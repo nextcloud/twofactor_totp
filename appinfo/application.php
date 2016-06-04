@@ -1,7 +1,5 @@
 <?php
 
-namespace OCA\TwoFactorTotp\AppInfo;
-
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -20,14 +18,15 @@ namespace OCA\TwoFactorTotp\AppInfo;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
+
+namespace OCA\TwoFactorTotp\AppInfo;
+
 use OCP\AppFramework\App;
 
 class Application extends App {
 
-	public function __construct($urlParams = []) {
-		parent::__construct('twofactor_totps', $urlParams);
-
-		$container = $this->getContainer();
-	}
+    public function __construct($urlParams = []) {
+        parent::__construct('twofactor_totps', $urlParams);
+    }
 
 }

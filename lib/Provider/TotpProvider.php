@@ -39,8 +39,6 @@ class TotpProvider implements IProvider {
     /**
      * Get unique identifier of this 2FA provider
      *
-     * @since 9.1.0
-     *
      * @return string
      */
     public function getId() {
@@ -49,10 +47,6 @@ class TotpProvider implements IProvider {
 
     /**
      * Get the display name for selecting the 2FA provider
-     *
-     * Example: "Email"
-     *
-     * @since 9.1.0
      *
      * @return string
      */
@@ -63,10 +57,6 @@ class TotpProvider implements IProvider {
     /**
      * Get the description for selecting the 2FA provider
      *
-     * Example: "Get a token via e-mail"
-     *
-     * @since 9.1.0
-     *
      * @return string
      */
     public function getDescription() {
@@ -76,18 +66,10 @@ class TotpProvider implements IProvider {
     /**
      * Get the template for rending the 2FA provider view
      *
-     * @since 9.1.0
-     *
      * @param IUser $user
      * @return Template
      */
     public function getTemplate(IUser $user) {
-        try {
-            $this->totp->getSecret($user);
-        } catch (NoTotpSecretFoundException $ex) {
-            $qr = $this->totp->createSecret($user);
-        }
-
         $tmpl = new Template('twofactor_totp', 'challenge');
         $tmpl->assign('qr', $qr);
         return $tmpl;
@@ -95,8 +77,6 @@ class TotpProvider implements IProvider {
 
     /**
      * Verify the given challenge
-     *
-     * @since 9.1.0
      *
      * @param IUser $user
      * @param string $challenge
@@ -108,13 +88,11 @@ class TotpProvider implements IProvider {
     /**
      * Decides whether 2FA is enabled for the given user
      *
-     * @since 9.1.0
-     *
      * @param IUser $user
      * @return boolean
      */
     public function isTwoFactorAuthEnabledForUser(IUser $user) {
-        return true;
+        return $this->totp->hasSecret($user);
     }
 
 }

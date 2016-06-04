@@ -29,18 +29,22 @@ interface ITotp {
     /**
      * @param IUser $user
      */
-    public function getSecret(IUser $user);
+    public function hasSecret(IUser $user);
 
     /**
      * @param IUser $user
      * @throws TotpSecretAlreadySet
      */
     public function createSecret(IUser $user);
-    
+
+    /**
+     * @param IUser $user
+     */
+    public function deleteSecret(IUser $user);
+
     /**
      * @param IUser $user
      * @param string $key
      */
     public function validateSecret(IUser $user, $key);
-    
 }

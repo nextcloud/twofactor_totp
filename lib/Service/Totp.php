@@ -44,15 +44,13 @@ class Totp implements ITotp {
         $this->crypto = $crypto;
     }
 
-    public function getSecret(IUser $user) {
+    public function hasSecret(IUser $user) {
         try {
-            $secret = $this->secretMapper->getSecret($user);
+            $this->secretMapper->getSecret($user);
         } catch (DoesNotExistException $ex) {
-            throw new NoTotpSecretFoundException();
+            return false;
         }
-
-        $encryptedSecret = $secret->getSecret();
-        return $this->crypto->decrypt($encryptedSecret);
+        return true;
     }
 
     /**
@@ -70,6 +68,16 @@ class Totp implements ITotp {
         $this->secretMapper->insert($dbSecret);
 
         return GoogleAuthenticator::getQrCodeUrl('totp', 'ownCloud TOTP', $secret);
+    }
+
+    public function deleteSecret(IUser $user) {
+        try {
+            // TODO: execute DELETE sql in mapper instead
+            $dbSecret = $this->secretMapper->getSecret($user);
+            $this->secretMapper->delete($dbSecret);
+        } catch (DoesNotExistException $ex) {
+            
+        }
     }
 
     public function validateSecret(IUser $user, $key) {

@@ -3,7 +3,7 @@
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * ownCloud - Two-factor TOPT
+ * ownCloud - Two-factor TOTP
  *
  * This code is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License, version 3,
@@ -18,6 +18,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-include_once __DIR__ . '/../vendor/autoload.php';
-
-\OC_App::registerPersonal('twofactor_totp', 'settings/personal');
+return [
+    'routes' => [
+        [
+            'name' => 'settings#state',
+            'url' => '/settings/state',
+            'verb' => 'GET'
+        ],
+        [
+            'name' => 'settings#enable',
+            'url' => '/settings/enable',
+            'verb' => 'POST'
+        ]
+    ]
+];
