@@ -21,14 +21,20 @@
 
 namespace OCA\TwoFactorTotp\Provider;
 
-use Base32\Base32;
+use OCA\TwoFactorTotp\Exception\NoTotpSecretFoundException;
+use OCA\TwoFactorTotp\Service\Totp;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\IUser;
 use OCP\Template;
-use Otp\GoogleAuthenticator;
-use Otp\Otp;
 
 class TotpProvider implements IProvider {
+
+    /** @var Totp */
+    private $totp;
+
+    public function __construct(Totp $totp) {
+        $this->totp = $totp;
+    }
 
     /**
      * Get unique identifier of this 2FA provider
@@ -76,13 +82,14 @@ class TotpProvider implements IProvider {
      * @return Template
      */
     public function getTemplate(IUser $user) {
-        $otp = new Otp();
-        //$secret = $this->random->generate(16);
-        $secret = GoogleAuthenticator::generateRandom();
-        $totp = $otp->totp(Base32::decode($secret));
+        try {
+            $this->totp->getSecret($user);
+        } catch (NoTotpSecretFoundException $ex) {
+            $qr = $this->totp->createSecret($user);
+        }
 
         $tmpl = new Template('twofactor_totp', 'challenge');
-        $tmpl->assign('secret', $totp);
+        $tmpl->assign('qr', $qr);
         return $tmpl;
     }
 
@@ -95,8 +102,7 @@ class TotpProvider implements IProvider {
      * @param string $challenge
      */
     public function verifyChallenge(IUser $user, $challenge) {
-        $otp = new Otp();
-        return $otp->checkTotp(Base32::decode($secret), $challenge);
+        return $this->totp->validateSecret($user, $challenge);
     }
 
     /**
