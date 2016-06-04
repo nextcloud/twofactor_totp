@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<info>
+	<id>twofactor_totp</id>
+	<name>Two Factor TOTP Provider</name>
+	<description>A Two-Factor-Auth Provider for TOTP (e.g. Google Authenticator) for ownCloud 9.1</description>
+	<licence>AGPL</licence>
+	<author>Christoph Wurst</author>
+	<version>0.0.1</version>
+	<namespace>TwoFactorTotp</namespace>
+	<category>other</category>
+	<types>
+		<authentication/>
+	</types>
+
+	<two-factor-providers>
+		<provider>OCA\TwoFactorTotp\Provider\TotpProvider</provider>
+	</two-factor-providers>
+
+	<dependencies>
+		<owncloud min-version="9.1" max-version="9.1" />
+	</dependencies>
+</info>
