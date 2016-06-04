@@ -71,7 +71,6 @@ class TotpProvider implements IProvider {
      */
     public function getTemplate(IUser $user) {
         $tmpl = new Template('twofactor_totp', 'challenge');
-        $tmpl->assign('qr', $qr);
         return $tmpl;
     }
 
