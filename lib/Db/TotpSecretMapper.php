@@ -49,7 +49,7 @@ class TotpSecretMapper extends Mapper {
 
         $row = $result->fetch();
         if ($row === false) {
-            throw new DoesNotExistException();
+            throw new DoesNotExistException('Secret does not exist');
         }
         return TotpSecret::fromRow($row);
     }
