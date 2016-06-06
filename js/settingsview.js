@@ -7,14 +7,17 @@
     OC.Settings.TwoFactorTotp = OC.Settings.TwoFactorTotp || {};
 
     var TEMPLATE = '<div>'
-            + '<input type="checkbox" class="checkbox" id="totp-enabled">'
-            + '<label for="totp-enabled">Enable TOTP</label>'
+            + '    <input type="checkbox" class="checkbox" id="totp-enabled">'
+            + '    <label for="totp-enabled">' + t('twofactor_totp', 'Enable TOTP') + '</label>'
             + '</div>'
-            + '{{#if qr}}'
+            + '{{#if secret}}'
+			+ '<div>'
+			+ '    <span>' + t('twofactor_totp', 'This is your new TOTP secret:') + ' {{secret}}</span>'
+			+ '</div>'
             + '<div>'
-            + '<a href="{{qr}}" target="_blank">Scan QR code with your TOTP app</a><br>'
-            + '<img src="{{qr}}>'
-            + '</div>'
+            + '    <span>' + t('twofactor_totp', 'Scan this QR code with your TOTP app') + '<span><br>'
+            + '    <img src="{{qr}}">'
+            + '    </div>'
             + '{{/if}}';
 
     var View = Backbone.View.extend({
@@ -68,7 +71,7 @@
                 var _this = this;
                 $.when(updating).done(function(data) {
                     _this._enabled = data.enabled;
-                    _this._showQr(data.qr);
+                    _this._showQr(data);
                     _this.$('#totp-enabled').attr('checked', data.enabled);
                 });
                 $.when(updating).always(function () {
@@ -77,9 +80,10 @@
                 this._enabled = enabled;
             }
         },
-        _showQr: function(qr) {
+        _showQr: function(data) {
             this.render({
-                qr: qr
+				secret: data.secret,
+                qr: data.qr
             });
         }
     });
