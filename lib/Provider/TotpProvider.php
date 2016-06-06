@@ -19,9 +19,9 @@
  *
  */
 
-namespace OCA\TwoFactorTotp\Provider;
+namespace OCA\TwoFactor_Totp\Provider;
 
-use OCA\TwoFactorTotp\Service\Totp;
+use OCA\TwoFactor_Totp\Service\ITotp;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\IL10N;
 use OCP\IUser;
@@ -29,7 +29,7 @@ use OCP\Template;
 
 class TotpProvider implements IProvider {
 
-    /** @var Totp */
+    /** @var ITotp */
     private $totp;
 
     /** @var IL10N */
@@ -39,7 +39,7 @@ class TotpProvider implements IProvider {
      * @param Totp $totp
      * @param IL10N $l10n
      */
-    public function __construct(Totp $totp, IL10N $l10n) {
+    public function __construct(ITotp $totp, IL10N $l10n) {
         $this->totp = $totp;
         $this->l10n = $l10n;
     }

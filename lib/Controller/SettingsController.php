@@ -19,10 +19,9 @@
  *
  */
 
-namespace OCA\TwoFactorTotp\Controller;
+namespace OCA\TwoFactor_Totp\Controller;
 
-use OCA\TwoFactorTotp\Service\ITotp;
-use OCA\TwoFactorTotp\Service\Totp;
+use OCA\TwoFactor_Totp\Service\ITotp;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -36,7 +35,13 @@ class SettingsController extends Controller {
     /** @var IUserSession */
     private $userSession;
 
-    public function __construct($appName, IRequest $request, IUserSession $userSession, Totp $totp) {
+    /**
+     * @param string $appName
+     * @param IRequest $request
+     * @param IUserSession $userSession
+     * @param ITotp $totp
+     */
+    public function __construct($appName, IRequest $request, IUserSession $userSession, ITotp $totp) {
         parent::__construct($appName, $request);
         $this->userSession = $userSession;
         $this->totp = $totp;

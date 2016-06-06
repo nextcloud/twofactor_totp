@@ -19,12 +19,12 @@
  *
  */
 
-namespace OCA\TwoFactorTotp\Service;
+namespace OCA\TwoFactor_Totp\Service;
 
 use Base32\Base32;
-use OCA\TwoFactorTotp\Db\TotpSecret;
-use OCA\TwoFactorTotp\Db\TotpSecretMapper;
-use OCA\TwoFactorTotp\Exception\NoTotpSecretFoundException;
+use OCA\TwoFactor_Totp\Db\TotpSecret;
+use OCA\TwoFactor_Totp\Db\TotpSecretMapper;
+use OCA\TwoFactor_Totp\Exception\NoTotpSecretFoundException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 use OCP\Security\ICrypto;

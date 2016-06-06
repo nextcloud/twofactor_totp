@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\TwoFactorTotp\Db;
+namespace OCA\TwoFactor_Totp\Db;
 
 use OCP\AppFramework\Db\Entity;
 

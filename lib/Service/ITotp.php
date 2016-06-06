@@ -19,9 +19,9 @@
  *
  */
 
-namespace OCA\TwoFactorTotp\Service;
+namespace OCA\TwoFactor_Totp\Service;
 
-use OCA\TwoFactorTotp\Exception\TotpSecretAlreadySet;
+use OCA\TwoFactor_Totp\Exception\TotpSecretAlreadySet;
 use OCP\IUser;
 
 interface ITotp {

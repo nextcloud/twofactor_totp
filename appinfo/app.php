@@ -18,6 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
+
+use OCA\TwoFactor_Totp\AppInfo\Application;
+
 include_once __DIR__ . '/../vendor/autoload.php';
 
-\OC_App::registerPersonal('twofactor_totp', 'settings/personal');
+$app = new Application();
+
+OC_App::registerPersonal('twofactor_totp', 'settings/personal');
