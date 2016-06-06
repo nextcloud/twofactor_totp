@@ -2,52 +2,66 @@ sudo: required
 dist: trusty
 language: php
 php:
-    - 5.6
-    - 7
+- 5.4
+- 5.5
+- 5.6
+- 7
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+services:
+- postgresql
 env:
-    global:
-        - CORE_BRANCH=stable9
-    matrix:
-        - DB=pgsql
-
-matrix:
-    allow_failures:
-        - env: DB=pgsql CORE_BRANCH=master
-    include:
-        - php: 5.6
-          env: DB=sqlite
-        - php: 5.6
-          env: DB=mysql
-        - php: 5.6
-          env: DB=pgsql CORE_BRANCH=master
-    fast_finish: true
-
+  global:
+  - CORE_BRANCH=master
+  - PHP_COVERAGE=FALSE
+  matrix:
+  - DB=sqlite
+branches:
+  only:
+  - master
+  - "/^stable\\d+(\\.\\d+)?$/"
+  - /^v\d++(\.\d+)?+(\.\d+)?+(\.\d+)?$/
+cache:
+  directories:
+  - "$HOME/.composer/cache/files"
+  - "$HOME/.npm"
+  - "$HOME/.cache/bower"
 before_install:
-    # install firefox and enable a display for running JavaScript tests
-    - export DISPLAY=:99.0
-    - sh -e /etc/init.d/xvfb start
-    - sudo apt-get update
-    - sudo apt-get -y install python3-setuptools firefox mariadb-server
-    - sudo easy_install3 requests ocdev
-    - nvm install 5.9
-    - npm install -g npm@latest
-    - make
-    # install core
-    - cd ../
-    - ocdev setup core --dir owncloud --branch $CORE_BRANCH --no-history
-    - mv twofactor_totp owncloud/apps/
+- mysql -u root -e "CREATE USER 'travis'@'localhost'"
+- mysql -u root -e "GRANT ALL ON *.* TO 'travis'@'localhost';"
+- sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then curl -s -o $HOME/.phpenv/versions/5.4/bin/phpunit
+  https://phar.phpunit.de/phpunit-4.8.9.phar; fi"
+- sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then chmod +x $HOME/.phpenv/versions/5.4/bin/phpunit;
+  fi"
+- composer self-update
+- composer install
+- wget https://raw.githubusercontent.com/owncloud/administration/master/travis-ci/before_install.sh
+- bash ./before_install.sh twofactor_totp $CORE_BRANCH $DB
+- cd ../core
+- php occ app:enable twofactor_totp
 
 before_script:
-    - createuser -U travis -s oc_autotest
-    - mysql -u root -e 'create database oc_autotest;'
-    - mysql -u root -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"
-    - mysql -u root -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"
-    - cd owncloud
-    - mkdir data
-    - ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
-    - ./occ app:enable twofactor_totp
-    - ocdev server &
-    - cd apps/twofactor_totp
+- cd apps/twofactor_totp
+- if [[ "$PHP_COVERAGE" = "FALSE" ]]; then phpenv config-rm xdebug.ini; fi
 
 script:
-    - make test
+- find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;
+- cd tests
+- phpunit --configuration phpunit.xml
+- if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar;
+  fi
+- if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover
+  clover.xml; fi
+
+matrix:
+  include:
+    - php: 7
+      env: "DB=pgsql PHP_COVERAGE=TRUE"
+    - php: 7
+      env: "DB=mysql"
+
+  fast_finish: true
