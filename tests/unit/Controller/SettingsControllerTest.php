@@ -19,4 +19,16 @@
  *
  */
 
-require_once __DIR__ . '/../../../tests/bootstrap.php';
+namespace OCA\TwoFactor_Totp\Test\Unit\Controller;
+
+class SettingsControllerTest extends \Test\TestCase {
+
+	protected function setUp() {
+		parent::setUp();
+	}
+
+	public function testNothing() {
+		$this->assertTrue(true);
+	}
+
+}
