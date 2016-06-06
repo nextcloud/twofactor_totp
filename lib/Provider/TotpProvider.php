@@ -21,9 +21,9 @@
 
 namespace OCA\TwoFactorTotp\Provider;
 
-use OCA\TwoFactorTotp\Exception\NoTotpSecretFoundException;
 use OCA\TwoFactorTotp\Service\Totp;
 use OCP\Authentication\TwoFactorAuth\IProvider;
+use OCP\IL10N;
 use OCP\IUser;
 use OCP\Template;
 
@@ -32,8 +32,16 @@ class TotpProvider implements IProvider {
     /** @var Totp */
     private $totp;
 
-    public function __construct(Totp $totp) {
+    /** @var IL10N */
+    private $l10n;
+
+    /**
+     * @param Totp $totp
+     * @param IL10N $l10n
+     */
+    public function __construct(Totp $totp, IL10N $l10n) {
         $this->totp = $totp;
+        $this->l10n = $l10n;
     }
 
     /**
@@ -60,7 +68,7 @@ class TotpProvider implements IProvider {
      * @return string
      */
     public function getDescription() {
-        return 'Authenticate with a TOTP app';
+        return $this->l10n->t('Authenticate with a TOTP app');
     }
 
     /**
