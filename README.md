@@ -1,4 +1,7 @@
 # Two Factor Totp
+[![Build Status](https://travis-ci.org/ChristophWurst/twofactor_totp.svg?branch=master)](https://travis-ci.org/ChristophWurst/twofactor_totp)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ChristophWurst/twofactor_totp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ChristophWurst/twofactor_totp/?branch=master)
+
 Works with [OTP Authenticator](https://github.com/0xbb/otp-authenticator) which can be downloaded from [F-Droid](https://f-droid.org/repository/browse/?fdfilter=totp&fdid=net.bierbaumer.otp_authenticator).
 
 ## Enabling TOTP 2FA for your account
