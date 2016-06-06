@@ -33,6 +33,7 @@ interface ITotp {
 
     /**
      * @param IUser $user
+     * @return string the newly created secret
      * @throws TotpSecretAlreadySet
      */
     public function createSecret(IUser $user);

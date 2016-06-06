@@ -67,7 +67,7 @@ class Totp implements ITotp {
 
         $this->secretMapper->insert($dbSecret);
 
-        return GoogleAuthenticator::getQrCodeUrl('totp', 'ownCloud TOTP', $secret);
+        return $secret;
     }
 
     public function deleteSecret(IUser $user) {
