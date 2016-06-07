@@ -83,7 +83,6 @@ class SettingsController extends Controller {
 		$this->totp->deleteSecret($user);
 		return [
 			'enabled' => false,
-			'qr' => null,
 		];
 	}
 
