@@ -1,6 +1,7 @@
-owncloud-twofactor_totp (0.0.1)
-* **Security**: Security description here
-* **Backwards incompatible change**: Changes in the API
-* **New dependency**: New dependencies such as a new ownCloud or PHP version
-* **Bugfix**: Bugfix description
-* **Enhancement**: New feature description
+# Changelog
+All notable changes to this project will be documented in this file.
+
+## 0.3.0 – 2016-06-09
+
+### Added
+- App is now signed
