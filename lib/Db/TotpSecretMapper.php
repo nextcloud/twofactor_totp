@@ -48,6 +48,7 @@ class TotpSecretMapper extends Mapper {
         $result = $qb->execute();
 
         $row = $result->fetch();
+	$result->closeCursor();
         if ($row === false) {
             throw new DoesNotExistException('Secret does not exist');
         }
