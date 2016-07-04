@@ -68,9 +68,17 @@ class SettingsController extends Controller {
 		$user = $this->userSession->getUser();
 		if ($state) {
 			$secret = $this->totp->createSecret($user);
-			
 			$qrCode = new QrCode();
-			$qr = $qrCode->setText("otpauth://totp/ownCloud%20TOTP?secret=$secret")
+			$nameLine = $user->getDisplayName();
+			$loginName = \OC::$server->getUserSession()->getSession()->get('loginname');
+			if (!empty($loginName)) {
+				$nameLine = "$nameLine ($loginName)";
+			}
+			$encodedNameLine = rawurlencode($nameLine);
+			$instanceRoot = \OC::$server->getUrlGenerator()->getAbsoluteURL('/');
+			$productName = (new \OCP\Defaults())->getName();
+			$encodedIssuer= rawurlencode("$instanceRoot ($productName)");
+			$qr = $qrCode->setText("otpauth://totp/$encodedIssuer:$encodedNameLine?secret=$secret&issuer=$encodedIssuer")
 				->setSize(150)
 				->getDataUri();
 			return [
