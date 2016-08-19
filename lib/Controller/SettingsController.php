@@ -25,7 +25,9 @@ use Endroid\QrCode\QrCode;
 use OCA\TwoFactor_Totp\Service\ITotp;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\Defaults;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\IUserSession;
 
 class SettingsController extends Controller {
@@ -36,16 +38,26 @@ class SettingsController extends Controller {
 	/** @var IUserSession */
 	private $userSession;
 
+	/** @var Defaults */
+	private $defaults;
+
+	/** @var IURLGenerator */
+	private $urlGenerator;
+
 	/**
 	 * @param string $appName
 	 * @param IRequest $request
 	 * @param IUserSession $userSession
 	 * @param ITotp $totp
+	 * @param Defaults $defaults
+	 * @param IURLGenerator $urlGenerator
 	 */
-	public function __construct($appName, IRequest $request, IUserSession $userSession, ITotp $totp) {
+	public function __construct($appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults, IURLGenerator $urlGenerator) {
 		parent::__construct($appName, $request);
 		$this->userSession = $userSession;
 		$this->totp = $totp;
+		$this->defaults = $defaults;
+		$this->urlGenerator = $urlGenerator;
 	}
 
 	/**
@@ -68,9 +80,11 @@ class SettingsController extends Controller {
 		$user = $this->userSession->getUser();
 		if ($state) {
 			$secret = $this->totp->createSecret($user);
-			
+
 			$qrCode = new QrCode();
-			$qr = $qrCode->setText("otpauth://totp/ownCloud%20TOTP?secret=$secret")
+			$secretName = $this->getSecretName();
+			$issuer = $this->getSecretIssuer();
+			$qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
 				->setSize(150)
 				->getDataUri();
 			return [
@@ -84,6 +98,17 @@ class SettingsController extends Controller {
 		return [
 			'enabled' => false,
 		];
+	}
+
+	private function getSecretName() {
+		$userName = $this->userSession->getUser()->getCloudId();
+		return rawurldecode($userName);
+	}
+
+	private function getSecretIssuer() {
+		$productName = $this->defaults->getName();
+		$url = $this->urlGenerator->getAbsoluteURL('/');
+		return rawurldecode("$url ($productName)");
 	}
 
 }
