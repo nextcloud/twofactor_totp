@@ -2,7 +2,7 @@
 <info>
 	<id>twofactor_totp</id>
 	<name>Two Factor TOTP Provider</name>
-	<description>A Two-Factor-Auth Provider for TOTP (e.g. Google Authenticator) for ownCloud 9.1</description>
+	<description>A Two-Factor-Auth Provider for TOTP (e.g. Google Authenticator)</description>
 	<licence>AGPL</licence>
 	<author>Christoph Wurst</author>
 	<version>0.3.0</version>
