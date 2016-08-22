@@ -84,8 +84,7 @@ class SettingsController extends Controller {
 			$qrCode = new QrCode();
 			$secretName = $this->getSecretName();
 			$issuer = $this->getSecretIssuer();
-			$x = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer";
-			$qr = $qrCode->setText($x)
+			$qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
 				->setSize(150)
 				->getDataUri();
 			return [
