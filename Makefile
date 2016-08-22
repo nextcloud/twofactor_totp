@@ -44,7 +44,9 @@ appstore: clean install-deps
 	--exclude=l10n/no-php \
 	--exclude=Makefile \
 	--exclude=nbproject \
+	--exclude=screenshots \
 	--exclude=phpunit*xml \
 	--exclude=tests \
 	--exclude=vendor/bin \
 	$(project_dir) $(sign_dir) 
+
