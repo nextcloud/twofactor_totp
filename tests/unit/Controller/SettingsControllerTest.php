@@ -21,7 +21,9 @@
 
 namespace OCA\TwoFactor_Totp\Unit\Controller;
 
+use Endroid\QrCode\QrCode;
 use OCA\TwoFactor_Totp\Controller\SettingsController;
+use OCP\Defaults;
 use Test\TestCase;
 
 class SettingsControllerTest extends TestCase {
@@ -29,6 +31,8 @@ class SettingsControllerTest extends TestCase {
 	private $request;
 	private $userSession;
 	private $totp;
+	private $defaults;
+	private $urlGenerator;
 
 	/** @var SettingsController */
 	private $controller;
@@ -39,8 +43,10 @@ class SettingsControllerTest extends TestCase {
 		$this->request = $this->getMock('\OCP\IRequest');
 		$this->userSession = $this->getMock('\OCP\IUserSession');
 		$this->totp = $this->getMock('\OCA\TwoFactor_Totp\Service\ITotp');
+		$this->defaults = new Defaults();
+		$this->urlGenerator = $this->getMock('\OCP\IURLGenerator');
 
-		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp);
+		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults, $this->urlGenerator);
 	}
 
 	public function testNothing() {
@@ -62,16 +68,25 @@ class SettingsControllerTest extends TestCase {
 
 	public function testEnable() {
 		$user = $this->getMock('\OCP\IUser');
-		$this->userSession->expects($this->once())
+		$this->userSession->expects($this->exactly(2))
 			->method('getUser')
 			->will($this->returnValue($user));
+		$user->expects($this->once())
+			->method('getCloudId')
+			->will($this->returnValue('user@instance.com'));
+		$this->urlGenerator->expects($this->once())
+			->method('getAbsoluteUrl')
+			->with('/')
+			->will($this->returnValue('https://instance.com'));
 		$this->totp->expects($this->once())
 			->method('createSecret')
 			->with($user)
 			->will($this->returnValue('newsecret'));
 
-		$qrCode = new \Endroid\QrCode\QrCode();
-		$qr = $qrCode->setText("otpauth://totp/ownCloud%20TOTP?secret=newsecret")
+		$qrCode = new QrCode();
+		$issuer = rawurlencode('https://instance.com (' . $this->defaults->getName() . ')');
+		$x = "otpauth://totp/user%40instance.com?secret=newsecret&issuer=$issuer";
+		$qr = $qrCode->setText($x)
 			->setSize(150)
 			->getDataUri();
 
