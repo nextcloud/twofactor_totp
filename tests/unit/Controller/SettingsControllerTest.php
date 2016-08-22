@@ -32,7 +32,6 @@ class SettingsControllerTest extends TestCase {
 	private $userSession;
 	private $totp;
 	private $defaults;
-	private $urlGenerator;
 
 	/** @var SettingsController */
 	private $controller;
@@ -44,9 +43,8 @@ class SettingsControllerTest extends TestCase {
 		$this->userSession = $this->getMock('\OCP\IUserSession');
 		$this->totp = $this->getMock('\OCA\TwoFactor_Totp\Service\ITotp');
 		$this->defaults = new Defaults();
-		$this->urlGenerator = $this->getMock('\OCP\IURLGenerator');
 
-		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults, $this->urlGenerator);
+		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);
 	}
 
 	public function testNothing() {
@@ -74,17 +72,13 @@ class SettingsControllerTest extends TestCase {
 		$user->expects($this->once())
 			->method('getCloudId')
 			->will($this->returnValue('user@instance.com'));
-		$this->urlGenerator->expects($this->once())
-			->method('getAbsoluteUrl')
-			->with('/')
-			->will($this->returnValue('https://instance.com'));
 		$this->totp->expects($this->once())
 			->method('createSecret')
 			->with($user)
 			->will($this->returnValue('newsecret'));
 
 		$qrCode = new QrCode();
-		$issuer = rawurlencode('https://instance.com (' . $this->defaults->getName() . ')');
+		$issuer = rawurlencode($this->defaults->getName());
 		$qr = $qrCode->setText("otpauth://totp/user%40instance.com?secret=newsecret&issuer=$issuer")
 			->setSize(150)
 			->getDataUri();
