@@ -5,7 +5,7 @@
 	 timeoutForMediumTests="900"
 	 timeoutForLargeTests="900">
 	<testsuite name="TOTP 2FA Provider">
-		<directory suffix="test.php">.</directory>
+		<directory suffix="Test.php">.</directory>
 	</testsuite>
 	<!-- filters for code coverage -->
 	<filter>

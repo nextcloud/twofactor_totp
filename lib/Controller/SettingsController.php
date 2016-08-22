@@ -102,13 +102,13 @@ class SettingsController extends Controller {
 
 	private function getSecretName() {
 		$userName = $this->userSession->getUser()->getCloudId();
-		return rawurldecode($userName);
+		return rawurlencode($userName);
 	}
 
 	private function getSecretIssuer() {
 		$productName = $this->defaults->getName();
 		$url = $this->urlGenerator->getAbsoluteURL('/');
-		return rawurldecode("$url ($productName)");
+		return rawurlencode("$url ($productName)");
 	}
 
 }
