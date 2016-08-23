@@ -101,8 +101,9 @@ class SettingsController extends Controller {
 	 * @return string
 	 */
 	private function getSecretName() {
+		$productName = $this->defaults->getName();
 		$userName = $this->userSession->getUser()->getCloudId();
-		return rawurlencode($userName);
+		return rawurlencode("$productName:$userName");
 	}
 
 	/**

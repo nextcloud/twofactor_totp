@@ -79,7 +79,7 @@ class SettingsControllerTest extends TestCase {
 
 		$qrCode = new QrCode();
 		$issuer = rawurlencode($this->defaults->getName());
-		$qr = $qrCode->setText("otpauth://totp/user%40instance.com?secret=newsecret&issuer=$issuer")
+		$qr = $qrCode->setText("otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer")
 			->setSize(150)
 			->getDataUri();
 
