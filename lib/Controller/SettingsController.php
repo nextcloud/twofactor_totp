@@ -41,23 +41,18 @@ class SettingsController extends Controller {
 	/** @var Defaults */
 	private $defaults;
 
-	/** @var IURLGenerator */
-	private $urlGenerator;
-
 	/**
 	 * @param string $appName
 	 * @param IRequest $request
 	 * @param IUserSession $userSession
 	 * @param ITotp $totp
 	 * @param Defaults $defaults
-	 * @param IURLGenerator $urlGenerator
 	 */
-	public function __construct($appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults, IURLGenerator $urlGenerator) {
+	public function __construct($appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults) {
 		parent::__construct($appName, $request);
 		$this->userSession = $userSession;
 		$this->totp = $totp;
 		$this->defaults = $defaults;
-		$this->urlGenerator = $urlGenerator;
 	}
 
 	/**
@@ -100,15 +95,25 @@ class SettingsController extends Controller {
 		];
 	}
 
+	/**
+	 * The user's cloud id, e.g. "christina@university.domain/owncloud"
+	 *
+	 * @return string
+	 */
 	private function getSecretName() {
+		$productName = $this->defaults->getName();
 		$userName = $this->userSession->getUser()->getCloudId();
-		return rawurlencode($userName);
+		return rawurlencode("$productName:$userName");
 	}
 
+	/**
+	 * The issuer, e.g. "Nextcloud" or "ownCloud"
+	 *
+	 * @return string
+	 */
 	private function getSecretIssuer() {
 		$productName = $this->defaults->getName();
-		$url = $this->urlGenerator->getAbsoluteURL('/');
-		return rawurlencode("$url ($productName)");
+		return rawurlencode($productName);
 	}
 
 }
