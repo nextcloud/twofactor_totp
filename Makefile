@@ -27,8 +27,6 @@ update-composer: composer.phar
 	php composer.phar install --prefer-dist
 
 appstore: clean install-deps
-	make clean
-	make install-composer-deps
 	mkdir -p $(sign_dir)
 	rsync -av \
 	--exclude=.git \
