@@ -5,6 +5,8 @@ OC.L10N.register(
     "This is your new TOTP secret:" : "Kjo është e fshehta juaj TOTP e re:",
     "Scan this QR code with your TOTP app" : "Skanojeni këtë kod QR me aplikacionin tuaj TOTP",
     "Authenticate with a TOTP app" : "Mirëfilltësimin kryejeni me një aplikacion TOTP",
-    "TOTP Second-factor Auth" : "TOTP Second-factor Auth"
+    "Authentication code" : "Kod mirëfilltësimi",
+    "Get the authentication code from the two-factor authentication app on your device." : "Merreni kodin e mirëfilltësimit pre aplikacionit të mirëfilltësimit dyfaktorësh te pajisja juaj.",
+    "TOTP second-factor auth" : "TOTP second-factor auth"
 },
 "nplurals=2; plural=(n != 1);");
