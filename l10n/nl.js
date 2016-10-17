@@ -5,6 +5,8 @@ OC.L10N.register(
     "This is your new TOTP secret:" : "Dit is uw nieuwe TOTP geheim:",
     "Scan this QR code with your TOTP app" : "Scan deze QR code met uw TOTP app",
     "Authenticate with a TOTP app" : "Authenticeren met een TOTP app",
-    "TOTP Second-factor Auth" : "TOTP tweede factor Auth"
+    "Authentication code" : "Autenticatiecode",
+    "Get the authentication code from the two-factor authentication app on your device." : "Krijg de authenticatiecode op je 'tweede factor' authenticatie app op je toestel.",
+    "TOTP second-factor auth" : "TOTP tweede factor auth"
 },
 "nplurals=2; plural=(n != 1);");
