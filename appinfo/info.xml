@@ -2,10 +2,10 @@
 <info>
 	<id>twofactor_totp</id>
 	<name>Two Factor TOTP Provider</name>
-	<description>A Two-Factor-Auth Provider for TOTP (e.g. Google Authenticator)</description>
+	<description>A Two-Factor-Auth Provider for TOTP</description>
 	<licence>AGPL</licence>
 	<author>Christoph Wurst</author>
-	<version>0.4.2</version>
+	<version>0.4.3</version>
 	<namespace>TwoFactor_Totp</namespace>
 	<category>other</category>
 
@@ -15,7 +15,6 @@
 
 	<dependencies>
 		<owncloud min-version="9.2" max-version="9.2" />
-		<php min-version="5.4" max-version="7.0" />
+		<php min-version="5.5" max-version="7.0" />
 	</dependencies>
-	<ocsid>174726</ocsid>
 </info>
