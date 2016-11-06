@@ -29,6 +29,28 @@ return [
             'name' => 'settings#enable',
             'url' => '/settings/enable',
             'verb' => 'POST'
-        ]
+        ],
+
+        // Admin routes
+        [
+            'name' => 'settings#getAdminConfig',
+            'url' => '/settings/getAdminConfig',
+            'verb' => 'GET'
+        ],
+        [
+            'name' => 'settings#setAdminConfig',
+            'url' => '/settings/setAdminConfig',
+            'verb' => 'POST'
+        ],
+        [
+            'name' => 'settings#adminRemoveFromList',
+            'url' => '/settings/adminRemoveFromList',
+            'verb' => 'POST'
+        ],
+        [
+            'name' => 'settings#adminAddToList',
+            'url' => '/settings/adminAddToList',
+            'verb' => 'POST'
+        ],
     ]
 ];

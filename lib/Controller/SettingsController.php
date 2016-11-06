@@ -116,4 +116,38 @@ class SettingsController extends Controller {
 		return rawurlencode($productName);
 	}
 
+
+    // Admin functions
+    /**
+     * @AdminRequired
+     * @return JSONResponse
+     */
+    public function getAdminConfig() {
+        return [
+            'type' => \OCP\Config::getAppValue('twofactor_totp', 'totp_type', 0),
+        ];
+    }
+    /**
+     * @AdminRequired
+     * @return JSONResponse
+     */
+    public function setAdminConfig() {
+        \OCP\Config::setAppValue('twofactor_totp', 'totp_type', intval($_POST['type']));
+        return [];
+    }
+    /**
+     * @AdminRequired
+     * @return JSONResponse
+     */
+    public function adminRemoveFromList($userOrGroup) {
+        return [];
+    }
+    /**
+     * @AdminRequired
+     * @return JSONResponse
+     */
+    public function adminAddToList($userOrGroup) {
+        return [];
+    }
+
 }

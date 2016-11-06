@@ -35,6 +35,8 @@ class TotpProvider implements IProvider {
     /** @var IL10N */
     private $l10n;
 
+    private $forceAuth = false;
+
     /**
      * @param Totp $totp
      * @param IL10N $l10n
@@ -42,6 +44,11 @@ class TotpProvider implements IProvider {
     public function __construct(ITotp $totp, IL10N $l10n) {
         $this->totp = $totp;
         $this->l10n = $l10n;
+
+        $type = \OCP\Config::getAppValue('twofactor_totp', 'totp_type', '0');
+        if($type == 2){
+            $this->forceAuth = true;
+        }
     }
 
     /**
@@ -79,6 +86,20 @@ class TotpProvider implements IProvider {
      */
     public function getTemplate(IUser $user) {
         $tmpl = new Template('twofactor_totp', 'challenge');
+        if($this->forceAuth && !$this->totp->hasSecret($user)){
+            $tmpl->assign('new_totp_user', 1);
+
+            $secret = $this->totp->createSecret($user);
+            $qrCode = new \Endroid\QrCode\QrCode();
+            $secretName = 'ForcedTotp'; //@TODO get SettingsController instance here or create class providing $this->getSecretName();
+            $issuer = 'Xcloud';  //@TODO get SettingsController instance here or create class providing $this->getSecretIssuer();
+            $qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
+                ->setSize(150)
+                ->getDataUri();
+
+            $tmpl->assign('secret', $secret);
+            $tmpl->assign('qr_src', $qr);
+        }
         return $tmpl;
     }
 
@@ -99,6 +120,7 @@ class TotpProvider implements IProvider {
      * @return boolean
      */
     public function isTwoFactorAuthEnabledForUser(IUser $user) {
+        if($this->forceAuth) return true;
         return $this->totp->hasSecret($user);
     }
 
