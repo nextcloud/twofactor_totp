@@ -35,7 +35,7 @@ class TotpProvider implements IProvider {
     /** @var IL10N */
     private $l10n;
 
-    private $forceAuth = false;
+    private $type = 0;
 
     /**
      * @param Totp $totp
@@ -45,10 +45,8 @@ class TotpProvider implements IProvider {
         $this->totp = $totp;
         $this->l10n = $l10n;
 
-        $type = \OCP\Config::getAppValue('twofactor_totp', 'totp_type', '0');
-        if($type == 2){
-            $this->forceAuth = true;
-        }
+        $this->defaults = new \OCP\Defaults(); // @TODO: Get current OC Defaults
+        $this->type = $type = \OCP\Config::getAppValue('twofactor_totp', 'totp_type', 0);
     }
 
     /**
@@ -86,13 +84,13 @@ class TotpProvider implements IProvider {
      */
     public function getTemplate(IUser $user) {
         $tmpl = new Template('twofactor_totp', 'challenge');
-        if($this->forceAuth && !$this->totp->hasSecret($user)){
+        if(!$this->totp->hasSecret($user)){
             $tmpl->assign('new_totp_user', 1);
 
             $secret = $this->totp->createSecret($user);
             $qrCode = new \Endroid\QrCode\QrCode();
-            $secretName = 'ForcedTotp'; //@TODO get SettingsController instance here or create class providing $this->getSecretName();
-            $issuer = 'Xcloud';  //@TODO get SettingsController instance here or create class providing $this->getSecretIssuer();
+            $secretName = $this->getSecretName($user);
+            $issuer = $this->getSecretIssuer();
             $qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
                 ->setSize(150)
                 ->getDataUri();
@@ -120,8 +118,58 @@ class TotpProvider implements IProvider {
      * @return boolean
      */
     public function isTwoFactorAuthEnabledForUser(IUser $user) {
-        if($this->forceAuth) return true;
+        if($this->isTwoFactorAuthForcedForUser($user)) return true;
         return $this->totp->hasSecret($user);
     }
 
+    /**
+	 * Decides whether 2FA is forces for the fiven user
+	 *
+     * @param IUser $user
+     * @return boolean
+	 */
+    public function isTwoFactorAuthForcedForUser(IUser $user){
+        $type = $this->type;
+
+        if($type == 1 || $type == 2){
+            $list = $this->getUserList();
+            $inList = in_array($user->getDisplayName(), $list);
+
+            if($type == 1 && $inList) return true;
+            if($type == 2 && !$inList) return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns an array of users who are forced to use 2FA
+     *
+     * @return Array
+     */
+    private function getUserList(){
+        // @TODO: Get Users from DB (+ get users in groups)
+        return [];
+    }
+
+    /**
+	 * The user's cloud id, e.g. "christina@university.domain/owncloud"
+	 *
+	 * @return string
+	 */
+	private function getSecretName($user) {
+		$productName = $this->defaults->getName();
+		$userName = $user->getCloudId();
+		return rawurlencode("$productName:$userName");
+	}
+
+	/**
+	 * The issuer, e.g. "Nextcloud" or "ownCloud"
+	 *
+	 * @return string
+	 */
+	private function getSecretIssuer() {
+		$productName = $this->defaults->getName();
+		return rawurlencode($productName);
+	}
 }

@@ -139,15 +139,27 @@ class SettingsController extends Controller {
      * @AdminRequired
      * @return JSONResponse
      */
-    public function adminRemoveFromList($userOrGroup) {
-        return [];
+    public function setUsers() {
+        $arr = explode('|', $_POST['data']);
+
+        // @TODO: Store Users to db
+
+        return [
+            'users' => $arr
+        ];
     }
     /**
      * @AdminRequired
      * @return JSONResponse
      */
-    public function adminAddToList($userOrGroup) {
-        return [];
+    public function setGroups() {
+        $arr = explode('|', $_POST['data']);
+
+        // @TODO: Store Groups to db
+
+        return [
+            'groups' => $arr
+        ];
     }
 
 }

@@ -43,13 +43,13 @@ return [
             'verb' => 'POST'
         ],
         [
-            'name' => 'settings#adminRemoveFromList',
-            'url' => '/settings/adminRemoveFromList',
+            'name' => 'settings#setGroups',
+            'url' => '/settings/setGroups',
             'verb' => 'POST'
         ],
         [
-            'name' => 'settings#adminAddToList',
-            'url' => '/settings/adminAddToList',
+            'name' => 'settings#setUsers',
+            'url' => '/settings/setUsers',
             'verb' => 'POST'
         ],
     ]
