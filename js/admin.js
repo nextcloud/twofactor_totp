@@ -35,7 +35,7 @@
                         if (query.term !== '') {
                             queryData = {
                                 pattern: query.term,
-                                //filterGroups: 1
+                                filterGroups: 1
                             };
                         }
                         $.ajax({
