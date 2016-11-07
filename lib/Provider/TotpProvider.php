@@ -19,9 +19,9 @@
  *
  */
 
-namespace OCA\TwoFactor_Totp\Provider;
+namespace OCA\TwoFactorTOTP\Provider;
 
-use OCA\TwoFactor_Totp\Service\ITotp;
+use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\IL10N;
 use OCP\IUser;
