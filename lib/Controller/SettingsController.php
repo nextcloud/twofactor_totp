@@ -19,10 +19,10 @@
  *
  */
 
-namespace OCA\TwoFactor_Totp\Controller;
+namespace OCA\TwoFactorTOTP\Controller;
 
 use Endroid\QrCode\QrCode;
-use OCA\TwoFactor_Totp\Service\ITotp;
+use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;

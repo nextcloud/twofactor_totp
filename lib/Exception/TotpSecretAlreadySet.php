@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\TwoFactor_Totp\Exception;
+namespace OCA\TwoFactorTOTP\Exception;
 
 use Exception;
 

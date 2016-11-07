@@ -6,11 +6,11 @@
 	<licence>AGPL</licence>
 	<author>Christoph Wurst</author>
 	<version>0.4.3</version>
-	<namespace>TwoFactor_Totp</namespace>
+	<namespace>TwoFactorTOTP</namespace>
 	<category>other</category>
 
 	<two-factor-providers>
-		<provider>OCA\TwoFactor_Totp\Provider\TotpProvider</provider>
+		<provider>OCA\TwoFactorTOTP\Provider\TotpProvider</provider>
 	</two-factor-providers>
 
 	<dependencies>

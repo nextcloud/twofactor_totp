@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\TwoFactor_Totp\Db;
+namespace OCA\TwoFactorTOTP\Db;
 
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Mapper;

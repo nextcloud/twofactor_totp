@@ -19,7 +19,7 @@
  *
  */
 
-use OCA\TwoFactor_Totp\AppInfo\Application;
+use OCA\TwoFactorTOTP\AppInfo\Application;
 
 include_once __DIR__ . '/../vendor/autoload.php';
 
