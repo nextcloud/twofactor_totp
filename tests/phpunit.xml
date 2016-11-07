@@ -10,10 +10,10 @@
 	<!-- filters for code coverage -->
 	<filter>
 		<whitelist>
-			<directory suffix=".php">../twofactor_totp</directory>
+			<directory suffix=".php">../</directory>
 			<exclude>
-				<directory suffix=".php">../twofactor_totp/l10n</directory>
-				<directory suffix=".php">../twofactor_totp/tests</directory>
+				<directory suffix=".php">../l10n</directory>
+				<directory suffix=".php">../tests</directory>
 			</exclude>
 		</whitelist>
 	</filter>
