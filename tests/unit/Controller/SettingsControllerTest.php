@@ -39,16 +39,16 @@ class SettingsControllerTest extends TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->request = $this->getMock('\OCP\IRequest');
-		$this->userSession = $this->getMock('\OCP\IUserSession');
-		$this->totp = $this->getMock('\OCA\TwoFactorTOTP\Service\ITotp');
+		$this->request = $this->createMock('\OCP\IRequest');
+		$this->userSession = $this->createMock('\OCP\IUserSession');
+		$this->totp = $this->createMock('\OCA\TwoFactorTOTP\Service\ITotp');
 		$this->defaults = new Defaults();
 
 		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);
 	}
 
 	public function testNothing() {
-		$user = $this->getMock('\OCP\IUser');
+		$user = $this->createMock('\OCP\IUser');
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->will($this->returnValue($user));
@@ -65,7 +65,7 @@ class SettingsControllerTest extends TestCase {
 	}
 
 	public function testEnable() {
-		$user = $this->getMock('\OCP\IUser');
+		$user = $this->createMock('\OCP\IUser');
 		$this->userSession->expects($this->exactly(2))
 			->method('getUser')
 			->will($this->returnValue($user));
@@ -93,7 +93,7 @@ class SettingsControllerTest extends TestCase {
 	}
 
 	public function testEnableDisable() {
-		$user = $this->getMock('\OCP\IUser');
+		$user = $this->createMock('\OCP\IUser');
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->will($this->returnValue($user));
