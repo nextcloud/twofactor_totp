@@ -7,8 +7,5 @@ Tested with the following apps:
 * [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2) (proprietary)
 
 ## Enabling TOTP 2FA for your account
-![](screenshots/settings.png)
-![](screenshots/login.png)
-![](screenshots/select_challenge.png)
 ![](screenshots/enter_challenge.png)
-![](screenshots/files.png)
+![](screenshots/settings.png)
