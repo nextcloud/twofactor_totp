@@ -29,7 +29,7 @@ update-composer: composer.phar
 
 appstore: clean install-deps
 	mkdir -p $(sign_dir)
-	rsync -av \
+	rsync -a \
 	--exclude=.git \
 	--exclude=build \
 	--exclude=.gitignore \
@@ -53,7 +53,7 @@ appstore: clean install-deps
 		--privateKey=$(cert_dir)/$(app_name).key\
 		--certificate=$(cert_dir)/$(app_name).crt\
 		--path=$(sign_dir)/$(app_name)
-	openssl dgst -sha512 -sign $(cert_dir)/$(app_name).key $(sign_dir)/$(app_name).tar.gz | openssl base64
-	tar -cvzf $(build_dir)/$(app_name).tar.gz \
+	tar -czf $(build_dir)/$(app_name).tar.gz \
 		-C $(sign_dir) $(app_name)
+	openssl dgst -sha512 -sign $(cert_dir)/$(app_name).key $(build_dir)/$(app_name).tar.gz | openssl base64
 
