@@ -1,8 +1,10 @@
 { "translations": {
-    "Enable TOTP" : "TOTP Etkinleştir",
-    "This is your new TOTP secret:" : "Yeni TOTP sırrınız:",
-    "Scan this QR code with your TOTP app" : "Bu QR kodunu TOTP uygulamanızla tarayın",
-    "Authenticate with a TOTP app" : "Bir TOTP uygulamasıyla kimlik doğrulaması yapın",
-    "TOTP Second-factor Auth" : "TOTP İkinci Yöntem Doğrulaması"
+    "Enable TOTP" : "TOTP kullanılsın",
+    "This is your new TOTP secret:" : "Yeni TOTP parolanız:",
+    "Scan this QR code with your TOTP app" : "TOTP uygulamanızla bu QR kodunu tarayın",
+    "Authenticate with a TOTP app" : "TOTP uygulamasıyla doğrulama",
+    "Authentication code" : "Doğrulama kodu",
+    "Get the authentication code from the two-factor authentication app on your device." : "Aygıtınızdaki iki aşamalı doğrulama uygulamasından doğrulama kodunu alın.",
+    "TOTP second-factor auth" : "TOTP iki aşamalı doğrulama"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
