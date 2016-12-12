@@ -88,8 +88,7 @@ class Totp implements ITotp {
 		$activity->setApp('twofactor_totp')
 			->setType('twofactor_totp')
 			->setAuthor($user->getUID())
-			->setAffectedUser($user->getUID())
-			->setMessage($event);
+			->setAffectedUser($user->getUID());
 		$activity->setSubject($event . '_subject');
 		$this->activityManager->publish($activity);
 	}

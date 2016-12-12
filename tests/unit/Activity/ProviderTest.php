@@ -27,12 +27,14 @@ use OCA\TwoFactorTOTP\Activity\Provider;
 use OCP\Activity\IEvent;
 use OCP\IL10N;
 use OCP\ILogger;
+use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 use Test\TestCase;
 
 class ProviderTest extends TestCase {
 
 	private $l10n;
+	private $urlGenerator;
 	private $logger;
 
 	/** @var Provider */
@@ -42,9 +44,10 @@ class ProviderTest extends TestCase {
 		parent::setUp();
 
 		$this->l10n = $this->createMock(IFactory::class);
+		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 		$this->logger = $this->createMock(ILogger::class);
 
-		$this->provider = new Provider($this->l10n, $this->logger);
+		$this->provider = new Provider($this->l10n, $this->urlGenerator, $this->logger);
 	}
 
 	public function testParseUnrelated() {
@@ -76,13 +79,24 @@ class ProviderTest extends TestCase {
 		$event = $this->createMock(IEvent::class);
 		$l = $this->createMock(IL10N::class);
 
+		$event->expects($this->once())
+			->method('getApp')
+			->will($this->returnValue('twofactor_totp'));
 		$this->l10n->expects($this->once())
 			->method('get')
 			->with('twofactor_totp', $lang)
 			->will($this->returnValue($l));
+		$this->urlGenerator->expects($this->once())
+			->method('imagePath')
+			->with('core', 'actions/password.svg')
+			->will($this->returnValue('path/to/image'));
+		$this->urlGenerator->expects($this->once())
+			->method('getAbsoluteURL')
+			->with('path/to/image')
+			->will($this->returnValue('absolute/path/to/image'));
 		$event->expects($this->once())
-			->method('getApp')
-			->will($this->returnValue('twofactor_totp'));
+			->method('setIcon')
+			->with('absolute/path/to/image');
 		$event->expects($this->once())
 			->method('getSubject')
 			->will($this->returnValue($subject));

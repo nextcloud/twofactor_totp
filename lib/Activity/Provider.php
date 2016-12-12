@@ -25,6 +25,7 @@ use InvalidArgumentException;
 use OCP\Activity\IEvent;
 use OCP\Activity\IProvider;
 use OCP\ILogger;
+use OCP\IURLGenerator;
 use OCP\L10N\IFactory as L10nFactory;
 
 class Provider implements IProvider {
@@ -32,11 +33,15 @@ class Provider implements IProvider {
 	/** @var L10nFactory */
 	private $l10n;
 
+	/** @var IURLGenerator */
+	private $urlGenerator;
+
 	/** @var ILogger */
 	private $logger;
 
-	public function __construct(L10nFactory $l10n, ILogger $logger) {
+	public function __construct(L10nFactory $l10n, IURLGenerator $urlGenerator, ILogger $logger) {
 		$this->logger = $logger;
+		$this->urlGenerator = $urlGenerator;
 		$this->l10n = $l10n;
 	}
 
@@ -47,22 +52,19 @@ class Provider implements IProvider {
 
 		$l = $this->l10n->get('twofactor_totp', $language);
 
+		$event->setIcon($this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'actions/password.svg')));
 		switch ($event->getSubject()) {
 			case 'totp_enabled_subject':
-				$event->setSubject($l->t('TOTP enabled'));
-				$event->setMessage($l->t('You enabled TOTP two-factor authentication for your account.'));
+				$event->setSubject($l->t('You enabled TOTP two-factor authentication for your account'));
 				break;
 			case 'totp_disabled_subject':
-				$event->setSubject($l->t('TOTP disabled'));
-				$event->setMessage($l->t('You disabled TOTP two-factor authentication for your account.'));
+				$event->setSubject($l->t('You disabled TOTP two-factor authentication for your account'));
 				break;
 			case 'totp_success_subject':
-				$event->setSubject($l->t('TOTP code used'));
-				$event->setMessage($l->t('A TOTP code was used to log into your account.'));
+				$event->setSubject($l->t('A TOTP code was used to log into your account'));
 				break;
 			case 'totp_error_subject':
-				$event->setSubject($l->t('Invalid TOTP code used'));
-				$event->setMessage($l->t('An invalid TOTP code was used to log into your account.'));
+				$event->setSubject($l->t('An invalid TOTP code was used to log into your account'));
 				break;
 		}
 		return $event;
