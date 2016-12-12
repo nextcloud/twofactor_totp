@@ -22,8 +22,16 @@
 namespace OCA\TwoFactorTOTP\Activity;
 
 use OCP\Activity\ISetting;
+use OCP\IL10N;
 
 class Setting implements ISetting {
+
+	/** @var IL10N */
+	private $l10n;
+
+	public function __construct(IL10N $l10n) {
+		$this->l10n = $l10n;
+	}
 
 	public function canChangeMail() {
 		return false;
@@ -38,7 +46,7 @@ class Setting implements ISetting {
 	}
 
 	public function getName() {
-		return 'TOTP 2FA';
+		return $this->l10n->t('TOTP (Google Authenticator)');
 	}
 
 	public function getPriority() {
