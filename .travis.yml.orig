@@ -1,0 +1,78 @@
+sudo: required
+dist: trusty
+language: php
+php:
+  - 5.6
+  - 7
+  - 7.1
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+services:
+- postgresql
+env:
+  global:
+  - CORE_BRANCH=master
+  - PHP_COVERAGE=FALSE
+  matrix:
+  - DB=sqlite
+branches:
+  only:
+  - master
+  - "/^stable\\d+(\\.\\d+)?$/"
+  - /^v\d++(\.\d+)?+(\.\d+)?+(\.\d+)?$/
+cache:
+  directories:
+  - "$HOME/.composer/cache/files"
+  - "$HOME/.npm"
+  - "$HOME/.cache/bower"
+before_install:
+<<<<<<< HEAD
+  - php --info
+=======
+- - php --info
+>>>>>>> fix travis
+  # XDebug is only needed if we report coverage -> speeds up other builds
+  - if [[ "$PHP_COVERAGE" = "FALSE" ]]; then phpenv config-rm xdebug.ini; fi
+
+  # Set up DB
+  - if [[ "$DB" == 'pgsql' ]]; then createuser -U travis -s nc_autotest; fi
+  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e 'create database nc_autotest;'; fi
+  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "CREATE USER 'nc_autotest'@'localhost' IDENTIFIED BY '';"; fi
+  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "GRANT ALL ON nc_autotest.* TO 'nc_autotest'@'localhost';"; fi
+
+  - composer self-update
+  - composer install
+
+  - cd ..
+  - git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b $CORE_BRANCH core
+  - mv twofactor_totp core/apps/
+
+before_script:
+  # Set up core
+  - php -f core/occ maintenance:install --database-name nc_autotest --database-user nc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
+
+  # Set up app
+  - php -f core/occ app:enable twofactor_totp
+  - cd core/apps/twofactor_totp
+
+script:
+  - find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;
+  - cd tests
+  - phpunit --configuration phpunit.xml
+  - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi
+
+matrix:
+  include:
+    - php: 7
+      env: "DB=sqlite CORE_BRANCH=stable11"
+    - php: 7
+      env: "DB=pgsql PHP_COVERAGE=TRUE"
+    - php: 7
+      env: "DB=mysql"
+
+  fast_finish: true
