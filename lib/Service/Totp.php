@@ -30,67 +30,100 @@ use OCP\IUser;
 use OCP\Security\ICrypto;
 use Otp\GoogleAuthenticator;
 use Otp\Otp;
+use OCP\Activity\IManager as ActivityManager;
 
 class Totp implements ITotp {
 
-    /** @var TotpSecretMapper */
-    private $secretMapper;
+	/** @var TotpSecretMapper */
+	private $secretMapper;
 
-    /** @var ICrypto */
-    private $crypto;
+	/** @var ICrypto */
+	private $crypto;
 
-    public function __construct(TotpSecretMapper $secretMapper, ICrypto $crypto) {
-        $this->secretMapper = $secretMapper;
-        $this->crypto = $crypto;
-    }
+	/** @var ActivityManager */
+	private $activityManager;
 
-    public function hasSecret(IUser $user) {
-        try {
-            $this->secretMapper->getSecret($user);
-        } catch (DoesNotExistException $ex) {
-            return false;
-        }
-        return true;
-    }
+	public function __construct(TotpSecretMapper $secretMapper, ICrypto $crypto, ActivityManager $activityManager) {
+		$this->secretMapper = $secretMapper;
+		$this->crypto = $crypto;
+		$this->activityManager = $activityManager;
+	}
 
-    /**
-     * @todo prevent duplicates
-     * 
-     * @param IUser $user
-     */
-    public function createSecret(IUser $user) {
-        $secret = GoogleAuthenticator::generateRandom();
+	public function hasSecret(IUser $user) {
+		try {
+			$this->secretMapper->getSecret($user);
+		} catch (DoesNotExistException $ex) {
+			return false;
+		}
+		return true;
+	}
 
-        $dbSecret = new TotpSecret();
-        $dbSecret->setUserId($user->getUID());
-        $dbSecret->setSecret($this->crypto->encrypt($secret));
+	/**
+	 * @todo prevent duplicates
+	 *
+	 * @param IUser $user
+	 */
+	public function createSecret(IUser $user) {
+		$secret = GoogleAuthenticator::generateRandom();
 
-        $this->secretMapper->insert($dbSecret);
+		$dbSecret = new TotpSecret();
+		$dbSecret->setUserId($user->getUID());
+		$dbSecret->setSecret($this->crypto->encrypt($secret));
 
-        return $secret;
-    }
+		$this->secretMapper->insert($dbSecret);
+		$this->publishEvent($user, 'totp_enabled');
 
-    public function deleteSecret(IUser $user) {
-        try {
-            // TODO: execute DELETE sql in mapper instead
-            $dbSecret = $this->secretMapper->getSecret($user);
-            $this->secretMapper->delete($dbSecret);
-        } catch (DoesNotExistException $ex) {
-            
-        }
-    }
+		return $secret;
+	}
 
-    public function validateSecret(IUser $user, $key) {
-        try {
-            $dbSecret = $this->secretMapper->getSecret($user);
-        } catch (DoesNotExistException $ex) {
-            throw new NoTotpSecretFoundException();
-        }
+	/**
+	 * Push an TOTP event the user's activity stream
+	 *
+	 * @param IUser $user
+	 * @param string $event
+	 */
+	private function publishEvent(IUser $user, $event) {
 
-        $secret = $this->crypto->decrypt($dbSecret->getSecret());
+		$activity = $this->activityManager->generateEvent();
+		$activity->setApp('twofactor_totp')
+			->setType('twofactor_totp')
+			->setAuthor($user->getUID())
+			->setAffectedUser($user->getUID())
+			->setMessage($event);
+		$activity->setSubject($event . '_subject');
+		$this->activityManager->publish($activity);
+	}
 
-        $otp = new Otp();
-        return $otp->checkTotp(Base32::decode($secret), $key, 3);
-    }
+	public function deleteSecret(IUser $user) {
+		try {
+			// TODO: execute DELETE sql in mapper instead
+			$dbSecret = $this->secretMapper->getSecret($user);
+			$this->secretMapper->delete($dbSecret);
+		} catch (DoesNotExistException $ex) {
+			// Ignore
+		}
+		$this->publishEvent($user, 'totp_disabled');
+	}
+
+	public function validateSecret(IUser $user, $key) {
+		try {
+			$dbSecret = $this->secretMapper->getSecret($user);
+		} catch (DoesNotExistException $ex) {
+			throw new NoTotpSecretFoundException();
+		}
+
+		$secret = $this->crypto->decrypt($dbSecret->getSecret());
+
+		$otp = new Otp();
+		$valid = $otp->checkTotp(Base32::decode($secret), $key, 3);
+
+		if ($valid) {
+			$this->publishEvent($user, 'totp_success');
+		} else {
+			$this->publishEvent($user, 'totp_error');
+		}
+
+		return $valid;
+	}
 
 }
