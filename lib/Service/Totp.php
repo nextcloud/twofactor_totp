@@ -87,7 +87,7 @@ class Totp implements ITotp {
 
 		$activity = $this->activityManager->generateEvent();
 		$activity->setApp('twofactor_totp')
-			->setType('twofactor_totp')
+			->setType('twofactor')
 			->setAuthor($user->getUID())
 			->setAffectedUser($user->getUID());
 		$activity->setSubject($event . '_subject');
@@ -115,15 +115,7 @@ class Totp implements ITotp {
 		$secret = $this->crypto->decrypt($dbSecret->getSecret());
 
 		$otp = new Otp();
-		$valid = $otp->checkTotp(Base32::decode($secret), $key, 3);
-
-		if ($valid) {
-			$this->publishEvent($user, 'totp_success');
-		} else {
-			$this->publishEvent($user, 'totp_error');
-		}
-
-		return $valid;
+		return $otp->checkTotp(Base32::decode($secret), $key, 3);
 	}
 
 }

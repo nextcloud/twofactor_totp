@@ -61,12 +61,6 @@ class Provider implements IProvider {
 			case 'totp_disabled_subject':
 				$event->setSubject($l->t('You disabled TOTP two-factor authentication for your account'));
 				break;
-			case 'totp_success_subject':
-				$event->setSubject($l->t('A TOTP code was used to log into your account'));
-				break;
-			case 'totp_error_subject':
-				$event->setSubject($l->t('An invalid TOTP code was used to log into your account'));
-				break;
 		}
 		return $event;
 	}
