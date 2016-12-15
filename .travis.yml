@@ -29,34 +29,42 @@ cache:
   - "$HOME/.npm"
   - "$HOME/.cache/bower"
 before_install:
-- mysql -u root -e "CREATE USER 'travis'@'localhost'"
-- mysql -u root -e "GRANT ALL ON *.* TO 'travis'@'localhost';"
-- sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then curl -s -o $HOME/.phpenv/versions/5.4/bin/phpunit
-  https://phar.phpunit.de/phpunit-4.8.9.phar; fi"
-- sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then chmod +x $HOME/.phpenv/versions/5.4/bin/phpunit;
-  fi"
-- composer self-update
-- composer install
-- wget https://raw.githubusercontent.com/owncloud/administration/master/travis-ci/before_install.sh
-- bash ./before_install.sh twofactor_totp $CORE_BRANCH $DB
-- cd ../core
-- php occ app:enable twofactor_totp
+  - php --info
+  # XDebug is only needed if we report coverage -> speeds up other builds
+  - if [[ "$PHP_COVERAGE" = "FALSE" ]]; then phpenv config-rm xdebug.ini; fi
+
+  # Set up DB
+  - if [[ "$DB" == 'pgsql' ]]; then createuser -U travis -s nc_autotest; fi
+  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e 'create database nc_autotest;'; fi
+  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "CREATE USER 'nc_autotest'@'localhost' IDENTIFIED BY '';"; fi
+  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "GRANT ALL ON nc_autotest.* TO 'nc_autotest'@'localhost';"; fi
+
+  - composer self-update
+  - composer install
+
+  - cd ..
+  - git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b $CORE_BRANCH core
+  - mv twofactor_totp core/apps/
 
 before_script:
-- cd apps/twofactor_totp
-- if [[ "$PHP_COVERAGE" = "FALSE" ]]; then phpenv config-rm xdebug.ini; fi
+  # Set up core
+  - php -f core/occ maintenance:install --database-name nc_autotest --database-user nc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
+
+  # Set up app
+  - php -f core/occ app:enable twofactor_totp
+  - cd core/apps/twofactor_totp
 
 script:
-- find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;
-- cd tests
-- phpunit --configuration phpunit.xml
-- if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar;
-  fi
-- if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover
-  clover.xml; fi
+  - find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;
+  - cd tests
+  - phpunit --configuration phpunit.xml
+  - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi
 
 matrix:
   include:
+    - php: 7
+      env: "DB=sqlite CORE_BRANCH=stable11"
     - php: 7
       env: "DB=pgsql PHP_COVERAGE=TRUE"
     - php: 7
