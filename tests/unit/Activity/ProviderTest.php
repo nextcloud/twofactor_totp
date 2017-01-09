@@ -65,8 +65,6 @@ class ProviderTest extends TestCase {
 		return [
 				['totp_enabled_subject'],
 				['totp_disabled_subject'],
-				['totp_error_subject'],
-				['totp_success_subject'],
 				[null],
 		];
 	}
