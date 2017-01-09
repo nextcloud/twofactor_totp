@@ -2,6 +2,7 @@
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Henning Bopp <henning.bopp@gmail.com>
  *
  * ownCloud - Two-factor TOPT
  *
@@ -26,3 +27,4 @@ include_once __DIR__ . '/../vendor/autoload.php';
 $app = new Application();
 
 OC_App::registerPersonal('twofactor_totp', 'settings/personal');
+OC_App::registerAdmin('twofactor_totp', 'settings/admin');
