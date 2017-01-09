@@ -24,7 +24,7 @@ namespace OCA\TwoFactorTOTP\Unit\Controller;
 
 use Endroid\QrCode\QrCode;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
-use OCA\TwoFactorTOTP\Service\ITotp;
+use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUser;
@@ -46,7 +46,7 @@ class SettingsControllerTest extends TestCase {
 
 		$this->request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
-		$this->totp = $this->createMock(ITotp::class);
+		$this->totp = $this->createMock(Totp::class);
 		$this->defaults = new Defaults();
 
 		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);

@@ -27,7 +27,6 @@ use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
-use OCP\IURLGenerator;
 use OCP\IUserSession;
 
 class SettingsController extends Controller {
