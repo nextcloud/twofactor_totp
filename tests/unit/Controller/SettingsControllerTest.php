@@ -2,6 +2,7 @@
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright Copyright (c) 2016 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * Two-factor TOTP
  *
@@ -23,7 +24,11 @@ namespace OCA\TwoFactorTOTP\Unit\Controller;
 
 use Endroid\QrCode\QrCode;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
+use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\Defaults;
+use OCP\IRequest;
+use OCP\IUser;
+use OCP\IUserSession;
 use Test\TestCase;
 
 class SettingsControllerTest extends TestCase {
@@ -39,16 +44,16 @@ class SettingsControllerTest extends TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->request = $this->createMock('\OCP\IRequest');
-		$this->userSession = $this->createMock('\OCP\IUserSession');
-		$this->totp = $this->createMock('\OCA\TwoFactorTOTP\Service\ITotp');
+		$this->request = $this->createMock(IRequest::class);
+		$this->userSession = $this->createMock(IUserSession::class);
+		$this->totp = $this->createMock(Totp::class);
 		$this->defaults = new Defaults();
 
 		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);
 	}
 
 	public function testNothing() {
-		$user = $this->createMock('\OCP\IUser');
+		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->will($this->returnValue($user));
@@ -58,14 +63,14 @@ class SettingsControllerTest extends TestCase {
 			->will($this->returnValue(true));
 
 		$expected = [
-			'enabled' => true,
+		    'enabled' => true,
 		];
 
 		$this->assertEquals($expected, $this->controller->state());
 	}
 
 	public function testEnable() {
-		$user = $this->createMock('\OCP\IUser');
+		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->exactly(2))
 			->method('getUser')
 			->will($this->returnValue($user));
@@ -84,16 +89,16 @@ class SettingsControllerTest extends TestCase {
 			->getDataUri();
 
 		$expected = [
-			'enabled' => true,
-			'secret' => 'newsecret',
-			'qr' => $qr,
+		    'enabled' => true,
+		    'secret' => 'newsecret',
+		    'qr' => $qr,
 		];
 
 		$this->assertEquals($expected, $this->controller->enable(true));
 	}
 
 	public function testEnableDisable() {
-		$user = $this->createMock('\OCP\IUser');
+		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->will($this->returnValue($user));
@@ -101,7 +106,7 @@ class SettingsControllerTest extends TestCase {
 			->method('deleteSecret');
 
 		$expected = [
-			'enabled' => false,
+		    'enabled' => false,
 		];
 
 		$this->assertEquals($expected, $this->controller->enable(false));

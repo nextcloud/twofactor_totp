@@ -18,7 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-
 use OCA\TwoFactorTOTP\AppInfo\Application;
 
 include_once __DIR__ . '/../vendor/autoload.php';

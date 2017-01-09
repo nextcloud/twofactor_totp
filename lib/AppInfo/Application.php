@@ -21,15 +21,17 @@
 
 namespace OCA\TwoFactorTOTP\AppInfo;
 
+use OCA\TwoFactorTOTP\Service\ITotp;
+use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\AppFramework\App;
 
 class Application extends App {
 
-    public function __construct($urlParams = []) {
-        parent::__construct('twofactor_totp', $urlParams);
+	public function __construct($urlParams = []) {
+		parent::__construct('twofactor_totp', $urlParams);
 
-        $container = $this->getContainer();
-        $container->registerAlias('\OCA\TwoFactorTOTP\Service\ITotp', '\OCA\TwoFactorTOTP\Service\Totp');
-    }
+		$container = $this->getContainer();
+		$container->registerAlias(ITotp::class, Totp::class);
+	}
 
 }
