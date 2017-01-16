@@ -4,7 +4,10 @@ OC.L10N.register(
     "Enable TOTP" : "TOTP (zeitgesteuertes Einmalpasswort) aktivieren",
     "This is your new TOTP secret:" : "Dies ist Ihr neuer TOTP-Schlüssel:",
     "Scan this QR code with your TOTP app" : "Scannen Sie diesen QR-Code mit Ihrer TOTP-App",
-    "Authenticate with a TOTP app" : "Mit einer TOTP-App authentisieren",
+    "You enabled TOTP two-factor authentication for your account" : "Sie haben TOTP Zwei-Faktor-Authentifizierung für Ihr Konto aktiviert",
+    "You disabled TOTP two-factor authentication for your account" : "Sie haben TOTP Zwei-Faktor-Authentifizierung für Ihr Konto deaktiviert",
+    "TOTP (Google Authenticator)" : "TOTP (Google Authentifizierung)",
+    "Authenticate with a TOTP app" : "Mit einer TOTP-App authentifizieren",
     "Authentication code" : "Authentifizierungscode",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalten Sie den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf Ihrem Gerät.",
     "TOTP second-factor auth" : "TOTP-Zweifaktorauthentifizierung"
