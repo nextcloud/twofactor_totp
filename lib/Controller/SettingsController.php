@@ -67,6 +67,7 @@ class SettingsController extends Controller {
 
 	/**
 	 * @NoAdminRequired
+	 * @PasswordConfirmationRequired
 	 * @param bool $state
 	 * @return JSONResponse
 	 */
