@@ -3,6 +3,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/twofactor_totp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/twofactor_totp/?branch=master)
 
 Tested with the following apps:
+* [FreeOTP Authenticator](https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp) (open source)
 * [OTP Authenticator](https://github.com/0xbb/otp-authenticator) (open source) which can be downloaded from [F-Droid](https://f-droid.org/repository/browse/?fdfilter=totp&fdid=net.bierbaumer.otp_authenticator) and has a built-in QR-code reader.
 * [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2) (proprietary)
 

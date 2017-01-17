@@ -47,7 +47,7 @@ class SettingTest extends TestCase {
 		$this->assertEquals('twofactor_totp', $this->setting->getIdentifier());
 		$this->l10n->expects($this->once())
 			->method('t')
-			->with('TOTP (Google Authenticator)')
+			->with('TOTP (Authenticator app)')
 			->will($this->returnValue('TOTP (Google Authentifizierer)'));
 		$this->assertEquals('TOTP (Google Authentifizierer)', $this->setting->getName());
 		$this->assertEquals(10, $this->setting->getPriority());

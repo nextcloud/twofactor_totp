@@ -47,7 +47,7 @@ class Setting implements ISetting {
 	}
 
 	public function getName() {
-		return $this->l10n->t('TOTP (Google Authenticator)');
+		return $this->l10n->t('TOTP (Authenticator app)');
 	}
 
 	public function getPriority() {
