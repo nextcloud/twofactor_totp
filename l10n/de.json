@@ -4,7 +4,6 @@
     "Scan this QR code with your TOTP app" : "Scanne diesen QR-Code mit deiner TOTP-App",
     "You enabled TOTP two-factor authentication for your account" : "Du hast TOTP Zwei-Faktor-Authentifizierung für Dein Konto aktiviert",
     "You disabled TOTP two-factor authentication for your account" : "Du hast TOTP Zwei-Faktor-Authentifizierung für Dein Konto deaktiviert",
-    "TOTP (Google Authenticator)" : "TOTP (Google Authentifizierung)",
     "Authenticate with a TOTP app" : "Mit einer TOTP-App authentifizieren",
     "Authentication code" : "Authentifizierungscode",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalte den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf deinem Gerät.",
