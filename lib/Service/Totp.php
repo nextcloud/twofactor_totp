@@ -26,12 +26,12 @@ use Base32\Base32;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
 use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
+use OCP\Activity\IManager as ActivityManager;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use Otp\GoogleAuthenticator;
 use Otp\Otp;
-use OCP\Activity\IManager as ActivityManager;
 
 class Totp implements ITotp {
 

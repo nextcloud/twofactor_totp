@@ -5,3 +5,5 @@ vendor/
 
 # Ignore NetBeans project
 /nbproject/
+
+tests/clover.xml
