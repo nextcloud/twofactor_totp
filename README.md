@@ -4,8 +4,8 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/twofactor_totp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/twofactor_totp/?branch=master)
 
 Tested with the following apps:
-* [FreeOTP Authenticator](https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp) (open source)
-* [OTP Authenticator](https://github.com/0xbb/otp-authenticator) (open source) which can be downloaded from [F-Droid](https://f-droid.org/repository/browse/?fdfilter=totp&fdid=net.bierbaumer.otp_authenticator) and has a built-in QR-code reader.
+* [FreeOTP Authenticator](https://freeotp.github.io/) (open source) Availabe via [F-droid](https://f-droid.org/repository/browse/?fdfilter=otp&fdid=org.fedorahosted.freeotp), [Google Play](https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp), and [Apple's App Store](https://itunes.apple.com/us/app/freeotp-authenticator/id872559395?mt=8)
+* [OTP Authenticator](https://github.com/0xbb/otp-authenticator) (open source) Availabe via [F-Droid](https://f-droid.org/repository/browse/?fdfilter=totp&fdid=net.bierbaumer.otp_authenticator) and [Google Play](https://play.google.com/store/apps/details?id=net.bierbaumer.otp_authenticator). It features a built-in QR-code reader.
 * [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2) (proprietary)
 
 ## Enabling TOTP 2FA for your account
