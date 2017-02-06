@@ -2,6 +2,7 @@
 
 script('twofactor_totp', 'settingsview');
 script('twofactor_totp', 'settings');
+style('twofactor_totp', 'settings');
 
 ?>
 
