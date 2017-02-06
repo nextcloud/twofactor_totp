@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.1.0 – 2017-02-06
+### Added
+- App icon
+- Translations
+
 ## 1.0.0 – 2017-01-23
 ### Added
 - Nextcloud 12 support
