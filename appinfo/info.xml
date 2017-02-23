@@ -14,7 +14,7 @@
 	</two-factor-providers>
 
 	<dependencies>
-		<owncloud min-version="9.1" max-version="9.2" />
+		<owncloud min-version="9.1" max-version="9.1" />
 		<php min-version="5.4" max-version="7.0" />
 	</dependencies>
 	<ocsid>174726</ocsid>

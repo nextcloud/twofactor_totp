@@ -16,7 +16,7 @@ services:
 - postgresql
 env:
   global:
-  - CORE_BRANCH=master
+  - CORE_BRANCH=stable9.1
   - PHP_COVERAGE=FALSE
   matrix:
   - DB=sqlite
