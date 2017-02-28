@@ -10,6 +10,6 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "Uwierzytelnij przy pomocy aplikacji TOTP",
     "Authentication code" : "Kod uwierzytelnienia",
     "Get the authentication code from the two-factor authentication app on your device." : "Pobierz kod uwierzytelnienia z aplikacji dwuskładnikowego uwierzytelniania na swoim urządzeniu.",
-    "TOTP second-factor auth" : "Drugi składnik uwierzytelnienia TOTP"
+    "TOTP second-factor auth" : "Dwuskładnikowe uwierzytelnienie TOTP"
 },
 "nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>=14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);");
