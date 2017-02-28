@@ -7,6 +7,18 @@ sign_dir=$(build_dir)/sign
 appstore_dir=$(build_dir)/appstore
 source_dir=$(build_dir)/source
 package_name=$(app_name)
+occ=$(CURDIR)/../../occ
+private_key=$(HOME)/.owncloud/certificates/$(app_name).key
+certificate=$(HOME)/.owncloud/certificates/$(app_name).crt
+sign=php -f $(occ) integrity:sign-app --privateKey="$(private_key)" --certificate="$(certificate)"
+sign_skip_msg="Skipping signing, either no key and certificate found in $(private_key) and $(certificate) or occ can not be found at $(occ)"
+ifneq (,$(wildcard $(private_key)))
+ifneq (,$(wildcard $(certificate)))
+ifneq (,$(wildcard $(occ)))
+	CAN_SIGN=true
+endif
+endif
+endif
 
 all: appstore
 
@@ -47,4 +59,10 @@ appstore: clean install-deps
 	--exclude=phpunit*xml \
 	--exclude=tests \
 	--exclude=vendor/bin \
-	$(project_dir) $(sign_dir) 
+	$(project_dir) $(sign_dir)
+ifdef CAN_SIGN
+	$(sign) --path="$(sign_dir)/$(app_name)"
+else
+	@echo $(sign_skip_msg)
+endif
+	tar -czf $(package_name).tar.gz -C $(sign_dir) $(app_name)
