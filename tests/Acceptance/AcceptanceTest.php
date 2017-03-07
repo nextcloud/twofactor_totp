@@ -66,7 +66,6 @@ abstract class AcceptanceTest extends PHPUnit_Framework_TestCase {
 	protected function tearDown() {
 		parent::tearDown();
 
-		// TOOD: only if run on CI
 		$sessionId = $this->webDriver->getSessionID();
 
 		$this->webDriver->quit();
