@@ -152,7 +152,7 @@ class TOTPAcceptenceTest extends PHPUnit_Framework_TestCase {
 
 		// Enter a wrong OTP
 		$this->webDriver->findElement(WebDriverBy::name('challenge'))->sendKeys('000');
-		$this->webDriver->findElement(WebDriverBy::cssSelector('input.confirm-inline.icon-confirm'))->click();
+		$this->webDriver->findElement(WebDriverBy::cssSelector('button[type="submit"]'))->click();
 
 		$this->assertEquals('http://localhost:8080/index.php/login/challenge/totp', $this->webDriver->getCurrentURL());
 	}
