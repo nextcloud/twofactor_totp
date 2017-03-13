@@ -52,28 +52,34 @@ class Totp implements ITotp {
 
 	public function hasSecret(IUser $user) {
 		try {
-			$this->secretMapper->getSecret($user);
+			$secret = $this->secretMapper->getSecret($user);
+			return ITotp::STATE_ENABLED === (int) $secret->getState();
 		} catch (DoesNotExistException $ex) {
 			return false;
 		}
-		return true;
 	}
 
 	/**
-	 * @todo prevent duplicates
-	 *
 	 * @param IUser $user
 	 */
 	public function createSecret(IUser $user) {
+		try {
+			// Delet existing one
+			$oldSecret = $this->secretMapper->getSecret($user);
+			$this->secretMapper->delete($oldSecret);
+		} catch (DoesNotExistException $ex) {
+			// Ignore
+		}
+
+		// Create new one
 		$secret = GoogleAuthenticator::generateRandom();
 
 		$dbSecret = new TotpSecret();
 		$dbSecret->setUserId($user->getUID());
 		$dbSecret->setSecret($this->crypto->encrypt($secret));
+		$dbSecret->setState(ITotp::STATE_CREATED);
 
 		$this->secretMapper->insert($dbSecret);
-		$this->publishEvent($user, 'totp_enabled');
-
 		return $secret;
 	}
 
@@ -84,7 +90,6 @@ class Totp implements ITotp {
 	 * @param string $event
 	 */
 	private function publishEvent(IUser $user, $event) {
-
 		$activity = $this->activityManager->generateEvent();
 		$activity->setApp('twofactor_totp')
 			->setType('twofactor')
@@ -92,6 +97,17 @@ class Totp implements ITotp {
 			->setAffectedUser($user->getUID());
 		$activity->setSubject($event . '_subject');
 		$this->activityManager->publish($activity);
+	}
+
+	public function enable(IUser $user, $key) {
+		if (!$this->validateSecret($user, $key)) {
+			return false;
+		}
+		$dbSecret = $this->secretMapper->getSecret($user);
+		$dbSecret->setState(ITotp::STATE_ENABLED);
+		$this->secretMapper->update($dbSecret);
+		$this->publishEvent($user, 'totp_enabled');
+		return true;
 	}
 
 	public function deleteSecret(IUser $user) {

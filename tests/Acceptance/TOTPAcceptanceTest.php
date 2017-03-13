@@ -49,11 +49,16 @@ class TOTPAcceptenceTest extends AcceptanceTest {
 
 		$this->user = OC::$server->getUserManager()->get('admin');
 		$this->secretMapper = new TotpSecretMapper(OC::$server->getDatabaseConnection());
+		$this->cleanUp();
 	}
 
 	protected function tearDown() {
 		parent::tearDown();
 
+		$this->cleanUp();
+	}
+
+	private function cleanUp() {
 		// Always delete secret again
 		try {
 			$secret = $this->secretMapper->getSecret($this->user);
@@ -91,10 +96,9 @@ class TOTPAcceptenceTest extends AcceptanceTest {
 			} catch (ElementNotSelectableException $ex) {
 				return false;
 			}
-			return true;
 		});
 		$this->webDriver->executeScript('arguments[0].click(); console.log(arguments[0]);', [
-		    $this->webDriver->findElement(WebDriverBy::id('totp-enabled')),
+			$this->webDriver->findElement(WebDriverBy::id('totp-enabled')),
 		]);
 		$this->webDriver->wait(20, 1000)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('twofactor-totp-settings'), 'This is your new TOTP secret:'));
 	}
@@ -119,9 +123,19 @@ class TOTPAcceptenceTest extends AcceptanceTest {
 		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('admin');
 		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] input[type=submit]'))->click();
 
+		$this->webDriver->wait(20, 1000)->until(function(WebDriver $driver) {
+			try {
+				return $driver->findElements(WebDriverBy::className('totp-form'));
+			} catch (ElementNotSelectableException $ex) {
+				return false;
+			}
+		});
+
 		// Enter a wrong OTP
-		$this->webDriver->findElement(WebDriverBy::name('challenge'))->sendKeys('000');
-		$this->webDriver->findElement(WebDriverBy::cssSelector('button[type="submit"]'))->click();
+		$this->webDriver->findElement(WebDriverBy::name('challenge'))->sendKeys('000000');
+		$this->webDriver->findElement(WebDriverBy::cssSelector('button[type="submit"]'))->submit();
+
+		$this->webDriver->wait(20, 1000)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::className('warning'), 'Error while validating your second factor'));
 
 		$this->assertEquals('http://localhost:8080/index.php/login/challenge/totp', $this->webDriver->getCurrentURL());
 	}

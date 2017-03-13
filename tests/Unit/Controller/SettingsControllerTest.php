@@ -23,15 +23,17 @@
 namespace OCA\TwoFactorTOTP\Unit\Controller;
 
 use Endroid\QrCode\QrCode;
+use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
+use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUser;
 use OCP\IUserSession;
-use Test\TestCase;
+use PHPUnit_Framework_TestCase;
 
-class SettingsControllerTest extends TestCase {
+class SettingsControllerTest extends PHPUnit_Framework_TestCase {
 
 	private $request;
 	private $userSession;
@@ -52,7 +54,7 @@ class SettingsControllerTest extends TestCase {
 		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);
 	}
 
-	public function testNothing() {
+	public function testDisabledState() {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
@@ -60,16 +62,16 @@ class SettingsControllerTest extends TestCase {
 		$this->totp->expects($this->once())
 			->method('hasSecret')
 			->with($user)
-			->will($this->returnValue(true));
+			->will($this->returnValue(false));
 
 		$expected = [
-		    'enabled' => true,
+			'state' => false,
 		];
 
 		$this->assertEquals($expected, $this->controller->state());
 	}
 
-	public function testEnable() {
+	public function testCreateSecret() {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->exactly(2))
 			->method('getUser')
@@ -89,15 +91,32 @@ class SettingsControllerTest extends TestCase {
 			->getDataUri();
 
 		$expected = [
-		    'enabled' => true,
-		    'secret' => 'newsecret',
-		    'qr' => $qr,
+			'state' => ITotp::STATE_CREATED,
+			'secret' => 'newsecret',
+			'qr' => $qr,
 		];
 
 		$this->assertEquals($expected, $this->controller->enable(true));
 	}
 
-	public function testEnableDisable() {
+	public function testEnableSecret() {
+		$user = $this->createMock(IUser::class);
+		$this->userSession->expects($this->once())
+			->method('getUser')
+			->will($this->returnValue($user));
+		$this->totp->expects($this->once())
+			->method('enable')
+			->with($user, '123456')
+			->willReturn(true);
+
+		$expected = [
+			'state' => ITotp::STATE_ENABLED,
+		];
+
+		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_ENABLED, '123456'));
+	}
+
+	public function testDisableSecret() {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
@@ -106,10 +125,20 @@ class SettingsControllerTest extends TestCase {
 			->method('deleteSecret');
 
 		$expected = [
-		    'enabled' => false,
+			'state' => ITotp::STATE_DISABLED,
 		];
 
-		$this->assertEquals($expected, $this->controller->enable(false));
+		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_DISABLED));
+	}
+
+	public function testEnableInvalidState() {
+		$user = $this->createMock(IUser::class);
+		$this->userSession->expects($this->once())
+			->method('getUser')
+			->will($this->returnValue($user));
+
+		$this->expectException(InvalidArgumentException::class);
+		$this->controller->enable(17);
 	}
 
 }
