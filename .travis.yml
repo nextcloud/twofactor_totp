@@ -36,6 +36,10 @@ cache:
   - "$HOME/.cache/bower"
 before_install:
   - php --info
+  # Download phpunit 5.7
+  - wget https://phar.phpunit.de/phpunit-5.7.phar -O phpunit
+  - chmod u+x phpunit
+
   # XDebug is only needed if we report coverage -> speeds up other builds
   - if [[ "$PHP_COVERAGE" = "FALSE" ]]; then phpenv config-rm xdebug.ini; fi
 
@@ -69,8 +73,8 @@ before_script:
 script:
   - if [[ "$SAUCE" = "FALSE" ]]; then find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;; fi
   - cd tests
-  - if [[ "$SAUCE" = "FALSE" ]]; then phpunit --group default --configuration phpunit.xml; fi
-  - if [[ "$SAUCE" = "TRUE" ]]; then phpunit --group Acceptance --no-coverage --configuration phpunit.xml; fi
+  - if [[ "$SAUCE" = "FALSE" ]]; then ../phpunit --group default --configuration phpunit.xml; fi
+  - if [[ "$SAUCE" = "TRUE" ]]; then ../phpunit --group Acceptance --no-coverage --configuration phpunit.xml; fi
   - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
   - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi
 
