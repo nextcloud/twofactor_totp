@@ -23,77 +23,46 @@
 namespace OCA\TwoFactorTOTP\Tests\Acceptance;
 
 use Facebook\WebDriver\Exception\ElementNotSelectableException;
-use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Facebook\WebDriver\Remote\WebDriverBrowserType;
-use Facebook\WebDriver\Remote\WebDriverCapabilityType;
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 use OC;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 use Otp\GoogleAuthenticator;
-use PHPUnit_Framework_TestCase;
 
 /**
  * @group Acceptance
  */
-class TOTPAcceptenceTest extends PHPUnit_Framework_TestCase {
+class TOTPAcceptenceTest extends AcceptanceTest {
 
 	/** @var IUser */
-	private static $user;
+	private $user;
 
 	/** @var TotpSecretMapper */
-	private static $secretMapper;
-
-	/** @var RemoteWebDriver */
-	protected $webDriver;
-
-	public static function setUpBeforeClass() {
-		parent::setUpBeforeClass();
-
-		self::$user = OC::$server->getUserManager()->get('admin');
-		self::$secretMapper = new TotpSecretMapper(OC::$server->getDatabaseConnection());
-	}
+	private $secretMapper;
 
 	public function setUp() {
-		$capabilities = [
-			WebDriverCapabilityType::BROWSER_NAME => $this->getBrowser(),
-		];
+		parent::setUp();
 
-		if ($this->isRunningOnCI()) {
-			$capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
-			$capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
-			$capabilities['name'] = 'PR' . getenv('TRAVIS_PULL_REQUEST') . ', Build ' . getenv('TRAVIS_BUILD_NUMBER');
-			$user = 'nextcloud-totp';
-			$accessKey = getenv('SAUCE_ACCESS_KEY');
-			$this->webDriver = RemoteWebDriver::create("http://$user:$accessKey@ondemand.saucelabs.com/wd/hub", $capabilities);
-		} else {
-			$this->webDriver = RemoteWebDriver::create("http://localhost:4444/wd/hub", $capabilities);
-		}
+		$this->user = OC::$server->getUserManager()->get('admin');
+		$this->secretMapper = new TotpSecretMapper(OC::$server->getDatabaseConnection());
 	}
 
-	private function getBrowser() {
-		$env = getenv('SELENIUM_BROWSER');
-		if ($env !== false) {
-			return $env;
-		}
-		return WebDriverBrowserType::FIREFOX;
-	}
+	protected function tearDown() {
+		parent::tearDown();
 
-	private function isRunningOnCI() {
-		return getenv('TRAVIS') !== false;
-	}
-
-	public function tearDown() {
 		// Always delete secret again
-		$secret = self::$secretMapper->getSecret(self::$user);
-		if (!is_null($secret)) {
-			self::$secretMapper->delete($secret);
+		try {
+			$secret = $this->secretMapper->getSecret($this->user);
+			if (!is_null($secret)) {
+				$this->secretMapper->delete($secret);
+			}
+		} catch (DoesNotExistException $ex) {
+			// Ignore
 		}
-
-		$this->webDriver->quit();
 	}
 
 	public function testEnableTOTP() {
@@ -125,7 +94,7 @@ class TOTPAcceptenceTest extends PHPUnit_Framework_TestCase {
 			return true;
 		});
 		$this->webDriver->executeScript('arguments[0].click(); console.log(arguments[0]);', [
-			$this->webDriver->findElement(WebDriverBy::id('totp-enabled')),
+		    $this->webDriver->findElement(WebDriverBy::id('totp-enabled')),
 		]);
 		$this->webDriver->wait(20, 1000)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('twofactor-totp-settings'), 'This is your new TOTP secret:'));
 	}
@@ -134,8 +103,8 @@ class TOTPAcceptenceTest extends PHPUnit_Framework_TestCase {
 		$secret = GoogleAuthenticator::generateRandom();
 		$dbsecret = new TotpSecret();
 		$dbsecret->setSecret(OC::$server->getCrypto()->encrypt($secret));
-		$dbsecret->setUserId(self::$user->getUID());
-		self::$secretMapper->insert($dbsecret);
+		$dbsecret->setUserId($this->user->getUID());
+		$this->secretMapper->insert($dbsecret);
 		return $secret;
 	}
 
