@@ -9,6 +9,7 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (Aplicativo autenticador)",
     "Authenticate with a TOTP app" : "Autenticar com um aplicativo TOTP",
     "Authentication code" : "Código de autenticação",
+    "Submit" : "Submeter",
     "Get the authentication code from the two-factor authentication app on your device." : "Obtenha o código de autenticação do aplicativo de autenticação de dois fatores em seu dispositivo.",
     "TOTP second-factor auth" : "Autenticação do segundo fator do TOTP"
 },
