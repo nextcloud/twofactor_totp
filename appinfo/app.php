@@ -24,5 +24,3 @@ use OCA\TwoFactor_Totp\AppInfo\Application;
 include_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Application();
-
-OC_App::registerPersonal('twofactor_totp', 'settings/personal');
