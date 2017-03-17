@@ -9,6 +9,7 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (Kimlik Doğrulama Uygulaması)",
     "Authenticate with a TOTP app" : "TOTP uygulamasıyla kimlik doğrulama",
     "Authentication code" : "Kimlik doğrulama kodu",
+    "Submit" : "Gönder",
     "Get the authentication code from the two-factor authentication app on your device." : "Aygıtınızda yüklü iki aşamalı kimlik doğrulaması uygulamasından kodu alın.",
     "TOTP second-factor auth" : "TOTP iki aşamalı kimlik doğrulama"
 },
