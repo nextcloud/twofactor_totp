@@ -9,6 +9,7 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (Autentizační aplikace)",
     "Authenticate with a TOTP app" : "Přihlaste se pomocí TOTP aplikace",
     "Authentication code" : "Ověřovací kód",
+    "Submit" : "Odeslat",
     "Get the authentication code from the two-factor authentication app on your device." : "Získat ověřovací kód z aplikace na vašem přístroji.",
     "TOTP second-factor auth" : "TOTP druhý ověřovací faktor"
 },
