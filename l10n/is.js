@@ -9,6 +9,7 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (auðkenningarforrit)",
     "Authenticate with a TOTP app" : "Auðkenna með TOTP-forriti",
     "Authentication code" : "Auðkenningarkóði",
+    "Submit" : "Senda inn",
     "Get the authentication code from the two-factor authentication app on your device." : "Náðu í auðkenningarkóða frá tveggja-þrepa auðkenningarforriti á tækinu þínu.",
     "TOTP second-factor auth" : "TOTP tveggja-þrepa auðkenning"
 },
