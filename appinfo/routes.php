@@ -2,6 +2,7 @@
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Semih Serhat Karakaya <karakayasemi@itu.edu.tr>
  *
  * Two-factor TOTP
  *
@@ -29,6 +30,11 @@ return [
             'name' => 'settings#enable',
             'url' => '/settings/enable',
             'verb' => 'POST'
-        ]
+        ],
+        [
+            'name' => 'settings#verifyNewSecret',
+            'url' => '/settings/verifyNewSecret',
+            'verb' => 'POST'
+        ],
     ]
 ];
