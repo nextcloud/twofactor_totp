@@ -1,0 +1,16 @@
+OC.L10N.register(
+    "twofactor_totp",
+    {
+    "Enable TOTP" : "Bật TOTP",
+    "This is your new TOTP secret:" : "Đây là mã bí mật TOTP mới của bạn:",
+    "Scan this QR code with your TOTP app" : "Quét mã QR này với ứng dụng TOTP của bạn",
+    "You enabled TOTP two-factor authentication for your account" : "Bạn đã bật xác thực hai yếu tố TOTP cho tài khoản của mình",
+    "You disabled TOTP two-factor authentication for your account" : "Bạn đã tắt xác thực hai yếu tố TOTP cho tài khoản của mình",
+    "TOTP (Authenticator app)" : "TOTP (Ứng dụng xác thực)",
+    "Authenticate with a TOTP app" : "Xác thực bằng ứng dụng TOTP",
+    "Authentication code" : "Mã xác thực",
+    "Submit" : "Gửi",
+    "Get the authentication code from the two-factor authentication app on your device." : "Nhận mã xác thực từ ứng dụng xác thực hai yếu tố trên thiết bị của bạn.",
+    "TOTP second-factor auth" : "Xác thực hai yếu tố TOTP"
+},
+"nplurals=1; plural=0;");
