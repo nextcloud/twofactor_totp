@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.3.0 – unreleased
+### Added
+-
+### Changed
+-
+
 ## 1.1.0 – 2017-02-06
 ### Added
 - App icon
