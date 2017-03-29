@@ -1,6 +1,6 @@
 /* global Backbone, Handlebars */
 
-(function (OC, Backbone, Handlebars, $) {
+(function (OC, Handlebars, $) {
     'use strict';
 
     OC.Settings = OC.Settings || {};
@@ -20,7 +20,7 @@
             + '    </div>'
             + '{{/if}}';
 
-    var View = Backbone.View.extend({
+    var View = OC.Backbone.View.extend({
         template: Handlebars.compile(TEMPLATE),
         _loading: undefined,
         _enabled: undefined,
@@ -90,4 +90,4 @@
 
     OC.Settings.TwoFactorTotp.View = View;
 
-})(OC, Backbone, Handlebars, $);
+})(OC, Handlebars, $);
