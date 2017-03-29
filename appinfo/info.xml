@@ -9,7 +9,7 @@
 	<namespace>TwoFactor_Totp</namespace>
 	<category>security</category>
 
-	<screenshot>https://raw.githubusercontent.com/owncloud/twofactor_totp/43312ebd26c2e8f22b3e8a7e3b9cb4afb1c46570/screenshots/settings.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/owncloud/twofactor_totp/cc989d968cef37f28df8e2dc633babf9a6c894cc/screenshots/settings.png</screenshot>
 	<two-factor-providers>
 		<provider>OCA\TwoFactor_Totp\Provider\TotpProvider</provider>
 	</two-factor-providers>
