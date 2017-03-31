@@ -6,6 +6,7 @@ OC.L10N.register(
     "Scan this QR code with your TOTP app" : "Olvassa be ezt a QR kódot a TOTP alkalmazásával",
     "Authenticate with a TOTP app" : "Hitelesítés TOTP alkalmazással",
     "Authentication code" : "Azonosítási kód",
+    "Submit" : "Küldés",
     "TOTP second-factor auth" : "TOTP második lépcsős hitelesítés"
 },
 "nplurals=2; plural=(n != 1);");

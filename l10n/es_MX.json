@@ -1,0 +1,6 @@
+{ "translations": {
+    "Enable TOTP" : "Habilitar TOTP",
+    "Authenticate with a TOTP app" : "Autenticar con una aplicación TOTP",
+    "Authentication code" : "Código de autenticación"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
