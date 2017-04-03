@@ -1,11 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.3.0 – unreleased
+## 1.2.0 – 2017-04-03
 ### Added
--
+- Settings icon (NC12 only)
 ### Changed
--
+- Dedicated login button
+- Translations
 
 ## 1.1.0 – 2017-02-06
 ### Added
