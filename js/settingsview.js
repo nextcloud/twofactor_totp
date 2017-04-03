@@ -238,4 +238,4 @@
 
 	OC.Settings.TwoFactorTotp.View = View;
 
-})(OC, Backbone, Handlebars, $, _);
+})(OC, OC.Backbone, Handlebars, $, _);
