@@ -22,6 +22,7 @@
 namespace OCA\TwoFactorTOTP\Controller;
 
 use Endroid\QrCode\QrCode;
+use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
@@ -61,38 +62,47 @@ class SettingsController extends Controller {
 	public function state() {
 		$user = $this->userSession->getUser();
 		return [
-			'enabled' => $this->totp->hasSecret($user),
+			'state' => $this->totp->hasSecret($user),
 		];
 	}
 
 	/**
 	 * @NoAdminRequired
 	 * @PasswordConfirmationRequired
-	 * @param bool $state
+	 * @param int $state
+	 * @param string|null $key for verification
 	 * @return JSONResponse
 	 */
-	public function enable($state) {
+	public function enable($state, $key = null) {
 		$user = $this->userSession->getUser();
-		if ($state) {
-			$secret = $this->totp->createSecret($user);
+		switch ($state) {
+			case ITotp::STATE_DISABLED:
+				$this->totp->deleteSecret($user);
+				return [
+					'state' => ITotp::STATE_DISABLED,
+				];
+			case ITotp::STATE_CREATED:
+				$secret = $this->totp->createSecret($user);
 
-			$qrCode = new QrCode();
-			$secretName = $this->getSecretName();
-			$issuer = $this->getSecretIssuer();
-			$qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
-				->setSize(150)
-				->getDataUri();
-			return [
-				'enabled' => true,
-				'secret' => $secret,
-				'qr' => $qr,
-			];
+				$qrCode = new QrCode();
+				$secretName = $this->getSecretName();
+				$issuer = $this->getSecretIssuer();
+				$qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
+					->setSize(150)
+					->getDataUri();
+				return [
+					'state' => ITotp::STATE_CREATED,
+					'secret' => $secret,
+					'qr' => $qr,
+				];
+			case ITotp::STATE_ENABLED:
+				$success = $this->totp->enable($user, $key);
+				return [
+					'state' => $success ? ITotp::STATE_ENABLED : ITotp::STATE_CREATED,
+				];
+			default:
+				throw new InvalidArgumentException('Invalid TOTP state');
 		}
-
-		$this->totp->deleteSecret($user);
-		return [
-			'enabled' => false,
-		];
 	}
 
 	/**

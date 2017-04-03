@@ -28,13 +28,18 @@ use OCP\AppFramework\Db\Entity;
  * @method void setUserId(string $userId)
  * @method string getSecret()
  * @method void setSecret(string $secret)
+ * @method int getState()
+ * @method void setState(int $state)
  */
 class TotpSecret extends Entity {
 
-    /** @var string */
-    protected $userId;
+	/** @var string */
+	protected $userId;
 
-    /** @var string */
-    protected $secret;
+	/** @var string */
+	protected $secret;
+
+	/** @var int */
+	protected $state;
 
 }

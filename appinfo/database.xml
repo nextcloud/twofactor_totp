@@ -27,6 +27,17 @@
                 <type>clob</type>
                 <notnull>true</notnull>
             </field>
+	    <!--
+		STATE 0 : disabled
+		STATE 1 : created (but not active)
+		STATE 2 : enabled
+	    -->
+	    <field>
+                <name>state</name>
+                <type>integer</type>
+		<default>2</default>
+                <notnull>true</notnull>
+            </field>
 
             <index>
                 <name>totp_secrets_user_id</name>

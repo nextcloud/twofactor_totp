@@ -2,3 +2,10 @@
 .nav-icon-totp-second-factor-auth {
 	background-image: url('../img/app-dark.svg?v=1');
 }
+
+.totp-loading {
+	display: inline-block;
+	vertical-align: sub;
+	margin-left: -2px;
+	margin-right: 4px;
+}
