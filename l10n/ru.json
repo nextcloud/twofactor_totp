@@ -2,11 +2,11 @@
     "Enable TOTP" : "Включить TOTP",
     "This is your new TOTP secret:" : "Это ваш новый TOTP секрет:",
     "Scan this QR code with your TOTP app" : "Просканируйте этот QR код с помощью вашего TOTP приложения",
+    "Authentication code" : "Аутентификационный код",
     "You enabled TOTP two-factor authentication for your account" : "Вы включили двухфакторную авторизацию TOTP для своего аккаунта",
     "You disabled TOTP two-factor authentication for your account" : "Вы отключили двухфакторную авторизацию TOTP для своего аккаунта",
     "TOTP (Authenticator app)" : "TOTP (Приложение авторизации)",
     "Authenticate with a TOTP app" : "Аутентифицируйтесь с помощью TOTP приложения",
-    "Authentication code" : "Аутентификационный код",
     "Submit" : "Отправить",
     "Get the authentication code from the two-factor authentication app on your device." : "Получите аутентификационный код из приложения двухфакторной аутентификации на вашем устройстве.",
     "TOTP second-factor auth" : "Аутентификация вторым фактором с помщью TOTP"

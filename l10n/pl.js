@@ -4,11 +4,11 @@ OC.L10N.register(
     "Enable TOTP" : "Włącz TOTP",
     "This is your new TOTP secret:" : "To jest twoje nowe tajne TOTP:",
     "Scan this QR code with your TOTP app" : "Zeskanuj kod QR przy pomocy swojej aplikacji TOTP",
+    "Authentication code" : "Kod uwierzytelnienia",
     "You enabled TOTP two-factor authentication for your account" : "Włączono dwukrotne uwierzytelnienie TOTP na twoim koncie",
     "You disabled TOTP two-factor authentication for your account" : "Wyłączono dwukrotne uwierzytelnienie TOTP na twoim koncie",
     "TOTP (Authenticator app)" : "TOTP (aplikacja uwierzytelniająca)",
     "Authenticate with a TOTP app" : "Uwierzytelnij przy pomocy aplikacji TOTP",
-    "Authentication code" : "Kod uwierzytelnienia",
     "Submit" : "Zatwierdź",
     "Get the authentication code from the two-factor authentication app on your device." : "Pobierz kod uwierzytelnienia z aplikacji dwuskładnikowego uwierzytelniania na swoim urządzeniu.",
     "TOTP second-factor auth" : "Dwuskładnikowe uwierzytelnienie TOTP"

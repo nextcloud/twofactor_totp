@@ -4,11 +4,11 @@ OC.L10N.register(
     "Enable TOTP" : "Povolit TOTP",
     "This is your new TOTP secret:" : "Toto je vaše nové TOTP tajemství:",
     "Scan this QR code with your TOTP app" : "Naskenujte tento QR kód svou TOTP aplikací",
+    "Authentication code" : "Ověřovací kód",
     "You enabled TOTP two-factor authentication for your account" : "Pro váš účet jste povolil(a) dvoufázovou autentizaci pomocí TOTP",
     "You disabled TOTP two-factor authentication for your account" : "Pro váš účet jste zakázal(a) dvoufázovou autentizaci pomocí TOTP",
     "TOTP (Authenticator app)" : "TOTP (Autentizační aplikace)",
     "Authenticate with a TOTP app" : "Přihlaste se pomocí TOTP aplikace",
-    "Authentication code" : "Ověřovací kód",
     "Submit" : "Odeslat",
     "Get the authentication code from the two-factor authentication app on your device." : "Získat ověřovací kód z aplikace na vašem přístroji.",
     "TOTP second-factor auth" : "TOTP druhý ověřovací faktor"
