@@ -5,8 +5,10 @@ OC.L10N.register(
     "This is your new TOTP secret:" : "Aquest és el teu nou secret TOTP:",
     "Scan this QR code with your TOTP app" : "Escaneja aquest codi QR amb la teva app TOTP",
     "Authentication code" : "Codi d'autenticació",
+    "Verify" : "Verifica",
     "TOTP (Authenticator app)" : "TOTP (Autenticació de l'aplicació)",
     "Authenticate with a TOTP app" : "Autentica`t amb la app TOTP",
+    "Submit" : "Envia",
     "TOTP second-factor auth" : "TOTP segon factor d'autenticació"
 },
 "nplurals=2; plural=(n != 1);");

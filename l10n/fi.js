@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Kun olet konfiguroinut sovelluksen, kirjoita testikoodi alle varmistaaksesi, että sovellus on konfiguroitu oikein.",
     "Authentication code" : "Vahvistuskoodi",
     "Verify" : "Tarkista",
+    "Could not verify your key. Please try again" : "Koodin tarkastus epäonnistui. Yritä uudelleen.",
     "You enabled TOTP two-factor authentication for your account" : "Otit TOTP-tunnistautumisen käyttöön tililläsi",
     "You disabled TOTP two-factor authentication for your account" : "Poistit TOTP-tunnistautumisen käytöstä tililläsi",
     "TOTP (Authenticator app)" : "TOTP (Authenticator-sovellus)",
