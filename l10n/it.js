@@ -5,6 +5,8 @@ OC.L10N.register(
     "This is your new TOTP secret:" : "Questo è il tuo nuovo segreto TOTP:",
     "Scan this QR code with your TOTP app" : "Esegui la scansione di questo codice QR con la tua applicazione TOTP",
     "Authentication code" : "Codice di autenticazione",
+    "Verify" : "Verifica",
+    "Could not verify your key. Please try again" : "Impossibile verificare la tua chiave. Prova ancora",
     "You enabled TOTP two-factor authentication for your account" : "Hai abilitato l'autenticazione TOTP a due fattori per il tuo account",
     "You disabled TOTP two-factor authentication for your account" : "Hai disabilitato l'autenticazione TOTP a due fattori per il tuo account",
     "TOTP (Authenticator app)" : "TOTP (Applicazione autenticazione)",
