@@ -4,6 +4,7 @@
     "Scan this QR code with your TOTP app" : "Skann denne QR-koden med din applikasjon for to-trinns bekreftelse",
     "Authentication code" : "Autentiseringskode",
     "Verify" : "Bekreft",
+    "Could not verify your key. Please try again" : "Kunne ikke bekrefte din nøkkel. Prøv igjen",
     "You enabled TOTP two-factor authentication for your account" : "Du har aktivert to-trinns bekreftelse for din konto",
     "You disabled TOTP two-factor authentication for your account" : "Du har deaktivert to-trinns bekreftelse for din konto",
     "TOTP (Authenticator app)" : "To-trinns bekreftelse (TOTP)",
