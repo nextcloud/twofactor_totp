@@ -5,6 +5,7 @@ OC.L10N.register(
     "This is your new TOTP secret:" : "Az új időalapú egyszeri titkos jelszava (TOTP):",
     "Scan this QR code with your TOTP app" : "Olvassa be ezt a QR kódot a TOTP alkalmazásával",
     "Authentication code" : "Azonosítási kód",
+    "Verify" : "Ellenőrzés",
     "Authenticate with a TOTP app" : "Hitelesítés TOTP alkalmazással",
     "Submit" : "Küldés",
     "TOTP second-factor auth" : "TOTP második lépcsős hitelesítés"
