@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.3.0 – 2017-05-02
+### Added
+- Confirmation before enabling
+- Translations
+### Fixed
+- Client-side js error on personal page due to wrong js namespacing
+- Icon on personal settings page
+
 ## 1.2.0 – 2017-04-03
 ### Added
 - Settings icon (NC12 only)
