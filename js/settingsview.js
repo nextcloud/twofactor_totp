@@ -8,7 +8,7 @@
 
     var TEMPLATE = '<div>'
             + '    <input type="checkbox" class="checkbox" id="totp-enabled">'
-            + '    <label for="totp-enabled">' + t('twofactor_totp', 'Enable TOTP') + '</label>'
+            + '    <label for="totp-enabled">' + t('twofactor_totp', 'Activate TOTP') + '</label>'
             + '</div>'
             + '{{#if secret}}'
 			+ '<div>'
