@@ -1,7 +1,6 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "Enable TOTP" : "تفعيل TOTP كلمة السر المؤقتة ولمرة واحدة",
     "This is your new TOTP secret:" : "هذا هو سر TOTP الجديد الخاص بك:",
     "Scan this QR code with your TOTP app" : "إمسح رمز الـ QR هذا بتطبيق كلمة السر TOTP لديك",
     "Authenticate with a TOTP app" : "المصادقة عبر تطبيق TOTP",

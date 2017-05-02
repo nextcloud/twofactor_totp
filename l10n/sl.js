@@ -1,7 +1,6 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "Enable TOTP" : "Omogoči enkratno geslo",
     "This is your new TOTP secret:" : "Nastavljeno je novo enkratno geslo:",
     "Scan this QR code with your TOTP app" : "Preberi kodo QR enkratnega gesla z ustreznim programom",
     "Authenticate with a TOTP app" : "Overi z enkratnim geslom",

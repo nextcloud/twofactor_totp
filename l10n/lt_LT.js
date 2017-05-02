@@ -1,7 +1,6 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "Enable TOTP" : "Įjungti TOTP",
     "This is your new TOTP secret:" : "Jūsų naujasis TOTP raktas:",
     "Scan this QR code with your TOTP app" : "Nuskanuokite šį QR kodą su savo TOTP programėle",
     "Authenticate with a TOTP app" : "Prisijungti su TOTP programėle",
