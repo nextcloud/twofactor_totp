@@ -57,7 +57,7 @@ class SettingsController extends Controller {
 
 	/**
 	 * @NoAdminRequired
-	 * @return JSONResponse
+	 * @return array
 	 */
 	public function state() {
 		$user = $this->userSession->getUser();
@@ -69,7 +69,7 @@ class SettingsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 * @param bool $state
-	 * @return JSONResponse
+	 * @return array
 	 */
 	public function enable($state) {
 		$user = $this->userSession->getUser();
@@ -98,7 +98,7 @@ class SettingsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 * @param string $challenge
-	 * @return JSONResponse
+	 * @return array
 	 */
 	public function verifyNewSecret($challenge) {
 		$user = $this->userSession->getUser();

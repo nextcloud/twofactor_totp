@@ -1,4 +1,4 @@
-/* global Backbone, Handlebars */
+/* global Backbone, Handlebars, OC */
 
 (function (OC, Handlebars, $) {
     'use strict';
@@ -19,9 +19,9 @@
         + '    <img src="{{qr}}">'
         + '</div>'
         + '<div>'
-        + '	   <span>' + t('twofactor_totp', 'Please verify authentication code in order to complete setup')+ '</span><br>'
-        + '	   <input type="text" id="totp-challenge" required="required" autofocus autocomplete="off" autocapitalize="off">'
-        + '	   <button id="totp-verify-secret" class="button">Verify</button>'
+		+ '	   <span>' + t('twofactor_totp', 'You can test a generated authentication code below.') + '</span><br>'
+        + '	   <input type="text" id="totp-challenge" required="required" type="tel" minlength="6" maxlength="6" autocomplete="off" placeholder="' + t('twofactor_totp', 'Authentication code') + '">'
+        + '	   <button id="totp-verify-secret" class="button">' + t('twofactor_totp', 'Verify') + '</button>'
         + '	   <span id="totp-verify-msg" class="msg"></span>'
         + '</div>'
         + '{{/if}}';
@@ -32,7 +32,7 @@
         _enabled: undefined,
         events: {
             'change #totp-enabled': '_onToggleEnabled',
-            'click #totp-verify-secret': '_clickVerifySecret',
+            'click #totp-verify-secret': '_clickVerifySecret'
         },
         initialize: function () {
             this._load();
@@ -45,7 +45,7 @@
 
             var url = OC.generateUrl('/apps/twofactor_totp/settings/state');
             var loading = $.ajax(url, {
-                method: 'GET',
+                method: 'GET'
             });
 
             var _this = this;
