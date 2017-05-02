@@ -3,6 +3,10 @@ OC.L10N.register(
     {
     "This is your new TOTP secret:" : "Nastavljeno je novo enkratno geslo:",
     "Scan this QR code with your TOTP app" : "Preberi kodo QR enkratnega gesla z ustreznim programom",
+    "Authentication code" : "Overitvena koda",
+    "Verify" : "Overi",
+    "Verified" : "Overjeno",
+    "Not verified" : "Ni overjeno",
     "Authenticate with a TOTP app" : "Overi z enkratnim geslom",
     "TOTP Second-factor Auth" : "Overitev z dvojnim enkratnim geslom"
 },
