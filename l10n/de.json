@@ -10,6 +10,7 @@
     "You disabled TOTP two-factor authentication for your account" : "Du hast TOTP Zwei-Faktor-Authentifizierung für Dein Konto deaktiviert",
     "TOTP (Authenticator app)" : "TOTP (App zur Authentifizierung)",
     "Authenticate with a TOTP app" : "Mit einer TOTP-App authentifizieren",
+    "Two Factor TOTP Provider" : "Zwei-Faktor TOTP-Anbieter",
     "Submit" : "Übermitteln",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalte den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf deinem Gerät.",
     "TOTP second-factor auth" : "TOTP-Zweifaktorauthentifizierung"
