@@ -12,6 +12,7 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Vous avez désactivé l'authentification à deux facteurs TOTP  pour votre compte",
     "TOTP (Authenticator app)" : "TOTP (Application d'authentification)",
     "Authenticate with a TOTP app" : "Authentification avec votre application TOTP",
+    "Two Factor TOTP Provider" : "Fournisseur de TOTP pour l'authentification en deux étapes",
     "Submit" : "Envoyer",
     "Get the authentication code from the two-factor authentication app on your device." : "Saisissez le code d'authentification de l'application d'authentification à deux facteurs sur votre appareil.",
     "TOTP second-factor auth" : "Deuxième facteur d'authentification du mot de passe temporaire à usage unique"

@@ -12,6 +12,7 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "您为您的账户禁用了 TOTP 两步验证",
     "TOTP (Authenticator app)" : "TOTP (认证应用)",
     "Authenticate with a TOTP app" : "使用 TOTP 应用验证身份",
+    "Two Factor TOTP Provider" : "二次验证短信提供者",
     "Submit" : "提交",
     "Get the authentication code from the two-factor authentication app on your device." : "从您设备上的两步验证应用获取验证码",
     "TOTP second-factor auth" : "TOTP 两步验证"
