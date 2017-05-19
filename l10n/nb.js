@@ -12,6 +12,7 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Du har deaktivert to-trinns bekreftelse for din konto",
     "TOTP (Authenticator app)" : "To-trinns bekreftelse (TOTP)",
     "Authenticate with a TOTP app" : "Autentiser med din applikasjon for to-trinns bekreftelse",
+    "Two Factor TOTP Provider" : "Tofaktors TOTP-tilbyder",
     "Submit" : "Send inn",
     "Get the authentication code from the two-factor authentication app on your device." : "Hent autentiseringskoden fra din applikasjon for to-trinns bekreftelse.",
     "TOTP second-factor auth" : "To-trinns bekreftelse med TOTP"
