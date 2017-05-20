@@ -10,6 +10,7 @@
     "You disabled TOTP two-factor authentication for your account" : "Wyłączono dwukrotne uwierzytelnienie TOTP na twoim koncie",
     "TOTP (Authenticator app)" : "TOTP (aplikacja uwierzytelniająca)",
     "Authenticate with a TOTP app" : "Uwierzytelnij przy pomocy aplikacji TOTP",
+    "Two Factor TOTP Provider" : "Dostawca TOTP dla uwierzytelniania dwuetapowego",
     "Submit" : "Zatwierdź",
     "Get the authentication code from the two-factor authentication app on your device." : "Pobierz kod uwierzytelnienia z aplikacji dwuskładnikowego uwierzytelniania na swoim urządzeniu.",
     "TOTP second-factor auth" : "Dwuskładnikowe uwierzytelnienie TOTP"
