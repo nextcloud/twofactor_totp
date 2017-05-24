@@ -1,8 +1,14 @@
 OC.L10N.register(
     "twofactor_totp",
     {
+    "Activate TOTP" : "Activer TOTP",
     "This is your new TOTP secret:" : "Votre nouveau mot de passe TOP :",
     "Scan this QR code with your TOTP app" : "Scannez ce QR code avec votre application TOTP",
+    "You can test a generated authentication code below." : "Vous pouvez tester ci-dessous un code d'authentification généré.",
+    "Authentication code" : "Code d'authentification",
+    "Verify" : "Vérification",
+    "Verified" : "Vérifié",
+    "Not verified" : "Non vérifié",
     "Authenticate with a TOTP app" : "Authentification avec votre application TOTP",
     "TOTP Second-factor Auth" : "TOTP Deuxième facteur d'authentification"
 },
