@@ -10,6 +10,7 @@
     "You disabled TOTP two-factor authentication for your account" : "You disabled TOTP two-factor authentication for your account",
     "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
     "Authenticate with a TOTP app" : "Authenticate with a TOTP app",
+    "Two Factor TOTP Provider" : "Two Factor TOTP Provider",
     "Submit" : "Submit",
     "Get the authentication code from the two-factor authentication app on your device." : "Get the authentication code from the two-factor authentication app on your device.",
     "TOTP second-factor auth" : "TOTP second-factor auth"
