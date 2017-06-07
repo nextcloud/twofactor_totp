@@ -2,6 +2,7 @@
     "Enable TOTP" : "Aktivizo TOTP",
     "This is your new TOTP secret:" : "Kjo është e fshehta juaj TOTP e re:",
     "Scan this QR code with your TOTP app" : "Skanojeni këtë kod QR me aplikacionin tuaj TOTP",
+    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Mbasi keni konfiguruar aplikacionin, vendosni një kod provë poshtë për tu siguruar se aplikacioni yt është konfiguruar saktësisht.",
     "Authentication code" : "Kod mirëfilltësimi",
     "Verify" : "Vërteto",
     "Could not verify your key. Please try again" : "Çelësi juaj s'mund të verifikohej. Ju lutem provoni përsëri",
