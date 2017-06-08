@@ -9,6 +9,7 @@ OC.L10N.register(
     "Verify" : "Vërteto",
     "Could not verify your key. Please try again" : "Çelësi juaj s'mund të verifikohej. Ju lutem provoni përsëri",
     "Authenticate with a TOTP app" : "Mirëfilltësimin kryejeni me një aplikacion TOTP",
+    "Submit" : "Prano",
     "Get the authentication code from the two-factor authentication app on your device." : "Merreni kodin e mirëfilltësimit pre aplikacionit të mirëfilltësimit dyfaktorësh te pajisja juaj.",
     "TOTP second-factor auth" : "TOTP second-factor auth"
 },
