@@ -2,6 +2,7 @@
     "Enable TOTP" : "Aktivér TOTP",
     "This is your new TOTP secret:" : "Dette er din nye hemmelige TOTP :",
     "Scan this QR code with your TOTP app" : "Scan denne QR-kode med din TOTP app",
+    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Når du har konfigureret din app skal du skrive en test kode her under for at sikre at din app er blevet konfigureret korrekt.",
     "Authentication code" : "Autorisationskode",
     "Authenticate with a TOTP app" : "Godkend med en TOTP app"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
