@@ -1,0 +1,14 @@
+<?php
+$TRANSLATIONS = array(
+"Activate TOTP" => "TOTP (zeitgesteuertes Einmalpasswort) aktivieren",
+"This is your new TOTP secret:" => "Dies ist dein neuer TOTP-Schlüssel:",
+"Scan this QR code with your TOTP app" => "Scanne diesen QR-Code mit deiner TOTP-App",
+"You can test a generated authentication code below." => "Du kannst einen generierten Authentifizierungscode unten testen.",
+"Authentication code" => "Authentifizierungscode",
+"Verify" => "Bestätigen",
+"Verified" => "Bestätigt",
+"Not verified" => "Nicht bestätigt",
+"Authenticate with a TOTP app" => "Mit einer TOTP-App (zeitgesteuertes Einmalpasswort) authentifizieren",
+"TOTP Second-factor Auth" => "TOTP-Zweifaktorauthentifizierung"
+);
+$PLURAL_FORMS = "nplurals=2; plural=(n != 1);";
