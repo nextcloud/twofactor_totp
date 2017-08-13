@@ -2,6 +2,7 @@
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Semih Serhat Karakaya <karakayasemi@itu.edu.tr>
  *
  * Two-factor TOTP
  *
@@ -93,13 +94,13 @@ class TotpProvider implements IProvider {
     }
 
     /**
-     * Decides whether 2FA is enabled for the given user
+     * Decides whether 2FA is enabled and verified for the given user
      *
      * @param IUser $user
      * @return boolean
      */
     public function isTwoFactorAuthEnabledForUser(IUser $user) {
-        return $this->totp->hasSecret($user);
+        return $this->totp->hasSecret($user) && $this->totp->isVerified($user);
     }
 
 }

@@ -62,7 +62,7 @@ class SettingsController extends Controller {
 	public function state() {
 		$user = $this->userSession->getUser();
 		return [
-			'enabled' => $this->totp->hasSecret($user),
+			'enabled' => $this->totp->hasSecret($user) && $this->totp->isVerified($user),
 		];
 	}
 
@@ -103,7 +103,7 @@ class SettingsController extends Controller {
 	public function verifyNewSecret($challenge) {
 		$user = $this->userSession->getUser();
 		return [
-			'verified' => $this->totp->validateSecret($user, $challenge)
+			'verified' => $this->totp->verifySecret($user, $challenge)
 		];
 	}
 

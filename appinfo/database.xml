@@ -27,6 +27,11 @@
                 <type>clob</type>
                 <notnull>true</notnull>
             </field>
+            <field>
+                <name>verified</name>
+                <type>boolean</type>
+                <default>false</default>
+            </field>
 
             <index>
                 <name>totp_secrets_user_id</name>

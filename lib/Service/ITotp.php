@@ -2,6 +2,7 @@
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Semih Serhat Karakaya <karakayasemi@itu.edu.tr>
  *
  * Two-factor TOTP
  *
@@ -48,4 +49,16 @@ interface ITotp {
      * @param string $key
      */
     public function validateSecret(IUser $user, $key);
+
+    /**
+     * @param IUser $user
+     * @param string $key
+     */
+    public function verifySecret(IUser $user, $key);
+
+    /**
+     * @param IUser $user
+     * @return boolean
+     */
+    public function isVerified(IUser $user);
 }

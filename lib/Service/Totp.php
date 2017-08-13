@@ -2,6 +2,7 @@
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Semih Serhat Karakaya <karakayasemi@itu.edu.tr>
  *
  * Two-factor TOTP
  *
@@ -54,22 +55,25 @@ class Totp implements ITotp {
     }
 
     /**
-     * @todo prevent duplicates
      * 
      * @param IUser $user
      */
     public function createSecret(IUser $user) {
+        $this->deleteSecret($user);
         $secret = GoogleAuthenticator::generateRandom();
 
         $dbSecret = new TotpSecret();
         $dbSecret->setUserId($user->getUID());
         $dbSecret->setSecret($this->crypto->encrypt($secret));
-
+        $dbSecret->setVerified(false);
         $this->secretMapper->insert($dbSecret);
 
         return $secret;
     }
 
+    /**
+     * @param IUser $user
+     */
     public function deleteSecret(IUser $user) {
         try {
             // TODO: execute DELETE sql in mapper instead
@@ -80,6 +84,24 @@ class Totp implements ITotp {
         }
     }
 
+    /**
+     * @param IUser $user
+     * @param string $key
+     */
+    public function verifySecret(IUser $user, $key) {
+        if($this->validateSecret($user, $key) === true) {
+            $dbSecret = $this->secretMapper->getSecret($user);
+            $dbSecret->setVerified(true);
+            $this->secretMapper->update($dbSecret);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param IUser $user
+     * @param string $key
+     */
     public function validateSecret(IUser $user, $key) {
         try {
             $dbSecret = $this->secretMapper->getSecret($user);
@@ -91,6 +113,19 @@ class Totp implements ITotp {
 
         $otp = new Otp();
         return $otp->checkTotp(Base32::decode($secret), $key, 3);
+    }
+
+    /**
+     * @param IUser $user
+     * @return boolean
+     */
+    public function isVerified(IUser $user) {
+        try {
+            $secret = $this->secretMapper->getSecret($user);
+            return $secret->getVerified();
+        } catch (DoesNotExistException $ex) {
+            return false;
+        }
     }
 
 }

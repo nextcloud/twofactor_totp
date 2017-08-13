@@ -28,6 +28,8 @@ use OCP\AppFramework\Db\Entity;
  * @method void setUserId(string $userId)
  * @method string getSecret()
  * @method void setSecret(string $secret)
+ * @method boolean getVerified()
+ * @method void setVerified(bool $verified)
  */
 class TotpSecret extends Entity {
 
@@ -36,5 +38,8 @@ class TotpSecret extends Entity {
 
     /** @var string */
     protected $secret;
+
+    /** @var boolean */
+    protected $verified;
 
 }

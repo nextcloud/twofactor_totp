@@ -19,7 +19,7 @@
         + '    <img src="{{qr}}">'
         + '</div>'
         + '<div>'
-		+ '	   <span>' + t('twofactor_totp', 'You can test a generated authentication code below.') + '</span><br>'
+        + '	   <span>' + t('twofactor_totp', 'To enable second-factor verify authentication code below.') + '</span><br>'
         + '	   <input type="text" id="totp-challenge" required="required" type="tel" minlength="6" maxlength="6" autocomplete="off" placeholder="' + t('twofactor_totp', 'Authentication code') + '">'
         + '	   <button id="totp-verify-secret" class="button">' + t('twofactor_totp', 'Verify') + '</button>'
         + '	   <span id="totp-verify-msg" class="msg"></span>'
