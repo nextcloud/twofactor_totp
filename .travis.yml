@@ -22,7 +22,7 @@ services:
 
 env:
   global:
-  - CORE_BRANCH=master
+  - CORE_BRANCH=stable12
   - PHP_COVERAGE=FALSE
   - SAUCE=FALSE
   matrix:
@@ -96,9 +96,9 @@ matrix:
       env: "DB=pgsql PHP_COVERAGE=TRUE"
     - php: 7
       env: "DB=mysql"
-    - php: 7.1
+    - php: 7
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
-    - php: 7.1
+    - php: 7
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
 
   fast_finish: true
