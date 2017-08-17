@@ -4,7 +4,6 @@ OC.L10N.register(
     "Activate TOTP" : "アクティブTOTP",
     "This is your new TOTP secret:" : "TOTPの新しい秘密鍵",
     "Scan this QR code with your TOTP app" : "TOTPアプリでQRコードをスキャンしてください",
-    "You can test a generated authentication code below." : "下で生成した認証コードをテストできます。",
     "Authentication code" : "認証コード",
     "Verify" : "確認",
     "Verified" : "確認済",

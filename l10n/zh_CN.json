@@ -2,7 +2,6 @@
     "Activate TOTP" : "激活 TOTP",
     "This is your new TOTP secret:" : "这是您新的 TOTP 密文：",
     "Scan this QR code with your TOTP app" : "使用您的 TOTP 应用扫描该二维码",
-    "You can test a generated authentication code below." : "你可以在下方测试生成的验证码。",
     "Authentication code" : "验证码",
     "Verify" : "验证",
     "Verified" : "已验证",

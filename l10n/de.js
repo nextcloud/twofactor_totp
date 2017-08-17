@@ -4,7 +4,6 @@ OC.L10N.register(
     "Activate TOTP" : "TOTP (zeitgesteuertes Einmalpasswort) aktivieren",
     "This is your new TOTP secret:" : "Dies ist dein neuer TOTP-Schlüssel:",
     "Scan this QR code with your TOTP app" : "Scanne diesen QR-Code mit deiner TOTP-App",
-    "You can test a generated authentication code below." : "Du kannst einen generierten Authentifizierungscode unten testen.",
     "Authentication code" : "Authentifizierungscode",
     "Verify" : "Bestätigen",
     "Verified" : "Bestätigt",

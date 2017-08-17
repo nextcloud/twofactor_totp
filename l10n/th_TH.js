@@ -4,7 +4,6 @@ OC.L10N.register(
     "Activate TOTP" : "เปิดใช้งาน TOTP",
     "This is your new TOTP secret:" : "นี่คือข้อความลับ TOTP ใหม่ของคุณ:",
     "Scan this QR code with your TOTP app" : "สแกน QR โค้ดนี้กับแอพฯ TOTP ของคุณ",
-    "You can test a generated authentication code below." : "คุณสามารถทดสอบรหัสการตรวจสอบสิทธิ์ด้านล่างได้",
     "Authentication code" : "รหัสรับรองความถูกต้อง",
     "Verify" : "ยืนยัน",
     "Verified" : "ยืนยันแล้ว",
