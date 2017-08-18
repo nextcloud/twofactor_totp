@@ -4,6 +4,7 @@ OC.L10N.register(
     "Activate TOTP" : "激活 TOTP",
     "This is your new TOTP secret:" : "这是您新的 TOTP 密文：",
     "Scan this QR code with your TOTP app" : "使用您的 TOTP 应用扫描该二维码",
+    "To enable second-factor verify authentication code below." : "在下方输入验证码以启用两步验证",
     "Authentication code" : "验证码",
     "Verify" : "验证",
     "Verified" : "已验证",
