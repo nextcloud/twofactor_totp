@@ -4,6 +4,7 @@ OC.L10N.register(
     "Activate TOTP" : "הפעלת TOTP",
     "This is your new TOTP secret:" : "להלן סיסמת ה- TOTP החדשה שלך:",
     "Scan this QR code with your TOTP app" : "יש לסרוק את קוד ה- QR עם יישום ה- TOTP שלך",
+    "To enable second-factor verify authentication code below." : "לצורך הפעלת סדר שני יש לאמת את קוד האימות מטה.",
     "Authentication code" : "קוד אימות",
     "Verify" : "אימות",
     "Verified" : "מאומת",
