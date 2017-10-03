@@ -84,13 +84,14 @@ class TOTPAcceptenceTest extends AcceptanceTest {
 		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] input[type=submit]'))->click();
 
 		// Go to personal settings
-		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::elementToBeClickable(WebDriverBy::id('expandDisplayName')));
-		$this->webDriver->findElement(WebDriverBy::id('expandDisplayName'))->click();
-		$this->webDriver->findElement(WebDriverBy::linkText('Personal'))->click();
+		//$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::elementToBeClickable(WebDriverBy::id('expandDisplayName')));
+		//$this->webDriver->findElement(WebDriverBy::id('expandDisplayName'))->click();
+		//$this->webDriver->findElement(WebDriverBy::partialLinkText('src="/settings/img/personal.svg'))->click();
+		$this->webDriver->get('http://localhostt:8080/index.php/settings/user/additional');
 
 		// Go to TOTP settings
-		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::elementToBeClickable(WebDriverBy::linkText('TOTP second-factor auth')));
-		$this->webDriver->findElement(WebDriverBy::linkText('TOTP second-factor auth'))->click();
+		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::elementToBeClickable(WebDriverBy::id('totp-enabled')));
+		$this->webDriver->findElement(WebDriverBy::id('totp-enabled'))->click();
 
 		// Enable TOTP
 		// Wait for state being loaded from the server

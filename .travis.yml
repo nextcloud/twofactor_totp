@@ -3,7 +3,7 @@ dist: trusty
 language: php
 php:
   - 5.6
-  - 7
+  - 7.0
   - 7.1
 
 addons:
@@ -22,11 +22,15 @@ services:
 
 env:
   global:
-  - CORE_BRANCH=stable12
   - PHP_COVERAGE=FALSE
   - SAUCE=FALSE
   matrix:
-  - DB=sqlite
+  - CORE_BRANCH=master   DB=sqlite
+  - CORE_BRANCH=master   DB=mysql
+  - CORE_BRANCH=master   DB=pgsql
+  - CORE_BRANCH=stable12 DB=sqlite
+  - CORE_BRANCH=stable12 DB=mysql
+  - CORE_BRANCH=stable12 DB=pgsql
 
 branches:
   only:
@@ -91,15 +95,12 @@ after_script:
 matrix:
   include:
     - php: 7
-      env: "DB=sqlite"
+      env: "CORE_BRANCH=stable12 DB=mysql"
     - php: 7
-      env: "DB=pgsql PHP_COVERAGE=TRUE"
+      env: "CORE_BRANCH=master DB=mysql PHP_COVERAGE=TRUE"
     - php: 7
-      env: "DB=mysql"
+      env: "CORE_BRANCH=master DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
     - php: 7
-      env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
-    - php: 7
-      env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
-
+      env: "CORE_BRANCH=master DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
+ 
   fast_finish: true
-
