@@ -31,4 +31,7 @@
 			<provider>OCA\TwoFactorTOTP\Activity\Provider</provider>
 		</providers>
 	</activity>
+	<settings>
+		<personal>OCA\TwoFactorTOTP\Settings\Personal</personal>
+	</settings>
 </info>
