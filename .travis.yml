@@ -22,7 +22,7 @@ services:
 
 env:
   global:
-  - CORE_BRANCH=stable12
+  - CORE_BRANCH=master
   - PHP_COVERAGE=FALSE
   - SAUCE=FALSE
   matrix:

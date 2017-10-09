@@ -83,14 +83,8 @@ class TOTPAcceptenceTest extends AcceptanceTest {
 		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('admin');
 		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] input[type=submit]'))->click();
 
-		// Go to personal settings
-		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::elementToBeClickable(WebDriverBy::id('expandDisplayName')));
-		$this->webDriver->findElement(WebDriverBy::id('expandDisplayName'))->click();
-		$this->webDriver->findElement(WebDriverBy::linkText('Personal'))->click();
-
-		// Go to TOTP settings
-		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::elementToBeClickable(WebDriverBy::linkText('TOTP second-factor auth')));
-		$this->webDriver->findElement(WebDriverBy::linkText('TOTP second-factor auth'))->click();
+		// Go to personal settings and TOTP settings
+		$this->webDriver->get('http://localhost:8080/index.php/settings/user/security');
 
 		// Enable TOTP
 		// Wait for state being loaded from the server
