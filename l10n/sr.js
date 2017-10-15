@@ -1,0 +1,20 @@
+OC.L10N.register(
+    "twofactor_totp",
+    {
+    "Enable TOTP" : "Укључи TOTP",
+    "This is your new TOTP secret:" : "Ово је Ваша нова TOTP тајна:",
+    "Scan this QR code with your TOTP app" : "Скенирајте овај QR код са Вашом TOTP апликацијом",
+    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Онда када подесите апликацију, унесите пробни код испод да проверите да ли је апликација добро подешена.",
+    "Authentication code" : "Код за проверу идентитета",
+    "Verify" : "Провери",
+    "Could not verify your key. Please try again" : "Не могу да верификујем Ваш кључ. Пробајте поново",
+    "You enabled TOTP two-factor authentication for your account" : "Укључили сте TOTP двофакторску проверу идентитета за Ваш налог",
+    "You disabled TOTP two-factor authentication for your account" : "Искључили сте TOTP двофакторску проверу идентитета за Ваш налог",
+    "TOTP (Authenticator app)" : "TOTP (апликација за проверу идентитета)",
+    "Authenticate with a TOTP app" : "Идентификујте се са TOTP апликацијом",
+    "Two Factor TOTP Provider" : "Провајдер двофакторске TOTP",
+    "Submit" : "Пошаљи",
+    "Get the authentication code from the two-factor authentication app on your device." : "Узмите идентификациони код из апликације за проверу идентитета са Вашег уређаја.",
+    "TOTP second-factor auth" : "TOTP други фактор провере идентитета"
+},
+"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);");
