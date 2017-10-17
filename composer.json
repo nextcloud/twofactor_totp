@@ -8,5 +8,9 @@
 	},
 	"require-dev": {
 		"facebook/webdriver": "^1.3"
+	},
+	"config": {
+		"optimize-autoloader": true,
+		"classmap-authoritative": true
 	}
 }
