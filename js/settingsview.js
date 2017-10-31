@@ -29,7 +29,7 @@
 		+ '    <img src="{{qr}}">'
 		+ '</div>'
 		+ '<span>' + t('twofactor_totp', 'Once you have configured your app, enter a test code below to ensure that your app has been configured correctly.') + '<span><br>'
-		+ '<input id="totp-confirmation" type="tel" minlength="6" maxlength="6" autocomplete="off" autocapitalize="off" placeholder="' + t('twofactor_totp', 'Authentication code') + '">'
+		+ '<input id="totp-confirmation" type="tel" minlength="6" maxlength="10" autocomplete="off" autocapitalize="off" placeholder="' + t('twofactor_totp', 'Authentication code') + '">'
 		+ '<input id="totp-confirmation-submit" type="button" value="' + t('twofactor_totp', 'Verify') + '">'
 		+ '{{/if}}';
 
