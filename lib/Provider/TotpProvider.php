@@ -89,6 +89,7 @@ class TotpProvider implements IProvider {
 	 * @param string $challenge
 	 */
 	public function verifyChallenge(IUser $user, $challenge) {
+		$challenge = preg_replace('/[^0-9]/', '', $challenge);
 		return $this->totp->validateSecret($user, $challenge);
 	}
 
