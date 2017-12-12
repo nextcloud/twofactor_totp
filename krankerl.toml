@@ -1,0 +1,24 @@
+[package]
+exclude = [
+	".git",
+	"build",
+	".gitignore",
+	".travis.yml",
+	".scrutinizer.yml",
+        "CONTRIBUTING.md",
+	"composer.json",
+	"composer.lock",
+	"composer.phar",
+	"krankerl.toml",
+	"l10n/.tx",
+	"l10n/no-php",
+	"Makefile",
+	"nbproject",
+	"screenshots",
+	"tests",
+	"vendor/bin",
+]
+
+before_cmds = [
+	"composer install --no-dev -o",
+]

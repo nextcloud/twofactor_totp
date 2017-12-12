@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.4.0 – 2017-12-12
+### Added
+- Nextcloud 13 support
+- Php7.2 support
+- Translations
+### Fixed
+- List settings in security section
+- Remove whitespaces from OTP code
+
 ## 1.3.1 – 2017-08-14
 ### Added
 - Translations
