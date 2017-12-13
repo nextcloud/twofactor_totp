@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.4.0 – 2017-12-12
+## 1.4.0 – 2017-12-13
 ### Added
 - Nextcloud 13 support
 - Php7.2 support
