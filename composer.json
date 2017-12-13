@@ -1,6 +1,6 @@
 {
 	"require": {
-		"christian-riesen/otp": "1.*",
+		"christian-riesen/otp": "2.*",
 		"endroid/qrcode": "1.7.*"
 	},
 	"platform": {
