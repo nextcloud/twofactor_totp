@@ -11,6 +11,9 @@
 	},
 	"config": {
 		"optimize-autoloader": true,
-		"classmap-authoritative": true
+		"classmap-authoritative": true,
+		"platform": {
+			"php": "5.6"
+		}
 	}
 }
