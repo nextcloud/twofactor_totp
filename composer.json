@@ -1,7 +1,7 @@
 {
 	"require": {
 		"christian-riesen/otp": "1.*",
-		"endroid/qrcode": "1.7.*"
+		"endroid/qrcode": "3.0.*"
 	},
 	"platform": {
 		"php": ">=5.6.0"
