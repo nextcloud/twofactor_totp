@@ -4,6 +4,7 @@ OC.L10N.register(
     "Activate TOTP" : "Aktyvuoti TOTP",
     "This is your new TOTP secret:" : "Jūsų naujasis TOTP raktas:",
     "Scan this QR code with your TOTP app" : "Nuskanuokite šį QR kodą su savo TOTP programėle",
+    "To enable second-factor verify authentication code below." : "Įjungti dvigubą autorizacija įveskite kodą žemiau.",
     "Authentication code" : "Autentifikacijos kodas",
     "Verify" : "Patvirtinti",
     "Verified" : "Patvirtinta",
