@@ -64,7 +64,7 @@ class TotpTest extends TestCase {
 	 * @param boolean $validationResult
 	 * @param boolean $expectedResult
 	 */
-	public function testValidateSecret($lastKey, $key, $validationResult, $expectedResult) {
+	public function testValidateKey($lastKey, $key, $validationResult, $expectedResult) {
 		/** @var IUser | \PHPUnit_Framework_MockObject_MockObject $user  */
 		$user = $this->createMock(IUser::class);
 		$dbSecret = $this
@@ -96,7 +96,7 @@ class TotpTest extends TestCase {
 				->method('update')
 				->with($dbSecret);
 		}
-		$this->assertEquals($this->totp->validateSecret($user, $key), $expectedResult);
+		$this->assertEquals($this->totp->validateKey($user, $key), $expectedResult);
 	}
 
 	public function validationProvider() {
@@ -117,6 +117,6 @@ class TotpTest extends TestCase {
 			->with($user)
 			->will($this->throwException(new DoesNotExistException('')));
 		$this->expectException(NoTotpSecretFoundException::class);
-		$this->totp->validateSecret($user, 'testkey');
+		$this->totp->validateKey($user, 'testkey');
 	}
 }
