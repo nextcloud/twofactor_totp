@@ -17,8 +17,8 @@
 	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_totp/dd1e48deec73a250886f35f3924186f5357f4c5f/screenshots/enter_challenge.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_totp/dd1e48deec73a250886f35f3924186f5357f4c5f/screenshots/settings.png</screenshot>
 	<dependencies>
-		<php min-version="5.6" max-version="7.2" />
-		<nextcloud min-version="13" max-version="13" />
+		<php min-version="7.0" max-version="7.2" />
+		<nextcloud min-version="14" max-version="14" />
 	</dependencies>
 	<two-factor-providers>
 		<provider>OCA\TwoFactorTOTP\Provider\TotpProvider</provider>
