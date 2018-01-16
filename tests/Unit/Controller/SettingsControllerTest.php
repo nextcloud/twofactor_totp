@@ -88,7 +88,7 @@ class SettingsControllerTest extends PHPUnit_Framework_TestCase {
 		$issuer = rawurlencode($this->defaults->getName());
 		$qr = $qrCode->setText("otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer")
 			->setSize(150)
-			->getDataUri();
+			->writeDataUri();
 
 		$expected = [
 			'state' => ITotp::STATE_CREATED,

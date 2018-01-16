@@ -130,11 +130,14 @@
 				// spinner until the user has finished the registration
 				this._loading = this._state === STATE_CREATED;
 				this.render();
-			}.bind(this), function() {
+			}.bind(this), function(e) {
+				OC.Notification.showTemporary(t('twofactor_totp', 'Could not enable TOTP'));
+				console.error('Could not enable TOTP', e);
+
 				// Restore on error
 				this._loading = false;
 				this.render();
-			}).catch(console.error.bind(this));
+			}.bind(this)).catch(console.error.bind(this));
 		},
 
 		/**
