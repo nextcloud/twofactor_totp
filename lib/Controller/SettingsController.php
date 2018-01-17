@@ -81,7 +81,7 @@ class SettingsController extends Controller {
 			$issuer = $this->getSecretIssuer();
 			$qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
 				->setSize(150)
-				->getDataUri();
+				->writeDataUri();
 			return [
 				'enabled' => true,
 				'secret' => $secret,
