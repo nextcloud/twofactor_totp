@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Uygulamanızı yapılandırdıktan sonra aşağı bir deneme kodu yazarak uygulamanızın doğru yapılandırıldığından emin olun.",
     "Authentication code" : "Kimlik doğrulama kodu",
     "Verify" : "Doğrula",
+    "Could not enable TOTP" : "TOTP etkinleştirilemedi",
     "Could not verify your key. Please try again" : "Anahtarınız doğrulanamadı. Lütfen yeniden deneyin",
     "You enabled TOTP two-factor authentication for your account" : "Hesabınız için TOTP iki aşamalı kimlik doğrulamasını etkinleştirdiniz",
     "You disabled TOTP two-factor authentication for your account" : "Hesabınız için TOTP iki aşamalı kimlik doğrulamasını devre dışı bıraktınız",

@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Amikor beállítottad az app-ot, írj be ide egy teszt kódot, hogy megbizonyosodj a helyes beállításról.",
     "Authentication code" : "Azonosítási kód",
     "Verify" : "Ellenőrzés",
+    "Could not enable TOTP" : "TOTP nem engedélyezhető",
     "Could not verify your key. Please try again" : "A kulcs nem ellenőrizhető. Próbálja meg újra.",
     "You enabled TOTP two-factor authentication for your account" : "Endedélyezte a TOTP két lécsős azonosítást a fiókhoz.",
     "You disabled TOTP two-factor authentication for your account" : "Letiltotta a TOTP kétlépcsős azonosítást a fiókhoz.",
