@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly.",
     "Authentication code" : "Authentication code",
     "Verify" : "Verify",
+    "Could not enable TOTP" : "Could not enable TOTP",
     "Could not verify your key. Please try again" : "Could not verify your key. Please try again",
     "You enabled TOTP two-factor authentication for your account" : "You enabled TOTP two-factor authentication for your account",
     "You disabled TOTP two-factor authentication for your account" : "You disabled TOTP two-factor authentication for your account",
