@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Онда када подесите апликацију, унесите пробни код испод да проверите да ли је апликација добро подешена.",
     "Authentication code" : "Код за проверу идентитета",
     "Verify" : "Провери",
+    "Could not enable TOTP" : "Не могу да укључим TOTP",
     "Could not verify your key. Please try again" : "Не могу да верификујем Ваш кључ. Пробајте поново",
     "You enabled TOTP two-factor authentication for your account" : "Укључили сте TOTP двофакторску проверу идентитета за Ваш налог",
     "You disabled TOTP two-factor authentication for your account" : "Искључили сте TOTP двофакторску проверу идентитета за Ваш налог",

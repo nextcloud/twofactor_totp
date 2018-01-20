@@ -5,6 +5,7 @@
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Når du har satt opp programmet ditt, skriv inn testkoden nedenfor for å forsikre deg om at det har gått rett for seg.",
     "Authentication code" : "Autentiseringskode",
     "Verify" : "Bekreft",
+    "Could not enable TOTP" : "Kune ikke aktivere TOTP",
     "Could not verify your key. Please try again" : "Kunne ikke bekrefte din nøkkel. Prøv igjen",
     "You enabled TOTP two-factor authentication for your account" : "Du har aktivert to-trinns bekreftelse for din konto",
     "You disabled TOTP two-factor authentication for your account" : "Du har deaktivert to-trinns bekreftelse for din konto",
