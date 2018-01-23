@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Voeg een test code in na het instellen van je app om er zeker van te zijn dat de instellingen correct zijn.",
     "Authentication code" : "Authenticatie code",
     "Verify" : "Verifiëren",
+    "Could not enable TOTP" : "Kon TOTP niet inschakelen",
     "Could not verify your key. Please try again" : "Kon je sleutel niet verifiëren. Probeer het opnieuw",
     "You enabled TOTP two-factor authentication for your account" : "Je hebt TOTP twee-factor authenticatie voor je account ingeschakeld",
     "You disabled TOTP two-factor authentication for your account" : "Je hebt TOTP twee-factor authenticatie voor je account uitgeschakeld",
