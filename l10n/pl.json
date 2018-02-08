@@ -5,6 +5,7 @@
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Kiedy skonfigurujesz aplikację, wprowadź poniżej testowy kod, aby upewnić się, że Twoja aplikacja jest skonfigurowana poprawnie.",
     "Authentication code" : "Kod uwierzytelnienia",
     "Verify" : "Weryfikuj",
+    "Could not enable TOTP" : "Nie można włączyć TOTP",
     "Could not verify your key. Please try again" : "Nie można zweryfikować Twojego klucza. Proszę spróbować ponownie",
     "You enabled TOTP two-factor authentication for your account" : "Włączono dwukrotne uwierzytelnienie TOTP na Twoim koncie",
     "You disabled TOTP two-factor authentication for your account" : "Wyłączono dwukrotne uwierzytelnienie TOTP na Twoim koncie",
