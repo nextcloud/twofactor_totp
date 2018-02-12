@@ -3,7 +3,7 @@ host = https://www.transifex.com
 lang_map = bg_BG: bg, cs_CZ: cs, fi_FI: fi, hu_HU: hu, nb_NO: nb, sk_SK: sk, th_TH: th, ja_JP: ja
 
 [nextcloud.twofactor_totp]
-file_filter = <lang>/twofactor_totp.po
+file_filter = translationfiles/<lang>/twofactor_totp.po
 source_file = translationfiles/templates/twofactor_totp.pot
 source_lang = en
 type = PO
