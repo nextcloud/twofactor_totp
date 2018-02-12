@@ -4,7 +4,7 @@
 	<name>2-Factor Authentication</name>
 	<summary>Increase access security with 2FA/TOTP</summary>
 	<description>2-Factor Authentication adds another layer of access security to ownCloud. The authentication method confirms a user’s identity utilizing a combination of two independent components. Instead of simply requiring a username/password combination, an additional access token (time-based one-time password/TOTP), which can be obtained via mobile phones for instance, is needed to gain access to ownCloud accounts. This not only improves access security, but also provides administrators with an option for disabling individual tokens. Time-based one-time passwords (TOTP) can be obtained through services like Google Authenticator or an Open-Source implementation of the TOTP standard like LinOTP.
-This extension provides the most simple way to add a second factor to user logins. More sophisticated 2-Factor Authentication mechanisms with additional authentication devices is available via the [PrivacyIDEA ownCloud App](https://marketplace.owncloud.com/apps/twofactor_privacyidea) or by integrating [other Identity Providers](https://marketplace.owncloud.com/apps/user_shibboleth).</description>
+This extension provides the most simple way to add a second factor to user logins. More sophisticated 2-Factor Authentication mechanisms with additional authentication devices is available via the [PrivacyIDEA ownCloud App](https://marketplace.owncloud.com/apps/twofactor_privacyidea) or by integrating other Identity Providers that offer multi-factor authenication mechanisms.</description>
 	<licence>AGPL</licence>
 	<author>ownCloud GmbH, Christoph Wurst</author>
 	<version>0.4.4</version>
