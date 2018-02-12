@@ -1,14 +1,19 @@
 <?xml version="1.0"?>
 <info>
 	<id>twofactor_totp</id>
-	<name>Two Factor TOTP Provider</name>
-	<description>A Two-Factor-Auth Provider for TOTP (e.g. Google Authenticator)</description>
+	<name>2-Factor Authentication</name>
+	<summary>Increase access security with 2FA/TOTP</summary>
+	<description>2-Factor Authentication adds another layer of access security to ownCloud. The authentication method confirms a user’s identity utilizing a combination of two independent components. Instead of simply requiring a username/password combination, an additional access token (time-based one-time password/TOTP), which can be obtained via mobile phones for instance, is needed to gain access to ownCloud accounts. This not only improves access security, but also provides administrators with an option for disabling individual tokens. Time-based one-time passwords (TOTP) can be obtained through services like Google Authenticator or an Open-Source implementation of the TOTP standard like LinOTP.
+This extension provides the most simple way to add a second factor to user logins. More sophisticated 2-Factor Authentication mechanisms with additional authentication devices is available via the [PrivacyIDEA ownCloud App](https://marketplace.owncloud.com/apps/twofactor_privacyidea) or by integrating [other Identity Providers](https://marketplace.owncloud.com/apps/user_shibboleth).</description>
 	<licence>AGPL</licence>
-	<author>Christoph Wurst</author>
+	<author>ownCloud GmbH, Christoph Wurst</author>
 	<version>0.4.4</version>
 	<namespace>TwoFactor_Totp</namespace>
 	<category>security</category>
-
+	<documentation>
+    		<admin>https://doc.owncloud.com/server/latest/admin_manual/configuration/server/occ_command.html#two-factor-authentication</admin>
+		<user>https://doc.owncloud.com/server/latest/user_manual/session_management.html</user>
+	</documentation>
 	<screenshot>https://raw.githubusercontent.com/owncloud/twofactor_totp/cc989d968cef37f28df8e2dc633babf9a6c894cc/screenshots/settings.png</screenshot>
 	<two-factor-providers>
 		<provider>OCA\TwoFactor_Totp\Provider\TotpProvider</provider>
