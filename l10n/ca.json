@@ -5,6 +5,7 @@
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Un cop hagis configurat la teva aplicació, introdueix un codi de prova a continuació per assegurar-te que la teva aplicació s'hagi configurat correctament.",
     "Authentication code" : "Codi d'autenticació",
     "Verify" : "Verifica",
+    "Could not enable TOTP" : "No s'ha pogut habilitar TOTP",
     "Could not verify your key. Please try again" : "No es va poder verificar la teva clau. Siusplau torna a provar",
     "You enabled TOTP two-factor authentication for your account" : "Has habilitat l'autenticació de dos factors TOTP per al teu compte",
     "You disabled TOTP two-factor authentication for your account" : "Has deshabilitat l'autenticació de dos factors TOTP per al teu compte",
