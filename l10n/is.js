@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Þegar þú hefur stillt forritið þitt, settu inn prufukóðann hér fyrir neðan til að ganga úr skugga um að forritið hafi verið rétt sett upp.",
     "Authentication code" : "Auðkenningarkóði",
     "Verify" : "Sannreyna",
+    "Could not enable TOTP" : "Tókst ekki að virkja TOTP",
     "Could not verify your key. Please try again" : "Gat ekki sannreynt lykilinn þinn. Endilega reyndu aftur",
     "You enabled TOTP two-factor authentication for your account" : "Þú virkjaðir TOTP tveggja-þrepa auðkenningu fyrir aðganginn þinn",
     "You disabled TOTP two-factor authentication for your account" : "Þú gerðir TOTP tveggja-þrepa auðkenningu fyrir aðganginn þinn óvirka",
