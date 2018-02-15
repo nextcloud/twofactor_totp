@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - 
+
 ## [0.4.4] - 2018-02-15
 ### Added
 - Support for php7.2 [#32](https://github.com/owncloud/twofactor_totp/pull/32)
@@ -21,7 +23,5 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 - App is now signed
 
-
-
-
+[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/0.4.4...HEAD
 [0.4.4]: https://github.com/owncloud/twofactor_totp/compare/0.3...0.4
