@@ -60,7 +60,7 @@ class TotpProvider implements IProvider {
      * @return string
      */
     public function getDisplayName() {
-        return 'TOTP (Google Authenticator)';
+        return 'Time-based One-time Password';
     }
 
     /**
