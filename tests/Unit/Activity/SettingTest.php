@@ -22,9 +22,9 @@
 
 namespace OCA\TwoFactorTOTP\Test\Unit\Activity;
 
+use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\TwoFactorTOTP\Activity\Setting;
 use OCP\IL10N;
-use Test\TestCase;
 
 class SettingTest extends TestCase {
 

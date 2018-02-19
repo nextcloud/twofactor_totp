@@ -23,6 +23,9 @@
 namespace OCA\TwoFactorTOTP\Tests\Acceptance;
 
 use Base32\Base32;
+use ChristophWurst\Nextcloud\Testing\Selenium;
+use ChristophWurst\Nextcloud\Testing\TestCase;
+use ChristophWurst\Nextcloud\Testing\TestUser;
 use Facebook\WebDriver\Exception\ElementNotSelectableException;
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
@@ -40,7 +43,10 @@ use PHPUnit_Framework_AssertionFailedError;
 /**
  * @group Acceptance
  */
-class TOTPAcceptenceTest extends AcceptanceTest {
+class TOTPAcceptenceTest extends TestCase {
+
+	use TestUser;
+	use Selenium;
 
 	/** @var IUser */
 	private $user;
@@ -51,27 +57,8 @@ class TOTPAcceptenceTest extends AcceptanceTest {
 	public function setUp() {
 		parent::setUp();
 
-		$this->user = OC::$server->getUserManager()->get('admin');
+		$this->user = $this->createTestUser();
 		$this->secretMapper = new TotpSecretMapper(OC::$server->getDatabaseConnection());
-		$this->cleanUp();
-	}
-
-	protected function tearDown() {
-		parent::tearDown();
-
-		$this->cleanUp();
-	}
-
-	private function cleanUp() {
-		// Always delete secret again
-		try {
-			$secret = $this->secretMapper->getSecret($this->user);
-			if (!is_null($secret)) {
-				$this->secretMapper->delete($secret);
-			}
-		} catch (DoesNotExistException $ex) {
-			// Ignore
-		}
 	}
 
 	public function testEnableTOTP() {
@@ -79,8 +66,8 @@ class TOTPAcceptenceTest extends AcceptanceTest {
 		$this->assertContains('Nextcloud', $this->webDriver->getTitle());
 
 		// Log in
-		$this->webDriver->findElement(WebDriverBy::id('user'))->sendKeys('admin');
-		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('admin');
+		$this->webDriver->findElement(WebDriverBy::id('user'))->sendKeys($this->user->getUID());
+		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('password');
 		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] input[type=submit]'))->click();
 
 		// Go to personal settings and TOTP settings
@@ -157,8 +144,8 @@ class TOTPAcceptenceTest extends AcceptanceTest {
 		$this->assertContains('Nextcloud', $this->webDriver->getTitle());
 
 		// Log in
-		$this->webDriver->findElement(WebDriverBy::id('user'))->sendKeys('admin');
-		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('admin');
+		$this->webDriver->findElement(WebDriverBy::id('user'))->sendKeys($this->user->getUID());
+		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('password');
 		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] input[type=submit]'))->click();
 
 		$this->webDriver->wait(20, 200)->until(function(WebDriver $driver) {

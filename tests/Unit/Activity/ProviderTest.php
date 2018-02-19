@@ -22,6 +22,7 @@
 
 namespace OCA\TwoFactorTOTP\Test\Unit\Activity;
 
+use ChristophWurst\Nextcloud\Testing\TestCase;
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Activity\Provider;
 use OCP\Activity\IEvent;
@@ -29,7 +30,6 @@ use OCP\IL10N;
 use OCP\ILogger;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
-use Test\TestCase;
 
 class ProviderTest extends TestCase {
 

@@ -31,9 +31,9 @@ use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUser;
 use OCP\IUserSession;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class SettingsControllerTest extends PHPUnit_Framework_TestCase {
+class SettingsControllerTest extends TestCase {
 
 	private $request;
 	private $userSession;
