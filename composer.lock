@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8910b9ed5eadddb0d63fc72c7f8d1eda",
+    "content-hash": "0094f56245cfd1973a648412fd3a6521",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -159,16 +159,16 @@
         },
         {
             "name": "endroid/qr-code",
-            "version": "2.5.0",
+            "version": "3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/endroid/qr-code.git",
-                "reference": "a9a57ab57ac75928fcdcfb2a71179963ff6fe573"
+                "reference": "f2c7455b73f0b6455156171bf1127e10bec1c28e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/endroid/qr-code/zipball/a9a57ab57ac75928fcdcfb2a71179963ff6fe573",
-                "reference": "a9a57ab57ac75928fcdcfb2a71179963ff6fe573",
+                "url": "https://api.github.com/repos/endroid/qr-code/zipball/f2c7455b73f0b6455156171bf1127e10bec1c28e",
+                "reference": "f2c7455b73f0b6455156171bf1127e10bec1c28e",
                 "shasum": ""
             },
             "require": {
@@ -176,25 +176,17 @@
                 "ext-gd": "*",
                 "khanamiryan/qrcode-detector-decoder": "^1.0",
                 "myclabs/php-enum": "^1.5",
-                "php": ">=5.6",
-                "symfony/options-resolver": ">=2.7",
-                "symfony/property-access": ">=2.7"
+                "php": ">=7.1",
+                "symfony/options-resolver": "^2.7|^3.0|^4.0",
+                "symfony/property-access": "^2.7|^3.0|^4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": ">=5.7",
-                "symfony/asset": ">=2.7",
-                "symfony/browser-kit": ">=2.7",
-                "symfony/finder": ">=2.7",
-                "symfony/framework-bundle": ">=2.7",
-                "symfony/http-kernel": ">=2.7",
-                "symfony/templating": ">=2.7",
-                "symfony/twig-bundle": ">=2.7",
-                "symfony/yaml": ">=2.7"
+                "phpunit/phpunit": "^5.7|^6.0"
             },
-            "type": "symfony-bundle",
+            "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
@@ -210,21 +202,20 @@
                 {
                     "name": "Jeroen van den Enden",
                     "email": "info@endroid.nl",
-                    "homepage": "http://endroid.nl/"
+                    "homepage": "https://endroid.nl/"
                 }
             ],
             "description": "Endroid QR Code",
-            "homepage": "https://github.com/endroid/QrCode",
+            "homepage": "https://github.com/endroid/qr-code",
             "keywords": [
                 "bundle",
                 "code",
                 "endroid",
-                "flex",
+                "php",
                 "qr",
-                "qrcode",
-                "symfony"
+                "qrcode"
             ],
-            "time": "2017-10-22T18:56:00+00:00"
+            "time": "2018-02-13T08:28:17+00:00"
         },
         {
             "name": "khanamiryan/qrcode-detector-decoder",
