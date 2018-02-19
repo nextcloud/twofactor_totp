@@ -12,10 +12,7 @@ addons:
     - mysql-server-5.6
     - mysql-client-core-5.6
     - mysql-client-5.6
-  sauce_connect:
-    username: "nextcloud-totp"
-  jwt:
-    secure: dUvqHso+T2Gkb4Nlg4feP3s1wnFy9XWwYakckpcl24HLd7yN/zMU3/qWfAZ0NzKOvQvILdBtjjj9Bdo4jJXzfnbRPwcWE7i2E9TvHMJYYOCEymUG0IZyKNZSyxlt4FlgTXYLUTyPLeEQwb4F01Uy3kbERowfT6LtPPeReLpKcE4R3Sbz4AI4p3ugWoI9E/+zHzUHAdWJTrlwLiIVx2/9eQ+fy5BJXeFPzNeNuDhzzC0ceXkv6bKAn5Fuh+QzPCf8AURezZQ04cWoSsIymSwAlzRDBZsUqib/aOyHgkwCQFsUuRuCaZwz2DhG+PwXe0FZD/EuRYE+huVL9jV6Q7mkaclOU3UyOlsIKogLLY9HhekMStOpH2rXP0+xYmogWT1eRqsvXcODD1/3ujPWsQOR78j5KlrIEHeqfKJ9TC3gBNLPTTHIjqmadTRBsuxuWkcoZAMthaQF/j2lBk0al5rk5h9sb53MQVUy3mzDL0ou9lFRJv4hEYQoyIS9tfe6CSyHbTtQAPkeMqSZ3fKI6Jl4AP4MtN1ITOyHsY2psmsdOzDj7qlC6/+A7ApyPsshRQ0vpr9YTZhMmNZFLS6Vr7y+mdGFlkH90LK4RPEUWkn1ROaaS2BeBPGoYqNJq16wT3I2ijN3uvA8/G+4Y2F9aezYIdgUW0WG3vvtP7SW57m80Do=
+  sauce_connect: true
 
 services:
 - postgresql
