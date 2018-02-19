@@ -7,7 +7,7 @@
 		"php": ">=7.0.0"
 	},
 	"require-dev": {
-		"christophwurst/nextcloud_testing": "0.2.0"
+		"christophwurst/nextcloud_testing": "0.3.0"
 	},
 	"config": {
 		"optimize-autoloader": true,
