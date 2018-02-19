@@ -1,7 +1,8 @@
 filter:
     excluded_paths:
-        - 'vendor/*'
         - 'l10n/*'
+        - 'tests/'
+        - 'vendor/*'
 
 imports:
     - javascript
