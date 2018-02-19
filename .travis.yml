@@ -88,14 +88,12 @@ after_script:
 matrix:
   include:
     - php: 7
-      env: "DB=sqlite"
-    - php: 7
       env: "DB=pgsql PHP_COVERAGE=TRUE"
-    - php: 7
+    - php: 7.2
       env: "DB=mysql"
-    - php: 7
+    - php: 7.2
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
-    - php: 7
+    - php: 7.2
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
 
   fast_finish: true
