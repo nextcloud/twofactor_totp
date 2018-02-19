@@ -43,11 +43,13 @@ abstract class AcceptanceTest extends PHPUnit_Framework_TestCase {
 			$capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
 			$capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
 			$capabilities['name'] = $this->getTestName();
-			$user = 'nextcloud-totp';
+			$user = getenv('SAUCE_USERNAME');
 			$accessKey = getenv('SAUCE_ACCESS_KEY');
 			$this->webDriver = RemoteWebDriver::create("http://$user:$accessKey@ondemand.saucelabs.com/wd/hub", $capabilities);
 		} else {
-			$this->webDriver = RemoteWebDriver::create("http://localhost:4444/wd/hub", $capabilities);
+			$user = getenv('SAUCE_USERNAME');
+			$accessKey = getenv('SAUCE_ACCESS_KEY');
+			$this->webDriver = RemoteWebDriver::create("http://$user:$accessKey@localhost:4445/wd/hub", $capabilities);
 		}
 	}
 
@@ -60,7 +62,11 @@ abstract class AcceptanceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getTestName() {
-		return 'PR' . getenv('TRAVIS_PULL_REQUEST') . ', Build ' . getenv('TRAVIS_BUILD_NUMBER') . ', Test ' . self::class . '::' . $this->getName();
+		if ($this->isRunningOnCI()) {
+			return 'PR' . getenv('TRAVIS_PULL_REQUEST') . ', Build ' . getenv('TRAVIS_BUILD_NUMBER') . ', Test ' . self::class . '::' . $this->getName();
+		} else {
+			return 'Test ' . self::class . '::' . $this->getName();
+		}
 	}
 
 	protected function tearDown() {
@@ -83,7 +89,7 @@ abstract class AcceptanceTest extends PHPUnit_Framework_TestCase {
 		$httpClient = new Client();
 		$httpClient->put("https://saucelabs.com/rest/v1/nextcloud-totp/jobs/$sessionId", [
 		    'auth' => [
-			'nextcloud-totp',
+			getenv('SAUCE_USERNAME'),
 			getenv('SAUCE_ACCESS_KEY'),
 		    ],
 		    'json' => [
