@@ -8,7 +8,7 @@ OC.L10N.register(
     "Authentication code" : "Código de autentificación",
     "Verify" : "Verificar",
     "Could not enable TOTP" : "No se ha podido activar TOTP",
-    "Could not verify your key. Please try again" : "No se pudo verificar su clave. Por favor intente de nuevo",
+    "Could not verify your key. Please try again" : "No se ha podido verificar su clave. Por favor, inténtelo de nuevo",
     "You enabled TOTP two-factor authentication for your account" : "Ha habilitado TOTP autenticación de dos factores para su cuenta",
     "You disabled TOTP two-factor authentication for your account" : "Ha deshabilitado TOTP autenticación de dos factores para su cuenta",
     "TOTP (Authenticator app)" : "TOTP (App de autenticación)",
