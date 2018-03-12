@@ -4,11 +4,17 @@
 		"endroid/qr-code": "^2.5",
 		"christophwurst/nextcloud": "14.0.0.x-dev"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/ChristophWurst/nextcloud_testing"
+		}
+	],
 	"platform": {
 		"php": ">=7.0.0"
 	},
 	"require-dev": {
-		"christophwurst/nextcloud_testing": "0.3.0"
+		"christophwurst/nextcloud_testing": "dev-fix/oc-guzzle-client"
 	},
 	"config": {
 		"optimize-autoloader": true,

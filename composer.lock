@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f86e2da356258a377870dbb07a958677",
+    "content-hash": "14e025e4e2a0274fa8f3a985c6a458b1",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -643,16 +643,16 @@
     "packages-dev": [
         {
             "name": "christophwurst/nextcloud_testing",
-            "version": "0.3.0",
+            "version": "dev-fix/oc-guzzle-client",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
-                "reference": "9f56b4e43f2b13b40d3152277569c1c46835f3e8"
+                "reference": "68fc8a51942b5dd31747fb87785c183ee473c0b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/9f56b4e43f2b13b40d3152277569c1c46835f3e8",
-                "reference": "9f56b4e43f2b13b40d3152277569c1c46835f3e8",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/68fc8a51942b5dd31747fb87785c183ee473c0b3",
+                "reference": "68fc8a51942b5dd31747fb87785c183ee473c0b3",
                 "shasum": ""
             },
             "require": {
@@ -668,7 +668,6 @@
                     "ChristophWurst\\Nextcloud\\Testing\\": "/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -679,7 +678,11 @@
                 }
             ],
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
-            "time": "2018-02-19T18:27:17+00:00"
+            "support": {
+                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/fix/oc-guzzle-client",
+                "issues": "https://github.com/ChristophWurst/nextcloud_testing/issues"
+            },
+            "time": "2018-03-12T17:25:35+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -2111,7 +2114,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "christophwurst/nextcloud": 20
+        "christophwurst/nextcloud": 20,
+        "christophwurst/nextcloud_testing": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
