@@ -31,6 +31,7 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUserSession;
+use function is_null;
 
 class SettingsController extends Controller {
 
@@ -56,6 +57,9 @@ class SettingsController extends Controller {
 	 */
 	public function state(): JSONResponse {
 		$user = $this->userSession->getUser();
+		if (is_null($user)) {
+			throw new Exception('user not available');
+		}
 		return new JSONResponse([
 			'state' => $this->totp->hasSecret($user),
 		]);
@@ -69,6 +73,9 @@ class SettingsController extends Controller {
 	 */
 	public function enable(int $state, string $key = null): JSONResponse {
 		$user = $this->userSession->getUser();
+		if (is_null($user)) {
+			throw new Exception('user not available');
+		}
 		switch ($state) {
 			case ITotp::STATE_DISABLED:
 				$this->totp->deleteSecret($user);
