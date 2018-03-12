@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "14e025e4e2a0274fa8f3a985c6a458b1",
+    "content-hash": "2383bb1241bfbf11ed85f4df472c571b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -643,7 +643,7 @@
     "packages-dev": [
         {
             "name": "christophwurst/nextcloud_testing",
-            "version": "dev-fix/oc-guzzle-client",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
@@ -668,6 +668,7 @@
                     "ChristophWurst\\Nextcloud\\Testing\\": "/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -678,10 +679,6 @@
                 }
             ],
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
-            "support": {
-                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/fix/oc-guzzle-client",
-                "issues": "https://github.com/ChristophWurst/nextcloud_testing/issues"
-            },
             "time": "2018-03-12T17:25:35+00:00"
         },
         {
@@ -2114,8 +2111,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "christophwurst/nextcloud": 20,
-        "christophwurst/nextcloud_testing": 20
+        "christophwurst/nextcloud": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
