@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8910b9ed5eadddb0d63fc72c7f8d1eda",
+    "content-hash": "c7912f7bf9653891174887a856b5127c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -610,16 +610,16 @@
     "packages-dev": [
         {
             "name": "christophwurst/nextcloud_testing",
-            "version": "0.3.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
-                "reference": "9f56b4e43f2b13b40d3152277569c1c46835f3e8"
+                "reference": "68fc8a51942b5dd31747fb87785c183ee473c0b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/9f56b4e43f2b13b40d3152277569c1c46835f3e8",
-                "reference": "9f56b4e43f2b13b40d3152277569c1c46835f3e8",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/68fc8a51942b5dd31747fb87785c183ee473c0b3",
+                "reference": "68fc8a51942b5dd31747fb87785c183ee473c0b3",
                 "shasum": ""
             },
             "require": {
@@ -646,7 +646,7 @@
                 }
             ],
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
-            "time": "2018-02-19T18:27:17+00:00"
+            "time": "2018-03-12T17:25:35+00:00"
         },
         {
             "name": "doctrine/instantiator",
