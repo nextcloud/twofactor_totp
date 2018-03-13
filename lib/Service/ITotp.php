@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -45,7 +47,7 @@ interface ITotp {
 	 * @return string the newly created secret
 	 * @throws TotpSecretAlreadySet
 	 */
-	public function createSecret(IUser $user);
+	public function createSecret(IUser $user): string;
 
 	/**
 	 * Enable OTP for the given user. The secret has to be generated
@@ -56,7 +58,7 @@ interface ITotp {
 	 * @return bool whether the key is valid and the secret has been enabled
 	 * @throws DoesNotExistException
 	 */
-	public function enable(IUser $user, $key);
+	public function enable(IUser $user, $key): bool;
 
 	/**
 	 * @param IUser $user
@@ -67,5 +69,5 @@ interface ITotp {
 	 * @param IUser $user
 	 * @param string $key
 	 */
-	public function validateSecret(IUser $user, $key);
+	public function validateSecret(IUser $user, $key): bool;
 }

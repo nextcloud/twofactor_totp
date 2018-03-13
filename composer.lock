@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7912f7bf9653891174887a856b5127c",
+    "content-hash": "2383bb1241bfbf11ed85f4df472c571b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -156,6 +156,39 @@
                 "totp"
             ],
             "time": "2015-10-08T08:17:59+00:00"
+        },
+        {
+            "name": "christophwurst/nextcloud",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
+                "reference": "cdb5f02e3eb7e0cc10b2ad221550283d6006e38a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/cdb5f02e3eb7e0cc10b2ad221550283d6006e38a",
+                "reference": "cdb5f02e3eb7e0cc10b2ad221550283d6006e38a",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "14.0.0-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Wurst",
+                    "email": "christoph@winzerhof-wurst.at"
+                }
+            ],
+            "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
+            "time": "2018-03-09T09:27:07+00:00"
         },
         {
             "name": "endroid/qr-code",
@@ -2077,7 +2110,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "christophwurst/nextcloud": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
