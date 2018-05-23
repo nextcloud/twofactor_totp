@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Una vez que hayas configurado la aplicación, ingresa un códgo de pruebas para asegurar que esté correctamente configurada. ",
     "Authentication code" : "Código de autenticación",
     "Verify" : "Verificar",
+    "Could not enable TOTP" : "No se pudo habilitar TOTP",
     "Could not verify your key. Please try again" : "No fue posible verificar tu llave. Por favor vuelve a intentarlo",
     "You enabled TOTP two-factor authentication for your account" : "Habilitaste la autenticación TOTP de dos factores en tu cuenta",
     "You disabled TOTP two-factor authentication for your account" : "Deshabilitaste la autenticación de dos factores TOTP para tu cuenta.",
