@@ -12,6 +12,8 @@
     "TOTP (Authenticator app)" : "TOTP (Applicazione autenticazione)",
     "Authenticate with a TOTP app" : "Autenticati con un'applicazione TOTP",
     "Two Factor TOTP Provider" : "Fornitore TOTP a due fattori",
+    "TOTP two-factor provider" : "Fornitore a due fattori per TOTP",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un provider di autenticazione a due fattori per TOTP (RFC 6238)",
     "Submit" : "Invia",
     "Get the authentication code from the two-factor authentication app on your device." : "Ottieni il codice di autenticazione dall'applicazione di autenticazione con due fattori sul tuo dispositivo.",
     "TOTP second-factor auth" : "Autenticazione con secondo fattore TOTP"
