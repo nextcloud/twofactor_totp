@@ -1,7 +1,7 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "Enable TOTP" : "Povolit TOTP",
+    "Enable TOTP" : "Zapnout TOTP",
     "This is your new TOTP secret:" : "Toto je vaše nové TOTP tajemství:",
     "Scan this QR code with your TOTP app" : "Naskenujte tento QR kód svou TOTP aplikací",
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Poté, co nastavíte vaši aplikaci, zadejte níže testovací kód, abyste ověřili, že je aplikace nastavena správně.",
