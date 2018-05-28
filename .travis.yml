@@ -12,6 +12,7 @@ addons:
     - mysql-server-5.6
     - mysql-client-core-5.6
     - mysql-client-5.6
+    - libxml2-utils
   sauce_connect: true
 
 services:
@@ -71,6 +72,11 @@ before_script:
   - php -S 0.0.0.0:8080 -t ../.. > webserver.log 2>&1 &
 
 script:
+  # Check info.xml schema validity
+  - wget https://apps.nextcloud.com/schema/apps/info.xsd
+  - xmllint appinfo/info.xml --schema info.xsd --noout
+  - rm info.xsd
+
   - if [[ "$SAUCE" = "FALSE" ]]; then find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;; fi
   - if [[ "$SAUCE" = "FALSE" ]]; then ./vendor/bin/phpunit --fail-on-warning --configuration tests/phpunit.xml --group default; fi
   - if [[ "$SAUCE" = "TRUE"  ]]; then ./vendor/bin/phpunit --fail-on-warning --configuration tests/phpunit.xml --group Acceptance --no-coverage; fi
