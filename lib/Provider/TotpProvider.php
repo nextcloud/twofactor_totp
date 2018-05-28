@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -35,10 +37,6 @@ class TotpProvider implements IProvider {
 	/** @var IL10N */
 	private $l10n;
 
-	/**
-	 * @param ITotp $totp
-	 * @param IL10N $l10n
-	 */
 	public function __construct(ITotp $totp, IL10N $l10n) {
 		$this->totp = $totp;
 		$this->l10n = $l10n;
@@ -46,60 +44,45 @@ class TotpProvider implements IProvider {
 
 	/**
 	 * Get unique identifier of this 2FA provider
-	 *
-	 * @return string
 	 */
-	public function getId() {
+	public function getId(): string {
 		return 'totp';
 	}
 
 	/**
 	 * Get the display name for selecting the 2FA provider
-	 *
-	 * @return string
 	 */
-	public function getDisplayName() {
+	public function getDisplayName(): string {
 		return 'TOTP (Authenticator app)';
 	}
 
 	/**
 	 * Get the description for selecting the 2FA provider
-	 *
-	 * @return string
 	 */
-	public function getDescription() {
+	public function getDescription(): string {
 		return $this->l10n->t('Authenticate with a TOTP app');
 	}
 
 	/**
 	 * Get the template for rending the 2FA provider view
-	 *
-	 * @param IUser $user
-	 * @return Template
 	 */
-	public function getTemplate(IUser $user) {
+	public function getTemplate(IUser $user): Template {
 		$tmpl = new Template('twofactor_totp', 'challenge');
 		return $tmpl;
 	}
 
 	/**
 	 * Verify the given challenge
-	 *
-	 * @param IUser $user
-	 * @param string $challenge
 	 */
-	public function verifyChallenge(IUser $user, $challenge) {
+	public function verifyChallenge(IUser $user, string $challenge): bool {
 		$challenge = preg_replace('/[^0-9]/', '', $challenge);
 		return $this->totp->validateSecret($user, $challenge);
 	}
 
 	/**
 	 * Decides whether 2FA is enabled for the given user
-	 *
-	 * @param IUser $user
-	 * @return boolean
 	 */
-	public function isTwoFactorAuthEnabledForUser(IUser $user) {
+	public function isTwoFactorAuthEnabledForUser(IUser $user): bool {
 		return $this->totp->hasSecret($user);
 	}
 

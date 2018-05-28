@@ -1,13 +1,14 @@
 {
 	"require": {
 		"christian-riesen/otp": "1.*",
-		"endroid/qr-code": "^2.5"
+		"endroid/qr-code": "^2.5",
+		"christophwurst/nextcloud": "14.0.0.x-dev"
 	},
 	"platform": {
 		"php": ">=7.0.0"
 	},
 	"require-dev": {
-		"christophwurst/nextcloud_testing": "0.3.0"
+		"christophwurst/nextcloud_testing": "0.3.1"
 	},
 	"config": {
 		"optimize-autoloader": true,

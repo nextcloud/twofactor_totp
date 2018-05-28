@@ -18,4 +18,4 @@ OC.L10N.register(
     "Get the authentication code from the two-factor authentication app on your device." : "აუტენტიფიკაციის კოდი მიიღეთ თქვენს მოწყობილობაზე არსებული ორ-ფაქტორიანი აუტენტიფიკაციის აპლიკაციისგან.",
     "TOTP second-factor auth" : "TOTP მეორე-ფაქტორის აუტენტიფიკაცია"
 },
-"nplurals=1; plural=0;");
+"nplurals=2; plural=(n!=1);");

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8910b9ed5eadddb0d63fc72c7f8d1eda",
+    "content-hash": "2383bb1241bfbf11ed85f4df472c571b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -156,6 +156,39 @@
                 "totp"
             ],
             "time": "2015-10-08T08:17:59+00:00"
+        },
+        {
+            "name": "christophwurst/nextcloud",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
+                "reference": "9275d848ddec5a84cf21319bab07951a75af12d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/9275d848ddec5a84cf21319bab07951a75af12d2",
+                "reference": "9275d848ddec5a84cf21319bab07951a75af12d2",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "14.0.0-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Wurst",
+                    "email": "christoph@winzerhof-wurst.at"
+                }
+            ],
+            "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
+            "time": "2018-04-05T07:16:03+00:00"
         },
         {
             "name": "endroid/qr-code",
@@ -610,16 +643,16 @@
     "packages-dev": [
         {
             "name": "christophwurst/nextcloud_testing",
-            "version": "0.3.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
-                "reference": "9f56b4e43f2b13b40d3152277569c1c46835f3e8"
+                "reference": "68fc8a51942b5dd31747fb87785c183ee473c0b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/9f56b4e43f2b13b40d3152277569c1c46835f3e8",
-                "reference": "9f56b4e43f2b13b40d3152277569c1c46835f3e8",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/68fc8a51942b5dd31747fb87785c183ee473c0b3",
+                "reference": "68fc8a51942b5dd31747fb87785c183ee473c0b3",
                 "shasum": ""
             },
             "require": {
@@ -646,7 +679,7 @@
                 }
             ],
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
-            "time": "2018-02-19T18:27:17+00:00"
+            "time": "2018-03-12T17:25:35+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -2077,7 +2110,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "christophwurst/nextcloud": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

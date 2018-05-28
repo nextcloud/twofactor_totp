@@ -5,6 +5,7 @@
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Μόλις διαμορφώσετε την εφαρμογή σας, εισαγάγετε παρακάτω έναν κώδικα δοκιμής για να βεβαιωθείτε ότι η εφαρμογή σας έχει ρυθμιστεί σωστά.",
     "Authentication code" : "Κώδικας πιστοποίησης",
     "Verify" : "Επαλήθευση",
+    "Could not enable TOTP" : "Αδυναμία ενεργοποίησης TOTP",
     "Could not verify your key. Please try again" : "Αδυναμία επαλήθευσης κλειδιού. Παρακαλούμε προσπαθήστε ξανά",
     "You enabled TOTP two-factor authentication for your account" : "Ενεργοποιήσατε την ΤΟΤΡ πιστοποίηση δύο-παραγόντων για το λογαριασμό σας",
     "You disabled TOTP two-factor authentication for your account" : "Απενεργοποιήσατε την ΤΟΤΡ πιστοποίηση δύο-παραγόντων για το λογαριασμό σας",

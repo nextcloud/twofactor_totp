@@ -27,6 +27,7 @@ use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Service\Totp;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUser;
@@ -64,9 +65,9 @@ class SettingsControllerTest extends TestCase {
 			->with($user)
 			->will($this->returnValue(false));
 
-		$expected = [
+		$expected = new JSONResponse([
 			'state' => false,
-		];
+		]);
 
 		$this->assertEquals($expected, $this->controller->state());
 	}
@@ -90,11 +91,11 @@ class SettingsControllerTest extends TestCase {
 			->setSize(150)
 			->writeDataUri();
 
-		$expected = [
+		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
 			'secret' => 'newsecret',
 			'qr' => $qr,
-		];
+		]);
 
 		$this->assertEquals($expected, $this->controller->enable(true));
 	}
@@ -109,9 +110,9 @@ class SettingsControllerTest extends TestCase {
 			->with($user, '123456')
 			->willReturn(true);
 
-		$expected = [
+		$expected = new JSONResponse([
 			'state' => ITotp::STATE_ENABLED,
-		];
+		]);
 
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_ENABLED, '123456'));
 	}
@@ -124,9 +125,9 @@ class SettingsControllerTest extends TestCase {
 		$this->totp->expects($this->once())
 			->method('deleteSecret');
 
-		$expected = [
+		$expected = new JSONResponse([
 			'state' => ITotp::STATE_DISABLED,
-		];
+		]);
 
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_DISABLED));
 	}

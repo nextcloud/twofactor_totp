@@ -17,4 +17,4 @@ OC.L10N.register(
     "Get the authentication code from the two-factor authentication app on your device." : "Na vašom zariadení získajte autentizačný kód z aplikácie pre dvojfaktorovú autentizáciu.",
     "TOTP second-factor auth" : "TOTP druhý faktor autentizácia"
 },
-"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;");
+"nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);");

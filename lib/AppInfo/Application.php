@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -27,7 +29,7 @@ use OCP\AppFramework\App;
 
 class Application extends App {
 
-	public function __construct($urlParams = []) {
+	public function __construct(array $urlParams = []) {
 		parent::__construct('twofactor_totp', $urlParams);
 
 		$container = $this->getContainer();

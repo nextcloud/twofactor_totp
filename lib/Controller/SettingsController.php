@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -29,6 +31,7 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUserSession;
+use function is_null;
 
 class SettingsController extends Controller {
 
@@ -41,14 +44,7 @@ class SettingsController extends Controller {
 	/** @var Defaults */
 	private $defaults;
 
-	/**
-	 * @param string $appName
-	 * @param IRequest $request
-	 * @param IUserSession $userSession
-	 * @param ITotp $totp
-	 * @param Defaults $defaults
-	 */
-	public function __construct($appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults) {
+	public function __construct(string $appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults) {
 		parent::__construct($appName, $request);
 		$this->userSession = $userSession;
 		$this->totp = $totp;
@@ -59,11 +55,14 @@ class SettingsController extends Controller {
 	 * @NoAdminRequired
 	 * @return JSONResponse
 	 */
-	public function state() {
+	public function state(): JSONResponse {
 		$user = $this->userSession->getUser();
-		return [
+		if (is_null($user)) {
+			throw new Exception('user not available');
+		}
+		return new JSONResponse([
 			'state' => $this->totp->hasSecret($user),
-		];
+		]);
 	}
 
 	/**
@@ -71,16 +70,18 @@ class SettingsController extends Controller {
 	 * @PasswordConfirmationRequired
 	 * @param int $state
 	 * @param string|null $key for verification
-	 * @return JSONResponse
 	 */
-	public function enable($state, $key = null) {
+	public function enable(int $state, string $key = null): JSONResponse {
 		$user = $this->userSession->getUser();
+		if (is_null($user)) {
+			throw new Exception('user not available');
+		}
 		switch ($state) {
 			case ITotp::STATE_DISABLED:
 				$this->totp->deleteSecret($user);
-				return [
+				return new JSONResponse([
 					'state' => ITotp::STATE_DISABLED,
-				];
+				]);
 			case ITotp::STATE_CREATED:
 				$secret = $this->totp->createSecret($user);
 
@@ -90,16 +91,16 @@ class SettingsController extends Controller {
 				$qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
 					->setSize(150)
 					->writeDataUri();
-				return [
+				return new JSONResponse([
 					'state' => ITotp::STATE_CREATED,
 					'secret' => $secret,
 					'qr' => $qr,
-				];
+				]);
 			case ITotp::STATE_ENABLED:
 				$success = $this->totp->enable($user, $key);
-				return [
+				return new JSONResponse([
 					'state' => $success ? ITotp::STATE_ENABLED : ITotp::STATE_CREATED,
-				];
+				]);
 			default:
 				throw new InvalidArgumentException('Invalid TOTP state');
 		}
@@ -110,18 +111,18 @@ class SettingsController extends Controller {
 	 *
 	 * @return string
 	 */
-	private function getSecretName() {
+	private function getSecretName(): string {
 		$productName = $this->defaults->getName();
 		$userName = $this->userSession->getUser()->getCloudId();
 		return rawurlencode("$productName:$userName");
 	}
 
 	/**
-	 * The issuer, e.g. "Nextcloud" or "ownCloud"
+	 * The issuer, e.g. "Nextcloud"
 	 *
 	 * @return string
 	 */
-	private function getSecretIssuer() {
+	private function getSecretIssuer(): string {
 		$productName = $this->defaults->getName();
 		return rawurlencode($productName);
 	}

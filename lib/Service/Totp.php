@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2016 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -62,7 +64,7 @@ class Totp implements ITotp {
 	/**
 	 * @param IUser $user
 	 */
-	public function createSecret(IUser $user) {
+	public function createSecret(IUser $user): string {
 		try {
 			// Delet existing one
 			$oldSecret = $this->secretMapper->getSecret($user);
@@ -99,7 +101,7 @@ class Totp implements ITotp {
 		$this->activityManager->publish($activity);
 	}
 
-	public function enable(IUser $user, $key) {
+	public function enable(IUser $user, $key): bool {
 		if (!$this->validateSecret($user, $key)) {
 			return false;
 		}
@@ -121,7 +123,7 @@ class Totp implements ITotp {
 		$this->publishEvent($user, 'totp_disabled');
 	}
 
-	public function validateSecret(IUser $user, $key) {
+	public function validateSecret(IUser $user, $key): bool {
 		try {
 			$dbSecret = $this->secretMapper->getSecret($user);
 		} catch (DoesNotExistException $ex) {
