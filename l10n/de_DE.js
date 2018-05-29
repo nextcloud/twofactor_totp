@@ -14,6 +14,8 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (App zur Authentifizierung)",
     "Authenticate with a TOTP app" : "Mit einer TOTP-App authentifizieren",
     "Two Factor TOTP Provider" : "Zwei-Faktor TOTP-Anbieter",
+    "TOTP two-factor provider" : "Zwei-Faktor TOTP-Anbieter",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Ein Zwei-Faktor-Anbieter für TOTP (RFC 6238)",
     "Submit" : "Übermitteln",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalten Sie den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf Ihrem Gerät.",
     "TOTP second-factor auth" : "TOTP-Zweifaktorauthentifizierung"
