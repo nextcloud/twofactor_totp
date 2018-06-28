@@ -14,6 +14,8 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (апликација за проверу идентитета)",
     "Authenticate with a TOTP app" : "Идентификујте се са TOTP апликацијом",
     "Two Factor TOTP Provider" : "Провајдер двофакторске TOTP",
+    "TOTP two-factor provider" : "Двофакторски провајдер за TOTP",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Провајдер двофакторске TOTP (RFC 6238)",
     "Submit" : "Пошаљи",
     "Get the authentication code from the two-factor authentication app on your device." : "Узмите идентификациони код из апликације за проверу идентитета са Вашег уређаја.",
     "TOTP second-factor auth" : "TOTP други фактор провере идентитета"
