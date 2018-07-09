@@ -4,6 +4,7 @@ OC.L10N.register(
     "Activate TOTP" : "Aktywuj TOTP",
     "This is your new TOTP secret:" : "To jest Twój nowy sekret dla TOTP:",
     "Scan this QR code with your TOTP app" : "Zeskanuj ten kod QR przy pomocy swojej aplikacji TOTP",
+    "To enable second-factor verify authentication code below." : "Zweryfikuj poniższy kod aby włączyć uwierzytelnianie dwuskładnikowe.",
     "Authentication code" : "Kod weryfikacyjny",
     "Verify" : "Zweryfikowane",
     "Verified" : "Zweryfikowano",
