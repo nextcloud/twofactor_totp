@@ -7,6 +7,7 @@ OC.L10N.register(
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Poté, co nastavíte vaši aplikaci, zadejte níže testovací kód, abyste ověřili, že je aplikace nastavena správně.",
     "Authentication code" : "Ověřovací kód",
     "Verify" : "Ověřit",
+    "Could not enable TOTP" : "TOTP se nepodařilo povolit",
     "Could not verify your key. Please try again" : "Ověření vašeho klíče se nezdařilo. Prosím zkuste to znovu.",
     "You enabled TOTP two-factor authentication for your account" : "Pro váš účet jste povolil(a) dvoufázovou autentizaci pomocí TOTP",
     "You disabled TOTP two-factor authentication for your account" : "Pro váš účet jste zakázal(a) dvoufázovou autentizaci pomocí TOTP",
