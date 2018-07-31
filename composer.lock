@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "2383bb1241bfbf11ed85f4df472c571b",
@@ -163,12 +163,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "9275d848ddec5a84cf21319bab07951a75af12d2"
+                "reference": "499dfadc8f8694915f49730c69829c03eace56d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/9275d848ddec5a84cf21319bab07951a75af12d2",
-                "reference": "9275d848ddec5a84cf21319bab07951a75af12d2",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/499dfadc8f8694915f49730c69829c03eace56d8",
+                "reference": "499dfadc8f8694915f49730c69829c03eace56d8",
                 "shasum": ""
             },
             "type": "library",
@@ -188,7 +188,7 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2018-04-05T07:16:03+00:00"
+            "time": "2018-07-26T15:23:17+00:00"
         },
         {
             "name": "endroid/qr-code",
