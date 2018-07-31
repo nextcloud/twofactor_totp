@@ -1,6 +1,6 @@
 {
 	"require": {
-		"christian-riesen/otp": "1.*",
+		"christian-riesen/otp": "2.*",
 		"endroid/qr-code": "^2.5",
 		"christophwurst/nextcloud": "14.0.0.x-dev"
 	},
