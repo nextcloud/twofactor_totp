@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright Copyright (c) 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * Two-factor TOTP
  *
@@ -19,4 +22,30 @@
  *
  */
 
-include_once __DIR__ . '/../vendor/autoload.php';
+namespace OCA\TwoFactorTOTP\Unit\Event;
+
+use ChristophWurst\Nextcloud\Testing\TestCase;
+use OCA\TwoFactorTOTP\Event\StateChanged;
+use OCP\IUser;
+
+class StateChangedTest extends TestCase {
+
+	public function testEnabled() {
+		$user = $this->createMock(IUser::class);
+		$event = new StateChanged($user, true);
+
+		$enabled = $event->isEnabled();
+
+		$this->assertTrue($enabled);
+	}
+
+	public function testDisabled() {
+		$user = $this->createMock(IUser::class);
+		$event = new StateChanged($user, false);
+
+		$enabled = $event->isEnabled();
+
+		$this->assertFalse($enabled);
+	}
+
+}

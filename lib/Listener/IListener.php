@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright Copyright (c) 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * Two-factor TOTP
  *
@@ -19,4 +22,12 @@
  *
  */
 
-include_once __DIR__ . '/../vendor/autoload.php';
+namespace OCA\TwoFactorTOTP\Listener;
+
+use Symfony\Component\EventDispatcher\Event;
+
+interface IListener {
+
+	public function handle(Event $event);
+
+}

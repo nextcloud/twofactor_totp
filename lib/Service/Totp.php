@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -27,13 +27,14 @@ namespace OCA\TwoFactorTOTP\Service;
 use Base32\Base32;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
+use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
-use OCP\Activity\IManager as ActivityManager;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use Otp\GoogleAuthenticator;
 use Otp\Otp;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Totp implements ITotp {
 
@@ -43,19 +44,21 @@ class Totp implements ITotp {
 	/** @var ICrypto */
 	private $crypto;
 
-	/** @var ActivityManager */
-	private $activityManager;
+	/** @var EventDispatcherInterface */
+	private $eventDispatcher;
 
-	public function __construct(TotpSecretMapper $secretMapper, ICrypto $crypto, ActivityManager $activityManager) {
+	public function __construct(TotpSecretMapper $secretMapper,
+								ICrypto $crypto,
+								EventDispatcherInterface $eventDispatcher) {
 		$this->secretMapper = $secretMapper;
 		$this->crypto = $crypto;
-		$this->activityManager = $activityManager;
+		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	public function hasSecret(IUser $user) {
 		try {
 			$secret = $this->secretMapper->getSecret($user);
-			return ITotp::STATE_ENABLED === (int) $secret->getState();
+			return ITotp::STATE_ENABLED === (int)$secret->getState();
 		} catch (DoesNotExistException $ex) {
 			return false;
 		}
@@ -66,7 +69,7 @@ class Totp implements ITotp {
 	 */
 	public function createSecret(IUser $user): string {
 		try {
-			// Delet existing one
+			// Delete existing one
 			$oldSecret = $this->secretMapper->getSecret($user);
 			$this->secretMapper->delete($oldSecret);
 		} catch (DoesNotExistException $ex) {
@@ -85,22 +88,6 @@ class Totp implements ITotp {
 		return $secret;
 	}
 
-	/**
-	 * Push an TOTP event the user's activity stream
-	 *
-	 * @param IUser $user
-	 * @param string $event
-	 */
-	private function publishEvent(IUser $user, $event) {
-		$activity = $this->activityManager->generateEvent();
-		$activity->setApp('twofactor_totp')
-			->setType('security')
-			->setAuthor($user->getUID())
-			->setAffectedUser($user->getUID());
-		$activity->setSubject($event . '_subject');
-		$this->activityManager->publish($activity);
-	}
-
 	public function enable(IUser $user, $key): bool {
 		if (!$this->validateSecret($user, $key)) {
 			return false;
@@ -108,7 +95,9 @@ class Totp implements ITotp {
 		$dbSecret = $this->secretMapper->getSecret($user);
 		$dbSecret->setState(ITotp::STATE_ENABLED);
 		$this->secretMapper->update($dbSecret);
-		$this->publishEvent($user, 'totp_enabled');
+
+		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, true));
+
 		return true;
 	}
 
@@ -120,7 +109,8 @@ class Totp implements ITotp {
 		} catch (DoesNotExistException $ex) {
 			// Ignore
 		}
-		$this->publishEvent($user, 'totp_disabled');
+
+		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
 	}
 
 	public function validateSecret(IUser $user, $key): bool {
