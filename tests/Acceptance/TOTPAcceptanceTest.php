@@ -33,8 +33,10 @@ use Facebook\WebDriver\WebDriverExpectedCondition;
 use OC;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
+use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\IUser;
 use Otp\GoogleAuthenticator;
 use Otp\Otp;
@@ -75,7 +77,7 @@ class TOTPAcceptenceTest extends TestCase {
 
 		// Enable TOTP
 		// Wait for state being loaded from the server
-		$this->webDriver->wait(20, 200)->until(function(WebDriver $driver) {
+		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return count($driver->findElements(WebDriverBy::id('totp-enabled'))) > 0;
 			} catch (ElementNotSelectableException $ex) {
@@ -100,7 +102,7 @@ class TOTPAcceptenceTest extends TestCase {
 		$this->webDriver->findElement(WebDriverBy::id('totp-confirmation-submit'))->click();
 
 		// Try to locate checked checkbox
-		$this->webDriver->wait(20, 200)->until(function(WebDriver $driver) {
+		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return $driver->findElement(WebDriverBy::id('totp-enabled'))->getAttribute('checked') === 'true';
 			} catch (ElementNotSelectableException $ex) {
@@ -113,7 +115,7 @@ class TOTPAcceptenceTest extends TestCase {
 	private function assertHasSecret($state) {
 		try {
 			$secret = $this->secretMapper->getSecret($this->user);
-			if ($state !== (int) $secret->getState()) {
+			if ($state !== (int)$secret->getState()) {
 				throw new PHPUnit_Framework_AssertionFailedError('TOTP secret has wrong state');
 			}
 		} catch (DoesNotExistException $ex) {
@@ -134,6 +136,13 @@ class TOTPAcceptenceTest extends TestCase {
 		$dbsecret->setSecret(OC::$server->getCrypto()->encrypt($secret));
 		$dbsecret->setUserId($this->user->getUID());
 		$this->secretMapper->insert($dbsecret);
+
+		/** @var IRegistry $registry */
+		$registry = OC::$server->query(IRegistry::class);
+		/** @var TotpProvider $provider */
+		$provider = OC::$server->query(TotpProvider::class);
+		$registry->enableProviderFor($provider, $this->user);
+
 		return $secret;
 	}
 
@@ -148,7 +157,7 @@ class TOTPAcceptenceTest extends TestCase {
 		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('password');
 		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] input[type=submit]'))->click();
 
-		$this->webDriver->wait(20, 200)->until(function(WebDriver $driver) {
+		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return $driver->findElements(WebDriverBy::className('totp-form'));
 			} catch (ElementNotSelectableException $ex) {

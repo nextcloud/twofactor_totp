@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -23,6 +23,10 @@ declare(strict_types = 1);
 
 namespace OCA\TwoFactorTOTP\AppInfo;
 
+use OCA\TwoFactorTOTP\Event\StateChanged;
+use OCA\TwoFactorTOTP\Listener\IListener;
+use OCA\TwoFactorTOTP\Listener\StateChangeActivity;
+use OCA\TwoFactorTOTP\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\AppFramework\App;
@@ -34,6 +38,19 @@ class Application extends App {
 
 		$container = $this->getContainer();
 		$container->registerAlias(ITotp::class, Totp::class);
+
+		$dispatcher = $container->getServer()->getEventDispatcher();
+		$dispatcher->addListener(StateChanged::class, function (StateChanged $event) use ($container) {
+			/** @var IListener[] $listeners */
+			$listeners = [
+				$container->query(StateChangeActivity::class),
+				$container->query(StateChangeRegistryUpdater::class),
+			];
+
+			foreach ($listeners as $listener) {
+				$listener->handle($event);
+			}
+		});
 	}
 
 }

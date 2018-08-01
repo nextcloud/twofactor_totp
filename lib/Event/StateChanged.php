@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright Copyright (c) 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * Two-factor TOTP
  *
@@ -19,4 +22,36 @@
  *
  */
 
-include_once __DIR__ . '/../vendor/autoload.php';
+namespace OCA\TwoFactorTOTP\Event;
+
+use OCP\IUser;
+use Symfony\Component\EventDispatcher\Event;
+
+class StateChanged extends Event {
+
+	/** @var IUser */
+	private $user;
+
+	/** @var bool */
+	private $enabled;
+
+	public function __construct(IUser $user, bool $enabled) {
+		$this->user = $user;
+		$this->enabled = $enabled;
+	}
+
+	/**
+	 * @return IUser
+	 */
+	public function getUser(): IUser {
+		return $this->user;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEnabled(): bool {
+		return $this->enabled;
+	}
+
+}
