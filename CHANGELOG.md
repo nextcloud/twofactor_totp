@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.5.0 – 2018-08-02
+### Added
+- Nextcloud 14 support
+### Changed
+- App requires php7+
+### Fixed
+- Provider registration (requires Beta 2+)
+
 ## 1.4.1 – 2018-01-09
 ### Added
 - New and updated translations
