@@ -69,7 +69,7 @@ before_script:
   - cd core/apps/twofactor_totp
 
   # Start php server for acceptance tests
-  - php -S 0.0.0.0:8080 -t ../.. > webserver.log 2>&1 &
+  - until php -S 0.0.0.0:8080 -t; do echo "Restarting php server"; done ../.. > webserver.log 2>&1 &
 
 script:
   # Check info.xml schema validity
