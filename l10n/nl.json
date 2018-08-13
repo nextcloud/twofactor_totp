@@ -13,6 +13,7 @@
     "Authenticate with a TOTP app" : "Authenticeren met een TOTP app",
     "Two Factor TOTP Provider" : "Twee-factor TOTP leverancier",
     "TOTP two-factor provider" : "TOTP two-factor provider",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Een Two-Factor-Auth Provider voor TOTP (RFC 6238)",
     "Submit" : "Versturen",
     "Get the authentication code from the two-factor authentication app on your device." : "Krijg de authenticatiecode op je 'tweede factor' authenticatie app op je toestel.",
     "TOTP second-factor auth" : "TOTP tweede factor auth"
