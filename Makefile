@@ -95,7 +95,7 @@ test-acceptance-webui: ## Run webUI acceptance tests
 test-acceptance-webui: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI
 
-all: appstore
+all: install-deps
 
 clean: ## Clean build
 	rm -rf $(build_dir)
