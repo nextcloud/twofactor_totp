@@ -13,6 +13,7 @@
     "Authenticate with a TOTP app" : "Auðkenna með TOTP-forriti",
     "Two Factor TOTP Provider" : "Veituaðili tveggja-þrepa TOTP-vottunar",
     "TOTP two-factor provider" : "Veituaðili tveggja-þrepa TOTP-vottunar",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Veituaðili tveggja-þrepa vottunar fyrir TOTP (RFC 6238)",
     "Submit" : "Senda inn",
     "Get the authentication code from the two-factor authentication app on your device." : "Náðu í auðkenningarkóða frá tveggja-þrepa auðkenningarforriti á tækinu þínu.",
     "TOTP second-factor auth" : "TOTP tveggja-þrepa auðkenning"
