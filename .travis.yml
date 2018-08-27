@@ -8,7 +8,7 @@ php:
   - 7.2
 env:
   global:
-    - CORE_BRANCH=master
+    - CORE_BRANCH=stable10
     - PHP_COVERAGE=FALSE
   matrix:
     - DB=sqlite
