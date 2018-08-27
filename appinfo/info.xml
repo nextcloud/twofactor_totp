@@ -22,6 +22,9 @@ This extension provides the most simple way to add a second factor to user login
 	<settings>
 		<personal>OCA\TwoFactor_Totp\Settings\PersonalPanel</personal>
 	</settings>
+	<commands>
+		<command>OCA\TwoFactor_Totp\Command\SetSecretVerificationStatusCommand</command>
+	</commands>
 
 	<dependencies>
 		<owncloud min-version="10.0" max-version="10.0" />

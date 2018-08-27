@@ -25,12 +25,12 @@ namespace OCA\TwoFactor_Totp\Db;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Mapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
-use OCP\IDb;
+use OCP\IDBConnection;
 use OCP\IUser;
 
 class TotpSecretMapper extends Mapper {
 
-    public function __construct(IDb $db) {
+    public function __construct(IDBConnection $db) {
         parent::__construct($db, 'twofactor_totp_secrets');
     }
 
@@ -55,5 +55,16 @@ class TotpSecretMapper extends Mapper {
         }
         return TotpSecret::fromRow($row);
     }
+
+	/**
+	 * @param boolean $status
+	 */
+    public function setAllSecretsVerificationStatus($status) {
+		/* @var $qb IQueryBuilder */
+		$qb = $this->db->getQueryBuilder();
+		$qb->update('twofactor_totp_secrets')
+			->set('verified', $qb->createNamedParameter($status, IQueryBuilder::PARAM_BOOL))
+			->execute();
+	}
 
 }
