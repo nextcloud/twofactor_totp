@@ -8,7 +8,7 @@ php:
   - 7.2
 env:
   global:
-    - CORE_BRANCH=master
+    - CORE_BRANCH=stable10
     - PHP_COVERAGE=FALSE
   matrix:
     - DB=sqlite
@@ -23,10 +23,6 @@ cache:
     - "$HOME/.npm"
     - "$HOME/.cache/bower"
 before_install:
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then curl -s -o $HOME/.phpenv/versions/5.4/bin/phpunit
-    https://phar.phpunit.de/phpunit-4.8.9.phar; fi"
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then chmod +x $HOME/.phpenv/versions/5.4/bin/phpunit;
-    fi"
   - composer self-update
   - composer install
   - wget https://raw.githubusercontent.com/owncloud/administration/master/travis-ci/before_install.sh
@@ -41,7 +37,7 @@ before_script:
 script:
   - find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;
   - cd tests
-  - phpunit --configuration phpunit.xml
+  - ../../../lib/composer/phpunit/phpunit/phpunit --configuration phpunit.xml
   - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar;
     fi
   - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover
