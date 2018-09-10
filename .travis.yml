@@ -89,6 +89,8 @@ after_script:
 
 matrix:
   include:
+    - php: 7.2
+      env: "DB=mysql CORE_BRANCH=stable14"
     - php: 7
       env: "DB=pgsql PHP_COVERAGE=TRUE"
     - php: 7.2
