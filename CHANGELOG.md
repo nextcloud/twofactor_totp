@@ -4,7 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased] - 
+## [Unreleased] -
+
+## [0.5.0] - 2018-09-??
+### Changed
+- add commands to change verified state of secret [#53](https://github.com/owncloud/twofactor_totp/pull/53)
+- hu_HU translation improved [d3bbe03](https://github.com/owncloud/twofactor_totp/commit/d3bbe03976fae9467ce6197a4d2dff6f05589bf3)
+- is translation improved [1ec5bae](https://github.com/owncloud/twofactor_totp/commit/1ec5baee7007933cc91d73edac58a6f51e0721b4)
+- cs_CZ translation improved [4ee81d4](https://github.com/owncloud/twofactor_totp/commit/4ee81d4d8d6cd8d68b1eacf8572c02f9122d5415), [0b01b50](https://github.com/owncloud/twofactor_totp/commit/0b01b505e8373941ee6066082bb3a35101af405a),
+[ec10461](https://github.com/owncloud/twofactor_totp/commit/ec104613388c3436b1dce4733bbf92f6495527c9)
+- pl translation improved [b5d787c](https://github.com/owncloud/twofactor_totp/commit/b5d787c760b508a780564d654ed5bf8bb6d9e464)
+- fi_FI translation improved [d8d18b](https://github.com/owncloud/twofactor_totp/commit/d8d18bcab511e12dc380498b74e250ffdf91f370)
 
 ## [0.4.4] - 2018-02-15
 ### Added
@@ -23,5 +33,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 - App is now signed
 
-[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/0.4.4...HEAD
+[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/0.5.0...HEAD
+[0.5.0]: https://github.com/owncloud/twofactor_totp/compare/0.4.4...0.5.0
 [0.4.4]: https://github.com/owncloud/twofactor_totp/compare/0.3...0.4
