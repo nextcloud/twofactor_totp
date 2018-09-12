@@ -45,9 +45,17 @@ script:
 
 matrix:
   include:
-    - php: 7
-      env: "DB=pgsql PHP_COVERAGE=TRUE"
-    - php: 7
-      env: "DB=mysql"
+    - php: 7.1
+      env: DB=sqlite CORE_BRANCH=master
+    - php: 7.2
+      env: DB=sqlite CORE_BRANCH=master
+    - php: 7.1
+      env: DB=mysql CORE_BRANCH=master
+    - php: 7.2
+      env: DB=mysql CORE_BRANCH=master
+    - php: 7.1
+      env: DB=pgsql CORE_BRANCH=master
+    - php: 7.2
+      env: DB=pgsql CORE_BRANCH=master PHP_COVERAGE=TRUE
 
   fast_finish: true
