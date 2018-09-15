@@ -5,6 +5,7 @@
     "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "アプリケーションの設定後、以下のテストコードでアプリが正しく設定できているかを確認してください。",
     "Authentication code" : "認証コード",
     "Verify" : "検証",
+    "Could not enable TOTP" : "TOTPを有効にできません",
     "Could not verify your key. Please try again" : "鍵を検証できませんでした。やり直してください。",
     "You enabled TOTP two-factor authentication for your account" : "あなたのアカウントに対するTOTP 2段階認証を有効にしました。",
     "You disabled TOTP two-factor authentication for your account" : "あなたのアカウントに対するTOTP 2段階認証を無効化しました。",
