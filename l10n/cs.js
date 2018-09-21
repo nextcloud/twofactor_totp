@@ -14,6 +14,8 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (Autentizační aplikace)",
     "Authenticate with a TOTP app" : "Přihlaste se pomocí TOTP aplikace",
     "Two Factor TOTP Provider" : "TOTP poskytovatel dvoufázových kódů",
+    "TOTP two-factor provider" : "Poskytovatel dvoufázového TOTP",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Poskytovatel dvouúřovňového ověřování pro TOTP (dle normy RFC 6238)",
     "Submit" : "Odeslat",
     "Get the authentication code from the two-factor authentication app on your device." : "Získat ověřovací kód z aplikace na vašem přístroji.",
     "TOTP second-factor auth" : "TOTP druhý ověřovací faktor"
