@@ -40,9 +40,13 @@ class Totp implements ITotp {
     /** @var ICrypto */
     private $crypto;
 
-    public function __construct(TotpSecretMapper $secretMapper, ICrypto $crypto) {
+    /** @var Otp */
+    private  $otp;
+
+    public function __construct(TotpSecretMapper $secretMapper, ICrypto $crypto, Otp $otp) {
         $this->secretMapper = $secretMapper;
         $this->crypto = $crypto;
+        $this->otp = $otp;
     }
 
     public function hasSecret(IUser $user) {
@@ -109,10 +113,18 @@ class Totp implements ITotp {
             throw new NoTotpSecretFoundException();
         }
 
-        $secret = $this->crypto->decrypt($dbSecret->getSecret());
-
-        $otp = new Otp();
-        return $otp->checkTotp(Base32::decode($secret), $key, 3);
+        /**
+         * Check last validated key to prevent consecutive usage of the same key
+         */
+        if ($dbSecret->getLastValidatedKey() !== $key) {
+            $secret = $this->crypto->decrypt($dbSecret->getSecret());
+            if ($this->otp->checkTotp(Base32::decode($secret), $key, 3) === true) {
+                $dbSecret->setLastValidatedKey($key);
+                $this->secretMapper->update($dbSecret);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
