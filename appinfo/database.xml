@@ -28,6 +28,11 @@
                 <notnull>true</notnull>
             </field>
             <field>
+                <name>last_validated_key</name>
+                <type>text</type>
+                <length>32</length>
+            </field>
+            <field>
                 <name>verified</name>
                 <type>boolean</type>
                 <default>false</default>

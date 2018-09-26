@@ -43,7 +43,7 @@ class TotpSecretMapper extends Mapper {
         /* @var $qb IQueryBuilder */
         $qb = $this->db->getQueryBuilder();
 
-        $qb->select('id', 'user_id', 'secret', 'verified')
+        $qb->select('id', 'user_id', 'secret', 'verified', 'last_validated_key')
                 ->from('twofactor_totp_secrets')
                 ->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user->getUID())));
         $result = $qb->execute();
