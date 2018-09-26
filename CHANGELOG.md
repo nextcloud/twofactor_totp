@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - pl translation improved [b5d787c](https://github.com/owncloud/twofactor_totp/commit/b5d787c760b508a780564d654ed5bf8bb6d9e464)
 - fi_FI translation improved [d8d18b](https://github.com/owncloud/twofactor_totp/commit/d8d18bcab511e12dc380498b74e250ffdf91f370)
 
+### Fixed
+- do not allow multiple uses of the same key [#63](https://github.com/owncloud/twofactor_totp/pull/63)
+
 ## [0.4.4] - 2018-02-15
 ### Added
 - Support for php7.2 [#32](https://github.com/owncloud/twofactor_totp/pull/32)
