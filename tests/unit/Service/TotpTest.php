@@ -68,7 +68,10 @@ class TotpTest extends TestCase {
 	public function testValidateSecret($lastKey, $key, $validationResult, $expectedResult) {
 		/** @var IUser | \PHPUnit_Framework_MockObject_MockObject $user  */
 		$user = $this->createMock(IUser::class);
-		$dbSecret = $this->createMock(TotpSecret::class);
+		$dbSecret = $this
+			->getMockBuilder(TotpSecret::class)
+			->setMethods(['getSecret', 'getLastValidatedKey', 'setLastValidatedKey'])
+			->getMock();
 
 		$dbSecret->expects($this->once())
 			->method('getLastValidatedKey')

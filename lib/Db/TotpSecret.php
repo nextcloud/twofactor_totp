@@ -27,9 +27,12 @@ use OCP\AppFramework\Db\Entity;
 /**
  * @method string getUserId()
  * @method void setUserId(string $userId)
+ * @method string getSecret()
  * @method void setSecret(string $secret)
  * @method boolean getVerified()
  * @method void setVerified(bool $verified)
+ * @method string getLastValidatedKey()
+ * @method void setLastValidatedKey(string $lastValidatedKey)
  */
 class TotpSecret extends Entity {
 
@@ -44,26 +47,4 @@ class TotpSecret extends Entity {
 
     /** @var boolean */
     protected $verified;
-
-    /**
-     * @return string
-     */
-    public function getSecret() {
-        return $this->secret;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastValidatedKey() {
-        return $this->lastValidatedKey;
-    }
-
-    /**
-     * @param string $key
-     */
-    public function setLastValidatedKey($key) {
-        $this->lastValidatedKey = $key;
-    }
-
 }
