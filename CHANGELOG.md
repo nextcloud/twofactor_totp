@@ -4,10 +4,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased] -
-
-## [0.5.0] - 2018-09-??
-### Changed
+## [0.5.0] - 2018-09-28
+### Added
 - add commands to change verified state of secret [#53](https://github.com/owncloud/twofactor_totp/pull/53)
 - hu_HU translation improved [d3bbe03](https://github.com/owncloud/twofactor_totp/commit/d3bbe03976fae9467ce6197a4d2dff6f05589bf3)
 - is translation improved [1ec5bae](https://github.com/owncloud/twofactor_totp/commit/1ec5baee7007933cc91d73edac58a6f51e0721b4)
