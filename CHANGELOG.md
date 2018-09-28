@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
 ## [0.5.1] - 2018-09-28
 ### Fixed
 - do not allow multiple uses of the same key [#63](https://github.com/owncloud/twofactor_totp/pull/63) [#66](https://github.com/owncloud/twofactor_totp/pull/66)
@@ -35,6 +37,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 - App is now signed
 
-[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/0.5.0...HEAD
+[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/0.5.1...HEAD
+[0.5.1]: https://github.com/owncloud/twofactor_totp/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/owncloud/twofactor_totp/compare/0.4.4...0.5.0
 [0.4.4]: https://github.com/owncloud/twofactor_totp/compare/0.3...0.4
