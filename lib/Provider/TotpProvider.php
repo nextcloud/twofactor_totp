@@ -25,11 +25,12 @@ namespace OCA\TwoFactorTOTP\Provider;
 
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\Authentication\TwoFactorAuth\IProvider;
+use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\IL10N;
 use OCP\IUser;
 use OCP\Template;
 
-class TotpProvider implements IProvider {
+class TotpProvider implements IProvider, IProvidesIcons {
 
 	/** @var ITotp */
 	private $totp;
@@ -86,4 +87,11 @@ class TotpProvider implements IProvider {
 		return $this->totp->hasSecret($user);
 	}
 
+	public function getLightIcon(): String {
+		return image_path('twofactor_totp', 'app.svg');
+	}
+
+	public function getDarkIcon(): String {
+		return image_path('twofactor_totp', 'app-dark.svg');
+	}
 }
