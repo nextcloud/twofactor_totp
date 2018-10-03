@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -24,12 +24,16 @@ declare(strict_types = 1);
 namespace OCA\TwoFactorTOTP\Provider;
 
 use OCA\TwoFactorTOTP\Service\ITotp;
+use OCA\TwoFactorTOTP\Settings\Personal;
+use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
+use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
+use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
 use OCP\IL10N;
 use OCP\IUser;
 use OCP\Template;
 
-class TotpProvider implements IProvider {
+class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings {
 
 	/** @var ITotp */
 	private $totp;
@@ -86,4 +90,15 @@ class TotpProvider implements IProvider {
 		return $this->totp->hasSecret($user);
 	}
 
+	public function getLightIcon(): String {
+		return image_path('twofactor_totp', 'app.svg');
+	}
+
+	public function getDarkIcon(): String {
+		return image_path('twofactor_totp', 'app-dark.svg');
+	}
+
+	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
+		return new Personal();
+	}
 }

@@ -1,27 +1,11 @@
 .totp-form {
 	margin: 16px auto 1px !important;
 }
-.totp-form > input, .totp-form > button {
+.totp-form > input {
 	padding: 10px;
-	margin: 0px 0px 5px 0px;
+	margin: 0 0 5px 0;
 }
 .totp-form > input[type="tel"] {
 	width: 260px;
-	margin: 0px 0px 5px 0px;
-}
-.totp-form > button[type="submit"] {
-	width: 280px;
-	border-radius: 3px;
-	font-size: 20px;
-}
-
-.confirm-inline {
-	position: absolute;
-	right: 10px;
-	top: 0;
-	margin: 0 !important;
-	padding-right: 25px !important;
-	background-color: transparent !important;
-	border: none !important;
-	opacity: .5;
+	margin: 0 0 5px 0;
 }

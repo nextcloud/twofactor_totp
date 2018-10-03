@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -17,36 +20,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
+
 namespace OCA\TwoFactorTOTP\Settings;
 
-use OCP\AppFramework\Http\TemplateResponse;
-use OCP\Settings\ISettings;
+use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
+use OCP\Template;
 
-class Personal implements ISettings {
+class Personal implements IPersonalProviderSettings {
 
-	/**
-	 * @return TemplateResponse
-	 */
-	public function getForm() {
-		return new TemplateResponse('twofactor_totp', 'personal');
+	public function getBody(): Template {
+		return new Template('twofactor_totp', 'personal');
 	}
-
-	/**
-	 * @return string the section ID, e.g. 'sharing'
-	 */
-	public function getSection() {
-		return 'security';
-	}
-
-	/**
-	 * @return int whether the form should be rather on the top or bottom of
-	 * the admin section. The forms are arranged in ascending order of the
-	 * priority values. It is required to return a value between 0 and 100.
-	 *
-	 * E.g.: 70
-	 */
-	public function getPriority() {
-		return 40;
-	}
-
 }

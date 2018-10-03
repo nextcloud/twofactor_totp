@@ -87,7 +87,7 @@ class TOTPAcceptenceTest extends TestCase {
 		$this->webDriver->executeScript('arguments[0].click(); console.log(arguments[0]);', [
 			$this->webDriver->findElement(WebDriverBy::id('totp-enabled')),
 		]);
-		$this->webDriver->wait(15, 200)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('twofactor-totp-settings'), 'This is your new TOTP secret:'));
+		$this->webDriver->wait(15, 200)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('twofactor-totp-settings'), 'Your new TOTP secret is:'));
 		$this->assertHasSecret(ITotp::STATE_CREATED);
 
 		// Enter a wrong OTP
