@@ -2,9 +2,6 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "TOTP kullanılsın",
-    "This is your new TOTP secret:" : "Yeni TOTP parolanız:",
-    "Scan this QR code with your TOTP app" : "TOTP uygulamanızla bu QR kodunu tarayın",
-    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Uygulamanızı yapılandırdıktan sonra aşağı bir deneme kodu yazarak uygulamanızın doğru yapılandırıldığından emin olun.",
     "Authentication code" : "Kimlik doğrulama kodu",
     "Verify" : "Doğrula",
     "Could not enable TOTP" : "TOTP etkinleştirilemedi",
@@ -16,8 +13,7 @@ OC.L10N.register(
     "Two Factor TOTP Provider" : "İki Aşamalı Kimlik Doğrulama TOTP Hizmeti Sağlayıcısı",
     "TOTP two-factor provider" : "TOTP iki aşamalı kimlik doğrulama hizmeti sağlayıcısı",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP için iki aşamalı kimlik doğrulama hizmeti sağlayıcısı (RFC 6238)",
-    "Submit" : "Gönder",
     "Get the authentication code from the two-factor authentication app on your device." : "Aygıtınızda yüklü iki aşamalı kimlik doğrulaması uygulamasından kodu alın.",
-    "TOTP second-factor auth" : "TOTP iki aşamalı kimlik doğrulama"
+    "Submit" : "Gönder"
 },
 "nplurals=2; plural=(n > 1);");

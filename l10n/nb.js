@@ -2,9 +2,6 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "Aktiver to-trinns bekreftelse med TOTP",
-    "This is your new TOTP secret:" : "Dette er din nye to-trinns bekreftelses-hemmelighet for TOTP:",
-    "Scan this QR code with your TOTP app" : "Skann denne QR-koden med TOTP-programmet ditt for to-trinns bekreftelse",
-    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Når du har satt opp programmet ditt, skriv inn testkoden nedenfor for å forsikre deg om at det har gått rett for seg.",
     "Authentication code" : "Autentiseringskode",
     "Verify" : "Bekreft",
     "Could not enable TOTP" : "Kune ikke aktivere TOTP",
@@ -14,8 +11,7 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "To-trinns bekreftelse (TOTP)",
     "Authenticate with a TOTP app" : "Autentiser med et TOTP-program",
     "Two Factor TOTP Provider" : "Tofaktors TOTP-tilbyder",
-    "Submit" : "Send inn",
     "Get the authentication code from the two-factor authentication app on your device." : "Hent autentiseringskoden fra din applikasjon for to-trinns bekreftelse.",
-    "TOTP second-factor auth" : "To-trinns bekreftelse med TOTP"
+    "Submit" : "Send inn"
 },
 "nplurals=2; plural=(n != 1);");

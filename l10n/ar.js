@@ -2,8 +2,6 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "تفعيل TOTP",
-    "This is your new TOTP secret:" : "هذا هو سر TOTP الجديد الخاص بك:",
-    "Scan this QR code with your TOTP app" : "إمسح رمز الـ QR هذا بتطبيق كلمة السر TOTP لديك",
     "Authentication code" : "رمز المصادقة",
     "Verify" : "تحقق",
     "Could not verify your key. Please try again" : "تعذرت عملية التحقق من مفتاحك. يرجى إعادة المحاولة",

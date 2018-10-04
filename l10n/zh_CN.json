@@ -1,8 +1,5 @@
 { "translations": {
     "Enable TOTP" : "启用 TOTP",
-    "This is your new TOTP secret:" : "这是您的新 TOTP 密钥",
-    "Scan this QR code with your TOTP app" : "使用您的 TOTP 应用扫描二维码",
-    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "一旦你配置好你的应用，输入以下测试码来确保你的应用配置正确。",
     "Authentication code" : "验证码",
     "Verify" : "验证",
     "Could not enable TOTP" : "无法启用TOTP",
@@ -14,8 +11,7 @@
     "Two Factor TOTP Provider" : "二次TOTP验证提供者",
     "TOTP two-factor provider" : "TOTP两步认证",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "一个 TOTP (RFC 6238) 两步验证提供者",
-    "Submit" : "提交",
     "Get the authentication code from the two-factor authentication app on your device." : "从您设备上的两步验证应用获取验证码",
-    "TOTP second-factor auth" : "TOTP 两步验证"
+    "Submit" : "提交"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

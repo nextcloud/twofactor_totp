@@ -2,9 +2,6 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "Activer les mots de passe à usage unique (TOTP)",
-    "This is your new TOTP secret:" : "Votre nouveau secret TOTP est :",
-    "Scan this QR code with your TOTP app" : "Scannez ce QR code avec votre application TOTP",
-    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Une fois que vous avez configuré votre application, entrez un code test ci-dessous pour vérifier que votre application a bien été configurée correctement.",
     "Authentication code" : "Code d'authentification",
     "Verify" : "Vérifier",
     "Could not enable TOTP" : "Impossible d'activer les mots de passe à usage unique (TOTP)",
@@ -16,8 +13,7 @@ OC.L10N.register(
     "Two Factor TOTP Provider" : "Fournisseur de TOTP pour l'authentification en deux étapes",
     "TOTP two-factor provider" : "Fournisseur TOTP à deux facteurs",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un fournisseur d'authentification à deux facteurs pour TOTP (RFC 6238)",
-    "Submit" : "Envoyer",
     "Get the authentication code from the two-factor authentication app on your device." : "Saisissez le code d'authentification de l'application d'authentification à deux facteurs sur votre appareil.",
-    "TOTP second-factor auth" : "Deuxième facteur d'authentification du mot de passe temporaire à usage unique"
+    "Submit" : "Envoyer"
 },
 "nplurals=2; plural=(n > 1);");

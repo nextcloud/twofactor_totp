@@ -1,8 +1,5 @@
 { "translations": {
     "Enable TOTP" : "Habilitar TOTP",
-    "This is your new TOTP secret:" : "Esti ye'l to secretu TOTP nuevu:",
-    "Scan this QR code with your TOTP app" : "Escania esti códigu QR cola to aplicación TOTP",
-    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Namái configures la to aplicación, introduz embaxo un códigu de prueba p'asegurar que la to aplicación ta configurada afayadizamente.",
     "Authentication code" : "Códigu de configuración",
     "Verify" : "Verificar",
     "Could not enable TOTP" : "Nun pudo activase TOTP",
@@ -12,8 +9,7 @@
     "TOTP (Authenticator app)" : "TOTP (aplicación autenticadora)",
     "Authenticate with a TOTP app" : "Autenticar con una aplicación TOTP",
     "Two Factor TOTP Provider" : "Fornidor d'autenticación en dos pasos de TOTP",
-    "Submit" : "Unviar",
     "Get the authentication code from the two-factor authentication app on your device." : "Consigui'l códigu de l'aplicación d'autenticación en dos pasos nel to preséu.",
-    "TOTP second-factor auth" : "Autenticación del segundu pasu de TOTP"
+    "Submit" : "Unviar"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

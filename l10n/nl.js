@@ -2,9 +2,6 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "Inschakelen TOTP",
-    "This is your new TOTP secret:" : "Dit is je nieuwe TOTP geheim:",
-    "Scan this QR code with your TOTP app" : "Scan deze QR code met je TOTP app",
-    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Voeg een test code in na het instellen van je app om er zeker van te zijn dat de instellingen correct zijn.",
     "Authentication code" : "Authenticatie code",
     "Verify" : "Verifiëren",
     "Could not enable TOTP" : "Kon TOTP niet inschakelen",
@@ -16,8 +13,7 @@ OC.L10N.register(
     "Two Factor TOTP Provider" : "Twee-factor TOTP leverancier",
     "TOTP two-factor provider" : "TOTP two-factor provider",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Een Two-Factor-Auth Provider voor TOTP (RFC 6238)",
-    "Submit" : "Versturen",
     "Get the authentication code from the two-factor authentication app on your device." : "Krijg de authenticatiecode op je 'tweede factor' authenticatie app op je toestel.",
-    "TOTP second-factor auth" : "TOTP tweede factor auth"
+    "Submit" : "Versturen"
 },
 "nplurals=2; plural=(n != 1);");

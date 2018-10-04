@@ -2,9 +2,6 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "Habilitar TOTP",
-    "This is your new TOTP secret:" : "Este é o  seu novo secreto de TOTP:",
-    "Scan this QR code with your TOTP app" : "Escanee este código QR coa súa aplicación TOTP",
-    "Once you have configured your app, enter a test code below to ensure that your app has been configured correctly." : "Cando teña configurada a súa aplicación, introduza debaixo un código de probas para asegurar que a súa aplicación estea configurada correctamente",
     "Authentication code" : "Código de autenticación",
     "Verify" : "Verificar",
     "Could not verify your key. Please try again" : "Non foi posíbel verificar a súa chave. Ténteo de novo",
@@ -13,8 +10,7 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (aplicación de autenticación)",
     "Authenticate with a TOTP app" : "Autenticar coa aplicación TOTP",
     "Two Factor TOTP Provider" : "Provedor TOTP de dous factores",
-    "Submit" : "Enviar",
     "Get the authentication code from the two-factor authentication app on your device." : "Obteña o código de autenticación da aplicación de autenticación de dous factores no seu dispositivo.",
-    "TOTP second-factor auth" : "Segundo factor de autenticación TOTP"
+    "Submit" : "Enviar"
 },
 "nplurals=2; plural=(n != 1);");
