@@ -2,6 +2,9 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "TOTP kullanılsın",
+    "Your new TOTP secret is:" : "Yeni TOTP parolanız:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Hızlı kurulum için TOTP uygulamanızla şu QR kodunu tarayın:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Uygulamanızı yapılandırdıktan sonra aşağı bir deneme kodu yazarak herşeyin düzgün çalıştığından emin olun:",
     "Authentication code" : "Kimlik doğrulama kodu",
     "Verify" : "Doğrula",
     "Could not enable TOTP" : "TOTP etkinleştirilemedi",

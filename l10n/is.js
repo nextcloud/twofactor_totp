@@ -2,6 +2,9 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "Virkja TOTP",
+    "Your new TOTP secret is:" : "Þetta er nýi TOTP-leynilykillinn þinn:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Til að setja upp í flýti, skannaðu þennan QR-kóða með TOTP-forritinu þínu:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Þegar þú hefur stillt forritið þitt, settu inn prufukóðann hér fyrir neðan til að ganga úr skugga um að virki rétt:",
     "Authentication code" : "Auðkenningarkóði",
     "Verify" : "Sannreyna",
     "Could not enable TOTP" : "Tókst ekki að virkja TOTP",

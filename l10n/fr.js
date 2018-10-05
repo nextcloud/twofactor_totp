@@ -2,6 +2,9 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Enable TOTP" : "Activer les mots de passe à usage unique (TOTP)",
+    "Your new TOTP secret is:" : "Votre nouveau mot de passe TOTP est:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Pour un paramétrage facile, scannez ce QR code avec votre application TOTP.",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Après avoir configuré votre application, entrez un code test ci-dessous pour vérifier que votre application a bien été configurée correctement. ",
     "Authentication code" : "Code d'authentification",
     "Verify" : "Vérifier",
     "Could not enable TOTP" : "Impossible d'activer les mots de passe à usage unique (TOTP)",

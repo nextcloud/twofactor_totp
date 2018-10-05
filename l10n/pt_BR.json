@@ -1,5 +1,8 @@
 { "translations": {
     "Enable TOTP" : "Ativar TOTP",
+    "Your new TOTP secret is:" : "Seu novo segredo TOTP é:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Para uma configuração rápida, digitalize este código QR com o seu aplicativo TOTP:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Depois de configurar seu aplicativo, insira um código de teste abaixo para garantir que tudo funcione corretamente:",
     "Authentication code" : "Código de autenticação",
     "Verify" : "Verificar",
     "Could not enable TOTP" : "Não foi  possível ativar o TOTP",
