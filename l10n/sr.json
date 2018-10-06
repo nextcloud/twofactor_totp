@@ -1,5 +1,8 @@
 { "translations": {
     "Enable TOTP" : "Укључи TOTP",
+    "Your new TOTP secret is:" : "Ово је Ваша нова TOTP тајна:",
+    "For quick setup, scan this QR code with your TOTP app:" : "За брзо подешавање, скенирајте овај QR код са Вашом TOTP апликацијом",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Када сте подесили апликацију, унесите пробни код испод да проверите да ли све ради како треба:",
     "Authentication code" : "Код за проверу идентитета",
     "Verify" : "Провери",
     "Could not enable TOTP" : "Не могу да укључим TOTP",
