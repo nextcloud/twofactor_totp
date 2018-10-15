@@ -61,17 +61,18 @@ class SettingsController extends Controller {
 			throw new Exception('user not available');
 		}
 		return new JSONResponse([
-			'state' => $this->totp->hasSecret($user),
+			'state' => $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED,
 		]);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 * @PasswordConfirmationRequired
+	 *
 	 * @param int $state
-	 * @param string|null $key for verification
+	 * @param string|null $code for verification
 	 */
-	public function enable(int $state, string $key = null): JSONResponse {
+	public function enable(int $state, string $code = null): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new Exception('user not available');
@@ -97,7 +98,7 @@ class SettingsController extends Controller {
 					'qr' => $qr,
 				]);
 			case ITotp::STATE_ENABLED:
-				$success = $this->totp->enable($user, $key);
+				$success = $this->totp->enable($user, $code);
 				return new JSONResponse([
 					'state' => $success ? ITotp::STATE_ENABLED : ITotp::STATE_CREATED,
 				]);

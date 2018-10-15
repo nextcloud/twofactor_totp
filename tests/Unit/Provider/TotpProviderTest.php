@@ -101,8 +101,12 @@ class TotpProviderTest extends TestCase {
 	}
 
 	public function testGetPersonalSettings() {
-		$expected = new Personal();
+		$expected = new Personal(ITotp::STATE_ENABLED);
 		$user = $this->createMock(IUser::class);
+		$this->totp->expects($this->once())
+			->method('hasSecret')
+			->with($user)
+			->willReturn(true);
 
 		$actual = $this->provider->getPersonalSettings($user);
 
