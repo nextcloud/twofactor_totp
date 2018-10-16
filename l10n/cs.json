@@ -1,5 +1,7 @@
 { "translations": {
     "Enable TOTP" : "Zapnout TOTP",
+    "For quick setup, scan this QR code with your TOTP app:" : "Pro rychlé nastavení naskenujte tento QR kód svou TOTP aplikací:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Po dokončení nastavení aplikace se zadáním zkušebního kódu níže ujistěte, že vše správně funguje:",
     "Authentication code" : "Ověřovací kód",
     "Verify" : "Ověřit",
     "Could not enable TOTP" : "TOTP se nepodařilo povolit",
