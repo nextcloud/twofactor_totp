@@ -169,7 +169,7 @@ class TOTPAcceptenceTest extends TestCase {
 		$this->webDriver->findElement(WebDriverBy::name('challenge'))->sendKeys('000000');
 		$this->webDriver->findElement(WebDriverBy::cssSelector('button[type="submit"]'))->submit();
 
-		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::className('warning'), 'Error while validating your second factor'));
+		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::className('body-login-container'), 'Error while validating your second factor'));
 
 		$this->assertEquals('http://localhost:8080/index.php/login/challenge/totp', $this->webDriver->getCurrentURL());
 	}
