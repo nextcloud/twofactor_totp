@@ -65,7 +65,6 @@ class ProviderTest extends TestCase {
 		return [
 				['totp_enabled_subject'],
 				['totp_disabled_subject'],
-				[null],
 		];
 	}
 
@@ -98,13 +97,8 @@ class ProviderTest extends TestCase {
 		$event->expects($this->once())
 			->method('getSubject')
 			->will($this->returnValue($subject));
-		if (is_null($subject)) {
-			$event->expects($this->never())
-				->method('setSubject');
-		} else {
-			$event->expects($this->once())
-				->method('setSubject');
-		}
+		$event->expects($this->once())
+			->method('setSubject');
 
 		$this->provider->parse($lang, $event);
 	}
