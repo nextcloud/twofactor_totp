@@ -24,12 +24,12 @@ declare(strict_types = 1);
 namespace OCA\TwoFactorTOTP\Db;
 
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Mapper;
+use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\IUser;
 
-class TotpSecretMapper extends Mapper {
+class TotpSecretMapper extends QBMapper {
 
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'twofactor_totp_secrets');
@@ -45,6 +45,7 @@ class TotpSecretMapper extends Mapper {
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('id', 'user_id', 'secret', 'state')
+			->from($this->getTableName())
 			->from('twofactor_totp_secrets')
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user->getUID())));
 		$result = $qb->execute();
