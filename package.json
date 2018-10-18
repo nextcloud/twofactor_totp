@@ -26,6 +26,9 @@
     "last 2 versions",
     "ie >= 11"
   ],
+  "jshintConfig": {
+    "esversion": 6
+  },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
