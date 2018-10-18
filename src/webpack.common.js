@@ -11,14 +11,6 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /davclient/,
-				use: 'exports-loader?dav'
-			},
-			{
-				test: /ical/,
-				use: 'exports-loader?ICAL'
-			},
-			{
 				test: /\.css$/,
 				use: ['vue-style-loader', 'css-loader']
 			},
@@ -54,11 +46,6 @@ module.exports = {
 	},
 	plugins: [new VueLoaderPlugin()],
 	resolve: {
-		alias: {
-			vue$: 'vue/dist/vue.esm.js',
-			'@core': path.resolve('components/core')
-		},
-		extensions: ['*', '.js', '.vue', '.json'],
-		symlinks: false
+		extensions: ['*', '.js', '.vue']
 	}
 };
