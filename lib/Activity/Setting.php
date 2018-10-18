@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -34,31 +35,31 @@ class Setting implements ISetting {
 		$this->l10n = $l10n;
 	}
 
-	public function canChangeMail() {
+	public function canChangeMail(): bool {
 		return false;
 	}
 
-	public function canChangeStream() {
+	public function canChangeStream(): bool {
 		return false;
 	}
 
-	public function getIdentifier() {
+	public function getIdentifier(): string {
 		return 'twofactor_totp';
 	}
 
-	public function getName() {
+	public function getName(): string {
 		return $this->l10n->t('TOTP (Authenticator app)');
 	}
 
-	public function getPriority() {
+	public function getPriority(): int {
 		return 10;
 	}
 
-	public function isDefaultEnabledMail() {
+	public function isDefaultEnabledMail(): bool {
 		return true;
 	}
 
-	public function isDefaultEnabledStream() {
+	public function isDefaultEnabledStream(): bool {
 		return true;
 	}
 
