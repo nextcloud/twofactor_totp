@@ -99,6 +99,6 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	}
 
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
-		return new Personal();
+		return new Personal($this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED);
 	}
 }

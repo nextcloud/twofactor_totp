@@ -28,7 +28,16 @@ use OCP\Template;
 
 class Personal implements IPersonalProviderSettings {
 
+	/** @var int */
+	private $state;
+
+	public function __construct(int $state) {
+		$this->state = $state;
+	}
+
 	public function getBody(): Template {
-		return new Template('twofactor_totp', 'personal');
+		$template = new Template('twofactor_totp', 'personal');
+		$template->assign('state', $this->state);
+		return $template;
 	}
 }

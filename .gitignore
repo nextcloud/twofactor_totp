@@ -1,6 +1,9 @@
 composer.phar
 
+/node_modules
+
 build/
+/js
 vendor/
 
 # Ignore NetBeans project
