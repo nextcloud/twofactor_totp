@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -25,7 +26,6 @@ namespace OCA\TwoFactorTOTP\Activity;
 use InvalidArgumentException;
 use OCP\Activity\IEvent;
 use OCP\Activity\IProvider;
-use OCP\ILogger;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory as L10nFactory;
 
@@ -37,16 +37,12 @@ class Provider implements IProvider {
 	/** @var IURLGenerator */
 	private $urlGenerator;
 
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(L10nFactory $l10n, IURLGenerator $urlGenerator, ILogger $logger) {
-		$this->logger = $logger;
+	public function __construct(L10nFactory $l10n, IURLGenerator $urlGenerator) {
 		$this->urlGenerator = $urlGenerator;
 		$this->l10n = $l10n;
 	}
 
-	public function parse($language, IEvent $event, IEvent $previousEvent = null) {
+	public function parse($language, IEvent $event, IEvent $previousEvent = null): IEvent {
 		if ($event->getApp() !== 'twofactor_totp') {
 			throw new InvalidArgumentException();
 		}

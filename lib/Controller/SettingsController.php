@@ -58,7 +58,7 @@ class SettingsController extends Controller {
 	public function state(): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
-			throw new Exception('user not available');
+			throw new \Exception('user not available');
 		}
 		return new JSONResponse([
 			'state' => $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED,
@@ -75,7 +75,7 @@ class SettingsController extends Controller {
 	public function enable(int $state, string $code = null): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
-			throw new Exception('user not available');
+			throw new \Exception('user not available');
 		}
 		switch ($state) {
 			case ITotp::STATE_DISABLED:
