@@ -170,12 +170,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "bed1c86c007845cd00780f2284bfd2a1caa74423"
+                "reference": "364b38c62dec5c1d99f4e6d81e5861d3e74ea8b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/bed1c86c007845cd00780f2284bfd2a1caa74423",
-                "reference": "bed1c86c007845cd00780f2284bfd2a1caa74423",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/364b38c62dec5c1d99f4e6d81e5861d3e74ea8b1",
+                "reference": "364b38c62dec5c1d99f4e6d81e5861d3e74ea8b1",
                 "shasum": ""
             },
             "require": {
@@ -184,7 +184,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "14.0.0-dev"
+                    "dev-master": "15.0.0-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -198,7 +198,7 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2018-10-02T15:59:55+00:00"
+            "time": "2018-10-15T16:04:55+00:00"
         },
         {
             "name": "endroid/qr-code",
