@@ -1,11 +1,6 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "Enable TOTP" : "Включить TOTP",
-    "Authentication code" : "Код аутентификации",
-    "Verify" : "Проверить",
-    "Could not enable TOTP" : "Не удалось включить TOTP",
-    "Could not verify your key. Please try again" : "Не удаётся проверить ваш ключ. Попробуйте ещё раз.",
     "You enabled TOTP two-factor authentication for your account" : "Вы включили двухфакторную авторизацию TOTP для своего аккаунта",
     "You disabled TOTP two-factor authentication for your account" : "Вы отключили двухфакторную авторизацию TOTP для своего аккаунта",
     "TOTP (Authenticator app)" : "TOTP (Приложение авторизации)",
@@ -13,7 +8,10 @@ OC.L10N.register(
     "Two Factor TOTP Provider" : "Второй фактор — приложение TOTP",
     "TOTP two-factor provider" : "Провайдер двухфакторной аутентификации TOTP",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Провайдер двухфакторной аутентификации для TOTP (RFC 6238)",
+    "Could not enable TOTP" : "Не удалось включить TOTP",
+    "Could not verify your key. Please try again" : "Не удаётся проверить ваш ключ. Попробуйте ещё раз.",
     "Get the authentication code from the two-factor authentication app on your device." : "Получите аутентификационный код из приложения двухфакторной аутентификации на вашем устройстве.",
+    "Authentication code" : "Код аутентификации",
     "Submit" : "Отправить"
 },
 "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);");
