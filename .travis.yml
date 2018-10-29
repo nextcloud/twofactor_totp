@@ -38,10 +38,9 @@ script:
   - find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;
   - cd tests
   - ../../../lib/composer/phpunit/phpunit/phpunit --configuration phpunit.xml
-  - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar;
-    fi
-  - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover
-    clover.xml; fi
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 matrix:
   include:
