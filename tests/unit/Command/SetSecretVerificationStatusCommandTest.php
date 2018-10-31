@@ -107,5 +107,4 @@ class SetSecretVerificationStatusCommandTest extends TestCase {
 			],
 		];
 	}
-
 }

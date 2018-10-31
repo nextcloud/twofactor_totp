@@ -27,7 +27,6 @@ use OCP\Defaults;
 use Test\TestCase;
 
 class SettingsControllerTest extends TestCase {
-
 	private $request;
 	private $userSession;
 	private $totp;
@@ -63,7 +62,7 @@ class SettingsControllerTest extends TestCase {
 			->method('hasSecret')
 			->with($user)
 			->will($this->returnValue($hasSecret));
-		if($hasSecret) {
+		if ($hasSecret) {
 			$this->totp->expects($this->once())
 				->method('isVerified')
 				->with($user)
@@ -85,7 +84,6 @@ class SettingsControllerTest extends TestCase {
 		];
 	}
 
-
 	public function testEnable() {
 		$user = $this->createMock('\OCP\IUser');
 		$this->userSession->expects($this->exactly(2))
@@ -100,7 +98,7 @@ class SettingsControllerTest extends TestCase {
 			->will($this->returnValue('newsecret'));
 
 		$qrCode = new QrCode();
-		$issuer = rawurlencode($this->defaults->getName());
+		$issuer = \rawurlencode($this->defaults->getName());
 		$qr = $qrCode->setText("otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer")
 			->setSize(150)
 			->writeDataUri();
@@ -128,5 +126,4 @@ class SettingsControllerTest extends TestCase {
 
 		$this->assertEquals($expected, $this->controller->enable(false));
 	}
-
 }

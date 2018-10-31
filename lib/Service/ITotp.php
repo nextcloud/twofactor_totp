@@ -27,38 +27,38 @@ use OCP\IUser;
 
 interface ITotp {
 
-    /**
-     * @param IUser $user
-     */
-    public function hasSecret(IUser $user);
+	/**
+	 * @param IUser $user
+	 */
+	public function hasSecret(IUser $user);
 
-    /**
-     * @param IUser $user
-     * @return string the newly created secret
-     * @throws TotpSecretAlreadySet
-     */
-    public function createSecret(IUser $user);
+	/**
+	 * @param IUser $user
+	 * @return string the newly created secret
+	 * @throws TotpSecretAlreadySet
+	 */
+	public function createSecret(IUser $user);
 
-    /**
-     * @param IUser $user
-     */
-    public function deleteSecret(IUser $user);
+	/**
+	 * @param IUser $user
+	 */
+	public function deleteSecret(IUser $user);
 
-    /**
-     * @param IUser $user
-     * @param string $key
-     */
-    public function validateSecret(IUser $user, $key);
+	/**
+	 * @param IUser $user
+	 * @param string $key
+	 */
+	public function validateSecret(IUser $user, $key);
 
-    /**
-     * @param IUser $user
-     * @param string $key
-     */
-    public function verifySecret(IUser $user, $key);
+	/**
+	 * @param IUser $user
+	 * @param string $key
+	 */
+	public function verifySecret(IUser $user, $key);
 
-    /**
-     * @param IUser $user
-     * @return boolean
-     */
-    public function isVerified(IUser $user);
+	/**
+	 * @param IUser $user
+	 * @return boolean
+	 */
+	public function isVerified(IUser $user);
 }
