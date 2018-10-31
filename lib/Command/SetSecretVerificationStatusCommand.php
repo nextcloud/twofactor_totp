@@ -100,7 +100,7 @@ class SetSecretVerificationStatusCommand extends Command {
 		foreach ($options['uids'] as $uid) {
 			try {
 				$user = $this->userManager->get($uid);
-				if(!$user) {
+				if (!$user) {
 					$output->writeln("<error>User $uid does not exist</error>");
 					continue;
 				}
@@ -134,7 +134,7 @@ class SetSecretVerificationStatusCommand extends Command {
 
 		if ($input->getOption('all') !== false) {
 			$uids = 'all';
-		} else if(\count($input->getOption('uid'))) {
+		} elseif (\count($input->getOption('uid'))) {
 			$uids = $input->getOption('uid');
 		} else {
 			throw new InvalidArgumentException(

@@ -19,9 +19,7 @@
  *
  */
 
-
 namespace OCA\TwoFactor_Totp\Settings;
-
 
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\Settings\ISettings;

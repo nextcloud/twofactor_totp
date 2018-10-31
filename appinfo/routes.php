@@ -20,21 +20,21 @@
  *
  */
 return [
-    'routes' => [
-        [
-            'name' => 'settings#state',
-            'url' => '/settings/state',
-            'verb' => 'GET'
-        ],
-        [
-            'name' => 'settings#enable',
-            'url' => '/settings/enable',
-            'verb' => 'POST'
-        ],
-        [
-            'name' => 'settings#verifyNewSecret',
-            'url' => '/settings/verifyNewSecret',
-            'verb' => 'POST'
-        ],
-    ]
+	'routes' => [
+		[
+			'name' => 'settings#state',
+			'url' => '/settings/state',
+			'verb' => 'GET'
+		],
+		[
+			'name' => 'settings#enable',
+			'url' => '/settings/enable',
+			'verb' => 'POST'
+		],
+		[
+			'name' => 'settings#verifyNewSecret',
+			'url' => '/settings/verifyNewSecret',
+			'verb' => 'POST'
+		],
+	]
 ];

@@ -24,5 +24,4 @@ namespace OCA\TwoFactor_Totp\Exception;
 use Exception;
 
 class TotpSecretAlreadySet extends Exception {
-
 }

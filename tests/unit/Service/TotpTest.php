@@ -42,10 +42,10 @@ class TotpTest extends TestCase {
 	private $crypto;
 
 	/** @var Otp | \PHPUnit_Framework_MockObject_MockObject  */
-	private  $otp;
+	private $otp;
 
 	/** @var Totp */
-	private  $totp;
+	private $totp;
 
 	protected function setUp() {
 		parent::setUp();
@@ -55,7 +55,6 @@ class TotpTest extends TestCase {
 		$this->otp = $this->createMock(Otp::class);
 
 		$this->totp = new Totp($this->secretMapper, $this->crypto, $this->otp);
-
 	}
 
 	/**
@@ -81,7 +80,7 @@ class TotpTest extends TestCase {
 			->with($user)
 			->will($this->returnValue($dbSecret));
 
-		if($lastKey !== $key) {
+		if ($lastKey !== $key) {
 			$dbSecret->expects($this->once())
 				->method('getSecret')
 				->will($this->returnValue('secret'));
@@ -89,7 +88,7 @@ class TotpTest extends TestCase {
 				->method('checkTotp')
 				->will($this->returnValue($validationResult));
 		}
-		if($expectedResult === true) {
+		if ($expectedResult === true) {
 			$dbSecret->expects($this->once())
 				->method('setLastValidatedKey')
 				->with($key);
@@ -120,5 +119,4 @@ class TotpTest extends TestCase {
 		$this->expectException(NoTotpSecretFoundException::class);
 		$this->totp->validateSecret($user, 'testkey');
 	}
-
 }

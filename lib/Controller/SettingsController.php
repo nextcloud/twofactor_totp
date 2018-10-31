@@ -115,7 +115,7 @@ class SettingsController extends Controller {
 	private function getSecretName() {
 		$productName = $this->defaults->getName();
 		$userName = $this->userSession->getUser()->getCloudId();
-		return rawurlencode("$productName:$userName");
+		return \rawurlencode("$productName:$userName");
 	}
 
 	/**
@@ -125,7 +125,6 @@ class SettingsController extends Controller {
 	 */
 	private function getSecretIssuer() {
 		$productName = $this->defaults->getName();
-		return rawurlencode($productName);
+		return \rawurlencode($productName);
 	}
-
 }

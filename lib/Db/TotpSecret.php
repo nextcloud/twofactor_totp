@@ -36,15 +36,15 @@ use OCP\AppFramework\Db\Entity;
  */
 class TotpSecret extends Entity {
 
-    /** @var string */
-    protected $userId;
+	/** @var string */
+	protected $userId;
 
-    /** @var string */
-    protected $secret;
+	/** @var string */
+	protected $secret;
 
-    /** @var string */
-    protected $lastValidatedKey;
+	/** @var string */
+	protected $lastValidatedKey;
 
-    /** @var boolean */
-    protected $verified;
+	/** @var boolean */
+	protected $verified;
 }

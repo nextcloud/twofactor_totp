@@ -29,42 +29,40 @@ use OCP\IDBConnection;
 use OCP\IUser;
 
 class TotpSecretMapper extends Mapper {
+	public function __construct(IDBConnection $db) {
+		parent::__construct($db, 'twofactor_totp_secrets');
+	}
 
-    public function __construct(IDBConnection $db) {
-        parent::__construct($db, 'twofactor_totp_secrets');
-    }
+	/**
+	 * @param IUser $user
+	 * @throws DoesNotExistException
+	 * @return TotpSecret
+	 */
+	public function getSecret(IUser $user) {
+		/* @var $qb IQueryBuilder */
+		$qb = $this->db->getQueryBuilder();
 
-    /**
-     * @param IUser $user
-     * @throws DoesNotExistException
-     * @return TotpSecret
-     */
-    public function getSecret(IUser $user) {
-        /* @var $qb IQueryBuilder */
-        $qb = $this->db->getQueryBuilder();
+		$qb->select('id', 'user_id', 'secret', 'verified', 'last_validated_key')
+				->from('twofactor_totp_secrets')
+				->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user->getUID())));
+		$result = $qb->execute();
 
-        $qb->select('id', 'user_id', 'secret', 'verified', 'last_validated_key')
-                ->from('twofactor_totp_secrets')
-                ->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user->getUID())));
-        $result = $qb->execute();
-
-        $row = $result->fetch();
-        $result->closeCursor();
-        if ($row === false) {
-            throw new DoesNotExistException('Secret does not exist');
-        }
-        return TotpSecret::fromRow($row);
-    }
+		$row = $result->fetch();
+		$result->closeCursor();
+		if ($row === false) {
+			throw new DoesNotExistException('Secret does not exist');
+		}
+		return TotpSecret::fromRow($row);
+	}
 
 	/**
 	 * @param boolean $status
 	 */
-    public function setAllSecretsVerificationStatus($status) {
+	public function setAllSecretsVerificationStatus($status) {
 		/* @var $qb IQueryBuilder */
 		$qb = $this->db->getQueryBuilder();
 		$qb->update('twofactor_totp_secrets')
 			->set('verified', $qb->createNamedParameter($status, IQueryBuilder::PARAM_BOOL))
 			->execute();
 	}
-
 }

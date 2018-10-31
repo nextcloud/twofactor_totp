@@ -24,12 +24,10 @@ namespace OCA\TwoFactor_Totp\AppInfo;
 use OCP\AppFramework\App;
 
 class Application extends App {
+	public function __construct($urlParams = []) {
+		parent::__construct('twofactor_totp', $urlParams);
 
-    public function __construct($urlParams = []) {
-        parent::__construct('twofactor_totp', $urlParams);
-
-        $container = $this->getContainer();
-        $container->registerAlias('\OCA\TwoFactor_Totp\Service\ITotp', '\OCA\TwoFactor_Totp\Service\Totp');
-    }
-
+		$container = $this->getContainer();
+		$container->registerAlias('\OCA\TwoFactor_Totp\Service\ITotp', '\OCA\TwoFactor_Totp\Service\Totp');
+	}
 }

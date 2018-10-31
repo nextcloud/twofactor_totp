@@ -30,77 +30,76 @@ use OCP\Template;
 
 class TotpProvider implements IProvider {
 
-    /** @var ITotp */
-    private $totp;
+	/** @var ITotp */
+	private $totp;
 
-    /** @var IL10N */
-    private $l10n;
+	/** @var IL10N */
+	private $l10n;
 
-    /**
-     * @param Totp $totp
-     * @param IL10N $l10n
-     */
-    public function __construct(ITotp $totp, IL10N $l10n) {
-        $this->totp = $totp;
-        $this->l10n = $l10n;
-    }
+	/**
+	 * @param Totp $totp
+	 * @param IL10N $l10n
+	 */
+	public function __construct(ITotp $totp, IL10N $l10n) {
+		$this->totp = $totp;
+		$this->l10n = $l10n;
+	}
 
-    /**
-     * Get unique identifier of this 2FA provider
-     *
-     * @return string
-     */
-    public function getId() {
-        return 'totp';
-    }
+	/**
+	 * Get unique identifier of this 2FA provider
+	 *
+	 * @return string
+	 */
+	public function getId() {
+		return 'totp';
+	}
 
-    /**
-     * Get the display name for selecting the 2FA provider
-     *
-     * @return string
-     */
-    public function getDisplayName() {
-        return 'Time-based One-time Password';
-    }
+	/**
+	 * Get the display name for selecting the 2FA provider
+	 *
+	 * @return string
+	 */
+	public function getDisplayName() {
+		return 'Time-based One-time Password';
+	}
 
-    /**
-     * Get the description for selecting the 2FA provider
-     *
-     * @return string
-     */
-    public function getDescription() {
-        return $this->l10n->t('Authenticate with a TOTP app');
-    }
+	/**
+	 * Get the description for selecting the 2FA provider
+	 *
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->l10n->t('Authenticate with a TOTP app');
+	}
 
-    /**
-     * Get the template for rending the 2FA provider view
-     *
-     * @param IUser $user
-     * @return Template
-     */
-    public function getTemplate(IUser $user) {
-        $tmpl = new Template('twofactor_totp', 'challenge');
-        return $tmpl;
-    }
+	/**
+	 * Get the template for rending the 2FA provider view
+	 *
+	 * @param IUser $user
+	 * @return Template
+	 */
+	public function getTemplate(IUser $user) {
+		$tmpl = new Template('twofactor_totp', 'challenge');
+		return $tmpl;
+	}
 
-    /**
-     * Verify the given challenge
-     *
-     * @param IUser $user
-     * @param string $challenge
-     */
-    public function verifyChallenge(IUser $user, $challenge) {
-        return $this->totp->validateSecret($user, $challenge);
-    }
+	/**
+	 * Verify the given challenge
+	 *
+	 * @param IUser $user
+	 * @param string $challenge
+	 */
+	public function verifyChallenge(IUser $user, $challenge) {
+		return $this->totp->validateSecret($user, $challenge);
+	}
 
-    /**
-     * Decides whether 2FA is enabled and verified for the given user
-     *
-     * @param IUser $user
-     * @return boolean
-     */
-    public function isTwoFactorAuthEnabledForUser(IUser $user) {
-        return $this->totp->hasSecret($user) && $this->totp->isVerified($user);
-    }
-
+	/**
+	 * Decides whether 2FA is enabled and verified for the given user
+	 *
+	 * @param IUser $user
+	 * @return boolean
+	 */
+	public function isTwoFactorAuthEnabledForUser(IUser $user) {
+		return $this->totp->hasSecret($user) && $this->totp->isVerified($user);
+	}
 }

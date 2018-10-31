@@ -34,110 +34,108 @@ use Otp\Otp;
 
 class Totp implements ITotp {
 
-    /** @var TotpSecretMapper */
-    private $secretMapper;
+	/** @var TotpSecretMapper */
+	private $secretMapper;
 
-    /** @var ICrypto */
-    private $crypto;
+	/** @var ICrypto */
+	private $crypto;
 
-    /** @var Otp */
-    private  $otp;
+	/** @var Otp */
+	private $otp;
 
-    public function __construct(TotpSecretMapper $secretMapper, ICrypto $crypto, Otp $otp) {
-        $this->secretMapper = $secretMapper;
-        $this->crypto = $crypto;
-        $this->otp = $otp;
-    }
+	public function __construct(TotpSecretMapper $secretMapper, ICrypto $crypto, Otp $otp) {
+		$this->secretMapper = $secretMapper;
+		$this->crypto = $crypto;
+		$this->otp = $otp;
+	}
 
-    public function hasSecret(IUser $user) {
-        try {
-            $this->secretMapper->getSecret($user);
-        } catch (DoesNotExistException $ex) {
-            return false;
-        }
-        return true;
-    }
+	public function hasSecret(IUser $user) {
+		try {
+			$this->secretMapper->getSecret($user);
+		} catch (DoesNotExistException $ex) {
+			return false;
+		}
+		return true;
+	}
 
-    /**
-     * 
-     * @param IUser $user
-     */
-    public function createSecret(IUser $user) {
-        $this->deleteSecret($user);
-        $secret = GoogleAuthenticator::generateRandom();
+	/**
+	 *
+	 * @param IUser $user
+	 */
+	public function createSecret(IUser $user) {
+		$this->deleteSecret($user);
+		$secret = GoogleAuthenticator::generateRandom();
 
-        $dbSecret = new TotpSecret();
-        $dbSecret->setUserId($user->getUID());
-        $dbSecret->setSecret($this->crypto->encrypt($secret));
-        $dbSecret->setVerified(false);
-        $this->secretMapper->insert($dbSecret);
+		$dbSecret = new TotpSecret();
+		$dbSecret->setUserId($user->getUID());
+		$dbSecret->setSecret($this->crypto->encrypt($secret));
+		$dbSecret->setVerified(false);
+		$this->secretMapper->insert($dbSecret);
 
-        return $secret;
-    }
+		return $secret;
+	}
 
-    /**
-     * @param IUser $user
-     */
-    public function deleteSecret(IUser $user) {
-        try {
-            // TODO: execute DELETE sql in mapper instead
-            $dbSecret = $this->secretMapper->getSecret($user);
-            $this->secretMapper->delete($dbSecret);
-        } catch (DoesNotExistException $ex) {
-            
-        }
-    }
+	/**
+	 * @param IUser $user
+	 */
+	public function deleteSecret(IUser $user) {
+		try {
+			// TODO: execute DELETE sql in mapper instead
+			$dbSecret = $this->secretMapper->getSecret($user);
+			$this->secretMapper->delete($dbSecret);
+		} catch (DoesNotExistException $ex) {
+		}
+	}
 
-    /**
-     * @param IUser $user
-     * @param string $key
-     */
-    public function verifySecret(IUser $user, $key) {
-        if($this->validateSecret($user, $key) === true) {
-            $dbSecret = $this->secretMapper->getSecret($user);
-            $dbSecret->setVerified(true);
-            $this->secretMapper->update($dbSecret);
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * @param IUser $user
+	 * @param string $key
+	 */
+	public function verifySecret(IUser $user, $key) {
+		if ($this->validateSecret($user, $key) === true) {
+			$dbSecret = $this->secretMapper->getSecret($user);
+			$dbSecret->setVerified(true);
+			$this->secretMapper->update($dbSecret);
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * @param IUser $user
-     * @param string $key
-     */
-    public function validateSecret(IUser $user, $key) {
-        try {
-            $dbSecret = $this->secretMapper->getSecret($user);
-        } catch (DoesNotExistException $ex) {
-            throw new NoTotpSecretFoundException();
-        }
+	/**
+	 * @param IUser $user
+	 * @param string $key
+	 */
+	public function validateSecret(IUser $user, $key) {
+		try {
+			$dbSecret = $this->secretMapper->getSecret($user);
+		} catch (DoesNotExistException $ex) {
+			throw new NoTotpSecretFoundException();
+		}
 
-        /**
-         * Check last validated key to prevent consecutive usage of the same key
-         */
-        if ($dbSecret->getLastValidatedKey() !== $key) {
-            $secret = $this->crypto->decrypt($dbSecret->getSecret());
-            if ($this->otp->checkTotp(Base32::decode($secret), $key, 3) === true) {
-                $dbSecret->setLastValidatedKey($key);
-                $this->secretMapper->update($dbSecret);
-                return true;
-            }
-        }
-        return false;
-    }
+		/**
+		 * Check last validated key to prevent consecutive usage of the same key
+		 */
+		if ($dbSecret->getLastValidatedKey() !== $key) {
+			$secret = $this->crypto->decrypt($dbSecret->getSecret());
+			if ($this->otp->checkTotp(Base32::decode($secret), $key, 3) === true) {
+				$dbSecret->setLastValidatedKey($key);
+				$this->secretMapper->update($dbSecret);
+				return true;
+			}
+		}
+		return false;
+	}
 
-    /**
-     * @param IUser $user
-     * @return boolean
-     */
-    public function isVerified(IUser $user) {
-        try {
-            $secret = $this->secretMapper->getSecret($user);
-            return $secret->getVerified();
-        } catch (DoesNotExistException $ex) {
-            return false;
-        }
-    }
-
+	/**
+	 * @param IUser $user
+	 * @return boolean
+	 */
+	public function isVerified(IUser $user) {
+		try {
+			$secret = $this->secretMapper->getSecret($user);
+			return $secret->getVerified();
+		} catch (DoesNotExistException $ex) {
+			return false;
+		}
+	}
 }

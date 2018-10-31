@@ -20,7 +20,6 @@
 
 namespace OCA\Twofactor_Totp\Tests\Db;
 
-
 use OCA\TwoFactor_Totp\Db\TotpSecret;
 use OCA\TwoFactor_Totp\Db\TotpSecretMapper;
 use OCP\IDBConnection;
@@ -99,6 +98,5 @@ class TotpSecretMapperTest extends TestCase {
 		$this->assertEquals(false, (boolean)$secret1->getVerified());
 		$secret2 = $this->mapper->getSecret($user2);
 		$this->assertEquals(false, (boolean)$secret2->getVerified());
-
 	}
 }
