@@ -36,7 +36,7 @@ before_script:
 
 script:
   - find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;
-  - ../../lib/composer/phpunit/phpunit/phpunit --configuration tests/unit/phpunit.xml
+  - ../../lib/composer/phpunit/phpunit/phpunit --configuration phpunit.xml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
