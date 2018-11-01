@@ -3,7 +3,7 @@ workspace:
   path: apps/twofactor_totp
 
 branches:
-  - master
+- master
 
 pipeline:
   install-server:
@@ -24,7 +24,7 @@ pipeline:
     detach: true
     pull: true
     commands:
-      - tail -f /var/www/owncloud/data/owncloud.log
+    - tail -f /var/www/owncloud/data/owncloud.log
     when:
       matrix:
         NEED_SERVER: true
@@ -33,15 +33,15 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
-      - cd /var/www/owncloud/apps/twofactor_totp
-      - make
-      - cd /var/www/owncloud/
-      - php occ a:l
-      - php occ a:e twofactor_totp
-      - php occ a:e testing
-      - php occ a:l
-      - php occ config:system:set trusted_domains 1 --value=owncloud
-      - php occ log:manage --level 0
+    - cd /var/www/owncloud/apps/twofactor_totp
+    - make
+    - cd /var/www/owncloud/
+    - php occ a:l
+    - php occ a:e twofactor_totp
+    - php occ a:e testing
+    - php occ a:l
+    - php occ config:system:set trusted_domains 1 --value=owncloud
+    - php occ log:manage --level 0
     when:
       matrix:
         NEED_INSTALL_APP: true
@@ -50,7 +50,7 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
-      - chown www-data /var/www/owncloud -R
+    - chown www-data /var/www/owncloud -R
     when:
       matrix:
         NEED_INSTALL_APP: true
@@ -59,7 +59,7 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
-      - make test-php-style
+    - make test-php-style
     when:
       matrix:
         TEST_SUITE: owncloud-coding-standard
@@ -76,6 +76,18 @@ pipeline:
     when:
       matrix:
         TEST_SUITE: phpunit
+
+  codecov:
+    image: plugins/codecov:2
+    secrets: [codecov_token]
+    pull: true
+    paths:
+    - tests/output/clover.xml
+    files:
+    - '*.xml'
+    when:
+      matrix:
+        COVERAGE: true
 
 services:
   mysql:
@@ -113,7 +125,7 @@ services:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
-      - APACHE_WEBROOT=/var/www/owncloud/
+    - APACHE_WEBROOT=/var/www/owncloud/
     command: ["/usr/local/bin/apachectl", "-e", "debug", "-D", "FOREGROUND"]
     when:
       matrix:
@@ -176,7 +188,7 @@ matrix:
     DB_TYPE: sqlite
     NEED_SERVER: true
     NEED_INSTALL_APP: true
-  
+
   - PHP_VERSION: 7.0
     OC_VERSION: daily-stable10-qa
     TEST_SUITE: phpunit
