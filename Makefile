@@ -52,7 +52,7 @@ test-php-unit: vendor/bin/phpunit
 .PHONY: test-php-unit-dbg
 test-php-unit-dbg:         ## Run php unit tests using phpdbg
 test-php-unit-dbg: vendor/bin/phpunit
-	$(PHPUNITDBG) --configuration ./tests/unit/phpunit.xml --testsuite unit
+	$(PHPUNITDBG) --configuration ./phpunit.xml --testsuite unit
 
 .PHONY: test-php-style
 test-php-style:            ## Run php-cs-fixer and check owncloud code-style
