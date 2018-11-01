@@ -3,6 +3,7 @@ composer.phar
 build/
 vendor/
 .php_cs.cache
+tests/output
 
 # Ignore NetBeans project
 /nbproject/

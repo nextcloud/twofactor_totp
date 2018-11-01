@@ -47,7 +47,7 @@ help:
 .PHONY: test-php-unit
 test-php-unit:             ## Run php unit tests
 test-php-unit: vendor/bin/phpunit
-	$(PHPUNIT) --configuration ./tests/unit/phpunit.xml --testsuite unit
+	$(PHPUNIT) --configuration ./phpunit.xml --testsuite unit
 
 .PHONY: test-php-unit-dbg
 test-php-unit-dbg:         ## Run php unit tests using phpdbg

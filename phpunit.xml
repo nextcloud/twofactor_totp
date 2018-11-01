@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit bootstrap="tests/unit/bootstrap.php"
+		 verbose="true"
+		 timeoutForSmallTests="900"
+		 timeoutForMediumTests="900"
+		 timeoutForLargeTests="900"
+>
+	<testsuite name='unit'>
+		<directory suffix='Test.php'>./tests/unit</directory>
+	</testsuite>
+	<!-- filters for code coverage -->
+	<filter>
+		<whitelist>
+			<directory suffix=".php">.</directory>
+			<exclude>
+				<directory suffix=".php">./l10n</directory>
+				<directory suffix=".php">./tests</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+	<logging>
+		<!-- and this is where your report will be written -->
+		<log type="coverage-clover" target="./tests/output/clover.xml"/>
+	</logging>
+</phpunit>
