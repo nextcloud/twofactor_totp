@@ -1,5 +1,5 @@
 # Two Factor Totp
-[![Build Status](https://travis-ci.org/owncloud/twofactor_totp.svg?branch=master)](https://travis-ci.org/owncloud/twofactor_totp)
+[![Build Status](https://drone.owncloud.com/api/badges/owncloud/twofactor_totp/status.svg?branch=master)](https://drone.owncloud.com/owncloud/twofactor_totp)
 [![codecov](https://codecov.io/gh/owncloud/twofactor_totp/branch/master/graph/badge.svg)](https://codecov.io/gh/owncloud/twofactor_totp)
 
 Tested with the following apps:
