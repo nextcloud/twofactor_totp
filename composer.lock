@@ -54,24 +54,25 @@
         },
         {
             "name": "christian-riesen/base32",
-            "version": "1.3.1",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristianRiesen/base32.git",
-                "reference": "0a31e50c0fa9b1692d077c86ac188eecdcbaf7fa"
+                "reference": "80ff0e3b2124e61b4b39e2535709452f70bff367"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/0a31e50c0fa9b1692d077c86ac188eecdcbaf7fa",
-                "reference": "0a31e50c0fa9b1692d077c86ac188eecdcbaf7fa",
+                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/80ff0e3b2124e61b4b39e2535709452f70bff367",
+                "reference": "80ff0e3b2124e61b4b39e2535709452f70bff367",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*",
-                "satooshi/php-coveralls": "0.*"
+                "php": ">=5.6",
+                "phpunit/phpunit": "^5.0",
+                "satooshi/php-coveralls": "^1.0"
             },
             "type": "library",
             "extra": {
@@ -104,7 +105,7 @@
                 "encode",
                 "rfc4648"
             ],
-            "time": "2016-05-05T11:49:03+00:00"
+            "time": "2018-11-02T09:03:50+00:00"
         },
         {
             "name": "christian-riesen/otp",
@@ -170,12 +171,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "364b38c62dec5c1d99f4e6d81e5861d3e74ea8b1"
+                "reference": "4d3a1b276ab27ec30796e39b9f9631aff400ca48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/364b38c62dec5c1d99f4e6d81e5861d3e74ea8b1",
-                "reference": "364b38c62dec5c1d99f4e6d81e5861d3e74ea8b1",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/4d3a1b276ab27ec30796e39b9f9631aff400ca48",
+                "reference": "4d3a1b276ab27ec30796e39b9f9631aff400ca48",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +199,7 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2018-10-15T16:04:55+00:00"
+            "time": "2018-11-02T16:17:21+00:00"
         },
         {
             "name": "endroid/qr-code",
