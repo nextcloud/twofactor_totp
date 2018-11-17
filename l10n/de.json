@@ -7,10 +7,10 @@
     "TOTP two-factor provider" : "TOTP Zwei-Faktor-Anbieter",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Ein Zwei-Faktor-Anbieter für TOTP (RFC 6238)",
     "For quick setup, scan this QR code with your TOTP app:" : "Für eine schnelle Konfiguration, QR-Code mit der TOTP-App scannen:",
+    "Authentication code" : "Authentifizierungscode",
     "Could not enable TOTP" : "TOTP kann nicht aktiviert werden",
     "Could not verify your key. Please try again" : "Dein Schlüssel konnte nicht überprüft werden. Bitte erneut versuchen",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalte den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf deinem Gerät.",
-    "Authentication code" : "Authentifizierungscode",
     "Submit" : "Übermitteln"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

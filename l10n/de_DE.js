@@ -9,10 +9,10 @@ OC.L10N.register(
     "TOTP two-factor provider" : "Zwei-Faktor TOTP-Anbieter",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Ein Zwei-Faktor-Anbieter für TOTP (RFC 6238)",
     "For quick setup, scan this QR code with your TOTP app:" : "Für eine schnelle Konfiguration, QR-Code mit der TOTP-App scannen:",
+    "Authentication code" : "Authentifizierungscode",
     "Could not enable TOTP" : "TOTP kann nicht aktiviert werden",
     "Could not verify your key. Please try again" : "Ihr Schlüssel konnte nicht überprüft werden. Bitte erneut versuchen",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalten Sie den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf Ihrem Gerät.",
-    "Authentication code" : "Authentifizierungscode",
     "Submit" : "Übermitteln"
 },
 "nplurals=2; plural=(n != 1);");

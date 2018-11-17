@@ -6,9 +6,9 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (Gokendelses app)",
     "Authenticate with a TOTP app" : "Godkend med en TOTP app",
     "Two Factor TOTP Provider" : "Two Factor TOTP udbyder",
+    "Authentication code" : "Autorisationskode",
     "Could not verify your key. Please try again" : "Kunne ikke bekræfte din nøgle. Prøv venligst igen",
     "Get the authentication code from the two-factor authentication app on your device." : "Få godkendelses koden fra two-factor godkendelses app på din enhed. ",
-    "Authentication code" : "Autorisationskode",
     "Submit" : "Indsend"
 },
 "nplurals=2; plural=(n != 1);");
