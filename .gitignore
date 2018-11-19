@@ -2,6 +2,8 @@ composer.phar
 
 build/
 vendor/
+vendor-bin/**/vendor
+vendor-bin/**/composer.lock
 .php_cs.cache
 tests/output
 
