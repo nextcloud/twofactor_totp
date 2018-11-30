@@ -111,7 +111,7 @@ ifdef CAN_SIGN
 else
 	@echo $(sign_skip_msg)
 endif
-	tar -czf $(package_name).tar.gz -C $(sign_dir) $(app_name)
+	tar --format=gnu -czf $(package_name).tar.gz -C $(sign_dir) $(app_name)
 
 #
 # Dependency management

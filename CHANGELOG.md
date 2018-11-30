@@ -4,14 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [0.5.2]
+
+### Changed
+
+- Set max version to 10 because core platform is switching to Semver
+- Updating QR code library - [#39](https://github.com/owncloud/twofactor_totp/issues/39)
 
 ## [0.5.1] - 2018-09-28
+
 ### Fixed
+
 - do not allow multiple uses of the same key [#63](https://github.com/owncloud/twofactor_totp/pull/63) [#66](https://github.com/owncloud/twofactor_totp/pull/66)
 
 ## [0.5.0] - 2018-09-28
+
 ### Added
+
 - add commands to change verified state of secret [#53](https://github.com/owncloud/twofactor_totp/pull/53)
 - hu_HU translation improved [d3bbe03](https://github.com/owncloud/twofactor_totp/commit/d3bbe03976fae9467ce6197a4d2dff6f05589bf3)
 - is translation improved [1ec5bae](https://github.com/owncloud/twofactor_totp/commit/1ec5baee7007933cc91d73edac58a6f51e0721b4)
@@ -21,23 +30,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - fi_FI translation improved [d8d18b](https://github.com/owncloud/twofactor_totp/commit/d8d18bcab511e12dc380498b74e250ffdf91f370)
 
 ## [0.4.4] - 2018-02-15
+
 ### Added
+
 - Support for php7.2 [#32](https://github.com/owncloud/twofactor_totp/pull/32)
 
 ### Changed
+
 - Enabling the second factor requires a mandatory authentication [#28](https://github.com/owncloud/twofactor_totp/pull/28)
 - Adjusted application display name [#43](https://github.com/owncloud/twofactor_totp/pull/43)
 
 ## 0.4.0 – 2016-08-19
+
 - Cloud ID, product name and URL encoded in QR code label
 - Support for NC11/OC9.1
 
 ## 0.3.0 – 2016-06-09
 
 ### Added
+
 - App is now signed
 
-[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/0.5.1...HEAD
+[0.5.2]: https://github.com/owncloud/twofactor_totp/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/owncloud/twofactor_totp/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/owncloud/twofactor_totp/compare/0.4.4...0.5.0
 [0.4.4]: https://github.com/owncloud/twofactor_totp/compare/0.3...0.4
