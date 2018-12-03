@@ -25,6 +25,7 @@ namespace OCA\TwoFactorTOTP\Provider;
 
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
+use OCP\Authentication\TwoFactorAuth\IDeactivatableByAdmin;
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
@@ -33,7 +34,7 @@ use OCP\IL10N;
 use OCP\IUser;
 use OCP\Template;
 
-class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings {
+class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin {
 
 	/** @var ITotp */
 	private $totp;
@@ -101,4 +102,14 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
 		return new Personal($this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED);
 	}
+
+	/**
+	 * Disable this provider for the given user.
+	 *
+	 * @param IUser $user the user to deactivate this provider for
+	 */
+	public function disableFor(IUser $user) {
+		$this->totp->deleteSecret($user, true);
+	}
+
 }

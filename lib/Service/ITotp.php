@@ -63,7 +63,7 @@ interface ITotp {
 	/**
 	 * @param IUser $user
 	 */
-	public function deleteSecret(IUser $user);
+	public function deleteSecret(IUser $user, bool $byAdmin = false);
 
 	/**
 	 * @param IUser $user

@@ -27,6 +27,7 @@ namespace OCA\TwoFactorTOTP\Service;
 use Base32\Base32;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
+use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
 use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -101,7 +102,7 @@ class Totp implements ITotp {
 		return true;
 	}
 
-	public function deleteSecret(IUser $user) {
+	public function deleteSecret(IUser $user, bool $byAdmin = false) {
 		try {
 			// TODO: execute DELETE sql in mapper instead
 			$dbSecret = $this->secretMapper->getSecret($user);
@@ -110,7 +111,11 @@ class Totp implements ITotp {
 			// Ignore
 		}
 
-		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
+		if ($byAdmin) {
+			$this->eventDispatcher->dispatch(DisabledByAdmin::class, new DisabledByAdmin($user));
+		} else {
+			$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
+		}
 	}
 
 	public function validateSecret(IUser $user, $key): bool {
