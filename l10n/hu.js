@@ -6,10 +6,10 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (Hitelesítő app)",
     "Authenticate with a TOTP app" : "Hitelesítés TOTP alkalmazással",
     "Two Factor TOTP Provider" : "Kétlépcsős TOTP Szolgáltató",
+    "Authentication code" : "Azonosítási kód",
     "Could not enable TOTP" : "TOTP nem engedélyezhető",
     "Could not verify your key. Please try again" : "A kulcs nem ellenőrizhető. Próbálja meg újra.",
     "Get the authentication code from the two-factor authentication app on your device." : "Szerezd meg a kétfaktoros azonosítási alkalmazásodból a kódot az eszközödről.",
-    "Authentication code" : "Azonosítási kód",
     "Submit" : "Küldés"
 },
 "nplurals=2; plural=(n != 1);");

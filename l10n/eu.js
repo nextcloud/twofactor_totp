@@ -6,9 +6,9 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (autentifikazio app-a)",
     "Authenticate with a TOTP app" : "TOTP app-arekin izena eman",
     "Two Factor TOTP Provider" : "Bi faktoreen TOTP hornitzailea",
+    "Authentication code" : "Autentifikazio kodea",
     "Could not verify your key. Please try again" : "Ezin da zure gakoa ziurtatu. Saia zaitez berriz mesedez",
     "Get the authentication code from the two-factor authentication app on your device." : "Zure gailuko bi faktoreetako autentikazio app-tik autentikazio kodea lortu.",
-    "Authentication code" : "Autentifikazio kodea",
     "Submit" : "Onartu"
 },
 "nplurals=2; plural=(n != 1);");

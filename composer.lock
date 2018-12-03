@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f72e73012124abfc2913130ad27677a",
+    "content-hash": "9951458615cee76364fae01a3cff6ccb",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -167,16 +167,16 @@
         },
         {
             "name": "christophwurst/nextcloud",
-            "version": "dev-master",
+            "version": "dev-stable15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "4d3a1b276ab27ec30796e39b9f9631aff400ca48"
+                "reference": "b9945622a4e5524f5b6bf6d651f94ff7d4d8f8d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/4d3a1b276ab27ec30796e39b9f9631aff400ca48",
-                "reference": "4d3a1b276ab27ec30796e39b9f9631aff400ca48",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/b9945622a4e5524f5b6bf6d651f94ff7d4d8f8d9",
+                "reference": "b9945622a4e5524f5b6bf6d651f94ff7d4d8f8d9",
                 "shasum": ""
             },
             "require": {
@@ -199,7 +199,7 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2018-11-02T16:17:21+00:00"
+            "time": "2018-11-16T08:23:46+00:00"
         },
         {
             "name": "endroid/qr-code",

@@ -6,9 +6,9 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (aplicación de autenticador)",
     "Authenticate with a TOTP app" : "Autenticar con una aplicación TOTP",
     "Two Factor TOTP Provider" : "Proveedor TOTP de Dos-Factores",
+    "Authentication code" : "Código de autenticación",
     "Could not verify your key. Please try again" : "No fue posible verificar tu llave. Por favor vuelve a intentarlo",
     "Get the authentication code from the two-factor authentication app on your device." : "Obten el código de autenticación de la aplicación de autenticación de dos factores en tu dispositivo.",
-    "Authentication code" : "Código de autenticación",
     "Submit" : "Enviar"
 },
 "nplurals=2; plural=(n != 1);");

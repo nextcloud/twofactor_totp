@@ -6,11 +6,15 @@
     "Two Factor TOTP Provider" : "Kaksivaiheisen TOTP:n tarjoaja",
     "TOTP two-factor provider" : "TOTP-kaksivaiheisuuden tarjoaja",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Kaksivaiheisen tunnistautumisen tarjoaja TOTP:ille (RFC 6238)",
+    "Enable TOTP" : "Käytä TOTP:tä",
+    "Your new TOTP secret is:" : "Uusi TOTP-salaisuutesi on:",
     "For quick setup, scan this QR code with your TOTP app:" : "Skannaa tämä QR-koodi TOTP-sovelluksellasi asetusten nopeaa määritystä varten:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Kun olet määrittänyt sovelluksen, kirjoita testikoodi alle varmistaaksesi että kaikki toimii kunnolla:",
+    "Authentication code" : "Tunnistautumiskoodi",
+    "Verify" : "Vahvista",
     "Could not enable TOTP" : "TOTP:ia ei voitu ottaa käyttöön",
     "Could not verify your key. Please try again" : "Koodin tarkastus epäonnistui. Yritä uudelleen.",
-    "Get the authentication code from the two-factor authentication app on your device." : "Hanki vahvistuskoodi laitteesi 2-vaiheisen tunnistautumisen sovelluksesta.",
-    "Authentication code" : "Vahvistuskoodi",
+    "Get the authentication code from the two-factor authentication app on your device." : "Hanki tunnistautumiskoodi laitteesi 2-vaiheisen tunnistautumisen sovelluksesta.",
     "Submit" : "Lähetä"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

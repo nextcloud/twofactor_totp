@@ -8,10 +8,10 @@ OC.L10N.register(
     "Two Factor TOTP Provider" : "Two Factor TOTP Provider",
     "TOTP two-factor provider" : "TOTP two-factor provider",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "A Two-Factor-Auth Provider for TOTP (RFC 6238)",
+    "Authentication code" : "Authentication code",
     "Could not enable TOTP" : "Could not enable TOTP",
     "Could not verify your key. Please try again" : "Could not verify your key. Please try again",
     "Get the authentication code from the two-factor authentication app on your device." : "Get the authentication code from the two-factor authentication app on your device.",
-    "Authentication code" : "Authentication code",
     "Submit" : "Submit"
 },
 "nplurals=2; plural=(n != 1);");

@@ -8,10 +8,10 @@ OC.L10N.register(
     "Two Factor TOTP Provider" : "二次TOTP验证提供者",
     "TOTP two-factor provider" : "TOTP两步认证",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "一个 TOTP (RFC 6238) 两步验证提供者",
+    "Authentication code" : "验证码",
     "Could not enable TOTP" : "无法启用TOTP",
     "Could not verify your key. Please try again" : "无法验证您的密钥. 请再次尝试",
     "Get the authentication code from the two-factor authentication app on your device." : "从您设备上的两步验证应用获取验证码",
-    "Authentication code" : "验证码",
     "Submit" : "提交"
 },
 "nplurals=1; plural=0;");
