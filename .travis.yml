@@ -5,6 +5,7 @@ php:
   - 7
   - 7.1
   - 7.2
+  - 7.3
 
 addons:
   apt:
@@ -42,8 +43,8 @@ cache:
 before_install:
   - php --info
 
-  # XDebug is only needed if we report coverage -> speeds up other builds
-  - if [[ "$PHP_COVERAGE" = "FALSE" ]]; then phpenv config-rm xdebug.ini; fi
+  # XDebug is only needed if we report coverage -> speeds up other builds (7.3 has no xdebug yet)
+  - if [[ "$PHP_COVERAGE" = "FALSE" ]]; then phpenv config-rm xdebug.ini || true; fi
 
   # Set up DB
   - if [[ "$DB" == 'pgsql' ]]; then createuser -U travis -s nc_autotest; fi
