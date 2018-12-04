@@ -65,6 +65,7 @@ class ProviderTest extends TestCase {
 		return [
 				['totp_enabled_subject'],
 				['totp_disabled_subject'],
+				['totp_disabled_by_admin'],
 		];
 	}
 

@@ -113,4 +113,13 @@ class TotpProviderTest extends TestCase {
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testDeactivate() {
+		$user = $this->createMock(IUser::class);
+		$this->totp->expects($this->once())
+			->method('deleteSecret')
+			->with($user);
+
+		$this->provider->disableFor($user);
+	}
+
 }
