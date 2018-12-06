@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Hesabınız için TOTP iki aşamalı kimlik doğrulamasını etkinleştirdiniz",
     "You disabled TOTP two-factor authentication for your account" : "Hesabınız için TOTP iki aşamalı kimlik doğrulamasını devre dışı bıraktınız",
+    "TOTP two-factor authentication disabled by an admin" : "TOTP iki aşamalı kimlik doğrulaması yönetici tarafından devre dışı bırakılmış",
     "TOTP (Authenticator app)" : "TOTP (Kimlik Doğrulama Uygulaması)",
     "Authenticate with a TOTP app" : "TOTP uygulamasıyla kimlik doğrulama",
     "Two Factor TOTP Provider" : "İki Aşamalı Kimlik Doğrulama TOTP Hizmeti Sağlayıcısı",
