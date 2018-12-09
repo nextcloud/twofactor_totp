@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Je hebt TOTP twee-factor authenticatie voor je account ingeschakeld",
     "You disabled TOTP two-factor authentication for your account" : "Je hebt TOTP twee-factor authenticatie voor je account uitgeschakeld",
+    "TOTP two-factor authentication disabled by an admin" : "TOTP tweefactor authenticatie is uitgeschakeld door een beheerder",
     "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
     "Authenticate with a TOTP app" : "Authenticeren met een TOTP app",
     "Two Factor TOTP Provider" : "Twee-factor TOTP leverancier",
