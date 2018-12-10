@@ -22,6 +22,7 @@ exclude = [
 	"src",
 	"tests",
 	"vendor/bin",
+	"vendor/endroid/qr-code/assets",
 ]
 
 before_cmds = [
