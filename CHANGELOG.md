@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.1.0 – 2018-12-12
+### Added
+- Ability to disable provider via `occ twofactor:disable <uid> totp`
+- Support for Nextcloud 16
+- Support for php 7.3
+- New and updated translations
+### Fixed
+- Password confirmation on IE and other outdated browsers
+- Removed unused assets in release tarball
+
 ## 2.0.1 – 2018-11-19
 ### Fixed
 - Handle/log rejected password confirmation
