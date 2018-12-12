@@ -19,7 +19,7 @@
     "nextcloud-password-confirmation": "^0.4.1",
     "nextcloud-server": "^0.15.9",
     "nextcloud-vue": "^0.4.6",
-    "vue": "^2.5.20",
+    "vue": "^2.5.21",
     "vuex": "^3.0.1"
   },
   "browserslist": [
