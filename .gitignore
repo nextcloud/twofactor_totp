@@ -1,10 +1,15 @@
 composer.phar
 
 build/
+
+# Composer
 vendor/
 vendor-bin/**/vendor
 vendor-bin/**/composer.lock
 .php_cs.cache
+
+# Tests - auto-generated files
+/tests/acceptance/output*
 tests/output
 
 # Ignore NetBeans project

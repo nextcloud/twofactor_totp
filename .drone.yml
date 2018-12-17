@@ -6,7 +6,7 @@ branches:
 - master
 
 pipeline:
-  install-server:
+  install-core:
     image: owncloudci/core
     pull: true
     version: ${OC_VERSION}
@@ -17,7 +17,7 @@ pipeline:
     db_password: owncloud
     when:
       matrix:
-        NEED_SERVER: true
+        NEED_CORE: true
 
   owncloud-log:
     image: owncloud/ubuntu:16.04
@@ -53,7 +53,7 @@ pipeline:
     - chown www-data /var/www/owncloud -R
     when:
       matrix:
-        NEED_INSTALL_APP: true
+        NEED_SERVER: true
 
   owncloud-coding-standard:
     image: owncloudci/php:${PHP_VERSION}
@@ -68,7 +68,6 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
-    - PHP_VERSION=${PHP_VERSION}
     - COVERAGE=${COVERAGE}
     commands:
     - if [ -z "${COVERAGE}" ]; then make test-php-unit; fi
@@ -76,6 +75,24 @@ pipeline:
     when:
       matrix:
         TEST_SUITE: phpunit
+
+  phan:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    commands:
+    - make test-php-phan
+    when:
+      matrix:
+        TEST_SUITE: phan
+
+  phpstan:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    commands:
+    - make test-php-phpstan
+    when:
+      matrix:
+        TEST_SUITE: phpstan
 
   codecov:
     image: plugins/codecov:2
@@ -137,47 +154,50 @@ matrix:
   - PHP_VERSION: 7.2
     TEST_SUITE: owncloud-coding-standard
 
+  - PHP_VERSION: 5.6
+    TEST_SUITE: owncloud-coding-standard
+
   # Unit Tests master
   - PHP_VERSION: 7.1
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
     DB_TYPE: sqlite
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.2
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
     DB_TYPE: sqlite
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.1
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
     DB_TYPE: mysql
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.2
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
     DB_TYPE: mysql
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.1
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
     DB_TYPE: pgsql
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.2
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
     DB_TYPE: pgsql
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
     COVERAGE: true
 
@@ -186,26 +206,26 @@ matrix:
     OC_VERSION: daily-stable10-qa
     TEST_SUITE: phpunit
     DB_TYPE: sqlite
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.0
     OC_VERSION: daily-stable10-qa
     TEST_SUITE: phpunit
     DB_TYPE: sqlite
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.1
     OC_VERSION: daily-stable10-qa
     TEST_SUITE: phpunit
     DB_TYPE: sqlite
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.2
     OC_VERSION: daily-stable10-qa
     TEST_SUITE: phpunit
     DB_TYPE: sqlite
-    NEED_SERVER: true
+    NEED_CORE: true
     NEED_INSTALL_APP: true

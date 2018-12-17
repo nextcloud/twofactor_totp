@@ -1,17 +1,15 @@
 {
   "name": "owncloud/twofactor_totp",
-  "config" : {
+  "config": {
     "platform": {
       "php": "5.6.37"
     }
   },
   "require": {
-		"christian-riesen/otp": "1.*",
+    "christian-riesen/otp": "1.*",
     "endroid/qr-code": "2.5.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.7",
-    "jakub-onderka/php-parallel-lint": "^1.0",
     "bamarni/composer-bin-plugin": "^1.2"
   },
   "extra": {
