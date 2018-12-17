@@ -23,9 +23,6 @@
 	<two-factor-providers>
 		<provider>OCA\TwoFactorTOTP\Provider\TotpProvider</provider>
 	</two-factor-providers>
-	<settings>
-		<personal>OCA\TwoFactorTOTP\Settings\Personal</personal>
-	</settings>
 	<activity>
 		<settings>
 			<setting>OCA\TwoFactorTOTP\Activity\Setting</setting>
