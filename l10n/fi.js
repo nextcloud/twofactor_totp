@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Otit TOTP-tunnistautumisen käyttöön tililläsi",
     "You disabled TOTP two-factor authentication for your account" : "Poistit TOTP-tunnistautumisen käytöstä tililläsi",
+    "TOTP two-factor authentication disabled by an admin" : "TOTP-kaksivaiheinen tunnistautuminen on poistettu käytöstä ylläpidon toimesta",
     "TOTP (Authenticator app)" : "TOTP (Authenticator-sovellus)",
     "Authenticate with a TOTP app" : "Tunnistaudu TOTP-sovelluksella",
     "Two Factor TOTP Provider" : "Kaksivaiheisen TOTP:n tarjoaja",
