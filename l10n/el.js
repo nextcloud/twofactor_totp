@@ -7,6 +7,7 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "Πιστοποίηση με μια TOTP εφαρμογή",
     "Two Factor TOTP Provider" : "Πάροχος TOTP Δύο Παραγόντων",
     "Authentication code" : "Κώδικας πιστοποίησης",
+    "Verify" : "Επαλήθευση",
     "Could not enable TOTP" : "Αδυναμία ενεργοποίησης TOTP",
     "Could not verify your key. Please try again" : "Αδυναμία επαλήθευσης κλειδιού. Παρακαλούμε προσπαθήστε ξανά",
     "Get the authentication code from the two-factor authentication app on your device." : "Παραλάβετε τον κωδικό πιστοποίησης από την εφαρμογή δύο-παραγόντων στην συσκευή σας.",
