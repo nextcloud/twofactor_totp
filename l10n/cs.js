@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Pro svůj účet jste povolil(a) dvoufázové ověření pomocí TOTP",
     "You disabled TOTP two-factor authentication for your account" : "Pro váš účet jste zakázali dvoufázové ověřování pomocí TOTP",
+    "TOTP two-factor authentication disabled by an admin" : "TOTP dvoufázové přihlašování vypnuto administrátorem",
     "TOTP (Authenticator app)" : "TOTP (Autentizační aplikace)",
     "Authenticate with a TOTP app" : "Přihlaste se pomocí TOTP aplikace",
     "Two Factor TOTP Provider" : "TOTP poskytovatel dvoufázových kódů",
