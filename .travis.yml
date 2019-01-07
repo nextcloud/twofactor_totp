@@ -2,7 +2,6 @@ sudo: required
 dist: trusty
 language: php
 php:
-  - 7
   - 7.1
   - 7.2
   - 7.3
@@ -97,7 +96,7 @@ script:
 
 matrix:
   include:
-    - php: 7
+    - php: 7.1
       env: "DB=pgsql PHP_COVERAGE=TRUE"
     - php: 7.2
       env: "DB=mysql"
@@ -109,7 +108,7 @@ matrix:
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
     - php: 7.0
       env: "DB=mysql CORE_BRANCH=stable15"
-    - php: 7.2
-      env: "DB=mysql CORE_BRANCH=v15.0.0RC1"
+    - php: 7.1
+      env: "DB=mysql CORE_BRANCH=v15.0.0"
   fast_finish: true
 
