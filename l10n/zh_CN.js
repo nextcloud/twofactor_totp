@@ -8,7 +8,7 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "使用 TOTP 应用验证身份",
     "Two Factor TOTP Provider" : "二次TOTP验证提供者",
     "TOTP two-factor provider" : "TOTP两步认证",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "一个 TOTP (RFC 6238) 两步验证提供者",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "一个 TOTP（RFC 6238）两步验证提供者",
     "Enable TOTP" : "启用 TOTP",
     "Your new TOTP secret is:" : "您的新 TOTP 密钥：",
     "For quick setup, scan this QR code with your TOTP app:" : "使用您的 TOTP 应用扫描二维码以快速安装：",
@@ -16,7 +16,7 @@ OC.L10N.register(
     "Authentication code" : "验证码",
     "Verify" : "验证",
     "Could not enable TOTP" : "无法启用TOTP",
-    "Could not verify your key. Please try again" : "无法验证您的密钥. 请再次尝试",
+    "Could not verify your key. Please try again" : "无法验证您的密钥。请再次尝试",
     "Get the authentication code from the two-factor authentication app on your device." : "从您设备上的两步验证应用获取验证码",
     "Submit" : "提交"
 },
