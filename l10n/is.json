@@ -1,6 +1,7 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Þú virkjaðir TOTP tveggja-þrepa auðkenningu fyrir aðganginn þinn",
     "You disabled TOTP two-factor authentication for your account" : "Þú gerðir TOTP tveggja-þrepa auðkenningu fyrir aðganginn þinn óvirka",
+    "TOTP two-factor authentication disabled by an admin" : "TOTP tveggja-þátta auðkenning er gerð óvirk af kerfisstjóra",
     "TOTP (Authenticator app)" : "TOTP (auðkenningarforrit)",
     "Authenticate with a TOTP app" : "Auðkenna með TOTP-forriti",
     "Two Factor TOTP Provider" : "Veituaðili tveggja-þrepa TOTP-vottunar",
