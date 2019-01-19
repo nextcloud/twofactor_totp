@@ -20,7 +20,9 @@
  */
 
 use OCA\TwoFactor_Totp\AppInfo\Application;
+use OCA\TwoFactor_Totp\Hooks;
 
 include_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Application();
+$app->getContainer()->query(Hooks::class)->register();
