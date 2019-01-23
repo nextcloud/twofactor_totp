@@ -29,14 +29,15 @@ endif
 # dependency folders (leave empty if not required)
 composer_deps=
 composer_dev_deps=
+acceptance_test_deps=vendor-bin/behat/vendor
 nodejs_deps=
 bower_deps=
-acceptance_test_deps=
 
 # bin file definitions
 PHPUNIT=php -d zend.enable_gc=0  "$(PWD)/../../lib/composer/bin/phpunit"
 PHPUNITDBG=phpdbg -qrr -d memory_limit=4096M -d zend.enable_gc=0 "$(PWD)/../../lib/composer/bin/phpunit"
 PHP_CS_FIXER=php -d zend.enable_gc=0 vendor-bin/owncloud-codestyle/vendor/bin/php-cs-fixer
+PHP_CODESNIFFER=vendor-bin/php_codesniffer/vendor/bin/phpcs
 PHAN=php -d zend.enable_gc=0 vendor-bin/phan/vendor/bin/phan
 PHPSTAN=php -d zend.enable_gc=0 vendor-bin/phpstan/vendor/bin/phpstan
 BEHAT_BIN=vendor-bin/behat/vendor/bin/behat
@@ -60,8 +61,9 @@ test-php-unit-dbg: vendor
 
 .PHONY: test-php-style
 test-php-style: ## Run php-cs-fixer and check owncloud code-style
-test-php-style: vendor-bin/owncloud-codestyle/vendor
+test-php-style: vendor-bin/owncloud-codestyle/vendor vendor-bin/php_codesniffer/vendor
 	$(PHP_CS_FIXER) fix -v --diff --diff-format udiff --allow-risky yes --dry-run
+	$(PHP_CODESNIFFER) --runtime-set ignore_warnings_on_exit --standard=phpcs.xml tests/acceptance
 
 .PHONY: test-php-style-fix
 test-php-style-fix: ## Run php-cs-fixer and fix code style issues
@@ -80,17 +82,17 @@ test-php-phpstan: vendor-bin/phpstan/vendor
 
 .PHONY: test-acceptance-api
 test-acceptance-api: ## Run API acceptance tests
-test-acceptance-api: vendor-bin/behat/vendor
+test-acceptance-api: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type api
 
 .PHONY: test-acceptance-cli
 test-acceptance-cli: ## Run CLI acceptance tests
-test-acceptance-cli: vendor-bin/behat/vendor
+test-acceptance-cli: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type cli
 
 .PHONY: test-acceptance-webui
 test-acceptance-webui: ## Run webUI acceptance tests
-test-acceptance-webui: vendor-bin/behat/vendor
+test-acceptance-webui: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI
 
 all: appstore
@@ -160,6 +162,12 @@ vendor-bin/owncloud-codestyle/vendor: vendor/bamarni/composer-bin-plugin vendor-
 
 vendor-bin/owncloud-codestyle/composer.lock: vendor-bin/owncloud-codestyle/composer.json
 	@echo owncloud-codestyle composer.lock is not up to date.
+
+vendor-bin/php_codesniffer/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/php_codesniffer/composer.lock
+	composer bin php_codesniffer install --no-progress
+
+vendor-bin/php_codesniffer/composer.lock: vendor-bin/php_codesniffer/composer.json
+	@echo php_codesniffer composer.lock is not up to date.
 
 vendor-bin/phan/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/phan/composer.lock
 	composer bin phan install --no-progress
