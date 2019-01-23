@@ -78,6 +78,18 @@ pipeline:
       matrix:
         TEST_SUITE: phpunit
 
+  api-acceptance-tests:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - TEST_SERVER_URL=http://owncloud
+      - BEHAT_SUITE=${BEHAT_SUITE}
+    commands:
+      - make test-acceptance-api
+    when:
+      matrix:
+        TEST_SUITE: api-acceptance
+
   cli-acceptance-tests:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
@@ -89,6 +101,22 @@ pipeline:
     when:
       matrix:
         TEST_SUITE: cli-acceptance
+
+  webui-acceptance-tests:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - BROWSER=chrome #chrome or firefox
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - TEST_SERVER_URL=http://owncloud
+      - PLATFORM=Linux
+      - BEHAT_SUITE=${BEHAT_SUITE}
+    commands:
+      - make test-acceptance-webui
+    when:
+      matrix:
+        TEST_SUITE: web-acceptance
 
   phan:
     image: owncloudci/php:${PHP_VERSION}
@@ -161,6 +189,13 @@ services:
     when:
       matrix:
         NEED_SERVER: true
+
+  selenium:
+    image: selenium/standalone-chrome-debug:latest
+    pull: true
+    when:
+      matrix:
+        TEST_SUITE: web-acceptance
 
   email:
     image: mailhog/mailhog
@@ -254,7 +289,7 @@ matrix:
   - PHP_VERSION: 7.1
     DB_TYPE: mysql
     OC_VERSION: daily-master-qa
-    TEST_SUITE: cli-acceptance
+    TEST_SUITE: web-acceptance
     BEHAT_SUITE: cliTwoFactorTOTP
     DB_NAME: oc_db
     DB_USERNAME: admin
@@ -266,7 +301,7 @@ matrix:
   - PHP_VERSION: 7.0
     DB_TYPE: mysql
     OC_VERSION: daily-stable10-qa
-    TEST_SUITE: cli-acceptance
+    TEST_SUITE: web-acceptance
     BEHAT_SUITE: cliTwoFactorTOTP
     DB_NAME: oc_db
     DB_USERNAME: admin
