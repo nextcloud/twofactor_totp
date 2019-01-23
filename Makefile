@@ -29,9 +29,9 @@ endif
 # dependency folders (leave empty if not required)
 composer_deps=
 composer_dev_deps=
+acceptance_test_deps=vendor-bin/behat/vendor
 nodejs_deps=
 bower_deps=
-acceptance_test_deps=
 
 # bin file definitions
 PHPUNIT=php -d zend.enable_gc=0  "$(PWD)/../../lib/composer/bin/phpunit"
@@ -80,17 +80,17 @@ test-php-phpstan: vendor-bin/phpstan/vendor
 
 .PHONY: test-acceptance-api
 test-acceptance-api: ## Run API acceptance tests
-test-acceptance-api: vendor-bin/behat/vendor
+test-acceptance-api: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type api
 
 .PHONY: test-acceptance-cli
 test-acceptance-cli: ## Run CLI acceptance tests
-test-acceptance-cli: vendor-bin/behat/vendor
+test-acceptance-cli: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type cli
 
 .PHONY: test-acceptance-webui
 test-acceptance-webui: ## Run webUI acceptance tests
-test-acceptance-webui: vendor-bin/behat/vendor
+test-acceptance-webui: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI
 
 all: appstore
