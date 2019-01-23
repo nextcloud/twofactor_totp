@@ -34,7 +34,7 @@ pipeline:
     pull: true
     commands:
     - cd /var/www/owncloud/apps/twofactor_totp
-    - make
+    - make vendor
     - cd /var/www/owncloud/
     - php occ a:l
     - php occ a:e twofactor_totp
@@ -51,6 +51,8 @@ pipeline:
     pull: true
     commands:
     - chown www-data /var/www/owncloud -R
+    - chmod 777 /var/www/owncloud/tests/acceptance/filesForUpload -R
+    - chmod +x /var/www/owncloud/tests/acceptance/run.sh
     when:
       matrix:
         NEED_SERVER: true
@@ -75,6 +77,46 @@ pipeline:
     when:
       matrix:
         TEST_SUITE: phpunit
+
+  api-acceptance-tests:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - TEST_SERVER_URL=http://owncloud
+      - BEHAT_SUITE=${BEHAT_SUITE}
+    commands:
+      - make test-acceptance-api
+    when:
+      matrix:
+        TEST_SUITE: api-acceptance
+
+  cli-acceptance-tests:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - TEST_SERVER_URL=http://owncloud
+      - BEHAT_SUITE=${BEHAT_SUITE}
+    commands:
+      - make test-acceptance-cli
+    when:
+      matrix:
+        TEST_SUITE: cli-acceptance
+
+  webui-acceptance-tests:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - BROWSER=chrome #chrome or firefox
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - TEST_SERVER_URL=http://owncloud
+      - PLATFORM=Linux
+      - BEHAT_SUITE=${BEHAT_SUITE}
+    commands:
+      - make test-acceptance-webui
+    when:
+      matrix:
+        TEST_SUITE: web-acceptance
 
   phan:
     image: owncloudci/php:${PHP_VERSION}
@@ -147,6 +189,20 @@ services:
     when:
       matrix:
         NEED_SERVER: true
+
+  selenium:
+    image: selenium/standalone-chrome-debug:latest
+    pull: true
+    when:
+      matrix:
+        TEST_SUITE: web-acceptance
+
+  email:
+    image: mailhog/mailhog
+    pull: true
+    when:
+      matrix:
+        USE_EMAIL: true
 
 matrix:
   include:
@@ -229,3 +285,28 @@ matrix:
     DB_TYPE: sqlite
     NEED_CORE: true
     NEED_INSTALL_APP: true
+
+  - PHP_VERSION: 7.1
+    DB_TYPE: mysql
+    OC_VERSION: daily-master-qa
+    TEST_SUITE: web-acceptance
+    BEHAT_SUITE: cliTwoFactorTOTP
+    DB_NAME: oc_db
+    DB_USERNAME: admin
+    DB_PASSWORD: secret
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+    NEED_SERVER: true
+
+  - PHP_VERSION: 7.0
+    DB_TYPE: mysql
+    OC_VERSION: daily-stable10-qa
+    TEST_SUITE: web-acceptance
+    BEHAT_SUITE: cliTwoFactorTOTP
+    DB_NAME: oc_db
+    DB_USERNAME: admin
+    DB_PASSWORD: secret
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+    NEED_SERVER: true
+    USE_EMAIL: true
