@@ -1,11 +1,11 @@
 default:
   autoload:
-    - %paths.base%/../features/bootstrap
+    '': '%paths.base%/../features/bootstrap'
 
   suites:
     cliTwoFactorTOTP:
       paths:
-        - %paths.base%/../features/cliTwoFactorTOTP
+        - '%paths.base%/../features/cliTwoFactorTOTP'
       contexts:
         - TwoFactorTOTPContext:
         - FeatureContext: &common_feature_context_params
@@ -22,4 +22,4 @@ default:
   extensions:
     jarnaiz\JUnitFormatter\JUnitFormatterExtension:
       filename: report.xml
-      outputDir: %paths.base%/../output/
+      outputDir: '%paths.base%/../output/'

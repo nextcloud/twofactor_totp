@@ -31,6 +31,7 @@ composer_deps=
 composer_dev_deps=
 nodejs_deps=
 bower_deps=
+acceptance_test_deps=
 
 # bin file definitions
 PHPUNIT=php -d zend.enable_gc=0  "$(PWD)/../../lib/composer/bin/phpunit"
@@ -38,6 +39,7 @@ PHPUNITDBG=phpdbg -qrr -d memory_limit=4096M -d zend.enable_gc=0 "$(PWD)/../../l
 PHP_CS_FIXER=php -d zend.enable_gc=0 vendor-bin/owncloud-codestyle/vendor/bin/php-cs-fixer
 PHAN=php -d zend.enable_gc=0 vendor-bin/phan/vendor/bin/phan
 PHPSTAN=php -d zend.enable_gc=0 vendor-bin/phpstan/vendor/bin/phpstan
+BEHAT_BIN=vendor-bin/behat/vendor/bin/behat
 
 .DEFAULT_GOAL := help
 
@@ -78,24 +80,25 @@ test-php-phpstan: vendor-bin/phpstan/vendor
 
 .PHONY: test-acceptance-api
 test-acceptance-api: ## Run API acceptance tests
-test-acceptance-api:
-	../../tests/acceptance/run.sh --remote --type api
+test-acceptance-api: vendor-bin/behat/vendor
+	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type api
 
 .PHONY: test-acceptance-cli
 test-acceptance-cli: ## Run CLI acceptance tests
-test-acceptance-cli:
-	../../tests/acceptance/run.sh --remote --type cli
+test-acceptance-cli: vendor-bin/behat/vendor
+	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type cli
 
 .PHONY: test-acceptance-webui
 test-acceptance-webui: ## Run webUI acceptance tests
-test-acceptance-webui:
-	../../tests/acceptance/run.sh --remote --type webUI
+test-acceptance-webui: vendor-bin/behat/vendor
+	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI
 
 all: appstore
 
 clean: ## Clean build
 	rm -rf $(build_dir)
 	rm -rf vendor
+	rm -Rf vendor-bin/**/vendor vendor-bin/**/composer.lock
 
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php
@@ -169,3 +172,9 @@ vendor-bin/phpstan/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/phpstan
 
 vendor-bin/phpstan/composer.lock: vendor-bin/phpstan/composer.json
 	@echo phpstan composer.lock is not up to date.
+
+vendor-bin/behat/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/behat/composer.lock
+	composer bin behat install --no-progress
+
+vendor-bin/behat/composer.lock: vendor-bin/behat/composer.json
+	@echo behat composer.lock is not up to date.
