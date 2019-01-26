@@ -12,6 +12,7 @@ OC.L10N.register(
     "Enable TOTP" : "Включить TOTP",
     "Your new TOTP secret is:" : "Ваша новая TOTP секретное слово:",
     "For quick setup, scan this QR code with your TOTP app:" : "Для быстрой настройки, отсканируйте QR-код с помощью приложения TOTP:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "После настройки приложения введите проверочный код в поле ниже:",
     "Authentication code" : "Код аутентификации",
     "Verify" : "Подтвердить",
     "Could not enable TOTP" : "Не удалось включить TOTP",
