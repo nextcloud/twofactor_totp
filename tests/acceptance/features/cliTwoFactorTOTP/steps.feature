@@ -121,7 +121,6 @@ Feature: Testing Two factor TOTP
     And user "user8" should be able to access a skeleton file
     And user "new-user" should be able to access a skeleton file
 
-  @skip @issue-89
   Scenario: Deleted user having TOTP enabled recreated should not ask for password
     Given user "user8" has logged in using the webUI
     And the user has browsed to the personal security settings page
