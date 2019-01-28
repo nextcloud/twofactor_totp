@@ -65,4 +65,14 @@ class TotpSecretMapper extends Mapper {
 			->set('verified', $qb->createNamedParameter($status, IQueryBuilder::PARAM_BOOL))
 			->execute();
 	}
+
+	/**
+	 * @param string $uid
+	 */
+	public function deleteSecretsByUserId($uid) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->delete('twofactor_totp_secrets')
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($uid)))
+			->execute();
+	}
 }
