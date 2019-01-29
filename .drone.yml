@@ -310,3 +310,28 @@ matrix:
     NEED_INSTALL_APP: true
     NEED_SERVER: true
     USE_EMAIL: true
+
+  - PHP_VERSION: 7.1
+    DB_TYPE: mysql
+    OC_VERSION: daily-master-qa
+    TEST_SUITE: web-acceptance
+    BEHAT_SUITE: webUITwoFactorTOTP
+    DB_NAME: oc_db
+    DB_USERNAME: admin
+    DB_PASSWORD: secret
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+    NEED_SERVER: true
+
+  - PHP_VERSION: 7.0
+    DB_TYPE: mysql
+    OC_VERSION: daily-stable10-qa
+    TEST_SUITE: web-acceptance
+    BEHAT_SUITE: webUITwoFactorTOTP
+    DB_NAME: oc_db
+    DB_USERNAME: admin
+    DB_PASSWORD: secret
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+    NEED_SERVER: true
+    USE_EMAIL: true
