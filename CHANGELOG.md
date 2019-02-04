@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [0.5.3]
+
+### Fixed
+
+- Disable TOTP after user deletion - [#89](https://github.com/owncloud/twofactor_totp/issues/89)
 
 ## [0.5.2] - 2018-12-03
 
@@ -53,7 +57,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - App is now signed
 
-[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/0.5.2...master
+[0.5.3]: https://github.com/owncloud/twofactor_totp/compare/0.5.2...0.5.3
 [0.5.2]: https://github.com/owncloud/twofactor_totp/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/owncloud/twofactor_totp/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/owncloud/twofactor_totp/compare/0.4.4...0.5.0
