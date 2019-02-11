@@ -19,6 +19,17 @@ default:
         - WebUIPersonalSecuritySettingsContext:
         - WebUILoginContext:
 
+    webUITwoFactorTOTP:
+      paths:
+        - '%paths.base%/../features/webUITwoFactorTOTP'
+      contexts:
+        - TwoFactorTOTPContext:
+        - FeatureContext: *common_feature_context_params
+        - OccContext:
+        - WebUIGeneralContext:
+        - WebUIPersonalSecuritySettingsContext:
+        - WebUILoginContext:
+
   extensions:
     jarnaiz\JUnitFormatter\JUnitFormatterExtension:
       filename: report.xml
