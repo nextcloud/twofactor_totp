@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.1.1 – 2019-02-12
+### Fixed
+- IE11 compatibility
+- Updated vulnerable `lodash` dependency
+- Fixed old settings page registrations causing log spam
+- Packaging of .git directory inside `vendor`
+
 ## 2.1.0 – 2018-12-12
 ### Added
 - Ability to disable provider via `occ twofactor:disable <uid> totp`
