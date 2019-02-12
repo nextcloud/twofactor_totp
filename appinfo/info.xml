@@ -2,7 +2,7 @@
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
 	<id>twofactor_totp</id>
-	<name>Two Factor TOTP Provider</name>
+	<name>Two-Factor TOTP Provider</name>
 	<summary>TOTP two-factor provider</summary>
 	<description>A Two-Factor-Auth Provider for TOTP (RFC 6238)</description>
 	<version>2.1.1</version>
