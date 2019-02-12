@@ -102,17 +102,14 @@ clean: ## Clean build
 	rm -rf vendor
 	rm -Rf vendor-bin/**/vendor vendor-bin/**/composer.lock
 
-composer.phar:
-	curl -sS https://getcomposer.org/installer | php
-
 install-deps: install-composer-deps
 
-install-composer-deps: composer.phar
-	php composer.phar install
+install-composer-deps:
+	php composer install
 
-update-composer: composer.phar
+update-composer:
 	rm -f composer.lock
-	php composer.phar install --prefer-dist
+	php composer install --prefer-dist
 
 dist: clean install-deps
 	make clean
@@ -127,7 +124,6 @@ dist: clean install-deps
         --exclude=CONTRIBUTING.md \
 	--exclude=composer.json \
 	--exclude=composer.lock \
-	--exclude=composer.phar \
 	--exclude=l10n/.tx \
 	--exclude=l10n/no-php \
 	--exclude=Makefile \
