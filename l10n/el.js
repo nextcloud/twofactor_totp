@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Απενεργοποιήσατε την ΤΟΤΡ πιστοποίηση δύο-παραγόντων για το λογαριασμό σας",
     "TOTP (Authenticator app)" : "TOTP (Εφαρμογή πιστοποίησης)",
     "Authenticate with a TOTP app" : "Πιστοποίηση με μια TOTP εφαρμογή",
-    "Two Factor TOTP Provider" : "Πάροχος TOTP Δύο Παραγόντων",
     "Authentication code" : "Κώδικας πιστοποίησης",
     "Verify" : "Επαλήθευση",
     "Could not enable TOTP" : "Αδυναμία ενεργοποίησης TOTP",

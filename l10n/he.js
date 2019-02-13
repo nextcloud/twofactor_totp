@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "השבתת אימות TOTP דו־שלבי לחשבון שלך",
     "TOTP (Authenticator app)" : "TOTP (יישומון אימות)",
     "Authenticate with a TOTP app" : "אימות עם יישום ה- TOTP",
-    "Two Factor TOTP Provider" : "ספק TOTP דו־שלבי",
     "TOTP two-factor provider" : "ספק אימות דו־שלבי TOTP",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "ספק אימות דו־שלבי עבור TOTP‏ (RFC 6238)",
     "Authentication code" : "קוד אימות",

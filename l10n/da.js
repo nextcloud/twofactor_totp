@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Du har deaktiveret two-factor godkendelse til din konto.",
     "TOTP (Authenticator app)" : "TOTP (Gokendelses app)",
     "Authenticate with a TOTP app" : "Godkend med en TOTP app",
-    "Two Factor TOTP Provider" : "Two Factor TOTP udbyder",
     "Authentication code" : "Autorisationskode",
     "Could not verify your key. Please try again" : "Kunne ikke bekræfte din nøgle. Prøv venligst igen",
     "Get the authentication code from the two-factor authentication app on your device." : "Få godkendelses koden fra two-factor godkendelses app på din enhed. ",

@@ -6,7 +6,6 @@ OC.L10N.register(
     "TOTP two-factor authentication disabled by an admin" : "Двухфакторная авторизация TOTP была отключена администратором",
     "TOTP (Authenticator app)" : "TOTP (Приложение авторизации)",
     "Authenticate with a TOTP app" : "Аутентифицируйтесь с помощью TOTP приложения",
-    "Two Factor TOTP Provider" : "Второй фактор — приложение TOTP",
     "TOTP two-factor provider" : "Провайдер двухфакторной аутентификации TOTP",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Провайдер двухфакторной аутентификации для TOTP (RFC 6238)",
     "Enable TOTP" : "Включить TOTP",

@@ -3,7 +3,6 @@
     "You disabled TOTP two-factor authentication for your account" : "Esat atspējojis TOTP divu faktoru autentifikāciju jūsu kontam",
     "TOTP (Authenticator app)" : "TOTP (Autentificētājs programma)",
     "Authenticate with a TOTP app" : "Autentificēt ar TOTP programmu",
-    "Two Factor TOTP Provider" : "Otrā faktora TOTP pakalpojumu sniedzējs",
     "Authentication code" : "Autentifikācijas kods",
     "Could not verify your key. Please try again" : "Nevarēja verificēt tavu atslēgu. Mēģini vēlreiz.",
     "Get the authentication code from the two-factor authentication app on your device." : "Iegūstiet autentifikācijas kodu no divu faktoru autentifikācijas koda autentifikācijas jūsu ierīcē.",

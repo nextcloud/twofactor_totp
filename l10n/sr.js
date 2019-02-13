@@ -6,7 +6,6 @@ OC.L10N.register(
     "TOTP two-factor authentication disabled by an admin" : "Администратор искључио TOTP двофакторску проверу идентитета",
     "TOTP (Authenticator app)" : "TOTP (апликација за проверу идентитета)",
     "Authenticate with a TOTP app" : "Идентификујте се са TOTP апликацијом",
-    "Two Factor TOTP Provider" : "Провајдер двофакторске TOTP",
     "TOTP two-factor provider" : "Двофакторски провајдер за TOTP",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Провајдер двофакторске TOTP (RFC 6238)",
     "Enable TOTP" : "Укључи TOTP",

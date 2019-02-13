@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Du har deaktivert to-trinns bekreftelse for din konto",
     "TOTP (Authenticator app)" : "To-trinns bekreftelse (TOTP)",
     "Authenticate with a TOTP app" : "Autentiser med et TOTP-program",
-    "Two Factor TOTP Provider" : "Tofaktors TOTP-tilbyder",
     "Authentication code" : "Autentiseringskode",
     "Could not enable TOTP" : "Kune ikke aktivere TOTP",
     "Could not verify your key. Please try again" : "Kunne ikke bekrefte din nøkkel. Prøv igjen",

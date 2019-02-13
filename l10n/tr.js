@@ -6,7 +6,6 @@ OC.L10N.register(
     "TOTP two-factor authentication disabled by an admin" : "TOTP iki aşamalı kimlik doğrulaması yönetici tarafından devre dışı bırakılmış",
     "TOTP (Authenticator app)" : "TOTP (Kimlik Doğrulama Uygulaması)",
     "Authenticate with a TOTP app" : "TOTP uygulamasıyla kimlik doğrulama",
-    "Two Factor TOTP Provider" : "İki Aşamalı Kimlik Doğrulama TOTP Hizmeti Sağlayıcısı",
     "TOTP two-factor provider" : "TOTP iki aşamalı kimlik doğrulama hizmeti sağlayıcısı",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP için iki aşamalı kimlik doğrulama hizmeti sağlayıcısı (RFC 6238)",
     "Enable TOTP" : "TOTP kullanılsın",

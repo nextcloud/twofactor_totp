@@ -3,7 +3,6 @@
     "You disabled TOTP two-factor authentication for your account" : "You disabled TOTP two-factor authentication for your account",
     "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
     "Authenticate with a TOTP app" : "Authenticate with a TOTP app",
-    "Two Factor TOTP Provider" : "Two Factor TOTP Provider",
     "TOTP two-factor provider" : "TOTP two-factor provider",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "A Two-Factor-Auth Provider for TOTP (RFC 6238)",
     "Authentication code" : "Authentication code",

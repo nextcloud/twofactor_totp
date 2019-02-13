@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "あなたのアカウントに対するTOTP 2段階認証を無効化しました。",
     "TOTP (Authenticator app)" : "TOTP (認証アプリ)",
     "Authenticate with a TOTP app" : "TOTPアプリで認証する",
-    "Two Factor TOTP Provider" : "TOTP 2要素認証プロバイダー",
     "TOTP two-factor provider" : "TOTP 2要素認証プロバイダー",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP（RFC 6238）の二要素認証プロバイダ",
     "Enable TOTP" : "TOTP有効化",

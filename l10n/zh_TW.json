@@ -4,7 +4,6 @@
     "TOTP two-factor authentication disabled by an admin" : "TOTP兩階段驗證功能被系統管理員停用。",
     "TOTP (Authenticator app)" : "TOTP (驗證應用程式)",
     "Authenticate with a TOTP app" : "使用 TOTP 應用程式驗證身分",
-    "Two Factor TOTP Provider" : "兩階段驗證TOTP碼提供者",
     "TOTP two-factor provider" : "TOTP兩階段驗證供應商",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP兩階段驗證裝置供應商 (RFC 6238)",
     "Enable TOTP" : "啟用TOTP",

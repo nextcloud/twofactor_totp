@@ -6,7 +6,6 @@ OC.L10N.register(
     "TOTP two-factor authentication disabled by an admin" : "TOTP-kaksivaiheinen tunnistautuminen on poistettu käytöstä ylläpidon toimesta",
     "TOTP (Authenticator app)" : "TOTP (Authenticator-sovellus)",
     "Authenticate with a TOTP app" : "Tunnistaudu TOTP-sovelluksella",
-    "Two Factor TOTP Provider" : "Kaksivaiheisen TOTP:n tarjoaja",
     "TOTP two-factor provider" : "TOTP-kaksivaiheisuuden tarjoaja",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Kaksivaiheisen tunnistautumisen tarjoaja TOTP:ille (RFC 6238)",
     "Enable TOTP" : "Käytä TOTP:tä",

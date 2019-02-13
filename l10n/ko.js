@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "내 계정의 TOTP 2단계 인증을 비활성화함",
     "TOTP (Authenticator app)" : "TOTP(인증기 앱)",
     "Authenticate with a TOTP app" : "TOTP 앱으로 인증",
-    "Two Factor TOTP Provider" : "TOTP 2단계 인증 공급자",
     "Authentication code" : "인증 코드",
     "Could not enable TOTP" : "TOTP를 활성화할 수 없음",
     "Could not verify your key. Please try again" : "내 키를 확인할 수 없습니다. 다시 시도하십시오",

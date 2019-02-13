@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Letiltotta a TOTP kétfaktoros hitelesítést a fiókhoz.",
     "TOTP (Authenticator app)" : "TOTP (Hitelesítő app)",
     "Authenticate with a TOTP app" : "Hitelesítés TOTP alkalmazással",
-    "Two Factor TOTP Provider" : "Kétlépcsős TOTP Szolgáltató",
     "Enable TOTP" : "Időalapú egyszeri jelszó (TOTP) engedélyezése",
     "Your new TOTP secret is:" : "Az új időalapú egyszeri titkos jelszava (TOTP):",
     "Authentication code" : "Azonosítási kód",

@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "TOTP bi pausutako autentikazioa desgaitu duzu zure kontuan",
     "TOTP (Authenticator app)" : "TOTP (autentifikazio app-a)",
     "Authenticate with a TOTP app" : "TOTP app-arekin izena eman",
-    "Two Factor TOTP Provider" : "Bi faktoreen TOTP hornitzailea",
     "Authentication code" : "Autentifikazio kodea",
     "Verify" : "Egiaztatu",
     "Could not verify your key. Please try again" : "Ezin da zure gakoa ziurtatu. Saia zaitez berriz mesedez",
