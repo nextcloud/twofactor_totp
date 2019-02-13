@@ -105,11 +105,11 @@ clean: ## Clean build
 install-deps: install-composer-deps
 
 install-composer-deps:
-	php composer install
+	composer install
 
 update-composer:
 	rm -f composer.lock
-	php composer install --prefer-dist
+	composer install --prefer-dist
 
 dist: clean install-deps
 	make clean
@@ -121,7 +121,7 @@ dist: clean install-deps
 	--exclude=.gitignore \
 	--exclude=.travis.yml \
 	--exclude=.scrutinizer.yml \
-        --exclude=CONTRIBUTING.md \
+	--exclude=CONTRIBUTING.md \
 	--exclude=composer.json \
 	--exclude=composer.lock \
 	--exclude=l10n/.tx \
