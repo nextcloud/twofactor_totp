@@ -6,6 +6,7 @@ OC.L10N.register(
     "TOTP two-factor authentication disabled by an admin" : "TOTP dvoufázové přihlašování vypnuto administrátorem",
     "TOTP (Authenticator app)" : "TOTP (Autentizační aplikace)",
     "Authenticate with a TOTP app" : "Přihlaste se pomocí TOTP aplikace",
+    "Two-Factor TOTP Provider" : "Poskytovatel TOTP kódů pro dvoufázové ověření",
     "TOTP two-factor provider" : "Poskytovatel dvoufázového TOTP",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Poskytovatel dvouúřovňového ověřování pro TOTP (dle normy RFC 6238)",
     "Enable TOTP" : "Zapnout TOTP",
