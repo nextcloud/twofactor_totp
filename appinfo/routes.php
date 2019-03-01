@@ -36,5 +36,16 @@ return [
 			'url' => '/settings/verifyNewSecret',
 			'verb' => 'POST'
 		],
+	],
+	'ocs' => [
+		[
+			'name' => 'totp_api#validateKey',
+			'url' => '/api/v1/validate/{uid}/{key}',
+			'verb' => 'GET',
+			'requirements' => [
+				'uid' => '.+',
+				'key' => '.+'
+			]
+		]
 	]
 ];

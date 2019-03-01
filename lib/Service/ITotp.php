@@ -22,6 +22,7 @@
 
 namespace OCA\TwoFactor_Totp\Service;
 
+use OCA\TwoFactor_Totp\Exception\NoTotpSecretFoundException;
 use OCA\TwoFactor_Totp\Exception\TotpSecretAlreadySet;
 use OCP\IUser;
 
@@ -46,9 +47,11 @@ interface ITotp {
 
 	/**
 	 * @param IUser $user
-	 * @param string $key
+	 * @param string $key 6 digits numeric time-based one time password.
+	 * @return boolean If key is correct
+	 * @throws NoTotpSecretFoundException
 	 */
-	public function validateSecret(IUser $user, $key);
+	public function validateKey(IUser $user, $key);
 
 	/**
 	 * @param IUser $user

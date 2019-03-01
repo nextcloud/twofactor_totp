@@ -92,7 +92,7 @@ class Totp implements ITotp {
 	 * @param string $key
 	 */
 	public function verifySecret(IUser $user, $key) {
-		if ($this->validateSecret($user, $key) === true) {
+		if ($this->validateKey($user, $key) === true) {
 			$dbSecret = $this->secretMapper->getSecret($user);
 			$dbSecret->setVerified(true);
 			$this->secretMapper->update($dbSecret);
@@ -104,8 +104,10 @@ class Totp implements ITotp {
 	/**
 	 * @param IUser $user
 	 * @param string $key
+	 * @return boolean
+	 * @throws NoTotpSecretFoundException
 	 */
-	public function validateSecret(IUser $user, $key) {
+	public function validateKey(IUser $user, $key) {
 		try {
 			$dbSecret = $this->secretMapper->getSecret($user);
 		} catch (DoesNotExistException $ex) {
