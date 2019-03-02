@@ -17,7 +17,7 @@ OC.L10N.register(
     "Verify" : "Verifiser",
     "Could not enable TOTP" : "Kunne ikke aktivere TOTP",
     "Could not verify your key. Please try again" : "Kunne ikke bekrefte din nøkkel. Prøv igjen",
-    "Get the authentication code from the two-factor authentication app on your device." : "Hent autentiseringskoden fra din applikasjon for to-trinns bekreftelse.",
+    "Get the authentication code from the two-factor authentication app on your device." : "Få autentiseringskoden fra to-trinns-appen på din enhet. ",
     "Submit" : "Send inn"
 },
 "nplurals=2; plural=(n != 1);");
