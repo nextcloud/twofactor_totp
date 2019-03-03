@@ -6,6 +6,7 @@ OC.L10N.register(
     "TOTP two-factor authentication disabled by an admin" : "管理员已禁用了 TOTP 两步验证",
     "TOTP (Authenticator app)" : "TOTP (认证应用)",
     "Authenticate with a TOTP app" : "使用 TOTP 应用验证身份",
+    "Two-Factor TOTP Provider" : "双因素TOTP提供者",
     "TOTP two-factor provider" : "TOTP 两步验证",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "一个 TOTP（RFC 6238）两步验证提供者",
     "Enable TOTP" : "启用 TOTP",
