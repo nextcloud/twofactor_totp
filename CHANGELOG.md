@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.1.2 – 2019-03-07
+### Fixed
+- Initial migration for outdated database schemas
+- App name typo
+### Changed
+- Updated translations
+- Updated dependencies
+
 ## 2.1.1 – 2019-02-12
 ### Fixed
 - IE11 compatibility
