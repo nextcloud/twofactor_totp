@@ -119,12 +119,16 @@ dist: clean install-deps
 	make install-composer-deps
 	mkdir -p $(sign_dir)
 	rsync -av \
+	--exclude=.drone.yml \
 	--exclude=.git \
-	--exclude=build \
 	--exclude=.gitignore \
+	--exclude=.phan \
+	--exclude=.php_cs.cache \
+	--exclude=.php_cs.dist \
 	--exclude=.travis.yml \
 	--exclude=.scrutinizer.yml \
-        --exclude=CONTRIBUTING.md \
+	--exclude=build \
+	--exclude=CONTRIBUTING.md \
 	--exclude=composer.json \
 	--exclude=composer.lock \
 	--exclude=composer.phar \
@@ -132,10 +136,13 @@ dist: clean install-deps
 	--exclude=l10n/no-php \
 	--exclude=Makefile \
 	--exclude=nbproject \
+	--exclude=phpcs.xml \
+	--exclude=phpstan.neon \
 	--exclude=phpunit*xml \
 	--exclude=screenshots \
 	--exclude=tests \
 	--exclude=vendor/bin \
+	--exclude=vendor-bin \
 	$(project_dir) $(sign_dir)
 ifdef CAN_SIGN
 	$(sign) --path="$(sign_dir)/$(app_name)"
