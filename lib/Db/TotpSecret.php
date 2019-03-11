@@ -32,6 +32,8 @@ use OCP\AppFramework\Db\Entity;
  * @method void setSecret(string $secret)
  * @method int getState()
  * @method void setState(int $state)
+ * @method int getLastCounter();
+ * @method void setLastCounter(int $counter)
  */
 class TotpSecret extends Entity {
 
@@ -43,5 +45,15 @@ class TotpSecret extends Entity {
 
 	/** @var int */
 	protected $state;
+
+	/** @var int */
+	protected $lastCounter;
+
+	public function __construct() {
+		$this->addType('userId', 'string');
+		$this->addType('secret', 'string');
+		$this->addType('state', 'int');
+		$this->addType('lastCounter', 'int');
+	}
 
 }

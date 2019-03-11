@@ -25,6 +25,9 @@ declare(strict_types=1);
 namespace OCA\TwoFactorTOTP\Service;
 
 use Base32\Base32;
+use EasyTOTP\Factory;
+use EasyTOTP\TOTPInvalidResultInterface;
+use EasyTOTP\TOTPValidResultInterface;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
 use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
@@ -34,7 +37,6 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use Otp\GoogleAuthenticator;
-use Otp\Otp;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Totp implements ITotp {
@@ -126,9 +128,23 @@ class Totp implements ITotp {
 		}
 
 		$secret = $this->crypto->decrypt($dbSecret->getSecret());
+		$otp = Factory::getTOTP(Base32::decode($secret), 30, 6);
 
-		$otp = new Otp();
-		return $otp->checkTotp(Base32::decode($secret), $key, 3);
+		$counter = null;
+		$lastCounter = $dbSecret->getLastCounter();
+		if ($lastCounter !== -1) {
+			$counter = $lastCounter;
+		}
+
+		$result = $otp->verify($key, 3, $counter);
+		if ($result instanceof TOTPValidResultInterface) {
+			$dbSecret->setLastCounter($result->getCounter());
+			$this->secretMapper->update($dbSecret);
+
+			return true;
+		}
+
+		return false;
 	}
 
 }
