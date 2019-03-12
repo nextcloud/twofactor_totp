@@ -7,7 +7,7 @@
 	},
 	"require-dev": {
 		"christophwurst/nextcloud": "dev-master",
-		"christophwurst/nextcloud_testing": "0.5.1"
+		"christophwurst/nextcloud_testing": "0.6.0"
 	},
 	"scripts": {
 		"test": "phpunit -c tests/phpunit.xml",
