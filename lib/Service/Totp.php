@@ -26,7 +26,6 @@ namespace OCA\TwoFactorTOTP\Service;
 
 use Base32\Base32;
 use EasyTOTP\Factory;
-use EasyTOTP\TOTPInvalidResultInterface;
 use EasyTOTP\TOTPValidResultInterface;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
@@ -36,7 +35,7 @@ use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 use OCP\Security\ICrypto;
-use Otp\GoogleAuthenticator;
+use OCP\Security\ISecureRandom;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Totp implements ITotp {
@@ -49,13 +48,17 @@ class Totp implements ITotp {
 
 	/** @var EventDispatcherInterface */
 	private $eventDispatcher;
+	/** @var ISecureRandom */
+	private $random;
 
 	public function __construct(TotpSecretMapper $secretMapper,
 								ICrypto $crypto,
-								EventDispatcherInterface $eventDispatcher) {
+								EventDispatcherInterface $eventDispatcher,
+								ISecureRandom $random) {
 		$this->secretMapper = $secretMapper;
 		$this->crypto = $crypto;
 		$this->eventDispatcher = $eventDispatcher;
+		$this->random = $random;
 	}
 
 	public function hasSecret(IUser $user) {
@@ -65,6 +68,10 @@ class Totp implements ITotp {
 		} catch (DoesNotExistException $ex) {
 			return false;
 		}
+	}
+
+	private function generateSecret(): string {
+		return $this->random->generate(16, ISecureRandom::CHAR_UPPER.'234567');
 	}
 
 	/**
@@ -80,7 +87,7 @@ class Totp implements ITotp {
 		}
 
 		// Create new one
-		$secret = GoogleAuthenticator::generateRandom();
+		$secret = $this->generateSecret();
 
 		$dbSecret = new TotpSecret();
 		$dbSecret->setUserId($user->getUID());
