@@ -84,17 +84,11 @@ class SettingsControllerTest extends TestCase {
 			->method('createSecret')
 			->with($user)
 			->will($this->returnValue('newsecret'));
-
-		$qrCode = new QrCode();
 		$issuer = rawurlencode($this->defaults->getName());
-		$qr = $qrCode->setText("otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer")
-			->setSize(150)
-			->writeDataUri();
-
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
 			'secret' => 'newsecret',
-			'qr' => $qr,
+			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer",
 		]);
 
 		$this->assertEquals($expected, $this->controller->enable(true));
