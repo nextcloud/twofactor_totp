@@ -23,7 +23,6 @@ declare(strict_types = 1);
 
 namespace OCA\TwoFactorTOTP\Controller;
 
-use Endroid\QrCode\QrCode;
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Controller;
