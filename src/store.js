@@ -21,9 +21,9 @@ const saveState = (data) => {
 export const actions = {
 	enable ({commit}) {
 		return saveState({state: state.STATE_CREATED})
-			.then(({state, secret, qr}) => {
+			.then(({state, secret, qrUrl}) => {
 				commit('setState', state)
-				return {qr, secret}
+				return {qrUrl, secret}
 			})
 	},
 

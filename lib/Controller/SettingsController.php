@@ -86,16 +86,13 @@ class SettingsController extends Controller {
 			case ITotp::STATE_CREATED:
 				$secret = $this->totp->createSecret($user);
 
-				$qrCode = new QrCode();
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
-				$qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
-					->setSize(150)
-					->writeDataUri();
+				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer";
 				return new JSONResponse([
 					'state' => ITotp::STATE_CREATED,
 					'secret' => $secret,
-					'qr' => $qr,
+					'qrUrl' => $qrUrl,
 				]);
 			case ITotp::STATE_ENABLED:
 				$success = $this->totp->enable($user, $code);

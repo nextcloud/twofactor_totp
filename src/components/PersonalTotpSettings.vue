@@ -38,7 +38,7 @@
 		<div v-if="secret">
 			<p>{{ t('twofactor_totp', 'Your new TOTP secret is:' )}} {{secret}}</p>
 			<p> {{ t('twofactor_totp', 'For quick setup, scan this QR code with your TOTP app:') }}</p>
-			<img :src="qr">
+			<QR :value="qrUrl" :options="{width: 150}"></QR>
 			<p> {{ t('twofactor_totp', 'After you configured your app, enter a test code below to ensure everything works correctly:') }} </p>
 			<input id="totp-confirmation"
 				   type="tel"
@@ -61,17 +61,22 @@
 
 <script>
 	import confirmPassword from 'nextcloud-password-confirmation'
+	import QR from '@chenfengyuan/vue-qrcode'
 
 	import state from '../state'
 
 	export default {
 		name: 'PersonalTotpSettings',
+		components: {
+			QR
+		},
 		data () {
 			return {
 				loading: false,
 				loadingConfirmation: false,
 				enabled: this.$store.state.totpState === state.STATE_ENABLED,
 				secret: undefined,
+				qrUrl: '',
 				confirmation: '',
 			}
 		},
@@ -100,9 +105,9 @@
 
 				return confirmPassword()
 					.then(() => this.$store.dispatch('enable'))
-					.then(({secret, qr}) => {
+					.then(({secret, qrUrl}) => {
 						this.secret = secret
-						this.qr = qr
+						this.qrUrl = qrUrl
 						// If the stat could be changed, keep showing the loading
 						// spinner until the user has finished the registration
 						this.loading = this.$store.state.totpState === state.STATE_CREATED
@@ -129,7 +134,7 @@
 							// Success
 							this.loading = false
 							this.enabled = true
-							this.qr = undefined
+							this.qrUrl = ''
 							this.secret = undefined
 						} else {
 							OC.Notification.showTemporary(t('twofactor_totp', 'Could not verify your key. Please try again'));
