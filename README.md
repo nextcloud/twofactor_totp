@@ -11,7 +11,7 @@ Tested with the following apps:
 * [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2) (proprietary)
 * [KeePassXC (Linux, Windows, macOS)](https://keepassxc.org/) (open-source) Available via [download](https://keepassxc.org/download/), package repositories or [GitHub](http://www.github.com/keepassxreboot/keepassxc/) (Keepass also provides a plugin and Keepass2Android allows to use TOTP token)
 * [SailOTP (SailfishOS)](https://github.com/seiichiro0185/sailotp) (open source) Available via JollaStore or [Openrepos.net](https://openrepos.net/content/seiichiro0185/sailotp)
-* [OTP Auth](https://cooperrs.de/otpauth.html) (proprietary) Availabe via [Apple's App Store](https://itunes.apple.com/us/app/otp-auth/id659877384)
+
 ## Enabling TOTP 2FA for your account
 ![](screenshots/enter_challenge.png)
 ![](screenshots/settings.png)
