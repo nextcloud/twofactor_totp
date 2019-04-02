@@ -24,10 +24,8 @@ namespace OCA\TwoFactor_Totp\Controller;
 use Endroid\QrCode\QrCode;
 use OCA\TwoFactor_Totp\Service\ITotp;
 use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
-use OCP\IURLGenerator;
 use OCP\IUserSession;
 
 class SettingsController extends Controller {

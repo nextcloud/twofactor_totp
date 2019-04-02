@@ -21,7 +21,6 @@
 
 namespace OCA\TwoFactor_Totp\Unit\Controller;
 
-use OC\OCS\Result;
 use OCA\TwoFactor_Totp\Controller\TotpApiController;
 use OCA\TwoFactor_Totp\Exception\NoTotpSecretFoundException;
 use OCA\TwoFactor_Totp\Service\ITotp;
@@ -32,7 +31,6 @@ use OCP\IRequest;
 use OCP\IUser;
 use OCP\IUserManager;
 use Test\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class TotpApiControllerTest extends TestCase {
 
