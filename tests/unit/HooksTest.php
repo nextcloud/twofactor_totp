@@ -38,12 +38,12 @@ class HooksTest extends TestCase {
 	private $hooks;
 
 	/**
-	 * @var EventDispatcherInterface | \PHPUnit_Framework_MockObject_MockObject $eventDispatcherMock
+	 * @var EventDispatcherInterface | \PHPUnit\Framework\MockObject\MockObject $eventDispatcherMock
 	 */
 	private $eventDispatcherMock;
 
 	/**
-	 * @var TotpSecretMapper | \PHPUnit_Framework_MockObject_MockObject $secretMapperMock
+	 * @var TotpSecretMapper | \PHPUnit\Framework\MockObject\MockObject $secretMapperMock
 	 */
 	private $secretMapperMock;
 

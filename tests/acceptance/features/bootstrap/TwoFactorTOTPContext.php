@@ -24,6 +24,7 @@ use Behat\Behat\Context\Context;
 use Page\PersonalSecuritySettingsPageWithTOTPEnabled;
 use Otp\Otp;
 use Base32\Base32;
+use PHPUnit\Framework\Assert;
 
 require_once 'bootstrap.php';
 
@@ -130,7 +131,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @return void
 	 */
 	public function totpSecretKeyShouldBeVerifiecOnTheWebUI() {
-		PHPUnit_Framework_Assert::assertTrue(
+		Assert::assertTrue(
 			$this->personalSecuritySettingsPage->isKeyVerified(),
 			'The key could not be verified'
 		);
@@ -142,7 +143,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @return void
 	 */
 	public function theSecretCodeFromQRCodeShouldMatchWithTheOneDisplayedOnTheWebUI() {
-		PHPUnit_Framework_Assert::assertEquals(
+		Assert::assertEquals(
 			$this->getSecretCodeFromQRCode(),
 			$this->personalSecuritySettingsPage->getSecretCode()
 		);

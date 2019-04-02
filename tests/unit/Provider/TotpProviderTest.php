@@ -31,13 +31,13 @@ use Test\TestCase;
  */
 class TotpProviderTest extends TestCase {
 
-	/** @var ITotp | \PHPUnit_Framework_MockObject_MockObject  $totp */
+	/** @var ITotp | \PHPUnit\Framework\MockObject\MockObject  $totp */
 	private $totp;
 
-	/** @var IL10N | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var IL10N | \PHPUnit\Framework\MockObject\MockObject */
 	private $l;
 
-	/** @var IUser | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var IUser | \PHPUnit\Framework\MockObject\MockObject */
 	private $user;
 
 	/** @var TotpProvider $totpProvider */
