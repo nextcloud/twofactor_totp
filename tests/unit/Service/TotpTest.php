@@ -35,13 +35,13 @@ use Test\TestCase;
  */
 class TotpTest extends TestCase {
 
-	/** @var TotpSecretMapper | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var TotpSecretMapper | \PHPUnit\Framework\MockObject\MockObject */
 	private $secretMapper;
 
-	/** @var ICrypto | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var ICrypto | \PHPUnit\Framework\MockObject\MockObject */
 	private $crypto;
 
-	/** @var Otp | \PHPUnit_Framework_MockObject_MockObject  */
+	/** @var Otp | \PHPUnit\Framework\MockObject\MockObject  */
 	private $otp;
 
 	/** @var Totp */
@@ -65,7 +65,7 @@ class TotpTest extends TestCase {
 	 * @param boolean $expectedResult
 	 */
 	public function testValidateKey($lastKey, $key, $validationResult, $expectedResult) {
-		/** @var IUser | \PHPUnit_Framework_MockObject_MockObject $user  */
+		/** @var IUser | \PHPUnit\Framework\MockObject\MockObject $user  */
 		$user = $this->createMock(IUser::class);
 		$dbSecret = $this
 			->getMockBuilder(TotpSecret::class)
@@ -109,7 +109,7 @@ class TotpTest extends TestCase {
 	}
 
 	public function testValidateSecretNoSecret() {
-		/** @var IUser | \PHPUnit_Framework_MockObject_MockObject $user  */
+		/** @var IUser | \PHPUnit\Framework\MockObject\MockObject $user  */
 		$user = $this->createMock(IUser::class);
 
 		$this->secretMapper->expects($this->once())
