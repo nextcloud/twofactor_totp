@@ -107,8 +107,8 @@ matrix:
     - php: 7.2
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
     - php: 7.1
-      env: "DB=mysql CORE_BRANCH=stable15"
+      env: "DB=mysql CORE_BRANCH=stable16"
     - php: 7.1
-      env: "DB=mysql CORE_BRANCH=v15.0.0"
+      env: "DB=mysql CORE_BRANCH=v16.0.0RC1"
   fast_finish: true
 
