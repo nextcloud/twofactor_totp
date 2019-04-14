@@ -148,6 +148,15 @@ pipeline:
       matrix:
         COVERAGE: true
 
+  notify:
+    image: plugins/slack:1
+    pull: true
+    secrets: [slack_webhook]
+    channel: builds
+    when:
+      status: [failure, changed]
+      event: [push, tag]
+
 services:
   mysql:
     image: mysql:5.5
