@@ -110,11 +110,11 @@ class PersonalSecuritySettingsPageWithTOTPEnabled extends PersonalSecuritySettin
 	 * @return bool
 	 */
 	public function isKeyVerified() {
-		$verificationMsg = $this->waitTillElementIsNotNull($this->totpVerifyMsgXpath);
-		$this->assertElementNotNull(
-			$verificationMsg,
-			__METHOD__ . ' The verification msg could not be found'
-		);
+		try {
+			$verificationMsg = $this->waitTillXpathIsVisible($this->totpVerifyMsgXpath);
+		} catch (\Exception $exception) {
+			return false;
+		}
 		return ($verificationMsg->getText() === 'Verified');
 	}
 }

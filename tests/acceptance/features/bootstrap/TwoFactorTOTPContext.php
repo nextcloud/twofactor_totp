@@ -110,7 +110,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theUserAddsVerficationKeyFromSecretKeyToVerifyUsingWebUI() {
+	public function theUserAddsVerificationKeyFromSecretKeyToVerifyUsingWebUI() {
 		if (!$this->totpUsed) {
 			$this->personalSecuritySettingsPage->addVerificationKey(
 				$this->generateTOTPKey()
@@ -130,7 +130,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function totpSecretKeyShouldBeVerifiecOnTheWebUI() {
+	public function totpSecretKeyShouldBeVerifiedOnTheWebUI() {
 		Assert::assertTrue(
 			$this->personalSecuritySettingsPage->isKeyVerified(),
 			'The key could not be verified'
