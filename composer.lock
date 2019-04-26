@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8c2b6a05ebb8d52f4eac5fbc5c4f721",
+    "content-hash": "4a2d6c9b6109f6c2d95395a6dac9ce06",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -171,16 +171,16 @@
         },
         {
             "name": "christophwurst/nextcloud",
-            "version": "v16.0.0-beta3",
+            "version": "v16.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "69332fc5190a4c209669a3933e7ca1767a292e7a"
+                "reference": "13e62cd107e54bbb0a58a4c5e38cfe508fee7261"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/69332fc5190a4c209669a3933e7ca1767a292e7a",
-                "reference": "69332fc5190a4c209669a3933e7ca1767a292e7a",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/13e62cd107e54bbb0a58a4c5e38cfe508fee7261",
+                "reference": "13e62cd107e54bbb0a58a4c5e38cfe508fee7261",
                 "shasum": ""
             },
             "require": {
@@ -203,7 +203,7 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2019-04-08T08:10:16+00:00"
+            "time": "2019-04-25T13:33:13+00:00"
         },
         {
             "name": "christophwurst/nextcloud_testing",
@@ -1778,7 +1778,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -2042,9 +2042,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "christophwurst/nextcloud": 10
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

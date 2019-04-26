@@ -5,7 +5,7 @@
 	},
 	"require-dev": {
 		"christian-riesen/otp": "2.*",
-		"christophwurst/nextcloud": "v16.0.0-beta3",
+		"christophwurst/nextcloud": "v16.0.0",
 		"christophwurst/nextcloud_testing": "0.6.0"
 	},
 	"scripts": {
