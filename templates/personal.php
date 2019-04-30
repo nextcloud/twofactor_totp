@@ -1,6 +1,6 @@
 <?php
 
-script('twofactor_totp', 'settings');
+script('twofactor_totp', 'main-settings');
 style('twofactor_totp', 'settings');
 
 ?>

@@ -29,6 +29,6 @@ return [
             'name' => 'settings#enable',
             'url' => '/settings/enable',
             'verb' => 'POST'
-        ]
+        ],
     ]
 ];

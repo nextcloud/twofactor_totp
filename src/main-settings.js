@@ -19,8 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import store from './store'
 import Vue from 'vue'
+
+import Logger from './logger'
+import store from './store'
 
 Vue.mixin({
 	methods: {
@@ -28,6 +30,7 @@ Vue.mixin({
 	},
 })
 
+Logger.debug('loading initial state')
 const initialStateElement = document.getElementById(
 	'twofactor-totp-initial-state'
 )
@@ -36,6 +39,8 @@ if (initialStateElement) {
 	store.replaceState({
 		totpState: state,
 	})
+} else {
+	Logger.warn('no initial state element found')
 }
 
 import PersonalTotpSettings from './components/PersonalTotpSettings'
@@ -44,3 +49,5 @@ const View = Vue.extend(PersonalTotpSettings)
 new View({
 	store,
 }).$mount('#twofactor-totp-settings')
+
+Logger.debug('personal settings loaded and rendered')

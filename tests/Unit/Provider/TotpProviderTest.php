@@ -27,9 +27,11 @@ declare(strict_types=1);
 namespace OCA\TwoFactorTOTP\Test\Unit\Provider;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
+use OCA\TwoFactorTOTP\Provider\AtLoginProvider;
 use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
+use OCP\AppFramework\IAppContainer;
 use OCP\IL10N;
 use OCP\IUser;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -42,6 +44,9 @@ class TotpProviderTest extends TestCase {
 	/** @var IL10N|MockObject */
 	private $l10n;
 
+	/** @var IAppContainer|MockObject */
+	private $container;
+
 	/** @var TotpProvider */
 	private $provider;
 
@@ -50,10 +55,12 @@ class TotpProviderTest extends TestCase {
 
 		$this->totp = $this->createMock(ITotp::class);
 		$this->l10n = $this->createMock(IL10N::class);
+		$this->container = $this->createMock(IAppContainer::class);
 
 		$this->provider = new TotpProvider(
 			$this->totp,
-			$this->l10n
+			$this->l10n,
+			$this->container
 		);
 	}
 
@@ -120,6 +127,20 @@ class TotpProviderTest extends TestCase {
 			->with($user);
 
 		$this->provider->disableFor($user);
+	}
+
+	public function testGetSetupProvider() {
+		/** @var IUser|MockObject $user */
+		$user = $this->createMock(IUser::class);
+		$provider = $this->createMock(AtLoginProvider::class);
+		$this->container->expects($this->once())
+			->method('query')
+			->with(AtLoginProvider::class)
+			->willReturn($provider);
+
+		$result = $this->provider->getLoginSetup($user);
+
+		$this->assertSame($provider, $result);
 	}
 
 }

@@ -1,7 +1,9 @@
-/*
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+<?php
+
+/**
+ * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,24 +21,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require('jsdom-global')()
+declare(strict_types=1);
 
-require('vue').mixin({
-	methods: {
-		t: (app, str) => str,
-	},
-})
+script('twofactor_totp', 'main-login-setup');
 
-global.expect = require('chai').expect
-// https://github.com/vuejs/vue-test-utils/issues/936
-// better fix for "TypeError: Super expression must either be null or
-// a function" than pinning an old version of prettier.
-//
-// https://github.com/vuejs/vue-cli/issues/2128#issuecomment-453109575
-window.Date = Date
+?>
 
-global.OC = {
-	getCurrentUser: () => {
-		return { uid: false }
-	},
-}
+<div id="twofactor-totp-login-setup"></div>

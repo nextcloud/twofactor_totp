@@ -25,7 +25,10 @@ namespace OCA\TwoFactorTOTP\Provider;
 
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
+use OCP\AppFramework\IAppContainer;
+use OCP\Authentication\TwoFactorAuth\IActivatableAtLogin;
 use OCP\Authentication\TwoFactorAuth\IDeactivatableByAdmin;
+use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
@@ -34,7 +37,7 @@ use OCP\IL10N;
 use OCP\IUser;
 use OCP\Template;
 
-class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin {
+class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
 
 	/** @var ITotp */
 	private $totp;
@@ -42,9 +45,15 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/** @var IL10N */
 	private $l10n;
 
-	public function __construct(ITotp $totp, IL10N $l10n) {
+	/** @var IAppContainer */
+	private $container;
+
+	public function __construct(ITotp $totp,
+								IL10N $l10n,
+								IAppContainer $container) {
 		$this->totp = $totp;
 		$this->l10n = $l10n;
+		$this->container = $container;
 	}
 
 	/**
@@ -72,8 +81,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	 * Get the template for rending the 2FA provider view
 	 */
 	public function getTemplate(IUser $user): Template {
-		$tmpl = new Template('twofactor_totp', 'challenge');
-		return $tmpl;
+		return new Template('twofactor_totp', 'challenge');
 	}
 
 	/**
@@ -110,6 +118,10 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	 */
 	public function disableFor(IUser $user) {
 		$this->totp->deleteSecret($user, true);
+	}
+
+	public function getLoginSetup(IUser $user): ILoginSetupProvider {
+		return $this->container->query(AtLoginProvider::class);
 	}
 
 }

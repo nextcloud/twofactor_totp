@@ -25,14 +25,14 @@ namespace OCA\TwoFactorTOTP\Controller;
 
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Service\ITotp;
-use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUserSession;
 use function is_null;
 
-class SettingsController extends Controller {
+class SettingsController extends ALoginSetupController {
 
 	/** @var ITotp */
 	private $totp;
