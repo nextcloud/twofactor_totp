@@ -35,40 +35,25 @@
 			<label for="totp-enabled">{{ t('twofactor_totp', 'Enable TOTP') }}</label>
 		</div>
 
-		<div v-if="secret">
-			<p>{{ t('twofactor_totp', 'Your new TOTP secret is:' )}} {{secret}}</p>
-			<p> {{ t('twofactor_totp', 'For quick setup, scan this QR code with your TOTP app:') }}</p>
-			<QR :value="qrUrl" :options="{width: 150}"></QR>
-			<p> {{ t('twofactor_totp', 'After you configured your app, enter a test code below to ensure everything works correctly:') }} </p>
-			<input id="totp-confirmation"
-				   type="tel"
-				   minlength="6"
-				   maxlength="10"
-				   autocomplete="off"
-				   autocapitalize="off"
-				   v-on:keydown="onConfirmKeyDown"
-				   v-model="confirmation"
-				   :disabled="loadingConfirmation"
-				   :placeholder="t('twofactor_totp', 'Authentication code')">
-			<input id="totp-confirmation-submit"
-				   type="button"
-				   v-on:click="enableTOTP"
-				   :disabled="loadingConfirmation"
-				   :value="t('twofactor_totp', 'Verify')">
-		</div>
+		<SetupConfirmation v-if="secret"
+						   :secret="secret"
+						   :qr-url="qrUrl"
+						   :loading="loadingConfirmation"
+						   :confirmation.sync="confirmation"
+						   @confirm="enableTOTP"/>
 	</div>
 </template>
 
 <script>
 	import confirmPassword from 'nextcloud-password-confirmation'
-	import QR from '@chenfengyuan/vue-qrcode'
 
+	import SetupConfirmation from './SetupConfirmation'
 	import state from '../state'
 
 	export default {
 		name: 'PersonalTotpSettings',
 		components: {
-			QR
+			SetupConfirmation,
 		},
 		data () {
 			return {
@@ -144,12 +129,6 @@
 						this.loadingConfirmation = false
 					})
 					.catch(console.error)
-			},
-
-			onConfirmKeyDown(e) {
-				if (e.which === 13) {
-					this.enableTOTP()
-				}
 			},
 
 			disableTOTP() {
