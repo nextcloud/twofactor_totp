@@ -6,11 +6,11 @@
     "TOTP two-factor provider" : "TOTP kétfaktoros szolgáltató",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Kétfaktoros hitelesítési szolgáltató TOTP(RFC6238)-hez",
     "Enable TOTP" : "Időalapú egyszeri jelszó (TOTP) engedélyezése",
+    "Could not enable TOTP" : "TOTP nem engedélyezhető",
+    "Could not verify your key. Please try again" : "A kulcs nem ellenőrizhető. Próbálja meg újra.",
     "Your new TOTP secret is:" : "Az új időalapú egyszeri titkos jelszava (TOTP):",
     "Authentication code" : "Azonosítási kód",
     "Verify" : "Ellenőrzés",
-    "Could not enable TOTP" : "TOTP nem engedélyezhető",
-    "Could not verify your key. Please try again" : "A kulcs nem ellenőrizhető. Próbálja meg újra.",
     "Get the authentication code from the two-factor authentication app on your device." : "Szerezd meg a kétfaktoros azonosítási alkalmazásodból a kódot az eszközödről.",
     "Submit" : "Küldés"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

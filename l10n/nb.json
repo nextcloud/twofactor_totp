@@ -8,13 +8,13 @@
     "TOTP two-factor provider" : "To-trinn tilbyder",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "En to-trinn tilbyder (RFC 6238)",
     "Enable TOTP" : "Aktiver to-trinn",
+    "Could not enable TOTP" : "Kunne ikke aktivere TOTP",
+    "Could not verify your key. Please try again" : "Kunne ikke bekrefte din nøkkel. Prøv igjen",
     "Your new TOTP secret is:" : "Ny to-trinn hemmelig nøkker er:",
     "For quick setup, scan this QR code with your TOTP app:" : "For raskt oppsett kan du skanne denne QR koden med ditt to-trinn program:",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Etter appen er satt opp må du oppgi en kode for å verifisere at alt fungerer korrekt:",
     "Authentication code" : "Autentiseringskode",
     "Verify" : "Verifiser",
-    "Could not enable TOTP" : "Kunne ikke aktivere TOTP",
-    "Could not verify your key. Please try again" : "Kunne ikke bekrefte din nøkkel. Prøv igjen",
     "Get the authentication code from the two-factor authentication app on your device." : "Få autentiseringskoden fra to-trinns-appen på din enhet. ",
     "Submit" : "Send inn"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

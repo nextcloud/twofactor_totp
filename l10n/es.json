@@ -8,13 +8,13 @@
     "TOTP two-factor provider" : "Proveedor de TOTP para verificación en dos pasos",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un proveedor de verificación en dos pasos para TOTP (RFC 6238)",
     "Enable TOTP" : "Habilitar TOTP",
+    "Could not enable TOTP" : "No se ha podido activar TOTP",
+    "Could not verify your key. Please try again" : "No se ha podido verificar su clave. Por favor, inténtelo de nuevo",
     "Your new TOTP secret is:" : "Este es tu nuevo secreto TOTP:",
     "For quick setup, scan this QR code with your TOTP app:" : "Para una configuración rápida , escanea este código QR con tu app TOTP",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Una vez has configurado la aplicación, introduce un código de prueba debajo para asegurarte de que tu aplicación se ha configurado correctamente.",
     "Authentication code" : "Código de autentificación",
     "Verify" : "Verificar",
-    "Could not enable TOTP" : "No se ha podido activar TOTP",
-    "Could not verify your key. Please try again" : "No se ha podido verificar su clave. Por favor, inténtelo de nuevo",
     "Get the authentication code from the two-factor authentication app on your device." : "Consigue el codigo de autentificación de la aplicación de tu dispositivo movil.",
     "Submit" : "Enviar"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

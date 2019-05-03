@@ -7,9 +7,9 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "אימות עם יישום ה- TOTP",
     "TOTP two-factor provider" : "ספק אימות דו־שלבי TOTP",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "ספק אימות דו־שלבי עבור TOTP‏ (RFC 6238)",
-    "Authentication code" : "קוד אימות",
     "Could not enable TOTP" : "לא ניתן להפעיל TOTP",
     "Could not verify your key. Please try again" : "לא ניתן לוודא שהמפתח שלך תקין. נא לנסות שוב",
+    "Authentication code" : "קוד אימות",
     "Get the authentication code from the two-factor authentication app on your device." : "קבלת קוד אימות מיישום אימות דו-מרכיבי בהתקן שלך.",
     "Submit" : "הגשה"
 },
