@@ -2,9 +2,6 @@ workspace:
   base: /var/www/owncloud
   path: apps/twofactor_totp
 
-branches:
-- master
-
 pipeline:
   install-core:
     image: owncloudci/core
