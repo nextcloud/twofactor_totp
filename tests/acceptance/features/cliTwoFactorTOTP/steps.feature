@@ -5,7 +5,7 @@ Feature: Testing Two factor TOTP
   So that the users can use TOTP without verification with TOTP code
 
   Background:
-    Given these users have been created with default attributes:
+    Given these users have been created with default attributes and skeleton files:
       | username |
       | user0    |
       | new-user |
