@@ -5,7 +5,7 @@ Feature: Testing Two factor TOTP
   So that the users can use two factor auth from TOTP key
 
   Background:
-    Given user "newly-created-user" has been created with default attributes
+    Given user "newly-created-user" has been created with default attributes and skeleton files
     And using OCS API version "2"
 
   Scenario: Verify using the key generated from the secret
