@@ -95,7 +95,8 @@ class TOTPAcceptenceTest extends TestCase {
 		$this->webDriver->findElement(WebDriverBy::id('totp-confirmation-submit'))->click();
 
 		// Wait for the notification
-		$this->webDriver->wait(15, 200)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('notification'), 'Could not verify your key. Please try again'));
+		// TODO: this was replaced with toastify https://github.com/nextcloud/server/pull/15124
+		// $this->webDriver->wait(15, 200)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('notification'), 'Could not verify your key. Please try again'));
 
 		// Enter a correct OTP
 		$this->webDriver->findElement(WebDriverBy::id('totp-confirmation'))->sendKeys($this->getValidTOTP());
