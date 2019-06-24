@@ -111,4 +111,16 @@ class TotpSecretMapperTest extends TestCase {
 		$this->mapper->deleteSecretsByUserId('user1');
 		$this->mapper->getSecret($user);
 	}
+
+	public function testGetAllSecrets() {
+		$secrets1 = $this->mapper->getAllSecrets();
+		$this->assertCount(1, $secrets1);
+		$this->mapper->insert(TotpSecret::fromParams([
+			'userId' => 'user3',
+			'secret' => 'test',
+			'verified' => false
+		]));
+		$secrets2 = $this->mapper->getAllSecrets();
+		$this->assertCount(2, $secrets2);
+	}
 }
