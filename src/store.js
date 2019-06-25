@@ -1,4 +1,5 @@
 import Axios from 'nextcloud-axios'
+import {generateUrl} from 'nextcloud-router'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -13,7 +14,7 @@ export const mutations = {
 }
 
 const saveState = (data) => {
-	const url = OC.generateUrl('/apps/twofactor_totp/settings/enable');
+	const url = generateUrl('/apps/twofactor_totp/settings/enable');
 	return Axios.post(url, data)
 		.then(resp => resp.data)
 }
