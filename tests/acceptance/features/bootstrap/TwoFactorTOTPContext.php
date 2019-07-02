@@ -21,10 +21,12 @@
  */
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Page\PersonalSecuritySettingsPageWithTOTPEnabled;
 use Otp\Otp;
 use Base32\Base32;
 use PHPUnit\Framework\Assert;
+use Page\VerificationPage;
 
 require_once 'bootstrap.php';
 
@@ -48,6 +50,34 @@ class TwoFactorTOTPContext implements Context {
 	private $totpSecret;
 
 	/**
+	 *
+	 * @var featureContext
+	 */
+	private $featureContext;
+
+	/**
+	 *
+	 * @var WebUIGeneralContext
+	 */
+	private $webUIGeneralContext;
+
+	/**
+	 *
+	 * @var VerificationPage
+	 */
+	private $verificationPage;
+
+	/**
+	 * @var int
+	 */
+	private $counter;
+
+	/**
+	 * @var int
+	 */
+	private $timeCounter = null;
+
+	/**
 	 * Returns secret key
 	 *
 	 * @return string
@@ -63,18 +93,33 @@ class TwoFactorTOTPContext implements Context {
 	 */
 	private function generateTOTPKey() {
 		$otp = new Otp();
-		return $otp->totp(Base32::decode($this->getSecret()));
+		if ($this->timeCounter === null) {
+			$this->timeCounter = \floor(\time() / 30);
+		} else {
+			$this->timeCounter += 1;
+		}
+		$this->counter += 1;
+		if ($this->counter > 2) {
+			throw new \Exception(
+				'Key used more than twice'
+			);
+		}
+		return $otp->totp(Base32::decode($this->getSecret()), $this->timeCounter);
 	}
 	/**
 	 * WebUIPersonalSecuritySettingsTOTPEnabledContext constructor.
 	 *
 	 * @param PersonalSecuritySettingsPageWithTOTPEnabled $personalSecuritySettingsPage
+	 * @param VerificationPage $verificationPage
 	 */
 	public function __construct(
-		PersonalSecuritySettingsPageWithTOTPEnabled $personalSecuritySettingsPage
+		PersonalSecuritySettingsPageWithTOTPEnabled $personalSecuritySettingsPage,
+		VerificationPage $verificationPage
 	) {
 		// $personalSecuritySettingsPage is private, therefore needs to be overridden
 		$this->personalSecuritySettingsPage = $personalSecuritySettingsPage;
+
+		$this->verificationPage = $verificationPage;
 	}
 
 	/**
@@ -126,6 +171,62 @@ class TwoFactorTOTPContext implements Context {
 	}
 
 	/**
+	 * @When the user re-logs in as :username to the two-factor authentication verification page
+	 *
+	 * @param string $username
+	 *
+	 * @return void
+	 */
+	public function theUserReLogsInAsForTwoFactorAuthentication($username) {
+		$this->webUIGeneralContext->theUserLogsOutOfTheWebUI();
+		$password = $this->featureContext->getPasswordForUser($username);
+
+		$this->webUIGeneralContext->loginAs($username, $password, $target = 'VerificationPage');
+	}
+
+	/**
+	 * @When the user adds one-time key :key on the verification page on the webUI
+	 *
+	 * @param string $key
+	 *
+	 * @return void
+	 */
+	public function theUserAddsOneTimeKeyOnTheVerificationPageOnTheWebui($key) {
+		$this->verificationPage->addVerificationKey($key);
+	}
+
+	/**
+	 * @Then the user should see an error message on the verification page saying :message
+	 *
+	 * @param string $message
+	 *
+	 * @return void
+	 */
+	public function theUserShouldSeeAnErrorMessageOnTheVerificationPageSaying($message) {
+		$errormessage = $this->verificationPage->getErrorMessage();
+		PHPUnit\Framework\Assert::assertEquals($message, $errormessage);
+	}
+
+	/**
+	 * @When the user cancels the verification using the webUI
+	 *
+	 * @return void
+	 */
+	public function theUserCancelsTheVerificationUsingTheWebui() {
+		$this->verificationPage->cancelVerification();
+	}
+
+	/**
+	 * @When the user adds one-time key generated from the secret key on the verification page on the webUI
+	 *
+	 * @return void
+	 */
+	public function theUserAddsOneTimeKeyGeneratedOnVerificationPageOnTheWebui() {
+		$key = $this->generateTOTPKey();
+		$this->verificationPage->addVerificationKey($key);
+	}
+
+	/**
 	 * @Then the TOTP secret key should be verified on the webUI
 	 *
 	 * @return void
@@ -147,5 +248,23 @@ class TwoFactorTOTPContext implements Context {
 			$this->getSecretCodeFromQRCode(),
 			$this->personalSecuritySettingsPage->getSecretCode()
 		);
+	}
+
+	/**
+	 * This will run before EVERY scenario.
+	 * It will set the properties for this object.
+	 *
+	 * @BeforeScenario @webUI
+	 *
+	 * @param BeforeScenarioScope $scope
+	 *
+	 * @return void
+	 */
+	public function before(BeforeScenarioScope $scope) {
+		// Get the environment
+		$environment = $scope->getEnvironment();
+		// Get all the contexts you need in this context
+		$this->featureContext = $environment->getContext('FeatureContext');
+		$this->webUIGeneralContext = $environment->getContext('WebUIGeneralContext');
 	}
 }
