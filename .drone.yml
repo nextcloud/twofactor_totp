@@ -16,6 +16,19 @@ pipeline:
       matrix:
         NEED_CORE: true
 
+  install-testrunner:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    commands:
+    - git clone -b stable10 --depth=1 https://github.com/owncloud/core.git /var/www/owncloud/testrunner
+    - cp -r /var/www/owncloud/apps/twofactor_totp /var/www/owncloud/testrunner/apps/
+    - cd /var/www/owncloud/testrunner
+    - make install-composer-deps
+    - make vendor-bin-deps
+    when:
+      matrix:
+        NEED_TARBALL: true
+
   owncloud-log:
     image: owncloud/ubuntu:16.04
     detach: true
@@ -48,8 +61,11 @@ pipeline:
     pull: true
     commands:
     - chown www-data /var/www/owncloud -R
-    - chmod 777 /var/www/owncloud/tests/acceptance/filesForUpload -R
-    - chmod +x /var/www/owncloud/tests/acceptance/run.sh
+    - if [ "${NEED_TARBALL}" = "true" ];
+      then chmod 777 /var/www/owncloud/testrunner/tests/acceptance/filesForUpload -R;
+      chmod +x /var/www/owncloud/testrunner/tests/acceptance/run.sh;
+      else chmod 777 /var/www/owncloud/tests/acceptance/filesForUpload -R;
+      chmod +x /var/www/owncloud/tests/acceptance/run.sh; fi
     when:
       matrix:
         NEED_SERVER: true
@@ -82,6 +98,7 @@ pipeline:
       - TEST_SERVER_URL=http://owncloud
       - BEHAT_SUITE=${BEHAT_SUITE}
     commands:
+      - if [ "${NEED_TARBALL}" = "true" ]; then cd /var/www/owncloud/testrunner/apps/twofactor_totp; fi
       - make test-acceptance-api
     when:
       matrix:
@@ -94,6 +111,7 @@ pipeline:
       - TEST_SERVER_URL=http://owncloud
       - BEHAT_SUITE=${BEHAT_SUITE}
     commands:
+      - if [ "${NEED_TARBALL}" = "true" ]; then cd /var/www/owncloud/testrunner/apps/twofactor_totp; fi
       - make test-acceptance-cli
     when:
       matrix:
@@ -110,6 +128,7 @@ pipeline:
       - PLATFORM=Linux
       - BEHAT_SUITE=${BEHAT_SUITE}
     commands:
+      - if [ "${NEED_TARBALL}" = "true" ]; then cd /var/www/owncloud/testrunner/apps/twofactor_totp; fi
       - make test-acceptance-webui
     when:
       matrix:
@@ -334,3 +353,32 @@ matrix:
     NEED_INSTALL_APP: true
     NEED_SERVER: true
     USE_EMAIL: true
+
+  # Owncloud Tarball
+  - PHP_VERSION: 7.2
+    DB_TYPE: mysql
+    OC_VERSION: 10.2.0
+    TEST_SUITE: web-acceptance
+    BEHAT_SUITE: webUITwoFactorTOTP
+    DB_NAME: oc_db
+    DB_USERNAME: admin
+    DB_PASSWORD: secret
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+    NEED_SERVER: true
+    USE_EMAIL: true
+    NEED_TARBALL: true
+
+  - PHP_VERSION: 7.0
+    DB_TYPE: mysql
+    OC_VERSION: 10.2.0
+    TEST_SUITE: web-acceptance
+    BEHAT_SUITE: cliTwoFactorTOTP
+    DB_NAME: oc_db
+    DB_USERNAME: admin
+    DB_PASSWORD: secret
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+    NEED_SERVER: true
+    USE_EMAIL: true
+    NEED_TARBALL: true
