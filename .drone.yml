@@ -357,7 +357,7 @@ matrix:
   # Owncloud Tarball
   - PHP_VERSION: 7.2
     DB_TYPE: mysql
-    OC_VERSION: 10.2.0
+    OC_VERSION: 10.2.1
     TEST_SUITE: web-acceptance
     BEHAT_SUITE: webUITwoFactorTOTP
     DB_NAME: oc_db
@@ -371,7 +371,7 @@ matrix:
 
   - PHP_VERSION: 7.0
     DB_TYPE: mysql
-    OC_VERSION: 10.2.0
+    OC_VERSION: 10.2.1
     TEST_SUITE: web-acceptance
     BEHAT_SUITE: cliTwoFactorTOTP
     DB_NAME: oc_db
