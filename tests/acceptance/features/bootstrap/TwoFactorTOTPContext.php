@@ -27,6 +27,7 @@ use Otp\Otp;
 use Base32\Base32;
 use PHPUnit\Framework\Assert;
 use Page\VerificationPage;
+use TestHelpers\OcsApiHelper;
 
 require_once 'bootstrap.php';
 
@@ -248,6 +249,93 @@ class TwoFactorTOTPContext implements Context {
 			$this->getSecretCodeFromQRCode(),
 			$this->personalSecuritySettingsPage->getSecretCode()
 		);
+	}
+
+	/**
+	 * Send request with secet key for two factor authentication
+	 *
+	 * @param string $user
+	 * @param string $secretKey
+	 *
+	 * @return void
+	 */
+	public function sendRequestWithSecretKey($user, $secretKey) {
+		$response = OcsApiHelper::sendRequest(
+			$this->featureContext->getBaseUrl(),
+			$this->featureContext->getAdminUsername(),
+			$this->featureContext->getAdminPassword(),
+			'GET',
+			"/apps/twofactor_totp/api/v1/validate/$user/$secretKey",
+			$body = [],
+			$ocsApiVersion = 1
+		);
+		$this->featureContext->setResponse($response);
+	}
+
+	/**
+	 * @When the administrator tries to verify with the one-time key generated from the secret key for user :user
+	 *
+	 * @param string $user
+	 *
+	 * @return void
+	 */
+	public function theAdministratorTriesToVerifyTheOtpKeyForUserUsingTheCorrectKey($user) {
+		$secretKey = $this->generateTOTPKey();
+		$this->sendRequestWithSecretKey($user, $secretKey);
+	}
+
+	/**
+	 * @Then the result of the last verification request should be true
+	 *
+	 * @throws \Exception
+	 *
+	 * @return void
+	 */
+	public function theResultOfTheLastVerificationRequestShouldBeTrue() {
+		$result = \json_decode(
+			\json_encode(
+				$this->featureContext->getResponseXml()->data[0]
+			),
+			true
+		)['result'];
+		if ((int)$result !== 1) {
+			throw new \Exception(
+				"Invalid OTP"
+			);
+		}
+	}
+
+	/**
+	 * @When the administrator tries to verify with an invalid key :secretKey for user :user
+	 *
+	 * @param string $secretKey
+	 * @param string $user
+	 *
+	 * @return void
+	 */
+	public function theAdministratorTriesToVerifyTheOtpKeyForUserUsingTheWrongKey($secretKey, $user) {
+		$this->sendRequestWithSecretKey($user, $secretKey);
+	}
+
+	/**
+	 * @Then the result of the last verification request should be false
+	 *
+	 * @throws \Exception
+	 *
+	 * @return void
+	 */
+	public function theResultOfTheLastVerificationRequestShouldBeFalse() {
+		$result = \json_decode(
+			\json_encode(
+				$this->featureContext->getResponseXml()->data[0]
+			),
+			true
+		);
+		if (\sizeof($result['result']) !== 0) {
+			throw new \Exception(
+				"Valid OTP"
+			);
+		}
 	}
 
 	/**
