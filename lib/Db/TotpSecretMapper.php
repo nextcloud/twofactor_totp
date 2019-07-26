@@ -75,4 +75,12 @@ class TotpSecretMapper extends Mapper {
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($uid)))
 			->execute();
 	}
+
+	public function getAllSecrets() {
+		$qb = $this->db->getQueryBuilder();
+		return $qb ->select('*')
+			->from('twofactor_totp_secrets')
+			->execute()
+			->fetchAll();
+	}
 }
