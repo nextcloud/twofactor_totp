@@ -9,6 +9,6 @@ OC.L10N.register(
     "Authentication code" : "Autentifikazio kodea",
     "Verify" : "Egiaztatu",
     "Get the authentication code from the two-factor authentication app on your device." : "Zure gailuko bi faktoreetako autentikazio app-tik autentikazio kodea lortu.",
-    "Submit" : "Onartu"
+    "Submit" : "Bidali"
 },
 "nplurals=2; plural=(n != 1);");

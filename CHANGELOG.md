@@ -1,6 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.0.0 – 2019-08-06
+### Added
+- Nextcloud 17 support
+### Fixed
+- Updated `lodash` vulnerability
+### Changed
+- Updated translations
+- Updated dependencies
+### Removed
+- Nextcloud 15 support
+
 ## 2.1.2 – 2019-03-07
 ### Fixed
 - Initial migration for outdated database schemas
