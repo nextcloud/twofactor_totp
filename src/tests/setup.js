@@ -34,7 +34,3 @@ global.expect = require('chai').expect
 //
 // https://github.com/vuejs/vue-cli/issues/2128#issuecomment-453109575
 window.Date = Date
-
-global.OC = {
-	generateUrl: () => ''
-}
