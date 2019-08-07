@@ -63,16 +63,16 @@
         },
         {
             "name": "rullzer/easytotp",
-            "version": "v0.1.3",
+            "version": "v0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rullzer/easytotp.git",
-                "reference": "2abb51ed20ae250a205061a3cbaeef2cb06d570e"
+                "reference": "3214c29212bab1c9b5ffd03b228e51bf85cae305"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rullzer/easytotp/zipball/2abb51ed20ae250a205061a3cbaeef2cb06d570e",
-                "reference": "2abb51ed20ae250a205061a3cbaeef2cb06d570e",
+                "url": "https://api.github.com/repos/rullzer/easytotp/zipball/3214c29212bab1c9b5ffd03b228e51bf85cae305",
+                "reference": "3214c29212bab1c9b5ffd03b228e51bf85cae305",
                 "shasum": ""
             },
             "require": {
@@ -107,7 +107,7 @@
                 "rfc6238",
                 "totp"
             ],
-            "time": "2019-03-05T12:09:03+00:00"
+            "time": "2019-08-07T13:01:50+00:00"
         }
     ],
     "packages-dev": [
