@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.0.1 – 2019-08-07
+### Fixed
+- Numeric overflow on 32bit php installations
+
 ## 3.0.0 – 2019-08-06
 ### Added
 - Nextcloud 17 support
