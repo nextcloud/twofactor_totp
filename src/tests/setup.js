@@ -23,8 +23,8 @@ require('jsdom-global')()
 
 require('vue').mixin({
 	methods: {
-		t: (app, str) => str
-	}
+		t: (app, str) => str,
+	},
 })
 
 global.expect = require('chai').expect

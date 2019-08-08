@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {shallowMount, createLocalVue} from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 const localVue = createLocalVue()
@@ -40,14 +40,14 @@ describe('PersonalTotpSettings', () => {
 		}
 		store = new Vuex.Store({
 			state: {},
-			actions
+			actions,
 		})
 	})
 
 	it('does not load on start', () => {
 		const settings = shallowMount(PersonalTotpSettings, {
 			store,
-			localVue
+			localVue,
 		})
 
 		expect(settings.vm.loading).to.be.false

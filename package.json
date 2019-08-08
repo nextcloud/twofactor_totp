@@ -8,7 +8,7 @@
   "scripts": {
     "build": "webpack --progress --hide-modules --config src/webpack.prod.js",
     "dev": "webpack --progress --watch --config src/webpack.dev.js",
-    "lint": "$(npm bin)/eslint --ext .js,.vue js",
+    "lint": "eslint --ext .js,.vue src",
     "lint:autofix": "eslint --ext .js,.vue src --fix",
     "test": "mocha-webpack --webpack-config src/webpack.test.js --require src/tests/setup.js src/tests/**/*.spec.js",
     "test:watch": "mocha-webpack -w --webpack-config src/webpack.test.js --require src/tests/setup.js src/tests/**/*.spec.js"
@@ -41,6 +41,7 @@
     "css-loader": "^3.2.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-nextcloud": "^0.2.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^5.2.3",
     "file-loader": "^4.1.0",
