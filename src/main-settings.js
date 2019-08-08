@@ -19,20 +19,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import store from './store';
+import store from './store'
 import Vue from 'vue'
 
 Vue.mixin({
 	methods: {
 		t,
-	}
+	},
 })
 
-const initialStateElement = document.getElementById('twofactor-totp-initial-state')
+const initialStateElement = document.getElementById(
+	'twofactor-totp-initial-state'
+)
 if (initialStateElement) {
 	const state = parseInt(initialStateElement.value, 10)
 	store.replaceState({
-		totpState: state
+		totpState: state,
 	})
 }
 

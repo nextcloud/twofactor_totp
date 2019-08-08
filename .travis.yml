@@ -83,6 +83,9 @@ script:
   # Build js bundle
   - npm run build
 
+  # Lint js files
+  - if [[ "$TEST_JS" = "TRUE" ]]; then npm run lint; fi
+
   # Run js tests
   - if [[ "$TEST_JS" = "TRUE" ]]; then npm run test; fi
 

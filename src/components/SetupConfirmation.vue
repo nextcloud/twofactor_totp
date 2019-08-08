@@ -21,78 +21,96 @@
 
 <template>
 	<div>
-	<p>{{ t('twofactor_totp', 'Your new TOTP secret is:' )}} {{secret}}</p>
-	<p> {{ t('twofactor_totp', 'For quick setup, scan this QR code with your TOTP app:') }}</p>
-	<QR :value="qrUrl" :options="{width: 150}"></QR>
-	<p> {{ t('twofactor_totp', 'After you configured your app, enter a test code below to ensure everything works correctly:') }} </p>
-	<input id="totp-confirmation"
-		   type="tel"
-		   minlength="6"
-		   maxlength="10"
-		   autocomplete="off"
-		   autocapitalize="off"
-		   v-on:keydown="onConfirmKeyDown"
-		   v-model="confirmationCode"
-		   :disabled="loading"
-		   :placeholder="t('twofactor_totp', 'Authentication code')">
-	<input id="totp-confirmation-submit"
-		   type="button"
-		   v-on:click="confirm"
-		   :disabled="loading"
-		   :value="t('twofactor_totp', 'Verify')">
+		<p>
+			{{ t('twofactor_totp', 'Your new TOTP secret is:') }} {{ secret }}
+		</p>
+		<p>
+			{{
+				t(
+					'twofactor_totp',
+					'For quick setup, scan this QR code with your TOTP app:'
+				)
+			}}
+		</p>
+		<QR :value="qrUrl" :options="{ width: 150 }"></QR>
+		<p>
+			{{
+				t(
+					'twofactor_totp',
+					'After you configured your app, enter a test code below to ensure everything works correctly:'
+				)
+			}}
+		</p>
+		<input
+			id="totp-confirmation"
+			v-model="confirmationCode"
+			type="tel"
+			minlength="6"
+			maxlength="10"
+			autocomplete="off"
+			autocapitalize="off"
+			:disabled="loading"
+			:placeholder="t('twofactor_totp', 'Authentication code')"
+			@keydown="onConfirmKeyDown"
+		/>
+		<input
+			id="totp-confirmation-submit"
+			type="button"
+			:disabled="loading"
+			:value="t('twofactor_totp', 'Verify')"
+			@click="confirm"
+		/>
 	</div>
 </template>
 
 <script>
-	import QR from '@chenfengyuan/vue-qrcode'
+import QR from '@chenfengyuan/vue-qrcode'
 
-	export default {
-		name: 'SetupConfirmation',
-		components: {
-			QR,
+export default {
+	name: 'SetupConfirmation',
+	components: {
+		QR,
+	},
+	props: {
+		loading: {
+			type: Boolean,
+			default: false,
 		},
-		props: {
-			loading: {
-				type: Boolean,
-				default: false,
-			},
-			secret: {
-				type: String,
-				required: true,
-			},
-			qrUrl: {
-				type: String,
-				required: true,
-			},
-			confirmation: {
-				type: String,
-				default: '',
-			}
+		secret: {
+			type: String,
+			required: true,
 		},
-		data() {
-			return {
-				confirmationCode: this.confirmation,
-			}
+		qrUrl: {
+			type: String,
+			required: true,
 		},
-		watch: {
-			confirmation(newVal) {
-				this.confirmationCode = newVal
-			}
+		confirmation: {
+			type: String,
+			default: '',
 		},
-		methods: {
-			confirm() {
-				this.$emit('update:confirmation', this.confirmationCode)
-				this.$emit('confirm')
-			},
-			onConfirmKeyDown(e) {
-				if (e.which === 13) {
-					this.confirm()
-				}
-			},
+	},
+	data() {
+		return {
+			confirmationCode: this.confirmation,
 		}
-	}
+	},
+	watch: {
+		confirmation(newVal) {
+			this.confirmationCode = newVal
+		},
+	},
+	methods: {
+		confirm() {
+			this.$emit('update:confirmation', this.confirmationCode)
+			this.$emit('confirm')
+		},
+		onConfirmKeyDown(e) {
+			if (e.which === 13) {
+				this.confirm()
+			}
+		},
+	},
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
