@@ -6,7 +6,6 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (aplicación autenticadora)",
     "Authenticate with a TOTP app" : "Autenticar con una aplicación TOTP",
     "Could not enable TOTP" : "Nun pudo activase TOTP",
-    "Could not verify your key. Please try again" : "Nun pudo verificase la to clave. Volvi tentalo, por favor",
     "Authentication code" : "Códigu de configuración",
     "Get the authentication code from the two-factor authentication app on your device." : "Consigui'l códigu de l'aplicación d'autenticación en dos pasos nel to preséu.",
     "Submit" : "Unviar"

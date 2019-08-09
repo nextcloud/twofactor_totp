@@ -4,7 +4,6 @@
     "TOTP (Authenticator app)" : "TOTP (Εφαρμογή πιστοποίησης)",
     "Authenticate with a TOTP app" : "Πιστοποίηση με μια TOTP εφαρμογή",
     "Could not enable TOTP" : "Αδυναμία ενεργοποίησης TOTP",
-    "Could not verify your key. Please try again" : "Αδυναμία επαλήθευσης κλειδιού. Παρακαλούμε προσπαθήστε ξανά",
     "Authentication code" : "Κώδικας πιστοποίησης",
     "Verify" : "Επαλήθευση",
     "Get the authentication code from the two-factor authentication app on your device." : "Παραλάβετε τον κωδικό πιστοποίησης από την εφαρμογή δύο-παραγόντων στην συσκευή σας.",

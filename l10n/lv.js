@@ -5,7 +5,6 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Esat atspējojis TOTP divu faktoru autentifikāciju jūsu kontam",
     "TOTP (Authenticator app)" : "TOTP (Autentificētājs programma)",
     "Authenticate with a TOTP app" : "Autentificēt ar TOTP programmu",
-    "Could not verify your key. Please try again" : "Nevarēja verificēt tavu atslēgu. Mēģini vēlreiz.",
     "Authentication code" : "Autentifikācijas kods",
     "Get the authentication code from the two-factor authentication app on your device." : "Iegūstiet autentifikācijas kodu no divu faktoru autentifikācijas koda autentifikācijas jūsu ierīcē.",
     "Submit" : "Iesniegt"

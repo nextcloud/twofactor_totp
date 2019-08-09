@@ -6,7 +6,6 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (აუტენტიფიკაციის აპლიკაცია)",
     "Authenticate with a TOTP app" : "გაიარეთ აუტენტიფიკაცია თქვენს TOTP აპლიკაციასთან",
     "Could not enable TOTP" : "TOTP-ს ამოქმედება ვერ მოხერხდა",
-    "Could not verify your key. Please try again" : "თქვენი გასაღები ვერ დამოწმდა. გთხოვთ სცადოთ ახლიდან",
     "Authentication code" : "აუტენტიფიკაციის კოდი",
     "Get the authentication code from the two-factor authentication app on your device." : "აუტენტიფიკაციის კოდი მიიღეთ თქვენს მოწყობილობაზე არსებული ორ-ფაქტორიანი აუტენტიფიკაციის აპლიკაციისგან.",
     "Submit" : "გაგზავნა"
