@@ -1,7 +1,7 @@
 /*
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,24 +19,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require('jsdom-global')()
+import Axios from 'nextcloud-axios'
+import { generateUrl } from 'nextcloud-router'
 
-require('vue').mixin({
-	methods: {
-		t: (app, str) => str,
-	},
-})
+export const saveState = async data => {
+	const url = generateUrl('/apps/twofactor_totp/settings/enable')
 
-global.expect = require('chai').expect
-// https://github.com/vuejs/vue-test-utils/issues/936
-// better fix for "TypeError: Super expression must either be null or
-// a function" than pinning an old version of prettier.
-//
-// https://github.com/vuejs/vue-cli/issues/2128#issuecomment-453109575
-window.Date = Date
-
-global.OC = {
-	getCurrentUser: () => {
-		return { uid: false }
-	},
+	const resp = await Axios.post(url, data)
+	return resp.data
 }

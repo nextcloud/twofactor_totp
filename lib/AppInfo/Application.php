@@ -34,8 +34,10 @@ use OCP\AppFramework\App;
 
 class Application extends App {
 
+	const APP_ID = 'twofactor_totp';
+
 	public function __construct(array $urlParams = []) {
-		parent::__construct('twofactor_totp', $urlParams);
+		parent::__construct(self::APP_ID, $urlParams);
 
 		$container = $this->getContainer();
 		$container->registerAlias(ITotp::class, Totp::class);

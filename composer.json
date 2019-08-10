@@ -6,7 +6,7 @@
 	"require-dev": {
 		"christian-riesen/otp": "2.*",
 		"christophwurst/nextcloud": "17.0.0.x-dev",
-		"christophwurst/nextcloud_testing": "0.6.0"
+		"christophwurst/nextcloud_testing": "0.7.0"
 	},
 	"scripts": {
 		"test": "phpunit -c tests/phpunit.xml",

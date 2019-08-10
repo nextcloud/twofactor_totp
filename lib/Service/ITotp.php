@@ -23,7 +23,9 @@ declare(strict_types = 1);
 
 namespace OCA\TwoFactorTOTP\Service;
 
+use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCA\TwoFactorTOTP\Exception\TotpSecretAlreadySet;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 
 interface ITotp {
@@ -57,6 +59,7 @@ interface ITotp {
 	 * @param string $key for verification
 	 * @return bool whether the key is valid and the secret has been enabled
 	 * @throws DoesNotExistException
+	 * @throws NoTotpSecretFoundException
 	 */
 	public function enable(IUser $user, $key): bool;
 

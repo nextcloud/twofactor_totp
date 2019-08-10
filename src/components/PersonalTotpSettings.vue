@@ -53,6 +53,7 @@
 <script>
 import confirmPassword from 'nextcloud-password-confirmation'
 
+import Logger from '../logger'
 import SetupConfirmation from './SetupConfirmation'
 import state from '../state'
 
@@ -80,6 +81,7 @@ export default {
 		toggleEnabled() {
 			if (this.loading) {
 				// Ignore event
+				Logger.debug('still loading -> ignoring event')
 				return
 			}
 
@@ -93,6 +95,8 @@ export default {
 		createTOTP() {
 			// Show loading spinner
 			this.loading = true
+
+			Logger.debug('starting setup')
 
 			return confirmPassword()
 				.then(() => this.$store.dispatch('enable'))
@@ -108,18 +112,20 @@ export default {
 					OC.Notification.showTemporary(
 						t('twofactor_totp', 'Could not enable TOTP')
 					)
-					console.error('Could not enable TOTP', e)
+					Logger.error('Could not enable TOTP', e)
 
 					// Restore on error
 					this.loading = false
 				})
-				.catch(console.error)
+				.catch(e => Logger.error(e))
 		},
 
 		enableTOTP() {
 			// Show loading spinner and disable input elements
 			this.loading = true
 			this.loadingConfirmation = true
+
+			Logger.debug('starting enable')
 
 			return confirmPassword()
 				.then(() => this.$store.dispatch('confirm', this.confirmation))
@@ -142,17 +148,19 @@ export default {
 					this.confirmation = ''
 					this.loadingConfirmation = false
 				})
-				.catch(console.error)
+				.catch(Logger.error)
 		},
 
 		disableTOTP() {
 			// Show loading spinner
 			this.loading = true
 
+			Logger.debug('starting disable')
+
 			return confirmPassword()
 				.then(() => this.$store.dispatch('disable'))
 				.then(() => (this.enabled = false))
-				.catch(console.error.bind(this))
+				.catch(Logger.error.bind(this))
 				.then(() => (this.loading = false))
 		},
 	},
