@@ -260,6 +260,13 @@ matrix:
     NEED_CORE: true
     NEED_INSTALL_APP: true
 
+  - PHP_VERSION: 7.3
+    OC_VERSION: daily-master-qa
+    TEST_SUITE: phpunit
+    DB_TYPE: sqlite
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+
   - PHP_VERSION: 7.0
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
@@ -281,6 +288,13 @@ matrix:
     NEED_CORE: true
     NEED_INSTALL_APP: true
 
+  - PHP_VERSION: 7.3
+    OC_VERSION: daily-master-qa
+    TEST_SUITE: phpunit
+    DB_TYPE: mysql
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+
   - PHP_VERSION: 7.0
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
@@ -296,6 +310,14 @@ matrix:
     NEED_INSTALL_APP: true
 
   - PHP_VERSION: 7.2
+    OC_VERSION: daily-master-qa
+    TEST_SUITE: phpunit
+    DB_TYPE: pgsql
+    NEED_CORE: true
+    NEED_INSTALL_APP: true
+    COVERAGE: true
+
+  - PHP_VERSION: 7.3
     OC_VERSION: daily-master-qa
     TEST_SUITE: phpunit
     DB_TYPE: pgsql
