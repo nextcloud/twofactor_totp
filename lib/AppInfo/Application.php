@@ -31,6 +31,7 @@ use OCA\TwoFactorTOTP\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\AppFramework\App;
+use OCP\EventDispatcher\IEventDispatcher;
 
 class Application extends App {
 
@@ -42,28 +43,11 @@ class Application extends App {
 		$container = $this->getContainer();
 		$container->registerAlias(ITotp::class, Totp::class);
 
-		$dispatcher = $container->getServer()->getEventDispatcher();
-		$dispatcher->addListener(StateChanged::class, function (StateChanged $event) use ($container) {
-			/** @var IListener[] $listeners */
-			$listeners = [
-				$container->query(StateChangeActivity::class),
-				$container->query(StateChangeRegistryUpdater::class),
-			];
-
-			foreach ($listeners as $listener) {
-				$listener->handle($event);
-			}
-		});
-		$dispatcher->addListener(DisabledByAdmin::class, function (DisabledByAdmin $event) use ($container) {
-			/** @var IListener[] $listeners */
-			$listeners = [
-				$container->query(StateChangeActivity::class),
-			];
-
-			foreach ($listeners as $listener) {
-				$listener->handle($event);
-			}
-		});
+		/** @var IEventDispatcher $dispatcher */
+		$dispatcher = $container->query(IEventDispatcher::class);
+		$dispatcher->addServiceListener(StateChanged::class, StateChangeActivity::class);
+		$dispatcher->addServiceListener(StateChanged::class, StateChangeRegistryUpdater::class);
+		$dispatcher->addServiceListener(DisabledByAdmin::class, StateChangeActivity::class);
 	}
 
 }
