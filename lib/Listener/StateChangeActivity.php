@@ -27,9 +27,10 @@ namespace OCA\TwoFactorTOTP\Listener;
 use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
 use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCP\Activity\IManager as ActivityManager;
-use Symfony\Component\EventDispatcher\Event;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 
-class StateChangeActivity implements IListener {
+class StateChangeActivity implements IEventListener {
 
 	/** @var ActivityManager */
 	private $activityManager;
@@ -38,7 +39,7 @@ class StateChangeActivity implements IListener {
 		$this->activityManager = $activityManager;
 	}
 
-	public function handle(Event $event) {
+	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
 			if ($event instanceof DisabledByAdmin) {
 				$subject = 'totp_disabled_by_admin';

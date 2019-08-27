@@ -25,7 +25,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorTOTP\Event;
 
 use OCP\IUser;
-use Symfony\Component\EventDispatcher\Event;
+use OCP\EventDispatcher\Event;
 
 class StateChanged extends Event {
 
@@ -36,6 +36,8 @@ class StateChanged extends Event {
 	private $enabled;
 
 	public function __construct(IUser $user, bool $enabled) {
+		parent::__construct();
+
 		$this->user = $user;
 		$this->enabled = $enabled;
 	}

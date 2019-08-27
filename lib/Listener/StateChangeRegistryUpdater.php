@@ -27,9 +27,10 @@ namespace OCA\TwoFactorTOTP\Listener;
 use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
-use Symfony\Component\EventDispatcher\Event;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 
-class StateChangeRegistryUpdater implements IListener {
+class StateChangeRegistryUpdater implements IEventListener {
 
 	/** @var IRegistry */
 	private $registry;
@@ -42,7 +43,7 @@ class StateChangeRegistryUpdater implements IListener {
 		$this->provider = $provider;
 	}
 
-	public function handle(Event $event) {
+	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
 			if ($event->isEnabled()) {
 				$this->registry->enableProviderFor($this->provider, $event->getUser());
