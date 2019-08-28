@@ -13,8 +13,8 @@ use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCA\TwoFactorTOTP\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
+use OCP\EventDispatcher\Event;
 use OCP\IUser;
-use Symfony\Component\EventDispatcher\Event;
 
 class StateChangeRegistryUpdaterTest extends TestCase {
 
@@ -37,7 +37,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 	}
 
 	public function testIgnoresGenericEvent() {
-		$event = $this->createMock(Event::class);
+		$event = new Event();
 		$this->registry->expects($this->never())
 			->method('enableProviderFor');
 		$this->registry->expects($this->never())
