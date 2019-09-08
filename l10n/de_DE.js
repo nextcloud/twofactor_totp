@@ -10,7 +10,7 @@ OC.L10N.register(
     "TOTP two-factor provider" : "Zwei-Faktor TOTP-Anbieter",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Ein Zwei-Faktor-Anbieter für TOTP (RFC 6238)",
     "Enable TOTP" : "TOTP aktivieren",
-    "Could not enable TOTP" : "TOTP kann nicht aktiviert werden",
+    "Could not enable TOTP" : "TOTP konnte nicht aktiviert werden",
     "Your new TOTP secret is:" : "Ihr neuer TOTP-Schlüssel ist:",
     "Authentication code" : "Authentifizierungscode",
     "Verify" : "Überprüfen",
