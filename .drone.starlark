@@ -60,15 +60,12 @@ config = {
 				'firefox'
 			],
 		},
-		'api': {
-			'suites': [
-				'apiTwoFactorTOTP'
-			],
-		},
-		'cli': {
-			'suites': [
-				'cliTwoFactorTOTP'
-			],
+		# Note: the API and CLI tests need webUI steps for their setup, so they look like webUI suites
+		'webUIother': {
+			'suites': {
+				'webUIapiTwoFactorTOTP': 'webUIapiTOTP',
+				'webUIcliTwoFactorTOTP': 'webUIcliTOTP'
+			},
 		},
 	},
 }

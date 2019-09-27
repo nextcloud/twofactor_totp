@@ -1,8 +1,8 @@
 @webUI @insulated
-Feature: Testing Two factor TOTP
-  As a admin
-  I want to be able to verify secrets from webUI
-  So that the users can use two factor auth from TOTP key
+Feature: Use the webUI to verify OTP keys
+  As a user
+  I want to be able to use the webUI to activate and verify my OTP key
+  So that I can use two factor authentication
 
   Background:
     Given user "newly-created-user" has been created with default attributes and skeleton files

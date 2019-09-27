@@ -1,8 +1,10 @@
 @webUI
-Feature: Testing Two factor TOTP
-  As a admin
-  I want to send otp
-  So that I can check the result of last verification request
+Feature: Use an API to verify OTP keys for users
+  As an admin
+  I want to be able to use an API to verify OTP keys for users
+  So that I can remotely manage OTP for users
+
+  Note: this feature is testing the API, but needs webUI steps for scenario setup in "given" steps
 
   Background:
     Given these users have been created with default attributes and skeleton files:

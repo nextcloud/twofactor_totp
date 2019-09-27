@@ -3,9 +3,9 @@ default:
     '': '%paths.base%/../features/bootstrap'
 
   suites:
-    cliTwoFactorTOTP:
+    webUIcliTwoFactorTOTP:
       paths:
-        - '%paths.base%/../features/cliTwoFactorTOTP'
+        - '%paths.base%/../features/webUIcliTwoFactorTOTP'
       contexts:
         - TwoFactorTOTPContext:
         - FeatureContext: &common_feature_context_params
@@ -30,9 +30,9 @@ default:
         - WebUIPersonalSecuritySettingsContext:
         - WebUILoginContext:
 
-    apiTwoFactorTOTP:
+    webUIapiTwoFactorTOTP:
       paths:
-        - '%paths.base%/../features/apiTwoFactorTOTP'
+        - '%paths.base%/../features/webUIapiTwoFactorTOTP'
       contexts:
         - TwoFactorTOTPContext:
         - FeatureContext: *common_feature_context_params

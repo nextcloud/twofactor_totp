@@ -1233,7 +1233,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiTwoFactorTOTP-master-mariadb10.2-php7.0
+name: webUIapiTOTP-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1306,9 +1306,13 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-webui
   environment:
-    BEHAT_SUITE: apiTwoFactorTOTP
+    BEHAT_SUITE: webUIapiTwoFactorTOTP
+    BROWSER: chrome
+    PLATFORM: Linux
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
 
 services:
@@ -1320,6 +1324,12 @@ services:
     MYSQL_PASSWORD: owncloud
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
 - name: server
   pull: always
@@ -1348,7 +1358,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiTwoFactorTOTP-latest-mariadb10.2-php7.0
+name: webUIapiTOTP-latest-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1421,9 +1431,13 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-webui
   environment:
-    BEHAT_SUITE: apiTwoFactorTOTP
+    BEHAT_SUITE: webUIapiTwoFactorTOTP
+    BROWSER: chrome
+    PLATFORM: Linux
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
 
 services:
@@ -1435,6 +1449,12 @@ services:
     MYSQL_PASSWORD: owncloud
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
 - name: server
   pull: always
@@ -1463,7 +1483,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: cliTwoFactorTOTP-master-mariadb10.2-php7.0
+name: webUIcliTOTP-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1536,9 +1556,13 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-cli
+  - make test-acceptance-webui
   environment:
-    BEHAT_SUITE: cliTwoFactorTOTP
+    BEHAT_SUITE: webUIcliTwoFactorTOTP
+    BROWSER: chrome
+    PLATFORM: Linux
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
 
 services:
@@ -1550,6 +1574,12 @@ services:
     MYSQL_PASSWORD: owncloud
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
 - name: server
   pull: always
@@ -1578,7 +1608,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: cliTwoFactorTOTP-latest-mariadb10.2-php7.0
+name: webUIcliTOTP-latest-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1651,9 +1681,13 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-cli
+  - make test-acceptance-webui
   environment:
-    BEHAT_SUITE: cliTwoFactorTOTP
+    BEHAT_SUITE: webUIcliTwoFactorTOTP
+    BROWSER: chrome
+    PLATFORM: Linux
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
 
 services:
@@ -1665,6 +1699,12 @@ services:
     MYSQL_PASSWORD: owncloud
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
 - name: server
   pull: always
@@ -1729,9 +1769,9 @@ depends_on:
 - webUITwoFactTOTP-master-firefox-mariadb10.2-php7.0
 - webUITwoFactTOTP-latest-chrome-mariadb10.2-php7.0
 - webUITwoFactTOTP-latest-firefox-mariadb10.2-php7.0
-- apiTwoFactorTOTP-master-mariadb10.2-php7.0
-- apiTwoFactorTOTP-latest-mariadb10.2-php7.0
-- cliTwoFactorTOTP-master-mariadb10.2-php7.0
-- cliTwoFactorTOTP-latest-mariadb10.2-php7.0
+- webUIapiTOTP-master-chrome-mariadb10.2-php7.0
+- webUIapiTOTP-latest-chrome-mariadb10.2-php7.0
+- webUIcliTOTP-master-chrome-mariadb10.2-php7.0
+- webUIcliTOTP-latest-chrome-mariadb10.2-php7.0
 
 ...
