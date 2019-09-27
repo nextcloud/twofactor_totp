@@ -91,6 +91,7 @@ class TwoFactorTOTPContext implements Context {
 	 * Generate One time key for login from secret
 	 *
 	 * @return string
+	 * @throws Exception
 	 */
 	private function generateTOTPKey() {
 		$otp = new Otp();
@@ -177,6 +178,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @param string $username
 	 *
 	 * @return void
+	 * @throws Exception
 	 */
 	public function theUserReLogsInAsForTwoFactorAuthentication($username) {
 		$this->webUIGeneralContext->theUserLogsOutOfTheWebUI();
@@ -221,6 +223,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @When the user adds one-time key generated from the secret key on the verification page on the webUI
 	 *
 	 * @return void
+	 * @throws Exception
 	 */
 	public function theUserAddsOneTimeKeyGeneratedOnVerificationPageOnTheWebui() {
 		$key = $this->generateTOTPKey();
@@ -252,7 +255,7 @@ class TwoFactorTOTPContext implements Context {
 	}
 
 	/**
-	 * Send request with secet key for two factor authentication
+	 * Send request with secret key for two factor authentication
 	 *
 	 * @param string $user
 	 * @param string $secretKey
@@ -278,6 +281,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @param string $user
 	 *
 	 * @return void
+	 * @throws Exception
 	 */
 	public function theAdministratorTriesToVerifyTheOtpKeyForUserUsingTheCorrectKey($user) {
 		$secretKey = $this->generateTOTPKey();
