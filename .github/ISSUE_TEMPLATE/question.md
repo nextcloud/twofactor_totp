@@ -1,13 +1,7 @@
 ---
 name: 🙋 Question
 about: Do you have a question about the app?
-version: 0.1
+version: 0.2
 ---
 
-### Question
-
-<!-- Fill in the relevant information below to help triage your question. -->
-
-#### Summary
-
-<!-- Provide a summary of your question (if applicable). -->
+Please ask your question(s) at https://help.nextcloud.com/c/apps/twofactor-totp. 
