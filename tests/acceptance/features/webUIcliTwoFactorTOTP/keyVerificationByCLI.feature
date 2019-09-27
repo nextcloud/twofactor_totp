@@ -1,8 +1,10 @@
 @webUI
-Feature: Testing Two factor TOTP
-  As a admin
-  I want to be able to verify secrets
-  So that the users can use TOTP without verification with TOTP code
+Feature: Use the CLI to verify OTP keys for users
+  As an admin
+  I want to be able to use the CLI to verify OTP keys for users
+  So that I can manage OTP for users
+
+  Note: this feature is testing the CLI, but needs webUI steps for scenario setup in "given" steps
 
   Background:
     Given these users have been created with default attributes and skeleton files:

@@ -73,7 +73,7 @@ class VerificationPage extends OwncloudPage {
 
 	/**
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function getErrorMessage() {
 		$errorMessageElement = $this->find(
