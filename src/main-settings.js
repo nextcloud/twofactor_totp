@@ -20,7 +20,7 @@
  */
 
 import Vue from 'vue'
-
+import { loadState } from '@nextcloud/initial-state'
 import Logger from './logger'
 import store from './store'
 
@@ -30,18 +30,9 @@ Vue.mixin({
 	},
 })
 
-Logger.debug('loading initial state')
-const initialStateElement = document.getElementById(
-	'twofactor-totp-initial-state'
-)
-if (initialStateElement) {
-	const state = parseInt(initialStateElement.value, 10)
-	store.replaceState({
-		totpState: state,
-	})
-} else {
-	Logger.warn('no initial state element found')
-}
+store.replaceState({
+	totpState: loadState('twofactor_totp', 'state'),
+})
 
 import PersonalTotpSettings from './components/PersonalTotpSettings'
 

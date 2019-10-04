@@ -32,6 +32,7 @@ use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
 use OCP\AppFramework\IAppContainer;
+use OCP\IInitialStateService;
 use OCP\IL10N;
 use OCP\IUser;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -47,6 +48,9 @@ class TotpProviderTest extends TestCase {
 	/** @var IAppContainer|MockObject */
 	private $container;
 
+	/** @var IInitialStateService|MockObject */
+	private $initialState;
+
 	/** @var TotpProvider */
 	private $provider;
 
@@ -56,11 +60,13 @@ class TotpProviderTest extends TestCase {
 		$this->totp = $this->createMock(ITotp::class);
 		$this->l10n = $this->createMock(IL10N::class);
 		$this->container = $this->createMock(IAppContainer::class);
+		$this->initialState = $this->createMock(IInitialStateService::class);
 
 		$this->provider = new TotpProvider(
 			$this->totp,
 			$this->l10n,
-			$this->container
+			$this->container,
+			$this->initialState
 		);
 	}
 
@@ -108,12 +114,20 @@ class TotpProviderTest extends TestCase {
 	}
 
 	public function testGetPersonalSettings() {
-		$expected = new Personal(ITotp::STATE_ENABLED);
+		$expected = new Personal();
+
 		$user = $this->createMock(IUser::class);
 		$this->totp->expects($this->once())
 			->method('hasSecret')
 			->with($user)
 			->willReturn(true);
+		$this->initialState->expects($this->once())
+			->method('provideInitialState')
+			->with(
+				'twofactor_totp',
+				'state',
+				true
+			);
 
 		$actual = $this->provider->getPersonalSettings($user);
 
