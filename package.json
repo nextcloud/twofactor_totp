@@ -18,6 +18,7 @@
     "@nextcloud/auth": "^0.3.1",
     "@nextcloud/axios": "^0.4.1",
     "@nextcloud/logger": "^0.1.0",
+    "@nextcloud/initial-state": "^0.2.0",
     "@nextcloud/password-confirmation": "^0.6.0",
     "@nextcloud/router": "^0.1.0",
     "@vue/babel-preset-app": "^3.11.0",

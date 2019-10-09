@@ -33,6 +33,7 @@ use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
+use OCP\IInitialStateService;
 use OCP\IL10N;
 use OCP\IUser;
 use OCP\Template;
@@ -48,12 +49,17 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/** @var IAppContainer */
 	private $container;
 
+	/** @var IInitialStateService */
+	private $initialStateService;
+
 	public function __construct(ITotp $totp,
 								IL10N $l10n,
-								IAppContainer $container) {
+								IAppContainer $container,
+								IInitialStateService $initialStateService) {
 		$this->totp = $totp;
 		$this->l10n = $l10n;
 		$this->container = $container;
+		$this->initialStateService = $initialStateService;
 	}
 
 	/**
@@ -108,7 +114,8 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	}
 
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
-		return new Personal($this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED);
+		$this->initialStateService->provideInitialState('twofactor_totp', 'state', $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED);
+		return new Personal();
 	}
 
 	/**
