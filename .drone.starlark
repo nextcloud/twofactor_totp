@@ -67,6 +67,36 @@ config = {
 				'webUIcliTwoFactorTOTP': 'webUIcliTOTP'
 			},
 		},
+		'webUI-PHP7.3': {
+			'suites': {
+				'webUITwoFactorTOTP': 'webUITwoFactTOTP',
+			},
+			'browsers': [
+				'chrome',
+				'firefox'
+			],
+			'servers': [
+				'daily-master-qa',
+				'10.3.0'
+			],
+			'phpVersions': [
+				'7.3'
+			],
+		},
+		# Note: the API and CLI tests need webUI steps for their setup, so they look like webUI suites
+		'webUIother-PHP7.3': {
+			'suites': {
+				'webUIapiTwoFactorTOTP': 'webUIapiTOTP',
+				'webUIcliTwoFactorTOTP': 'webUIcliTOTP'
+			},
+			'servers': [
+				'daily-master-qa',
+				'10.3.0'
+			],
+			'phpVersions': [
+				'7.3'
+			],
+		},
 	},
 }
 
