@@ -6,17 +6,24 @@ ifndef COMPOSER_BIN
     $(error composer is not available on your system, please install composer)
 endif
 
-app_name=twofactor_totp
-project_dir=$(CURDIR)/../$(app_name)
-build_dir=$(CURDIR)/build/artifacts
-sign_dir=$(build_dir)/sign
-appstore_dir=$(build_dir)/appstore
-source_dir=$(build_dir)/source
-package_name=$(app_name)
+app_name=$(notdir $(CURDIR))
+doc_files=AUTHORS.md CHANGELOG.md COPYING README.md
+src_dirs=appinfo js l10n lib templates vendor
+all_src=$(src_dirs) $(doc_files)
+build_dir=$(CURDIR)/build
+dist_dir=$(build_dir)/dist
+
+# dependency folders (leave empty if not required)
+composer_deps=
+composer_dev_deps=
+acceptance_test_deps=vendor-bin/behat/vendor
+nodejs_deps=
+bower_deps=
+
 occ=$(CURDIR)/../../occ
 private_key=$(HOME)/.owncloud/certificates/$(app_name).key
 certificate=$(HOME)/.owncloud/certificates/$(app_name).crt
-sign=php -f $(occ) integrity:sign-app --privateKey="$(private_key)" --certificate="$(certificate)"
+sign=$(occ) integrity:sign-app --privateKey="$(private_key)" --certificate="$(certificate)"
 sign_skip_msg="Skipping signing, either no key and certificate found in $(private_key) and $(certificate) or occ can not be found at $(occ)"
 ifneq (,$(wildcard $(private_key)))
 ifneq (,$(wildcard $(certificate)))
@@ -25,13 +32,6 @@ ifneq (,$(wildcard $(occ)))
 endif
 endif
 endif
-
-# dependency folders (leave empty if not required)
-composer_deps=
-composer_dev_deps=
-acceptance_test_deps=vendor-bin/behat/vendor
-nodejs_deps=
-bower_deps=
 
 # bin file definitions
 PHPUNIT=php -d zend.enable_gc=0  "$(PWD)/../../lib/composer/bin/phpunit"
@@ -47,7 +47,6 @@ BEHAT_BIN=vendor-bin/behat/vendor/bin/behat
 # start with displaying help
 help: ## Show this help message
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//' | sed -e 's/  */ /' | column -t -s :
-
 
 .PHONY: test-php-unit
 test-php-unit: ## Run php unit tests
@@ -111,41 +110,21 @@ update-composer:
 	rm -f composer.lock
 	composer install --prefer-dist
 
-dist: clean install-deps
+$(dist_dir)/$(app_name): $(composer_deps) $(bower_deps)
 	make clean
 	make install-composer-deps
-	mkdir -p $(sign_dir)
-	rsync -av \
-	--exclude=.drone.yml \
-	--exclude=.git \
-	--exclude=.gitignore \
-	--exclude=.phan \
-	--exclude=.php_cs.cache \
-	--exclude=.php_cs.dist \
-	--exclude=.travis.yml \
-	--exclude=.scrutinizer.yml \
-	--exclude=build \
-	--exclude=CONTRIBUTING.md \
-	--exclude=composer.json \
-	--exclude=composer.lock \
-	--exclude=l10n/.tx \
-	--exclude=l10n/no-php \
-	--exclude=Makefile \
-	--exclude=nbproject \
-	--exclude=phpcs.xml \
-	--exclude=phpstan.neon \
-	--exclude=phpunit*xml \
-	--exclude=screenshots \
-	--exclude=tests \
-	--exclude=vendor/bin \
-	--exclude=vendor-bin \
-	$(project_dir) $(sign_dir)
+	rm -Rf $@; mkdir -p $@
+	cp -R $(all_src) $@
+
 ifdef CAN_SIGN
-	$(sign) --path="$(sign_dir)/$(app_name)"
+	$(sign) --path="$(dist_dir)/$(app_name)"
 else
 	@echo $(sign_skip_msg)
 endif
-	tar --format=gnu -czf $(build_dir)/$(package_name).tar.gz -C $(sign_dir) $(app_name)
+	tar --format=gnu -czf $(dist_dir)/$(app_name).tar.gz -C $(dist_dir) $(app_name)
+
+.PHONY: dist
+dist: $(dist_dir)/$(app_name)
 
 #
 # Dependency management
