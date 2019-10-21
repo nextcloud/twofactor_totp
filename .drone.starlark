@@ -77,7 +77,7 @@ config = {
 			],
 			'servers': [
 				'daily-master-qa',
-				'10.3.0'
+				'latest'
 			],
 			'phpVersions': [
 				'7.3'
@@ -91,7 +91,7 @@ config = {
 			},
 			'servers': [
 				'daily-master-qa',
-				'10.3.0'
+				'latest'
 			],
 			'phpVersions': [
 				'7.3'

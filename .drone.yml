@@ -1984,7 +1984,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUITwoFactTOTP-10.3.0-chrome-mariadb10.2-php7.3
+name: webUITwoFactTOTP-latest-chrome-mariadb10.2-php7.3
 
 platform:
   os: linux
@@ -2006,7 +2006,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/twofactor_totp
-    version: 10.3.0
+    version: latest
 
 - name: install-testrunner
   pull: always
@@ -2109,7 +2109,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUITwoFactTOTP-10.3.0-firefox-mariadb10.2-php7.3
+name: webUITwoFactTOTP-latest-firefox-mariadb10.2-php7.3
 
 platform:
   os: linux
@@ -2131,7 +2131,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/twofactor_totp
-    version: 10.3.0
+    version: latest
 
 - name: install-testrunner
   pull: always
@@ -2360,7 +2360,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIapiTOTP-10.3.0-chrome-mariadb10.2-php7.3
+name: webUIapiTOTP-latest-chrome-mariadb10.2-php7.3
 
 platform:
   os: linux
@@ -2382,7 +2382,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/twofactor_totp
-    version: 10.3.0
+    version: latest
 
 - name: install-testrunner
   pull: always
@@ -2610,7 +2610,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIcliTOTP-10.3.0-chrome-mariadb10.2-php7.3
+name: webUIcliTOTP-latest-chrome-mariadb10.2-php7.3
 
 platform:
   os: linux
@@ -2632,7 +2632,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/twofactor_totp
-    version: 10.3.0
+    version: latest
 
 - name: install-testrunner
   pull: always
@@ -2780,11 +2780,11 @@ depends_on:
 - webUIcliTOTP-latest-chrome-mariadb10.2-php7.0
 - webUITwoFactTOTP-master-chrome-mariadb10.2-php7.3
 - webUITwoFactTOTP-master-firefox-mariadb10.2-php7.3
-- webUITwoFactTOTP-10.3.0-chrome-mariadb10.2-php7.3
-- webUITwoFactTOTP-10.3.0-firefox-mariadb10.2-php7.3
+- webUITwoFactTOTP-latest-chrome-mariadb10.2-php7.3
+- webUITwoFactTOTP-latest-firefox-mariadb10.2-php7.3
 - webUIapiTOTP-master-chrome-mariadb10.2-php7.3
-- webUIapiTOTP-10.3.0-chrome-mariadb10.2-php7.3
+- webUIapiTOTP-latest-chrome-mariadb10.2-php7.3
 - webUIcliTOTP-master-chrome-mariadb10.2-php7.3
-- webUIcliTOTP-10.3.0-chrome-mariadb10.2-php7.3
+- webUIcliTOTP-latest-chrome-mariadb10.2-php7.3
 
 ...
