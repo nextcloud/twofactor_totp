@@ -2757,6 +2757,9 @@ trigger:
   ref:
   - refs/tags/**
   - refs/heads/master
+  status:
+  - success
+  - failure
 
 depends_on:
 - phpunit-php7.0-sqlite
