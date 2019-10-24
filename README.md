@@ -13,6 +13,10 @@ Tested with the following apps:
 * [SailOTP (SailfishOS)](https://github.com/seiichiro0185/sailotp) (open source) Available via JollaStore or [Openrepos.net](https://openrepos.net/content/seiichiro0185/sailotp)
 * [OTP Auth](https://cooperrs.de/otpauth.html) (proprietary) Availabe via [Apple's App Store](https://itunes.apple.com/us/app/otp-auth/id659877384)
 
+Tested with the following hardware devices:
+* [Nitrokey Pro](https://shop.nitrokey.com/shop/product/nitrokey-pro-2-3)
+* [Nitrokey Storage](https://shop.nitrokey.com/shop)
+
 ## Enabling TOTP 2FA for your account
 ![](screenshots/enter_challenge.png)
 ![](screenshots/settings.png)
