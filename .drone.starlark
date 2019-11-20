@@ -97,6 +97,32 @@ config = {
 				'7.3'
 			],
 		},
+		'webUI-encryption': {
+			'suites': {
+				'webUIapiTwoFactorTOTP': 'webUIapiTOTPEnc',
+				'webUIcliTwoFactorTOTP': 'webUIcliTOTPEnc',
+				'webUITwoFactorTOTP': 'webUI2FactTOTPEnc'
+			},
+			'extraApps': {
+				'encryption': ''
+			},
+			'extraSetup': [
+				{
+					'name': 'configure-encryption',
+					'image': 'owncloudci/php:7.1',
+					'pull': 'always',
+					'commands': [
+						'cd /var/www/owncloud/server',
+						'php occ encryption:enable',
+						'php occ encryption:select-encryption-type masterkey --yes',
+						'php occ config:list'
+					]
+				}
+			],
+			'phpVersions': [
+				'7.3'
+			],
+		}
 	},
 }
 
