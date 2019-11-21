@@ -83,14 +83,8 @@ script:
   # Build js bundle
   - npm run build
 
-  # Lint js files
-  - if [[ "$TEST_JS" = "TRUE" ]]; then npm run lint; fi
-
   # Run js tests
   - if [[ "$TEST_JS" = "TRUE" ]]; then npm run test; fi
-
-  # Lint php files
-  - if [[ "$SAUCE" = "FALSE" ]]; then find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;; fi
 
   # Run php unit tests
   - if [[ "$SAUCE" = "FALSE" ]]; then ./vendor/bin/phpunit --fail-on-warning --configuration tests/phpunit.xml --group default; fi
