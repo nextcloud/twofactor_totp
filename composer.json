@@ -9,6 +9,7 @@
 		"christophwurst/nextcloud_testing": "0.7.0"
 	},
 	"scripts": {
+		"lint": "find . -name \\*.php -not -path './vendor/*' -exec php -l \"{}\" \\;",
 		"test": "phpunit -c tests/phpunit.xml",
 		"test:acceptance": "phpunit -c tests/phpunit.xml tests/Acceptance",
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
