@@ -1,32 +1,6 @@
 ---
 kind: pipeline
 type: docker
-name: coding-standard-php7.0
-
-platform:
-  os: linux
-  arch: amd64
-
-workspace:
-  base: /var/www/owncloud
-  path: server/apps/twofactor_totp
-
-steps:
-- name: coding-standard
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - make test-php-style
-
-trigger:
-  ref:
-  - refs/pull/**
-  - refs/tags/**
-  - refs/heads/master
-
----
-kind: pipeline
-type: docker
 name: coding-standard-php7.1
 
 platform:
@@ -105,7 +79,7 @@ trigger:
 ---
 kind: pipeline
 type: docker
-name: phpunit-php7.0-sqlite
+name: phpunit-php7.1-sqlite
 
 platform:
   os: linux
@@ -131,14 +105,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -150,7 +124,7 @@ steps:
 
 - name: phpunit-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - make test-php-unit-dbg
 
@@ -170,7 +144,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -178,7 +151,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: phpunit-php7.0-mariadb10.2
+name: phpunit-php7.1-mariadb10.2
 
 platform:
   os: linux
@@ -204,14 +177,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -223,7 +196,7 @@ steps:
 
 - name: phpunit-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - make test-php-unit-dbg
 
@@ -253,255 +226,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
-- coding-standard-php7.1
-- coding-standard-php7.2
-- coding-standard-php7.3
-
----
-kind: pipeline
-type: docker
-name: phpunit-php7.0-mysql5.5
-
-platform:
-  os: linux
-  arch: amd64
-
-workspace:
-  base: /var/www/owncloud
-  path: server/apps/twofactor_totp
-
-steps:
-- name: install-core
-  pull: always
-  image: owncloudci/core
-  settings:
-    core_path: /var/www/owncloud/server
-    db_host: mysql
-    db_name: owncloud
-    db_password: owncloud
-    db_type: mysql
-    db_username: owncloud
-    exclude: apps/twofactor_totp
-    version: daily-master-qa
-
-- name: install-app-twofactor_totp
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - cd /var/www/owncloud/server/apps/twofactor_totp
-  - make vendor
-
-- name: setup-server-twofactor_totp
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - cd /var/www/owncloud/server
-  - php occ a:l
-  - php occ a:e twofactor_totp
-  - php occ a:e testing
-  - php occ a:l
-  - php occ config:system:set trusted_domains 1 --value=server
-  - php occ log:manage --level 2
-
-- name: phpunit-tests
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - make test-php-unit-dbg
-
-- name: codecov-upload
-  pull: always
-  image: plugins/codecov:2
-  settings:
-    paths:
-    - tests/output/clover.xml
-    token:
-      from_secret: codecov_token
-
-services:
-- name: mysql
-  pull: always
-  image: mysql:5.5
-  environment:
-    MYSQL_DATABASE: owncloud
-    MYSQL_PASSWORD: owncloud
-    MYSQL_ROOT_PASSWORD: owncloud
-    MYSQL_USER: owncloud
-
-trigger:
-  ref:
-  - refs/pull/**
-  - refs/tags/**
-  - refs/heads/master
-
-depends_on:
-- coding-standard-php7.0
-- coding-standard-php7.1
-- coding-standard-php7.2
-- coding-standard-php7.3
-
----
-kind: pipeline
-type: docker
-name: phpunit-php7.0-mysql5.7
-
-platform:
-  os: linux
-  arch: amd64
-
-workspace:
-  base: /var/www/owncloud
-  path: server/apps/twofactor_totp
-
-steps:
-- name: install-core
-  pull: always
-  image: owncloudci/core
-  settings:
-    core_path: /var/www/owncloud/server
-    db_host: mysql
-    db_name: owncloud
-    db_password: owncloud
-    db_type: mysql
-    db_username: owncloud
-    exclude: apps/twofactor_totp
-    version: daily-master-qa
-
-- name: install-app-twofactor_totp
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - cd /var/www/owncloud/server/apps/twofactor_totp
-  - make vendor
-
-- name: setup-server-twofactor_totp
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - cd /var/www/owncloud/server
-  - php occ a:l
-  - php occ a:e twofactor_totp
-  - php occ a:e testing
-  - php occ a:l
-  - php occ config:system:set trusted_domains 1 --value=server
-  - php occ log:manage --level 2
-
-- name: phpunit-tests
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - make test-php-unit-dbg
-
-- name: codecov-upload
-  pull: always
-  image: plugins/codecov:2
-  settings:
-    paths:
-    - tests/output/clover.xml
-    token:
-      from_secret: codecov_token
-
-services:
-- name: mysql
-  pull: always
-  image: mysql:5.7
-  environment:
-    MYSQL_DATABASE: owncloud
-    MYSQL_PASSWORD: owncloud
-    MYSQL_ROOT_PASSWORD: owncloud
-    MYSQL_USER: owncloud
-
-trigger:
-  ref:
-  - refs/pull/**
-  - refs/tags/**
-  - refs/heads/master
-
-depends_on:
-- coding-standard-php7.0
-- coding-standard-php7.1
-- coding-standard-php7.2
-- coding-standard-php7.3
-
----
-kind: pipeline
-type: docker
-name: phpunit-php7.0-postgres9.4
-
-platform:
-  os: linux
-  arch: amd64
-
-workspace:
-  base: /var/www/owncloud
-  path: server/apps/twofactor_totp
-
-steps:
-- name: install-core
-  pull: always
-  image: owncloudci/core
-  settings:
-    core_path: /var/www/owncloud/server
-    db_host: postgres
-    db_name: owncloud
-    db_password: owncloud
-    db_type: pgsql
-    db_username: owncloud
-    exclude: apps/twofactor_totp
-    version: daily-master-qa
-
-- name: install-app-twofactor_totp
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - cd /var/www/owncloud/server/apps/twofactor_totp
-  - make vendor
-
-- name: setup-server-twofactor_totp
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - cd /var/www/owncloud/server
-  - php occ a:l
-  - php occ a:e twofactor_totp
-  - php occ a:e testing
-  - php occ a:l
-  - php occ config:system:set trusted_domains 1 --value=server
-  - php occ log:manage --level 2
-
-- name: phpunit-tests
-  pull: always
-  image: owncloudci/php:7.0
-  commands:
-  - make test-php-unit-dbg
-
-- name: codecov-upload
-  pull: always
-  image: plugins/codecov:2
-  settings:
-    paths:
-    - tests/output/clover.xml
-    token:
-      from_secret: codecov_token
-
-services:
-- name: postgres
-  pull: always
-  image: postgres:9.4
-  environment:
-    POSTGRES_DB: owncloud
-    POSTGRES_PASSWORD: owncloud
-    POSTGRES_USER: owncloud
-
-trigger:
-  ref:
-  - refs/pull/**
-  - refs/tags/**
-  - refs/heads/master
-
-depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -556,7 +280,16 @@ steps:
   pull: always
   image: owncloudci/php:7.1
   commands:
-  - make test-php-unit
+  - make test-php-unit-dbg
+
+- name: codecov-upload
+  pull: always
+  image: plugins/codecov:2
+  settings:
+    paths:
+    - tests/output/clover.xml
+    token:
+      from_secret: codecov_token
 
 services:
 - name: mysql
@@ -575,7 +308,169 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: phpunit-php7.1-mysql5.7
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: server/apps/twofactor_totp
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mysql
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/twofactor_totp
+    version: daily-master-qa
+
+- name: install-app-twofactor_totp
+  pull: always
+  image: owncloudci/php:7.1
+  commands:
+  - cd /var/www/owncloud/server/apps/twofactor_totp
+  - make vendor
+
+- name: setup-server-twofactor_totp
+  pull: always
+  image: owncloudci/php:7.1
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e twofactor_totp
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: phpunit-tests
+  pull: always
+  image: owncloudci/php:7.1
+  commands:
+  - make test-php-unit-dbg
+
+- name: codecov-upload
+  pull: always
+  image: plugins/codecov:2
+  settings:
+    paths:
+    - tests/output/clover.xml
+    token:
+      from_secret: codecov_token
+
+services:
+- name: mysql
+  pull: always
+  image: mysql:5.7
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: phpunit-php7.1-postgres9.4
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: server/apps/twofactor_totp
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: postgres
+    db_name: owncloud
+    db_password: owncloud
+    db_type: pgsql
+    db_username: owncloud
+    exclude: apps/twofactor_totp
+    version: daily-master-qa
+
+- name: install-app-twofactor_totp
+  pull: always
+  image: owncloudci/php:7.1
+  commands:
+  - cd /var/www/owncloud/server/apps/twofactor_totp
+  - make vendor
+
+- name: setup-server-twofactor_totp
+  pull: always
+  image: owncloudci/php:7.1
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e twofactor_totp
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: phpunit-tests
+  pull: always
+  image: owncloudci/php:7.1
+  commands:
+  - make test-php-unit-dbg
+
+- name: codecov-upload
+  pull: always
+  image: plugins/codecov:2
+  settings:
+    paths:
+    - tests/output/clover.xml
+    token:
+      from_secret: codecov_token
+
+services:
+- name: postgres
+  pull: always
+  image: postgres:9.4
+  environment:
+    POSTGRES_DB: owncloud
+    POSTGRES_PASSWORD: owncloud
+    POSTGRES_USER: owncloud
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -649,7 +544,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -723,7 +617,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -731,7 +624,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUITwoFactTOTP-master-chrome-mariadb10.2-php7.0
+name: webUITwoFactTOTP-master-chrome-mariadb10.2-php7.1
 
 platform:
   os: linux
@@ -757,7 +650,7 @@ steps:
 
 - name: install-testrunner
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - mkdir /tmp/testrunner
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
@@ -768,14 +661,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -794,13 +687,13 @@ steps:
 
 - name: fix-permissions
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - chown -R www-data /var/www/owncloud/server
 
 - name: acceptance-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
@@ -831,7 +724,7 @@ services:
 
 - name: server
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   command:
   - /usr/local/bin/apachectl
   - -e
@@ -848,7 +741,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -856,7 +748,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUITwoFactTOTP-master-firefox-mariadb10.2-php7.0
+name: webUITwoFactTOTP-master-firefox-mariadb10.2-php7.1
 
 platform:
   os: linux
@@ -882,7 +774,7 @@ steps:
 
 - name: install-testrunner
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - mkdir /tmp/testrunner
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
@@ -893,14 +785,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -919,13 +811,13 @@ steps:
 
 - name: fix-permissions
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - chown -R www-data /var/www/owncloud/server
 
 - name: acceptance-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
@@ -957,7 +849,7 @@ services:
 
 - name: server
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   command:
   - /usr/local/bin/apachectl
   - -e
@@ -974,7 +866,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -982,7 +873,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUITwoFactTOTP-latest-chrome-mariadb10.2-php7.0
+name: webUITwoFactTOTP-latest-chrome-mariadb10.2-php7.1
 
 platform:
   os: linux
@@ -1008,7 +899,7 @@ steps:
 
 - name: install-testrunner
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - mkdir /tmp/testrunner
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
@@ -1019,14 +910,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -1045,13 +936,13 @@ steps:
 
 - name: fix-permissions
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - chown -R www-data /var/www/owncloud/server
 
 - name: acceptance-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
@@ -1082,7 +973,7 @@ services:
 
 - name: server
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   command:
   - /usr/local/bin/apachectl
   - -e
@@ -1099,7 +990,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -1107,7 +997,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUITwoFactTOTP-latest-firefox-mariadb10.2-php7.0
+name: webUITwoFactTOTP-latest-firefox-mariadb10.2-php7.1
 
 platform:
   os: linux
@@ -1133,7 +1023,7 @@ steps:
 
 - name: install-testrunner
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - mkdir /tmp/testrunner
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
@@ -1144,14 +1034,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -1170,13 +1060,13 @@ steps:
 
 - name: fix-permissions
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - chown -R www-data /var/www/owncloud/server
 
 - name: acceptance-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
@@ -1208,7 +1098,7 @@ services:
 
 - name: server
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   command:
   - /usr/local/bin/apachectl
   - -e
@@ -1225,7 +1115,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -1233,7 +1122,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIapiTOTP-master-chrome-mariadb10.2-php7.0
+name: webUIapiTOTP-master-chrome-mariadb10.2-php7.1
 
 platform:
   os: linux
@@ -1259,7 +1148,7 @@ steps:
 
 - name: install-testrunner
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - mkdir /tmp/testrunner
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
@@ -1270,14 +1159,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -1296,13 +1185,13 @@ steps:
 
 - name: fix-permissions
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - chown -R www-data /var/www/owncloud/server
 
 - name: acceptance-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
@@ -1333,7 +1222,7 @@ services:
 
 - name: server
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   command:
   - /usr/local/bin/apachectl
   - -e
@@ -1350,7 +1239,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -1358,7 +1246,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIapiTOTP-latest-chrome-mariadb10.2-php7.0
+name: webUIapiTOTP-latest-chrome-mariadb10.2-php7.1
 
 platform:
   os: linux
@@ -1384,7 +1272,7 @@ steps:
 
 - name: install-testrunner
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - mkdir /tmp/testrunner
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
@@ -1395,14 +1283,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -1421,13 +1309,13 @@ steps:
 
 - name: fix-permissions
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - chown -R www-data /var/www/owncloud/server
 
 - name: acceptance-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
@@ -1458,7 +1346,7 @@ services:
 
 - name: server
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   command:
   - /usr/local/bin/apachectl
   - -e
@@ -1475,7 +1363,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -1483,7 +1370,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIcliTOTP-master-chrome-mariadb10.2-php7.0
+name: webUIcliTOTP-master-chrome-mariadb10.2-php7.1
 
 platform:
   os: linux
@@ -1509,7 +1396,7 @@ steps:
 
 - name: install-testrunner
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - mkdir /tmp/testrunner
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
@@ -1520,14 +1407,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -1546,13 +1433,13 @@ steps:
 
 - name: fix-permissions
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - chown -R www-data /var/www/owncloud/server
 
 - name: acceptance-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
@@ -1583,7 +1470,7 @@ services:
 
 - name: server
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   command:
   - /usr/local/bin/apachectl
   - -e
@@ -1600,7 +1487,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -1608,7 +1494,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIcliTOTP-latest-chrome-mariadb10.2-php7.0
+name: webUIcliTOTP-latest-chrome-mariadb10.2-php7.1
 
 platform:
   os: linux
@@ -1634,7 +1520,7 @@ steps:
 
 - name: install-testrunner
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - mkdir /tmp/testrunner
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
@@ -1645,14 +1531,14 @@ steps:
 
 - name: install-app-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server/apps/twofactor_totp
   - make vendor
 
 - name: setup-server-twofactor_totp
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - cd /var/www/owncloud/server
   - php occ a:l
@@ -1671,13 +1557,13 @@ steps:
 
 - name: fix-permissions
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - chown -R www-data /var/www/owncloud/server
 
 - name: acceptance-tests
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
@@ -1708,7 +1594,7 @@ services:
 
 - name: server
   pull: always
-  image: owncloudci/php:7.0
+  image: owncloudci/php:7.1
   command:
   - /usr/local/bin/apachectl
   - -e
@@ -1725,7 +1611,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -1850,7 +1735,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -1976,7 +1860,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -2101,7 +1984,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -2227,7 +2109,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -2352,7 +2233,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -2477,7 +2357,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -2602,7 +2481,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -2727,7 +2605,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -2872,7 +2749,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -3017,7 +2893,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -3162,7 +3037,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -3307,7 +3181,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -3452,7 +3325,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -3597,7 +3469,6 @@ trigger:
   - refs/heads/master
 
 depends_on:
-- coding-standard-php7.0
 - coding-standard-php7.1
 - coding-standard-php7.2
 - coding-standard-php7.3
@@ -3632,22 +3503,21 @@ trigger:
   - failure
 
 depends_on:
-- phpunit-php7.0-sqlite
-- phpunit-php7.0-mariadb10.2
-- phpunit-php7.0-mysql5.5
-- phpunit-php7.0-mysql5.7
-- phpunit-php7.0-postgres9.4
+- phpunit-php7.1-sqlite
+- phpunit-php7.1-mariadb10.2
 - phpunit-php7.1-mysql5.5
+- phpunit-php7.1-mysql5.7
+- phpunit-php7.1-postgres9.4
 - phpunit-php7.2-mysql5.5
 - phpunit-php7.3-mysql5.5
-- webUITwoFactTOTP-master-chrome-mariadb10.2-php7.0
-- webUITwoFactTOTP-master-firefox-mariadb10.2-php7.0
-- webUITwoFactTOTP-latest-chrome-mariadb10.2-php7.0
-- webUITwoFactTOTP-latest-firefox-mariadb10.2-php7.0
-- webUIapiTOTP-master-chrome-mariadb10.2-php7.0
-- webUIapiTOTP-latest-chrome-mariadb10.2-php7.0
-- webUIcliTOTP-master-chrome-mariadb10.2-php7.0
-- webUIcliTOTP-latest-chrome-mariadb10.2-php7.0
+- webUITwoFactTOTP-master-chrome-mariadb10.2-php7.1
+- webUITwoFactTOTP-master-firefox-mariadb10.2-php7.1
+- webUITwoFactTOTP-latest-chrome-mariadb10.2-php7.1
+- webUITwoFactTOTP-latest-firefox-mariadb10.2-php7.1
+- webUIapiTOTP-master-chrome-mariadb10.2-php7.1
+- webUIapiTOTP-latest-chrome-mariadb10.2-php7.1
+- webUIcliTOTP-master-chrome-mariadb10.2-php7.1
+- webUIcliTOTP-latest-chrome-mariadb10.2-php7.1
 - webUITwoFactTOTP-master-chrome-mariadb10.2-php7.3
 - webUITwoFactTOTP-master-firefox-mariadb10.2-php7.3
 - webUITwoFactTOTP-latest-chrome-mariadb10.2-php7.3

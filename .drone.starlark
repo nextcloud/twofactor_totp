@@ -14,7 +14,6 @@ config = {
 	'codestyle': {
 		'ordinary' : {
 			'phpVersions': [
-				'7.0',
 				'7.1',
 				'7.2',
 				'7.3',
@@ -27,7 +26,7 @@ config = {
 	'phpunit': {
 		'allDatabasesExceptOracle' : {
 			'phpVersions': [
-				'7.0',
+				'7.1',
 			],
 			'databases': [
 				'sqlite',
@@ -39,7 +38,6 @@ config = {
 		},
 		'reducedDatabases' : {
 			'phpVersions': [
-				'7.1',
 				'7.2',
 				'7.3',
 			],
@@ -167,7 +165,7 @@ def codestyle():
 		return pipelines
 
 	default = {
-		'phpVersions': ['7.0'],
+		'phpVersions': ['7.1'],
 	}
 
 	if 'defaults' in config:
@@ -356,7 +354,7 @@ def phan():
 		return pipelines
 
 	default = {
-		'phpVersions': ['7.0', '7.1', '7.2', '7.3'],
+		'phpVersions': ['7.1', '7.2', '7.3'],
 	}
 
 	if 'defaults' in config:
@@ -428,7 +426,7 @@ def build():
 		return pipelines
 
 	default = {
-		'phpVersions': ['7.0'],
+		'phpVersions': ['7.1'],
 		'commands': [
 			'make dist'
 		],
@@ -553,13 +551,13 @@ def javascript():
 		},
 		'steps':
 			installCore('daily-master-qa', 'sqlite', False) +
-			installApp('7.0') +
-			setupServerAndApp('7.0', params['logLevel']) +
+			installApp('7.1') +
+			setupServerAndApp('7.1', params['logLevel']) +
 			params['extraSetup'] +
 		[
 			{
 				'name': 'js-tests',
-				'image': 'owncloudci/php:7.0',
+				'image': 'owncloudci/php:7.1',
 				'pull': 'always',
 				'environment': params['extraEnvironment'],
 				'commands': params['extraCommandsBeforeTestRun'] + [
@@ -606,7 +604,7 @@ def phptests(testType):
 	errorFound = False
 
 	default = {
-		'phpVersions': ['7.0', '7.1', '7.2', '7.3'],
+		'phpVersions': ['7.1', '7.2', '7.3'],
 		'databases': [
 			'sqlite', 'mariadb:10.2', 'mysql:5.5', 'mysql:5.7', 'postgres:9.4', 'oracle'
 		],
@@ -773,7 +771,7 @@ def acceptance():
 	default = {
 		'servers': ['daily-master-qa', 'latest'],
 		'browsers': ['chrome'],
-		'phpVersions': ['7.0'],
+		'phpVersions': ['7.1'],
 		'databases': ['mariadb:10.2'],
 		'federatedServerNeeded': False,
 		'filterTags': '',
@@ -1350,7 +1348,7 @@ def setupCeph(serviceParams):
 
 	createFirstBucket = serviceParams['createFirstBucket'] if 'createFirstBucket' in serviceParams else True
 	setupCommands = serviceParams['setupCommands'] if 'setupCommands' in serviceParams else [
-		'wait-for-it -t 60 ceph:80',
+		'wait-for-it -t 120 ceph:80',
 		'cd /var/www/owncloud/server/apps/files_primary_s3',
 		'cp tests/drone/ceph.config.php /var/www/owncloud/server/config',
 		'cd /var/www/owncloud/server',
@@ -1358,7 +1356,7 @@ def setupCeph(serviceParams):
 
 	return [{
 		'name': 'setup-ceph',
-		'image': 'owncloudci/php:7.0',
+		'image': 'owncloudci/php:7.1',
 		'pull': 'always',
 		'commands': setupCommands + ([
 			'./apps/files_primary_s3/tests/drone/create-bucket.sh',
@@ -1378,7 +1376,7 @@ def setupScality(serviceParams):
 	createFirstBucket = serviceParams['createFirstBucket'] if 'createFirstBucket' in serviceParams else True
 	createExtraBuckets = serviceParams['createExtraBuckets'] if 'createExtraBuckets' in serviceParams else False
 	setupCommands = serviceParams['setupCommands'] if 'setupCommands' in serviceParams else [
-		'wait-for-it -t 60 scality:8000',
+		'wait-for-it -t 120 scality:8000',
 		'cd /var/www/owncloud/server/apps/files_primary_s3',
 		'cp tests/drone/%s /var/www/owncloud/server/config' % configFile,
 		'cd /var/www/owncloud/server'
@@ -1386,7 +1384,7 @@ def setupScality(serviceParams):
 
 	return [{
 		'name': 'setup-scality',
-		'image': 'owncloudci/php:7.0',
+		'image': 'owncloudci/php:7.1',
 		'pull': 'always',
 		'commands': setupCommands + ([
 			'php occ s3:create-bucket owncloud --accept-warning'
