@@ -21,7 +21,7 @@
     "@nextcloud/initial-state": "^0.2.0",
     "@nextcloud/password-confirmation": "^0.6.0",
     "@nextcloud/router": "^0.1.0",
-    "@vue/babel-preset-app": "^4.0.5",
+    "@vue/babel-preset-app": "^4.1.1",
     "nextcloud-vue": "^0.12.7",
     "vue": "^2.6.10",
     "vuex": "^3.1.2"
