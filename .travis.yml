@@ -2,9 +2,9 @@ sudo: required
 dist: trusty
 language: php
 php:
-  - 7.1
   - 7.2
   - 7.3
+  - 7.4snapshot
 
 addons:
   postgresql: "9.5"
@@ -26,6 +26,7 @@ env:
   - PHP_COVERAGE=FALSE
   - TEST_JS=FALSE
   - SAUCE=FALSE
+  - PATCH_VERSION_CHECK=FALSE
   matrix:
   - DB=sqlite
 
@@ -61,6 +62,8 @@ before_install:
 
   - cd ..
   - git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b $CORE_BRANCH core
+  - if [[ "$PATCH_VERSION_CHECK" = "TRUE" ]]; then echo "<?php" > core/lib/versioncheck.php; fi
+  - if [[ "$PATCH_VERSION_CHECK" = "TRUE" ]]; then  sed -ri 's/(<php min\-version="[0-9\.]+") max\-version="[0-9\.]+"/\1/g' twofactor_totp/appinfo/info.xml; fi
   - mv twofactor_totp core/apps/
 
 before_script:
@@ -94,15 +97,17 @@ script:
 
 matrix:
   include:
-    - php: 7.1
+    - php: 7.2
       env: "DB=pgsql PHP_COVERAGE=TRUE"
-    - php: 7.2
+    - php: 7.3
       env: "DB=mysql"
-    - php: 7.2
+    - php: 7.3
       env: "TEST_JS=TRUE"
-    - php: 7.2
+    - php: 7.3
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
-    - php: 7.2
+    - php: 7.3
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
+    - php: nightly
+      env: "PATCH_VERSION_CHECK=TRUE"
   fast_finish: true
 
