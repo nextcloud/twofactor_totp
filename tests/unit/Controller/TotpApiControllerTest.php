@@ -52,7 +52,7 @@ class TotpApiControllerTest extends TestCase {
 	/** @var TotpApiController */
 	private $controller;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->user = $this->createMock(IUser::class);
 		$this->request = $this->createMock(IRequest::class);

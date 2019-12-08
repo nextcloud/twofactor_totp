@@ -43,7 +43,7 @@ class TotpProviderTest extends TestCase {
 	/** @var TotpProvider $totpProvider */
 	private $totpProvider;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->totp = $this->createMock(ITotp::class);
