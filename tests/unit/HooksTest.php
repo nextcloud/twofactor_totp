@@ -47,7 +47,7 @@ class HooksTest extends TestCase {
 	 */
 	private $secretMapperMock;
 
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->eventDispatcherMock = $this->getMockBuilder(EventDispatcherInterface::class)
 			->disableOriginalConstructor()

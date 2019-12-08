@@ -46,7 +46,7 @@ class DeleteRedundantSecretsCommandTest extends TestCase {
 	/** @var string  */
 	private $dbTable = 'twofactor_totp_secrets';
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->db = \OC::$server->getDatabaseConnection();
@@ -73,7 +73,7 @@ class DeleteRedundantSecretsCommandTest extends TestCase {
 		]));
 	}
 
-	protected function tearDown() {
+	protected function tearDown(): void {
 		parent::tearDown();
 		$query = $this->db->getQueryBuilder()->delete($this->dbTable);
 		$query->execute();

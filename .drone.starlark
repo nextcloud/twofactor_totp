@@ -1281,7 +1281,7 @@ def installTestrunner(phpVersion, useBundledApp):
 			'cp -r /var/www/owncloud/testrunner/apps/%s /var/www/owncloud/server/apps/' % config['app']
 		] if not useBundledApp else []) + [
 			'cd /var/www/owncloud/testrunner',
-			'make install-composer-deps vendor-bin-deps'
+			'make install-composer-deps'
 		]
 	}]
 
