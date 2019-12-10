@@ -656,8 +656,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -780,8 +778,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -905,8 +901,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -1029,8 +1023,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -1154,8 +1146,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -1278,8 +1268,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -1402,8 +1390,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -1526,8 +1512,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -1650,8 +1634,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -1774,8 +1756,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -1899,8 +1879,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -2023,8 +2001,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -2148,8 +2124,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -2272,8 +2246,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -2396,8 +2368,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -2520,8 +2490,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -2644,8 +2612,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -2788,8 +2754,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -2932,8 +2896,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -3076,8 +3038,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -3220,8 +3180,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
@@ -3364,8 +3322,6 @@ steps:
   - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
   - rsync -aIX /tmp/testrunner /var/www/owncloud
   - cp -r /var/www/owncloud/testrunner/apps/twofactor_totp /var/www/owncloud/server/apps/
-  - cd /var/www/owncloud/testrunner
-  - make install-composer-deps
 
 - name: install-app-twofactor_totp
   pull: always
