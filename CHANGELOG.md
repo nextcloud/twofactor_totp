@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.1.1 – 2019-12-12
+### Changed
+- New and updated translations
+- Updated dependencies
+### Fixed
+- JavaScript vulnerabilities in `mem` and `serialize-javascript` dependencies
+
 ## 4.1.0 – 2019-12-02
 ### Added
 - Nextcloud 18 support
