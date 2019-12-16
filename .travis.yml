@@ -1,26 +1,21 @@
 sudo: required
-dist: trusty
+dist: xenial
 language: php
 php:
   - 7.2
   - 7.3
-  - 7.4snapshot
-jobs:
-  allow_failures:
-  - php: nightly
+  - 7.4
 
 addons:
   postgresql: "9.5"
   apt:
     packages:
-    - mysql-server-5.6
-    - mysql-client-core-5.6
-    - mysql-client-5.6
     - libxml2-utils
   sauce_connect: true
 
 services:
-- postgresql
+  - mysql
+  - postgresql
 
 env:
   global:
@@ -32,6 +27,28 @@ env:
   - PATCH_VERSION_CHECK=FALSE
   matrix:
   - DB=sqlite
+
+matrix:
+  include:
+    - php: 7.2
+      env: "DB=pgsql PHP_COVERAGE=TRUE"
+    - php: 7.3
+      env: "DB=mysql"
+    - php: 7.3
+      env: "TEST_JS=TRUE"
+    - php: 7.3
+      env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
+    - php: 7.3
+      env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
+    - php: 7.3
+      env: "CORE_BRANCH=stable17"
+    - php: 7.3
+      env: "CORE_BRANCH=stable18"
+    - php: nightly
+      env: "PATCH_VERSION_CHECK=TRUE"
+  fast_finish: true
+  allow_failures:
+    - php: nightly
 
 branches:
   only:
@@ -100,24 +117,3 @@ script:
   - if [[ "$SAUCE" = "TRUE"  ]]; then ./vendor/bin/phpunit --fail-on-warning --configuration tests/phpunit.xml --group Acceptance --no-coverage; fi
   - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
   - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover tests/clover.xml; fi
-
-matrix:
-  include:
-    - php: 7.2
-      env: "DB=pgsql PHP_COVERAGE=TRUE"
-    - php: 7.3
-      env: "DB=mysql"
-    - php: 7.3
-      env: "TEST_JS=TRUE"
-    - php: 7.3
-      env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
-    - php: 7.3
-      env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
-    - php: 7.3
-      env: "CORE_BRANCH=stable17"
-    - php: 7.3
-      env: "CORE_BRANCH=stable18"
-    - php: nightly
-      env: "PATCH_VERSION_CHECK=TRUE"
-  fast_finish: true
-
