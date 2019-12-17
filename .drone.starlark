@@ -1345,7 +1345,7 @@ def setupCeph(serviceParams):
 
 	createFirstBucket = serviceParams['createFirstBucket'] if 'createFirstBucket' in serviceParams else True
 	setupCommands = serviceParams['setupCommands'] if 'setupCommands' in serviceParams else [
-		'wait-for-it -t 120 ceph:80',
+		'wait-for-it -t 600 ceph:80',
 		'cd /var/www/owncloud/server/apps/files_primary_s3',
 		'cp tests/drone/ceph.config.php /var/www/owncloud/server/config',
 		'cd /var/www/owncloud/server',
@@ -1373,7 +1373,7 @@ def setupScality(serviceParams):
 	createFirstBucket = serviceParams['createFirstBucket'] if 'createFirstBucket' in serviceParams else True
 	createExtraBuckets = serviceParams['createExtraBuckets'] if 'createExtraBuckets' in serviceParams else False
 	setupCommands = serviceParams['setupCommands'] if 'setupCommands' in serviceParams else [
-		'wait-for-it -t 120 scality:8000',
+		'wait-for-it -t 600 scality:8000',
 		'cd /var/www/owncloud/server/apps/files_primary_s3',
 		'cp tests/drone/%s /var/www/owncloud/server/config' % configFile,
 		'cd /var/www/owncloud/server'

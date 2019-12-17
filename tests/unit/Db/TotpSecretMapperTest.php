@@ -61,9 +61,10 @@ class TotpSecretMapperTest extends TestCase {
 	}
 
 	/**
-	 * @expectedException \OCP\AppFramework\Db\DoesNotExistException
 	 */
 	public function testGetNonExistSecret() {
+		$this->expectException(\OCP\AppFramework\Db\DoesNotExistException::class);
+
 		$user = \OC::$server->getUserManager()->get('user2');
 		$this->mapper->getSecret($user);
 	}
@@ -101,9 +102,10 @@ class TotpSecretMapperTest extends TestCase {
 	}
 
 	/**
-	 * @expectedException \OCP\AppFramework\Db\DoesNotExistException
 	 */
 	public function testDeleteSecretsByUserId() {
+		$this->expectException(\OCP\AppFramework\Db\DoesNotExistException::class);
+
 		$user = \OC::$server->getUserManager()->get('user1');
 		$secret = $this->mapper->getSecret($user);
 		$this->assertEquals($user->getUID(), $secret->getUserId());
