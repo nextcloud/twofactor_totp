@@ -1,4 +1,5 @@
 { "translations": {
+    "Enable TOTP" : "Omogoči enkratno geslo",
     "Authentication code" : "Overitvena koda",
     "Verify" : "Overi",
     "Submit" : "Pošlji"

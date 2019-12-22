@@ -5,7 +5,9 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Ai dezactivat autentificarea în doi pași TOTP pentru contul tău",
     "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
     "Authenticate with a TOTP app" : "Autentifică-te cu o aplicație TOTP",
+    "Enable TOTP" : "Activează TOTP",
     "Authentication code" : "Cod autentificare",
+    "Verify" : "Verifică",
     "Get the authentication code from the two-factor authentication app on your device." : "Obțineți codul de autentificare din aplicația de autentificare two-factor de pe dispozitiv.",
     "Submit" : "Trimite"
 },

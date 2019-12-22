@@ -7,8 +7,10 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "Overujete sa pomocou TOTP aplikácie",
     "TOTP two-factor provider" : "Poskytovateľ dvojfaktorovej služby TOTP",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Poskytovateľ dvojfaktorovej služby TOTP (RFC 6238)",
+    "Enable TOTP" : "Povoliť TOTP",
     "Could not enable TOTP" : "Nepodarilo sa zapnúť TOTP",
     "Authentication code" : "Overovací kód",
+    "Verify" : "Overiť",
     "Get the authentication code from the two-factor authentication app on your device." : "Na vašom zariadení získajte overovací kód z aplikácie pre dvojfaktorové overovanie.",
     "Submit" : "Odoslať"
 },

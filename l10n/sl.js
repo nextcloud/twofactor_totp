@@ -1,6 +1,7 @@
 OC.L10N.register(
     "twofactor_totp",
     {
+    "Enable TOTP" : "Omogoči enkratno geslo",
     "Authentication code" : "Overitvena koda",
     "Verify" : "Overi",
     "Submit" : "Pošlji"

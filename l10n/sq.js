@@ -5,6 +5,7 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "Keni çaktivizuar vertëtimin me dy faktorë TOTP për llogarinë tënde",
     "TOTP (Authenticator app)" : "TOTP (Aplikacion autentifikues)",
     "Authenticate with a TOTP app" : "Mirëfilltësimin kryejeni me një aplikacion TOTP",
+    "Enable TOTP" : "Aktivizo TOTP",
     "Could not enable TOTP" : "Nuk mund të aktivizohej TOTP",
     "Authentication code" : "Kod mirëfilltësimi",
     "Verify" : "Verifiko",

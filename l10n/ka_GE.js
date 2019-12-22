@@ -5,8 +5,10 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "თქვენს ანგარიშზე გათიშეთ TOTP ორ-ფაქტორიანი აუტენტიფიკაცია",
     "TOTP (Authenticator app)" : "TOTP (აუტენტიფიკაციის აპლიკაცია)",
     "Authenticate with a TOTP app" : "გაიარეთ აუტენტიფიკაცია თქვენს TOTP აპლიკაციასთან",
+    "Enable TOTP" : "აამოქმედეთ TOTP",
     "Could not enable TOTP" : "TOTP-ს ამოქმედება ვერ მოხერხდა",
     "Authentication code" : "აუტენტიფიკაციის კოდი",
+    "Verify" : "დამოწმება",
     "Get the authentication code from the two-factor authentication app on your device." : "აუტენტიფიკაციის კოდი მიიღეთ თქვენს მოწყობილობაზე არსებული ორ-ფაქტორიანი აუტენტიფიკაციის აპლიკაციისგან.",
     "Submit" : "გაგზავნა"
 },
