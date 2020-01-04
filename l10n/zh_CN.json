@@ -1,6 +1,6 @@
 { "translations": {
-    "You enabled TOTP two-factor authentication for your account" : "您为您的账户启用了 TOTP 两步验证",
-    "You disabled TOTP two-factor authentication for your account" : "您为您的账户禁用了 TOTP 两步验证",
+    "You enabled TOTP two-factor authentication for your account" : "您为您的账号启用了 TOTP 两步验证",
+    "You disabled TOTP two-factor authentication for your account" : "您为您的账号禁用了 TOTP 两步验证",
     "TOTP two-factor authentication disabled by an admin" : "管理员已禁用了 TOTP 两步验证",
     "TOTP (Authenticator app)" : "TOTP (认证应用)",
     "Authenticate with a TOTP app" : "使用 TOTP 应用验证身份",
