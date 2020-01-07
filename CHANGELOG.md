@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.1.2 – 2020-01-07
+### Changed
+- New and updated translations
+- Updated dependencies
+
 ## 4.1.1 – 2019-12-12
 ### Changed
 - New and updated translations
