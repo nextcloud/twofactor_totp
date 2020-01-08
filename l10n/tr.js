@@ -4,6 +4,7 @@ OC.L10N.register(
     "Activate TOTP" : "TOTP'yi etkinleştir",
     "This is your new TOTP secret:" : "Yeni TOTP sırrınız:",
     "Scan this QR code with your TOTP app" : "Bu QR kodunu TOTP uygulamanızla tarayın",
+    "To enable second-factor verify authentication code below." : "Çifte kimlik doğrulaması özelliğini etkinleştirmek için aşağıdaki kimlik doğrulama kodunu doğrulayın.",
     "Authentication code" : "Kimlik doğrulama kodu",
     "Verify" : "Doğrula",
     "Verified" : "Doğrulandı",
