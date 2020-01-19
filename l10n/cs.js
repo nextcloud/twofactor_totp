@@ -10,7 +10,7 @@ OC.L10N.register(
     "TOTP two-factor provider" : "Poskytovatel dvoufázového TOTP",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Poskytovatel dvouúřovňového ověřování pro TOTP (dle normy RFC 6238)",
     "Enable TOTP" : "Zapnout TOTP",
-    "Could not enable TOTP" : "TOTP se nepodařilo povolit",
+    "Could not enable TOTP" : "TOTP se nepodařilo zapnout",
     "Your new TOTP secret is:" : "Vaše nové TOTP tajemství je:",
     "Authentication code" : "Ověřovací kód",
     "Verify" : "Ověřit",
