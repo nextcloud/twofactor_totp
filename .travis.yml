@@ -50,6 +50,9 @@ before_install:
   # XDebug is only needed if we report coverage -> speeds up other builds (7.3 has no xdebug yet)
   - if [[ "$PHP_COVERAGE" = "FALSE" ]]; then phpenv config-rm xdebug.ini || true; fi
 
+  # Use latest node for js tests
+  - if [[ "$TEST_JS" = "TRUE" ]]; then nvm install node; fi
+
   # Set up DB
   - if [[ "$DB" == 'pgsql' ]]; then createuser -U travis -s nc_autotest; fi
   - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e 'create database nc_autotest;'; fi
