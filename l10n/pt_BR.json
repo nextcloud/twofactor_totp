@@ -13,6 +13,8 @@
     "Authentication code" : "Código de autenticação",
     "Verify" : "Verificar",
     "Get the authentication code from the two-factor authentication app on your device." : "Obtenha o código de autenticação do aplicativo de autenticação de dois fatores em seu dispositivo.",
+    "For quick setup, scan this QR code with your TOTP app:": "Para configurar, instale no seu celular um aplicativo de TOTP compatível e escaneie o código abaixo:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:": "Para verificar que tudo foi configurado corretamente, digite abaixo o código gerado no seu aplicativo TOTP",
     "Submit" : "Enviar"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
