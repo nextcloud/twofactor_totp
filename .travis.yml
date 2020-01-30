@@ -110,6 +110,10 @@ matrix:
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
     - php: 7.3
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
+    - php: 7.3
+      env: "CORE_BRANCH=stable17"
+    - php: 7.3
+      env: "CORE_BRANCH=stable18"
     - php: nightly
       env: "PATCH_VERSION_CHECK=TRUE"
   fast_finish: true
