@@ -46,7 +46,7 @@
     "eslint-plugin-nextcloud": "^0.3.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-vue": "^6.2.1",
-    "file-loader": "^5.0.2",
+    "file-loader": "^5.1.0",
     "jsdom": "^16.2.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^7.0.1",
