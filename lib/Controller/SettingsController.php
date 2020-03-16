@@ -21,7 +21,10 @@
 
 namespace OCA\TwoFactor_Totp\Controller;
 
-use Endroid\QrCode\QrCode;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 use OCA\TwoFactor_Totp\Service\ITotp;
 use OCP\AppFramework\Controller;
 use OCP\Defaults;
@@ -74,16 +77,10 @@ class SettingsController extends Controller {
 		if ($state) {
 			$secret = $this->totp->createSecret($user);
 
-			$qrCode = new QrCode();
-			$secretName = $this->getSecretName();
-			$issuer = $this->getSecretIssuer();
-			$qr = $qrCode->setText("otpauth://totp/$secretName?secret=$secret&issuer=$issuer")
-				->setSize(150)
-				->writeDataUri();
 			return [
 				'enabled' => true,
 				'secret' => $secret,
-				'qr' => $qr,
+				'qr' => $this->generateBase64EncodedQrImage($secret)
 			];
 		}
 
@@ -124,5 +121,23 @@ class SettingsController extends Controller {
 	private function getSecretIssuer() {
 		$productName = $this->defaults->getName();
 		return \rawurlencode($productName);
+	}
+
+	/**
+	 * Generate base64 encoded png image
+	 *
+	 * @param string $secret
+	 * @return string
+	 */
+	private function generateBase64EncodedQrImage($secret) {
+		$secretName = $this->getSecretName();
+		$issuer = $this->getSecretIssuer();
+		$data = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer";
+		$renderer = new ImageRenderer(
+			new RendererStyle(170),
+			new ImagickImageBackEnd()
+		);
+		$writer = new Writer($renderer);
+		return 'data:image/png;base64,' . \base64_encode($writer->writeString($data));
 	}
 }

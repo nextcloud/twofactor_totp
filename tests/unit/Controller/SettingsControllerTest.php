@@ -21,7 +21,6 @@
 
 namespace OCA\TwoFactor_Totp\Unit\Controller;
 
-use Endroid\QrCode\QrCode;
 use OCA\TwoFactor_Totp\Controller\SettingsController;
 use OCP\Defaults;
 use Test\TestCase;
@@ -86,27 +85,19 @@ class SettingsControllerTest extends TestCase {
 
 	public function testEnable() {
 		$user = $this->createMock('\OCP\IUser');
-		$this->userSession->expects($this->exactly(2))
-			->method('getUser')
+		$this->userSession->method('getUser')
 			->will($this->returnValue($user));
-		$user->expects($this->once())
-			->method('getCloudId')
+		$user->method('getCloudId')
 			->will($this->returnValue('user@instance.com'));
 		$this->totp->expects($this->once())
 			->method('createSecret')
 			->with($user)
 			->will($this->returnValue('newsecret'));
 
-		$qrCode = new QrCode();
-		$issuer = \rawurlencode($this->defaults->getName());
-		$qr = $qrCode->setText("otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer")
-			->setSize(150)
-			->writeDataUri();
-
 		$expected = [
 			'enabled' => true,
 			'secret' => 'newsecret',
-			'qr' => $qr,
+			'qr' => $this->invokePrivate($this->controller, 'generateBase64EncodedQrImage', ['newsecret'])
 		];
 
 		$this->assertEquals($expected, $this->controller->enable(true));
