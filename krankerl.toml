@@ -1,31 +1,4 @@
 [package]
-exclude = [
-	".git",
-	".github",
-	".gitignore",
-	".travis.yml",
-	".tx",
-	".scrutinizer.yml",
-	"build",
-	"ci",
-	"CONTRIBUTING.md",
-	"composer.json",
-	"composer.lock",
-	"composer.phar",
-	"krankerl.toml",
-	"l10n/no-php",
-	"Makefile",
-	"nbproject",
-	"node_modules",
-	"package*",
-	"screenshots",
-	"src",
-	"tests",
-	"vendor/bin",
-	"vendor/christophwurst/nextcloud/.git",
-	"vendor/endroid/qr-code/assets",
-]
-
 before_cmds = [
 	"composer install --no-dev -o",
 	"npm install",
