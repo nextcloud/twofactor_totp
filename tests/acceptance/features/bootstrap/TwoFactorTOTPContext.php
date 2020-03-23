@@ -28,6 +28,7 @@ use Base32\Base32;
 use PHPUnit\Framework\Assert;
 use Page\VerificationPage;
 use TestHelpers\OcsApiHelper;
+use Zxing\QrReader;
 
 require_once 'bootstrap.php';
 
