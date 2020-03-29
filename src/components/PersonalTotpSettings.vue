@@ -108,7 +108,7 @@ export default {
 					this.loading =
 						this.$store.state.totpState === state.STATE_CREATED
 				})
-				.catch(e => {
+				.catch((e) => {
 					OC.Notification.showTemporary(
 						t('twofactor_totp', 'Could not enable TOTP')
 					)
@@ -117,7 +117,7 @@ export default {
 					// Restore on error
 					this.loading = false
 				})
-				.catch(e => Logger.error(e))
+				.catch((e) => Logger.error(e))
 		},
 
 		enableTOTP() {
