@@ -48,7 +48,7 @@ class SettingTest extends TestCase {
 		$this->l10n->expects($this->once())
 			->method('t')
 			->with('TOTP (Authenticator app)')
-			->will($this->returnValue('TOTP (Google Authentifizierer)'));
+			->willReturn('TOTP (Google Authentifizierer)');
 		$this->assertEquals('TOTP (Google Authentifizierer)', $this->setting->getName());
 		$this->assertEquals(10, $this->setting->getPriority());
 		$this->assertEquals(true, $this->setting->isDefaultEnabledMail());

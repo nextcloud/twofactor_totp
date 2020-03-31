@@ -25,7 +25,6 @@ namespace OCA\TwoFactorTOTP\AppInfo;
 
 use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
 use OCA\TwoFactorTOTP\Event\StateChanged;
-use OCA\TwoFactorTOTP\Listener\IListener;
 use OCA\TwoFactorTOTP\Listener\StateChangeActivity;
 use OCA\TwoFactorTOTP\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorTOTP\Service\ITotp;
