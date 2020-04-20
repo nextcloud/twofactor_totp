@@ -37,7 +37,7 @@ class TotpProvider implements IProvider {
 	private $l10n;
 
 	/**
-	 * @param Totp $totp
+	 * @param ITotp $totp
 	 * @param IL10N $l10n
 	 */
 	public function __construct(ITotp $totp, IL10N $l10n) {
