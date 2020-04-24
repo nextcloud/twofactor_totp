@@ -22,6 +22,7 @@
 
 namespace Page;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 
 /**
@@ -97,5 +98,13 @@ class VerificationPage extends OwncloudPage {
 		$this->waitTillElementIsNotNull($this->cancelOrLoginButtonXpath);
 		$cancel_btn = $this->find("xpath", $this->cancelOrLoginButtonXpath);
 		$cancel_btn->click();
+	}
+
+	/**
+	 *
+	 * @return NodeElement|null
+	 */
+	public function isErrorMessagePresent() {
+		return $this->find('xpath', $this->errorTokenMessageXpath);
 	}
 }
