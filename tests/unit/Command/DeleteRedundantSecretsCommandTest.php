@@ -82,7 +82,7 @@ class DeleteRedundantSecretsCommandTest extends TestCase {
 	public function testCommandInput() {
 		$this->commandTester->execute([]);
 		$output = $this->commandTester->getDisplay();
-		$this->assertContains("The redundant secret of nonexisting_user is deleted.", $output);
-		$this->assertContains("1 redundant secrets are deleted", $output);
+		$this->assertStringContainsString("The redundant secret of nonexisting_user is deleted.", $output);
+		$this->assertStringContainsString("1 redundant secrets are deleted", $output);
 	}
 }
