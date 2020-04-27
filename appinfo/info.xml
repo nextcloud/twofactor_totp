@@ -29,6 +29,6 @@ This extension provides the most simple way to add a second factor to user login
 
 	<dependencies>
 		<owncloud min-version="10.2" max-version="10" />
-		<php min-version="7.1" max-version="7.3" />
+		<php min-version="7.1" max-version="7.4" />
 	</dependencies>
 </info>
