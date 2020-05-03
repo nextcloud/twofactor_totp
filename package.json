@@ -49,7 +49,7 @@
     "file-loader": "^6.0.0",
     "jsdom": "^16.2.2",
     "jsdom-global": "^3.0.2",
-    "mocha": "^7.1.1",
+    "mocha": "^7.1.2",
     "mocha-webpack": "^2.0.0-beta.0",
     "prettier": "1.19.1",
     "sass-loader": "^8.0.2",
