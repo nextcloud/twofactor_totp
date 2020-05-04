@@ -9,6 +9,7 @@ vendor-bin/**/composer.lock
 .php_cs.cache
 
 # Tests - auto-generated files
+.phpunit.result.cache
 /tests/acceptance/output*
 tests/output
 

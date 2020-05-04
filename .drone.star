@@ -16,6 +16,7 @@ config = {
 			'phpVersions': [
 				'7.2',
 				'7.3',
+				'7.4',
 			],
 		},
 	},
@@ -40,6 +41,7 @@ config = {
 		'reducedDatabases' : {
 			'phpVersions': [
 				'7.3',
+				'7.4',
 			],
 			'databases': [
 				'mysql:5.5',
@@ -57,15 +59,12 @@ config = {
 				'chrome',
 				'firefox'
 			],
+			'phpVersions': [
+				'7.2',
+				'7.3'
+			],
 		},
-		# Note: the API and CLI tests need webUI steps for their setup, so they look like webUI suites
-		'webUIother': {
-			'suites': {
-				'webUIapiTwoFactorTOTP': 'webUIapiTOTP',
-				'webUIcliTwoFactorTOTP': 'webUIcliTOTP'
-			},
-		},
-		'webUI-PHP7.3': {
+		'webUI-74': {
 			'suites': {
 				'webUITwoFactorTOTP': 'webUITwoFactTOTP',
 			},
@@ -74,25 +73,33 @@ config = {
 				'firefox'
 			],
 			'servers': [
-				'daily-master-qa',
-				'latest'
+				'daily-master-qa'
 			],
 			'phpVersions': [
-				'7.3'
+				'7.4'
 			],
 		},
 		# Note: the API and CLI tests need webUI steps for their setup, so they look like webUI suites
-		'webUIother-PHP7.3': {
+		'webUIother': {
+			'suites': {
+				'webUIapiTwoFactorTOTP': 'webUIapiTOTP',
+				'webUIcliTwoFactorTOTP': 'webUIcliTOTP'
+			},
+			'phpVersions': [
+				'7.2',
+				'7.3'
+			],
+		},
+		'webUIother-74': {
 			'suites': {
 				'webUIapiTwoFactorTOTP': 'webUIapiTOTP',
 				'webUIcliTwoFactorTOTP': 'webUIcliTOTP'
 			},
 			'servers': [
-				'daily-master-qa',
-				'latest'
+				'daily-master-qa'
 			],
 			'phpVersions': [
-				'7.3'
+				'7.4'
 			],
 		},
 		'webUI-encryption': {
@@ -118,7 +125,37 @@ config = {
 				}
 			],
 			'phpVersions': [
+				'7.2',
 				'7.3'
+			],
+		},
+		'webUI-encryption-74': {
+			'suites': {
+				'webUIapiTwoFactorTOTP': 'webUIapiTOTPEnc',
+				'webUIcliTwoFactorTOTP': 'webUIcliTOTPEnc',
+				'webUITwoFactorTOTP': 'webUI2FactTOTPEnc'
+			},
+			'extraApps': {
+				'encryption': ''
+			},
+			'extraSetup': [
+				{
+					'name': 'configure-encryption',
+					'image': 'owncloudci/php:7.2',
+					'pull': 'always',
+					'commands': [
+						'cd /var/www/owncloud/server',
+						'php occ encryption:enable',
+						'php occ encryption:select-encryption-type masterkey --yes',
+						'php occ config:list'
+					]
+				}
+			],
+			'servers': [
+				'daily-master-qa'
+			],
+			'phpVersions': [
+				'7.4'
 			],
 		}
 	},
