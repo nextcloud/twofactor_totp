@@ -22,7 +22,6 @@
 
 namespace OCA\TwoFactorTOTP\Unit\Controller;
 
-use Endroid\QrCode\QrCode;
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
 use OCA\TwoFactorTOTP\Service\ITotp;
@@ -59,11 +58,11 @@ class SettingsControllerTest extends TestCase {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
-			->will($this->returnValue($user));
+			->willReturn($user);
 		$this->totp->expects($this->once())
 			->method('hasSecret')
 			->with($user)
-			->will($this->returnValue(false));
+			->willReturn(false);
 
 		$expected = new JSONResponse([
 			'state' => false,
@@ -76,14 +75,14 @@ class SettingsControllerTest extends TestCase {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->exactly(2))
 			->method('getUser')
-			->will($this->returnValue($user));
+			->willReturn($user);
 		$user->expects($this->once())
 			->method('getCloudId')
-			->will($this->returnValue('user@instance.com'));
+			->willReturn('user@instance.com');
 		$this->totp->expects($this->once())
 			->method('createSecret')
 			->with($user)
-			->will($this->returnValue('newsecret'));
+			->willReturn('newsecret');
 		$issuer = rawurlencode($this->defaults->getName());
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
@@ -98,7 +97,7 @@ class SettingsControllerTest extends TestCase {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
-			->will($this->returnValue($user));
+			->willReturn($user);
 		$this->totp->expects($this->once())
 			->method('enable')
 			->with($user, '123456')
@@ -115,7 +114,7 @@ class SettingsControllerTest extends TestCase {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
-			->will($this->returnValue($user));
+			->willReturn($user);
 		$this->totp->expects($this->once())
 			->method('deleteSecret');
 
@@ -130,7 +129,7 @@ class SettingsControllerTest extends TestCase {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
-			->will($this->returnValue($user));
+			->willReturn($user);
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->controller->enable(17);

@@ -37,7 +37,6 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Totp implements ITotp {
 

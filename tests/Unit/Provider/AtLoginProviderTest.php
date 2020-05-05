@@ -23,10 +23,8 @@
 namespace OCA\TwoFactorTOTP\Test\Unit\Provider;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorTOTP\AppInfo\Application;
 use OCA\TwoFactorTOTP\Provider\AtLoginProvider;
 use OCP\IURLGenerator;
-use OCP\Template;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class AtLoginProviderTest extends TestCase {
