@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Ha habilitado TOTP verificación en dos pasos para su cuenta",
     "You disabled TOTP two-factor authentication for your account" : "Ha deshabilitado TOTP verificación en dos pasos para su cuenta",
-    "TOTP two-factor authentication disabled by an admin" : "La autenticación de dos factores TOTP ha sido desactivada por un administrador",
+    "TOTP two-factor authentication disabled by an admin" : "La autenticación en dos pasos TOTP ha sido desactivada por un administrador",
     "TOTP (Authenticator app)" : "TOTP (App de autenticación)",
     "Authenticate with a TOTP app" : "Autenticar con la app TOTP",
     "Two-Factor TOTP Provider" : "Autenticación en dos pasos TOTP",
