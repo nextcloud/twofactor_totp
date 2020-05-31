@@ -42,11 +42,11 @@ Feature: Use the webUI to verify OTP keys
     And the user adds one-time key "<key>" on the verification page on the webUI
     Then the user should see an error message on the verification page saying "An error occurred while verifying the token"
     Examples:
-      | key    |
-      | abcde  |
-      | 11111  |
-      | ab2x6  |
-      | 1      |
+      | key   |
+      | abcde |
+      | 11111 |
+      | ab2x6 |
+      | 1     |
 
   Scenario: User cancels the the key verification on the verification page
     Given user "newly-created-user" has logged in using the webUI
