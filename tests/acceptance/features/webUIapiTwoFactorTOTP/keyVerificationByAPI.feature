@@ -9,14 +9,14 @@ Feature: Use an API to verify OTP keys for users
   Background:
     Given these users have been created with default attributes and skeleton files:
       | username |
-      | user0    |
+      | Alice    |
 
   Scenario Outline: Administrator tries to verify OTP key for user using correct key
     Given using OCS API version "<ocs_api_version>"
-    And user "user0" has logged in using the webUI
+    And user "Alice" has logged in using the webUI
     And the user has browsed to the personal security settings page
     And the user has activated TOTP Second-factor auth but not verified
-    When the administrator tries to verify with the one-time key generated from the secret key for user "user0"
+    When the administrator tries to verify with the one-time key generated from the secret key for user "Alice"
     Then the OCS status code should be "<ocs-code>"
     And the HTTP status code should be "<http-code>"
     And the result of the last verification request should be true
@@ -27,10 +27,10 @@ Feature: Use an API to verify OTP keys for users
 
   Scenario Outline: Administrator tries to verify OTP key for user using wrong key
     Given using OCS API version "<ocs_api_version>"
-    And user "user0" has logged in using the webUI
+    And user "Alice" has logged in using the webUI
     And the user has browsed to the personal security settings page
     And the user has activated TOTP Second-factor auth but not verified
-    When the administrator tries to verify with an invalid key "random" for user "user0"
+    When the administrator tries to verify with an invalid key "random" for user "Alice"
     Then the OCS status code should be "<ocs-code>"
     And the HTTP status code should be "<http-code>"
     And the result of the last verification request should be false
