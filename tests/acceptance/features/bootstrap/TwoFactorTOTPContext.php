@@ -102,9 +102,9 @@ class TwoFactorTOTPContext implements Context {
 			$this->timeCounter += 1;
 		}
 		$this->counter += 1;
-		if ($this->counter > 3) {
+		if ($this->counter > 2) {
 			throw new \Exception(
-				'Key used more than three times'
+				'Key used more than twice'
 			);
 		}
 		return $otp->totp(Base32::decode($this->getSecret()), $this->timeCounter);
@@ -164,11 +164,6 @@ class TwoFactorTOTPContext implements Context {
 				$this->generateTOTPKey()
 			);
 			$this->totpUsed = true;
-			if ($this->personalSecuritySettingsPage->isKeyVerified() === false) {
-				$this->personalSecuritySettingsPage->addVerificationKey(
-					$this->generateTOTPKey()
-				);
-			}
 		} else {
 			throw new \Exception(
 				'TOTP Already used.' .
@@ -234,11 +229,6 @@ class TwoFactorTOTPContext implements Context {
 	public function theUserAddsOneTimeKeyGeneratedOnVerificationPageOnTheWebui() {
 		$key = $this->generateTOTPKey();
 		$this->verificationPage->addVerificationKey($key);
-		$response = $this->verificationPage->isErrorMessagePresent();
-		if ($response !== null) {
-			$key = $this->generateTOTPKey();
-			$this->verificationPage->addVerificationKey($key);
-		}
 	}
 
 	/**

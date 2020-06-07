@@ -34,7 +34,6 @@ class PersonalSecuritySettingsPageWithTOTPEnabled extends PersonalSecuritySettin
 	private $verificationFieldXpath = '//input[@id="totp-challenge"]';
 	private $totpVerifyMsgXpath = '//span[@id="totp-verify-msg"]';
 	private $verifySubmissionBtnXpath = '//button[@id="totp-verify-secret"]';
-	private $verifiedMsgXpath = '//span[@id="totp-verify-msg"][contains(text(), "Verified")]';
 
 	/**
 	 * Activate TOTP for the user
@@ -116,7 +115,6 @@ class PersonalSecuritySettingsPageWithTOTPEnabled extends PersonalSecuritySettin
 		} catch (\Exception $exception) {
 			return false;
 		}
-		$this->waitTillElementIsNotNull($this->verifiedMsgXpath);
 		return ($verificationMsg->getText() === 'Verified');
 	}
 }
