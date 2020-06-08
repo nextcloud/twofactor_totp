@@ -229,6 +229,10 @@ class TwoFactorTOTPContext implements Context {
 	public function theUserAddsOneTimeKeyGeneratedOnVerificationPageOnTheWebui() {
 		$key = $this->generateTOTPKey();
 		$this->verificationPage->addVerificationKey($key);
+		$response = $this->verificationPage->isErrorMessagePresent();
+		if ($response) {
+			throw new \Exception("Recently added verification key is not verified");
+		}
 	}
 
 	/**
