@@ -9,7 +9,7 @@
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un provedor de verificación de dous pasos para TOTP (RFC 6238) ",
     "Enable TOTP" : "Activar TOTP",
     "Could not enable TOTP" : "Non foi posíbel activar TOTP ",
-    "Your new TOTP secret is:" : "O seu novo secreto de TOTP é:",
+    "Your new TOTP secret is:" : "O seu novo segredo de TOTP é:",
     "Authentication code" : "Código de autenticación",
     "Verify" : "Verificar",
     "Get the authentication code from the two-factor authentication app on your device." : "Obteña o código de autenticación da aplicación de autenticación de dous factores no seu dispositivo.",
