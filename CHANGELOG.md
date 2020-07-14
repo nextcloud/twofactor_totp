@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.7.0] - 2020-06-19
+
+### Fixed
+
+- Fix casting problem - [#182](https://github.com/owncloud/twofactor_totp/issues/182)
+
+### Changed
+
+- Support PHP 7.4 - [#175](https://github.com/owncloud/twofactor_totp/issues/175)
+- Bump libraries
+
 ## [0.6.1] - 2019-10-17
 
 ### Added
@@ -72,7 +83,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - App is now signed
 
-[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/v0.6.1...HEAD
+[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/v0.7.0...master
+[0.7.0]: https://github.com/owncloud/twofactor_totp/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/owncloud/twofactor_totp/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/owncloud/twofactor_totp/compare/0.5.3...v0.6.0
 [0.5.3]: https://github.com/owncloud/twofactor_totp/compare/0.5.2...v0.5.3
