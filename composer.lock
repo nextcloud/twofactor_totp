@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "733ee6791e8e79693a2c62d5647205ba",
+    "content-hash": "599e1d819aabe8da32bd59dbe17133d6",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -94,9 +94,9 @@
             "authors": [
                 {
                     "name": "Roeland Jago Douma",
+                    "role": "Developer",
                     "email": "roeland@famdouma.nl",
-                    "homepage": "http://rullzer.com",
-                    "role": "Developer"
+                    "homepage": "http://rullzer.com"
                 }
             ],
             "description": "Time-Based One-Time Password according to RFC6238",
@@ -171,16 +171,16 @@
         },
         {
             "name": "christophwurst/nextcloud",
-            "version": "v17.0.2",
+            "version": "v18.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "25aeb8ea0623e54da9ef26daefecff8b9c576df3"
+                "reference": "2cbf4d9b33e6c63ded02df1532728a712b1580cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/25aeb8ea0623e54da9ef26daefecff8b9c576df3",
-                "reference": "25aeb8ea0623e54da9ef26daefecff8b9c576df3",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/2cbf4d9b33e6c63ded02df1532728a712b1580cf",
+                "reference": "2cbf4d9b33e6c63ded02df1532728a712b1580cf",
                 "shasum": ""
             },
             "require": {
@@ -189,7 +189,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "17.0.0-dev"
+                    "dev-master": "18.0.0-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -203,7 +203,7 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2019-12-19T08:20:46+00:00"
+            "time": "2020-08-24T12:42:23+00:00"
         },
         {
             "name": "christophwurst/nextcloud_testing",
@@ -1023,8 +1023,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Utility class for timing",
@@ -2046,5 +2046,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.1"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
