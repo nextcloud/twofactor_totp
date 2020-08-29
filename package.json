@@ -23,7 +23,7 @@
     "@nextcloud/router": "^1.1.0",
     "@vue/babel-preset-app": "^4.5.4",
     "vue": "^2.6.12",
-    "vuex": "^3.4.0"
+    "vuex": "^3.5.1"
   },
   "browserslist": [
     "last 2 versions",
