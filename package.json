@@ -51,7 +51,7 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^7.1.2",
     "mocha-webpack": "^2.0.0-beta.0",
-    "prettier": "2.0.2",
+    "prettier": "2.1.1",
     "sass-loader": "^10.0.2",
     "sinon": "^9.0.3",
     "url-loader": "^4.1.0",
