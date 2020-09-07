@@ -26,17 +26,10 @@ config = {
 	'javascript': False,
 
 	'phpunit': {
-		'allDatabasesExceptOracle' : {
+		'allDatabases' : {
 			'phpVersions': [
 				'7.2',
-			],
-			'databases': [
-				'sqlite',
-				'mariadb:10.2',
-				'mysql:5.5',
-				'mysql:5.7',
-				'postgres:9.4',
-			],
+			]
 		},
 		'reducedDatabases' : {
 			'phpVersions': [
