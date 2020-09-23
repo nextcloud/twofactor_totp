@@ -2,7 +2,6 @@ sudo: required
 dist: xenial
 language: php
 php:
-  - 7.2
   - 7.3
   - 7.4
 
@@ -30,20 +29,22 @@ env:
 
 matrix:
   include:
-    - php: 7.2
+    - php: 7.3
       env: "DB=pgsql PHP_COVERAGE=TRUE"
     - php: 7.3
       env: "DB=mysql"
     - php: 7.3
       env: "TEST_JS=TRUE"
-    - php: 7.3
+    - php: 7.4
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
-    - php: 7.3
+    - php: 7.4
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
-    - php: 7.3
+    - php: 7.2
       env: "CORE_BRANCH=stable18"
     - php: 7.3
       env: "CORE_BRANCH=stable19"
+    - php: 7.4
+      env: "CORE_BRANCH=stable20"
     - php: nightly
       env: "PATCH_VERSION_CHECK=TRUE"
   fast_finish: true
