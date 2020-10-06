@@ -12,6 +12,8 @@ OC.L10N.register(
     "Enable TOTP" : "TOTP aktivieren",
     "Could not enable TOTP" : "TOTP konnte nicht aktiviert werden",
     "Your new TOTP secret is:" : "Ihr neuer TOTP-Schlüssel ist:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Für eine schnelle Einrichtung scannen Sie den QR code mit Ihrer TOTP app:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Nachdem Sie Ihre App konfiguriert haben, geben Sie unten einen Testcode ein, um zu überprüfen, ob alles korrekt funktioniert:",
     "Authentication code" : "Authentifizierungscode",
     "Verify" : "Überprüfen",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalten Sie den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf Ihrem Gerät.",

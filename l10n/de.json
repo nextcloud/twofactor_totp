@@ -10,6 +10,8 @@
     "Enable TOTP" : "TOTP aktivieren",
     "Could not enable TOTP" : "TOTP kann nicht aktiviert werden",
     "Your new TOTP secret is:" : "Dein neuer TOTP-Schlüssel ist:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Für eine schnelle Einrichtung scannen Sie den QR code mit Ihrer TOTP app:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Nachdem Sie Ihre App konfiguriert haben, geben Sie unten einen Testcode ein, um zu überprüfen, ob alles korrekt funktioniert:",
     "Authentication code" : "Authentifizierungscode",
     "Verify" : "Überprüfen",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalte den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf Deinem Gerät.",
