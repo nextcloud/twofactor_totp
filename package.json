@@ -54,7 +54,7 @@
     "prettier": "2.1.2",
     "sass-loader": "^10.0.3",
     "sinon": "^9.2.0",
-    "url-loader": "^4.1.0",
+    "url-loader": "^4.1.1",
     "vue-loader": "^15.9.3",
     "vue-server-renderer": "^2.6.12",
     "vue-template-compiler": "^2.6.12",
