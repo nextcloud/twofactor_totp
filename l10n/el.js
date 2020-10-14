@@ -11,6 +11,7 @@ OC.L10N.register(
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Πάροχος Αυθεντικοποίησης-Δύο-Παραγόντων για TOTP (RFC 6238)",
     "Enable TOTP" : "Ενεργοποίηση TOTP",
     "Could not enable TOTP" : "Αδυναμία ενεργοποίησης TOTP",
+    "Could not verify your key. Please try again" : "Αδυναμία επαλήθευσης κλειδιού. Παρακαλούμε προσπαθήστε ξανά",
     "Your new TOTP secret is:" : "Ο νέος κωδικός σας ΤΟΤΡ είναι:",
     "Authentication code" : "Κώδικας πιστοποίησης",
     "Verify" : "Επαλήθευση",

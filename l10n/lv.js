@@ -6,6 +6,7 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (Autentifikācijas lietotne)",
     "Authenticate with a TOTP app" : "Autentificēties ar TOTP lietotni",
     "Enable TOTP" : "Iespējot TOTP",
+    "Could not verify your key. Please try again" : "Nevarēja verificēt tavu atslēgu. Mēģini vēlreiz.",
     "Authentication code" : "Autentifikācijas kods",
     "Verify" : "Verificēt",
     "Get the authentication code from the two-factor authentication app on your device." : "Iegūstiet autentifikācijas kodu no divu faktoru autentifikācijas koda autentifikācijas jūsu ierīcē.",

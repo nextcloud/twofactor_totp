@@ -6,6 +6,7 @@ OC.L10N.register(
     "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
     "Authenticate with a TOTP app" : "Autentifică-te cu o aplicație TOTP",
     "Enable TOTP" : "Activează TOTP",
+    "Could not verify your key. Please try again" : "Nu s-a putut verifica cheia. Vă rugăm să încercați din nou",
     "Authentication code" : "Cod autentificare",
     "Verify" : "Verifică",
     "Get the authentication code from the two-factor authentication app on your device." : "Obțineți codul de autentificare din aplicația de autentificare two-factor de pe dispozitiv.",

@@ -9,6 +9,7 @@
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "A Two-Factor-Auth Provider for TOTP (RFC 6238)",
     "Enable TOTP" : "Enable TOTP",
     "Could not enable TOTP" : "Could not enable TOTP",
+    "Could not verify your key. Please try again" : "Could not verify your key. Please try again",
     "Your new TOTP secret is:" : "Your new TOTP secret is:",
     "Authentication code" : "Authentication code",
     "Verify" : "Verify",

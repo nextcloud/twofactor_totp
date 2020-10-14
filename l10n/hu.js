@@ -11,6 +11,7 @@ OC.L10N.register(
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Kétfaktoros hitelesítési szolgáltató TOTP(RFC6238)-hez",
     "Enable TOTP" : "Időalapú egyszeri jelszó (TOTP) engedélyezése",
     "Could not enable TOTP" : "TOTP nem engedélyezhető",
+    "Could not verify your key. Please try again" : "A kulcs nem ellenőrizhető. Próbálja meg újra.",
     "Your new TOTP secret is:" : "Az új időalapú egyszeri titkos jelszava (TOTP):",
     "Authentication code" : "Azonosítási kód",
     "Verify" : "Ellenőrzés",

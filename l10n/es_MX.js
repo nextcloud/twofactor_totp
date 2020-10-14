@@ -9,6 +9,7 @@ OC.L10N.register(
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un proveedor de Autenticación de Dos-Factores para TOTP (RFC 6238)",
     "Enable TOTP" : "Habilitar TOTP",
     "Could not enable TOTP" : "No se pudo habilitar TOTP",
+    "Could not verify your key. Please try again" : "No fue posible verificar tu llave. Por favor vuelve a intentarlo",
     "Authentication code" : "Código de autenticación",
     "Verify" : "Verificar",
     "Get the authentication code from the two-factor authentication app on your device." : "Obten el código de autenticación de la aplicación de autenticación de dos factores en tu dispositivo.",

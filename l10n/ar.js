@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Authenticate with a TOTP app" : "المصادقة عبر تطبيق TOTP",
     "Enable TOTP" : "تفعيل TOTP",
+    "Could not verify your key. Please try again" : "تعذرت عملية التحقق من مفتاحك. يرجى إعادة المحاولة",
     "Authentication code" : "رمز المصادقة",
     "Verify" : "تحقق"
 },

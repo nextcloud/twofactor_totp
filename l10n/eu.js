@@ -11,6 +11,7 @@ OC.L10N.register(
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP eskaintzeko zerbitzua (RFC 6238)",
     "Enable TOTP" : "TOTP gaitu",
     "Could not enable TOTP" : "Ezin izan da TOTP aktibatu",
+    "Could not verify your key. Please try again" : "Ezin da zure gakoa ziurtatu. Saia zaitez berriz mesedez",
     "Your new TOTP secret is:" : "Zure TOTP sekretua hauxe da:",
     "Authentication code" : "Autentifikazio kodea",
     "Verify" : "Egiaztatu",

@@ -7,6 +7,7 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "Mirëfilltësimin kryejeni me një aplikacion TOTP",
     "Enable TOTP" : "Aktivizo TOTP",
     "Could not enable TOTP" : "Nuk mund të aktivizohej TOTP",
+    "Could not verify your key. Please try again" : "Çelësi juaj s'mund të verifikohej. Ju lutem provoni përsëri",
     "Authentication code" : "Kod mirëfilltësimi",
     "Verify" : "Verifiko",
     "Get the authentication code from the two-factor authentication app on your device." : "Merreni kodin e mirëfilltësimit pre aplikacionit të mirëfilltësimit dyfaktorësh te pajisja juaj.",

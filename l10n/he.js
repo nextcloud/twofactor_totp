@@ -11,6 +11,7 @@ OC.L10N.register(
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "ספק אימות דו־שלבי עבור TOTP‏ (RFC 6238)",
     "Enable TOTP" : "הפעלת TOTP",
     "Could not enable TOTP" : "לא ניתן להפעיל TOTP",
+    "Could not verify your key. Please try again" : "לא ניתן לוודא שהמפתח שלך תקין. נא לנסות שוב",
     "Your new TOTP secret is:" : "סוד ה־TOTP החדש שלך הוא:",
     "Authentication code" : "קוד אימות",
     "Verify" : "אימות",

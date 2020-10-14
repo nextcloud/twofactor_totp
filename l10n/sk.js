@@ -11,6 +11,7 @@ OC.L10N.register(
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Poskytovateľ dvojfaktorovej služby TOTP (RFC 6238)",
     "Enable TOTP" : "Povoliť TOTP",
     "Could not enable TOTP" : "Nepodarilo sa zapnúť TOTP",
+    "Could not verify your key. Please try again" : "Nie je možné overiť váš kľúč. Skúste to znovu",
     "Your new TOTP secret is:" : "Váš nový TOTP kľúč je:",
     "Authentication code" : "Overovací kód",
     "Verify" : "Overiť",
