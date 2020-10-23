@@ -1,6 +1,7 @@
 OC.L10N.register(
     "twofactor_totp",
     {
+    "Authentication code" : "Код за автентификација",
     "Verify" : "Потврди",
     "Submit" : "Испрати"
 },
