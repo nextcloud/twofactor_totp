@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",
-    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
     "@vue/test-utils": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.1",
