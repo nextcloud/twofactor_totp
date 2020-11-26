@@ -13,6 +13,8 @@ OC.L10N.register(
     "Could not enable TOTP" : "Could not enable TOTP",
     "Could not verify your key. Please try again" : "Could not verify your key. Please try again",
     "Your new TOTP secret is:" : "Your new TOTP secret is:",
+    "For quick setup, scan this QR code with your TOTP app:" : "For quick setup, scan this QR code with your TOTP app:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "After you configured your app, enter a test code below to ensure everything works correctly:",
     "Authentication code" : "Authentication code",
     "Verify" : "Verify",
     "Get the authentication code from the two-factor authentication app on your device." : "Get the authentication code from the two-factor authentication app on your device.",
