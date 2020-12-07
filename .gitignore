@@ -15,3 +15,6 @@ tests/output
 
 # Ignore NetBeans project
 /nbproject/
+
+# SonarCloud scanner
+.scannerwork
