@@ -9,6 +9,7 @@
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Ponudnik dvostopenjske overitve s časovno omejenim geslom TOTP (RFC 6238)",
     "Enable TOTP" : "Omogoči enkratno geslo",
     "Could not enable TOTP" : "Ni mogoče uporabiti časovno omejenega enkratnega gesla TOTP",
+    "Could not verify your key. Please try again" : "Ključa ni mogoče overiti. Poskusite znova.",
     "Your new TOTP secret is:" : "Novo enkratno geslo TOTP:",
     "Authentication code" : "Overitvena koda",
     "Verify" : "Overi",
