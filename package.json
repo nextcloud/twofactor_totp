@@ -33,7 +33,7 @@
     "esversion": 6
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
+    "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@vue/test-utils": "^1.1.1",
     "babel-eslint": "^10.1.0",
