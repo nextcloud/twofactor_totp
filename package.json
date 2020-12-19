@@ -55,7 +55,7 @@
     "sass-loader": "^10.1.0",
     "sinon": "^9.2.2",
     "url-loader": "^4.1.1",
-    "vue-loader": "^15.9.5",
+    "vue-loader": "^15.9.6",
     "vue-server-renderer": "^2.6.12",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.2",
