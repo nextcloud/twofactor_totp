@@ -23,4 +23,4 @@ Tested with the following hardware devices:
 ![](screenshots/settings.png)
 
 ## Login with external apps
-Once you enable OTP with Two Factor Totp, your aplications (for example your Android app or your GNOME app) will need to login using device passwords. To manage it, [know more here](https://docs.nextcloud.com/server/stable/user_manual/session_management.html#managing-devices)
+Once you enable OTP with Two Factor Totp, your aplications (for example your Android app or your GNOME app) will need to login using device passwords. To manage it, [know more here](https://docs.nextcloud.com/server/stable/user_manual/en/session_management.html#managing-devices)
