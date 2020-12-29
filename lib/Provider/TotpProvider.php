@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorTOTP\Provider;
 
+use OCA\TwoFactorTOTP\AppInfo\Application;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
 use OCP\AppFramework\IAppContainer;
@@ -35,6 +36,7 @@ use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
 use OCP\IInitialStateService;
 use OCP\IL10N;
+use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
 
@@ -52,14 +54,19 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/** @var IInitialStateService */
 	private $initialStateService;
 
+	/** @var IURLGenerator */
+	private $urlGenerator;
+
 	public function __construct(ITotp $totp,
 								IL10N $l10n,
 								IAppContainer $container,
-								IInitialStateService $initialStateService) {
+								IInitialStateService $initialStateService,
+	IURLGenerator $urlGenerator) {
 		$this->totp = $totp;
 		$this->l10n = $l10n;
 		$this->container = $container;
 		$this->initialStateService = $initialStateService;
+		$this->urlGenerator = $urlGenerator;
 	}
 
 	/**
@@ -106,11 +113,11 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	}
 
 	public function getLightIcon(): String {
-		return image_path('twofactor_totp', 'app.svg');
+		return $this->urlGenerator->imagePath(Application::APP_ID, 'app.svg');
 	}
 
 	public function getDarkIcon(): String {
-		return image_path('twofactor_totp', 'app-dark.svg');
+		return $this->urlGenerator->imagePath(Application::APP_ID, 'app-dark.svg');
 	}
 
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {

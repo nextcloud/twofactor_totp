@@ -5,14 +5,16 @@
 	},
 	"require-dev": {
 		"christian-riesen/otp": "2.*",
-		"christophwurst/nextcloud": "^18.0.0",
+		"christophwurst/nextcloud": "^20.0.0",
 		"christophwurst/nextcloud_testing": "0.8.1",
-		"nextcloud/coding-standard": "^0.4.0"
+		"nextcloud/coding-standard": "^0.4.0",
+		"psalm/phar": "^4.3"
 	},
 	"scripts": {
 		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
 		"cs:fix": "php-cs-fixer fix",
+		"psalm": "psalm.phar",
 		"test": "phpunit -c tests/phpunit.xml",
 		"test:acceptance": "phpunit -c tests/phpunit.xml tests/Acceptance",
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",

@@ -30,6 +30,7 @@ use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUserSession;
+use RuntimeException;
 use function is_null;
 
 class SettingsController extends ALoginSetupController {
@@ -94,6 +95,9 @@ class SettingsController extends ALoginSetupController {
 					'qrUrl' => $qrUrl,
 				]);
 			case ITotp::STATE_ENABLED:
+				if ($code === null) {
+					throw new InvalidArgumentException("code is missing");
+				}
 				$success = $this->totp->enable($user, $code);
 				return new JSONResponse([
 					'state' => $success ? ITotp::STATE_ENABLED : ITotp::STATE_CREATED,
@@ -110,7 +114,11 @@ class SettingsController extends ALoginSetupController {
 	 */
 	private function getSecretName(): string {
 		$productName = $this->defaults->getName();
-		$userName = $this->userSession->getUser()->getCloudId();
+		$user = $this->userSession->getUser();
+		if ($user === null) {
+			throw new RuntimeException("No user in this context");
+		}
+		$userName = $user->getCloudId();
 		return rawurlencode("$productName:$userName");
 	}
 

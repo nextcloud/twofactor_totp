@@ -34,6 +34,7 @@ use OCA\TwoFactorTOTP\Settings\Personal;
 use OCP\AppFramework\IAppContainer;
 use OCP\IInitialStateService;
 use OCP\IL10N;
+use OCP\IURLGenerator;
 use OCP\IUser;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -51,42 +52,47 @@ class TotpProviderTest extends TestCase {
 	/** @var IInitialStateService|MockObject */
 	private $initialState;
 
+	/** @var IURLGenerator|MockObject */
+	private $urlGenerator;
+
 	/** @var TotpProvider */
 	private $provider;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->totp = $this->createMock(ITotp::class);
 		$this->l10n = $this->createMock(IL10N::class);
 		$this->container = $this->createMock(IAppContainer::class);
 		$this->initialState = $this->createMock(IInitialStateService::class);
+		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 
 		$this->provider = new TotpProvider(
 			$this->totp,
 			$this->l10n,
 			$this->container,
-			$this->initialState
+			$this->initialState,
+			$this->urlGenerator
 		);
 	}
 
-	public function testGetId() {
+	public function testGetId(): void {
 		$expectedId = 'totp';
 
 		$id = $this->provider->getId();
 
-		$this->assertEquals($expectedId, $id);
+		self::assertEquals($expectedId, $id);
 	}
 
-	public function testGetDisplayName() {
+	public function testGetDisplayName(): void {
 		$expected = 'TOTP (Authenticator app)';
 
 		$displayName = $this->provider->getDisplayName();
 
-		$this->assertEquals($expected, $displayName);
+		self::assertEquals($expected, $displayName);
 	}
 
-	public function testGetDescription() {
+	public function testGetDescription(): void {
 		$description = 'Authenticate with a TOTP app';
 		$this->l10n->expects($this->once())
 			->method('t')
@@ -94,26 +100,32 @@ class TotpProviderTest extends TestCase {
 
 		$descr = $this->provider->getDescription();
 
-		$this->assertEquals($description, $descr);
+		self::assertEquals($description, $descr);
 	}
 
-	public function testGetLightIcon() {
-		$expected = image_path('twofactor_totp', 'app.svg');
+	public function testGetLightIcon(): void {
+		$this->urlGenerator->expects(self::once())
+			->method('imagePath')
+			->with('twofactor_totp', 'app.svg')
+			->willReturn('/path/to/app.svg');
 
 		$icon = $this->provider->getLightIcon();
 
-		$this->assertEquals($expected, $icon);
+		self::assertEquals('/path/to/app.svg', $icon);
 	}
 
-	public function testGetDarkIcon() {
-		$expected = image_path('twofactor_totp', 'app-dark.svg');
+	public function testGetDarkIcon(): void {
+		$this->urlGenerator->expects(self::once())
+			->method('imagePath')
+			->with('twofactor_totp', 'app-dark.svg')
+			->willReturn('/path/to/app-dark.svg');
 
 		$icon = $this->provider->getDarkIcon();
 
-		$this->assertEquals($expected, $icon);
+		self::assertEquals('/path/to/app-dark.svg', $icon);
 	}
 
-	public function testGetPersonalSettings() {
+	public function testGetPersonalSettings(): void {
 		$expected = new Personal();
 
 		$user = $this->createMock(IUser::class);
@@ -131,10 +143,10 @@ class TotpProviderTest extends TestCase {
 
 		$actual = $this->provider->getPersonalSettings($user);
 
-		$this->assertEquals($expected, $actual);
+		self::assertEquals($expected, $actual);
 	}
 
-	public function testDeactivate() {
+	public function testDeactivate(): void {
 		$user = $this->createMock(IUser::class);
 		$this->totp->expects($this->once())
 			->method('deleteSecret')
@@ -143,7 +155,7 @@ class TotpProviderTest extends TestCase {
 		$this->provider->disableFor($user);
 	}
 
-	public function testGetSetupProvider() {
+	public function testGetSetupProvider(): void {
 		/** @var IUser|MockObject $user */
 		$user = $this->createMock(IUser::class);
 		$provider = $this->createMock(AtLoginProvider::class);
@@ -154,6 +166,6 @@ class TotpProviderTest extends TestCase {
 
 		$result = $this->provider->getLoginSetup($user);
 
-		$this->assertSame($provider, $result);
+		self::assertSame($provider, $result);
 	}
 }

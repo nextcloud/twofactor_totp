@@ -62,7 +62,7 @@ class Totp implements ITotp {
 		$this->random = $random;
 	}
 
-	public function hasSecret(IUser $user) {
+	public function hasSecret(IUser $user): bool {
 		try {
 			$secret = $this->secretMapper->getSecret($user);
 			return ITotp::STATE_ENABLED === (int)$secret->getState();
@@ -112,7 +112,7 @@ class Totp implements ITotp {
 		return true;
 	}
 
-	public function deleteSecret(IUser $user, bool $byAdmin = false) {
+	public function deleteSecret(IUser $user, bool $byAdmin = false): void {
 		try {
 			// TODO: execute DELETE sql in mapper instead
 			$dbSecret = $this->secretMapper->getSecret($user);
@@ -128,7 +128,7 @@ class Totp implements ITotp {
 		}
 	}
 
-	public function validateSecret(IUser $user, $key): bool {
+	public function validateSecret(IUser $user, string $key): bool {
 		try {
 			$dbSecret = $this->secretMapper->getSecret($user);
 		} catch (DoesNotExistException $ex) {
