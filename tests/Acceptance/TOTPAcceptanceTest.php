@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2017 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -26,7 +28,7 @@ use Base32\Base32;
 use ChristophWurst\Nextcloud\Testing\Selenium;
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use ChristophWurst\Nextcloud\Testing\TestUser;
-use Facebook\WebDriver\Exception\ElementNotSelectableException;
+use Facebook\WebDriver\Exception\ElementNotInteractableException;
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverExpectedCondition;
@@ -40,12 +42,11 @@ use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\IUser;
 use Otp\GoogleAuthenticator;
 use Otp\Otp;
-use PHPUnit_Framework_AssertionFailedError;
 
 /**
  * @group Acceptance
  */
-class TOTPAcceptenceTest extends TestCase {
+class TOTPAcceptanceTest extends TestCase {
 	use TestUser;
 	use Selenium;
 
@@ -55,16 +56,16 @@ class TOTPAcceptenceTest extends TestCase {
 	/** @var TotpSecretMapper */
 	private $secretMapper;
 
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->user = $this->createTestUser();
 		$this->secretMapper = new TotpSecretMapper(OC::$server->getDatabaseConnection());
 	}
 
-	public function testEnableTOTP() {
+	public function testEnableTOTP(): void {
 		$this->webDriver->get('http://localhost:8080/index.php/login');
-		$this->assertContains('Nextcloud', $this->webDriver->getTitle());
+		self::assertStringContainsString('Nextcloud', $this->webDriver->getTitle());
 
 		// Log in
 		$this->webDriver->findElement(WebDriverBy::id('user'))->sendKeys($this->user->getUID());
@@ -79,7 +80,7 @@ class TOTPAcceptenceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return count($driver->findElements(WebDriverBy::id('totp-enabled'))) > 0;
-			} catch (ElementNotSelectableException $ex) {
+			} catch (ElementNotInteractableException $ex) {
 				return false;
 			}
 		});
@@ -105,32 +106,32 @@ class TOTPAcceptenceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return $driver->findElement(WebDriverBy::id('totp-enabled'))->getAttribute('checked') === 'true';
-			} catch (ElementNotSelectableException $ex) {
+			} catch (ElementNotInteractableException $ex) {
 				return false;
 			}
 		});
 		$this->assertHasSecret(ITotp::STATE_ENABLED);
 	}
 
-	private function assertHasSecret($state) {
+	private function assertHasSecret($state): void {
 		try {
 			$secret = $this->secretMapper->getSecret($this->user);
 			if ($state !== (int)$secret->getState()) {
-				throw new PHPUnit_Framework_AssertionFailedError('TOTP secret has wrong state');
+				self::fail('TOTP secret has wrong state');
 			}
 		} catch (DoesNotExistException $ex) {
-			throw new PHPUnit_Framework_AssertionFailedError('User does not have a totp secret');
+			self::fail('User does not have a totp secret');
 		}
 	}
 
-	private function getValidTOTP() {
+	private function getValidTOTP(): string {
 		$dbSecret = $this->secretMapper->getSecret($this->user);
 		$secret = OC::$server->getCrypto()->decrypt($dbSecret->getSecret());
 		$otp = new Otp();
 		return $otp->totp(Base32::decode($secret));
 	}
 
-	private function createSecret() {
+	private function createSecret(): string {
 		$secret = GoogleAuthenticator::generateRandom();
 		$dbsecret = new TotpSecret();
 		$dbsecret->setSecret(OC::$server->getCrypto()->encrypt($secret));
@@ -146,11 +147,11 @@ class TOTPAcceptenceTest extends TestCase {
 		return $secret;
 	}
 
-	public function testLoginShouldFailWithWrongOTP() {
+	public function testLoginShouldFailWithWrongOTP(): void {
 		$this->createSecret();
 
 		$this->webDriver->get('http://localhost:8080/index.php/login');
-		$this->assertContains('Nextcloud', $this->webDriver->getTitle());
+		self::assertStringContainsString('Nextcloud', $this->webDriver->getTitle());
 
 		// Log in
 		$this->webDriver->findElement(WebDriverBy::id('user'))->sendKeys($this->user->getUID());
@@ -160,7 +161,7 @@ class TOTPAcceptenceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return $driver->findElements(WebDriverBy::className('totp-form'));
-			} catch (ElementNotSelectableException $ex) {
+			} catch (ElementNotInteractableException $ex) {
 				return false;
 			}
 		});

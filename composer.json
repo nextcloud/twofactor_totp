@@ -6,7 +6,7 @@
 	"require-dev": {
 		"christian-riesen/otp": "2.*",
 		"christophwurst/nextcloud": "^20.0.0",
-		"christophwurst/nextcloud_testing": "0.8.1",
+		"christophwurst/nextcloud_testing": "^0.10",
 		"nextcloud/coding-standard": "^0.4.0",
 		"psalm/phar": "^4.3"
 	},

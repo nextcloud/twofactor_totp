@@ -6,7 +6,6 @@
 /.nextcloudignore
 /.tx
 /build
-/ci
 /CONTRIBUTING.md
 /composer.*
 /krankerl.toml
