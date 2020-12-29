@@ -4,9 +4,7 @@
 /.github
 /.gitignore
 /.nextcloudignore
-/.travis.yml
 /.tx
-/.scrutinizer.yml
 /build
 /ci
 /CONTRIBUTING.md

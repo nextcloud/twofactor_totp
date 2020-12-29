@@ -39,10 +39,6 @@ matrix:
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
     - php: 7.4
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
-    - php: 7.3
-      env: "CORE_BRANCH=stable18"
-    - php: 7.3
-      env: "CORE_BRANCH=stable19"
     - php: 7.4
       env: "CORE_BRANCH=stable20"
     - php: nightly
@@ -116,5 +112,3 @@ script:
   # Run php unit tests
   - if [[ "$SAUCE" = "FALSE" ]]; then ./vendor/bin/phpunit --fail-on-warning --configuration tests/phpunit.xml --group default; fi
   - if [[ "$SAUCE" = "TRUE"  ]]; then ./vendor/bin/phpunit --fail-on-warning --configuration tests/phpunit.xml --group Acceptance --no-coverage; fi
-  - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [[ "$PHP_COVERAGE" = "TRUE" ]]; then php ocular.phar code-coverage:upload --format=php-clover tests/clover.xml; fi

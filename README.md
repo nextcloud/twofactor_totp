@@ -1,7 +1,6 @@
 # Two Factor Totp
 ![Downloads](https://img.shields.io/github/downloads/nextcloud/twofactor_totp/total.svg)
 [![Build Status](https://travis-ci.org/nextcloud/twofactor_totp.svg?branch=master)](https://travis-ci.org/nextcloud/twofactor_totp)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/twofactor_totp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/twofactor_totp/?branch=master)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/nextcloud-totp.svg)](https://saucelabs.com/u/nextcloud-totp)
 
