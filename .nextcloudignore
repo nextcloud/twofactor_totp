@@ -17,6 +17,7 @@
 /nbproject
 /node_modules
 /package*
+/.psalm.xml
 /screenshots
 /src
 /tests

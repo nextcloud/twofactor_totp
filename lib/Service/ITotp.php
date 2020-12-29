@@ -33,10 +33,7 @@ interface ITotp {
 	public const STATE_CREATED = 1;
 	public const STATE_ENABLED = 2;
 
-	/**
-	 * @param IUser $user
-	 */
-	public function hasSecret(IUser $user);
+	public function hasSecret(IUser $user): bool;
 
 	/**
 	 * Create a new secret
@@ -62,14 +59,7 @@ interface ITotp {
 	 */
 	public function enable(IUser $user, $key): bool;
 
-	/**
-	 * @param IUser $user
-	 */
-	public function deleteSecret(IUser $user, bool $byAdmin = false);
+	public function deleteSecret(IUser $user, bool $byAdmin = false): void;
 
-	/**
-	 * @param IUser $user
-	 * @param string $key
-	 */
-	public function validateSecret(IUser $user, $key): bool;
+	public function validateSecret(IUser $user, string $key): bool;
 }
