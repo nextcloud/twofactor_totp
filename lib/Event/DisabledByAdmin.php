@@ -27,9 +27,7 @@ namespace OCA\TwoFactorTOTP\Event;
 use OCP\IUser;
 
 class DisabledByAdmin extends StateChanged {
-
 	public function __construct(IUser $user) {
 		parent::__construct($user, false);
 	}
-
 }

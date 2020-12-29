@@ -156,5 +156,4 @@ class TotpProviderTest extends TestCase {
 
 		$this->assertSame($provider, $result);
 	}
-
 }

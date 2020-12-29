@@ -46,7 +46,6 @@ use PHPUnit_Framework_AssertionFailedError;
  * @group Acceptance
  */
 class TOTPAcceptenceTest extends TestCase {
-
 	use TestUser;
 	use Selenium;
 
@@ -174,5 +173,4 @@ class TOTPAcceptenceTest extends TestCase {
 
 		$this->assertEquals('http://localhost:8080/index.php/login/challenge/totp', $this->webDriver->getCurrentURL());
 	}
-
 }

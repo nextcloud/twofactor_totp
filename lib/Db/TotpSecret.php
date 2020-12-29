@@ -55,5 +55,4 @@ class TotpSecret extends Entity {
 		$this->addType('state', 'int');
 		$this->addType('lastCounter', 'int');
 	}
-
 }

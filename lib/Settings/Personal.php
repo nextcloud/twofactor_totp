@@ -27,7 +27,6 @@ use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Template;
 
 class Personal implements IPersonalProviderSettings {
-
 	public function getBody(): Template {
 		return new Template('twofactor_totp', 'personal');
 	}

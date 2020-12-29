@@ -29,10 +29,9 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 
 interface ITotp {
-
-	const STATE_DISABLED = 0;
-	const STATE_CREATED = 1;
-	const STATE_ENABLED = 2;
+	public const STATE_DISABLED = 0;
+	public const STATE_CREATED = 1;
+	public const STATE_ENABLED = 2;
 
 	/**
 	 * @param IUser $user

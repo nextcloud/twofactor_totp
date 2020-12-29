@@ -154,5 +154,4 @@ class Totp implements ITotp {
 
 		return false;
 	}
-
 }

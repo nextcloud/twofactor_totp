@@ -33,8 +33,7 @@ use OCP\AppFramework\App;
 use OCP\EventDispatcher\IEventDispatcher;
 
 class Application extends App {
-
-	const APP_ID = 'twofactor_totp';
+	public const APP_ID = 'twofactor_totp';
 
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
@@ -48,5 +47,4 @@ class Application extends App {
 		$dispatcher->addServiceListener(StateChanged::class, StateChangeRegistryUpdater::class);
 		$dispatcher->addServiceListener(DisabledByAdmin::class, StateChangeActivity::class);
 	}
-
 }

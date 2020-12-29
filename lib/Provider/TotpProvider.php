@@ -130,5 +130,4 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	public function getLoginSetup(IUser $user): ILoginSetupProvider {
 		return $this->container->query(AtLoginProvider::class);
 	}
-
 }

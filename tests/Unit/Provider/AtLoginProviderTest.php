@@ -52,5 +52,4 @@ class AtLoginProviderTest extends TestCase {
 
 		$this->addToAssertionCount(1);
 	}
-
 }

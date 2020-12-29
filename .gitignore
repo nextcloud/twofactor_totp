@@ -6,6 +6,8 @@ build/
 /js
 vendor/
 
+/.php_cs.cache
+
 # Ignore NetBeans project
 /nbproject/
 

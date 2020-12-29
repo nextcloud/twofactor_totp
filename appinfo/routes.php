@@ -19,16 +19,16 @@
  *
  */
 return [
-    'routes' => [
-        [
-            'name' => 'settings#state',
-            'url' => '/settings/state',
-            'verb' => 'GET'
-        ],
-        [
-            'name' => 'settings#enable',
-            'url' => '/settings/enable',
-            'verb' => 'POST'
-        ],
-    ]
+	'routes' => [
+		[
+			'name' => 'settings#state',
+			'url' => '/settings/state',
+			'verb' => 'GET'
+		],
+		[
+			'name' => 'settings#enable',
+			'url' => '/settings/enable',
+			'verb' => 'POST'
+		],
+	]
 ];
