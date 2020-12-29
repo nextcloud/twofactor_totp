@@ -34,7 +34,6 @@ use OCP\IUserSession;
 use PHPUnit\Framework\TestCase;
 
 class SettingsControllerTest extends TestCase {
-
 	private $request;
 	private $userSession;
 	private $totp;
@@ -134,5 +133,4 @@ class SettingsControllerTest extends TestCase {
 		$this->expectException(InvalidArgumentException::class);
 		$this->controller->enable(17);
 	}
-
 }

@@ -39,7 +39,7 @@ matrix:
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=firefox"
     - php: 7.4
       env: "DB=mysql SAUCE=TRUE SELENIUM_BROWSER=chrome"
-    - php: 7.2
+    - php: 7.3
       env: "CORE_BRANCH=stable18"
     - php: 7.3
       env: "CORE_BRANCH=stable19"

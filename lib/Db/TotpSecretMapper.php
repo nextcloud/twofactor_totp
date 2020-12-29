@@ -30,7 +30,6 @@ use OCP\IDBConnection;
 use OCP\IUser;
 
 class TotpSecretMapper extends QBMapper {
-
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'twofactor_totp_secrets');
 	}
@@ -57,5 +56,4 @@ class TotpSecretMapper extends QBMapper {
 		}
 		return TotpSecret::fromRow($row);
 	}
-
 }

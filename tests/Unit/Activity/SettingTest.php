@@ -27,7 +27,6 @@ use OCA\TwoFactorTOTP\Activity\Setting;
 use OCP\IL10N;
 
 class SettingTest extends TestCase {
-
 	private $l10n;
 
 	/** @var Setting */
@@ -54,5 +53,4 @@ class SettingTest extends TestCase {
 		$this->assertEquals(true, $this->setting->isDefaultEnabledMail());
 		$this->assertEquals(true, $this->setting->isDefaultEnabledStream());
 	}
-
 }

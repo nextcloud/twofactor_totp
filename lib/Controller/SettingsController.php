@@ -123,5 +123,4 @@ class SettingsController extends ALoginSetupController {
 		$productName = $this->defaults->getName();
 		return rawurlencode($productName);
 	}
-
 }

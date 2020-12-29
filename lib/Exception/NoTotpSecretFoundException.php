@@ -26,5 +26,4 @@ namespace OCA\TwoFactorTOTP\Exception;
 use Exception;
 
 class NoTotpSecretFoundException extends Exception {
-
 }

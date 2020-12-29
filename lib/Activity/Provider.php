@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -63,5 +64,4 @@ class Provider implements IProvider {
 		}
 		return $event;
 	}
-
 }

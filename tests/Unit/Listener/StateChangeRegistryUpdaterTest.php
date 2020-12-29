@@ -65,5 +65,4 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 
 		$this->listener->handle($event);
 	}
-
 }

@@ -32,7 +32,6 @@ use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 
 class ProviderTest extends TestCase {
-
 	private $l10n;
 	private $urlGenerator;
 	private $logger;
@@ -63,9 +62,9 @@ class ProviderTest extends TestCase {
 
 	public function subjectData() {
 		return [
-				['totp_enabled_subject'],
-				['totp_disabled_subject'],
-				['totp_disabled_by_admin'],
+			['totp_enabled_subject'],
+			['totp_disabled_subject'],
+			['totp_disabled_by_admin'],
 		];
 	}
 
@@ -103,5 +102,4 @@ class ProviderTest extends TestCase {
 
 		$this->provider->parse($lang, $event);
 	}
-
 }

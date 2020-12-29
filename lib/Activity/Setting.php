@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -62,5 +63,4 @@ class Setting implements ISetting {
 	public function isDefaultEnabledStream(): bool {
 		return true;
 	}
-
 }

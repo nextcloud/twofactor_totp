@@ -115,5 +115,4 @@ class StateChangeActivityTest extends TestCase {
 
 		$this->listener->handle($event);
 	}
-
 }
