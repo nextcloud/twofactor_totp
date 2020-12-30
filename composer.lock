@@ -8,27 +8,27 @@
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
-            "version": "2.0.1",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bacon/BaconQrCode.git",
-                "reference": "6e53ced3d2499cee4a0ef23a7c4d6449607ac7da"
+                "reference": "3e9d791b67d0a2912922b7b7c7312f4b37af41e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/6e53ced3d2499cee4a0ef23a7c4d6449607ac7da",
-                "reference": "6e53ced3d2499cee4a0ef23a7c4d6449607ac7da",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/3e9d791b67d0a2912922b7b7c7312f4b37af41e4",
+                "reference": "3e9d791b67d0a2912922b7b7c7312f4b37af41e4",
                 "shasum": ""
             },
             "require": {
-                "dasprid/enum": "^1.0",
+                "dasprid/enum": "^1.0.3",
                 "ext-iconv": "*",
-                "php": "^7.1"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "phly/keep-a-changelog": "^1.4",
-                "phpunit/phpunit": "^6.4",
-                "squizlabs/php_codesniffer": "^3.1"
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "squizlabs/php_codesniffer": "^3.4"
             },
             "suggest": {
                 "ext-imagick": "to generate QR code images"
@@ -47,13 +47,17 @@
                 {
                     "name": "Ben Scholzen 'DASPRiD'",
                     "email": "mail@dasprids.de",
-                    "homepage": "http://www.dasprids.de",
+                    "homepage": "https://dasprids.de/",
                     "role": "Developer"
                 }
             ],
             "description": "BaconQrCode is a QR code generator for PHP.",
             "homepage": "https://github.com/Bacon/BaconQrCode",
-            "time": "2020-07-14T11:04:05+00:00"
+            "support": {
+                "issues": "https://github.com/Bacon/BaconQrCode/issues",
+                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.3"
+            },
+            "time": "2020-10-30T02:02:47+00:00"
         },
         {
             "name": "christian-riesen/base32",
@@ -108,6 +112,10 @@
                 "encode",
                 "rfc4648"
             ],
+            "support": {
+                "issues": "https://github.com/ChristianRiesen/base32/issues",
+                "source": "https://github.com/ChristianRiesen/base32/tree/master"
+            },
             "time": "2018-11-02T09:03:50+00:00"
         },
         {
@@ -159,25 +167,29 @@
                 "rfc6238",
                 "totp"
             ],
+            "support": {
+                "issues": "https://github.com/ChristianRiesen/otp/issues",
+                "source": "https://github.com/ChristianRiesen/otp/tree/master"
+            },
             "time": "2015-10-08T08:17:59+00:00"
         },
         {
             "name": "dasprid/enum",
-            "version": "1.0.0",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DASPRiD/Enum.git",
-                "reference": "631ef6e638e9494b0310837fa531bedd908fc22b"
+                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/631ef6e638e9494b0310837fa531bedd908fc22b",
-                "reference": "631ef6e638e9494b0310837fa531bedd908fc22b",
+                "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/5abf82f213618696dda8e3bf6f64dd042d8542b2",
+                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2",
                 "shasum": ""
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.4",
-                "squizlabs/php_codesniffer": "^3.1"
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "squizlabs/php_codesniffer": "^3.4"
             },
             "type": "library",
             "autoload": {
@@ -193,7 +205,8 @@
                 {
                     "name": "Ben Scholzen 'DASPRiD'",
                     "email": "mail@dasprids.de",
-                    "homepage": "https://dasprids.de/"
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
                 }
             ],
             "description": "PHP 7.1 enum implementation",
@@ -201,7 +214,11 @@
                 "enum",
                 "map"
             ],
-            "time": "2017-10-25T22:45:27+00:00"
+            "support": {
+                "issues": "https://github.com/DASPRiD/Enum/issues",
+                "source": "https://github.com/DASPRiD/Enum/tree/1.0.3"
+            },
+            "time": "2020-10-02T16:03:48+00:00"
         }
     ],
     "packages-dev": [
@@ -249,27 +266,31 @@
                 "isolation",
                 "tool"
             ],
+            "support": {
+                "issues": "https://github.com/bamarni/composer-bin-plugin/issues",
+                "source": "https://github.com/bamarni/composer-bin-plugin/tree/master"
+            },
             "time": "2020-05-03T08:27:20+00:00"
         },
         {
             "name": "khanamiryan/qrcode-detector-decoder",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/khanamiryan/php-qrcode-detector-decoder.git",
-                "reference": "89b57f2d9939dd57394b83f6ccbd3e1a74659e34"
+                "reference": "07fceefb79d895e858e52921afb9c1433d2f3d5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/khanamiryan/php-qrcode-detector-decoder/zipball/89b57f2d9939dd57394b83f6ccbd3e1a74659e34",
-                "reference": "89b57f2d9939dd57394b83f6ccbd3e1a74659e34",
+                "url": "https://api.github.com/repos/khanamiryan/php-qrcode-detector-decoder/zipball/07fceefb79d895e858e52921afb9c1433d2f3d5e",
+                "reference": "07fceefb79d895e858e52921afb9c1433d2f3d5e",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6|^7.0"
+                "php": ">=5.6"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "^9.0"
             },
             "type": "library",
             "autoload": {
@@ -299,7 +320,11 @@
                 "qr",
                 "zxing"
             ],
-            "time": "2020-04-19T16:18:51+00:00"
+            "support": {
+                "issues": "https://github.com/khanamiryan/php-qrcode-detector-decoder/issues",
+                "source": "https://github.com/khanamiryan/php-qrcode-detector-decoder/tree/1.0.4"
+            },
+            "time": "2020-11-29T18:50:26+00:00"
         }
     ],
     "aliases": [],
@@ -312,5 +337,5 @@
     "platform-overrides": {
         "php": "7.1"
     },
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

@@ -26,17 +26,10 @@ config = {
 	'javascript': False,
 
 	'phpunit': {
-		'allDatabasesExceptOracle' : {
+		'allDatabases' : {
 			'phpVersions': [
 				'7.2',
-			],
-			'databases': [
-				'sqlite',
-				'mariadb:10.2',
-				'mysql:5.5',
-				'mysql:5.7',
-				'postgres:9.4',
-			],
+			]
 		},
 		'reducedDatabases' : {
 			'phpVersions': [
@@ -44,7 +37,7 @@ config = {
 				'7.4',
 			],
 			'databases': [
-				'mysql:5.5',
+				'mysql:8.0',
 			],
 			'coverage': False
 		},
@@ -164,33 +157,58 @@ config = {
 def main(ctx):
 	before = beforePipelines()
 
-	stages = stagePipelines()
+	coverageTests = coveragePipelines(ctx)
+	if (coverageTests == False):
+		print('Errors detected in coveragePipelines. Review messages above.')
+		return []
+
+	dependsOn(before, coverageTests)
+
+	stages = stagePipelines(ctx)
 	if (stages == False):
 		print('Errors detected. Review messages above.')
 		return []
 
 	dependsOn(before, stages)
 
-	after = afterPipelines()
-	dependsOn(stages, after)
+	if (coverageTests == []):
+		afterCoverageTests = []
+	else:
+		afterCoverageTests = afterCoveragePipelines(ctx)
+		dependsOn(coverageTests, afterCoverageTests)
 
-	return before + stages + after
+	after = afterPipelines(ctx)
+	dependsOn(afterCoverageTests + stages, after)
+
+	return before + coverageTests + afterCoverageTests + stages + after
 
 def beforePipelines():
 	return codestyle() + jscodestyle() + phpstan() + phan()
 
-def stagePipelines():
-	buildPipelines = build()
-	jsPipelines = javascript()
-	phpunitPipelines = phptests('phpunit')
-	phpintegrationPipelines = phptests('phpintegration')
-	acceptancePipelines = acceptance()
-	if (buildPipelines == False) or (jsPipelines == False) or (phpunitPipelines == False) or (phpintegrationPipelines == False) or (acceptancePipelines == False):
+def coveragePipelines(ctx):
+	# All pipelines that might have coverage or other test analysis reported
+	jsPipelines = javascript(ctx)
+	phpUnitPipelines = phpTests(ctx, 'phpunit')
+	phpIntegrationPipelines = phpTests(ctx, 'phpintegration')
+	if (jsPipelines == False) or (phpUnitPipelines == False) or (phpIntegrationPipelines == False):
 		return False
 
-	return buildPipelines + jsPipelines + phpunitPipelines + phpintegrationPipelines + acceptancePipelines
+	return jsPipelines + phpUnitPipelines + phpIntegrationPipelines
 
-def afterPipelines():
+def stagePipelines(ctx):
+	buildPipelines = build()
+	acceptancePipelines = acceptance(ctx)
+	if (buildPipelines == False) or (acceptancePipelines == False):
+		return False
+
+	return buildPipelines + acceptancePipelines
+
+def afterCoveragePipelines(ctx):
+	return [
+		sonarAnalysis(ctx)
+	]
+
+def afterPipelines(ctx):
 	return [
 		notify()
 	]
@@ -318,6 +336,7 @@ def phpstan():
 	default = {
 		'phpVersions': ['7.2'],
 		'logLevel': '2',
+		'extraApps': {},
 	}
 
 	if 'defaults' in config:
@@ -357,6 +376,7 @@ def phpstan():
 				'steps':
 					installCore('daily-master-qa', 'sqlite', False) +
 					installApp(phpVersion) +
+					installExtraApps(phpVersion, params['extraApps']) +
 					setupServerAndApp(phpVersion, params['logLevel']) +
 				[
 					{
@@ -391,7 +411,7 @@ def phan():
 		return pipelines
 
 	default = {
-		'phpVersions': ['7.2', '7.3'],
+		'phpVersions': ['7.2', '7.3', '7.4'],
 	}
 
 	if 'defaults' in config:
@@ -545,7 +565,7 @@ def build():
 
 	return pipelines
 
-def javascript():
+def javascript(ctx):
 	pipelines = []
 
 	if 'javascript' not in config:
@@ -615,15 +635,23 @@ def javascript():
 
 	if params['coverage']:
 		result['steps'].append({
-			'name': 'codecov-js',
-			'image': 'plugins/codecov:latest',
+			'name': 'coverage-cache',
+			'image': 'plugins/s3',
 			'pull': 'always',
 			'settings': {
-				'paths': [
-					'coverage/*.info',
-				],
-				'token': {
-					'from_secret': 'codecov_token'
+				'endpoint': {
+					'from_secret': 'cache_s3_endpoint'
+				},
+				'bucket': 'cache',
+				'source': './coverage/lcov.info',
+				'target': '%s/%s' % (ctx.repo.slug, ctx.build.commit + '-${DRONE_BUILD_NUMBER}'),
+				'path_style': True,
+				'strip_prefix': './coverage',
+				'access_key': {
+					'from_secret': 'cache_s3_access_key'
+				},
+				'secret_key': {
+					'from_secret': 'cache_s3_secret_key'
 				}
 			}
 		})
@@ -633,7 +661,7 @@ def javascript():
 
 	return [result]
 
-def phptests(testType):
+def phpTests(ctx, testType):
 	pipelines = []
 
 	if testType not in config:
@@ -642,9 +670,9 @@ def phptests(testType):
 	errorFound = False
 
 	default = {
-		'phpVersions': ['7.2', '7.3'],
+		'phpVersions': ['7.2', '7.3', '7.4'],
 		'databases': [
-			'sqlite', 'mariadb:10.2', 'mysql:5.5', 'mysql:5.7', 'postgres:9.4', 'oracle'
+			'sqlite', 'mariadb:10.2', 'mysql:8.0', 'postgres:9.4', 'oracle'
 		],
 		'coverage': True,
 		'includeKeyInMatrixName': False,
@@ -664,20 +692,20 @@ def phptests(testType):
 			for item in config['defaults'][testType]:
 				default[item] = config['defaults'][testType][item]
 
-	phptestConfig = config[testType]
+	phpTestConfig = config[testType]
 
-	if type(phptestConfig) == "bool":
-		if phptestConfig:
+	if type(phpTestConfig) == "bool":
+		if phpTestConfig:
 			# the config has just True, so specify an empty dict that will get the defaults
-			phptestConfig = {}
+			phpTestConfig = {}
 		else:
 			return pipelines
 
-	if len(phptestConfig) == 0:
+	if len(phpTestConfig) == 0:
 		# the PHP test config is an empty dict, so specify a single section that will get the defaults
-		phptestConfig = {'doDefault': {}}
+		phpTestConfig = {'doDefault': {}}
 
-	for category, matrix in phptestConfig.items():
+	for category, matrix in phpTestConfig.items():
 		params = {}
 		for item in default:
 			params[item] = matrix[item] if item in matrix else default[item]
@@ -700,7 +728,7 @@ def phptests(testType):
 
 		if ((config['app'] != 'files_primary_s3') and (filesPrimaryS3NeededForCeph or filesPrimaryS3NeededForScality)):
 			# If we are not already 'files_primary_s3' and we need S3 storage, then install the 'files_primary_s3' app
-			extraAppsDict  = {
+			extraAppsDict = {
 				'files_primary_s3': 'composer install'
 			}
 			for app, command in params['extraApps'].items():
@@ -772,15 +800,31 @@ def phptests(testType):
 
 				if params['coverage']:
 					result['steps'].append({
-						'name': 'codecov-upload',
-						'image': 'plugins/codecov:latest',
+						'name': 'coverage-rename',
+						'image': 'owncloudci/php:%s' % phpVersion,
+						'pull': 'always',
+						'commands': [
+							'mv tests/output/clover.xml tests/output/clover-%s.xml' % (name)
+						]
+					})
+					result['steps'].append({
+						'name': 'coverage-cache-1',
+						'image': 'plugins/s3',
 						'pull': 'always',
 						'settings': {
-							'paths': [
-								'tests/output/clover.xml',
-							],
-							'token': {
-								'from_secret': 'codecov_token'
+							'endpoint': {
+								'from_secret': 'cache_s3_endpoint'
+							},
+							'bucket': 'cache',
+							'source': 'tests/output/clover-%s.xml' % (name),
+							'target': '%s/%s' % (ctx.repo.slug, ctx.build.commit + '-${DRONE_BUILD_NUMBER}'),
+							'path_style': True,
+							'strip_prefix': 'tests/output',
+							'access_key': {
+								'from_secret': 'cache_s3_access_key'
+							},
+							'secret_key': {
+								'from_secret': 'cache_s3_secret_key'
 							}
 						}
 					})
@@ -795,7 +839,7 @@ def phptests(testType):
 
 	return pipelines
 
-def acceptance():
+def acceptance(ctx):
 	pipelines = []
 
 	if 'acceptance' not in config:
@@ -812,6 +856,7 @@ def acceptance():
 		'browsers': ['chrome'],
 		'phpVersions': ['7.2'],
 		'databases': ['mariadb:10.2'],
+		'esVersions': ['none'],
 		'federatedServerNeeded': False,
 		'filterTags': '',
 		'logLevel': '2',
@@ -833,6 +878,7 @@ def acceptance():
 		'runCoreTests': False,
 		'numberOfParts': 1,
 		'cron': '',
+		'pullRequestAndCron': 'nightly',
 	}
 
 	if 'defaults' in config:
@@ -878,146 +924,228 @@ def acceptance():
 
 			if ((config['app'] != 'files_primary_s3') and (filesPrimaryS3NeededForCeph or filesPrimaryS3NeededForScality)):
 				# If we are not already 'files_primary_s3' and we need S3 object storage, then install the 'files_primary_s3' app
-				extraAppsDict  = {
+				extraAppsDict = {
 					'files_primary_s3': 'composer install'
 				}
 				for app, command in params['extraApps'].items():
 					extraAppsDict[app] = command
 				params['extraApps'] = extraAppsDict
 
-			for server in params['servers']:
-				for browser in params['browsers']:
-					for phpVersion in params['phpVersions']:
-						for db in params['databases']:
-							for runPart in range(1, params['numberOfParts'] + 1):
-								name = 'unknown'
+			for testConfig in buildTestConfig(params):
+				name = 'unknown'
+				if isWebUI or isAPI or isCLI:
+					esString = '-es' + testConfig['esVersion'] if testConfig['esVersion'] != 'none' else ''
+					browserString = '' if testConfig['browser'] == '' else '-' + testConfig['browser']
+					keyString = '-' + category if testConfig['includeKeyInMatrixName'] else ''
+					partString = '' if testConfig['numberOfParts'] == 1 else '-%d-%d' % (testConfig['numberOfParts'], testConfig['runPart'])
+					name = '%s%s%s-%s%s-%s-php%s%s' % (alternateSuiteName, keyString, partString, testConfig['server'].replace('daily-', '').replace('-qa', ''), browserString, testConfig['database'].replace(':', ''), testConfig['phpVersion'], esString)
+					maxLength = 50
+					nameLength = len(name)
+					if nameLength > maxLength:
+						print("Error: generated stage name of length", nameLength, "is not supported. The maximum length is " + str(maxLength) + ".", name)
+						errorFound = True
 
-								if isWebUI or isAPI or isCLI:
-									browserString = '' if browser == '' else '-' + browser
-									keyString = '-' + category if params['includeKeyInMatrixName'] else ''
-									partString = '' if params['numberOfParts'] == 1 else '-%d-%d' % (params['numberOfParts'], runPart)
-									name = '%s%s%s-%s%s-%s-php%s' % (alternateSuiteName, keyString, partString, server.replace('daily-', '').replace('-qa', ''), browserString, db.replace(':', ''), phpVersion)
-									maxLength = 50
-									nameLength = len(name)
-									if nameLength > maxLength:
-										print("Error: generated stage name of length", nameLength, "is not supported. The maximum length is " + str(maxLength) + ".", name)
-										errorFound = True
+				environment = {}
+				for env in testConfig['extraEnvironment']:
+					environment[env] = testConfig['extraEnvironment'][env]
 
-								environment = {}
-								for env in params['extraEnvironment']:
-									environment[env] = params['extraEnvironment'][env]
+				environment['TEST_SERVER_URL'] = 'http://server'
+				environment['BEHAT_FILTER_TAGS'] = testConfig['filterTags']
 
-								environment['TEST_SERVER_URL'] = 'http://server'
-								environment['BEHAT_FILTER_TAGS'] = params['filterTags']
+				if (testConfig['runAllSuites'] == False):
+					environment['BEHAT_SUITE'] = suite
+				else:
+					environment['DIVIDE_INTO_NUM_PARTS'] = testConfig['numberOfParts']
+					environment['RUN_PART'] = testConfig['runPart']
 
-								if (params['runAllSuites'] == False):
-									environment['BEHAT_SUITE'] = suite
-								else:
-									environment['DIVIDE_INTO_NUM_PARTS'] = params['numberOfParts']
-									environment['RUN_PART'] = runPart
+				if isWebUI:
+					environment['SELENIUM_HOST'] = 'selenium'
+					environment['SELENIUM_PORT'] = '4444'
+					environment['BROWSER'] = testConfig['browser']
+					environment['PLATFORM'] = 'Linux'
+					if (testConfig['runCoreTests']):
+						makeParameter = 'test-acceptance-core-webui'
+					else:
+						makeParameter = 'test-acceptance-webui'
 
-								if isWebUI:
-									environment['SELENIUM_HOST'] = 'selenium'
-									environment['SELENIUM_PORT'] = '4444'
-									environment['BROWSER'] = browser
-									environment['PLATFORM'] = 'Linux'
-									if (params['runCoreTests']):
-										makeParameter = 'test-acceptance-core-webui'
-									else:
-										makeParameter = 'test-acceptance-webui'
+				if isAPI:
+					if (testConfig['runCoreTests']):
+						makeParameter = 'test-acceptance-core-api'
+					else:
+						makeParameter = 'test-acceptance-api'
 
-								if isAPI:
-									if (params['runCoreTests']):
-										makeParameter = 'test-acceptance-core-api'
-									else:
-										makeParameter = 'test-acceptance-api'
+				if isCLI:
+					if (testConfig['runCoreTests']):
+						makeParameter = 'test-acceptance-core-cli'
+					else:
+						makeParameter = 'test-acceptance-cli'
 
-								if isCLI:
-									if (params['runCoreTests']):
-										makeParameter = 'test-acceptance-core-cli'
-									else:
-										makeParameter = 'test-acceptance-cli'
+				if testConfig['emailNeeded']:
+					environment['MAILHOG_HOST'] = 'email'
 
-								if params['emailNeeded']:
-									environment['MAILHOG_HOST'] = 'email'
+				if testConfig['ldapNeeded']:
+					environment['TEST_WITH_LDAP'] = True
 
-								if params['ldapNeeded']:
-									environment['TEST_EXTERNAL_USER_BACKENDS'] = True
+				if (cephS3Needed or scalityS3Needed):
+					environment['OC_TEST_ON_OBJECTSTORE'] = '1'
+					if (testConfig['cephS3'] != False):
+						environment['S3_TYPE'] = 'ceph'
+					if (testConfig['scalityS3'] != False):
+						environment['S3_TYPE'] = 'scality'
+				federationDbSuffix = '-federated'
 
-								if (cephS3Needed or scalityS3Needed):
-									environment['OC_TEST_ON_OBJECTSTORE'] = '1'
-									if (params['cephS3'] != False):
-										environment['S3_TYPE'] = 'ceph'
-									if (params['scalityS3'] != False):
-										environment['S3_TYPE'] = 'scality'
-								federationDbSuffix = '-federated'
+				result = {
+					'kind': 'pipeline',
+					'type': 'docker',
+					'name': name,
+					'workspace' : {
+						'base': '/var/www/owncloud',
+						'path': 'testrunner/apps/%s' % config['app']
+					},
+					'steps':
+						installCore(testConfig['server'], testConfig['database'], testConfig['useBundledApp']) +
+						installTestrunner('7.4', testConfig['useBundledApp']) +
+						(installFederated(testConfig['server'], testConfig['phpVersion'], testConfig['logLevel'], testConfig['database'], federationDbSuffix) + owncloudLog('federated') if testConfig['federatedServerNeeded'] else []) +
+						installApp(testConfig['phpVersion']) +
+						installExtraApps(testConfig['phpVersion'], testConfig['extraApps']) +
+						setupServerAndApp(testConfig['phpVersion'], testConfig['logLevel']) +
+						owncloudLog('server') +
+						setupCeph(testConfig['cephS3']) +
+						setupScality(testConfig['scalityS3']) +
+						setupElasticSearch(testConfig['esVersion']) +
+						testConfig['extraSetup'] +
+						fixPermissions(testConfig['phpVersion'], testConfig['federatedServerNeeded']) +
+					[
+						({
+							'name': 'acceptance-tests',
+							'image': 'owncloudci/php:7.4',
+							'pull': 'always',
+							'environment': environment,
+							'commands': testConfig['extraCommandsBeforeTestRun'] + [
+								'touch /var/www/owncloud/saved-settings.sh',
+								'. /var/www/owncloud/saved-settings.sh',
+								'make %s' % makeParameter
+							]
+						}),
+					] + testConfig['extraTeardown'],
+					'services':
+						databaseService(testConfig['database']) +
+						browserService(testConfig['browser']) +
+						emailService(testConfig['emailNeeded']) +
+						ldapService(testConfig['ldapNeeded']) +
+						cephService(testConfig['cephS3']) +
+						scalityService(testConfig['scalityS3']) +
+						elasticSearchService(testConfig['esVersion']) +
+						testConfig['extraServices'] +
+						owncloudService(testConfig['server'], testConfig['phpVersion'], 'server', '/var/www/owncloud/server', testConfig['ssl'], testConfig['xForwardedFor']) +
+						((
+							owncloudService(testConfig['server'], testConfig['phpVersion'], 'federated', '/var/www/owncloud/federated', testConfig['ssl'], testConfig['xForwardedFor']) +
+							databaseServiceForFederation(testConfig['database'], federationDbSuffix)
+						) if testConfig['federatedServerNeeded'] else [] ),
+					'depends_on': [],
+					'trigger': {}
+				}
 
-								result = {
-									'kind': 'pipeline',
-									'type': 'docker',
-									'name': name,
-									'workspace' : {
-										'base': '/var/www/owncloud',
-										'path': 'testrunner/apps/%s' % config['app']
-									},
-									'steps':
-										installCore(server, db, params['useBundledApp']) +
-										installTestrunner(phpVersion, params['useBundledApp']) +
-										(installFederated(server, phpVersion, params['logLevel'], db, federationDbSuffix) + owncloudLog('federated') if params['federatedServerNeeded'] else []) +
-										installApp(phpVersion) +
-										installExtraApps(phpVersion, params['extraApps']) +
-										setupServerAndApp(phpVersion, params['logLevel']) +
-										owncloudLog('server') +
-										setupCeph(params['cephS3']) +
-										setupScality(params['scalityS3']) +
-										params['extraSetup'] +
-										fixPermissions(phpVersion, params['federatedServerNeeded']) +
-									[
-										({
-											'name': 'acceptance-tests',
-											'image': 'owncloudci/php:%s' % phpVersion,
-											'pull': 'always',
-											'environment': environment,
-											'commands': params['extraCommandsBeforeTestRun'] + [
-												'touch /var/www/owncloud/saved-settings.sh',
-												'. /var/www/owncloud/saved-settings.sh',
-												'make %s' % makeParameter
-											]
-										}),
-									] + params['extraTeardown'],
-									'services':
-										databaseService(db) +
-										browserService(browser) +
-										emailService(params['emailNeeded']) +
-										ldapService(params['ldapNeeded']) +
-										cephService(params['cephS3']) +
-										scalityService(params['scalityS3']) +
-										params['extraServices'] +
-										owncloudService(server, phpVersion, 'server', '/var/www/owncloud/server', params['ssl'], params['xForwardedFor']) +
-										((
-											owncloudService(server, phpVersion, 'federated', '/var/www/owncloud/federated', params['ssl'], params['xForwardedFor']) +
-											databaseServiceForFederation(db, federationDbSuffix)
-										) if params['federatedServerNeeded'] else [] ),
-									'depends_on': [],
-									'trigger': {}
-								}
+				if (testConfig['cron'] != ''):
+					result['trigger']['cron'] = testConfig['cron']
+				else:
+					if ((testConfig['pullRequestAndCron'] != '') and (ctx.build.event != 'pull_request')):
+						result['trigger']['cron'] = testConfig['pullRequestAndCron']
+					else:
+						result['trigger']['ref'] = [
+							'refs/pull/**',
+							'refs/tags/**'
+						]
 
-								if (params['cron'] == ''):
-									result['trigger']['ref'] = [
-										'refs/pull/**',
-										'refs/tags/**'
-									]
-									for branch in config['branches']:
-										result['trigger']['ref'].append('refs/heads/%s' % branch)
-								else:
-									result['trigger']['cron'] = params['cron']
-
-								pipelines.append(result)
+				pipelines.append(result)
 
 	if errorFound:
 		return False
 
 	return pipelines
+
+def sonarAnalysis(ctx, phpVersion = '7.4'):
+	result = {
+		'kind': 'pipeline',
+		'type': 'docker',
+		'name': 'sonar-analysis',
+		'workspace' : {
+			'base': '/var/www/owncloud',
+			'path': 'server/apps/%s' % config['app']
+		},
+		'steps':
+			cacheRestore() +
+			composerInstall(phpVersion) +
+			installCore('daily-master-qa', 'sqlite', False) +
+		[
+			{
+				'name': 'sync-from-cache',
+				'image': 'minio/mc:RELEASE.2020-12-18T10-53-53Z',
+				'pull': 'always',
+				'environment': {
+					'MC_HOST_cache': {
+						'from_secret': 'cache_s3_connection_url'
+					},
+				},
+				'commands': [
+					'mkdir -p results',
+					'mc mirror cache/cache/%s/%s results/' % (ctx.repo.slug, ctx.build.commit + '-${DRONE_BUILD_NUMBER}'),
+				]
+			},
+			{
+				'name': 'list-coverage-results',
+				'image': 'owncloudci/php:%s' % phpVersion,
+				'pull': 'always',
+				'commands': [
+					'ls -l results',
+				]
+			},
+			{
+				'name': 'sonarcloud',
+				'image': 'sonarsource/sonar-scanner-cli',
+				'pull': 'always',
+				'environment': {
+					'SONAR_TOKEN': {
+						'from_secret': 'sonar_token'
+					},
+					'SONAR_PULL_REQUEST_BASE': 'master' if ctx.build.event == 'pull_request' else '',
+					'SONAR_PULL_REQUEST_BRANCH': ctx.build.source if ctx.build.event == 'pull_request' else '',
+					'SONAR_PULL_REQUEST_KEY': ctx.build.ref.replace("refs/pull/", "").split("/")[0] if ctx.build.event == 'pull_request' else '',
+					'SONAR_SCANNER_OPTS': '-Xdebug'
+				},
+				'when': {
+					'instance': [
+						'drone.owncloud.services',
+						'drone.owncloud.com'
+					],
+				}
+			},
+			{
+				'name': 'purge-cache',
+				'image': 'minio/mc:RELEASE.2020-12-18T10-53-53Z',
+				'environment': {
+					'MC_HOST_cache': {
+						'from_secret': 'cache_s3_connection_url'
+					}
+				},
+				'commands': [
+				'mc rm --recursive --force cache/cache/%s/%s' % (ctx.repo.slug, ctx.build.commit + '-${DRONE_BUILD_NUMBER}'),
+				]
+			},
+		],
+		'depends_on': [],
+		'trigger': {
+			'ref': [
+				'refs/pull/**',
+				'refs/tags/**'
+			]
+		}
+	}
+
+	for branch in config['branches']:
+		result['trigger']['ref'].append('refs/heads/%s' % branch)
+
+	return result
 
 def notify():
 	result = {
@@ -1060,7 +1188,7 @@ def notify():
 def databaseService(db):
 	dbName = getDbName(db)
 	if (dbName == 'mariadb') or (dbName == 'mysql'):
-		return [{
+		service = {
 			'name': dbName,
 			'image': db,
 			'pull': 'always',
@@ -1070,7 +1198,10 @@ def databaseService(db):
 				'MYSQL_DATABASE': getDbDatabase(db),
 				'MYSQL_ROOT_PASSWORD': getDbRootPassword()
 			}
-		}]
+		}
+		if (db == 'mysql:8.0'):
+			service['command'] = ['--default-authentication-plugin=mysql_native_password']
+		return [service]
 
 	if dbName == 'postgres':
 		return [{
@@ -1149,6 +1280,19 @@ def ldapService(ldapNeeded):
 		}]
 
 	return []
+
+def elasticSearchService(esVersion):
+	if esVersion == "none":
+		return []
+
+	return [{
+		'name': 'elasticsearch',
+		'image': 'webhippie/elasticsearch:%s' % esVersion,
+		'pull': 'always',
+		'environment': {
+			'ELASTICSEARCH_PLUGINS_INSTALL': 'ingest-attachment'
+		}
+	}]
 
 def scalityService(serviceParams):
 	serviceEnvironment = {
@@ -1258,6 +1402,44 @@ def getDbDatabase(db):
 		return 'XE'
 
 	return 'owncloud'
+
+def cacheRestore():
+	return [{
+		'name': 'cache-restore',
+		'image': 'plugins/s3-cache:1',
+		'pull': 'always',
+		'settings': {
+			'access_key': {
+				'from_secret': 'cache_s3_access_key'
+			},
+			'endpoint': {
+				'from_secret': 'cache_s3_endpoint'
+			},
+			'restore': True,
+			'secret_key': {
+				'from_secret': 'cache_s3_secret_key'
+			}
+		},
+		'when': {
+			'instance': [
+				'drone.owncloud.services',
+				'drone.owncloud.com'
+			],
+		}
+	}]
+
+def composerInstall(phpVersion):
+	return [{
+		'name': 'composer-install',
+		'image': 'owncloudci/php:%s' % phpVersion,
+		'pull': 'always',
+		'environment': {
+			'COMPOSER_HOME': '/drone/src/.cache/composer'
+		},
+		'commands': [
+			'make vendor'
+		]
+	}]
 
 def installCore(version, db, useBundledApp):
 	host = getDbName(db)
@@ -1414,8 +1596,24 @@ def setupScality(serviceParams):
 		'commands': setupCommands + ([
 			'php occ s3:create-bucket owncloud --accept-warning'
 		] if createFirstBucket else []) + ([
-			'for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done',
+			'for I in $(seq 1 9); do php ./occ s3:create-bucket owncloud$I --accept-warning; done',
 		] if createExtraBuckets else [])
+	}]
+
+def setupElasticSearch(esVersion):
+	if esVersion == "none":
+		return []
+
+	return [{
+		'name': 'setup-es',
+		'image': 'owncloudci/php:7.2',
+		'pull': 'always',
+		'commands': [
+			'cd /var/www/owncloud/server',
+			'php occ config:app:set search_elastic servers --value elasticsearch',
+			'wait-for-it -t 60 elasticsearch:9200',
+			'php occ search:index:reset --force'
+		]
 	}]
 
 def fixPermissions(phpVersion, federatedServerNeeded):
@@ -1512,3 +1710,21 @@ def databaseServiceForFederation(db, suffix):
 			'MYSQL_ROOT_PASSWORD': getDbRootPassword()
 		}
 	}]
+
+def buildTestConfig(params):
+	configs = []
+	for server in params['servers']:
+		for browser in params['browsers']:
+			for phpVersion in params['phpVersions']:
+				for db in params['databases']:
+					for esVersion in params['esVersions']:
+						for runPart in range(1, params['numberOfParts'] + 1):
+							config = dict(params)
+							config['server'] = server
+							config['browser'] = browser
+							config['phpVersion'] = phpVersion
+							config['database'] = db
+							config['esVersion'] = esVersion
+							config['runPart'] = runPart
+							configs.append(config)
+	return configs
