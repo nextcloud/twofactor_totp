@@ -27,6 +27,7 @@ use OCA\TwoFactor_Totp\Service\Totp;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 use OCP\Security\ICrypto;
+use Otp\GoogleAuthenticator;
 use Otp\Otp;
 use Test\TestCase;
 
@@ -65,11 +66,10 @@ class TotpTest extends TestCase {
 	 * @param boolean $expectedResult
 	 */
 	public function testValidateKey($lastKey, $key, $validationResult, $expectedResult) {
-		/** @var IUser | \PHPUnit\Framework\MockObject\MockObject $user  */
 		$user = $this->createMock(IUser::class);
 		$dbSecret = $this
 			->getMockBuilder(TotpSecret::class)
-			->setMethods(['getSecret', 'getLastValidatedKey', 'setLastValidatedKey'])
+			->addMethods(['getSecret', 'getLastValidatedKey', 'setLastValidatedKey'])
 			->getMock();
 
 		$dbSecret->expects($this->once())
@@ -87,6 +87,10 @@ class TotpTest extends TestCase {
 			$this->otp->expects($this->once())
 				->method('checkTotp')
 				->will($this->returnValue($validationResult));
+			$this->crypto->expects($this->once())
+				->method('decrypt')
+				->with("secret")
+				->will($this->returnValue(GoogleAuthenticator::generateRandom()));
 		}
 		if ($expectedResult === true) {
 			$dbSecret->expects($this->once())

@@ -22,7 +22,6 @@
 
 namespace OCA\TwoFactor_Totp\Service;
 
-use Base32\Base32;
 use OCA\TwoFactor_Totp\Db\TotpSecret;
 use OCA\TwoFactor_Totp\Db\TotpSecretMapper;
 use OCA\TwoFactor_Totp\Exception\NoTotpSecretFoundException;
@@ -31,6 +30,7 @@ use OCP\IUser;
 use OCP\Security\ICrypto;
 use Otp\GoogleAuthenticator;
 use Otp\Otp;
+use ParagonIE\ConstantTime\Encoding;
 
 class Totp implements ITotp {
 
@@ -119,8 +119,7 @@ class Totp implements ITotp {
 		 */
 		if ($dbSecret->getLastValidatedKey() !== $key) {
 			$secret = $this->crypto->decrypt($dbSecret->getSecret());
-			/* @phpstan-ignore-next-line */
-			if ($this->otp->checkTotp(Base32::decode($secret), $key, 3) === true) {
+			if ($this->otp->checkTotp(Encoding::base32DecodeUpper($secret), $key, 3) === true) {
 				$dbSecret->setLastValidatedKey($key);
 				$this->secretMapper->update($dbSecret);
 				return true;
