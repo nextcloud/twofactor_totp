@@ -22,9 +22,10 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Otp\GoogleAuthenticator;
 use Page\PersonalSecuritySettingsPageWithTOTPEnabled;
 use Otp\Otp;
-use Base32\Base32;
+use ParagonIE\ConstantTime\Encoding;
 use PHPUnit\Framework\Assert;
 use Page\VerificationPage;
 use TestHelpers\OcsApiHelper;
@@ -107,7 +108,10 @@ class TwoFactorTOTPContext implements Context {
 				'Key used more than twice'
 			);
 		}
-		return $otp->totp(Base32::decode($this->getSecret()), $this->timeCounter);
+		if ($this->getSecret() === null) {
+			$this->totpSecret = GoogleAuthenticator::generateRandom();
+		}
+		return $otp->totp(Encoding::base32DecodeUpper($this->getSecret()), $this->timeCounter);
 	}
 	/**
 	 * WebUIPersonalSecuritySettingsTOTPEnabledContext constructor.

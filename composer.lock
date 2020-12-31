@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "508c3e74ceba0b2d8125e9e0ce8523c6",
+    "content-hash": "78fdde96acf37d912bf300df1085e49d",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -60,89 +60,37 @@
             "time": "2020-10-30T02:02:47+00:00"
         },
         {
-            "name": "christian-riesen/base32",
-            "version": "1.3.2",
+            "name": "christian-riesen/otp",
+            "version": "2.6.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ChristianRiesen/base32.git",
-                "reference": "80ff0e3b2124e61b4b39e2535709452f70bff367"
+                "url": "https://github.com/ChristianRiesen/otp.git",
+                "reference": "eb46a9239871ea838bac3d3d5b70dbf3c66d8443"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/80ff0e3b2124e61b4b39e2535709452f70bff367",
-                "reference": "80ff0e3b2124e61b4b39e2535709452f70bff367",
+                "url": "https://api.github.com/repos/ChristianRiesen/otp/zipball/eb46a9239871ea838bac3d3d5b70dbf3c66d8443",
+                "reference": "eb46a9239871ea838bac3d3d5b70dbf3c66d8443",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "paragonie/constant_time_encoding": "^1|^2",
+                "paragonie/random_compat": ">=1",
+                "php": ">=5.4.0",
+                "symfony/polyfill-php56": "^1"
             },
             "require-dev": {
-                "php": ">=5.6",
-                "phpunit/phpunit": "^5.0",
-                "satooshi/php-coveralls": "^1.0"
+                "phpunit/phpunit": "^4.8.35 || ^5.7.11 || ^6.0.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Base32\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christian Riesen",
-                    "email": "chris.riesen@gmail.com",
-                    "homepage": "http://christianriesen.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Base32 encoder/decoder according to RFC 4648",
-            "homepage": "https://github.com/ChristianRiesen/base32",
-            "keywords": [
-                "base32",
-                "decode",
-                "encode",
-                "rfc4648"
-            ],
-            "support": {
-                "issues": "https://github.com/ChristianRiesen/base32/issues",
-                "source": "https://github.com/ChristianRiesen/base32/tree/master"
-            },
-            "time": "2018-11-02T09:03:50+00:00"
-        },
-        {
-            "name": "christian-riesen/otp",
-            "version": "1.4.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ChristianRiesen/otp.git",
-                "reference": "20a539ce6280eb029030f4e7caefd5709a75e1ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ChristianRiesen/otp/zipball/20a539ce6280eb029030f4e7caefd5709a75e1ad",
-                "reference": "20a539ce6280eb029030f4e7caefd5709a75e1ad",
-                "shasum": ""
-            },
-            "require": {
-                "christian-riesen/base32": ">=1.0",
-                "php": ">=5.3.0"
-            },
-            "suggest": {
-                "paragonie/random_compat": "Optional polyfill for a more secure random generator for pre PHP7 versions"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Otp": "src"
+                    "Otp\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -169,9 +117,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ChristianRiesen/otp/issues",
-                "source": "https://github.com/ChristianRiesen/otp/tree/master"
+                "source": "https://github.com/ChristianRiesen/otp/tree/2.6.3"
             },
-            "time": "2015-10-08T08:17:59+00:00"
+            "time": "2020-12-29T18:16:28+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -219,6 +167,191 @@
                 "source": "https://github.com/DASPRiD/Enum/tree/1.0.3"
             },
             "time": "2020-10-02T16:03:48+00:00"
+        },
+        {
+            "name": "paragonie/constant_time_encoding",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/constant_time_encoding.git",
+                "reference": "f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c",
+                "reference": "f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7|^8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6|^7|^8|^9",
+                "vimeo/psalm": "^1|^2|^3|^4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ParagonIE\\ConstantTime\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Steve 'Sc00bz' Thomas",
+                    "email": "steve@tobtu.com",
+                    "homepage": "https://www.tobtu.com",
+                    "role": "Original Developer"
+                }
+            ],
+            "description": "Constant-time Implementations of RFC 4648 Encoding (Base-64, Base-32, Base-16)",
+            "keywords": [
+                "base16",
+                "base32",
+                "base32_decode",
+                "base32_encode",
+                "base64",
+                "base64_decode",
+                "base64_encode",
+                "bin2hex",
+                "encoding",
+                "hex",
+                "hex2bin",
+                "rfc4648"
+            ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/constant_time_encoding/issues",
+                "source": "https://github.com/paragonie/constant_time_encoding"
+            },
+            "time": "2020-12-06T15:14:20+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v9.99.100",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
+            "time": "2020-10-15T08:29:30+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php56",
+            "version": "v1.20.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php56.git",
+                "reference": "54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675",
+                "reference": "54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.20-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php56/tree/v1.20.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-10-23T14:02:19+00:00"
         }
     ],
     "packages-dev": [
