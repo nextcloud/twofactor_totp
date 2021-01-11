@@ -13,6 +13,8 @@ OC.L10N.register(
     "Could not enable TOTP" : "Αδυναμία ενεργοποίησης TOTP",
     "Could not verify your key. Please try again" : "Αδυναμία επαλήθευσης κλειδιού. Παρακαλούμε προσπαθήστε ξανά",
     "Your new TOTP secret is:" : "Ο νέος κωδικός σας ΤΟΤΡ είναι:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Για γρήγορη εγκατάσταση, σαρώστε αυτόν τον κωδικό QR με την εφαρμογή TOTP:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Αφού διαμορφώσετε την εφαρμογή σας, εισάγετε έναν κωδικό δοκιμής παρακάτω για να βεβαιωθείτε ότι όλα λειτουργούν σωστά:",
     "Authentication code" : "Κώδικας πιστοποίησης",
     "Verify" : "Επαλήθευση",
     "Get the authentication code from the two-factor authentication app on your device." : "Παραλάβετε τον κωδικό πιστοποίησης από την εφαρμογή δύο-παραγόντων στην συσκευή σας.",
