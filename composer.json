@@ -7,7 +7,7 @@
 		"christian-riesen/otp": "2.*",
 		"christophwurst/nextcloud": "^20.0.0",
 		"christophwurst/nextcloud_testing": "^0.12",
-		"nextcloud/coding-standard": "^0.4.0",
+		"nextcloud/coding-standard": "^0.5.0",
 		"psalm/phar": "^4.3"
 	},
 	"scripts": {
