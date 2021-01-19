@@ -7,9 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [ 7.3, 7.4 ]
-        nextcloud-version: [ 'stable20', 'master' ]
+        php-version: [ 7.3, 7.4, 8.0 ]
+        nextcloud-version: [ 'master' ]
         db: ['sqlite']
+        include:
+          - php-version: 7.3
+            nextcloud-version: 'stable20'
+            db: 'sqlite'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
       - name: Set up php${{ matrix.php-version }}
@@ -48,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [ 7.4 ]
+        php-version: [ 8.0 ]
         nextcloud-version: [ 'master' ]
         browser: [ 'firefox', 'chrome' ]
         db: [ 'mysql' ]

@@ -12,3 +12,4 @@ vendor/
 /nbproject/
 
 tests/clover.xml
+tests/.phpunit.result.cache
