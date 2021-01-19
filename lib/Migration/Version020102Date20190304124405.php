@@ -24,6 +24,7 @@ class Version020102Date20190304124405 extends SimpleMigrationStep {
 
 		$table = $schema->getTable('twofactor_totp_secrets');
 		if (!$table->hasColumn('state')) {
+			// TODO: use \OCP\DB\Types::INT
 			$table->addColumn('state', 'integer', [
 				'notnull' => true,
 				'default' => 2,

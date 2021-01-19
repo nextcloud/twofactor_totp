@@ -1,0 +1,136 @@
+name: Test
+
+on: push
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [ 7.3, 7.4 ]
+        nextcloud-version: [ 'stable20', 'master' ]
+        db: ['sqlite']
+    name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
+    steps:
+      - name: Set up php${{ matrix.php-version }}
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
+          coverage: xdebug
+      - name: Checkout Nextcloud
+        run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
+      - name: Install Nextcloud
+        run: php -f nextcloud/occ maintenance:install --database-host 127.0.0.1 --database-name nextcloud --database-user nextcloud --database-pass nextcloud --admin-user admin --admin-pass admin --database ${{ matrix.db }}
+      - name: Checkout app
+        uses: actions/checkout@master
+        with:
+          path: nextcloud/apps/twofactor_totp
+      - name: Install dependencies
+        working-directory: nextcloud/apps/twofactor_totp
+        run: composer install
+      - name: Run tests
+        working-directory: nextcloud/apps/twofactor_totp
+        run: composer run test:unit
+      - name: Report coverage
+        uses: codecov/codecov-action@v1
+        if: ${{ always() }}
+        with:
+          file: ./nextcloud/apps/twofactor_totp/tests/clover.xml
+          flags: unittests
+          fail_ci_if_error: true
+
+  acceptance-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [ 7.4 ]
+        nextcloud-version: [ 'master' ]
+        browser: [ 'firefox', 'chrome' ]
+        db: [ 'mysql' ]
+        include:
+          - nextcloud-version: 'stable20'
+            php-version: 7.4
+            browser: chrome
+            db: mysql
+    name: Nextcloud ${{ matrix.nextcloud-version }} acceptance tests on php${{ matrix.php-version }}/${{ matrix.browser }}/${{ matrix.db }}
+    services:
+      mysql-service:
+        image: mariadb:10
+        env:
+          MYSQL_ROOT_PASSWORD: my-secret-pw
+          MYSQL_DATABASE: nextcloud
+          MYSQL_USER: nextcloud
+          MYSQL_PASSWORD: nextcloud
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    steps:
+      - name: Set up php${{ matrix.php-version }}
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
+          coverage: none
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Checkout Nextcloud
+        run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
+      - name: Install Nextcloud
+        run: php -f nextcloud/occ maintenance:install --database-host 127.0.0.1 --database-name nextcloud --database-user nextcloud --database-pass nextcloud --admin-user admin --admin-pass admin --database ${{ matrix.db }}
+      - name: Checkout app
+        uses: actions/checkout@master
+        with:
+          path: nextcloud/apps/twofactor_totp
+      - name: Install dependencies
+        working-directory: nextcloud/apps/twofactor_totp
+        run: |
+          composer install
+          npm i
+      - name: Build the app
+        working-directory: nextcloud/apps/twofactor_totp
+        run: npm run build
+      - name: Install the app
+        run: php -f nextcloud/occ app:enable twofactor_totp
+      - name: Start Nextcloud web server
+        working-directory: nextcloud
+        run: php -S 0.0.0.0:8080 &
+      - name: Connect to sauce
+        uses: saucelabs/sauce-connect-action@master
+        with:
+          username: ${{ secrets.SAUCE_USERNAME }}
+          accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+          tunnelIdentifier: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-${{ matrix.browser }}"
+      - name: Run tests
+        working-directory: nextcloud/apps/twofactor_totp
+        run: composer run test:acceptance
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_TUNNEL_ID: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-${{ matrix.browser }}"
+          SELENIUM_BROWSER: ${{ matrix.browser }}
+    env:
+      CI: true
+      TRAVIS: true
+
+  frontend-unit-test:
+    runs-on: ubuntu-latest
+    name: Front-end unit tests
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install
+        run: npm install
+      - name: run tests
+        run: npm run test
+    env:
+      CI: true

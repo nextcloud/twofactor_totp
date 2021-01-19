@@ -40,7 +40,7 @@ class StateChangeActivityTest extends TestCase {
 	/** @var IManager */
 	private $activityManager;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->activityManager = $this->createMock(IManager::class);
