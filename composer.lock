@@ -4,34 +4,34 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c4434ff60b523dcd78442efbc4a0f96",
+    "content-hash": "c0d7dbca8e916aaf1c76182f57e97243",
     "packages": [
         {
             "name": "christian-riesen/base32",
-            "version": "1.3.2",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristianRiesen/base32.git",
-                "reference": "80ff0e3b2124e61b4b39e2535709452f70bff367"
+                "reference": "a1cac38d50adb5ce9337a62019a0697cc5da3ca1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/80ff0e3b2124e61b4b39e2535709452f70bff367",
-                "reference": "80ff0e3b2124e61b4b39e2535709452f70bff367",
+                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/a1cac38d50adb5ce9337a62019a0697cc5da3ca1",
+                "reference": "a1cac38d50adb5ce9337a62019a0697cc5da3ca1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "php": ">=5.6",
-                "phpunit/phpunit": "^5.0",
-                "satooshi/php-coveralls": "^1.0"
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^8.5.13 || ^9.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -59,7 +59,11 @@
                 "encode",
                 "rfc4648"
             ],
-            "time": "2018-11-02T09:03:50+00:00"
+            "support": {
+                "issues": "https://github.com/ChristianRiesen/base32/issues",
+                "source": "https://github.com/ChristianRiesen/base32/tree/1.5.2"
+            },
+            "time": "2021-01-11T22:44:02+00:00"
         },
         {
             "name": "rullzer/easytotp",
@@ -94,9 +98,9 @@
             "authors": [
                 {
                     "name": "Roeland Jago Douma",
-                    "role": "Developer",
                     "email": "roeland@famdouma.nl",
-                    "homepage": "http://rullzer.com"
+                    "homepage": "http://rullzer.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Time-Based One-Time Password according to RFC6238",
@@ -107,6 +111,10 @@
                 "rfc6238",
                 "totp"
             ],
+            "support": {
+                "issues": "https://github.com/rullzer/easytotp/issues",
+                "source": "https://github.com/rullzer/easytotp/tree/master"
+            },
             "time": "2019-08-07T13:01:50+00:00"
         }
     ],
@@ -174,63 +182,23 @@
             "time": "2020-12-29T18:16:28+00:00"
         },
         {
-            "name": "christophwurst/nextcloud",
-            "version": "v20.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "a207b55848d1ac4c83a954eac90c07714bbdaaed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/a207b55848d1ac4c83a954eac90c07714bbdaaed",
-                "reference": "a207b55848d1ac4c83a954eac90c07714bbdaaed",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "20.0.0-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "AGPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Christoph Wurst",
-                    "email": "christoph@winzerhof-wurst.at"
-                }
-            ],
-            "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "support": {
-                "issues": "https://github.com/ChristophWurst/nextcloud_composer/issues",
-                "source": "https://github.com/ChristophWurst/nextcloud_composer/tree/v20.0.4"
-            },
-            "time": "2020-12-23T12:42:07+00:00"
-        },
-        {
             "name": "christophwurst/nextcloud_testing",
-            "version": "v0.12.1",
+            "version": "v0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
-                "reference": "3cbba15c75b7442e21d661e16e84a549eec93f3f"
+                "reference": "844927d4efdde058ba20f10d7035bd9bc4f8e4b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/3cbba15c75b7442e21d661e16e84a549eec93f3f",
-                "reference": "3cbba15c75b7442e21d661e16e84a549eec93f3f",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/844927d4efdde058ba20f10d7035bd9bc4f8e4b1",
+                "reference": "844927d4efdde058ba20f10d7035bd9bc4f8e4b1",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0",
+                "php": "^7.3|^8.0",
                 "php-webdriver/webdriver": "^1.9",
-                "phpunit/phpunit": "^8.0|^9.0"
+                "phpunit/phpunit": "^9.0"
             },
             "require-dev": {
                 "christophwurst/nextcloud": "^17.0"
@@ -254,9 +222,9 @@
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
             "support": {
                 "issues": "https://github.com/ChristophWurst/nextcloud_testing/issues",
-                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v0.12.1"
+                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v0.10.0"
             },
-            "time": "2021-01-13T10:05:18+00:00"
+            "time": "2020-12-29T15:46:01+00:00"
         },
         {
             "name": "composer/semver",
@@ -789,21 +757,21 @@
         },
         {
             "name": "nextcloud/coding-standard",
-            "version": "v0.5.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextcloud/coding-standard.git",
-                "reference": "742ed895ae76c10daf95e08488cfb3f554199f40"
+                "reference": "57654010946567d063d231ff0e1ea44e1289f965"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextcloud/coding-standard/zipball/742ed895ae76c10daf95e08488cfb3f554199f40",
-                "reference": "742ed895ae76c10daf95e08488cfb3f554199f40",
+                "url": "https://api.github.com/repos/nextcloud/coding-standard/zipball/57654010946567d063d231ff0e1ea44e1289f965",
+                "reference": "57654010946567d063d231ff0e1ea44e1289f965",
                 "shasum": ""
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.17",
-                "php": "^7.2|^8.0"
+                "php": "^7.3|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -824,9 +792,9 @@
             "description": "Nextcloud coding standards for the php cs fixer",
             "support": {
                 "issues": "https://github.com/nextcloud/coding-standard/issues",
-                "source": "https://github.com/nextcloud/coding-standard/tree/v0.5.0"
+                "source": "https://github.com/nextcloud/coding-standard/tree/v0.4.0"
             },
-            "time": "2021-01-11T14:15:58+00:00"
+            "time": "2020-12-14T07:22:40+00:00"
         },
         {
             "name": "nikic/php-parser",
