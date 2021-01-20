@@ -6,7 +6,7 @@
   "license": "agpl",
   "private": true,
   "scripts": {
-    "build": "webpack --progress --hide-modules --config src/webpack.prod.js",
+    "build": "webpack --progress --config src/webpack.prod.js",
     "dev": "webpack --progress --watch --config src/webpack.dev.js",
     "lint": "eslint --ext .js,.vue src",
     "lint:autofix": "eslint --ext .js,.vue src --fix",
@@ -59,7 +59,7 @@
     "vue-server-renderer": "^2.6.12",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12",
+    "webpack-cli": "^4.4.0",
     "webpack-merge": "^5.7.3",
     "webpack-node-externals": "^2.5.2"
   },
