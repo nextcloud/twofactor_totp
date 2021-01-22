@@ -10,10 +10,6 @@ jobs:
         php-version: [ 7.3, 7.4, 8.0 ]
         nextcloud-version: [ 'master' ]
         db: ['sqlite']
-        include:
-          - php-version: 7.3
-            nextcloud-version: 'stable20'
-            db: 'sqlite'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
       - name: Set up php${{ matrix.php-version }}
@@ -33,10 +29,6 @@ jobs:
       - name: Install dependencies
         working-directory: nextcloud/apps/twofactor_totp
         run: composer install
-      - name: Fix php-parser on stable20 incompatibility with phpunit 9.3+
-        if: ${{ matrix.nextcloud-version == 'stable20' }}
-        working-directory: nextcloud/3rdparty
-        run: composer require nikic/php-parser:4.10
       - name: Run tests
         working-directory: nextcloud/apps/twofactor_totp
         run: composer run test:unit
@@ -52,15 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [ 8.0 ]
+        php-version: [ 7.4, 8.0 ]
         nextcloud-version: [ 'master' ]
         browser: [ 'firefox', 'chrome' ]
         db: [ 'mysql' ]
-        include:
-          - nextcloud-version: 'stable20'
-            php-version: 7.4
-            browser: chrome
-            db: mysql
     name: Nextcloud ${{ matrix.nextcloud-version }} acceptance tests on php${{ matrix.php-version }}/${{ matrix.browser }}/${{ matrix.db }}
     services:
       mysql-service:
@@ -87,7 +74,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: Checkout Nextcloud
         run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
       - name: Install Nextcloud
@@ -114,14 +101,14 @@ jobs:
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          tunnelIdentifier: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-${{ matrix.browser }}"
+          tunnelIdentifier: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
       - name: Run tests
         working-directory: nextcloud/apps/twofactor_totp
         run: composer run test:acceptance
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          SAUCE_TUNNEL_ID: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-${{ matrix.browser }}"
+          SAUCE_TUNNEL_ID: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
           SELENIUM_BROWSER: ${{ matrix.browser }}
     env:
       CI: true
