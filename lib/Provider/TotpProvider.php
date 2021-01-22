@@ -27,6 +27,7 @@ use OCA\TwoFactorTOTP\AppInfo\Application;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
 use OCP\AppFramework\IAppContainer;
+use OCP\AppFramework\Services\IInitialState;
 use OCP\Authentication\TwoFactorAuth\IActivatableAtLogin;
 use OCP\Authentication\TwoFactorAuth\IDeactivatableByAdmin;
 use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
@@ -34,7 +35,6 @@ use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
-use OCP\IInitialStateService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
@@ -51,8 +51,8 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/** @var IAppContainer */
 	private $container;
 
-	/** @var IInitialStateService */
-	private $initialStateService;
+	/** @var IInitialState */
+	private $initialState;
 
 	/** @var IURLGenerator */
 	private $urlGenerator;
@@ -60,12 +60,12 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	public function __construct(ITotp $totp,
 								IL10N $l10n,
 								IAppContainer $container,
-								IInitialStateService $initialStateService,
+								IInitialState $initialStateService,
 	IURLGenerator $urlGenerator) {
 		$this->totp = $totp;
 		$this->l10n = $l10n;
 		$this->container = $container;
-		$this->initialStateService = $initialStateService;
+		$this->initialState = $initialStateService;
 		$this->urlGenerator = $urlGenerator;
 	}
 
@@ -121,7 +121,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	}
 
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
-		$this->initialStateService->provideInitialState('twofactor_totp', 'state', $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED);
+		$this->initialState->provideInitialState('state', $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED);
 		return new Personal();
 	}
 

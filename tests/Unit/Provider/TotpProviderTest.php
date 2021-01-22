@@ -32,7 +32,7 @@ use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
 use OCP\AppFramework\IAppContainer;
-use OCP\IInitialStateService;
+use OCP\AppFramework\Services\IInitialState;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
@@ -64,7 +64,7 @@ class TotpProviderTest extends TestCase {
 		$this->totp = $this->createMock(ITotp::class);
 		$this->l10n = $this->createMock(IL10N::class);
 		$this->container = $this->createMock(IAppContainer::class);
-		$this->initialState = $this->createMock(IInitialStateService::class);
+		$this->initialState = $this->createMock(IInitialState::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 
 		$this->provider = new TotpProvider(
@@ -136,7 +136,6 @@ class TotpProviderTest extends TestCase {
 		$this->initialState->expects($this->once())
 			->method('provideInitialState')
 			->with(
-				'twofactor_totp',
 				'state',
 				true
 			);

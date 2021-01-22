@@ -30,21 +30,27 @@ use OCA\TwoFactorTOTP\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\AppFramework\App;
-use OCP\EventDispatcher\IEventDispatcher;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
-class Application extends App {
+class Application extends App implements IBootstrap {
 	public const APP_ID = 'twofactor_totp';
 
-	public function __construct(array $urlParams = []) {
-		parent::__construct(self::APP_ID, $urlParams);
+	public function __construct() {
+		parent::__construct(self::APP_ID);
+	}
 
-		$container = $this->getContainer();
-		$container->registerAlias(ITotp::class, Totp::class);
+	public function register(IRegistrationContext $context): void {
+		include_once __DIR__ . '/../../vendor/autoload.php';
 
-		/** @var IEventDispatcher $dispatcher */
-		$dispatcher = $container->query(IEventDispatcher::class);
-		$dispatcher->addServiceListener(StateChanged::class, StateChangeActivity::class);
-		$dispatcher->addServiceListener(StateChanged::class, StateChangeRegistryUpdater::class);
-		$dispatcher->addServiceListener(DisabledByAdmin::class, StateChangeActivity::class);
+		$context->registerServiceAlias(ITotp::class, Totp::class);
+
+		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
+		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
+		$context->registerEventListener(DisabledByAdmin::class, StateChangeActivity::class);
+	}
+
+	public function boot(IBootContext $context): void {
 	}
 }
