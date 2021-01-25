@@ -1,7 +1,7 @@
 {
   "name": "twofactor_totp",
   "description": "Nextcloud TwoFactor TOTP",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "author": "Christoph Wurst <christoph@winzerhof-wurst.at>",
   "license": "agpl",
   "private": true,
