@@ -52,7 +52,7 @@
     "mocha": "^8.2.1",
     "mochapack": "^2.0.6",
     "prettier": "2.2.1",
-    "sass-loader": "^10.1.0",
+    "sass-loader": "^10.1.1",
     "sinon": "^9.2.2",
     "url-loader": "^4.1.1",
     "vue-loader": "^15.9.6",
