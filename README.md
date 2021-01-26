@@ -1,6 +1,8 @@
 # Two Factor Totp
 [![Build Status](https://drone.owncloud.com/api/badges/owncloud/twofactor_totp/status.svg?branch=master)](https://drone.owncloud.com/owncloud/twofactor_totp)
-[![codecov](https://codecov.io/gh/owncloud/twofactor_totp/branch/master/graph/badge.svg)](https://codecov.io/gh/owncloud/twofactor_totp)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=owncloud_twofactor_totp&metric=alert_status)](https://sonarcloud.io/dashboard?id=owncloud_twofactor_totp)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=owncloud_twofactor_totp&metric=security_rating)](https://sonarcloud.io/dashboard?id=owncloud_twofactor_totp)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=owncloud_twofactor_totp&metric=coverage)](https://sonarcloud.io/dashboard?id=owncloud_twofactor_totp)
 
 Tested with the following apps:
 * [OTP Authenticator](https://github.com/0xbb/otp-authenticator) (open source) which can be downloaded from [F-Droid](https://f-droid.org/repository/browse/?fdfilter=totp&fdid=net.bierbaumer.otp_authenticator) and has a built-in QR-code reader.
