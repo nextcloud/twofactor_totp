@@ -61,26 +61,26 @@
         },
         {
             "name": "christian-riesen/otp",
-            "version": "2.6.3",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristianRiesen/otp.git",
-                "reference": "eb46a9239871ea838bac3d3d5b70dbf3c66d8443"
+                "reference": "aab865ae6d356993ad9d51f8a7e8f32b8a54730a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristianRiesen/otp/zipball/eb46a9239871ea838bac3d3d5b70dbf3c66d8443",
-                "reference": "eb46a9239871ea838bac3d3d5b70dbf3c66d8443",
+                "url": "https://api.github.com/repos/ChristianRiesen/otp/zipball/aab865ae6d356993ad9d51f8a7e8f32b8a54730a",
+                "reference": "aab865ae6d356993ad9d51f8a7e8f32b8a54730a",
                 "shasum": ""
             },
             "require": {
                 "paragonie/constant_time_encoding": "^1|^2",
                 "paragonie/random_compat": ">=1",
-                "php": ">=5.4.0",
+                "php": ">=5.6.0",
                 "symfony/polyfill-php56": "^1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7.11 || ^6.0.5"
+                "phpunit/phpunit": "^5.7.11 || ^6.0.5"
             },
             "type": "library",
             "extra": {
@@ -117,9 +117,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ChristianRiesen/otp/issues",
-                "source": "https://github.com/ChristianRiesen/otp/tree/2.6.3"
+                "source": "https://github.com/ChristianRiesen/otp/tree/2.7.0"
             },
-            "time": "2020-12-29T18:16:28+00:00"
+            "time": "2021-02-23T20:13:30+00:00"
         },
         {
             "name": "dasprid/enum",
