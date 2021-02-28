@@ -7,7 +7,7 @@ Feature: Use the CLI to verify OTP keys for users
   Note: this feature is testing the CLI, but needs webUI steps for scenario setup in "given" steps
 
   Background:
-    Given these users have been created with default attributes and skeleton files:
+    Given these users have been created with default attributes and large skeleton files:
       | username |
       | Alice    |
       | new-user |

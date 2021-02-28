@@ -5,7 +5,7 @@ Feature: Use the webUI to verify OTP keys
   So that I can use two factor authentication
 
   Background:
-    Given user "newly-created-user" has been created with default attributes and skeleton files
+    Given user "newly-created-user" has been created with default attributes and large skeleton files
     And using OCS API version "2"
 
   Scenario: Verify using the key generated from the secret
