@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "christian-riesen/base32",
-            "version": "1.5.2",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristianRiesen/base32.git",
-                "reference": "a1cac38d50adb5ce9337a62019a0697cc5da3ca1"
+                "reference": "2e82dab3baa008e24a505649b0d583c31d31e894"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/a1cac38d50adb5ce9337a62019a0697cc5da3ca1",
-                "reference": "a1cac38d50adb5ce9337a62019a0697cc5da3ca1",
+                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/2e82dab3baa008e24a505649b0d583c31d31e894",
+                "reference": "2e82dab3baa008e24a505649b0d583c31d31e894",
                 "shasum": ""
             },
             "require": {
@@ -61,9 +61,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ChristianRiesen/base32/issues",
-                "source": "https://github.com/ChristianRiesen/base32/tree/1.5.2"
+                "source": "https://github.com/ChristianRiesen/base32/tree/1.6.0"
             },
-            "time": "2021-01-11T22:44:02+00:00"
+            "time": "2021-02-26T10:19:33+00:00"
         },
         {
             "name": "rullzer/easytotp",
