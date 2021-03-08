@@ -5,7 +5,7 @@ OC.L10N.register(
     "You disabled TOTP two-factor authentication for your account" : "您已將您的賬戶停用了 TOTP 兩階段驗證",
     "TOTP two-factor authentication disabled by an admin" : "TOTP 兩階段驗證功能已被系統管理員停用",
     "TOTP (Authenticator app)" : "TOTP （驗證應用程式）",
-    "Authenticate with a TOTP app" : "使用 TOTP 應用程式驗證身分",
+    "Authenticate with a TOTP app" : "使用 TOTP 應用程式進行驗證",
     "Two-Factor TOTP Provider" : "雙因驗證 TOTP 碼提供者",
     "TOTP two-factor provider" : "TOTP 兩階段驗證供應商",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP 兩階段驗證裝置供應商 (RFC 6238)",
