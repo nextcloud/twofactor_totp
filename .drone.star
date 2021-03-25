@@ -117,6 +117,9 @@ config = {
 					]
 				}
 			],
+			'servers': [
+				'daily-master-qa'
+			],
 			'phpVersions': [
 				'7.2',
 				'7.3'
