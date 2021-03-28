@@ -60,7 +60,7 @@ class TotpProvider implements IProvider {
 	 * @return string
 	 */
 	public function getDisplayName() {
-		return 'Time-based One-time Password';
+		return $this->l10n->t('Time-based One-time Password');
 	}
 
 	/**
