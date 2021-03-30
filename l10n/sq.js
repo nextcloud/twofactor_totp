@@ -9,6 +9,7 @@ OC.L10N.register(
     "Verify" : "Verifikoje",
     "Verified" : "U verifikua",
     "Not verified" : "S’u verifikua",
+    "Time-based One-time Password" : "Fjalëkalim Vetëm-për-një-herë Bazuar-në-kohë",
     "Authenticate with a TOTP app" : "Mirëfilltësimin kryejeni me një aplikacion TOTP",
     "TOTP Second-factor Auth" : "TOTP Second-factor Auth"
 },

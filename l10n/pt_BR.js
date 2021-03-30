@@ -9,6 +9,7 @@ OC.L10N.register(
     "Verify" : "Verificar",
     "Verified" : "Verificado",
     "Not verified" : "Não verificado",
+    "Time-based One-time Password" : "Senha Baseada-no-Tempo Uma-vez",
     "Authenticate with a TOTP app" : "Autenticar com um aplicativo TOTP",
     "TOTP Second-factor Auth" : "TOTP Segundo-fator Auto"
 },
