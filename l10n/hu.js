@@ -13,6 +13,8 @@ OC.L10N.register(
     "Could not enable TOTP" : "TOTP nem engedélyezhető",
     "Could not verify your key. Please try again" : "A kulcs nem ellenőrizhető. Próbálja meg újra.",
     "Your new TOTP secret is:" : "Az új időalapú egyszeri titkos jelszava (TOTP):",
+    "For quick setup, scan this QR code with your TOTP app:" : "A gyors beállításhoz olvassa be ezt a QR-kódot a TOTP alkalmazással:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Miután konfigurálta az alkalmazást, írja be az alábbi tesztkódot, hogy meggyőződhessen róla, minden megfelelően működik:",
     "Authentication code" : "Azonosítási kód",
     "Verify" : "Ellenőrzés",
     "Get the authentication code from the two-factor authentication app on your device." : "Szerezd meg a kétfaktoros azonosítási alkalmazásodból a kódot az eszközödről.",
