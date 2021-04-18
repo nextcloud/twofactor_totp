@@ -9,6 +9,7 @@ OC.L10N.register(
     "Verify" : "ยืนยัน",
     "Verified" : "ยืนยันแล้ว",
     "Not verified" : "ยังไม่ได้ยืนยัน",
+    "Time-based One-time Password" : "รหัสผ่านแบบใช้ครั้งเดียว",
     "Authenticate with a TOTP app" : "ตรวจสอบสิทธิ์ด้วยแอปฯ TOTP",
     "TOTP Second-factor Auth" : "TOTP การยืนยันสองขั้นตอน"
 },
