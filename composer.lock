@@ -407,23 +407,23 @@
         },
         {
             "name": "khanamiryan/qrcode-detector-decoder",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/khanamiryan/php-qrcode-detector-decoder.git",
-                "reference": "07fceefb79d895e858e52921afb9c1433d2f3d5e"
+                "reference": "6c8c23003a87ecd7458807cd49372b1fb590d1f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/khanamiryan/php-qrcode-detector-decoder/zipball/07fceefb79d895e858e52921afb9c1433d2f3d5e",
-                "reference": "07fceefb79d895e858e52921afb9c1433d2f3d5e",
+                "url": "https://api.github.com/repos/khanamiryan/php-qrcode-detector-decoder/zipball/6c8c23003a87ecd7458807cd49372b1fb590d1f5",
+                "reference": "6c8c23003a87ecd7458807cd49372b1fb590d1f5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.0"
+                "phpunit/phpunit": "^5.7 | ^7.5 | ^8.0 | ^9.0"
             },
             "type": "library",
             "autoload": {
@@ -455,9 +455,9 @@
             ],
             "support": {
                 "issues": "https://github.com/khanamiryan/php-qrcode-detector-decoder/issues",
-                "source": "https://github.com/khanamiryan/php-qrcode-detector-decoder/tree/1.0.4"
+                "source": "https://github.com/khanamiryan/php-qrcode-detector-decoder/tree/1.0.5"
             },
-            "time": "2020-11-29T18:50:26+00:00"
+            "time": "2021-04-20T18:34:35+00:00"
         }
     ],
     "aliases": [],
