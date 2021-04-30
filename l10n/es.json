@@ -11,7 +11,7 @@
     "Could not enable TOTP" : "No se ha podido activar TOTP",
     "Could not verify your key. Please try again" : "No se ha podido verificar su clave. Por favor, inténtelo de nuevo",
     "Your new TOTP secret is:" : "Este es tu nuevo secreto TOTP:",
-    "For quick setup, scan this QR code with your TOTP app:" : "Para una configuración rápida , escanea este código QR con tu app TOTP",
+    "For quick setup, scan this QR code with your TOTP app:" : "Para una configuración rápida, escanea este código QR con tu app TOTP:",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Una vez has configurado la aplicación, introduce un código de prueba debajo para asegurarte de que tu aplicación se ha configurado correctamente.",
     "Authentication code" : "Código de autentificación",
     "Verify" : "Verificar",
