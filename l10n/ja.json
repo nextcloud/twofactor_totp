@@ -6,7 +6,7 @@
     "Authenticate with a TOTP app" : "TOTPアプリで認証する",
     "Two-Factor TOTP Provider" : "TOTP 二要素認証プロバイダー",
     "TOTP two-factor provider" : "TOTP 二要素認証プロバイダー",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP（RFC 6238）の二要素認証プロバイダ",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP（RFC 6238）の二要素認証プロバイダー",
     "Enable TOTP" : "TOTP有効化",
     "Could not enable TOTP" : "TOTP を有効にできません",
     "Could not verify your key. Please try again" : "鍵を検証できませんでした。やり直してください。",
