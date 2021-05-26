@@ -9,6 +9,7 @@ OC.L10N.register(
     "Verify" : "Bestätigen",
     "Verified" : "Bestätigt",
     "Not verified" : "Nicht bestätigt",
+    "Time-based One-time Password" : "Zeitgesteuertes Einmalpasswort",
     "Authenticate with a TOTP app" : "Mit einer TOTP-App (zeitgesteuertes Einmalpasswort) authentifizieren",
     "TOTP Second-factor Auth" : "TOTP-Zweifaktorauthentifizierung"
 },
