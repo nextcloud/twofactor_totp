@@ -9,6 +9,7 @@ OC.L10N.register(
     "Verify" : "Подтвердить",
     "Verified" : "Проверка прошла",
     "Not verified" : "Проверка не прошла",
+    "Time-based One-time Password" : "Одноразовый пароль на основе времени",
     "Authenticate with a TOTP app" : "Аутентифицируйтесь с помощью TOTP приложения",
     "TOTP Second-factor Auth" : "Аутентификация с помощью второго фактора TOTP"
 },
