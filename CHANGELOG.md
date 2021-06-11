@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.7.2] - 2021-05-26
+
+### Fixed
+
+- Translate "Verify" Button - [#215](https://github.com/owncloud/twofactor_totp/issues/215)
+- Translate DisplayName - [#216]](https://github.com/owncloud/twofactor_totp/issues/216)
+
+### Changed
+
+- Bump libraries
+
+
 ## [0.7.1] - 2021-01-07
 
 ### Fixed
@@ -93,7 +105,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - App is now signed
 
-[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/v0.7.1...master
+[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/v0.7.2...master
+[0.7.2]: https://github.com/owncloud/twofactor_totp/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/owncloud/twofactor_totp/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/owncloud/twofactor_totp/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/owncloud/twofactor_totp/compare/v0.6.0...v0.6.1
