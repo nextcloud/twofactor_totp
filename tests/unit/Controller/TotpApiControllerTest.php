@@ -62,7 +62,8 @@ class TotpApiControllerTest extends TestCase {
 
 		$this->controller = new TotpApiController(
 			'twofactor_totp',
-			$this->request, $this->totp,
+			$this->request,
+			$this->totp,
 			$this->userManager,
 			$this->logger
 		);
