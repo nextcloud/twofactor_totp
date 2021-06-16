@@ -29,6 +29,10 @@
     "last 2 versions",
     "ie >= 11"
   ],
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=7.0.0"
+  },
   "jshintConfig": {
     "esversion": 6
   },
