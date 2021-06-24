@@ -1,7 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 6.0.0 – 2020-08-26
+## 6.1.0 – 2021-06-24
+### Added
+- Nextcloud 22 support
+### Changed
+- New and updated translations
+- Updated dependencies
+
+## 6.0.0 – 2021-01-25
 ### Added
 - Nextcloud 21 support
 ### Changed
