@@ -8,7 +8,7 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "使用 TOTP 應用程式進行驗證",
     "Two-Factor TOTP Provider" : "雙重認證 TOTP 提供者",
     "TOTP two-factor provider" : "TOTP 雙重認證供應商",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP 雙重認證裝置供應商（RFC 6238)",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP 雙重認證裝置供應商（RFC 6238）",
     "Enable TOTP" : "啟用 TOTP",
     "Could not enable TOTP" : "無法啟用 TOTP",
     "Could not verify your key. Please try again" : "無法驗證你的密鑰。請重新再試",
