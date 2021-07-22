@@ -278,8 +278,9 @@ class TwoFactorTOTPContext implements Context {
 			$this->featureContext->getAdminPassword(),
 			'GET',
 			"/apps/twofactor_totp/api/v1/validate/$user/$secretKey",
-			$body = [],
-			$ocsApiVersion = 1
+			$this->featureContext->getStepLineRef(),
+			[],
+			1
 		);
 		$this->featureContext->setResponse($response);
 	}
