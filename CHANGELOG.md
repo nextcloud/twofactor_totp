@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+- Adapt to new login design - [#39053](https://github.com/owncloud/twofactor_totp/issues/237)
 
 ## [0.7.2] - 2021-05-26
 
