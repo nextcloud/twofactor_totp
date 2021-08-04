@@ -1,3 +1,10 @@
+dir = {
+    "base": "/var/www/owncloud",
+    "federated": "/var/www/owncloud/federated",
+    "server": "/var/www/owncloud/server",
+    "testrunner": "/var/www/owncloud/testrunner",
+}
+
 config = {
 	'app': 'twofactor_totp',
 	'rocketchat': {
@@ -159,6 +166,7 @@ config = {
 
 def main(ctx):
 	
+
 	before = beforePipelines(ctx)
 
 	coverageTests = coveragePipelines(ctx)
@@ -275,7 +283,7 @@ def codestyle(ctx):
 				'type': 'docker',
 				'name': name,
 				'workspace' : {
-					'base': '/var/www/owncloud',
+					'base': dir["base"],
 					'path': 'server/apps/%s' % ctx.repo.name
 				},
 				'steps': [
@@ -319,7 +327,7 @@ def jscodestyle(ctx):
 		'type': 'docker',
 		'name': 'coding-standard-js',
 		'workspace' : {
-			'base': '/var/www/owncloud',
+			'base': dir["base"],
 			'path': 'server/apps/%s' % ctx.repo.name
 		},
 		'steps': [
@@ -391,7 +399,7 @@ def phpstan(ctx):
 				'type': 'docker',
 				'name': name,
 				'workspace' : {
-					'base': '/var/www/owncloud',
+					'base': dir["base"],
 					'path': 'server/apps/%s' % ctx.repo.name
 				},
 				'steps':
@@ -466,7 +474,7 @@ def phan(ctx):
 				'type': 'docker',
 				'name': name,
 				'workspace' : {
-					'base': '/var/www/owncloud',
+					'base': dir["base"],
 					'path': 'server/apps/%s' % ctx.repo.name
 				},
 				'steps':
@@ -536,7 +544,7 @@ def build(ctx):
 			'type': 'docker',
 			'name': 'build',
 			'workspace' : {
-				'base': '/var/www/owncloud',
+				'base': dir["base"],
 				'path': 'server/apps/%s' % ctx.repo.name
 			},
 			'steps': [
@@ -637,7 +645,7 @@ def javascript(ctx, withCoverage):
 		'type': 'docker',
 		'name': 'javascript-tests',
 		'workspace' : {
-			'base': '/var/www/owncloud',
+			'base': dir["base"],
 			'path': 'server/apps/%s' % ctx.repo.name
 		},
 		'steps':
@@ -807,7 +815,7 @@ def phpTests(ctx, testType, withCoverage):
 					'type': 'docker',
 					'name': name,
 					'workspace' : {
-						'base': '/var/www/owncloud',
+						'base': dir["base"],
 						'path': 'server/apps/%s' % ctx.repo.name
 					},
 					'steps':
@@ -917,6 +925,7 @@ def acceptance(ctx):
 		'extraEnvironment': {},
 		'extraCommandsBeforeTestRun': [],
 		'extraApps': {},
+		'externalScality': [],
 		'useBundledApp': False,
 		'includeKeyInMatrixName': False,
 		'runAllSuites': False,
@@ -970,6 +979,71 @@ def acceptance(ctx):
 			# switch off earlyFail when running cron builds (for example, nightly CI)
 			if (ctx.build.event == "cron"):
 				params["earlyFail"] = False
+
+			if 'externalScality' in params and len(params['externalScality']) != 0:
+				# We want to use an external scality server for this pipeline.
+				# That uses some "standard" extraSetup and extraTeardown.
+				# Put the needed setup and teardown in place.
+				params["extraSetup"] = [
+					{
+						'name': 'configure-app',
+						'image': 'owncloudci/php:7.2',
+						'pull': 'always',
+						'commands': [
+							'cd /var/www/owncloud/server/apps/files_primary_s3',
+							'cp tests/drone/scality.config.php /var/www/owncloud/server/config',
+							'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
+							'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
+							'sed -i -e "s/verySecretKey1/$SCALITY_SECRET_ESCAPED/" /var/www/owncloud/server/config/scality.config.php',
+							'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
+							'sed -i -e "s/scality:8000/%s/" /var/www/owncloud/server/config/scality.config.php' % params['externalScality']['externalServerUrl'],
+							'cd /var/www/owncloud/server/',
+							'php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning',
+							'cd /var/www/owncloud/testrunner/apps/files_primary_s3',
+						],
+						'environment': {
+							'SCALITY_KEY': {
+								'from_secret': params['externalScality']['secrets']['scality_key']
+							},
+							'SCALITY_SECRET': {
+								'from_secret': params['externalScality']['secrets']['scality_secret']
+							},
+							'SCALITY_SECRET_ESCAPED': {
+								'from_secret': params['externalScality']['secrets']['scality_secret_escaped']
+							},
+						}
+					}
+				]
+				params["extraTeardown"] = [
+					{
+						'name': 'cleanup-scality-bucket',
+						'image': 'banst/awscli',
+						'pull': 'always',
+						'failure': 'ignore',
+						'commands': [
+							'aws configure set aws_access_key_id $SCALITY_KEY',
+							'aws configure set aws_secret_access_key $SCALITY_SECRET',
+							'aws --endpoint-url $SCALITY_ENDPOINT s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+							'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+							'aws --endpoint-url $SCALITY_ENDPOINT s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						],
+						'environment': {
+							'SCALITY_KEY': {
+								'from_secret': params['externalScality']['secrets']['scality_key']
+							},
+							'SCALITY_SECRET': {
+								'from_secret': params['externalScality']['secrets']['scality_secret']
+							},
+							'SCALITY_ENDPOINT': 'https://%s' % params['externalScality']['externalServerUrl'],
+						},
+						'when': {
+							'status': [
+								'failure',
+								'success',
+							],
+						},
+					}
+				]
 
 			if isAPI or isCLI:
 				params['browsers'] = ['']
@@ -1071,7 +1145,7 @@ def acceptance(ctx):
 					'type': 'docker',
 					'name': name,
 					'workspace' : {
-						'base': '/var/www/owncloud',
+						'base': dir["base"],
 						'path': 'testrunner/apps/%s' % ctx.repo.name
 					},
 					'steps':
@@ -1080,7 +1154,7 @@ def acceptance(ctx):
 						(installFederated(testConfig['server'], testConfig['phpVersion'], testConfig['logLevel'], testConfig['database'], federationDbSuffix) + owncloudLog('federated') if testConfig['federatedServerNeeded'] else []) +
 						installApp(ctx, testConfig['phpVersion']) +
 						installExtraApps(testConfig['phpVersion'], testConfig['extraApps']) +
-						setupServerAndApp(ctx, testConfig['phpVersion'], testConfig['logLevel']) +
+						setupServerAndApp(ctx, testConfig['phpVersion'], testConfig['logLevel'], testConfig['federatedServerNeeded']) +
 						owncloudLog('server') +
 						setupCeph(testConfig['cephS3']) +
 						setupScality(testConfig['scalityS3']) +
@@ -1094,8 +1168,8 @@ def acceptance(ctx):
 							'pull': 'always',
 							'environment': environment,
 							'commands': testConfig['extraCommandsBeforeTestRun'] + [
-								'touch /var/www/owncloud/saved-settings.sh',
-								'. /var/www/owncloud/saved-settings.sh',
+								'touch %s/saved-settings.sh' % dir["base"],
+								'. %s/saved-settings.sh' % dir["base"],
 								'make %s' % makeParameter
 							]
 						}),
@@ -1109,9 +1183,9 @@ def acceptance(ctx):
 						scalityService(testConfig['scalityS3']) +
 						elasticSearchService(testConfig['esVersion']) +
 						testConfig['extraServices'] +
-						owncloudService(testConfig['server'], testConfig['phpVersion'], 'server', '/var/www/owncloud/server', testConfig['ssl'], testConfig['xForwardedFor']) +
+						owncloudService(testConfig['server'], testConfig['phpVersion'], 'server', dir["server"], testConfig['ssl'], testConfig['xForwardedFor']) +
 						((
-							owncloudService(testConfig['server'], testConfig['phpVersion'], 'federated', '/var/www/owncloud/federated', testConfig['ssl'], testConfig['xForwardedFor']) +
+							owncloudService(testConfig['server'], testConfig['phpVersion'], 'federated', dir["federated"], testConfig['ssl'], testConfig['xForwardedFor']) +
 							databaseServiceForFederation(testConfig['database'], federationDbSuffix)
 						) if testConfig['federatedServerNeeded'] else [] ),
 					'depends_on': [],
@@ -1158,7 +1232,7 @@ def sonarAnalysis(ctx, phpVersion = '7.4'):
 		'type': 'docker',
 		'name': 'sonar-analysis',
 		'workspace' : {
-			'base': '/var/www/owncloud',
+			'base': dir["base"],
 			'path': 'server/apps/%s' % ctx.repo.name
 		},
 		'clone': {
@@ -1430,14 +1504,14 @@ def cephService(serviceParams):
 		'environment': serviceEnvironment
 	}]
 
-def owncloudService(version, phpVersion, name = 'server', path = '/var/www/owncloud/server', ssl = True, xForwardedFor = False):
+def owncloudService(version, phpVersion, name, path, ssl, xForwardedFor):
 	if ssl:
 		environment = {
 			'APACHE_WEBROOT': path,
 			'APACHE_CONFIG_TEMPLATE': 'ssl',
 			'APACHE_SSL_CERT_CN': 'server',
-			'APACHE_SSL_CERT': '/var/www/owncloud/%s.crt' % name,
-			'APACHE_SSL_KEY': '/var/www/owncloud/%s.key' % name,
+			'APACHE_SSL_CERT': '%s/%s.crt' % (dir["base"], name),
+			'APACHE_SSL_KEY': '%s/%s.key' % (dir["base"], name),
 			'APACHE_LOGGING_PATH': '/dev/null',
 		}
 	else:
@@ -1558,7 +1632,7 @@ def installCore(ctx, version, db, useBundledApp):
 		'pull': 'always',
 		'settings': {
 			'version': version,
-			'core_path': '/var/www/owncloud/server',
+			'core_path': dir["server"],
 			'db_type': dbType,
 			'db_name': database,
 			'db_host': host,
@@ -1580,21 +1654,21 @@ def installTestrunner(ctx, phpVersion, useBundledApp):
 		'commands': [
 			'mkdir /tmp/testrunner',
 			'git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner',
-			'rsync -aIX /tmp/testrunner /var/www/owncloud',
+			'rsync -aIX /tmp/testrunner %s' % dir["base"],
 		] + ([
-			'cp -r /var/www/owncloud/testrunner/apps/%s /var/www/owncloud/server/apps/' % ctx.repo.name
+			'cp -r %s/apps/%s %s/apps/' % (dir["testrunner"], ctx.repo.name, dir["server"])
 		] if not useBundledApp else [])
 	}]
 
 def installExtraApps(phpVersion, extraApps):
 	commandArray = []
 	for app, command in extraApps.items():
-		commandArray.append('git clone https://github.com/owncloud/%s.git /var/www/owncloud/testrunner/apps/%s' % (app, app))
-		commandArray.append('cp -r /var/www/owncloud/testrunner/apps/%s /var/www/owncloud/server/apps/' % app)
+		commandArray.append('git clone https://github.com/owncloud/%s.git %s/apps/%s' % (app, dir["testrunner"], app))
+		commandArray.append('cp -r %s/apps/%s %s/apps/' % (dir["testrunner"], app, dir["server"]))
 		if (command != ''):
-			commandArray.append('cd /var/www/owncloud/server/apps/%s' % app)
+			commandArray.append('cd %s/apps/%s' % (dir["server"], app))
 			commandArray.append(command)
-		commandArray.append('cd /var/www/owncloud/server')
+		commandArray.append('cd %s' % dir["server"])
 		commandArray.append('php occ a:l')
 		commandArray.append('php occ a:e %s' % app)
 		commandArray.append('php occ a:l')
@@ -1618,24 +1692,25 @@ def installApp(ctx, phpVersion):
 		'image': 'owncloudci/php:%s' % phpVersion,
 		'pull': 'always',
 		'commands': [
-			'cd /var/www/owncloud/server/apps/%s' % ctx.repo.name,
+			'cd %s/apps/%s' % (dir["server"], ctx.repo.name),
 			config['appInstallCommand']
 		]
 	}]
 
-def setupServerAndApp(ctx, phpVersion, logLevel):
+def setupServerAndApp(ctx, phpVersion, logLevel, federatedServerNeeded = False):
 	return [{
 		'name': 'setup-server-%s' % ctx.repo.name,
 		'image': 'owncloudci/php:%s' % phpVersion,
 		'pull': 'always',
 		'commands': [
-			'cd /var/www/owncloud/server',
+			'cd %s' % dir["server"],
 			'php occ a:l',
 			'php occ a:e %s' % ctx.repo.name,
 			'php occ a:e testing',
 			'php occ a:l',
 			'php occ config:system:set trusted_domains 1 --value=server',
 			'php occ log:manage --level %s' % logLevel,
+			'php occ config:system:set csrf.disabled --value=true' if federatedServerNeeded else ''
 		]
 	}]
 
@@ -1650,9 +1725,9 @@ def setupCeph(serviceParams):
 	createFirstBucket = serviceParams['createFirstBucket'] if 'createFirstBucket' in serviceParams else True
 	setupCommands = serviceParams['setupCommands'] if 'setupCommands' in serviceParams else [
 		'wait-for-it -t 600 ceph:80',
-		'cd /var/www/owncloud/server/apps/files_primary_s3',
-		'cp tests/drone/ceph.config.php /var/www/owncloud/server/config',
-		'cd /var/www/owncloud/server',
+		'cd %s/apps/files_primary_s3' % dir["server"],
+		'cp tests/drone/ceph.config.php %s/config' % dir["server"],
+		'cd %s' % dir["server"],
 	]
 
 	return [{
@@ -1678,9 +1753,9 @@ def setupScality(serviceParams):
 	createExtraBuckets = serviceParams['createExtraBuckets'] if 'createExtraBuckets' in serviceParams else False
 	setupCommands = serviceParams['setupCommands'] if 'setupCommands' in serviceParams else [
 		'wait-for-it -t 600 scality:8000',
-		'cd /var/www/owncloud/server/apps/files_primary_s3',
-		'cp tests/drone/%s /var/www/owncloud/server/config' % configFile,
-		'cd /var/www/owncloud/server'
+		'cd %s/apps/files_primary_s3' % dir["server"],
+		'cp tests/drone/%s %s/config' % (configFile, dir["server"]),
+		'cd %s' % dir["server"]
 	]
 
 	return [{
@@ -1703,9 +1778,9 @@ def setupElasticSearch(esVersion):
 		'image': 'owncloudci/php:7.2',
 		'pull': 'always',
 		'commands': [
-			'cd /var/www/owncloud/server',
+			'cd %s' % dir["server"],
 			'php occ config:app:set search_elastic servers --value elasticsearch',
-			'wait-for-it -t 60 elasticsearch:9200',
+			'wait-for-it -t 600 elasticsearch:9200',
 			'php occ search:index:reset --force'
 		]
 	}]
@@ -1716,10 +1791,10 @@ def fixPermissions(phpVersion, federatedServerNeeded):
 		'image': 'owncloudci/php:%s' % phpVersion,
 		'pull': 'always',
 		'commands': [
-			'chown -R www-data /var/www/owncloud/server',
+			'chown -R www-data %s' % dir["server"],
 			'wait-for-it -t 600 server:80'
 		] + ([
-			'chown -R www-data /var/www/owncloud/federated',
+			'chown -R www-data %s' % dir["federated"],
 			'wait-for-it -t 600 federated:80'
 		] if federatedServerNeeded else [])
 	}]
@@ -1731,7 +1806,7 @@ def owncloudLog(server):
 		'pull': 'always',
 		'detach': True,
 		'commands': [
-			'tail -f /var/www/owncloud/%s/data/owncloud.log' % server
+			'tail -f %s/%s/data/owncloud.log' % (dir["base"], server)
 		]
 	}]
 
@@ -1761,7 +1836,7 @@ def installFederated(federatedServerVersion, phpVersion, logLevel, db, dbSuffix 
 			'pull': 'always',
 			'settings': {
 				'version': federatedServerVersion,
-				'core_path': '/var/www/owncloud/federated',
+				'core_path': dir["federated"],
 				'db_type': 'mysql',
 				'db_name': database,
 				'db_host': host + dbSuffix,
@@ -1774,8 +1849,8 @@ def installFederated(federatedServerVersion, phpVersion, logLevel, db, dbSuffix 
 			'image': 'owncloudci/php:%s' % phpVersion,
 			'pull': 'always',
 			'commands': [
-				'echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh',
-				'cd /var/www/owncloud/federated',
+				'echo "export TEST_SERVER_FED_URL=http://federated" > %s/saved-settings.sh' % dir["base"],
+				'cd %s' % dir["federated"],
 				'php occ a:l',
 				'php occ a:e testing',
 				'php occ a:l',
@@ -1861,7 +1936,7 @@ def buildGithubCommentForBuildStopped(alternateSuiteName, earlyFail):
             "image": "owncloud/ubuntu:16.04",
             "pull": "always",
             "commands": [
-                'echo ":boom: Acceptance tests pipeline <strong>%s</strong> failed. The build has been cancelled.\\n\\n${DRONE_BUILD_LINK}/${DRONE_JOB_NUMBER}${DRONE_STAGE_NUMBER}/1\\n" >> /drone/src/comments.file' % alternateSuiteName,
+                'echo ":boom: Acceptance tests pipeline <strong>%s</strong> failed. The build has been cancelled.\\n\\n${DRONE_BUILD_LINK}/${DRONE_JOB_NUMBER}${DRONE_STAGE_NUMBER}/1\\n" >> %s/comments.file' % (alternateSuiteName, dir["base"]),
             ],
             "when": {
                  "status": [
@@ -1883,7 +1958,7 @@ def githubComment(earlyFail):
             "image": "jmccann/drone-github-comment:1",
             "pull": "if-not-exists",
             "settings": {
-                "message_file": "/drone/src/comments.file",
+                "message_file": "%s/comments.file" % dir["base"],
             },
             "environment": {
                 "GITHUB_TOKEN": {
