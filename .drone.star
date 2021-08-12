@@ -193,7 +193,7 @@ def main(ctx):
     return before + coverageTests + afterCoverageTests + nonCoverageTests + stages + after
 
 def beforePipelines(ctx):
-    return codestyle(ctx) + jscodestyle(ctx) + phpstan(ctx) + phan(ctx) + checkStarlark()
+    return codestyle(ctx) + jscodestyle(ctx) + checkForRecentBuilds(ctx) + phpstan(ctx) + phan(ctx) + checkStarlark()
 
 def coveragePipelines(ctx):
     # All unit test pipelines that have coverage or other test analysis reported
@@ -346,6 +346,57 @@ def jscodestyle(ctx):
     pipelines.append(result)
 
     return pipelines
+
+def checkForRecentBuilds(ctx):
+    pipelines = []
+
+    result = {
+        "kind": "pipeline",
+        "type": "docker",
+        "name": "stop-recent-builds",
+        "workspace": {
+            "base": dir["base"],
+            "path": "server/apps/%s" % ctx.repo.name,
+        },
+        "steps": stopRecentBuilds(ctx),
+        "depends_on": [],
+        "trigger": {
+            "ref": [
+                "refs/heads/master",
+                "refs/tags/**",
+                "refs/pull/**",
+            ],
+        },
+    }
+
+    pipelines.append(result)
+
+    return pipelines
+
+def stopRecentBuilds(ctx):
+    app = "%s/apps/%s" % (dir["server"], ctx.repo.name)
+    return [{
+        "name": "stop-recent-builds",
+        "image": "drone/cli:alpine",
+        "pull": "always",
+        "environment": {
+            "DRONE_SERVER": "https://drone.owncloud.com",
+            "DRONE_TOKEN": {
+                "from_secret": "drone_token",
+            },
+            "OWNCLOUD_APP": ctx.repo.slug,
+        },
+        "commands": [
+            "drone build ls %s --status running > %s/recentBuilds.txt" % (ctx.repo.slug, app),
+            "drone build info %s ${DRONE_BUILD_NUMBER} > %s/thisBuildInfo.txt" % (ctx.repo.slug, app),
+            "cd %s && ./.drone/cancelBuilds.sh" % app,
+        ],
+        "when": {
+            "event": [
+                "pull_request",
+            ],
+        },
+    }]
 
 def phpstan(ctx):
     pipelines = []
