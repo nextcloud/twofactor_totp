@@ -12,7 +12,7 @@ Tested with the following apps:
 * [KeePassXC (Linux, Windows, macOS)](https://keepassxc.org/) (open-source) Available via [download](https://keepassxc.org/download/), package repositories or [GitHub](http://www.github.com/keepassxreboot/keepassxc/) (Keepass also provides a plugin and Keepass2Android allows to use TOTP token)
 * [SailOTP (SailfishOS)](https://github.com/seiichiro0185/sailotp) (open source) Available via JollaStore or [Openrepos.net](https://openrepos.net/content/seiichiro0185/sailotp)
 * [OTP Auth](https://cooperrs.de/otpauth.html) (proprietary) Availabe via [Apple's App Store](https://itunes.apple.com/us/app/otp-auth/id659877384)
-* [Authy (Twilio Authy)] (proprietary) for Android and IOS. Availabe via [Google Play](https://play.google.com/store/apps/details?id=com.authy.authy) [Apple's App Store](https://apps.apple.com/de/app/twilio-authy/id494168017)
+* [Authy (Twilio Authy)](proprietary) for Android and IOS. Availabe via [Google Play](https://play.google.com/store/apps/details?id=com.authy.authy) and [Apple's App Store](https://apps.apple.com/de/app/twilio-authy/id494168017)
 
 Tested with the following hardware devices:
 * [Nitrokey Pro](https://shop.nitrokey.com/shop/product/nitrokey-pro-2-3)
