@@ -48,7 +48,7 @@ class TwoFactorTOTPContext implements Context {
 	private $totpUsed = false;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $totpSecret;
 
@@ -85,7 +85,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return string
 	 */
-	private function getSecret() {
+	private function getSecret(): ?string {
 		return $this->totpSecret;
 	}
 
@@ -95,7 +95,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @return string
 	 * @throws Exception
 	 */
-	private function generateTOTPKey() {
+	private function generateTOTPKey(): string {
 		$otp = new Otp();
 		if ($this->timeCounter === null) {
 			$this->timeCounter = \floor(\time() / 30);
@@ -113,6 +113,7 @@ class TwoFactorTOTPContext implements Context {
 		}
 		return $otp->totp(Encoding::base32DecodeUpper($this->getSecret()), $this->timeCounter);
 	}
+
 	/**
 	 * WebUIPersonalSecuritySettingsTOTPEnabledContext constructor.
 	 *
@@ -135,7 +136,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theUserHasActivatedTOTPSecondFactorAuthButNotVerified() {
+	public function theUserHasActivatedTOTPSecondFactorAuthButNotVerified(): void {
 		$this->personalSecuritySettingsPage->activateTOTP();
 		$this->totpSecret = $this->personalSecuritySettingsPage->getSecretCode();
 	}
@@ -145,7 +146,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return string
 	 */
-	public function getSecretCodeFromQRCode() {
+	public function getSecretCodeFromQRCode(): string {
 		$path = \tempnam(\sys_get_temp_dir(), 'totp_qrcode');
 		$data = \explode(',', $this->personalSecuritySettingsPage->getQRCode());
 		$file = \fopen($path, 'wb');
@@ -162,7 +163,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theUserAddsVerificationKeyFromSecretKeyToVerifyUsingWebUI() {
+	public function theUserAddsVerificationKeyFromSecretKeyToVerifyUsingWebUI(): void {
 		if (!$this->totpUsed) {
 			$this->personalSecuritySettingsPage->addVerificationKey(
 				$this->generateTOTPKey()
@@ -185,7 +186,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @return void
 	 * @throws Exception
 	 */
-	public function theUserReLogsInAsForTwoFactorAuthentication($username) {
+	public function theUserReLogsInAsForTwoFactorAuthentication(string $username): void {
 		$this->webUIGeneralContext->theUserLogsOutOfTheWebUI();
 		$password = $this->featureContext->getPasswordForUser($username);
 
@@ -199,7 +200,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theUserAddsOneTimeKeyOnTheVerificationPageOnTheWebui($key) {
+	public function theUserAddsOneTimeKeyOnTheVerificationPageOnTheWebui(string $key): void {
 		$this->verificationPage->addVerificationKey($key);
 	}
 
@@ -210,7 +211,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theUserShouldSeeAnErrorMessageOnTheVerificationPageSaying($message) {
+	public function theUserShouldSeeAnErrorMessageOnTheVerificationPageSaying(string $message): void {
 		$errormessage = $this->verificationPage->getErrorMessage();
 		PHPUnit\Framework\Assert::assertEquals($message, $errormessage);
 	}
@@ -220,7 +221,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theUserCancelsTheVerificationUsingTheWebui() {
+	public function theUserCancelsTheVerificationUsingTheWebui(): void {
 		$this->verificationPage->cancelVerification();
 	}
 
@@ -230,7 +231,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @return void
 	 * @throws Exception
 	 */
-	public function theUserAddsOneTimeKeyGeneratedOnVerificationPageOnTheWebui() {
+	public function theUserAddsOneTimeKeyGeneratedOnVerificationPageOnTheWebui(): void {
 		$key = $this->generateTOTPKey();
 		$this->verificationPage->addVerificationKey($key);
 		$response = $this->verificationPage->isErrorMessagePresent();
@@ -244,7 +245,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function totpSecretKeyShouldBeVerifiedOnTheWebUI() {
+	public function totpSecretKeyShouldBeVerifiedOnTheWebUI(): void {
 		Assert::assertTrue(
 			$this->personalSecuritySettingsPage->isKeyVerified(),
 			'The key could not be verified'
@@ -256,7 +257,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theSecretCodeFromQRCodeShouldMatchWithTheOneDisplayedOnTheWebUI() {
+	public function theSecretCodeFromQRCodeShouldMatchWithTheOneDisplayedOnTheWebUI(): void {
 		Assert::assertEquals(
 			$this->getSecretCodeFromQRCode(),
 			$this->personalSecuritySettingsPage->getSecretCode()
@@ -271,7 +272,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function sendRequestWithSecretKey($user, $secretKey) {
+	public function sendRequestWithSecretKey($user, $secretKey): void {
 		$response = OcsApiHelper::sendRequest(
 			$this->featureContext->getBaseUrl(),
 			$this->featureContext->getAdminUsername(),
@@ -293,7 +294,7 @@ class TwoFactorTOTPContext implements Context {
 	 * @return void
 	 * @throws Exception
 	 */
-	public function theAdministratorTriesToVerifyTheOtpKeyForUserUsingTheCorrectKey($user) {
+	public function theAdministratorTriesToVerifyTheOtpKeyForUserUsingTheCorrectKey(string $user): void {
 		$secretKey = $this->generateTOTPKey();
 		$this->sendRequestWithSecretKey($user, $secretKey);
 	}
@@ -305,7 +306,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theResultOfTheLastVerificationRequestShouldBeTrue() {
+	public function theResultOfTheLastVerificationRequestShouldBeTrue(): void {
 		$result = \json_decode(
 			\json_encode(
 				$this->featureContext->getResponseXml()->data[0]
@@ -327,7 +328,10 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theAdministratorTriesToVerifyTheOtpKeyForUserUsingTheWrongKey($secretKey, $user) {
+	public function theAdministratorTriesToVerifyTheOtpKeyForUserUsingTheWrongKey(
+		string $secretKey,
+		string $user
+	): void {
 		$this->sendRequestWithSecretKey($user, $secretKey);
 	}
 
@@ -338,7 +342,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function theResultOfTheLastVerificationRequestShouldBeFalse() {
+	public function theResultOfTheLastVerificationRequestShouldBeFalse(): void {
 		$result = \json_decode(
 			\json_encode(
 				$this->featureContext->getResponseXml()->data[0]
@@ -362,7 +366,7 @@ class TwoFactorTOTPContext implements Context {
 	 *
 	 * @return void
 	 */
-	public function before(BeforeScenarioScope $scope) {
+	public function before(BeforeScenarioScope $scope): void {
 		// Get the environment
 		$environment = $scope->getEnvironment();
 		// Get all the contexts you need in this context
