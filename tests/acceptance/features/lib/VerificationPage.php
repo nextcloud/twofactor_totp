@@ -48,8 +48,8 @@ class VerificationPage extends OwncloudPage {
 	 */
 	public function waitTillPageIsLoaded(
 		Session $session,
-		$timeout_msec = STANDARD_UI_WAIT_TIMEOUT_MILLISEC
-	) {
+		int $timeout_msec = STANDARD_UI_WAIT_TIMEOUT_MILLISEC
+	): void {
 		$field = $this->waitTillElementIsNotNull($this->verificationFieldXpath);
 		$this->assertElementNotNull(
 			$field,
@@ -65,7 +65,7 @@ class VerificationPage extends OwncloudPage {
 	 *
 	 * @return void
 	 */
-	public function addVerificationKey($key) {
+	public function addVerificationKey(string $key): void {
 		$field = $this->waitTillElementIsNotNull($this->verificationFieldXpath);
 		$field->setValue($key);
 		$submit_btn = $this->find("xpath", $this->verifySubmissionBtnXpath);
@@ -76,7 +76,7 @@ class VerificationPage extends OwncloudPage {
 	 *
 	 * @return string
 	 */
-	public function getErrorMessage() {
+	public function getErrorMessage(): string {
 		$errorMessageElement = $this->find(
 			"xpath",
 			$this->errorTokenMessageXpath
@@ -94,7 +94,7 @@ class VerificationPage extends OwncloudPage {
 	 *
 	 * @return void
 	 */
-	public function cancelVerification() {
+	public function cancelVerification(): void {
 		$this->waitTillElementIsNotNull($this->cancelOrLoginButtonXpath);
 		$cancel_btn = $this->find("xpath", $this->cancelOrLoginButtonXpath);
 		$cancel_btn->click();
@@ -104,7 +104,7 @@ class VerificationPage extends OwncloudPage {
 	 *
 	 * @return NodeElement|null
 	 */
-	public function isErrorMessagePresent() {
+	public function isErrorMessagePresent(): ?NodeElement {
 		return $this->find('xpath', $this->errorTokenMessageXpath);
 	}
 }

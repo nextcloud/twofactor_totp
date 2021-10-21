@@ -41,7 +41,7 @@ class PersonalSecuritySettingsPageWithTOTPEnabled extends PersonalSecuritySettin
 	 *
 	 * @return void
 	 */
-	public function activateTOTP() {
+	public function activateTOTP(): void {
 		$label = $this->waitTillElementIsNotNull($this->activateTOTPLabelXpath);
 		$this->assertElementNotNull(
 			$label,
@@ -55,7 +55,7 @@ class PersonalSecuritySettingsPageWithTOTPEnabled extends PersonalSecuritySettin
 	 *
 	 * @return string
 	 */
-	public function getQRCode() {
+	public function getQRCode(): string {
 		$image = $this->waitTillElementIsNotNull($this->qrCodeImageXpath);
 		$this->assertElementNotNull(
 			$image,
@@ -69,7 +69,7 @@ class PersonalSecuritySettingsPageWithTOTPEnabled extends PersonalSecuritySettin
 	 *
 	 * @return string
 	 */
-	public function getSecretCode() {
+	public function getSecretCode(): string {
 		$secret = $this->waitTillElementIsNotNull($this->secretCodeXpath);
 		$this->assertElementNotNull(
 			$secret,
@@ -86,7 +86,7 @@ class PersonalSecuritySettingsPageWithTOTPEnabled extends PersonalSecuritySettin
 	 *
 	 * @return void
 	 */
-	public function addVerificationKey($key) {
+	public function addVerificationKey(string $key): void {
 		$field = $this->waitTillElementIsNotNull($this->verificationFieldXpath);
 		$this->assertElementNotNull(
 			$field,
@@ -110,7 +110,7 @@ class PersonalSecuritySettingsPageWithTOTPEnabled extends PersonalSecuritySettin
 	 *
 	 * @return bool
 	 */
-	public function isKeyVerified() {
+	public function isKeyVerified(): bool {
 		try {
 			$verificationMsg = $this->waitTillXpathIsVisible($this->totpVerifyMsgXpath);
 		} catch (\Exception $exception) {
