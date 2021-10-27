@@ -10,7 +10,6 @@
 /composer.*
 /krankerl.toml
 /l10n/no-php
-/Makefile
 /nbproject
 /node_modules
 /package*
