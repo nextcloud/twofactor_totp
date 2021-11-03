@@ -11,7 +11,7 @@ Tested with the following apps:
 
 ## Enabling TOTP 2FA for your account
 ![](https://raw.githubusercontent.com/owncloud/twofactor_totp/stable9.1/screenshots/settings.png)
-![](https://raw.githubusercontent.com/owncloud/twofactor_totp/stable9.1/screenshots/verify.png)
+![](https://raw.githubusercontent.com/owncloud/twofactor_totp/22056c405b5ebd39d2ed528291480d4c2959504b/screenshots/verify.jpg)
 
 ## Running tests
 You can use the provided Makefile to run all tests by using:
