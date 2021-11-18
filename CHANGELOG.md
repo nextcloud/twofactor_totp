@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
+## [0.7.3] - 2021-11-09
+
 - Adapt to new login design - [#39053](https://github.com/owncloud/twofactor_totp/issues/237)
+- Dependencies updated
 
 ## [0.7.2] - 2021-05-26
 
@@ -106,7 +110,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - App is now signed
 
-[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/v0.7.2...master
+[Unreleased]: https://github.com/owncloud/twofactor_totp/compare/v0.7.3...master
+[0.7.3]: https://github.com/owncloud/twofactor_totp/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/owncloud/twofactor_totp/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/owncloud/twofactor_totp/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/owncloud/twofactor_totp/compare/v0.6.1...v0.7.0
