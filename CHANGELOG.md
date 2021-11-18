@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 - Translate "Verify" Button - [#215](https://github.com/owncloud/twofactor_totp/issues/215)
-- Translate DisplayName - [#216]](https://github.com/owncloud/twofactor_totp/issues/216)
+- Translate DisplayName - [#216](https://github.com/owncloud/twofactor_totp/issues/216)
 
 ### Changed
 
