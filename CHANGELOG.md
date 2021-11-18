@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 6.2.0 – unreleased
+### Added
+- Nextcloud 23 support
+### Changed
+- New and updated translations
+- Updated dependencies
+
 ## 6.1.0 – 2021-06-24
 ### Added
 - Nextcloud 22 support
