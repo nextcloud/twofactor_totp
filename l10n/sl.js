@@ -17,7 +17,7 @@ OC.L10N.register(
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Po nastavljanju programa vpišite preizkusno kodo v spodnje polje, da preverite pravilno delovanje: ",
     "Authentication code" : "Overitvena koda",
     "Verify" : "Overi",
-    "Get the authentication code from the two-factor authentication app on your device." : "Pridobi kodo za overitev prek programa za dvostopenjsko overjanje na napravi.",
+    "Get the authentication code from the two-factor authentication app on your device." : "Pridobi kodo za overitev s programom za dvostopenjsko overjanje na napravi.",
     "Submit" : "Pošlji"
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");
