@@ -31,7 +31,7 @@ use Behat\Mink\Session;
  * @package Page
  */
 class VerificationPage extends OwncloudPage {
-	private $verificationFieldXpath = '//form/input[@name="challenge"]';
+	private $verificationFieldXpath = '//form//input[@name="challenge"]';
 	private $verifySubmissionBtnXpath = '//form//button[@type="submit"]';
 	private $errorTokenMessageXpath = '//div/span[contains(text(),"verifying the token")]';
 	private $cancelOrLoginButtonXpath = '//a[@class="two-factor-cancel"]';
