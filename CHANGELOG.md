@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [0.7.4] - 2022-01-14
+
+### Changed
+
+- Align the code input field with the submit button on login [#249](https://github.com/owncloud/twofactor_totp/issues/249)
 
 ## [0.7.3] - 2021-11-09
 
@@ -111,6 +115,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - App is now signed
 
 [Unreleased]: https://github.com/owncloud/twofactor_totp/compare/v0.7.3...master
+[0.7.4]: https://github.com/owncloud/twofactor_totp/compare/v0.7.3...v0.7.4
 [0.7.3]: https://github.com/owncloud/twofactor_totp/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/owncloud/twofactor_totp/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/owncloud/twofactor_totp/compare/v0.7.0...v0.7.1
