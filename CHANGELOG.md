@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleasd] - xxxx-xx-xx
+## [Unreleased] - xxxx-xx-xx
 
 ## [0.7.4] - 2022-01-14
 
