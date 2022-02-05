@@ -14,6 +14,7 @@ This extension provides the most simple way to add a second factor to user login
     		<admin>https://doc.owncloud.com/server/latest/admin_manual/configuration/server/occ_command.html#two-factor-authentication</admin>
 		<user>https://doc.owncloud.com/server/latest/user_manual/session_management.html</user>
 	</documentation>
+	<bugs>https://github.com/owncloud/twofactor_totp/issues</bugs>
 	<screenshot>https://raw.githubusercontent.com/owncloud/twofactor_totp/cc989d968cef37f28df8e2dc633babf9a6c894cc/screenshots/settings.png</screenshot>
 	<two-factor-providers>
 		<provider>OCA\TwoFactor_Totp\Provider\TotpProvider</provider>
