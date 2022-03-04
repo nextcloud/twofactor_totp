@@ -46,7 +46,7 @@
     "chai": "^4.2.0",
     "css-loader": "^5.0.1",
     "eslint": "^7.25.0",
-    "eslint-config-prettier": "^7.1.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nextcloud": "^0.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.9.0",
