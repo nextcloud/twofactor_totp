@@ -7,4 +7,3 @@ file_filter = <lang>/twofactor_totp.po
 source_file = templates/twofactor_totp.pot
 source_lang = en
 type = PO
-
