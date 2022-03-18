@@ -22,3 +22,6 @@ tests/output
 
 # Generated from .drone.star
 .drone.yml
+
+# IDE Cache
+.idea
