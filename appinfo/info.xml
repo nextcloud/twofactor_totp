@@ -5,7 +5,7 @@
 	<name>Two-Factor TOTP Provider</name>
 	<summary>TOTP two-factor provider</summary>
 	<description>A Two-Factor-Auth Provider for TOTP (RFC 6238)</description>
-	<version>6.2.0-alpha.1</version>
+	<version>6.3.0-alpha.1</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<namespace>TwoFactorTOTP</namespace>
