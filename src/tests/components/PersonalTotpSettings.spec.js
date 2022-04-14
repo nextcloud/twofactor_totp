@@ -50,6 +50,6 @@ describe('PersonalTotpSettings', () => {
 			localVue,
 		})
 
-		expect(settings.vm.loading).toBe(true)
+		expect(settings.vm.loading).to.be.false
 	})
 })
