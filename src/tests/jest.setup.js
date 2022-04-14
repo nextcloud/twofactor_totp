@@ -19,9 +19,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require('jsdom-global')()
+import Vue from 'vue'
 
-require('vue').mixin({
+Vue.mixin({
 	methods: {
 		t: (app, str) => str,
 	},
