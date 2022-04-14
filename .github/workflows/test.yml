@@ -116,19 +116,3 @@ jobs:
     env:
       CI: true
       TRAVIS: true
-
-  frontend-unit-test:
-    runs-on: ubuntu-latest
-    name: Front-end unit tests
-    steps:
-      - uses: actions/checkout@master
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - name: npm install
-        run: npm install
-      - name: run tests
-        run: npm run test
-    env:
-      CI: true
