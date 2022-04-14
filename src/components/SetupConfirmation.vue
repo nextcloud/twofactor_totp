@@ -32,7 +32,7 @@
 				)
 			}}
 		</p>
-		<QR :value="qrUrl" :options="{ width: 150 }"></QR>
+		<QR :value="qrUrl" :options="{ width: 150 }" />
 		<p>
 			{{
 				t(
@@ -41,8 +41,7 @@
 				)
 			}}
 		</p>
-		<input
-			id="totp-confirmation"
+		<input id="totp-confirmation"
 			v-model="confirmationCode"
 			type="tel"
 			minlength="6"
@@ -51,15 +50,12 @@
 			autocapitalize="off"
 			:disabled="loading"
 			:placeholder="t('twofactor_totp', 'Authentication code')"
-			@keydown="onConfirmKeyDown"
-		/>
-		<input
-			id="totp-confirmation-submit"
+			@keydown="onConfirmKeyDown">
+		<input id="totp-confirmation-submit"
 			type="button"
 			:disabled="loading"
 			:value="t('twofactor_totp', 'Verify')"
-			@click="confirm"
-		/>
+			@click="confirm">
 	</div>
 </template>
 
@@ -112,5 +108,3 @@ export default {
 	},
 }
 </script>
-
-<style scoped></style>

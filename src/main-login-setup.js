@@ -1,4 +1,4 @@
-/*
+/**
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -20,16 +20,14 @@
  */
 
 import Vue from 'vue'
-
 import Logger from './logger'
+import LoginSetup from './components/LoginSetup'
 
 Vue.mixin({
 	methods: {
 		t,
 	},
 })
-
-import LoginSetup from './components/LoginSetup'
 
 Logger.debug('rendering login setup view')
 const View = Vue.extend(LoginSetup)

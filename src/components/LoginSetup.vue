@@ -21,16 +21,14 @@
 
 <template>
 	<div>
-		<div v-if="loading" class="loading"></div>
-		<SetupConfirmation
-			v-else
+		<div v-if="loading" class="loading" />
+		<SetupConfirmation v-else
 			:loading="confirmationLoading"
 			:secret="secret"
 			:qr-url="qrUrl"
 			:confirmation.sync="confirmation"
-			@confirm="confirm"
-		/>
-		<form ref="confirmForm" method="POST"></form>
+			@confirm="confirm" />
+		<form ref="confirmForm" method="POST" />
 	</div>
 </template>
 

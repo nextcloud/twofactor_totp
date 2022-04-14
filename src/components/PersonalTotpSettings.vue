@@ -22,31 +22,27 @@
 <template>
 	<div id="twofactor-totp-settings">
 		<template v-if="loading">
-			<span class="icon-loading-small totp-loading"></span>
+			<span class="icon-loading-small totp-loading" />
 			<span> {{ t('twofactor_totp', 'Enable TOTP') }} </span>
 		</template>
 		<div v-else>
-			<input
-				id="totp-enabled"
+			<input id="totp-enabled"
 				v-model="enabled"
 				type="checkbox"
 				class="checkbox"
 				:disabled="loading"
-				@change="toggleEnabled"
-			/>
+				@change="toggleEnabled">
 			<label for="totp-enabled">{{
 				t('twofactor_totp', 'Enable TOTP')
 			}}</label>
 		</div>
 
-		<SetupConfirmation
-			v-if="secret"
+		<SetupConfirmation v-if="secret"
 			:secret="secret"
 			:qr-url="qrUrl"
 			:loading="loadingConfirmation"
 			:confirmation.sync="confirmation"
-			@confirm="enableTOTP"
-		/>
+			@confirm="enableTOTP" />
 	</div>
 </template>
 
@@ -105,8 +101,8 @@ export default {
 					this.qrUrl = qrUrl
 					// If the stat could be changed, keep showing the loading
 					// spinner until the user has finished the registration
-					this.loading =
-						this.$store.state.totpState === state.STATE_CREATED
+					this.loading
+						= this.$store.state.totpState === state.STATE_CREATED
 				})
 				.catch((e) => {
 					OC.Notification.showTemporary(
