@@ -24,7 +24,6 @@
     "@nextcloud/logger": "^1.1.2",
     "@nextcloud/password-confirmation": "^1.0.1",
     "@nextcloud/router": "^1.2.0",
-    "@vue/babel-preset-app": "^4.5.12",
     "vue": "^2.6.14",
     "vuex": "^3.6.2"
   },
