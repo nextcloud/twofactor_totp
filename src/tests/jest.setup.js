@@ -1,4 +1,4 @@
-/*
+/**
  * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -19,12 +19,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const { merge } = require('webpack-merge')
-const common = require('./webpack.common.js')
-const nodeExternals = require('webpack-node-externals')
+import Vue from 'vue'
 
-module.exports = merge(common, {
-	mode: 'development',
-	devtool: 'inline-cheap-module-source-map',
-	externals: [nodeExternals()],
+Vue.mixin({
+	methods: {
+		t: (app, str) => str,
+	},
 })
+
+global.expect = require('chai').expect
+// https://github.com/vuejs/vue-test-utils/issues/936
+// better fix for "TypeError: Super expression must either be null or
+// a function" than pinning an old version of prettier.
+//
+// https://github.com/vuejs/vue-cli/issues/2128#issuecomment-453109575
+window.Date = Date
+
+global.OC = {
+	getCurrentUser: () => {
+		return { uid: false }
+	},
+	isUserAdmin: () => false,
+}

@@ -25,7 +25,7 @@ export const actions = {
 	confirm({ commit }, code) {
 		return saveState({
 			state: state.STATE_ENABLED,
-			code: code,
+			code,
 		}).then(({ state }) => commit('setState', state))
 	},
 

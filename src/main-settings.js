@@ -1,4 +1,4 @@
-/*
+/**
  * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -24,6 +24,8 @@ import { loadState } from '@nextcloud/initial-state'
 import Logger from './logger'
 import store from './store'
 
+import PersonalTotpSettings from './components/PersonalTotpSettings'
+
 Vue.mixin({
 	methods: {
 		t,
@@ -33,8 +35,6 @@ Vue.mixin({
 store.replaceState({
 	totpState: loadState('twofactor_totp', 'state'),
 })
-
-import PersonalTotpSettings from './components/PersonalTotpSettings'
 
 const View = Vue.extend(PersonalTotpSettings)
 new View({

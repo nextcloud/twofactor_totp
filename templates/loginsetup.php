@@ -23,7 +23,7 @@
 
 declare(strict_types=1);
 
-script('twofactor_totp', 'main-login-setup');
+script('twofactor_totp', 'twofactor_totp-main-login-setup');
 
 ?>
 

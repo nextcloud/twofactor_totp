@@ -1,4 +1,4 @@
-/*
+/**
  * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -22,15 +22,15 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
+import PersonalTotpSettings from '../../components/PersonalTotpSettings'
+
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
-import PersonalTotpSettings from '../../components/PersonalTotpSettings'
-
 describe('PersonalTotpSettings', () => {
-	var actions
-	var store
+	let actions
+	let store
 
 	beforeEach(() => {
 		actions = {
