@@ -21,21 +21,12 @@
 
 <template>
 	<div id="twofactor-totp-settings">
-		<template v-if="loading">
-			<span class="icon-loading-small totp-loading" />
-			<span> {{ t('twofactor_totp', 'Enable TOTP') }} </span>
-		</template>
-		<div v-else>
-			<input id="totp-enabled"
-				v-model="enabled"
-				type="checkbox"
-				class="checkbox"
-				:disabled="loading"
-				@change="toggleEnabled">
-			<label for="totp-enabled">{{
-				t('twofactor_totp', 'Enable TOTP')
-			}}</label>
-		</div>
+		<CheckboxRadioSwitch :checked.sync="enabled"
+			:disabled="loading"
+			type="switch"
+			@update:checked="toggleEnabled">
+			{{ t('twofactor_totp', 'Enable TOTP') }}
+		</CheckboxRadioSwitch>
 
 		<SetupConfirmation v-if="secret"
 			:secret="secret"
@@ -47,6 +38,7 @@
 </template>
 
 <script>
+import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
 import confirmPassword from '@nextcloud/password-confirmation'
 
 import Logger from '../logger'
@@ -56,6 +48,7 @@ import state from '../state'
 export default {
 	name: 'PersonalTotpSettings',
 	components: {
+		CheckboxRadioSwitch,
 		SetupConfirmation,
 	},
 	data() {
@@ -133,12 +126,7 @@ export default {
 						this.qrUrl = ''
 						this.secret = undefined
 					} else {
-						OC.Notification.showTemporary(
-							t(
-								'twofactor_totp',
-								'Could not verify your key. Please try again'
-							)
-						)
+						OC.Notification.showTemporary(t('twofactor_totp', 'Could not verify your key. Please try again'))
 					}
 
 					this.confirmation = ''
@@ -162,12 +150,3 @@ export default {
 	},
 }
 </script>
-
-<style scoped>
-.totp-loading {
-	display: inline-block;
-	vertical-align: sub;
-	margin-left: -2px;
-	margin-right: 4px;
-}
-</style>
