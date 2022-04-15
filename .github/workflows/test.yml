@@ -11,7 +11,9 @@ on:
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
+
     strategy:
+      fail-fast: false
       matrix:
         php-version: [ 8.0 ]
         nextcloud-version: [ 'master', 'stable23', 'stable22' ]
@@ -19,6 +21,7 @@ jobs:
         include:
           - php-versions: 7.3
             nextcloud-versions: stable21
+
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
       - name: Set up php${{ matrix.php-version }}
@@ -59,11 +62,21 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
-        php-version: [ 7.4, 8.0 ]
+        php-version: [ "7.4", "8.0" ]
         nextcloud-version: [ 'master', 'stable21' ]
         browser: [ 'firefox', 'chrome' ]
         db: [ 'mysql' ]
+        include:
+          - php-versions: "8.1"
+            nextcloud-versions: "master"
+            browser: 'firefox'
+            db: 'mysql'
+          - php-versions: "8.1"
+            nextcloud-versions: "master"
+            browser: 'chrome'
+            db: 'mysql'
 
     name: Nextcloud ${{ matrix.nextcloud-version }} acceptance tests on php${{ matrix.php-version }}/${{ matrix.browser }}/${{ matrix.db }}
 
