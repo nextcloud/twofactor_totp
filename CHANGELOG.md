@@ -1,6 +1,25 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 6.3.0-beta1 - 2022-04-19
+### Added
+- Nextcloud 24 support
+### Changed
+- Updated dependencies
+
+## 6.3.0-alpha1 - 2022-03-30
+### Fixed
+- Set autocomplete attribute of input field to one-time-code 
+- Fix the js build
+### Changed
+- Updated dependencies
+
+## 6.2.0 – 2021-12-01
+### Added
+- Nextcloud 23 support
+### Changed
+- Updated dependencies
+
 ## 6.1.0 – 2021-06-24
 ### Added
 - Nextcloud 22 support
