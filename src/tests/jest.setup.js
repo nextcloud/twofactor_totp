@@ -40,4 +40,5 @@ global.OC = {
 		return { uid: false }
 	},
 	isUserAdmin: () => false,
+	getLanguage: () => 'en-US'
 }
