@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 6.3.0 – unreleased
+## 6.3.0 – 2022-05-02
 ### Added
 - Nextcloud 24 support
 ### Changed
