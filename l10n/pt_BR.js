@@ -20,4 +20,4 @@ OC.L10N.register(
     "Get the authentication code from the two-factor authentication app on your device." : "Obtenha o código de autenticação do aplicativo de autenticação de dois fatores em seu dispositivo.",
     "Submit" : "Enviar"
 },
-"nplurals=2; plural=(n > 1);");
+"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
