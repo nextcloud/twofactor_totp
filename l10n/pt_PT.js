@@ -12,4 +12,4 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "Autenticação com uma app TOTP",
     "TOTP Second-factor Auth" : "Autenticação de Dois Fatores TOTP"
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

@@ -10,5 +10,5 @@
     "Time-based One-time Password" : "Contraseña de un solo uso basada en el tiempo",
     "Authenticate with a TOTP app" : "Validar con la aplicación TOTP",
     "TOTP Second-factor Auth" : "Autorización de 2 factores TOTP"
-},"pluralForm" :"nplurals=2; plural=(n != 1);"
+},"pluralForm" :"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }
