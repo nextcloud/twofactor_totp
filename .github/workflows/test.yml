@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ 8.0 ]
+        php-version: [ 8.1 ]
         nextcloud-version: [ 'master', 'stable23', 'stable22' ]
         db: ['sqlite']
         include:
@@ -64,7 +64,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ "7.4", "8.0" ]
+        php-version: [ "7.4", "8.1" ]
         nextcloud-version: [ 'master', 'stable21' ]
         browser: [ 'firefox', 'chrome' ]
         db: [ 'mysql' ]
