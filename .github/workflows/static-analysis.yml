@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ocp-version: [ 'v21.0.0', 'dev-stable22', 'dev-stable23', 'dev-stable24', 'dev-master' ]
+        ocp-version: [ 'dev-stable22', 'dev-stable23', 'dev-stable24', 'dev-master' ]
 
     name: Nextcloud ${{ matrix.ocp-version }}
     steps:
