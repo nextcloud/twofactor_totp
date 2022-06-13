@@ -19,7 +19,7 @@ jobs:
         nextcloud-version: [ 'master', 'stable23', 'stable22' ]
         db: ['sqlite']
         include:
-          - php-versions: 7.3
+          - php-versions: 7.4
             nextcloud-versions: stable21
 
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests

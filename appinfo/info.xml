@@ -17,7 +17,7 @@
 	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_totp/dd1e48deec73a250886f35f3924186f5357f4c5f/screenshots/enter_challenge.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_totp/dd1e48deec73a250886f35f3924186f5357f4c5f/screenshots/settings.png</screenshot>
 	<dependencies>
-		<php min-version="7.3" max-version="8.0" />
+		<php min-version="7.4" max-version="8.0" />
 		<nextcloud min-version="21" max-version="25" />
 	</dependencies>
 	<two-factor-providers>
