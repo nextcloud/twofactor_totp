@@ -18,9 +18,6 @@ jobs:
         php-version: [ 8.0 ]
         nextcloud-version: [ 'master', 'stable23', 'stable22' ]
         db: ['sqlite']
-        include:
-          - php-versions: 7.4
-            nextcloud-versions: stable21
 
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
@@ -65,7 +62,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version: [ "7.4", "8.0" ]
-        nextcloud-version: [ 'master', 'stable21' ]
+        nextcloud-version: [ 'master', 'stable22' ]
         browser: [ 'firefox', 'chrome' ]
         db: [ 'mysql' ]
         include:
