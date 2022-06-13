@@ -15,9 +15,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ 8.0 ]
-        nextcloud-version: [ 'master', 'stable23', 'stable22' ]
+        php-version: [ "8.1" ]
+        nextcloud-version: [ 'master', 'stable24' ]
         db: ['sqlite']
+        include:
+          - php-version: "8.0"
+            nextcloud-version: stable23
+            db: sqlite
+          - php-version: "7.4"
+            nextcloud-version: stable22
+            db: sqlite
 
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
@@ -61,17 +68,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ "7.4", "8.0" ]
-        nextcloud-version: [ 'master', 'stable22' ]
-        browser: [ 'firefox', 'chrome' ]
+        php-version: [ "8.1" ]
+        nextcloud-version: [ 'master' ]
+        browser: [ 'firefox' ]
         db: [ 'mysql' ]
         include:
-          - php-versions: "8.1"
-            nextcloud-versions: "master"
+          - php-version: "8.1"
+            nextcloud-version: "stable24"
+            browser: 'chrome'
+            db: 'sqlite'
+          - php-version: "8.0"
+            nextcloud-version: "stable23"
             browser: 'firefox'
-            db: 'mysql'
-          - php-versions: "8.1"
-            nextcloud-versions: "master"
+            db: 'pgsql'
+          - php-version: "7.4"
+            nextcloud-version: "stable22"
             browser: 'chrome'
             db: 'mysql'
 
@@ -92,6 +103,19 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
+      postgres-service:
+        image: postgres
+        env:
+          POSTGRES_USER: nextcloud
+          POSTGRES_DB: nextcloud
+          POSTGRES_PASSWORD: nextcloud
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Set up php${{ matrix.php-version }}
