@@ -9,6 +9,7 @@ OC.L10N.register(
     "Verify" : "Doğrula",
     "Verified" : "Doğrulandı",
     "Not verified" : "Doğrulanmadı",
+    "Time-based One-time Password" : "Zamana Dayalı Tek Kullanımlık Parola",
     "Authenticate with a TOTP app" : "Bir TOTP uygulamasıyla kimlik doğrulaması yapın",
     "TOTP Second-factor Auth" : "TOTP İkinci Yöntem Doğrulaması"
 },
