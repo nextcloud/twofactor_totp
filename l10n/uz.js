@@ -1,7 +1,7 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "Enable TOTP" : "TOTP yoqish",
-    "Verify" : "Tasdiqlang"
+    "Enable TOTP" : "Enable TOTP",
+    "Verify" : "Verify"
 },
 "nplurals=1; plural=0;");

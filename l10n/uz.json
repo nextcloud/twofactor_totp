@@ -1,5 +1,5 @@
 { "translations": {
-    "Enable TOTP" : "TOTP yoqish",
-    "Verify" : "Tasdiqlang"
+    "Enable TOTP" : "Enable TOTP",
+    "Verify" : "Verify"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
