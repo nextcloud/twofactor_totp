@@ -26,6 +26,7 @@ namespace OCA\TwoFactorTOTP\Db;
 use Doctrine\DBAL\Statement;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\Exception;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\IUser;
@@ -60,5 +61,17 @@ class TotpSecretMapper extends QBMapper {
 			throw new DoesNotExistException('Secret does not exist');
 		}
 		return TotpSecret::fromRow($row);
+	}
+
+	/**
+	 * @param string $uid
+	 * @throws Exception
+	 */
+	public function deleteSecretByUserId(string $uid): void {
+		$qb = $this->db->getQueryBuilder();
+
+		$qb->delete($this->getTableName())
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($uid)));
+		$qb->executeStatement();
 	}
 }

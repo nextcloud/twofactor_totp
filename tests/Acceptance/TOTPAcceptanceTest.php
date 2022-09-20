@@ -70,7 +70,7 @@ class TOTPAcceptanceTest extends TestCase {
 		// Log in
 		$this->webDriver->findElement(WebDriverBy::id('user'))->sendKeys($this->user->getUID());
 		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('password');
-		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] input[type=submit]'))->click();
+		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] [type=submit]'))->click();
 
 		// Go to personal settings and TOTP settings
 		$this->webDriver->get('http://localhost:8080/index.php/settings/user/security');
@@ -156,7 +156,7 @@ class TOTPAcceptanceTest extends TestCase {
 		// Log in
 		$this->webDriver->findElement(WebDriverBy::id('user'))->sendKeys($this->user->getUID());
 		$this->webDriver->findElement(WebDriverBy::id('password'))->sendKeys('password');
-		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] input[type=submit]'))->click();
+		$this->webDriver->findElement(WebDriverBy::cssSelector('form[name=login] [type=submit]'))->click();
 
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
