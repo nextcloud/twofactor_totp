@@ -1,0 +1,15 @@
+language: php
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+
+cache:
+  directories:
+    - "$HOME/.composer/cache/files"
+  
+before_install:
+  - php --info
+  - composer self-update
+  - composer install
+

@@ -1,0 +1,123 @@
+{
+    "packages": [
+        {
+            "name": "christian-riesen/base32",
+            "version": "1.6.0",
+            "version_normalized": "1.6.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ChristianRiesen/base32.git",
+                "reference": "2e82dab3baa008e24a505649b0d583c31d31e894"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/2e82dab3baa008e24a505649b0d583c31d31e894",
+                "reference": "2e82dab3baa008e24a505649b0d583c31d31e894",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^8.5.13 || ^9.5"
+            },
+            "time": "2021-02-26T10:19:33+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Base32\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Riesen",
+                    "email": "chris.riesen@gmail.com",
+                    "homepage": "http://christianriesen.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Base32 encoder/decoder according to RFC 4648",
+            "homepage": "https://github.com/ChristianRiesen/base32",
+            "keywords": [
+                "base32",
+                "decode",
+                "encode",
+                "rfc4648"
+            ],
+            "support": {
+                "issues": "https://github.com/ChristianRiesen/base32/issues",
+                "source": "https://github.com/ChristianRiesen/base32/tree/1.6.0"
+            },
+            "install-path": "../christian-riesen/base32"
+        },
+        {
+            "name": "rullzer/easytotp",
+            "version": "v0.1.4",
+            "version_normalized": "0.1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rullzer/easytotp.git",
+                "reference": "3214c29212bab1c9b5ffd03b228e51bf85cae305"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rullzer/easytotp/zipball/3214c29212bab1c9b5ffd03b228e51bf85cae305",
+                "reference": "3214c29212bab1c9b5ffd03b228e51bf85cae305",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0"
+            },
+            "time": "2019-08-07T13:01:50+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "EasyTOTP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roeland Jago Douma",
+                    "email": "roeland@famdouma.nl",
+                    "homepage": "http://rullzer.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Time-Based One-Time Password according to RFC6238",
+            "homepage": "https://github.com/rullzer/easytotp",
+            "keywords": [
+                "googleauthenticator",
+                "otp",
+                "rfc6238",
+                "totp"
+            ],
+            "support": {
+                "issues": "https://github.com/rullzer/easytotp/issues",
+                "source": "https://github.com/rullzer/easytotp/tree/master"
+            },
+            "install-path": "../rullzer/easytotp"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}
