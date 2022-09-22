@@ -16,15 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         php-version: [ "8.1" ]
-        nextcloud-version: [ 'master', 'stable24' ]
+        nextcloud-version: [ 'master' ]
         db: ['sqlite']
-        include:
-          - php-version: "8.0"
-            nextcloud-version: stable23
-            db: sqlite
-          - php-version: "7.4"
-            nextcloud-version: stable22
-            db: sqlite
 
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
@@ -72,19 +65,6 @@ jobs:
         nextcloud-version: [ 'master' ]
         browser: [ 'firefox' ]
         db: [ 'mysql' ]
-        include:
-          - php-version: "8.1"
-            nextcloud-version: "stable24"
-            browser: 'chrome'
-            db: 'sqlite'
-          - php-version: "8.0"
-            nextcloud-version: "stable23"
-            browser: 'firefox'
-            db: 'pgsql'
-          - php-version: "7.4"
-            nextcloud-version: "stable22"
-            browser: 'chrome'
-            db: 'mysql'
 
     name: Nextcloud ${{ matrix.nextcloud-version }} acceptance tests on php${{ matrix.php-version }}/${{ matrix.browser }}/${{ matrix.db }}
 
