@@ -3,7 +3,6 @@ composer.phar
 /node_modules
 
 build/
-/js
 vendor/
 
 /.php_cs.cache
