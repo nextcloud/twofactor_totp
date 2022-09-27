@@ -33,4 +33,16 @@ $classLoader->addPsr4(
 	__DIR__ . "/../../../../../../tests/acceptance/features/lib",
 	true
 );
+//some tests need the guests app contexts
+$classLoader->addPsr4(
+	"",
+	__DIR__ . "../../../",
+	true
+);
+//some tests need the guests app contexts
+$classLoader->addPsr4(
+	"",
+	__DIR__ . "/../../../../../guests/tests/acceptance/features/bootstrap",
+	true
+);
 $classLoader->register();

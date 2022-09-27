@@ -13,13 +13,13 @@ Feature: Use the CLI to verify OTP keys for users
       | new-user |
     And using OCS API version "2"
 
-  Scenario:  Verifying secret for the user having no secret should fail
+  Scenario: Verifying secret for the user having no secret should fail
     When the administrator invokes occ command "twofactor_totp:set-secret-verification-status -u new-user true"
     Then the command should have failed with exit code 1
     And the command output should contain the text "User has no secret: new-user"
     And user "new-user" should be able to access a skeleton file
 
-  Scenario:  Unverifying secret for the user having no secret should fail
+  Scenario: Unverifying secret for the user having no secret should fail
     When the administrator invokes occ command "twofactor_totp:set-secret-verification-status -u new-user false"
     Then the command should have failed with exit code 1
     And the command output should contain the text "User has no secret: new-user"
