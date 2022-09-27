@@ -46,11 +46,13 @@ default:
         - '%paths.base%/../features/webUITOTPGuests'
       contexts:
         - TwoFactorTOTPContext:
+        - GuestsContext:
         - FeatureContext: *common_feature_context_params
         - OccContext:
         - WebUIGeneralContext:
         - WebUIPersonalSecuritySettingsContext:
         - WebUILoginContext:
-        - GuestsContext:
+        - WebUIFilesContext:
+        - EmailContext:
   extensions:
     Cjm\Behat\StepThroughExtension: ~

@@ -189,7 +189,6 @@ class TwoFactorTOTPContext implements Context {
 	public function theUserReLogsInAsForTwoFactorAuthentication(string $username): void {
 		$this->webUIGeneralContext->theUserLogsOutOfTheWebUI();
 		$password = $this->featureContext->getPasswordForUser($username);
-
 		$this->webUIGeneralContext->loginAs($username, $password, $target = 'VerificationPage');
 	}
 
