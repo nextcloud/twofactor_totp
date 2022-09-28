@@ -91,9 +91,9 @@ config = {
             ],
         },
         "webUI-guests": {
-            "suites": {
-                "webUITOTPGuests": "webUITOTPGuests",
-            },
+            "suites": [
+                "webUITOTPGuests",
+            ],
             "extraApps": {
                 "guests": "",
             },

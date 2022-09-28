@@ -11,7 +11,7 @@ Feature: TOTP with guest users
 
   Scenario: Guest user can use 2FA and login with TOTP
     Given user "Alice" has shared folder "/shared" with user "guest@example.com"
-    And guest user "guest" has been registered with password "simplepass"
+    And guest user "guest" has registered and set password to "simplepass"
     And the administrator has invoked occ command "twofactor_totp:set-secret-verification-status -u guest true"
     And user "guest@example.com" logs in using the webUI
     And the user has browsed to the personal security settings page
@@ -24,7 +24,7 @@ Feature: TOTP with guest users
 
   Scenario: Guest user can use 2FA, login with TOTP and upload on a shared resource
     Given user "Alice" has shared folder "/shared" with user "guest@example.com" with permissions "all"
-    And guest user "guest" has been registered with password "simplepass"
+    And guest user "guest" has registered and set password to "simplepass"
     And the administrator has invoked occ command "twofactor_totp:set-secret-verification-status -u guest true"
     And user "guest@example.com" logs in using the webUI
     And the user has browsed to the personal security settings page
