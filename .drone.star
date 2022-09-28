@@ -100,6 +100,7 @@ config = {
             "servers": [
                 "daily-master-qa",
             ],
+            "emailNeeded": True,
         },
     },
 }

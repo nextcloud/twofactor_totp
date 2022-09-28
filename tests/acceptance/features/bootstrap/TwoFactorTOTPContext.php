@@ -156,17 +156,17 @@ class TwoFactorTOTPContext implements Context {
 		return $matches['secret'];
 	}
 
-    /**
-     * @Given the user has added one-time key generated from the secret key
-     *
-     * @throws \Exception
-     *
-     * @return void
-     */
-    public function theHasUserAddedVerificationKeyFromSecretKeyToVerifyUsingWebUI(): void {
-        $this->theUserAddsVerificationKeyFromSecretKeyToVerifyUsingWebUI();
-        $this->totpSecretKeyShouldBeVerifiedOnTheWebUI();
-    }
+	/**
+	 * @Given the user has added one-time key generated from the secret key
+	 *
+	 * @throws \Exception
+	 *
+	 * @return void
+	 */
+	public function theHasUserAddedVerificationKeyFromSecretKeyToVerifyUsingWebUI(): void {
+		$this->theUserAddsVerificationKeyFromSecretKeyToVerifyUsingWebUI();
+		$this->totpSecretKeyShouldBeVerifiedOnTheWebUI();
+	}
 
 	/**
 	 * @When the user adds one-time key generated from the secret key using the webUI
