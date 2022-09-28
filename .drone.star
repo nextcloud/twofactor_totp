@@ -90,6 +90,18 @@ config = {
                 "daily-master-qa",
             ],
         },
+        "webUI-guests": {
+            "suites": [
+                "webUITOTPGuests",
+            ],
+            "extraApps": {
+                "guests": "",
+            },
+            "servers": [
+                "daily-master-qa",
+            ],
+            "emailNeeded": True,
+        },
     },
 }
 

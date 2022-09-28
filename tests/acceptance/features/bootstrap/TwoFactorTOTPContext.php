@@ -157,6 +157,18 @@ class TwoFactorTOTPContext implements Context {
 	}
 
 	/**
+	 * @Given the user has added one-time key generated from the secret key
+	 *
+	 * @throws \Exception
+	 *
+	 * @return void
+	 */
+	public function theHasUserAddedVerificationKeyFromSecretKeyToVerifyUsingWebUI(): void {
+		$this->theUserAddsVerificationKeyFromSecretKeyToVerifyUsingWebUI();
+		$this->totpSecretKeyShouldBeVerifiedOnTheWebUI();
+	}
+
+	/**
 	 * @When the user adds one-time key generated from the secret key using the webUI
 	 *
 	 * @throws \Exception
@@ -189,7 +201,6 @@ class TwoFactorTOTPContext implements Context {
 	public function theUserReLogsInAsForTwoFactorAuthentication(string $username): void {
 		$this->webUIGeneralContext->theUserLogsOutOfTheWebUI();
 		$password = $this->featureContext->getPasswordForUser($username);
-
 		$this->webUIGeneralContext->loginAs($username, $password, $target = 'VerificationPage');
 	}
 

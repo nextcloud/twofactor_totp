@@ -41,5 +41,18 @@ default:
         - WebUIPersonalSecuritySettingsContext:
         - WebUILoginContext:
 
+    webUITOTPGuests:
+      paths:
+        - '%paths.base%/../features/webUITOTPGuests'
+      contexts:
+        - TwoFactorTOTPContext:
+        - GuestsContext:
+        - FeatureContext: *common_feature_context_params
+        - OccContext:
+        - WebUIGeneralContext:
+        - WebUIPersonalSecuritySettingsContext:
+        - WebUILoginContext:
+        - WebUIFilesContext:
+        - EmailContext:
   extensions:
     Cjm\Behat\StepThroughExtension: ~
