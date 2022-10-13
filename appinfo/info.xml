@@ -5,7 +5,7 @@
 	<name>Two-Factor TOTP Provider</name>
 	<summary>TOTP two-factor provider</summary>
 	<description>A Two-Factor-Auth Provider for TOTP (RFC 6238)</description>
-	<version>6.4.0</version>
+	<version>6.4.1</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<namespace>TwoFactorTOTP</namespace>
@@ -23,6 +23,9 @@
 	<two-factor-providers>
 		<provider>OCA\TwoFactorTOTP\Provider\TotpProvider</provider>
 	</two-factor-providers>
+	<commands>
+		<command>OCA\TwoFactorTOTP\Command\CleanUp</command>
+	</commands>
 	<activity>
 		<settings>
 			<setting>OCA\TwoFactorTOTP\Activity\Setting</setting>
