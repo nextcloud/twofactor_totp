@@ -17,7 +17,7 @@ OC.L10N.register(
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Après avoir configuré votre application, entrez un code de test ci-dessous pour vous assurer que tout fonctionne correctement:",
     "Authentication code" : "Code d'authentification",
     "Verify" : "Vérifier",
-    "Get the authentication code from the two-factor authentication app on your device." : "Saisissez le code d'authentification de l'application d'authentification à deux facteurs sur votre appareil.",
+    "Get the authentication code from the two-factor authentication app on your device." : "Récupérez un code d'authentification à partir de l'application d'authentification à deux facteurs de votre appareil.",
     "Submit" : "Envoyer"
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
