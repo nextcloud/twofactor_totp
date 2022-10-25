@@ -33,6 +33,8 @@ dir = {
     "federated": "/var/www/owncloud/federated",
     "server": "/var/www/owncloud/server",
     "testrunner": "/var/www/owncloud/testrunner",
+    "scalityConfig": "/var/www/owncloud/server/config/scality.config.php",
+    "browserService": "/home/seluser/Downloads",
 }
 
 config = {
@@ -79,7 +81,7 @@ config = {
                     "name": "configure-encryption",
                     "image": OC_CI_PHP % DEFAULT_PHP_VERSION,
                     "commands": [
-                        "cd /var/www/owncloud/server",
+                        "cd %s" % dir["server"],
                         "php occ encryption:enable",
                         "php occ encryption:select-encryption-type masterkey --yes",
                         "php occ config:list",
@@ -674,6 +676,7 @@ def phpTests(ctx, testType, withCoverage):
     # Note: do not run Oracle by default in PRs.
     prDefault = {
         "phpVersions": [DEFAULT_PHP_VERSION],
+        "servers": ["daily-master-qa"],
         "databases": [
             "sqlite",
             "mariadb:10.2",
@@ -698,6 +701,7 @@ def phpTests(ctx, testType, withCoverage):
     # The default PHP unit test settings for the cron job (usually runs nightly).
     cronDefault = {
         "phpVersions": [DEFAULT_PHP_VERSION],
+        "servers": ["daily-master-qa"],
         "databases": [
             "sqlite",
             "mariadb:10.2",
@@ -795,87 +799,98 @@ def phpTests(ctx, testType, withCoverage):
             else:
                 command = "make test-php-integration"
 
-            for db in params["databases"]:
-                keyString = "-" + category if params["includeKeyInMatrixName"] else ""
-                name = "%s%s-php%s-%s" % (testType, keyString, phpVersion, db.replace(":", ""))
-                maxLength = 50
-                nameLength = len(name)
-                if nameLength > maxLength:
-                    print("Error: generated phpunit stage name of length", nameLength, "is not supported. The maximum length is " + str(maxLength) + ".", name)
-                    errorFound = True
+            # Get the first 3 characters of the PHP version (7.4 or 8.0 etc)
+            # And use that for constructing the pipeline name
+            # That helps shorten pipeline names when using owncloud-ci images
+            # that have longer names like 7.4-ubuntu20.04
+            phpVersionForPipelineName = phpVersion[0:3]
 
-                result = {
-                    "kind": "pipeline",
-                    "type": "docker",
-                    "name": name,
-                    "workspace": {
-                        "base": dir["base"],
-                        "path": "server/apps/%s" % ctx.repo.name,
-                    },
-                    "steps": skipIfUnchanged(ctx, "unit-tests") +
-                             installCore(ctx, "daily-master-qa", db, False) +
-                             installAppPhp(ctx, phpVersion) +
-                             installExtraApps(phpVersion, params["extraApps"]) +
-                             setupServerAndApp(ctx, phpVersion, params["logLevel"], False, params["enableApp"]) +
-                             setupCeph(params["cephS3"]) +
-                             setupScality(params["scalityS3"]) +
-                             params["extraSetup"] +
-                             [
-                                 {
-                                     "name": "%s-tests" % testType,
-                                     "image": OC_CI_PHP % phpVersion,
-                                     "environment": params["extraEnvironment"],
-                                     "commands": params["extraCommandsBeforeTestRun"] + [
-                                         command,
-                                     ],
-                                 },
-                             ] + params["extraTeardown"],
-                    "services": databaseService(db) +
-                                cephService(params["cephS3"]) +
-                                scalityService(params["scalityS3"]) +
-                                params["extraServices"],
-                    "depends_on": [],
-                    "trigger": {
-                        "ref": [
-                            "refs/pull/**",
-                            "refs/tags/**",
-                        ],
-                    },
-                }
+            for server in params["servers"]:
+                for db in params["databases"]:
+                    keyString = "-" + category if params["includeKeyInMatrixName"] else ""
+                    if len(params["servers"]) > 1:
+                        serverString = "-%s" % server.replace("daily-", "").replace("-qa", "")
+                    else:
+                        serverString = ""
+                    name = "%s%s-php%s%s-%s" % (testType, keyString, phpVersionForPipelineName, serverString, db.replace(":", ""))
+                    maxLength = 50
+                    nameLength = len(name)
+                    if nameLength > maxLength:
+                        print("Error: generated phpunit stage name of length", nameLength, "is not supported. The maximum length is " + str(maxLength) + ".", name)
+                        errorFound = True
 
-                if params["coverage"]:
-                    result["steps"].append({
-                        "name": "coverage-rename",
-                        "image": OC_CI_PHP % phpVersion,
-                        "commands": [
-                            "mv tests/output/clover.xml tests/output/clover-%s.xml" % (name),
-                        ],
-                    })
-                    result["steps"].append({
-                        "name": "coverage-cache-1",
-                        "image": PLUGINS_S3,
-                        "settings": {
-                            "endpoint": {
-                                "from_secret": "cache_s3_endpoint",
-                            },
-                            "bucket": "cache",
-                            "source": "tests/output/clover-%s.xml" % (name),
-                            "target": "%s/%s" % (ctx.repo.slug, ctx.build.commit + "-${DRONE_BUILD_NUMBER}"),
-                            "path_style": True,
-                            "strip_prefix": "tests/output",
-                            "access_key": {
-                                "from_secret": "cache_s3_access_key",
-                            },
-                            "secret_key": {
-                                "from_secret": "cache_s3_secret_key",
-                            },
+                    result = {
+                        "kind": "pipeline",
+                        "type": "docker",
+                        "name": name,
+                        "workspace": {
+                            "base": dir["base"],
+                            "path": "server/apps/%s" % ctx.repo.name,
                         },
-                    })
+                        "steps": skipIfUnchanged(ctx, "unit-tests") +
+                                 installCore(ctx, server, db, False) +
+                                 installAppPhp(ctx, phpVersion) +
+                                 installExtraApps(phpVersion, params["extraApps"]) +
+                                 setupServerAndApp(ctx, phpVersion, params["logLevel"], False, params["enableApp"]) +
+                                 setupCeph(params["cephS3"]) +
+                                 setupScality(params["scalityS3"]) +
+                                 params["extraSetup"] +
+                                 [
+                                     {
+                                         "name": "%s-tests" % testType,
+                                         "image": OC_CI_PHP % phpVersion,
+                                         "environment": params["extraEnvironment"],
+                                         "commands": params["extraCommandsBeforeTestRun"] + [
+                                             command,
+                                         ],
+                                     },
+                                 ] + params["extraTeardown"],
+                        "services": databaseService(db) +
+                                    cephService(params["cephS3"]) +
+                                    scalityService(params["scalityS3"]) +
+                                    params["extraServices"],
+                        "depends_on": [],
+                        "trigger": {
+                            "ref": [
+                                "refs/pull/**",
+                                "refs/tags/**",
+                            ],
+                        },
+                    }
 
-                for branch in config["branches"]:
-                    result["trigger"]["ref"].append("refs/heads/%s" % branch)
+                    if params["coverage"]:
+                        result["steps"].append({
+                            "name": "coverage-rename",
+                            "image": OC_CI_PHP % phpVersion,
+                            "commands": [
+                                "mv tests/output/clover.xml tests/output/clover-%s.xml" % (name),
+                            ],
+                        })
+                        result["steps"].append({
+                            "name": "coverage-cache-1",
+                            "image": PLUGINS_S3,
+                            "settings": {
+                                "endpoint": {
+                                    "from_secret": "cache_s3_endpoint",
+                                },
+                                "bucket": "cache",
+                                "source": "tests/output/clover-%s.xml" % (name),
+                                "target": "%s/%s" % (ctx.repo.slug, ctx.build.commit + "-${DRONE_BUILD_NUMBER}"),
+                                "path_style": True,
+                                "strip_prefix": "tests/output",
+                                "access_key": {
+                                    "from_secret": "cache_s3_access_key",
+                                },
+                                "secret_key": {
+                                    "from_secret": "cache_s3_secret_key",
+                                },
+                            },
+                        })
 
-                pipelines.append(result)
+                    for branch in config["branches"]:
+                        result["trigger"]["ref"].append("refs/heads/%s" % branch)
+
+                    pipelines.append(result)
 
     if errorFound:
         return False
@@ -981,16 +996,16 @@ def acceptance(ctx):
                         "name": "configure-app",
                         "image": OC_CI_PHP % DEFAULT_PHP_VERSION,
                         "commands": [
-                            "cd /var/www/owncloud/server/apps/files_primary_s3",
-                            "cp tests/drone/scality.config.php /var/www/owncloud/server/config",
-                            "sed -i -e \"s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/\" /var/www/owncloud/server/config/scality.config.php",
-                            "sed -i -e \"s/accessKey1/$SCALITY_KEY/\" /var/www/owncloud/server/config/scality.config.php",
-                            "sed -i -e \"s/verySecretKey1/$SCALITY_SECRET_ESCAPED/\" /var/www/owncloud/server/config/scality.config.php",
-                            "sed -i -e \"s/http/https/\" /var/www/owncloud/server/config/scality.config.php",
-                            "sed -i -e \"s/scality:8000/%s/\" /var/www/owncloud/server/config/scality.config.php" % params["externalScality"]["externalServerUrl"],
-                            "cd /var/www/owncloud/server/",
+                            "cd %s/apps/files_primary_s3" % dir["server"],
+                            "cp tests/drone/scality.config.php %s/config" % dir["server"],
+                            "sed -i -e \"s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/\" %s" % dir["scalityConfig"],
+                            "sed -i -e \"s/accessKey1/$SCALITY_KEY/\" %s" % dir["scalityConfig"],
+                            "sed -i -e \"s/verySecretKey1/$SCALITY_SECRET_ESCAPED/\" %s" % dir["scalityConfig"],
+                            "sed -i -e \"s/http/https/\" %s" % dir["scalityConfig"],
+                            "sed -i -e \"s/scality:8000/%s/\" %s" % (params["externalScality"]["externalServerUrl"], dir["scalityConfig"]),
+                            "cd %s" % dir["server"],
                             "php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning",
-                            "cd /var/www/owncloud/testrunner/apps/files_primary_s3",
+                            "cd %s/apps/files_primary_s3" % dir["testrunner"],
                         ],
                         "environment": {
                             "SCALITY_KEY": {
@@ -1014,7 +1029,7 @@ def acceptance(ctx):
                             "aws configure set aws_access_key_id $SCALITY_KEY",
                             "aws configure set aws_secret_access_key $SCALITY_SECRET",
                             "aws --endpoint-url $SCALITY_ENDPOINT s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER",
-                            "/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER",
+                            "%s/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER" % dir["testrunner"],
                             "aws --endpoint-url $SCALITY_ENDPOINT s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER",
                         ],
                         "environment": {
@@ -1069,12 +1084,19 @@ def acceptance(ctx):
                     continue
 
                 name = "unknown"
+                phpVersionForDocker = testConfig["phpVersion"]
+
+                # Get the first 3 characters of the PHP version (7.4 or 8.0 etc)
+                # And use that for constructing the pipeline name
+                # That helps shorten pipeline names when using owncloud-ci images
+                # that have longer names like 7.4-ubuntu20.04
+                phpVersionForPipelineName = phpVersionForDocker[0:3]
                 if isWebUI or isAPI or isCLI:
                     esString = "-es" + testConfig["esVersion"] if testConfig["esVersion"] != "none" else ""
                     browserString = "" if testConfig["browser"] == "" else "-" + testConfig["browser"]
                     keyString = "-" + category if testConfig["includeKeyInMatrixName"] else ""
                     partString = "" if testConfig["numberOfParts"] == 1 else "-%d-%d" % (testConfig["numberOfParts"], testConfig["runPart"])
-                    name = "%s%s%s-%s%s-%s-php%s%s" % (alternateSuiteName, keyString, partString, testConfig["server"].replace("daily-", "").replace("-qa", ""), browserString, testConfig["database"].replace(":", ""), testConfig["phpVersion"], esString)
+                    name = "%s%s%s-%s%s-%s-php%s%s" % (alternateSuiteName, keyString, partString, testConfig["server"].replace("daily-", "").replace("-qa", ""), browserString, testConfig["database"].replace(":", ""), phpVersionForPipelineName, esString)
                     maxLength = 50
                     nameLength = len(name)
                     if nameLength > maxLength:
@@ -1142,11 +1164,11 @@ def acceptance(ctx):
                     "steps": skipIfUnchanged(ctx, "acceptance-tests") +
                              installCore(ctx, testConfig["server"], testConfig["database"], testConfig["useBundledApp"]) +
                              installTestrunner(ctx, DEFAULT_PHP_VERSION, testConfig["useBundledApp"]) +
-                             (installFederated(testConfig["server"], testConfig["phpVersion"], testConfig["logLevel"], testConfig["database"], federationDbSuffix) + owncloudLog("federated") if testConfig["federatedServerNeeded"] else []) +
-                             installAppPhp(ctx, testConfig["phpVersion"]) +
+                             (installFederated(testConfig["server"], phpVersionForDocker, testConfig["logLevel"], testConfig["database"], federationDbSuffix) + owncloudLog("federated") if testConfig["federatedServerNeeded"] else []) +
+                             installAppPhp(ctx, phpVersionForDocker) +
                              installAppJavaScript(ctx) +
-                             installExtraApps(testConfig["phpVersion"], testConfig["extraApps"]) +
-                             setupServerAndApp(ctx, testConfig["phpVersion"], testConfig["logLevel"], testConfig["federatedServerNeeded"], params["enableApp"]) +
+                             installExtraApps(phpVersionForDocker, testConfig["extraApps"]) +
+                             setupServerAndApp(ctx, phpVersionForDocker, testConfig["logLevel"], testConfig["federatedServerNeeded"], params["enableApp"]) +
                              owncloudLog("server") +
                              setupCeph(testConfig["cephS3"]) +
                              setupScality(testConfig["scalityS3"]) +
@@ -1154,7 +1176,7 @@ def acceptance(ctx):
                              testConfig["extraSetup"] +
                              waitForServer(testConfig["federatedServerNeeded"]) +
                              waitForEmailService(testConfig["emailNeeded"]) +
-                             fixPermissions(testConfig["phpVersion"], testConfig["federatedServerNeeded"], params["selUserNeeded"]) +
+                             fixPermissions(phpVersionForDocker, testConfig["federatedServerNeeded"], params["selUserNeeded"]) +
                              waitForBrowserService(testConfig["browser"]) +
                              [
                                  ({
@@ -1180,9 +1202,9 @@ def acceptance(ctx):
                                 scalityService(testConfig["scalityS3"]) +
                                 elasticSearchService(testConfig["esVersion"]) +
                                 testConfig["extraServices"] +
-                                owncloudService(testConfig["server"], testConfig["phpVersion"], "server", dir["server"], testConfig["ssl"], testConfig["xForwardedFor"]) +
+                                owncloudService(testConfig["server"], phpVersionForDocker, "server", dir["server"], testConfig["ssl"], testConfig["xForwardedFor"]) +
                                 ((
-                                    owncloudService(testConfig["server"], testConfig["phpVersion"], "federated", dir["federated"], testConfig["ssl"], testConfig["xForwardedFor"]) +
+                                    owncloudService(testConfig["server"], phpVersionForDocker, "federated", dir["federated"], testConfig["ssl"], testConfig["xForwardedFor"]) +
                                     databaseServiceForFederation(testConfig["database"], federationDbSuffix)
                                 ) if testConfig["federatedServerNeeded"] else []),
                     "depends_on": [],
@@ -1401,7 +1423,7 @@ def browserService(browser):
             },
             "volumes": [{
                 "name": "downloads",
-                "path": "/home/seluser/Downloads",
+                "path": dir["browserService"],
             }],
         }]
 
@@ -1415,7 +1437,7 @@ def browserService(browser):
             },
             "volumes": [{
                 "name": "downloads",
-                "path": "/home/seluser/Downloads",
+                "path": dir["browserService"],
             }],
         }]
 
@@ -1876,11 +1898,11 @@ def fixPermissions(phpVersion, federatedServerNeeded, selUserNeeded = False):
         ] + ([
             "chown -R www-data %s" % dir["federated"],
         ] if federatedServerNeeded else []) + ([
-            "chmod 777 /home/seluser/Downloads/",
+            "chmod 777 %s" % dir["browserService"],
         ] if selUserNeeded else []),
         "volumes": [{
             "name": "downloads",
-            "path": "/home/seluser/Downloads/",
+            "path": dir["browserService"],
         }],
     }]
 
@@ -1934,6 +1956,7 @@ def installFederated(federatedServerVersion, phpVersion, logLevel, db, dbSuffix 
                 "echo 'export TEST_SERVER_FED_URL=http://federated' > %s/saved-settings.sh" % dir["base"],
                 "cd %s" % dir["federated"],
                 "php occ a:l",
+                "php occ a:e files_external",
                 "php occ a:e testing",
                 "php occ a:l",
                 "php occ config:system:set trusted_domains 1 --value=federated",
@@ -2086,7 +2109,7 @@ def phplint(ctx):
         "type": "docker",
         "name": "lint-test",
         "workspace": {
-            "base": "/var/www/owncloud",
+            "base": dir["base"],
             "path": "server/apps/%s" % ctx.repo.name,
         },
         "steps": skipIfUnchanged(ctx, "lint") +
