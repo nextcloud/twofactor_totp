@@ -11,6 +11,7 @@ Feature: Use an API to verify OTP keys for users
       | username |
       | Alice    |
 
+
   Scenario Outline: Administrator tries to verify OTP key for user using correct key
     Given using OCS API version "<ocs_api_version>"
     And user "Alice" has logged in using the webUI
@@ -25,6 +26,7 @@ Feature: Use an API to verify OTP keys for users
       | 1               | 100      | 200       |
       | 2               | 100      | 200       |
 
+
   Scenario Outline: Administrator tries to verify OTP key for user using wrong key
     Given using OCS API version "<ocs_api_version>"
     And user "Alice" has logged in using the webUI
@@ -38,6 +40,7 @@ Feature: Use an API to verify OTP keys for users
       | ocs_api_version | ocs-code | http-code |
       | 1               | 100      | 200       |
       | 2               | 100      | 200       |
+
 
   Scenario Outline: Administrator tries to verify OTP key for a user that does not exist
     Given using OCS API version "<ocs_api_version>"
