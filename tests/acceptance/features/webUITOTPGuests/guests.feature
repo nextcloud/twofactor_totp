@@ -9,6 +9,7 @@ Feature: TOTP with guest users
     And the administrator has created guest user "guest" with email "guest@example.com"
     And user "Alice" has created folder "/shared"
 
+
   Scenario: Guest user can use 2FA and login with TOTP
     Given user "Alice" has shared folder "/shared" with user "guest@example.com"
     And guest user "guest" has registered and set password to "simplepass"
@@ -21,6 +22,7 @@ Feature: TOTP with guest users
     And the user adds one-time key generated from the secret key on the verification page on the webUI
     Then the user should be redirected to a webUI page with the title "Files - %productname%"
     And folder "shared" should be listed on the webUI
+
 
   Scenario: Guest user can use 2FA, login with TOTP and upload on a shared resource
     Given user "Alice" has shared folder "/shared" with user "guest@example.com" with permissions "all"
