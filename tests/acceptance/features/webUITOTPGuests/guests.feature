@@ -1,4 +1,4 @@
-@webUI @insulated @mailhog
+@webUI @insulated @email
 Feature: TOTP with guest users
   As a guest user
   I want to be able to use TOTP
