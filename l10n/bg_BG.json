@@ -4,9 +4,10 @@
     "Scan this QR code with your TOTP app" : "Сканирайте този QR код с Вашето TOTP приложение",
     "To enable second-factor verify authentication code below." : "За да активирате втори фактор за удостоверяване, кода е по-долу.",
     "Authentication code" : "Удостоверителен код",
-    "Verify" : "Потвърди",
+    "Verify" : "Потвърдете",
     "Verified" : "Потвърдено",
     "Not verified" : "Не е потвърдено",
+    "Time-based One-time Password" : "Еднократна парола, базирана на време",
     "Authenticate with a TOTP app" : "Удостоверете с TOTP приложение",
     "TOTP Second-factor Auth" : "TOTP Втори-фактор Auth"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
