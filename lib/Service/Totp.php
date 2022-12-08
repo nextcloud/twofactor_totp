@@ -119,6 +119,7 @@ class Totp implements ITotp {
 		 */
 		if ($dbSecret->getLastValidatedKey() !== $key) {
 			$secret = $this->crypto->decrypt($dbSecret->getSecret());
+			/* @phan-suppress-next-line PhanRedefinedClassReference */
 			if ($this->otp->checkTotp(Encoding::base32DecodeUpper($secret), $key, 3) === true) {
 				$dbSecret->setLastValidatedKey($key);
 				$this->secretMapper->update($dbSecret);
