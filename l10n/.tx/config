@@ -2,7 +2,7 @@
 host = https://www.transifex.com
 lang_map = ja_JP: ja
 
-[owncloud.twofactor_totp]
+[o:owncloud-org:p:owncloud:r:twofactor_totp]
 file_filter = <lang>/twofactor_totp.po
 source_file = templates/twofactor_totp.pot
 source_lang = en
