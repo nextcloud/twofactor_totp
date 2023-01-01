@@ -7,7 +7,7 @@
 		"christian-riesen/otp": "2.*",
 		"christophwurst/nextcloud_testing": "^0.12",
 		"nextcloud/coding-standard": "^1.0.0",
-		"psalm/phar": "^4.3"
+		"psalm/phar": "^5.4"
 	},
 	"scripts": {
 		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
