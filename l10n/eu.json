@@ -7,7 +7,7 @@
     "Two-Factor TOTP Provider" : "TOTP bi faktoreko zerbitzua",
     "TOTP two-factor provider" : "TOTP bi faktoreko zerbitzua",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP eskaintzeko zerbitzua (RFC 6238)",
-    "Enable TOTP" : "TOTP gaitu",
+    "Enable TOTP" : "Gaitu TOTP",
     "Could not enable TOTP" : "Ezin izan da TOTP aktibatu",
     "Could not verify your key. Please try again" : "Ezin da zure gakoa ziurtatu. Saia zaitez berriz mesedez",
     "Your new TOTP secret is:" : "Zure TOTP sekretua hauxe da:",
