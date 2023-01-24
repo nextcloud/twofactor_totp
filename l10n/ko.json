@@ -14,7 +14,7 @@
     "For quick setup, scan this QR code with your TOTP app:" : "빠르게 설정하려면 다음 QR 코드를 TOTP 앱으로 스캔하십시오:",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "앱을 설정한 후 아래에 테스트 코드를 입력하여 앱 설정이 올바른지 확인하십시오:",
     "Authentication code" : "인증 코드",
-    "Verify" : "검사",
+    "Verify" : "인증",
     "Get the authentication code from the two-factor authentication app on your device." : "내 장치에 있는 2단계 인증 앱에서 인증 코드를 확인하십시오.",
     "Submit" : "제출"
 },"pluralForm" :"nplurals=1; plural=0;"
