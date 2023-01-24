@@ -112,6 +112,7 @@ export default {
 
 					// Restore on error
 					this.loading = false
+					this.enabled = false
 				})
 				.catch((e) => Logger.error(e))
 		},
