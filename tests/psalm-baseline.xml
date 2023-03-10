@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.3.1@2feba22a005a18bf31d4c7b9bdb9252c73897476">
+<files psalm-version="5.7.7@e028ba46ba0d7f9a78bc3201c251e137383e145f">
+  <file src="lib/AppInfo/Application.php">
+    <InvalidArgument>
+      <code>StateChangeActivity::class</code>
+      <code>StateChangeActivity::class</code>
+      <code>StateChangeRegistryUpdater::class</code>
+      <code>UserDeleted::class</code>
+    </InvalidArgument>
+  </file>
   <file src="lib/Provider/AtLoginProvider.php">
-    <MissingDependency occurrences="2">
+    <MissingDependency>
       <code>Template</code>
       <code>Template</code>
     </MissingDependency>
   </file>
   <file src="lib/Provider/TotpProvider.php">
-    <MissingDependency occurrences="2">
+    <MissingDependency>
       <code>Template</code>
       <code>Template</code>
     </MissingDependency>
   </file>
   <file src="lib/Settings/Personal.php">
-    <MissingDependency occurrences="2">
+    <MissingDependency>
       <code>Template</code>
       <code>Template</code>
     </MissingDependency>
