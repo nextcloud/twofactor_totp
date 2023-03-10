@@ -30,6 +30,9 @@ use OCP\Activity\IManager as ActivityManager;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 
+/**
+ * @template-implements IEventListener<StateChanged>
+ */
 class StateChangeActivity implements IEventListener {
 
 	/** @var ActivityManager */

@@ -33,6 +33,9 @@ use OCP\EventDispatcher\IEventListener;
 use OCP\User\Events\UserDeletedEvent;
 use Psr\Log\LoggerInterface;
 
+/**
+ * @template-implements IEventListener<UserDeletedEvent>
+ */
 class UserDeleted implements IEventListener {
 
 	/** @var TotpSecretMapper */
