@@ -13,7 +13,7 @@
 		"christian-riesen/otp": "2.*",
 		"christophwurst/nextcloud_testing": "^0.12",
 		"nextcloud/coding-standard": "^1.0.0",
-		"nextcloud/ocp": "dev-master",
+		"nextcloud/ocp": "dev-stable26",
 		"vimeo/psalm": "^5.7"
 	},
 	"scripts": {
