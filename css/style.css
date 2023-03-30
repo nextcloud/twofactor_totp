@@ -10,3 +10,7 @@
 .totp-form > input[type='tel'] {
 	margin: 0 0 5px 0;
 }
+
+.two-factor-totp-icon {
+	filter: var(--background-invert-if-bright);
+}
