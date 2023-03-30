@@ -56,6 +56,9 @@ jobs:
           fail_ci_if_error: true
 
   acceptance-tests:
+    concurrency:
+      group: acceptance-tests
+      cancel-in-progress: true
     runs-on: ubuntu-latest
 
     strategy:
