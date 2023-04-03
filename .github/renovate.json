@@ -22,7 +22,7 @@
 	"rebaseWhen": "conflicted",
 	"ignoreUnstable": false,
 	"baseBranches": [
-		"main",
+		"master",
 		"stable26",
 		"stable25",
 		"stable24"
