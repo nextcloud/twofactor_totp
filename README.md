@@ -19,6 +19,16 @@ Tested with the following hardware devices:
 * [Nitrokey Pro](https://shop.nitrokey.com/shop/product/nitrokey-pro-2-3)
 * [Nitrokey Storage](https://shop.nitrokey.com/shop)
 
+## Installation
+
+### Nextcloud 25 and newer
+
+The app is [shipped](https://docs.nextcloud.com/server/latest/developer_manual/app_publishing_maintenance/release_process.html#shipped-apps) and comes with the installation of Nextcloud Server. No additional steps are necessary.
+
+### Nextcloud 24 and older
+
+The app is available through the [app store](https://apps.nextcloud.com/apps/twofactor_totp). It can be [installed through Nextcloud's app management UI](https://docs.nextcloud.com/server/latest/admin_manual/apps_management.html#managing-apps).
+
 ## Enabling TOTP 2FA for your account
 ![](screenshots/enter_challenge.png)
 ![](screenshots/settings.png)
