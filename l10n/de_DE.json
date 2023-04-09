@@ -15,7 +15,7 @@
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Nachdem Sie die App konfiguriert haben, geben Sie unten einen Testcode ein, um sicherzustellen, dass alles funktioniert:",
     "Authentication code" : "Authentifizierungscode",
     "Verify" : "Überprüfen",
-    "Get the authentication code from the two-factor authentication app on your device." : "Erhalten Sie den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf Ihrem Gerät.",
+    "Get the authentication code from the two-factor authentication app on your device." : "Erhalten Sie den Authentifizierungscode von der Zweifaktorauthentifizierungs-App auf Ihrem Gerät ",
     "Submit" : "Übermitteln"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
