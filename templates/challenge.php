@@ -2,7 +2,7 @@
 style('twofactor_totp', 'style');
 ?>
 
-<img class="two-factor-icon" src="<?php print_unescaped(image_path('twofactor_totp', 'app.svg')); ?>" alt="">
+<img class="two-factor-icon two-factor-totp-icon" src="<?php print_unescaped(image_path('twofactor_totp', 'app.svg')); ?>" alt="">
 
 <p><?php p($l->t('Get the authentication code from the two-factor authentication app on your device.')) ?></p>
 
