@@ -24,8 +24,7 @@
 	"baseBranches": [
 		"master",
 		"stable26",
-		"stable25",
-		"stable24"
+		"stable25"
 	],
 	"enabledManagers": [
 		"composer",
