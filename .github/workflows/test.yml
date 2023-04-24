@@ -47,7 +47,7 @@ jobs:
         run: composer run test:unit
 
       - name: Report coverage
-        uses: codecov/codecov-action@29386c70ef20e286228c72b668a06fd0e8399192 # v1
+        uses: codecov/codecov-action@894ff025c7b54547a9a2a1e9f228beae737ad3c2 # v3
         if: ${{ always() }}
         with:
           file: ./nextcloud/apps/twofactor_totp/tests/clover.xml
