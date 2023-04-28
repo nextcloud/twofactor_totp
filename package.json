@@ -44,12 +44,12 @@
     "@nextcloud/stylelint-config": "^2.1.2",
     "@nextcloud/webpack-vue-config": "^5.1.0",
     "@vue/test-utils": "^1.3.0",
+    "@vue/vue2-jest": "^27.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^27.5.1",
     "chai": "^4.3.6",
     "eslint-plugin-chai-friendly": "^0.7.2",
-    "jest": "^27.5.1",
-    "vue-jest": "^3.0.7"
+    "jest": "^27.5.1"
   },
   "prettier": {
     "singleQuote": true,
@@ -70,7 +70,7 @@
     "testEnvironment": "jsdom",
     "transform": {
       ".*\\.(js)$": "babel-jest",
-      ".*\\.(vue)$": "vue-jest"
+      ".*\\.(vue)$": "@vue/vue2-jest"
     }
   }
 }
