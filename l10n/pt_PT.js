@@ -5,6 +5,7 @@ OC.L10N.register(
     "Enable TOTP" : "Ativar TOTP",
     "Authentication code" : "Código de autenticação",
     "Verify" : "Verificar",
+    "Get the authentication code from the two-factor authentication app on your device." : "Obtenha o código de autenticação de dois fatores da sua aplicação de autenticação, no seu dispositivo.",
     "Submit" : "Submeter"
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
