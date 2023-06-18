@@ -4,7 +4,7 @@ OC.L10N.register(
     "You enabled TOTP two-factor authentication for your account" : "Ви увімкнули двофакторну авторизацію за допомогою одноразового коду",
     "You disabled TOTP two-factor authentication for your account" : "Ви вимкнули двофакторну авторизацію за допомогою одноразового коду",
     "TOTP two-factor authentication disabled by an admin" : "Двофактору авторизацію за допомогою одноразового коду вимкнено адміністратором",
-    "TOTP (Authenticator app)" : "За допомогою застосунку з другим фактором",
+    "TOTP (Authenticator app)" : "Із застосунком двофакторної авторизації",
     "Authenticate with a TOTP app" : "Увійти зі зґенерованим одноразовим кодом",
     "Two-Factor TOTP Provider" : "Постачальник послуг двофакторної авторизації TOTP",
     "TOTP two-factor provider" : "Постачальник послуг двофакторної авторизації TOTP",
