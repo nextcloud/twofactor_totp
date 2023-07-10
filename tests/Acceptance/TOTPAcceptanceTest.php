@@ -65,6 +65,7 @@ class TOTPAcceptanceTest extends TestCase {
 
 	public function testEnableTOTP(): void {
 		$this->webDriver->get('http://localhost:8080/index.php/login');
+		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::titleContains('Nextcloud'));
 		self::assertStringContainsString('Nextcloud', $this->webDriver->getTitle());
 
 		// Log in
@@ -151,6 +152,7 @@ class TOTPAcceptanceTest extends TestCase {
 		$this->createSecret();
 
 		$this->webDriver->get('http://localhost:8080/index.php/login');
+		$this->webDriver->wait(20, 200)->until(WebDriverExpectedCondition::titleContains('Nextcloud'));
 		self::assertStringContainsString('Nextcloud', $this->webDriver->getTitle());
 
 		// Log in
