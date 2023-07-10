@@ -18,7 +18,7 @@ export const actions = {
 			({ state, secret, qrUrl }) => {
 				commit('setState', state)
 				return { qrUrl, secret }
-			}
+			},
 		)
 	},
 
@@ -31,7 +31,7 @@ export const actions = {
 
 	disable({ commit }) {
 		return saveState({ state: state.STATE_DISABLED }).then(({ state }) =>
-			commit('setState', state)
+			commit('setState', state),
 		)
 	},
 }

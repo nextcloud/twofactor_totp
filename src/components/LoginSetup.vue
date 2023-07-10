@@ -68,7 +68,7 @@ export default {
 					this.qrUrl = qrUrl
 
 					this.loading = false
-				}
+				},
 			)
 		},
 		confirm() {

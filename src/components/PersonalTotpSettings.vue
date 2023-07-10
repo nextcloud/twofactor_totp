@@ -106,7 +106,7 @@ export default {
 				})
 				.catch((e) => {
 					OC.Notification.showTemporary(
-						t('twofactor_totp', 'Could not enable TOTP')
+						t('twofactor_totp', 'Could not enable TOTP'),
 					)
 					Logger.error('Could not enable TOTP', e)
 
@@ -137,8 +137,8 @@ export default {
 						OC.Notification.showTemporary(
 							t(
 								'twofactor_totp',
-								'Could not verify your key. Please try again'
-							)
+								'Could not verify your key. Please try again',
+							),
 						)
 					}
 
