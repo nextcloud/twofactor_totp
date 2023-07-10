@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { saveState } from './services/StateService'
-import state from './state'
+import { saveState } from './services/StateService.js'
+import state from './state.js'
 
 Vue.use(Vuex)
 

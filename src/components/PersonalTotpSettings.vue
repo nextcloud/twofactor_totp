@@ -49,9 +49,9 @@
 <script>
 import confirmPassword from '@nextcloud/password-confirmation'
 
-import Logger from '../logger'
-import SetupConfirmation from './SetupConfirmation'
-import state from '../state'
+import Logger from '../logger.js'
+import SetupConfirmation from './SetupConfirmation.vue'
+import state from '../state.js'
 
 export default {
 	name: 'PersonalTotpSettings',

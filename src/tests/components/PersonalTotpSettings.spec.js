@@ -22,7 +22,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import PersonalTotpSettings from '../../components/PersonalTotpSettings'
+import PersonalTotpSettings from '../../components/PersonalTotpSettings.vue'
 
 const localVue = createLocalVue()
 
