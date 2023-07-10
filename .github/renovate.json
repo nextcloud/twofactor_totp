@@ -87,7 +87,7 @@
 			"matchPackageNames": [
 				"jest",
 				"babel-jest",
-				"vue-jest"
+				"@vue/vue2-jest"
 			],
 			"automerge": true
 		}
