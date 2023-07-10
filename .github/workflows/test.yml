@@ -40,9 +40,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: nextcloud/apps/twofactor_totp
-        run: |
-          composer install
-          composer remove --dev nextcloud/ocp
+        run: composer install
 
       - name: Run tests
         working-directory: nextcloud/apps/twofactor_totp
@@ -145,6 +143,7 @@ jobs:
         working-directory: nextcloud/apps/twofactor_totp
         run: |
           composer install
+          composer remove --dev nextcloud/ocp
           npm ci
 
       - name: Build the app
