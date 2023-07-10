@@ -20,8 +20,8 @@
  */
 
 import Vue from 'vue'
-import Logger from './logger'
-import LoginSetup from './components/LoginSetup'
+import Logger from './logger.js'
+import LoginSetup from './components/LoginSetup.vue'
 
 Vue.mixin({
 	methods: {

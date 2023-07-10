@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { saveState } from './services/StateService'
-import state from './state'
+import { saveState } from './services/StateService.js'
+import state from './state.js'
 
 Vue.use(Vuex)
 
@@ -18,7 +18,7 @@ export const actions = {
 			({ state, secret, qrUrl }) => {
 				commit('setState', state)
 				return { qrUrl, secret }
-			}
+			},
 		)
 	},
 
@@ -31,7 +31,7 @@ export const actions = {
 
 	disable({ commit }) {
 		return saveState({ state: state.STATE_DISABLED }).then(({ state }) =>
-			commit('setState', state)
+			commit('setState', state),
 		)
 	},
 }

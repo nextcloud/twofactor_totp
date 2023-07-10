@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import Logger from '../logger'
-import { saveState } from '../services/StateService'
-import SetupConfirmation from './SetupConfirmation'
-import STATE from '../state'
+import Logger from '../logger.js'
+import { saveState } from '../services/StateService.js'
+import SetupConfirmation from './SetupConfirmation.vue'
+import STATE from '../state.js'
 
 export default {
 	name: 'LoginSetup',
@@ -68,7 +68,7 @@ export default {
 					this.qrUrl = qrUrl
 
 					this.loading = false
-				}
+				},
 			)
 		},
 		confirm() {

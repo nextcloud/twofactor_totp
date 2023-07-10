@@ -21,10 +21,10 @@
 
 import Vue from 'vue'
 import { loadState } from '@nextcloud/initial-state'
-import Logger from './logger'
-import store from './store'
+import Logger from './logger.js'
+import store from './store.js'
 
-import PersonalTotpSettings from './components/PersonalTotpSettings'
+import PersonalTotpSettings from './components/PersonalTotpSettings.vue'
 
 Vue.mixin({
 	methods: {

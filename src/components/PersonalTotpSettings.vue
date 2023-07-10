@@ -49,9 +49,9 @@
 <script>
 import confirmPassword from '@nextcloud/password-confirmation'
 
-import Logger from '../logger'
-import SetupConfirmation from './SetupConfirmation'
-import state from '../state'
+import Logger from '../logger.js'
+import SetupConfirmation from './SetupConfirmation.vue'
+import state from '../state.js'
 
 export default {
 	name: 'PersonalTotpSettings',
@@ -106,7 +106,7 @@ export default {
 				})
 				.catch((e) => {
 					OC.Notification.showTemporary(
-						t('twofactor_totp', 'Could not enable TOTP')
+						t('twofactor_totp', 'Could not enable TOTP'),
 					)
 					Logger.error('Could not enable TOTP', e)
 
@@ -137,8 +137,8 @@ export default {
 						OC.Notification.showTemporary(
 							t(
 								'twofactor_totp',
-								'Could not verify your key. Please try again'
-							)
+								'Could not verify your key. Please try again',
+							),
 						)
 					}
 
