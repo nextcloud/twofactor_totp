@@ -5,7 +5,7 @@
 	<name>Two-Factor TOTP Provider</name>
 	<summary>TOTP two-factor provider</summary>
 	<description>A Two-Factor-Auth Provider for TOTP (RFC 6238)</description>
-	<version>9.0.0-beta.2</version>
+	<version>10.0.0-dev</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<namespace>TwoFactorTOTP</namespace>
@@ -17,7 +17,7 @@
 	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_totp/dd1e48deec73a250886f35f3924186f5357f4c5f/screenshots/enter_challenge.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_totp/dd1e48deec73a250886f35f3924186f5357f4c5f/screenshots/settings.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="27" max-version="27" />
+		<nextcloud min-version="28" max-version="28" />
 	</dependencies>
 	<two-factor-providers>
 		<provider>OCA\TwoFactorTOTP\Provider\TotpProvider</provider>
