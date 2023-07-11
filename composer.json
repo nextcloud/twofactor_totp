@@ -14,7 +14,7 @@
 		"christophwurst/nextcloud_testing": "^0.12",
 		"nextcloud/coding-standard": "^1.0.0",
 		"nextcloud/ocp": "dev-master",
-		"vimeo/psalm": "^5.7"
+		"vimeo/psalm": "^5.13.1"
 	},
 	"scripts": {
 		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
