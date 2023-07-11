@@ -22,7 +22,7 @@
     "@nextcloud/axios": "^2.3.0",
     "@nextcloud/initial-state": "^2.0.0",
     "@nextcloud/logger": "^2.5.0",
-    "@nextcloud/password-confirmation": "^1.0.1",
+    "@nextcloud/password-confirmation": "^4.0.4",
     "@nextcloud/router": "^2.1.1",
     "vue": "^2.7.14",
     "vuex": "^3.6.2"
@@ -50,7 +50,8 @@
     "chai": "^4.3.7",
     "eslint-plugin-chai-friendly": "^0.7.2",
     "jest": "^29.6.1",
-    "jest-environment-jsdom": "^29.6.1"
+    "jest-environment-jsdom": "^29.6.1",
+    "jest-transform-stub": "^2.0.0"
   },
   "prettier": {
     "singleQuote": true,
@@ -68,10 +69,14 @@
     "setupFilesAfterEnv": [
       "./src/tests/jest.setup.js"
     ],
-    "testEnvironment": "jsdom",
+    "testEnvironment": "jest-environment-jsdom",
     "transform": {
       ".*\\.(js)$": "babel-jest",
-      ".*\\.(vue)$": "@vue/vue2-jest"
-    }
+      ".*\\.(vue)$": "@vue/vue2-jest",
+      ".*\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|avif)$": "jest-transform-stub"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/.*/.+\\.js$"
+    ]
   }
 }
