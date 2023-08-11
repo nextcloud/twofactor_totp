@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 10.0.0 – unreleased
+### Added
+- Nextcloud 28 support
+### Removed
+- Nextcloud 27 support
+
 ## 9.0.0 – unreleased
 ### Added
 - Nextcloud 27 support
