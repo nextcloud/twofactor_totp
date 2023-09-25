@@ -27,6 +27,7 @@
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
 		"test:acceptance:dev": "phpunit -c tests/phpunit.xml tests/Acceptance --no-coverage",
 		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage",
+		"bin": "echo 'bin not installed'",
 		"post-install-cmd": ["@composer bin all install --ansi"]
 	},
 	"config": {
