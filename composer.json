@@ -10,10 +10,10 @@
 		"rullzer/easytotp": "^0.1.4"
 	},
 	"require-dev": {
+		"bamarni/composer-bin-plugin": "^1.8",
 		"christian-riesen/otp": "2.*",
 		"christophwurst/nextcloud_testing": "^0.12",
-		"nextcloud/coding-standard": "^1.0.0",
-		"vimeo/psalm": "^5.15.0"
+		"nextcloud/coding-standard": "^1.0.0"
 	},
 	"scripts": {
 		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
@@ -35,6 +35,15 @@
 		"platform": {
 			"php": "8.0"
 		},
-		"sort-packages": true
+		"sort-packages": true,
+		"allow-plugins": {
+			"bamarni/composer-bin-plugin": true
+		}
+	},
+	"extra": {
+		"bamarni-bin": {
+			"bin-links": true,
+			"forward-command": true
+		}
 	}
 }
