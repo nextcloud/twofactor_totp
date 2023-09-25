@@ -38,5 +38,8 @@ jobs:
       - name: Install dependencies
         run: composer i
 
+      - name: Install nextcloud/ocp
+        run: composer require --dev nextcloud/ocp:dev-master --ignore-platform-reqs --with-dependencies
+
       - name: Run coding standards check
         run: composer run psalm
