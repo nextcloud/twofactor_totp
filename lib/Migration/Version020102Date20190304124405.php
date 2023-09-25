@@ -6,8 +6,8 @@ namespace OCA\TwoFactorTOTP\Migration;
 
 use Closure;
 use OCP\DB\ISchemaWrapper;
-use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
+use OCP\Migration\SimpleMigrationStep;
 
 class Version020102Date20190304124405 extends SimpleMigrationStep {
 

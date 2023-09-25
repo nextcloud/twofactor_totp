@@ -6,6 +6,7 @@ build/
 vendor/
 
 /.php_cs.cache
+/.php-cs-fixer.cache
 
 # Ignore NetBeans project
 /nbproject/

@@ -24,8 +24,8 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorTOTP\Event;
 
-use OCP\IUser;
 use OCP\EventDispatcher\Event;
+use OCP\IUser;
 
 class StateChanged extends Event {
 

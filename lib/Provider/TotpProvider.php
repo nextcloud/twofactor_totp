@@ -58,10 +58,10 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	private $urlGenerator;
 
 	public function __construct(ITotp $totp,
-								IL10N $l10n,
-								IAppContainer $container,
-								IInitialState $initialStateService,
-	IURLGenerator $urlGenerator) {
+		IL10N $l10n,
+		IAppContainer $container,
+		IInitialState $initialStateService,
+		IURLGenerator $urlGenerator) {
 		$this->totp = $totp;
 		$this->l10n = $l10n;
 		$this->container = $container;

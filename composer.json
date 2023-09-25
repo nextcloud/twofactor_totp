@@ -10,11 +10,9 @@
 		"rullzer/easytotp": "^0.1.4"
 	},
 	"require-dev": {
+		"bamarni/composer-bin-plugin": "^1.8",
 		"christian-riesen/otp": "2.*",
-		"christophwurst/nextcloud_testing": "^0.12",
-		"nextcloud/coding-standard": "^1.0.0",
-		"nextcloud/ocp": "dev-master",
-		"vimeo/psalm": "^5.15.0"
+		"christophwurst/nextcloud_testing": "^0.12"
 	},
 	"scripts": {
 		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
@@ -28,7 +26,9 @@
 		"test:acceptance": "phpunit -c tests/phpunit.xml tests/Acceptance",
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
 		"test:acceptance:dev": "phpunit -c tests/phpunit.xml tests/Acceptance --no-coverage",
-		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage"
+		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage",
+		"bin": "echo 'bin not installed'",
+		"post-install-cmd": ["@composer bin all install --ansi"]
 	},
 	"config": {
 		"optimize-autoloader": true,
@@ -36,6 +36,15 @@
 		"platform": {
 			"php": "8.0"
 		},
-		"sort-packages": true
+		"sort-packages": true,
+		"allow-plugins": {
+			"bamarni/composer-bin-plugin": true
+		}
+	},
+	"extra": {
+		"bamarni-bin": {
+			"bin-links": true,
+			"forward-command": true
+		}
 	}
 }

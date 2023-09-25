@@ -143,7 +143,6 @@ jobs:
         working-directory: nextcloud/apps/twofactor_totp
         run: |
           composer install
-          composer remove --dev nextcloud/ocp
           npm ci
 
       - name: Build the app
