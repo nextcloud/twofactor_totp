@@ -21,7 +21,7 @@ jobs:
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
       - name: Set up php${{ matrix.php-version }}
-        uses: shivammathur/setup-php@cb8f453143149404c7fd670b5f37c91d395b3054 # v2
+        uses: shivammathur/setup-php@7fdd3ece872ec7ec4c098ae5ab7637d5e0a96067 # v2
         with:
           php-version: ${{ matrix.php-version }}
           extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
@@ -101,7 +101,7 @@ jobs:
 
     steps:
       - name: Set up php${{ matrix.php-version }}
-        uses: shivammathur/setup-php@cb8f453143149404c7fd670b5f37c91d395b3054 # v2
+        uses: shivammathur/setup-php@7fdd3ece872ec7ec4c098ae5ab7637d5e0a96067 # v2
         with:
           php-version: ${{ matrix.php-version }}
           extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
