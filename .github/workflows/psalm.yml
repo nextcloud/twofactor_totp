@@ -1,0 +1,45 @@
+# This workflow is provided via the organization template repository
+#
+# https://github.com/nextcloud/.github
+# https://docs.github.com/en/actions/learn-github-actions/sharing-workflows-with-your-organization
+
+name: Static analysis
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - main
+      - stable*
+
+concurrency:
+  group: psalm-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+
+    name: Nextcloud
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Set up php
+        uses: shivammathur/setup-php@7fdd3ece872ec7ec4c098ae5ab7637d5e0a96067 # v2
+        with:
+          php-version: 8.1
+          coverage: none
+          ini-file: development
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: composer i
+
+      - name: Install nextcloud/ocp
+        run: composer require --dev nextcloud/ocp:dev-stable26 --ignore-platform-reqs --with-dependencies
+
+      - name: Run coding standards check
+        run: composer run psalm
