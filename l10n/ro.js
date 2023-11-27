@@ -8,7 +8,7 @@ OC.L10N.register(
     "Authenticate with a TOTP app" : "Autentifică-te cu o aplicație TOTP",
     "Two-Factor TOTP Provider" : "Furnizorul de autentificare în doi pași TOTP",
     "TOTP two-factor provider" : "Furnizorul de autentificare în doi pași TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un furnizor de autentificare în doi pași TOTP (RFC6238",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un furnizor de autentificare în doi pași TOTP (RFC6238)",
     "Enable TOTP" : "Activează TOTP",
     "Could not enable TOTP" : "Nu s-a putut activa autentificarea TOTP",
     "Could not verify your key. Please try again" : "Nu s-a putut verifica cheia. Vă rugăm să încercați din nou",
