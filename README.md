@@ -6,7 +6,6 @@
 
 Tested with the following apps:
 * [Aegis](https://github.com/beemdevelopment/Aegis) (open source) Available via [F-Droid](https://f-droid.org/en/packages/com.beemdevelopment.aegis/) and [Google Play](https://play.google.com/store/apps/details?id=com.beemdevelopment.aegis). It features a built-in QR-code reader.
-* [andOTP](https://github.com/andOTP/andOTP) (open source) Availabe via [F-Droid](https://f-droid.org/packages/org.shadowice.flocke.andotp/) and [Google Play](https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp). It features a built-in QR-code reader.
 * [FreeOTPPlus](https://github.com/helloworld1/FreeOTPPlus/) (open source) Availabe via [F-droid](https://f-droid.org/packages/org.liberty.android.freeotpplus/) and [Google Play](https://play.google.com/store/apps/details?id=org.liberty.android.freeotpplus).
 * [OTP Authenticator](https://github.com/0xbb/otp-authenticator) (open source) Availabe via [F-Droid](https://f-droid.org/en/packages/net.bierbaumer.otp_authenticator/) and [Google Play](https://play.google.com/store/apps/details?id=net.bierbaumer.otp_authenticator). It features a built-in QR-code reader.
 * [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2) (proprietary)
