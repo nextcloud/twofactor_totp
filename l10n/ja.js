@@ -1,8 +1,8 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "You enabled TOTP two-factor authentication for your account" : "あなたのアカウントに対するTOTP 二段階認証を有効にしました。",
-    "You disabled TOTP two-factor authentication for your account" : "あなたのアカウントに対するTOTP 二段階認証を無効化しました。",
+    "You enabled TOTP two-factor authentication for your account" : "あなたのアカウントに対するTOTP 二要素認証を有効にしました。",
+    "You disabled TOTP two-factor authentication for your account" : "あなたのアカウントに対するTOTP 二要素認証を無効化しました。",
     "TOTP two-factor authentication disabled by an admin" : "管理者によってTOTP二要素認証は無効にされています",
     "TOTP (Authenticator app)" : "TOTP (認証アプリ)",
     "Authenticate with a TOTP app" : "TOTPアプリで認証する",
@@ -17,7 +17,7 @@ OC.L10N.register(
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "アプリを設定したら、以下のテストコードを入力してすべてが正しく動作することを確認します。",
     "Authentication code" : "認証コード",
     "Verify" : "検証",
-    "Get the authentication code from the two-factor authentication app on your device." : "デバイスの二段階認証アプリで認証コードを取得してください。",
+    "Get the authentication code from the two-factor authentication app on your device." : "デバイスの二要素認証アプリで認証コードを取得してください。",
     "Submit" : "送信"
 },
 "nplurals=1; plural=0;");
