@@ -20,8 +20,8 @@
   -->
 
 <template>
-	<div>
-		<p>
+	<div class="setup-confirmation">
+		<p class="setup-confirmation__secret">
 			{{ t('twofactor_totp', 'Your new TOTP secret is:') }} {{ secret }}
 		</p>
 		<p>
@@ -108,3 +108,11 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.setup-confirmation {
+	&__secret {
+		word-break: break-all;
+	}
+}
+</style>
