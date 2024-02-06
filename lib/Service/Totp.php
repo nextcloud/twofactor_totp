@@ -72,7 +72,7 @@ class Totp implements ITotp {
 	}
 
 	private function generateSecret(): string {
-		return $this->random->generate(16, ISecureRandom::CHAR_UPPER.'234567');
+		return $this->random->generate(160, ISecureRandom::CHAR_UPPER.'234567');
 	}
 
 	/**
