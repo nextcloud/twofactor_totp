@@ -24,7 +24,7 @@
     "@nextcloud/logger": "^2.5.0",
     "@nextcloud/password-confirmation": "^4.0.4",
     "@nextcloud/router": "^2.1.2",
-    "vue": "^2.7.14",
+    "vue": "^2.7.16",
     "vuex": "^3.6.2"
   },
   "browserslist": [
