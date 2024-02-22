@@ -22,7 +22,7 @@
     "@nextcloud/axios": "^2.4.0",
     "@nextcloud/initial-state": "^2.0.0",
     "@nextcloud/logger": "^2.5.0",
-    "@nextcloud/password-confirmation": "^4.0.4",
+    "@nextcloud/password-confirmation": "^4.1.0",
     "@nextcloud/router": "^2.1.2",
     "vue": "^2.7.14",
     "vuex": "^3.6.2"
