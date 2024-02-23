@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",
-    "@nextcloud/auth": "^2.0.0",
+    "@nextcloud/auth": "^2.2.1",
     "@nextcloud/axios": "^2.4.0",
     "@nextcloud/initial-state": "^2.1.0",
     "@nextcloud/logger": "^2.7.0",
