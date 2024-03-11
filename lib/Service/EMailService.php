@@ -179,9 +179,6 @@ class EMailService implements IEMailService {
 			throw $e;
 		}
 
-		// Todo: enfernen
-		$this->logger->error("sent email message to $email, code: $authenticationCode");
-
 		return $email;
 	}
 }
