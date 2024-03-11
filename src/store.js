@@ -7,17 +7,17 @@ import state from './state.js'
 Vue.use(Vuex)
 
 export const mutations = {
-	setState(state, totpState) {
-		state.totpState = totpState
+	setState(state, emailState) {
+		state.emailState = emailState
 	},
 }
 
 export const actions = {
 	enable({ commit }) {
 		return saveState({ state: state.STATE_CREATED }).then(
-			({ state, secret, qrUrl }) => {
+			({ state, email }) => {
 				commit('setState', state)
-				return { qrUrl, secret }
+				return { email }
 			},
 		)
 	},
@@ -41,7 +41,7 @@ export const getters = {}
 export default new Vuex.Store({
 	strict: process.env.NODE_ENV !== 'production',
 	state: {
-		totpState: undefined,
+		emailState: undefined,
 	},
 	getters,
 	mutations,

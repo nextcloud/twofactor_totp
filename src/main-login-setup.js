@@ -2,6 +2,7 @@
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 Nico Kluge <nico.kluge@klugecoded.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -31,5 +32,5 @@ Vue.mixin({
 
 Logger.debug('rendering login setup view')
 const View = Vue.extend(LoginSetup)
-new View().$mount('#twofactor-totp-login-setup')
+new View().$mount('#twofactor-email-login-setup')
 Logger.debug('login setup view rendered')

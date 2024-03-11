@@ -2,6 +2,7 @@
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 Nico Kluge <nico.kluge@klugecoded.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -22,7 +23,7 @@
 import { getCurrentUser } from '@nextcloud/auth'
 import { getLoggerBuilder } from '@nextcloud/logger'
 
-const builder = getLoggerBuilder().setApp('twofactor_totp')
+const builder = getLoggerBuilder().setApp('twofactor_email')
 
 const user = getCurrentUser()
 if (user !== null) {

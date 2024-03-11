@@ -22,9 +22,10 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Activity;
+namespace OCA\TwoFactorEMail\Activity;
 
 use InvalidArgumentException;
+use OCA\TwoFactorEMail\AppInfo\Application;
 use OCP\Activity\IEvent;
 use OCP\Activity\IProvider;
 use OCP\IURLGenerator;
@@ -44,22 +45,22 @@ class Provider implements IProvider {
 	}
 
 	public function parse($language, IEvent $event, IEvent $previousEvent = null): IEvent {
-		if ($event->getApp() !== 'twofactor_totp') {
+		if ($event->getApp() !== Application::APP_ID) {
 			throw new InvalidArgumentException();
 		}
 
-		$l = $this->l10n->get('twofactor_totp', $language);
+		$l = $this->l10n->get(Application::APP_ID, $language);
 
 		$event->setIcon($this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'actions/password.svg')));
 		switch ($event->getSubject()) {
-			case 'totp_enabled_subject':
-				$event->setSubject($l->t('You enabled TOTP two-factor authentication for your account'));
+			case 'twofactor_email_enabled_subject':
+				$event->setSubject($l->t('You enabled e-mail two-factor authentication for your account'));
 				break;
-			case 'totp_disabled_subject':
-				$event->setSubject($l->t('You disabled TOTP two-factor authentication for your account'));
+			case 'twofactor_email_disabled_subject':
+				$event->setSubject($l->t('You disabled e-mail two-factor authentication for your account'));
 				break;
-			case 'totp_disabled_by_admin':
-				$event->setSubject($l->t('TOTP two-factor authentication disabled by an admin'));
+			case 'twofactor_email_disabled_by_admin':
+				$event->setSubject($l->t('E-mail two-factor authentication disabled by an admin'));
 				break;
 		}
 		return $event;

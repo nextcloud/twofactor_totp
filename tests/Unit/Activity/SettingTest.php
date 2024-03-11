@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2016 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -23,7 +24,7 @@
 namespace OCA\TwoFactorTOTP\Test\Unit\Activity;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorTOTP\Activity\Setting;
+use OCA\TwoFactorEMail\Activity\Setting;
 use OCP\IL10N;
 
 class SettingTest extends TestCase {
@@ -43,12 +44,12 @@ class SettingTest extends TestCase {
 	public function testAll() {
 		$this->assertEquals(false, $this->setting->canChangeMail());
 		$this->assertEquals(false, $this->setting->canChangeStream());
-		$this->assertEquals('twofactor_totp', $this->setting->getIdentifier());
+		$this->assertEquals('twofactor_email', $this->setting->getIdentifier());
 		$this->l10n->expects($this->once())
 			->method('t')
-			->with('TOTP (Authenticator app)')
-			->willReturn('TOTP (Google Authentifizierer)');
-		$this->assertEquals('TOTP (Google Authentifizierer)', $this->setting->getName());
+			->with('E-mail')
+			->willReturn('E-Mail');
+		$this->assertEquals('E-Mail', $this->setting->getName());
 		$this->assertEquals(10, $this->setting->getPriority());
 		$this->assertEquals(true, $this->setting->isDefaultEnabledMail());
 		$this->assertEquals(true, $this->setting->isDefaultEnabledStream());

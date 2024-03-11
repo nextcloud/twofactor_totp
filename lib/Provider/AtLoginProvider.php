@@ -4,6 +4,7 @@ declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2019, Roeland Jago Douma <roeland@famdouma.nl>
  *
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Roeland Jago Douma <roeland@famdouma.nl>
  *
  * @license GNU AGPL version 3 or any later version
@@ -23,9 +24,9 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Provider;
+namespace OCA\TwoFactorEMail\Provider;
 
-use OCA\TwoFactorTOTP\AppInfo\Application;
+use OCA\TwoFactorEMail\AppInfo\Application;
 use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
 use OCP\IURLGenerator;
 use OCP\Template;

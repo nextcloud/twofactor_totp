@@ -5,6 +5,7 @@ declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2022 Daniel Kesselberg <mail@danielkesselberg.de>
  *
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Daniel Kesselberg <mail@danielkesselberg.de>
  *
  * @license GNU AGPL version 3 or any later version
@@ -24,9 +25,9 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Listener;
+namespace OCA\TwoFactorEMail\Listener;
 
-use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
+use OCA\TwoFactorEMail\Db\TwoFactorEMailMapper;
 use OCP\DB\Exception;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
@@ -38,21 +39,21 @@ use Psr\Log\LoggerInterface;
  */
 class UserDeleted implements IEventListener {
 
-	/** @var TotpSecretMapper */
-	private $totpSecretMapper;
+	/** @var TwoFactorEMailMapper */
+	private $twoFactorEMailMapper;
 
 	/** @var LoggerInterface */
 	private $logger;
 
-	public function __construct(TotpSecretMapper $totpSecretMapper, LoggerInterface $logger) {
-		$this->totpSecretMapper = $totpSecretMapper;
+	public function __construct(TwoFactorEMailMapper $twoFactorEMailMapper, LoggerInterface $logger) {
+		$this->twoFactorEMailMapper = $twoFactorEMailMapper;
 		$this->logger = $logger;
 	}
 
 	public function handle(Event $event): void {
 		if ($event instanceof UserDeletedEvent) {
 			try {
-				$this->totpSecretMapper->deleteSecretByUserId($event->getUser()->getUID());
+				$this->twoFactorEMailMapper->deleteTwoFactorEMailByUserId($event->getUser()->getUID());
 			} catch (Exception $e) {
 				$this->logger->warning($e->getMessage(), ['uid' => $event->getUser()->getUID()]);
 			}

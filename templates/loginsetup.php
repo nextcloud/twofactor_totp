@@ -4,6 +4,7 @@
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 Nico Kluge <nico.kluge@klugecoded.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -23,8 +24,8 @@
 
 declare(strict_types=1);
 
-script('twofactor_totp', 'twofactor_totp-main-login-setup');
+script('twofactor_email', 'twofactor_email-main-login-setup');
 
 ?>
 
-<div id="twofactor-totp-login-setup"></div>
+<div id="twofactor-email-login-setup"></div>

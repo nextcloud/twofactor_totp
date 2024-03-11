@@ -2,6 +2,7 @@
  * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 Nico Kluge <nico.kluge@klugecoded.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -24,7 +25,7 @@ import { loadState } from '@nextcloud/initial-state'
 import Logger from './logger.js'
 import store from './store.js'
 
-import PersonalTotpSettings from './components/PersonalTotpSettings.vue'
+import PersonalEMailSettings from './components/PersonalEMailSettings.vue'
 
 Vue.mixin({
 	methods: {
@@ -33,12 +34,12 @@ Vue.mixin({
 })
 
 store.replaceState({
-	totpState: loadState('twofactor_totp', 'state'),
+	emailState: loadState('twofactor_email', 'state'),
 })
 
-const View = Vue.extend(PersonalTotpSettings)
+const View = Vue.extend(PersonalEMailSettings)
 new View({
 	store,
-}).$mount('#twofactor-totp-settings')
+}).$mount('#twofactor-email-settings')
 
 Logger.debug('personal settings loaded and rendered')

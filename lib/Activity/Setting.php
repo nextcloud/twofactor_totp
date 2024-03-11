@@ -22,8 +22,9 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Activity;
+namespace OCA\TwoFactorEMail\Activity;
 
+use OCA\TwoFactorEMail\AppInfo\Application;
 use OCP\Activity\ISetting;
 use OCP\IL10N;
 
@@ -45,11 +46,11 @@ class Setting implements ISetting {
 	}
 
 	public function getIdentifier(): string {
-		return 'twofactor_totp';
+		return Application::APP_ID;
 	}
 
 	public function getName(): string {
-		return $this->l10n->t('TOTP (Authenticator app)');
+		return $this->l10n->t('E-mail');
 	}
 
 	public function getPriority(): int {

@@ -1,7 +1,0 @@
-{ "translations": {
-    "Authenticate with a TOTP app" : "Autentiser med to-faktor program",
-    "Enable TOTP" : "Aktivere to-faktor pålogging",
-    "Authentication code" : "Autentifikasjons kode",
-    "Verify" : "Stadfest"
-},"pluralForm" :"nplurals=2; plural=(n != 1);"
-}

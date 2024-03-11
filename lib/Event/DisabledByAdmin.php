@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -22,7 +23,7 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Event;
+namespace OCA\TwoFactorEMail\Event;
 
 use OCP\IUser;
 

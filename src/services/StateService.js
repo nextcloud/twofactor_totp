@@ -2,6 +2,7 @@
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 Nico Kluge <nico.kluge@klugecoded.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -23,7 +24,7 @@ import Axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
 
 export const saveState = async (data) => {
-	const url = generateUrl('/apps/twofactor_totp/settings/enable')
+	const url = generateUrl('/apps/twofactor_email/settings/enable')
 
 	const resp = await Axios.post(url, data)
 	return resp.data

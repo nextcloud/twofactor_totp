@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * Two-factor TOTP
@@ -19,8 +20,7 @@
  *
  */
 
-
 require_once __DIR__ . '/../../../lib/base.php';
 require_once __DIR__ . '/../../../tests/bootstrap.php';
 
-\OC_App::loadApp('twofactor_totp');
+\OC_App::loadApp('twofactor_email');

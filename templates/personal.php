@@ -1,8 +1,7 @@
 <?php
 
-script('twofactor_totp', 'twofactor_totp-main-settings');
-style('twofactor_totp', 'settings');
-
+script('twofactor_email', 'twofactor_email-main-settings');
+style('twofactor_email', 'settings');
 ?>
 
-<div id="twofactor-totp-settings"></div>
+<div id="twofactor-email-settings"></div>

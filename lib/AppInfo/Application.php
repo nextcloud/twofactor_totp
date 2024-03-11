@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * Two-factor TOTP
@@ -21,15 +22,15 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\AppInfo;
+namespace OCA\TwoFactorEMail\AppInfo;
 
-use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
-use OCA\TwoFactorTOTP\Event\StateChanged;
-use OCA\TwoFactorTOTP\Listener\StateChangeActivity;
-use OCA\TwoFactorTOTP\Listener\StateChangeRegistryUpdater;
-use OCA\TwoFactorTOTP\Listener\UserDeleted;
-use OCA\TwoFactorTOTP\Service\ITotp;
-use OCA\TwoFactorTOTP\Service\Totp;
+use OCA\TwoFactorEMail\Event\DisabledByAdmin;
+use OCA\TwoFactorEMail\Event\StateChanged;
+use OCA\TwoFactorEMail\Listener\StateChangeActivity;
+use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
+use OCA\TwoFactorEMail\Listener\UserDeleted;
+use OCA\TwoFactorEMail\Service\IEMailService;
+use OCA\TwoFactorEMail\Service\EMailService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -37,7 +38,7 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\User\Events\UserDeletedEvent;
 
 class Application extends App implements IBootstrap {
-	public const APP_ID = 'twofactor_totp';
+	public const APP_ID = 'twofactor_email';
 
 	public function __construct() {
 		parent::__construct(self::APP_ID);
@@ -46,7 +47,7 @@ class Application extends App implements IBootstrap {
 	public function register(IRegistrationContext $context): void {
 		include_once __DIR__ . '/../../vendor/autoload.php';
 
-		$context->registerServiceAlias(ITotp::class, Totp::class);
+		$context->registerServiceAlias(IEMailService::class, EMailService::class);
 
 		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
 		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);

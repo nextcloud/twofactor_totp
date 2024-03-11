@@ -5,6 +5,7 @@ declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2022 Daniel Kesselberg <mail@danielkesselberg.de>
  *
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Daniel Kesselberg <mail@danielkesselberg.de>
  *
  * @license AGPL-3.0-or-later
@@ -23,9 +24,9 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Command;
+namespace OCA\TwoFactorEMail\Command;
 
-use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
+use OCA\TwoFactorEMail\Db\TwoFactorEMailMapper;
 use OCP\DB\Exception;
 use OCP\IDBConnection;
 use OCP\IUserManager;
@@ -41,45 +42,45 @@ class CleanUp extends Command {
 	/** @var IUserManager */
 	private $userManager;
 
-	/** @var TotpSecretMapper */
-	private $totpSecretMapper;
+	/** @var TwoFactorEMailMapper */
+	private $twoFactorEMailMapper;
 
 	public function __construct(
-		IDBConnection $db,
-		IUserManager $userManager,
-		TotpSecretMapper $totpSecretMapper
+        IDBConnection $db,
+        IUserManager $userManager,
+        TwoFactorEMailMapper $twoFactorEMailMapper
 	) {
 		parent::__construct();
 
 		$this->db = $db;
 		$this->userManager = $userManager;
-		$this->totpSecretMapper = $totpSecretMapper;
+		$this->twoFactorEMailMapper = $twoFactorEMailMapper;
 	}
 
 	protected function configure(): void {
 		$this
-			->setName('twofactor_totp:cleanup')
-			->setDescription('Remove orphaned totp secrets');
+			->setName('twofactor_email:cleanup')
+			->setDescription('Remove orphaned two-factor emails');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$io = new SymfonyStyle($input, $output);
-		$io->title('Remove totp secrets for deleted users');
+		$io->title('Remove two-factor e-mails for deleted users');
 
 		foreach ($this->findUserIds() as $userId) {
 			if ($this->userManager->userExists($userId) === false) {
 				try {
-					$io->text('Delete secret for uid "' . $userId . '"');
-					$this->totpSecretMapper->deleteSecretByUserId($userId);
+					$io->text('Delete two-factor e-mail for uid "' . $userId . '"');
+					$this->twoFactorEMailMapper->deleteTwoFactorEMailByUserId($userId);
 				} catch (Exception $e) {
-					$io->caution('Error deleting secret: ' . $e->getMessage());
+					$io->caution('Error deleting two-factor e-mail: ' . $e->getMessage());
 				}
 			}
 		}
 
-		$io->success('Orphaned totp secrets removed.');
+		$io->success('Orphaned two-factor e-mail removed.');
 
-		$io->text('Thank you for using Two-Factor TOTP!');
+		$io->text('Thank you for using two-factor e-mail!');
 		return 0;
 	}
 
@@ -91,7 +92,7 @@ class CleanUp extends Command {
 
 		$qb = $this->db->getQueryBuilder()
 			->selectDistinct('user_id')
-			->from($this->totpSecretMapper->getTableName());
+			->from($this->twoFactorEMailMapper->getTableName());
 
 		$result = $qb->executeQuery();
 

@@ -1,5 +1,5 @@
 {
-  "name": "twofactor_totp",
+  "name": "twofactor_email",
   "description": "Nextcloud TwoFactor TOTP",
   "version": "11.0.0-dev",
   "author": "Christoph Wurst <christoph@winzerhof-wurst.at>",

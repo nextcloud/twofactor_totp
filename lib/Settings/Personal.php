@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * Two-factor TOTP
@@ -21,13 +22,14 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Settings;
+namespace OCA\TwoFactorEMail\Settings;
 
+use OCA\TwoFactorEMail\AppInfo\Application;
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Template;
 
 class Personal implements IPersonalProviderSettings {
 	public function getBody(): Template {
-		return new Template('twofactor_totp', 'personal');
+		return new Template(Application::APP_ID, 'personal');
 	}
 }

@@ -1,7 +1,0 @@
-{ "translations": {
-    "Enable TOTP" : "Activar TOTP",
-    "Authentication code" : "Còdi d’autentificacion",
-    "Verify" : "Verificar",
-    "Submit" : "Transmetre"
-},"pluralForm" :"nplurals=2; plural=(n > 1);"
-}

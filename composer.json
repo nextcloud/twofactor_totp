@@ -2,7 +2,7 @@
 	"autoload-dev": {
 		"psr-4": {
 			"OCP\\": "vendor/nextcloud/ocp/OCP",
-			"OCA\\TwoFactorTOTP\\": "lib/"
+			"OCA\\TwoFactorEMail\\": "lib/"
 		}
 	},
 	"require": {

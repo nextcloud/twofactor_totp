@@ -2,7 +2,8 @@
   - @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
-  -
+   - @author 2024 Nico Kluge <nico.kluge@klugecoded.com>
+
   - @license GNU AGPL version 3 or any later version
   -
   - This program is free software: you can redistribute it and/or modify
@@ -21,27 +22,18 @@
 
 <template>
 	<div class="setup-confirmation">
-		<p class="setup-confirmation__secret">
-			{{ t('twofactor_totp', 'Your new TOTP secret is:') }} {{ secret }}
+		<p class="setup-confirmation__twofactor-email">
+			{{ t('twofactor_email', 'We have sent an email containing your authentication code to:') }} {{ email }}
 		</p>
 		<p>
 			{{
 				t(
-					'twofactor_totp',
-					'For quick setup, scan this QR code with your TOTP app:'
+					'twofactor_email',
+					'Please enter your authentication code:'
 				)
 			}}
 		</p>
-		<QR :value="qrUrl" :options="{ width: 150 }" />
-		<p>
-			{{
-				t(
-					'twofactor_totp',
-					'After you configured your app, enter a test code below to ensure everything works correctly:'
-				)
-			}}
-		</p>
-		<input id="totp-confirmation"
+		<input id="email-confirmation"
 			v-model="confirmationCode"
 			type="tel"
 			minlength="6"
@@ -49,34 +41,25 @@
 			autocomplete="off"
 			autocapitalize="off"
 			:disabled="loading"
-			:placeholder="t('twofactor_totp', 'Authentication code')"
+			:placeholder="t('twofactor_email', 'Authentication code')"
 			@keydown="onConfirmKeyDown">
-		<input id="totp-confirmation-submit"
+		<input id="email-confirmation-submit"
 			type="button"
 			:disabled="loading"
-			:value="t('twofactor_totp', 'Verify')"
+			:value="t('twofactor_email', 'Verify')"
 			@click="confirm">
 	</div>
 </template>
 
 <script>
-import QR from '@chenfengyuan/vue-qrcode'
-
 export default {
 	name: 'SetupConfirmation',
-	components: {
-		QR,
-	},
 	props: {
 		loading: {
 			type: Boolean,
 			default: false,
 		},
-		secret: {
-			type: String,
-			required: true,
-		},
-		qrUrl: {
+		email: {
 			type: String,
 			required: true,
 		},
@@ -111,7 +94,7 @@ export default {
 
 <style lang="scss" scoped>
 .setup-confirmation {
-	&__secret {
+	&__twofactor-email {
 		word-break: break-all;
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2016 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -24,7 +25,7 @@ namespace OCA\TwoFactorTOTP\Test\Unit\Activity;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use InvalidArgumentException;
-use OCA\TwoFactorTOTP\Activity\Provider;
+use OCA\TwoFactorEMail\Activity\Provider;
 use OCP\Activity\IEvent;
 use OCP\IL10N;
 use OCP\ILogger;
@@ -62,9 +63,9 @@ class ProviderTest extends TestCase {
 
 	public function subjectData() {
 		return [
-			['totp_enabled_subject'],
-			['totp_disabled_subject'],
-			['totp_disabled_by_admin'],
+			['twofactor_email_enabled_subject'],
+			['twofactor_email_disabled_subject'],
+			['twofactor_email_disabled_by_admin'],
 		];
 	}
 
@@ -78,10 +79,10 @@ class ProviderTest extends TestCase {
 
 		$event->expects($this->once())
 			->method('getApp')
-			->willReturn('twofactor_totp');
+			->willReturn('twofactor_email');
 		$this->l10n->expects($this->once())
 			->method('get')
-			->with('twofactor_totp', $lang)
+			->with('twofactor_email', $lang)
 			->willReturn($l);
 		$this->urlGenerator->expects($this->once())
 			->method('imagePath')

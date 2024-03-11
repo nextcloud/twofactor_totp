@@ -3,9 +3,10 @@
 declare(strict_types = 1);
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * Two-factor TOTP
+ * Two-factor email
  *
  * This code is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License, version 3,
@@ -21,34 +22,34 @@ declare(strict_types = 1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Controller;
+namespace OCA\TwoFactorEMail\Controller;
 
+use Exception;
 use InvalidArgumentException;
-use OCA\TwoFactorTOTP\Service\ITotp;
+use OCA\TwoFactorEMail\Service\IEMailService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
-use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUserSession;
-use RuntimeException;
+use OCP\Security\ISecureRandom;
 use function is_null;
 
 class SettingsController extends ALoginSetupController {
 
-	/** @var ITotp */
-	private $totp;
+	/** @var IEMailService */
+	private $emailService;
 
 	/** @var IUserSession */
 	private $userSession;
 
-	/** @var Defaults */
-	private $defaults;
+	/** @var ISecureRandom */
+	private $secureRandom;
 
-	public function __construct(string $appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults) {
+	public function __construct(string $appName, IRequest $request, IUserSession $userSession, IEMailService $emailService, ISecureRandom $secureRandom) {
 		parent::__construct($appName, $request);
 		$this->userSession = $userSession;
-		$this->totp = $totp;
-		$this->defaults = $defaults;
+		$this->emailService = $emailService;
+		$this->secureRandom = $secureRandom;
 	}
 
 	/**
@@ -61,7 +62,7 @@ class SettingsController extends ALoginSetupController {
 			throw new \Exception('user not available');
 		}
 		return new JSONResponse([
-			'state' => $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED,
+			'state' => $this->emailService->isEnabled($user) ? IEMailService::STATE_ENABLED : IEMailService::STATE_DISABLED,
 		]);
 	}
 
@@ -78,57 +79,29 @@ class SettingsController extends ALoginSetupController {
 			throw new \Exception('user not available');
 		}
 		switch ($state) {
-			case ITotp::STATE_DISABLED:
-				$this->totp->deleteSecret($user);
+			case IEMailService::STATE_DISABLED:
+				$this->emailService->deleteTwoFactorEMail($user);
 				return new JSONResponse([
-					'state' => ITotp::STATE_DISABLED,
+					'state' => IEMailService::STATE_DISABLED,
 				]);
-			case ITotp::STATE_CREATED:
-				$secret = $this->totp->createSecret($user);
-
-				$secretName = $this->getSecretName();
-				$issuer = $this->getSecretIssuer();
-				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer";
+			case IEMailService::STATE_CREATED:
+				$authenticationCode = $this->secureRandom->generate(6, ISecureRandom::CHAR_DIGITS);
+				$dbTwoFactorEMail = $this->emailService->createTwoFactorEMail($user);
+				$targetEMailAddress = $this->emailService->setAndSendAuthCode($user, $authenticationCode);
 				return new JSONResponse([
-					'state' => ITotp::STATE_CREATED,
-					'secret' => $secret,
-					'qrUrl' => $qrUrl,
+					'state' => $targetEMailAddress ? IEMailService::STATE_CREATED : IEMailService::STATE_DISABLED,
+					'email' => $targetEMailAddress,
 				]);
-			case ITotp::STATE_ENABLED:
+			case IEMailService::STATE_ENABLED:
 				if ($code === null) {
 					throw new InvalidArgumentException("code is missing");
 				}
-				$success = $this->totp->enable($user, $code);
+				$success = $this->emailService->enable($user, $code);
 				return new JSONResponse([
-					'state' => $success ? ITotp::STATE_ENABLED : ITotp::STATE_CREATED,
+					'state' => $success ? IEMailService::STATE_ENABLED : IEMailService::STATE_CREATED,
 				]);
 			default:
-				throw new InvalidArgumentException('Invalid TOTP state');
+				throw new InvalidArgumentException('Invalid email state');
 		}
-	}
-
-	/**
-	 * The user's cloud id, e.g. "christina@university.domain/owncloud"
-	 *
-	 * @return string
-	 */
-	private function getSecretName(): string {
-		$productName = $this->defaults->getName();
-		$user = $this->userSession->getUser();
-		if ($user === null) {
-			throw new RuntimeException("No user in this context");
-		}
-		$userName = $user->getCloudId();
-		return rawurlencode("$productName:$userName");
-	}
-
-	/**
-	 * The issuer, e.g. "Nextcloud"
-	 *
-	 * @return string
-	 */
-	private function getSecretIssuer(): string {
-		$productName = $this->defaults->getName();
-		return rawurlencode($productName);
 	}
 }

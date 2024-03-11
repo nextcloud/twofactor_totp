@@ -6,12 +6,12 @@
  * Time: 06:33
  */
 
-namespace OCA\TwoFactorTOTP\Test\Listener;
+namespace OCA\TwoFactorEMail\Test\Listener;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorTOTP\Event\StateChanged;
-use OCA\TwoFactorTOTP\Listener\StateChangeRegistryUpdater;
-use OCA\TwoFactorTOTP\Provider\TotpProvider;
+use OCA\TwoFactorEMail\Event\StateChanged;
+use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
+use OCA\TwoFactorEMail\Provider\EMailProvider;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\Event;
 use OCP\IUser;
@@ -24,14 +24,14 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 	/** @var IRegistry */
 	private $registry;
 
-	/** @var TotpProvider */
+	/** @var EMailProvider */
 	private $provider;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->registry = $this->createMock(IRegistry::class);
-		$this->provider = $this->createMock(TotpProvider::class);
+		$this->provider = $this->createMock(EMailProvider::class);
 
 		$this->listener = new StateChangeRegistryUpdater($this->registry, $this->provider);
 	}

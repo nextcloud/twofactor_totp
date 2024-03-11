@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2016 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -20,25 +21,24 @@
  *
  */
 
-namespace OCA\TwoFactorTOTP\Unit\Controller;
+namespace OCA\TwoFactorEMail\Unit\Controller;
 
 use InvalidArgumentException;
-use OCA\TwoFactorTOTP\Controller\SettingsController;
-use OCA\TwoFactorTOTP\Service\ITotp;
-use OCA\TwoFactorTOTP\Service\Totp;
+use OCA\TwoFactorEMail\Controller\SettingsController;
+use OCA\TwoFactorEMail\Service\IEMailService;
+use OCA\TwoFactorEMail\Service\EMailService;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IUser;
 use OCP\IUserSession;
+use OCP\Security\ISecureRandom;
 use PHPUnit\Framework\TestCase;
 
 class SettingsControllerTest extends TestCase {
 	private $request;
 	private $userSession;
-	private $totp;
-	private $defaults;
-
+	private $emailService;
+	private $secureRandom;
 	/** @var SettingsController */
 	private $controller;
 
@@ -47,10 +47,10 @@ class SettingsControllerTest extends TestCase {
 
 		$this->request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
-		$this->totp = $this->createMock(Totp::class);
-		$this->defaults = new Defaults();
+		$this->emailService = $this->createMock(EMailService::class);
+		$this->secureRandom = $this->createMock(ISecureRandom::class);
 
-		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);
+		$this->controller = new SettingsController('twofactor_email', $this->request, $this->userSession, $this->emailService, $this->secureRandom);
 	}
 
 	public function testDisabledState() {
@@ -58,8 +58,8 @@ class SettingsControllerTest extends TestCase {
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
-		$this->totp->expects($this->once())
-			->method('hasSecret')
+		$this->emailService->expects($this->once())
+			->method('isEnabled')
 			->with($user)
 			->willReturn(false);
 
@@ -70,58 +70,52 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->state());
 	}
 
-	public function testCreateSecret() {
-		$user = $this->createMock(IUser::class);
-		$this->userSession->expects($this->exactly(2))
-			->method('getUser')
-			->willReturn($user);
-		$user->expects($this->once())
-			->method('getCloudId')
-			->willReturn('user@instance.com');
-		$this->totp->expects($this->once())
-			->method('createSecret')
-			->with($user)
-			->willReturn('newsecret');
-		$issuer = rawurlencode($this->defaults->getName());
-		$expected = new JSONResponse([
-			'state' => ITotp::STATE_CREATED,
-			'secret' => 'newsecret',
-			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer",
-		]);
-
-		$this->assertEquals($expected, $this->controller->enable(true));
-	}
-
-	public function testEnableSecret() {
+	public function testCreateTwoFactorEMail() {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
-		$this->totp->expects($this->once())
+		$this->emailService->expects($this->once())
+			->method('setAndSendAuthCode')
+			->willReturn("user@instance.com");
+		$expected = new JSONResponse([
+			'state' => IEMailService::STATE_CREATED,
+			'email' => 'user@instance.com'
+		]);
+
+		$this->assertEquals($expected, $this->controller->enable(IEMailService::STATE_CREATED));
+	}
+
+	public function testEnableTwoFactorEMail() {
+		$user = $this->createMock(IUser::class);
+		$this->userSession->expects($this->once())
+			->method('getUser')
+			->willReturn($user);
+		$this->emailService->expects($this->once())
 			->method('enable')
 			->with($user, '123456')
 			->willReturn(true);
 
 		$expected = new JSONResponse([
-			'state' => ITotp::STATE_ENABLED,
+			'state' => IEMailService::STATE_ENABLED,
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_ENABLED, '123456'));
+		$this->assertEquals($expected, $this->controller->enable(IEMailService::STATE_ENABLED, '123456'));
 	}
 
-	public function testDisableSecret() {
+	public function testDisableTwoFactorEMail() {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
-		$this->totp->expects($this->once())
-			->method('deleteSecret');
+		$this->emailService->expects($this->once())
+			->method('deleteTwoFactorEMail');
 
 		$expected = new JSONResponse([
-			'state' => ITotp::STATE_DISABLED,
+			'state' => IEMailService::STATE_DISABLED,
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_DISABLED));
+		$this->assertEquals($expected, $this->controller->enable(IEMailService::STATE_DISABLED));
 	}
 
 	public function testEnableInvalidState() {

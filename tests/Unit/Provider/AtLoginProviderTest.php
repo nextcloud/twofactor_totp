@@ -2,6 +2,7 @@
 /**
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
@@ -20,10 +21,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\TwoFactorTOTP\Test\Unit\Provider;
+namespace OCA\TwoFactorEMail\Test\Unit\Provider;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorTOTP\Provider\AtLoginProvider;
+use OCA\TwoFactorEMail\Provider\AtLoginProvider;
 use OCP\IURLGenerator;
 use PHPUnit\Framework\MockObject\MockObject;
 

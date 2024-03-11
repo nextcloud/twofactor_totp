@@ -2,6 +2,7 @@
  * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 Nico Kluge <nico.kluge@klugecoded.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -22,13 +23,13 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import PersonalTotpSettings from '../../components/PersonalTotpSettings.vue'
+import PersonalEMailSettings from '../../components/PersonalEMailSettings.vue'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
-describe('PersonalTotpSettings', () => {
+describe('PersonalEMailSettings', () => {
 	let actions
 	let store
 
@@ -45,7 +46,7 @@ describe('PersonalTotpSettings', () => {
 	})
 
 	it('does not load on start', () => {
-		const settings = shallowMount(PersonalTotpSettings, {
+		const settings = shallowMount(PersonalEMailSettings, {
 			store,
 			localVue,
 		})

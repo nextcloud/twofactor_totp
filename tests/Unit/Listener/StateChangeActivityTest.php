@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -22,12 +23,12 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Unit\Listener;
+namespace OCA\TwoFactorEMail\Unit\Listener;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
-use OCA\TwoFactorTOTP\Event\StateChanged;
-use OCA\TwoFactorTOTP\Listener\StateChangeActivity;
+use OCA\TwoFactorEMail\Event\DisabledByAdmin;
+use OCA\TwoFactorEMail\Event\StateChanged;
+use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCP\Activity\IEvent;
 use OCP\Activity\IManager;
 use OCP\IUser;
@@ -59,7 +60,7 @@ class StateChangeActivityTest extends TestCase {
 			->willReturn($activityEvent);
 		$activityEvent->expects($this->once())
 			->method('setApp')
-			->with('twofactor_totp')
+			->with('twofactor_email')
 			->willReturnSelf();
 		$activityEvent->expects($this->once())
 			->method('setType')
@@ -91,7 +92,7 @@ class StateChangeActivityTest extends TestCase {
 			->willReturn($activityEvent);
 		$activityEvent->expects($this->once())
 			->method('setApp')
-			->with('twofactor_totp')
+			->with('twofactor_email')
 			->willReturnSelf();
 		$activityEvent->expects($this->once())
 			->method('setType')
@@ -107,7 +108,7 @@ class StateChangeActivityTest extends TestCase {
 			->willReturnSelf();
 		$activityEvent->expects($this->once())
 			->method('setSubject')
-			->with('totp_disabled_by_admin')
+			->with('twofactor_email_disabled_by_admin')
 			->willReturnSelf();
 		$this->activityManager->expects($this->once())
 			->method('publish')

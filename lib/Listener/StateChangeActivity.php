@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -22,10 +23,11 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Listener;
+namespace OCA\TwoFactorEMail\Listener;
 
-use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
-use OCA\TwoFactorTOTP\Event\StateChanged;
+use OCA\TwoFactorEMail\AppInfo\Application;
+use OCA\TwoFactorEMail\Event\DisabledByAdmin;
+use OCA\TwoFactorEMail\Event\StateChanged;
 use OCP\Activity\IManager as ActivityManager;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
@@ -45,14 +47,14 @@ class StateChangeActivity implements IEventListener {
 	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
 			if ($event instanceof DisabledByAdmin) {
-				$subject = 'totp_disabled_by_admin';
+				$subject = 'twofactor_email_disabled_by_admin';
 			} else {
-				$subject = $event->isEnabled() ? 'totp_enabled_subject' : 'totp_disabled_subject';
+				$subject = $event->isEnabled() ? 'twofactor_email_enabled_subject' : 'twofactor_email_disabled_subject';
 			}
 			$user = $event->getUser();
 
 			$activity = $this->activityManager->generateEvent();
-			$activity->setApp('twofactor_totp')
+			$activity->setApp(Application::APP_ID)
 				->setType('security')
 				->setAuthor($user->getUID())
 				->setAffectedUser($user->getUID())

@@ -1,7 +1,0 @@
-{ "translations": {
-    "Authenticate with a TOTP app" : "ตรวจสอบสิทธิ์ด้วยแอป TOTP",
-    "Enable TOTP" : "เปิดใช้งาน TOTP",
-    "Verify" : "ยืนยัน",
-    "Submit" : "ส่ง"
-},"pluralForm" :"nplurals=1; plural=0;"
-}

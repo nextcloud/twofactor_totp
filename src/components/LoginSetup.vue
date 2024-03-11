@@ -1,6 +1,7 @@
 <!--
   - @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
+  - @author 2024 Nico Kluge <nico.kluge@klugecoded.com>
   - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @license GNU AGPL version 3 or any later version
@@ -24,8 +25,7 @@
 		<div v-if="loading" class="loading" />
 		<SetupConfirmation v-else
 			:loading="confirmationLoading"
-			:secret="secret"
-			:qr-url="qrUrl"
+			:email="email"
 			:confirmation.sync="confirmation"
 			@confirm="confirm" />
 		<form ref="confirmForm" method="POST" />
@@ -47,8 +47,7 @@ export default {
 		return {
 			loading: true,
 			confirmationLoading: false,
-			secret: '',
-			qrUrl: '',
+			email: '',
 			confirmation: '',
 		}
 	},
@@ -58,14 +57,13 @@ export default {
 	methods: {
 		load() {
 			this.loading = true
-			Logger.info('starting TOTP setup')
+			Logger.info('starting e-mail setup')
 
 			saveState({ state: STATE.STATE_CREATED }).then(
-				({ secret, qrUrl }) => {
-					Logger.info('TOTP secret received')
+				({ email }) => {
+					Logger.info('E-mail auth code received')
 
-					this.secret = secret
-					this.qrUrl = qrUrl
+					this.email = email
 
 					this.loading = false
 				},
@@ -79,12 +77,12 @@ export default {
 				code: this.confirmation,
 			}).then(({ state }) => {
 				if (state === STATE.STATE_ENABLED) {
-					Logger.info('TOTP secret confirmed')
+					Logger.info('E-mail auth code confirmed')
 
 					Logger.info('todo: submit')
 					this.$refs.confirmForm.submit()
 				} else {
-					Logger.warn('TOTP confirmation failed')
+					Logger.warn('E-mail confirmation failed')
 
 					this.loading = false
 				}

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 /**
+ * @author Nico Kluge <nico.kluge@klugecoded.com>
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
@@ -22,10 +23,10 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\TwoFactorTOTP\Listener;
+namespace OCA\TwoFactorEMail\Listener;
 
-use OCA\TwoFactorTOTP\Event\StateChanged;
-use OCA\TwoFactorTOTP\Provider\TotpProvider;
+use OCA\TwoFactorEMail\Event\StateChanged;
+use OCA\TwoFactorEMail\Provider\EMailProvider;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
@@ -38,10 +39,10 @@ class StateChangeRegistryUpdater implements IEventListener {
 	/** @var IRegistry */
 	private $registry;
 
-	/** @var TotpProvider */
+	/** @var EMailProvider */
 	private $provider;
 
-	public function __construct(IRegistry $registry, TotpProvider $provider) {
+	public function __construct(IRegistry $registry, EMailProvider $provider) {
 		$this->registry = $registry;
 		$this->provider = $provider;
 	}
