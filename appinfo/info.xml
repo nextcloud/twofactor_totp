@@ -23,7 +23,7 @@
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-before.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-after.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="29" max-version="29" />
+		<nextcloud min-version="27" max-version="29" />
 	</dependencies>
 	<two-factor-providers>
 		<provider>OCA\TwoFactorEMail\Provider\EMailProvider</provider>
