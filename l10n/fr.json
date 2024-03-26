@@ -13,7 +13,7 @@
     "Your new TOTP secret is:" : "Votre nouveau secret TOTP est:",
     "For quick setup, scan this QR code with your TOTP app:" : "Pour un paramétrage facile, scannez ce QR code avec votre application TOTP.",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Après avoir configuré votre application, entrez un code de test ci-dessous pour vous assurer que tout fonctionne correctement:",
-    "Authentication code" : "Code d'authentification",
+    "Authentication code" : "Code d’authentification",
     "Verify" : "Vérifier",
     "Get the authentication code from the two-factor authentication app on your device." : "Récupérez un code d'authentification à partir de l'application d'authentification à deux facteurs de votre appareil.",
     "Submit" : "Envoyer"
