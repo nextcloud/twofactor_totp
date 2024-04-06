@@ -8,6 +8,11 @@
       <code>UserDeleted::class</code>
     </InvalidArgument>
   </file>
+  <file src="lib/Command/CleanUp.php">
+    <UndefinedClass>
+      <code><![CDATA[Command]]></code>
+    </UndefinedClass>
+  </file>
   <file src="lib/Provider/AtLoginProvider.php">
     <MissingDependency>
       <code>Template</code>
