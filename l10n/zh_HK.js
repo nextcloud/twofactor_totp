@@ -1,8 +1,8 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "You enabled TOTP two-factor authentication for your account" : "您已為您的賬戶啟用了 TOTP 雙重認證",
-    "You disabled TOTP two-factor authentication for your account" : "您已為您的賬戶停用了 TOTP 雙重認證",
+    "You enabled TOTP two-factor authentication for your account" : "您已為您的帳戶啟用了 TOTP 雙重認證",
+    "You disabled TOTP two-factor authentication for your account" : "您已為您的帳戶停用了 TOTP 雙重認證",
     "TOTP two-factor authentication disabled by an admin" : "系統管理員已停用 TOTP 雙重認證功能",
     "TOTP (Authenticator app)" : "TOTP （驗證應用程式）",
     "Authenticate with a TOTP app" : "使用 TOTP 應用程式進行驗證",
