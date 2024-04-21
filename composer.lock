@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a4ee26721100bab8de0745f7086f4f2",
+    "content-hash": "ee20e78b0aa6c637a20693baacc1d67e",
     "packages": [],
     "packages-dev": [
         {
@@ -66,25 +66,22 @@
         },
         {
             "name": "christophwurst/nextcloud_testing",
-            "version": "v0.12.4",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
-                "reference": "9c189b01dbcc3508108f08c417de6aaea7005fb0"
+                "reference": "6677a6d09f7fc9c8e5258a69aa684da4e9f43515"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/9c189b01dbcc3508108f08c417de6aaea7005fb0",
-                "reference": "9c189b01dbcc3508108f08c417de6aaea7005fb0",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/6677a6d09f7fc9c8e5258a69aa684da4e9f43515",
+                "reference": "6677a6d09f7fc9c8e5258a69aa684da4e9f43515",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0",
+                "php": "^7.4|^8.0",
                 "php-webdriver/webdriver": "^1.9",
-                "phpunit/phpunit": "^8.0|^9.0"
-            },
-            "require-dev": {
-                "christophwurst/nextcloud": "^17.0"
+                "phpunit/phpunit": "^8.0|^9.0|^10.0"
             },
             "type": "library",
             "autoload": {
@@ -105,9 +102,9 @@
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
             "support": {
                 "issues": "https://github.com/ChristophWurst/nextcloud_testing/issues",
-                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v0.12.4"
+                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v1.0.0"
             },
-            "time": "2021-02-18T08:41:09+00:00"
+            "time": "2023-10-30T07:42:56+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -902,6 +899,41 @@
                 }
             ],
             "time": "2024-07-10T11:45:39+00:00"
+        },
+        {
+            "name": "psalm/phar",
+            "version": "5.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/psalm/phar.git",
+                "reference": "d42708449bd2d99ec6509924332fd94263974b20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/psalm/phar/zipball/d42708449bd2d99ec6509924332fd94263974b20",
+                "reference": "d42708449bd2d99ec6509924332fd94263974b20",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "conflict": {
+                "vimeo/psalm": "*"
+            },
+            "bin": [
+                "psalm.phar"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Composer-based Psalm Phar",
+            "support": {
+                "issues": "https://github.com/psalm/phar/issues",
+                "source": "https://github.com/psalm/phar/tree/5.25.0"
+            },
+            "time": "2024-06-19T20:02:02+00:00"
         },
         {
             "name": "sebastian/cli-parser",

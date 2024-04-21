@@ -1,7 +1,7 @@
 {
-	"autoload-dev": {
+	"license": ["AGPL-3.0-or-later"],
+	"autoload": {
 		"psr-4": {
-			"OCP\\": "vendor/nextcloud/ocp/OCP",
 			"OCA\\TwoFactorEMail\\": "lib/"
 		}
 	},
@@ -30,7 +30,7 @@
 	},
 	"config": {
 		"optimize-autoloader": true,
-		"classmap-authoritative": true,
+		"classmap-authoritative": false,
 		"platform": {
 			"php": "8.0"
 		},
