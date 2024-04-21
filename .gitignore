@@ -11,6 +11,8 @@ js/
 
 # Ignore NetBeans project
 /nbproject/
+# Ignore JetBrains project
+/.idea/
 
 tests/clover.xml
 tests/.phpunit.result.cache
