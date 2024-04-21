@@ -1,32 +1,25 @@
-# Two Factor e-mail
-![Downloads](https://img.shields.io/github/downloads/datenschutz-individuell/twofactor_email/total.svg)
-[![Build Status](https://travis-ci.org/datenschutz-individuell/twofactor_email.svg?branch=v2)](https://travis-ci.org/datenschutz-individuell/twofactor_email)
+# Twofactor Email
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/datenschutz-individuell_twofactor-email.svg)](https://saucelabs.com/u/datenschutz-individuell_twofactor-email)
+This two factor authentication provider for Nextcloud creates a 6-digit random authentication code and sends it to the user's primary email address.
 
-This two factor authentication provider creates 6-digit random authentication codes and sends them to the user's primary email address.
+## Installation, activation and usage
 
-Currently this app must be installed by an admin and must be enabled by the user. It might be enhanced to enable admins to enforce 2FA via email for new (and existing?) users.
+The app must be installed and activated by a Nextcloud server admin. The easiest way to do so is to select "Apps" from the menu and search for "two", then select and install it – which will retrieve it from the [App Store](https://apps.nextcloud.com/apps/twofactor_email).
 
-It currently uses the primary email address set in 'Personal info' and cannot be activated if none is set there. There is an issue that argues that using the primary notification address poses a security risk (to be discussed).
+Users may enable any installed 2FA app. Upon login, they may choose from all enabled 2FA apps. It cannot be enabled if no email address is set in 'Personal info'. In the future, the app might be enhanced to allow using alternate address set there.
 
-It currently cannot be used on first login when two-factor authentication is enforced (not implemented yet).
+Admins may enforce 2FA for certain or all users. If enforced, users are prompted enable any installed 2FA app. In the future, the app might be enhanced to allow admins to enable Twofactor Email for new or even existing users. 
 
-Any pull requests or offers to help are welcome, please contact the maintainer (see [wiki](https://github.com/datenschutz-individuell/twofactor_email/wiki/Developer-notes)).
+Mind that, once you enable 2FA, you can no longer use your passwort in applications that don't support the web based 2FA login flow. For them, you need to create and use [app passwords](https://docs.nextcloud.com/server/stable/user_manual/en/session_management.html#managing-devices).
 
-The easiest way to install this app is to select "Apps" from the menu (as admin) and search for "two", then install it (which will retrieve it from the [App Store](https://apps.nextcloud.com/apps/twofactor_email)).
+## Any development help welcome
 
-## Enabling e-mail 2FA for your account
-![](screenshots/settings-before.png)
-![](screenshots/settings-after.png)
-
-## Login with external apps
-Once you enable OTP with Two Factor Totp, your applications (for example your Android app or your GNOME app) will need to login using device passwords. To manage it, [know more here](https://docs.nextcloud.com/server/stable/user_manual/en/session_management.html#managing-devices)
-
-## Development setup
+To build the app, check out the repo and follow these steps:
 
 * `composer update`
 * `composer i`
 * `npm install`
 * `npm ci`
 * `npm run build` or `npm run dev` [more info](https://docs.nextcloud.com/server/latest/developer_manual/digging_deeper/npm.html)
+
+Any pull requests or offers to help are welcome, please contact [the dev team](https://github.com/datenschutz-individuell/twofactor_email/wiki/Developer-notes).
