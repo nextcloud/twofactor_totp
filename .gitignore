@@ -4,6 +4,7 @@ composer.phar
 
 build/
 vendor/
+js/
 
 /.php_cs.cache
 /.php-cs-fixer.cache
