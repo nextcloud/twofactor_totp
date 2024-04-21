@@ -25,31 +25,30 @@ declare(strict_types = 1);
 namespace OCA\TwoFactorEMail\Db;
 
 use OCP\AppFramework\Db\Entity;
+use OCP\IUser;
 
 /**
  * @method string getUserId()
  * @method void setUserId(string $userId)
- * @method string getEmail()
- * @method void setEmail(string $email)
+ * @method string|null getEmail()
+ * @method void setEmail(string|null $email)
  * @method int getState()
  * @method void setState(int $state)
- * @method string getAuthCode()
- * @method void setAuthCode(string $authCode)
+ * @method string|null getAuthCode()
+ * @method void setAuthCode(string|null $authCode)
  */
 class TwoFactorEMail extends Entity {
-
-	public const USE_USER_EMAIL = 'USE_USER_EMAIL';
 
 	/** @var string */
 	protected $userId;
 
-	/** @var string */
+	/** @var string|null */
 	protected $email;
 
 	/** @var int */
 	protected $state;
 
-	/** @var string */
+	/** @var string|null */
 	protected $authCode;
 
 	public function __construct() {
@@ -59,7 +58,11 @@ class TwoFactorEMail extends Entity {
 		$this->addType('authCode', 'string');
 	}
 
-	public function useUserEMailAddress(): bool {
-		return $this->email === TwoFactorEMail::USE_USER_EMAIL;
+	/**
+	 * @param IUser $user
+	 * @return string|null
+	 */
+	public function getEMailAddress(IUser $user): ?string {
+		return $this->email ?? $user->getEMailAddress();
 	}
 }

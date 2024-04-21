@@ -30,9 +30,7 @@ use OCA\TwoFactorEMail\Db\TwoFactorEMailMapper;
 use OCA\TwoFactorEMail\Event\DisabledByAdmin;
 use OCA\TwoFactorEMail\Event\StateChanged;
 use OCA\TwoFactorEMail\Exception\NoTwoFactorEMailFoundException;
-use OCA\TwoFactorEMail\Exception\UserEMailAddressNotSet;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\DB\Exception;
 use OCP\Defaults;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IL10N;
@@ -87,7 +85,7 @@ class EMailService implements IEMailService {
 	/**
 	 * @param IUser $user
 	 */
-	public function createTwoFactorEMail(IUser $user, string $email = ""): TwoFactorEMail {
+	public function createTwoFactorEMail(IUser $user, string $email = null): TwoFactorEMail {
 		try {
 			// Delete existing one
 			$dbTwoFactorEmail = $this->twoFactorEMailMapper->getTwoFactorEMail($user);
@@ -95,8 +93,6 @@ class EMailService implements IEMailService {
 		} catch (DoesNotExistException $ex) {
 			// Ignore
 		}
-
-		if ($email === "") $email = TwoFactorEMail::USE_USER_EMAIL;
 
 		$dbTwoFactorEMail = new TwoFactorEMail();
 		$dbTwoFactorEMail->setUserId($user->getUID());
@@ -107,7 +103,7 @@ class EMailService implements IEMailService {
 		return $dbTwoFactorEMail;
 	}
 
-	public function enable(IUser $user, $key): bool {
+	public function enable(IUser $user, string $key): bool {
 		if (!$this->validateTwoFactorEMail($user, $key)) {
 			return false;
 		}
@@ -152,9 +148,9 @@ class EMailService implements IEMailService {
 		$dbTwoFactorEMail->setAuthCode($authenticationCode);
 		$this->twoFactorEMailMapper->update($dbTwoFactorEMail);
 
-		$email = $dbTwoFactorEMail->useUserEMailAddress() ? $user->getEMailAddress() : $dbTwoFactorEMail->getEmail();
+		$email = $dbTwoFactorEMail->getEMailAddress($user);
 
-		if (!$email) {
+		if ($email === null) {
 			return '';
 		}
 

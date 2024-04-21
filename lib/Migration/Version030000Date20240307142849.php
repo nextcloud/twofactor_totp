@@ -33,45 +33,34 @@ use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
 class Version030000Date20240307142849 extends SimpleMigrationStep {
-
-	/**
-	 * @param IOutput $output
-	 * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
-	 * @param array $options
-	 * @return ISchemaWrapper
-	 */
 	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		if (!$schema->hasTable('twofactor_email_table')) {
-			$table = $schema->createTable('twofactor_email_table');
+		if (!$schema->hasTable('twofactor_email')) {
+			$table = $schema->createTable('twofactor_email');
 			$table->addColumn('id', \OCP\DB\Types::INTEGER, [
 				'autoincrement' => true,
 				'notnull' => true,
-				'length' => 4,
 			]);
 			$table->addColumn('user_id', \OCP\DB\Types::STRING, [
 				'notnull' => true,
 				'length' => 64,
-				'default' => '',
 			]);
 			$table->addColumn('email', \OCP\DB\Types::STRING, [
-				'notnull' => true,
-				'length' => 64,
-				'default' => '',
+				'notnull' => false,
+				'length' => 255,
 			]);
 			$table->addColumn('state', \OCP\DB\Types::INTEGER, [
 				'notnull' => true,
-				'default' => 2,
 			]);
 			$table->addColumn('auth_code', \OCP\DB\Types::STRING, [
-				'notnull' => true,
-				'length' => 32,
-				'default' => '',
+				'notnull' => false,
+				'length' => 6,
+				'default' => null,
 			]);
 			$table->setPrimaryKey(['id']);
-			$table->addUniqueIndex(['user_id'], 'twofactor_email_table_user_id');
+			$table->addUniqueIndex(['user_id'], 'twofactor_email_user_id');
 		}
 		return $schema;
 	}

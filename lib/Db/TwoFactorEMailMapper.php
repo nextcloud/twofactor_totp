@@ -37,7 +37,7 @@ use OCP\IUser;
  */
 class TwoFactorEMailMapper extends QBMapper {
 	public function __construct(IDBConnection $db) {
-		parent::__construct($db, 'twofactor_email_table');
+		parent::__construct($db, 'twofactor_email');
 	}
 
 	/**
