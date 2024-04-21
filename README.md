@@ -16,9 +16,7 @@ Mind that, once you enable 2FA, you can no longer use your passwort in applicati
 
 To build the app, check out the repo and follow these steps:
 
-* `composer update`
-* `composer i`
-* `npm install`
+* `composer i --no-dev`
 * `npm ci`
 * `npm run build` or `npm run dev` [more info](https://docs.nextcloud.com/server/latest/developer_manual/digging_deeper/npm.html)
 
