@@ -50,6 +50,7 @@ jobs:
         uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3
         if: ${{ always() }}
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           file: ./nextcloud/apps/twofactor_totp/tests/clover.xml
           flags: unittests
           fail_ci_if_error: true
