@@ -63,6 +63,9 @@ class Totp implements ITotp {
 	/** @var ISecureRandom */
 	private $random;
 
+	/** @var IConfig */
+	private $config;
+
 	public function __construct(TotpSecretMapper $secretMapper,
 		ICrypto $crypto,
 		IEventDispatcher $eventDispatcher,
