@@ -79,7 +79,7 @@ class Totp implements ITotp {
 	}
 
 	private function getSecretLength(): int {
-		$length = (int)$this->config->getAppValue(Application::APP_ID, 'secret_length', self::DEFAULT_SECRET_LENGTH);
+		$length = (int)$this->config->getAppValue(Application::APP_ID, 'secret_length', (string) self::DEFAULT_SECRET_LENGTH);
 		return ($length >= self::MIN_SECRET_LENGTH && $length <= self::MAX_SECRET_LENGTH) ? $length : self::DEFAULT_SECRET_LENGTH;
 	}
 
@@ -89,7 +89,7 @@ class Totp implements ITotp {
 	}
 
 	private function getTokenLength(): int {
-		$length = (int)$this->config->getAppValue(Application::APP_ID, 'token_length', self::DEFAULT_TOKEN_LENGTH);
+		$length = (int)$this->config->getAppValue(Application::APP_ID, 'token_length', (string) self::DEFAULT_TOKEN_LENGTH);
 		return ($length >= self::MIN_TOKEN_LENGTH && $length <= self::MAX_TOKEN_LENGTH) ? $length : self::DEFAULT_TOKEN_LENGTH;
 	}
 
