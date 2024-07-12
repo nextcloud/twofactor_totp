@@ -36,10 +36,10 @@ use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\EventDispatcher\IEventDispatcher;
+use OCP\IConfig;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
-use OCP\IConfig;
 
 class Totp implements ITotp {
 	private const DEFAULT_SECRET_LENGTH = 32;
@@ -64,10 +64,10 @@ class Totp implements ITotp {
 	private $random;
 
 	public function __construct(TotpSecretMapper $secretMapper,
-			ICrypto $crypto,
-			IEventDispatcher $eventDispatcher,
-			ISecureRandom $random,
-			IConfig $config) {
+		ICrypto $crypto,
+		IEventDispatcher $eventDispatcher,
+		ISecureRandom $random,
+		IConfig $config) {
 		$this->secretMapper = $secretMapper;
 		$this->crypto = $crypto;
 		$this->eventDispatcher = $eventDispatcher;
