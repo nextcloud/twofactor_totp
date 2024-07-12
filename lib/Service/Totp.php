@@ -81,7 +81,7 @@ class Totp implements ITotp {
 	}
 
 	private function getHashAlgorithm(): string {
-		$algorithm = $this->config->getAppValue(Application::APP_ID, 'hash_algorithm', self::DEFAULT_HASH_ALGORITHM);
+		$algorithm = strtolower($this->config->getAppValue(Application::APP_ID, 'hash_algorithm', self::DEFAULT_HASH_ALGORITHM));
 		return in_array($algorithm, [TOTPInterface::HASH_SHA1, TOTPInterface::HASH_SHA256, TOTPInterface::HASH_SHA512], true) ? $algorithm : self::DEFAULT_HASH_ALGORITHM;
 	}
 
