@@ -25,7 +25,6 @@ namespace OCA\TwoFactorTOTP\Unit\Controller;
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
 use OCA\TwoFactorTOTP\Service\ITotp;
-use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
