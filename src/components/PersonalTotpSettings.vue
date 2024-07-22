@@ -1,23 +1,23 @@
 <!--
-  - @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
-  -
-  - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
-  -
-  - @license GNU AGPL version 3 or any later version
-  -
-  - This program is free software: you can redistribute it and/or modify
-  - it under the terms of the GNU Affero General Public License as
-  - published by the Free Software Foundation, either version 3 of the
-  - License, or (at your option) any later version.
-  -
-  - This program is distributed in the hope that it will be useful,
-  - but WITHOUT ANY WARRANTY; without even the implied warranty of
-  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  - GNU Affero General Public License for more details.
-  -
-  - You should have received a copy of the GNU Affero General Public License
-  - along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  -->
+	- @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+	-
+	- @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+	-
+	- @license GNU AGPL version 3 or any later version
+	-
+	- This program is free software: you can redistribute it and/or modify
+	- it under the terms of the GNU Affero General Public License as
+	- published by the Free Software Foundation, either version 3 of the
+	- License, or (at your option) any later version.
+	-
+	- This program is distributed in the hope that it will be useful,
+	- but WITHOUT ANY WARRANTY; without even the implied warranty of
+	- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
+	- GNU Affero General Public License for more details.
+	-
+	- You should have received a copy of the GNU Affero General Public License
+	- along with this program.	If not, see <http://www.gnu.org/licenses/>.
+	-->
 
 <template>
 	<div id="twofactor-totp-settings">
@@ -26,15 +26,52 @@
 			<span> {{ t('twofactor_totp', 'Enable TOTP') }} </span>
 		</template>
 		<div v-else>
-			<input id="totp-enabled"
-				v-model="enabled"
-				type="checkbox"
-				class="checkbox"
-				:disabled="loading"
-				@change="toggleEnabled">
-			<label for="totp-enabled">{{
-				t('twofactor_totp', 'Enable TOTP')
-			}}</label>
+			<!-- Checkbox in its own row -->
+			<div class="row">
+				<input id="totp-enabled"
+					v-model="enabled"
+					type="checkbox"
+					class="checkbox"
+					:disabled="loading"
+					@change="toggleEnabled">
+				<label for="totp-enabled">{{
+					t('twofactor_totp', 'Enable TOTP')
+				}}</label>
+			</div>
+
+			<!-- other elements in second row -->
+			<div class="row">
+				<!-- Token Length Select -->
+				<label for="token-length">{{
+					t('twofactor_totp', 'Token Length')
+				}}</label>
+				<select id="token-length"
+					v-model="tokenLength"
+					:disabled="loading || !enabled"
+					@change="onSettingsChange">
+					<option v-for="length in tokenLengthOptions" :key="length" :value="length">{{ length }}</option>
+				</select>
+
+				<!-- Hash Algorithm Select -->
+				<label for="hash-algorithm">{{
+					t('twofactor_totp', 'Hash Algorithm')
+				}}</label>
+				<select id="hash-algorithm"
+					v-model="hashAlgorithm"
+					:disabled="loading || !enabled"
+					@change="onSettingsChange">
+					<option value="1">SHA1</option>
+					<option value="2">SHA256</option>
+					<option value="3">SHA512</option>
+				</select>
+
+				<!-- Save Button -->
+				<button
+					@click="updateSettings"
+					:disabled="!settingsChanged || loading">
+					{{ t('twofactor_totp', 'Save') }}
+				</button>
+			</div>
 		</div>
 
 		<SetupConfirmation v-if="secret"
@@ -67,6 +104,10 @@ export default {
 			secret: undefined,
 			qrUrl: '',
 			confirmation: '',
+			tokenLength: this.$store.state.tokenLength, // default value from store
+			hashAlgorithm: this.$store.state.hashAlgorithm, // default value from store
+			tokenLengthOptions: [4, 5, 6, 7, 8, 9, 10], // options for token length
+			settingsChanged: false, // track if settings have changed
 		}
 	},
 	computed: {
@@ -100,14 +141,13 @@ export default {
 				.then(({ secret, qrUrl }) => {
 					this.secret = secret
 					this.qrUrl = qrUrl
-					// If the stat could be changed, keep showing the loading
+					// If the state could be changed, keep showing the loading
 					// spinner until the user has finished the registration
-					this.loading
-						= this.$store.state.totpState === state.STATE_CREATED
+					this.loading = this.$store.state.totpState === state.STATE_CREATED
 				})
 				.catch((e) => {
 					OC.Notification.showTemporary(
-						t('twofactor_totp', 'Could not enable TOTP'),
+						this.t('twofactor_totp', 'Could not enable TOTP'),
 					)
 					Logger.error('Could not enable TOTP', e)
 
@@ -115,7 +155,6 @@ export default {
 					this.loading = false
 					this.enabled = false
 				})
-				.catch((e) => Logger.error(e))
 		},
 
 		enableTOTP() {
@@ -136,10 +175,7 @@ export default {
 						this.secret = undefined
 					} else {
 						OC.Notification.showTemporary(
-							t(
-								'twofactor_totp',
-								'Could not verify your key. Please try again',
-							),
+							this.t('twofactor_totp', 'Could not verify your key. Please try again'),
 						)
 					}
 
@@ -161,6 +197,56 @@ export default {
 				.catch(Logger.error.bind(this))
 				.then(() => (this.loading = false))
 		},
+
+		fetchSettings() {
+			this.$store.dispatch('getSettings')
+				.then(() => {
+					this.tokenLength = this.$store.state.tokenLength
+					this.hashAlgorithm = this.$store.state.hashAlgorithm
+				})
+				.catch((e) => {
+					Logger.error('Could not fetch settings', e)
+				})
+		},
+
+		updateSettings() {
+			if (this.enabled) {
+				// Show loading spinner
+				this.loading = true
+
+				Logger.debug('Starting settings update')
+
+				// Confirm password before updating settings
+				return confirmPassword()
+					.then(() => this.$store.dispatch('updateSettings', {
+						tokenLength: this.tokenLength,
+						hashAlgorithm: this.hashAlgorithm,
+					}))
+					.then(() => {
+						this.loading = false
+						this.settingsChanged = false
+						OC.Notification.showTemporary(
+							this.t('twofactor_totp', 'Settings updated successfully'),
+						)
+					})
+					.catch((e) => {
+						OC.Notification.showTemporary(
+							this.t('twofactor_totp', 'Could not update settings'),
+						)
+						Logger.error('Could not update settings', e)
+						this.loading = false
+					})
+			}
+		},
+
+		onSettingsChange() {
+			this.settingsChanged = true
+		},
+
+	},
+
+	created() {
+		this.fetchSettings()
 	},
 }
 </script>

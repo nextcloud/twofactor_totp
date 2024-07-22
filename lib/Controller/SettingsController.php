@@ -26,9 +26,11 @@ namespace OCA\TwoFactorTOTP\Controller;
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http\RedirectResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\Defaults;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\IUserSession;
 use RuntimeException;
 use function is_null;
@@ -44,11 +46,22 @@ class SettingsController extends ALoginSetupController {
 	/** @var Defaults */
 	private $defaults;
 
-	public function __construct(string $appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults) {
+	/** @var IURLGenerator */
+	private $urlGenerator;
+
+	public function __construct(
+		string $appName,
+		IRequest $request,
+		IUserSession $userSession,
+		ITotp $totp,
+		Defaults $defaults,
+		IURLGenerator $urlGenerator
+	) {
 		parent::__construct($appName, $request);
 		$this->userSession = $userSession;
 		$this->totp = $totp;
 		$this->defaults = $defaults;
+		$this->urlGenerator = $urlGenerator;
 	}
 
 	/**
@@ -62,6 +75,8 @@ class SettingsController extends ALoginSetupController {
 		}
 		return new JSONResponse([
 			'state' => $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED,
+			'tokenLength' => $this->totp->getTokenLength($user),
+			'hashAlgorithm' => $this->totp->getHashAlgorithmId($user),
 		]);
 	}
 
@@ -71,8 +86,10 @@ class SettingsController extends ALoginSetupController {
 	 *
 	 * @param int $state
 	 * @param string|null $code for verification
+	 * @param int $tokenLength
+	 * @param int $hashAlgorithm
 	 */
-	public function enable(int $state, string $code = null): JSONResponse {
+	public function enable(int $state, string $code = null, int $tokenLength = 6, int $hashAlgorithm = 1) {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new \Exception('user not available');
@@ -84,7 +101,7 @@ class SettingsController extends ALoginSetupController {
 					'state' => ITotp::STATE_DISABLED,
 				]);
 			case ITotp::STATE_CREATED:
-				$secret = $this->totp->createSecret($user);
+				$secret = $this->totp->createSecret($user, $tokenLength, $hashAlgorithm);
 
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
@@ -99,12 +116,51 @@ class SettingsController extends ALoginSetupController {
 					throw new InvalidArgumentException("code is missing");
 				}
 				$success = $this->totp->enable($user, $code);
-				return new JSONResponse([
-					'state' => $success ? ITotp::STATE_ENABLED : ITotp::STATE_CREATED,
-				]);
+				if ($success) {
+					// Redirect to the 'state' route after successful enabling
+					$url = $this->urlGenerator->linkToRoute('twofactor_totp.settings.state');
+					return new RedirectResponse($url);
+				} else {
+					return new JSONResponse([
+						'state' => ITotp::STATE_CREATED,
+					]);
+				}
 			default:
 				throw new InvalidArgumentException('Invalid TOTP state');
 		}
+	}
+
+	/**
+	 * Update TOTP settings after TOTP has been enabled.
+	 *
+	 * @NoAdminRequired
+	 * @PasswordConfirmationRequired
+	 *
+	 * @param int $tokenLength
+	 * @param int $hashAlgorithm
+	 * @return JSONResponse
+	 */
+	public function updateSettings(int $tokenLength, int $hashAlgorithm): JSONResponse {
+		$user = $this->userSession->getUser();
+		if (is_null($user)) {
+			throw new \Exception('user not available');
+		}
+
+		$this->totp->updateSettings($user, $tokenLength, $hashAlgorithm);
+		return new JSONResponse([
+			'tokenLength' => $tokenLength,
+			'hashAlgorithm' => $hashAlgorithm,
+		]);
+	}
+
+	public function getSettings(): JSONResponse {
+		$user = $this->userSession->getUser();
+		if (is_null($user)) {
+			throw new \Exception('user not available');
+		}
+
+		$settings = $this->totp->getSettings($user);
+		return new JSONResponse($settings);
 	}
 
 	/**

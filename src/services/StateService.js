@@ -22,9 +22,23 @@
 import Axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
 
+// Function to save the TOTP state
 export const saveState = async (data) => {
 	const url = generateUrl('/apps/twofactor_totp/settings/enable')
-
 	const resp = await Axios.post(url, data)
+	return resp.data
+}
+
+// Function to get the TOTP state
+export const getState = async () => {
+	const url = generateUrl('/apps/twofactor_totp/settings/state')
+	const resp = await Axios.get(url)
+	return resp.data
+}
+
+// Function to update TOTP settings
+export const updateSettings = async (settings) => {
+	const url = generateUrl('/apps/twofactor_totp/settings/update')
+	const resp = await Axios.post(url, settings)
 	return resp.data
 }

@@ -26,7 +26,9 @@ namespace OCA\TwoFactorTOTP\Service;
 
 use Base32\Base32;
 use EasyTOTP\Factory;
+use EasyTOTP\TOTPInterface;
 use EasyTOTP\TOTPValidResultInterface;
+use OCA\TwoFactorTOTP\AppInfo\Application;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
 use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
@@ -34,11 +36,19 @@ use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\EventDispatcher\IEventDispatcher;
+use OCP\IConfig;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 
 class Totp implements ITotp {
+	private const DEFAULT_SECRET_LENGTH = 32;
+	private const MIN_SECRET_LENGTH = 26;
+	private const MAX_SECRET_LENGTH = 128;
+
+	private const DEFAULT_TOKEN_LENGTH = 6;
+	private const MIN_TOKEN_LENGTH = 4;
+	private const MAX_TOKEN_LENGTH = 10;
 
 	/** @var TotpSecretMapper */
 	private $secretMapper;
@@ -52,14 +62,67 @@ class Totp implements ITotp {
 	/** @var ISecureRandom */
 	private $random;
 
+	/** @var IConfig */
+	private $config;
+
 	public function __construct(TotpSecretMapper $secretMapper,
 		ICrypto $crypto,
 		IEventDispatcher $eventDispatcher,
-		ISecureRandom $random) {
+		ISecureRandom $random,
+		IConfig $config) {
 		$this->secretMapper = $secretMapper;
 		$this->crypto = $crypto;
 		$this->eventDispatcher = $eventDispatcher;
 		$this->random = $random;
+		$this->config = $config;
+	}
+
+	private function getSecretLength(): int {
+		$length = (int)$this->config->getAppValue(Application::APP_ID, 'secret_length', (string) self::DEFAULT_SECRET_LENGTH);
+		return ($length >= self::MIN_SECRET_LENGTH && $length <= self::MAX_SECRET_LENGTH) ? $length : self::DEFAULT_SECRET_LENGTH;
+	}
+
+	private static function getAlgorithmById(int $id): string {
+		switch ($id) {
+			case self::HASH_SHA1:
+				return \EasyTOTP\TOTPInterface::HASH_SHA1;
+			case self::HASH_SHA256:
+				return \EasyTOTP\TOTPInterface::HASH_SHA256;
+			case self::HASH_SHA512:
+				return \EasyTOTP\TOTPInterface::HASH_SHA512;
+			default:
+				return \EasyTOTP\TOTPInterface::HASH_SHA1; // Default value
+		}
+	}
+
+	public function getTokenLength(IUser $user): int {
+		try {
+			$secret = $this->secretMapper->getSecret($user);
+			$tokenLength = (int)$secret->getTokenLength();
+			return ($tokenLength >= self::MIN_TOKEN_LENGTH && $tokenLength <= self::MAX_TOKEN_LENGTH) ? $tokenLength : self::DEFAULT_TOKEN_LENGTH;
+		} catch (DoesNotExistException $ex) {
+			return self::DEFAULT_TOKEN_LENGTH; // Default value
+		}
+	}
+
+	public function getHashAlgorithmId(IUser $user): int {
+		try {
+			$secret = $this->secretMapper->getSecret($user);
+			return (int)$secret->getHashAlgorithm(); // Returns ID
+		} catch (DoesNotExistException $ex) {
+			return ITotp::HASH_SHA1; // Default value
+		}
+	}
+
+	public function updateSettings(IUser $user, int $tokenLength, int $hashAlgorithm): void {
+		try {
+			$dbSecret = $this->secretMapper->getSecret($user);
+			$dbSecret->setTokenLength($tokenLength);
+			$dbSecret->setHashAlgorithm($hashAlgorithm);
+			$this->secretMapper->update($dbSecret);
+		} catch (DoesNotExistException $ex) {
+			throw new RuntimeException('Secret not found for user.');
+		}
 	}
 
 	public function hasSecret(IUser $user): bool {
@@ -72,7 +135,8 @@ class Totp implements ITotp {
 	}
 
 	private function generateSecret(): string {
-		return $this->random->generate(32, ISecureRandom::CHAR_UPPER.'234567');
+		$secretLength = $this->getSecretLength();
+		return $this->random->generate($secretLength, ISecureRandom::CHAR_UPPER.'234567');
 	}
 
 	/**
@@ -136,7 +200,9 @@ class Totp implements ITotp {
 		}
 
 		$secret = $this->crypto->decrypt($dbSecret->getSecret());
-		$otp = Factory::getTOTP(Base32::decode($secret), 30, 6);
+		$hashAlgorithm = self::getAlgorithmById($this->getHashAlgorithmId($user));
+		$tokenLength = $this->getTokenLength($user);
+		$otp = Factory::getTOTP(Base32::decode($secret), 30, $tokenLength, 0, $hashAlgorithm);
 
 		$counter = null;
 		$lastCounter = $dbSecret->getLastCounter();

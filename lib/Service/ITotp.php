@@ -33,6 +33,10 @@ interface ITotp {
 	public const STATE_CREATED = 1;
 	public const STATE_ENABLED = 2;
 
+	public const HASH_SHA1 = 1;
+	public const HASH_SHA256 = 2;
+	public const HASH_SHA512 = 3;
+
 	public function hasSecret(IUser $user): bool;
 
 	/**
@@ -62,4 +66,10 @@ interface ITotp {
 	public function deleteSecret(IUser $user, bool $byAdmin = false): void;
 
 	public function validateSecret(IUser $user, string $key): bool;
+
+	public function getTokenLength(IUser $user): int;
+
+	public function getHashAlgorithmId(IUser $user): int;
+
+	public function updateSettings(IUser $user, int $tokenLength, int $hashAlgorithm): void;
 }

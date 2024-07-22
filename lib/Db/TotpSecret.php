@@ -32,8 +32,12 @@ use OCP\AppFramework\Db\Entity;
  * @method void setSecret(string $secret)
  * @method int getState()
  * @method void setState(int $state)
- * @method int getLastCounter();
+ * @method int getLastCounter()
  * @method void setLastCounter(int $counter)
+ * @method int getTokenLength()
+ * @method void setTokenLength(int $length)
+ * @method int getHashAlgorithm()
+ * @method void setHashAlgorithm(int $algorithm)
  */
 class TotpSecret extends Entity {
 
@@ -49,10 +53,18 @@ class TotpSecret extends Entity {
 	/** @var int */
 	protected $lastCounter;
 
+	/** @var int */
+	protected $tokenLength;
+
+	/** @var int */
+	protected $hashAlgorithm;
+
 	public function __construct() {
 		$this->addType('userId', 'string');
 		$this->addType('secret', 'string');
 		$this->addType('state', 'int');
 		$this->addType('lastCounter', 'int');
+		$this->addType('tokenLength', 'int');
+		$this->addType('hashAlgorithm', 'int');
 	}
 }

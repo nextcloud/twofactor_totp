@@ -44,7 +44,7 @@
 		<input id="totp-confirmation"
 			v-model="confirmationCode"
 			type="tel"
-			minlength="6"
+			minlength="4"
 			maxlength="10"
 			autocomplete="off"
 			autocapitalize="off"

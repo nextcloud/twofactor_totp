@@ -32,5 +32,10 @@ return [
 			'url' => '/settings/enable',
 			'verb' => 'POST'
 		],
+		[
+			'name' => 'settings#updateSettings',
+			'url' => '/settings/update',
+			'verb' => 'POST'
+		],
 	]
 ];
