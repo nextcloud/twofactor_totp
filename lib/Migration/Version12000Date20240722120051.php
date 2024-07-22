@@ -28,6 +28,7 @@ namespace OCA\TwoFactorTOTP\Migration;
 
 use Closure;
 use OCP\DB\ISchemaWrapper;
+use OCP\DB\Types;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
@@ -49,11 +50,11 @@ class Version12000Date20240722120051 extends SimpleMigrationStep {
 		$table = $schema->getTable('twofactor_totp_secrets');
 
 		// Adding new columns
-		$table->addColumn('token_length', \OCP\DB\Types::INT, [
+		$table->addColumn('token_length', Types::INT, [
 			'notnull' => true,
 			'default' => 6,
 		]);
-		$table->addColumn('hash_algorithm', \OCP\DB\Types::INT, [
+		$table->addColumn('hash_algorithm', Types::INT, [
 			'notnull' => true,
 			'default' => 1,
 		]);
