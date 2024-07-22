@@ -29,6 +29,7 @@ use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\IUserSession;
 use PHPUnit\Framework\TestCase;
@@ -47,9 +48,9 @@ class SettingsControllerTest extends TestCase {
 
 		$this->request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
-		$this->totp = $this->createMock(Totp::class);
-		$this->defaults = $this->createMock(Defaults::class);
-		$this->urlGenerator = $this->createMock(IURLGenerator::class);
+		$this->totp = $this->createMock(ITotp::class);
+		$this->defaults = $this->createMock(Defaults::class); // Optional, falls Defaults nicht mehr direkt gemockt werden muss
+		$this->urlGenerator = $this->createMock(IURLGenerator::class); // Stelle sicher, dass dies vorhanden ist
 
 		$this->controller = new SettingsController(
 			'twofactor_totp',
