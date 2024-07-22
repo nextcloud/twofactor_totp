@@ -101,7 +101,7 @@ class SettingsController extends ALoginSetupController {
 					'state' => ITotp::STATE_DISABLED,
 				]);
 			case ITotp::STATE_CREATED:
-				$secret = $this->totp->createSecret($user, $tokenLength, $hashAlgorithm);
+				$secret = $this->totp->createSecret($user);
 
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
