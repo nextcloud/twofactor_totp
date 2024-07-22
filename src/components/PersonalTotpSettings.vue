@@ -1,23 +1,23 @@
 <!--
-	- @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
-	-
-	- @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
-	-
-	- @license GNU AGPL version 3 or any later version
-	-
-	- This program is free software: you can redistribute it and/or modify
-	- it under the terms of the GNU Affero General Public License as
-	- published by the Free Software Foundation, either version 3 of the
-	- License, or (at your option) any later version.
-	-
-	- This program is distributed in the hope that it will be useful,
-	- but WITHOUT ANY WARRANTY; without even the implied warranty of
-	- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
-	- GNU Affero General Public License for more details.
-	-
-	- You should have received a copy of the GNU Affero General Public License
-	- along with this program.	If not, see <http://www.gnu.org/licenses/>.
-	-->
+  - @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  -
+  - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  -
+  - @license GNU AGPL version 3 or any later version
+  -
+  - This program is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU Affero General Public License as
+  - published by the Free Software Foundation, either version 3 of the
+  - License, or (at your option) any later version.
+  -
+  - This program is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU Affero General Public License for more details.
+  -
+  - You should have received a copy of the GNU Affero General Public License
+  - along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
 
 <template>
 	<div id="twofactor-totp-settings">
@@ -49,7 +49,9 @@
 					v-model="tokenLength"
 					:disabled="loading || !enabled"
 					@change="onSettingsChange">
-					<option v-for="length in tokenLengthOptions" :key="length" :value="length">{{ length }}</option>
+					<option v-for="length in tokenLengthOptions" :key="length" :value="length">
+						{{ length }}
+					</option>
 				</select>
 
 				<!-- Hash Algorithm Select -->
@@ -60,15 +62,20 @@
 					v-model="hashAlgorithm"
 					:disabled="loading || !enabled"
 					@change="onSettingsChange">
-					<option value="1">SHA1</option>
-					<option value="2">SHA256</option>
-					<option value="3">SHA512</option>
+					<option value="1">
+						SHA1
+					</option>
+					<option value="2">
+						SHA256
+					</option>
+					<option value="3">
+						SHA512
+					</option>
 				</select>
 
 				<!-- Save Button -->
-				<button
-					@click="updateSettings"
-					:disabled="!settingsChanged || loading">
+				<button :disabled="!settingsChanged || loading"
+					@click="updateSettings">
 					{{ t('twofactor_totp', 'Save') }}
 				</button>
 			</div>
@@ -114,6 +121,10 @@ export default {
 		state() {
 			return this.$store.state.totpState
 		},
+	},
+
+	created() {
+		this.fetchSettings()
 	},
 	methods: {
 		toggleEnabled() {
@@ -243,10 +254,6 @@ export default {
 			this.settingsChanged = true
 		},
 
-	},
-
-	created() {
-		this.fetchSettings()
 	},
 }
 </script>
