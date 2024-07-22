@@ -125,6 +125,7 @@ class SettingsController extends ALoginSetupController {
 						'state' => ITotp::STATE_CREATED,
 					]);
 				}
+				// no break
 			default:
 				throw new InvalidArgumentException('Invalid TOTP state');
 		}

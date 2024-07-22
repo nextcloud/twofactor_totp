@@ -26,7 +26,6 @@ namespace OCA\TwoFactorTOTP\Service;
 
 use Base32\Base32;
 use EasyTOTP\Factory;
-use EasyTOTP\TOTPInterface;
 use EasyTOTP\TOTPValidResultInterface;
 use OCA\TwoFactorTOTP\AppInfo\Application;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
