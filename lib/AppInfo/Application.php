@@ -26,11 +26,13 @@ namespace OCA\TwoFactorEMail\AppInfo;
 
 use OCA\TwoFactorEMail\Event\DisabledByAdmin;
 use OCA\TwoFactorEMail\Event\StateChanged;
+use OCA\TwoFactorEMail\Listener\EmailDeleted;
 use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorEMail\Listener\UserDeleted;
 use OCA\TwoFactorEMail\Service\IEMailService;
 use OCA\TwoFactorEMail\Service\EMailService;
+use OCP\Accounts\UserUpdatedEvent;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -53,6 +55,7 @@ class Application extends App implements IBootstrap {
 		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
 		$context->registerEventListener(DisabledByAdmin::class, StateChangeActivity::class);
 		$context->registerEventListener(UserDeletedEvent::class, UserDeleted::class);
+		$context->registerEventListener(UserUpdatedEvent::class, EmailDeleted::class);
 	}
 
 	public function boot(IBootContext $context): void {
