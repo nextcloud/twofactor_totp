@@ -39,6 +39,7 @@ use OCP\IConfig;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
+use RuntimeException;
 
 class Totp implements ITotp {
 	private const DEFAULT_SECRET_LENGTH = 32;
