@@ -26,6 +26,7 @@ use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http\RedirectResponse;
 use OCP\Defaults;
 use OCP\IRequest;
 use OCP\IURLGenerator;
@@ -73,6 +74,8 @@ class SettingsControllerTest extends TestCase {
 
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_DISABLED,
+			'tokenLength' => 0,
+			'hashAlgorithm' => 0,
 		]);
 
 		$this->assertEquals($expected, $this->controller->state());
@@ -97,7 +100,7 @@ class SettingsControllerTest extends TestCase {
 			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer",
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(true));
+		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_CREATED));
 	}
 
 	public function testEnableSecret() {
