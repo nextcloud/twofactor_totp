@@ -48,8 +48,8 @@ class SettingsControllerTest extends TestCase {
 		$this->request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->totp = $this->createMock(ITotp::class);
-		$this->defaults = $this->createMock(Defaults::class); // Optional, falls Defaults nicht mehr direkt gemockt werden muss
-		$this->urlGenerator = $this->createMock(IURLGenerator::class); // Stelle sicher, dass dies vorhanden ist
+		$this->defaults = $this->createMock(Defaults::class);
+		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 
 		$this->controller = new SettingsController(
 			'twofactor_totp',
@@ -72,7 +72,7 @@ class SettingsControllerTest extends TestCase {
 			->willReturn(false);
 
 		$expected = new JSONResponse([
-			'state' => false,
+			'state' => ITotp::STATE_DISABLED,
 		]);
 
 		$this->assertEquals($expected, $this->controller->state());
@@ -110,11 +110,15 @@ class SettingsControllerTest extends TestCase {
 			->with($user, '123456')
 			->willReturn(true);
 
-		$expected = new JSONResponse([
-			'state' => ITotp::STATE_ENABLED,
-		]);
+		$expectedUrl = $this->urlGenerator->linkToRoute('twofactor_totp.settings.state');
+		$this->urlGenerator->expects($this->once())
+			->method('linkToRoute')
+			->with('twofactor_totp.settings.state')
+			->willReturn($expectedUrl);
 
-		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_ENABLED, '123456'));
+		$expectedRedirectResponse = new RedirectResponse($expectedUrl);
+
+		$this->assertEquals($expectedRedirectResponse, $this->controller->enable(ITotp::STATE_ENABLED, '123456'));
 	}
 
 	public function testDisableSecret() {
