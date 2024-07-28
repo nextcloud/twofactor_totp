@@ -50,11 +50,11 @@ class Version12000Date20240722120051 extends SimpleMigrationStep {
 		$table = $schema->getTable('twofactor_totp_secrets');
 
 		// Adding new columns
-		$table->addColumn('token_length', Types::INT, [
+		$table->addColumn('token_length', Types::INTEGER, [
 			'notnull' => true,
 			'default' => 6,
 		]);
-		$table->addColumn('hash_algorithm', Types::INT, [
+		$table->addColumn('hash_algorithm', Types::INTEGER, [
 			'notnull' => true,
 			'default' => 1,
 		]);
