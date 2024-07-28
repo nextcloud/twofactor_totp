@@ -72,4 +72,6 @@ interface ITotp {
 	public function getHashAlgorithmId(IUser $user): int;
 
 	public function updateSettings(IUser $user, int $tokenLength, int $hashAlgorithm): void;
+
+	public function getSettings(IUser $user): array;
 }

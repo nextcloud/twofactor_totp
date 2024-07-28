@@ -124,6 +124,13 @@ class Totp implements ITotp {
 		}
 	}
 
+	public function getSettings(IUser $user): array {
+		return [
+			'tokenLength' => $this->getTokenLength($user),
+			'hashAlgorithmId' => $this->getHashAlgorithmId($user),
+		];
+	}
+
 	public function hasSecret(IUser $user): bool {
 		try {
 			$secret = $this->secretMapper->getSecret($user);
