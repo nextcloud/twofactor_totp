@@ -34,12 +34,17 @@ describe('PersonalTotpSettings', () => {
 
 	beforeEach(() => {
 		actions = {
-			enable: () => {},
-			confirm: () => {},
-			disable: () => {},
+			enable: jest.fn(),
+			confirm: jest.fn(),
+			disable: jest.fn(),
+			getSettings: jest.fn().mockResolvedValue({ tokenLength: 6, hashAlgorithm: 1 })
 		}
 		store = new Vuex.Store({
-			state: {},
+			state: {
+				totpState: undefined,
+				tokenLength: 6,
+				hashAlgorithm: 1,
+			},
 			actions,
 		})
 	})
