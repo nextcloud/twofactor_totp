@@ -26,21 +26,34 @@
 			<span> {{ t('twofactor_totp', 'Enable TOTP') }} </span>
 		</template>
 		<div v-else>
-			<!-- Checkbox in its own row -->
+			<!-- Checkbox and Advanced Settings Button in the same row -->
 			<div class="row">
-				<input id="totp-enabled"
-					v-model="enabled"
-					type="checkbox"
-					class="checkbox"
-					:disabled="loading"
-					@change="toggleEnabled">
-				<label for="totp-enabled">{{
-					t('twofactor_totp', 'Enable TOTP')
-				}}</label>
+				<div class="checkbox-container">
+					<input id="totp-enabled"
+						v-model="enabled"
+						type="checkbox"
+						class="checkbox"
+						:disabled="loading"
+						@change="toggleEnabled">
+					<label for="totp-enabled">{{
+						t('twofactor_totp', 'Enable TOTP')
+					}}</label>
+				</div>
+
+				<!-- Advanced Settings Button -->
+				<div v-if="enabled" class="advanced-settings-container">
+					<button @click="toggleAdvancedSettings" class="advanced-settings-btn">
+						{{ showAdvanced ? t('twofactor_totp', 'Hide Advanced Settings') : t('twofactor_totp', 'Advanced Settings') }}
+					</button>
+				</div>
 			</div>
 
-			<!-- other elements in second row -->
-			<div class="row">
+			<!-- Advanced Settings Section -->
+			<div v-if="showAdvanced" class="advanced-settings">
+				<p class="warning-message">
+					{{ t('twofactor_totp', 'Warning: Changing these settings may affect your TOTP setup. Proceed with caution.') }}
+				</p>
+
 				<!-- Token Length Select -->
 				<label for="token-length">{{
 					t('twofactor_totp', 'Token Length')
@@ -115,6 +128,7 @@ export default {
 			hashAlgorithm: this.$store.state.hashAlgorithm, // default value from store
 			tokenLengthOptions: [4, 5, 6, 7, 8, 9, 10], // options for token length
 			settingsChanged: false, // track if settings have changed
+			showAdvanced: false, // whether to show advanced settings
 		}
 	},
 	computed: {
@@ -254,6 +268,9 @@ export default {
 			this.settingsChanged = true
 		},
 
+		toggleAdvancedSettings() {
+			this.showAdvanced = !this.showAdvanced
+		},
 	},
 }
 </script>
@@ -264,5 +281,33 @@ export default {
 	vertical-align: sub;
 	margin-left: -2px;
 	margin-right: 4px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.checkbox-container {
+	display: flex;
+	align-items: center;
+}
+
+.advanced-settings-container {
+	margin-left: 80px;
+}
+
+.advanced-settings-btn {
+	padding: 5px 10px;
+}
+
+.advanced-settings {
+	margin-top: 20px;
+}
+
+.warning-message {
+	color: red;
+	font-weight: bold;
 }
 </style>
