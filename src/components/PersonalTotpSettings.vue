@@ -42,7 +42,7 @@
 
 				<!-- Advanced Settings Button -->
 				<div v-if="enabled" class="advanced-settings-container">
-					<button @click="toggleAdvancedSettings" class="advanced-settings-btn">
+					<button class="advanced-settings-btn" @click="toggleAdvancedSettings">
 						{{ showAdvanced ? t('twofactor_totp', 'Hide Advanced Settings') : t('twofactor_totp', 'Advanced Settings') }}
 					</button>
 				</div>
