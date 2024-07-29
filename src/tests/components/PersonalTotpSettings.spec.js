@@ -37,7 +37,7 @@ describe('PersonalTotpSettings', () => {
 			enable: jest.fn(),
 			confirm: jest.fn(),
 			disable: jest.fn(),
-			getSettings: jest.fn().mockResolvedValue({ tokenLength: 6, hashAlgorithm: 1 })
+			getSettings: jest.fn().mockResolvedValue({ tokenLength: 6, hashAlgorithm: 1 }),
 		}
 		store = new Vuex.Store({
 			state: {
