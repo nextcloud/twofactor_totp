@@ -51,12 +51,15 @@
 			<!-- Advanced Settings Section -->
 			<div v-if="showAdvanced" class="advanced-settings">
 				<p class="warning-message">
-					{{ t('twofactor_totp', 'Warning: Changing these settings may affect your TOTP setup. Proceed with caution.') }}
+					{{ t('twofactor_totp', 'Warning: Changing these settings may break TOTP functionality. Proceed with caution.') }}
+				</p>
+				<p class="instruction-message">
+					{{ t('twofactor_totp', 'Changes made here must be set exactly the same in your TOTP app. Only a few TOTP apps (like Aegis) support these custom settings. If changing one of these values is not possible in your TOTP app, then that value must be left untouched here. Otherwise, TOTP functionality will be broken until you change it back to the default of 6 for "Digits" and SHA1 for "Hash algorithm."') }}
 				</p>
 
 				<!-- Token Length Select -->
 				<label for="token-length">{{
-					t('twofactor_totp', 'Token Length')
+					t('twofactor_totp', 'Digits (OTP token length)')
 				}}</label>
 				<select id="token-length"
 					v-model="tokenLength"
@@ -69,7 +72,7 @@
 
 				<!-- Hash Algorithm Select -->
 				<label for="hash-algorithm">{{
-					t('twofactor_totp', 'Hash Algorithm')
+					t('twofactor_totp', 'Hash algorithm')
 				}}</label>
 				<select id="hash-algorithm"
 					v-model="hashAlgorithm"
@@ -309,5 +312,10 @@ export default {
 .warning-message {
 	color: red;
 	font-weight: bold;
+}
+
+.instruction-message {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 </style>
