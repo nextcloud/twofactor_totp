@@ -201,4 +201,3 @@ class SettingsController extends ALoginSetupController {
 		return $baseUrl . $subPath;
 	}
 }
-
