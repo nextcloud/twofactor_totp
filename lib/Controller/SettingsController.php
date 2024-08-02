@@ -105,7 +105,8 @@ class SettingsController extends ALoginSetupController {
 
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
-				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer";
+				$faviconUrl = $this->getFaviconUrl();
+				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer&image=$faviconUrl";
 				return new JSONResponse([
 					'state' => ITotp::STATE_CREATED,
 					'secret' => $secret,
@@ -188,4 +189,16 @@ class SettingsController extends ALoginSetupController {
 		$productName = $this->defaults->getName();
 		return rawurlencode($productName);
 	}
+
+	/**
+	 * FaviconUrl for FreeOTP
+	 *
+	 * @return string
+	 */
+	private function getFaviconUrl(): string {
+		$baseUrl = $this->urlGenerator->getBaseUrl();
+		$subPath = $this->urlGenerator->linkToRoute('theming.Icon.getFavicon', ['app' => 'core']);
+		return $baseUrl . $subPath;
+	}
 }
+
