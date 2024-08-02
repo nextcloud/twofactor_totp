@@ -97,7 +97,7 @@ class SettingsControllerTest extends TestCase {
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
 			'secret' => 'newsecret',
-			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer",
+			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&image=",
 		]);
 
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_CREATED));
@@ -147,5 +147,24 @@ class SettingsControllerTest extends TestCase {
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->controller->enable(17);
+	}
+
+	public function testGetFaviconUrl() {
+		$baseUrl = 'https://example.com/';
+		$subPath = 'path/to/favicon.ico';
+
+		$this->urlGenerator->expects($this->once())
+			->method('getBaseUrl')
+			->willReturn($baseUrl);
+
+		$this->urlGenerator->expects($this->once())
+			->method('linkToRoute')
+			->with('theming.Icon.getFavicon', ['app' => 'core'])
+			->willReturn($subPath);
+
+		$result = $this->controller->getFaviconUrl();
+
+		$expectedUrl = $baseUrl . $subPath;
+		$this->assertEquals($expectedUrl, $result);
 	}
 }
