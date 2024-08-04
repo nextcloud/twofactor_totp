@@ -51,10 +51,10 @@
 			<!-- Advanced Settings Section -->
 			<div v-if="showAdvanced" class="advanced-settings">
 				<p class="warning-message">
-					{{ t('twofactor_totp', 'Warning: Changing these settings may break TOTP functionality. Proceed with caution.') }}
+					{{ t('twofactor_totp', 'Warning: Changing these settings may break TOTP functionality.') }}
 				</p>
 				<p class="instruction-message">
-					{{ t('twofactor_totp', 'Changes made here must be set exactly the same in your TOTP app. Only a few TOTP apps (like Aegis) support these custom settings. If changing one of these values is not possible in your TOTP app, then that value must be left untouched here. Otherwise, TOTP functionality will be broken until you change it back to the default of 6 for "Digits" and SHA1 for "Hash algorithm."') }}
+					{{ t('twofactor_totp', 'Changes here must match exactly in your TOTP app. Most TOTP apps do not allow editing these settings. If a setting cannot be changed in your TOTP app, leave it unchanged here.') }}
 				</p>
 
 				<!-- Token Length Select -->
