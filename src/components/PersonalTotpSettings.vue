@@ -127,8 +127,8 @@ export default {
 			secret: undefined,
 			qrUrl: '',
 			confirmation: '',
-			tokenLength: this.$store.state.tokenLength, // default value from store
-			hashAlgorithm: this.$store.state.hashAlgorithm, // default value from store
+			tokenLength: null, // initially null to ensure it gets set when advanced settings are loaded
+			hashAlgorithm: null, // initially null to ensure it gets set when advanced settings are loaded
 			tokenLengthOptions: [4, 5, 6, 7, 8, 9, 10], // options for token length
 			settingsChanged: false, // track if settings have changed
 			showAdvanced: false, // whether to show advanced settings
@@ -140,9 +140,6 @@ export default {
 		},
 	},
 
-	created() {
-		this.fetchSettings()
-	},
 	methods: {
 		toggleEnabled() {
 			if (this.loading) {
@@ -273,6 +270,9 @@ export default {
 
 		toggleAdvancedSettings() {
 			this.showAdvanced = !this.showAdvanced
+			if (this.showAdvanced && this.tokenLength === null && this.hashAlgorithm === null) {
+				this.fetchSettings()
+			}
 		},
 	},
 }
