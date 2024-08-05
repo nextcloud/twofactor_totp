@@ -26,7 +26,9 @@ namespace OCA\TwoFactorTOTP\Service;
 
 use Base32\Base32;
 use EasyTOTP\Factory;
+use EasyTOTP\TOTPInterface;
 use EasyTOTP\TOTPValidResultInterface;
+use OCA\TwoFactorTOTP\AppInfo\Application;
 use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Db\TotpSecretMapper;
 use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
@@ -34,11 +36,20 @@ use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\EventDispatcher\IEventDispatcher;
+use OCP\IConfig;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 
 class Totp implements ITotp {
+	private const DEFAULT_SECRET_LENGTH = 32;
+	private const DEFAULT_HASH_ALGORITHM = TOTPInterface::HASH_SHA1;
+	private const DEFAULT_TOKEN_LENGTH = 6;
+
+	private const MIN_SECRET_LENGTH = 26;
+	private const MAX_SECRET_LENGTH = 128;
+	private const MIN_TOKEN_LENGTH = 6;
+	private const MAX_TOKEN_LENGTH = 12;
 
 	/** @var TotpSecretMapper */
 	private $secretMapper;
@@ -52,14 +63,34 @@ class Totp implements ITotp {
 	/** @var ISecureRandom */
 	private $random;
 
+	/** @var IConfig */
+	private $config;
+
 	public function __construct(TotpSecretMapper $secretMapper,
 		ICrypto $crypto,
 		IEventDispatcher $eventDispatcher,
-		ISecureRandom $random) {
+		ISecureRandom $random,
+		IConfig $config) {
 		$this->secretMapper = $secretMapper;
 		$this->crypto = $crypto;
 		$this->eventDispatcher = $eventDispatcher;
 		$this->random = $random;
+		$this->config = $config;
+	}
+
+	private function getSecretLength(): int {
+		$length = (int)$this->config->getAppValue(Application::APP_ID, 'secret_length', (string) self::DEFAULT_SECRET_LENGTH);
+		return ($length >= self::MIN_SECRET_LENGTH && $length <= self::MAX_SECRET_LENGTH) ? $length : self::DEFAULT_SECRET_LENGTH;
+	}
+
+	private function getHashAlgorithm(): string {
+		$algorithm = strtolower($this->config->getAppValue(Application::APP_ID, 'hash_algorithm', self::DEFAULT_HASH_ALGORITHM));
+		return in_array($algorithm, [TOTPInterface::HASH_SHA1, TOTPInterface::HASH_SHA256, TOTPInterface::HASH_SHA512], true) ? $algorithm : self::DEFAULT_HASH_ALGORITHM;
+	}
+
+	private function getTokenLength(): int {
+		$length = (int)$this->config->getAppValue(Application::APP_ID, 'token_length', (string) self::DEFAULT_TOKEN_LENGTH);
+		return ($length >= self::MIN_TOKEN_LENGTH && $length <= self::MAX_TOKEN_LENGTH) ? $length : self::DEFAULT_TOKEN_LENGTH;
 	}
 
 	public function hasSecret(IUser $user): bool {
@@ -72,7 +103,8 @@ class Totp implements ITotp {
 	}
 
 	private function generateSecret(): string {
-		return $this->random->generate(32, ISecureRandom::CHAR_UPPER.'234567');
+		$secretLength = $this->getSecretLength();
+		return $this->random->generate($secretLength, ISecureRandom::CHAR_UPPER.'234567');
 	}
 
 	/**
@@ -136,7 +168,9 @@ class Totp implements ITotp {
 		}
 
 		$secret = $this->crypto->decrypt($dbSecret->getSecret());
-		$otp = Factory::getTOTP(Base32::decode($secret), 30, 6);
+		$hashAlgorithm = $this->getHashAlgorithm();
+		$tokenLength = $this->getTokenLength();
+		$otp = Factory::getTOTP(Base32::decode($secret), 30, $tokenLength, 0, $hashAlgorithm);
 
 		$counter = null;
 		$lastCounter = $dbSecret->getLastCounter();
