@@ -22,7 +22,7 @@ class Version030000Date20190305114917 extends SimpleMigrationStep {
 		$schema = $schemaClosure();
 
 		$table = $schema->getTable('twofactor_totp_secrets');
-		if (!$table->hasColumn('last_counter')){
+		if (!$table->hasColumn('last_counter')) {
 			// TODO: use \OCP\DB\Types::BIGINT
 			$table->addColumn('last_counter', 'bigint', [
 				'notnull' => true,
