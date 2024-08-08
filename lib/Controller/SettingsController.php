@@ -28,7 +28,6 @@ use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\Http\RedirectResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\Defaults;
 use OCP\IRequest;

@@ -44,13 +44,13 @@ use OCP\Security\ISecureRandom;
 use RuntimeException;
 
 class Totp implements ITotp {
-/**
- * R6 - The algorithm MUST use a strong shared secret. The length of
- * the shared secret MUST be at least 128 bits. This document
- * RECOMMENDs a shared secret length of 160 bits.
- * https://datatracker.ietf.org/doc/html/rfc6238#section-4
- + https://datatracker.ietf.org/doc/html/rfc4226#section-4
- */
+	/**
+	 * R6 - The algorithm MUST use a strong shared secret. The length of
+	 * the shared secret MUST be at least 128 bits. This document
+	 * RECOMMENDs a shared secret length of 160 bits.
+	 * https://datatracker.ietf.org/doc/html/rfc6238#section-4
+	 * + https://datatracker.ietf.org/doc/html/rfc4226#section-4
+	 */
 	private const MIN_SECRET_LENGTH = 26; // 130 bit
 	private const DEFAULT_SECRET_LENGTH = 32; // 160 bit
 	private const MAX_SECRET_LENGTH = 128; // 640 bit
