@@ -99,7 +99,7 @@ class SettingsController extends ALoginSetupController {
 	 * @param int $digits
 	 * @param int $period
 	 */
-	public function enable(int $state, string $code = null, string $secret = null, int $algorithm = null, int $digits = null, int $period = null) {
+	public function enable(int $state, string $code = null, string $secret = null, int $algorithm = null, int $digits = null, int $period = ITotp::DEFAULT_PERIOD) {
 		$this->logger->debug('Enable called', [
 			'state' => $state,
 			'code' => $code,
@@ -112,12 +112,10 @@ class SettingsController extends ALoginSetupController {
 		// Use defaults as set by admin if null
 		$algorithm = $algorithm ?? $this->totp->getDefaultAlgorithm();
 		$digits = $digits ?? $this->totp->getDefaultDigits();
-		$period = $period ?? $this->totp->getDefaultPeriod();
 
 		$this->logger->debug('Enable after default values', [
 			'algorithm' => $algorithm,
 			'digits' => $digits,
-			'period' => $period
 		]);
 
 		$user = $this->userSession->getUser();
@@ -191,7 +189,7 @@ class SettingsController extends ALoginSetupController {
 		return new DataResponse([
 			'defaultAlgorithm' => $this->totp->getDefaultAlgorithm(),
 			'defaultDigits' => $this->totp->getDefaultDigits(),
-			'defaultPeriod' => $this->totp->getDefaultPeriod()
+			'defaultPeriod' => ITotp::DEFAULT_PERIOD
 		]);
 	}
 

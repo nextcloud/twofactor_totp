@@ -62,13 +62,6 @@ interface ITotp {
 	public function getDefaultDigits(): int;
 
 	/**
-	 * Get the default period in seconds
-	 *
-	 * @return int the default period
-	 */
-	public function getDefaultPeriod(): int;
-
-	/**
 	 * Create a new secret
 	 *
 	 * Note: the newly generated secret is disabled by default, because

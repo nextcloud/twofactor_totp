@@ -95,19 +95,15 @@ class Totp implements ITotp {
 	}
 
 	public function getDefaultAlgorithm(): int {
-		$algorithm = (int)$this->config->getAppValue(Application::APP_ID, 'hash_algorithm', (string) self::DEFAULT_ALGORITHM);
+		$algorithm = (int)$this->config->getAppValue(Application::APP_ID, 'hash_algorithm', (string) ITotp::DEFAULT_ALGORITHM);
 		$this->logger->debug("Default Hash Algorithm from config: " . $algorithm);
-		return in_array($algorithm, [ITotp::HASH_SHA1, ITotp::HASH_SHA256, ITotp::HASH_SHA512]) ? $algorithm : self::DEFAULT_ALGORITHM;
+		return in_array($algorithm, [ITotp::HASH_SHA1, ITotp::HASH_SHA256, ITotp::HASH_SHA512]) ? $algorithm : ITotp::DEFAULT_ALGORITHM;
 	}
 
 	public function getDefaultDigits(): int {
-		$length = (int)$this->config->getAppValue(Application::APP_ID, 'token_length', (string) self::DEFAULT_DIGITS);
+		$length = (int)$this->config->getAppValue(Application::APP_ID, 'token_length', (string) ITotp::DEFAULT_DIGITS);
 		$this->logger->debug("Default Token Length from config: " . $length);
-		return ($length >= self::DEFAULT_DIGITS && $length <= self::MAX_DIGITS) ? $length : self::DEFAULT_DIGITS;
-	}
-
-	public function getDefaultPeriod(): int {
-		return self::DEFAULT_PERIOD;
+		return ($length >= ITotp::DEFAULT_DIGITS && $length <= self::MAX_DIGITS) ? $length : ITotp::DEFAULT_DIGITS;
 	}
 
 	public static function getAlgorithmById(int $id): string {
@@ -130,8 +126,8 @@ class Totp implements ITotp {
 			$this->logger->debug("Hash Algorithm from secret: " . $algorithm);
 			return $algorithm; // Returns ID
 		} catch (DoesNotExistException $ex) {
-			$this->logger->debug("Hash Algorithm not found, defaulting to " . self::DEFAULT_ALGORITHM);
-			return self::DEFAULT_ALGORITHM; // Default value
+			$this->logger->debug("Hash Algorithm not found, defaulting to " . ITotp::DEFAULT_ALGORITHM);
+			return ITotp::DEFAULT_ALGORITHM; // Default value
 		}
 	}
 
@@ -142,8 +138,8 @@ class Totp implements ITotp {
 			$this->logger->debug("Digits token length from secret: " . $digits);
 			return $digits;
 		} catch (DoesNotExistException $ex) {
-			$this->logger->debug("Digits token length not found, defaulting to " . self::DEFAULT_DIGITS);
-			return self::DEFAULT_DIGITS; // Default value
+			$this->logger->debug("Digits token length not found, defaulting to " . ITotp::DEFAULT_DIGITS);
+			return ITotp::DEFAULT_DIGITS; // Default value
 		}
 	}
 
@@ -154,8 +150,8 @@ class Totp implements ITotp {
 			$this->logger->debug("Period in seconds from secret: " . $digits);
 			return $digits;
 		} catch (DoesNotExistException $ex) {
-			$this->logger->debug("Period in seconds not found, defaulting to " . self::DEFAULT_DIGITS);
-			return self::DEFAULT_PERIOD; // Default value
+			$this->logger->debug("Period in seconds not found, defaulting to " . ITotp::DEFAULT_DIGITS);
+			return ITotp::DEFAULT_PERIOD; // Default value
 		}
 	}
 
@@ -210,7 +206,7 @@ class Totp implements ITotp {
 	 * @param int $period
 	 * @return string the newly created secret
 	 */
-	public function createSecret(IUser $user, string $customSecret = null, int $algorithm = self::DEFAULT_ALGORITHM, int $digits = self::DEFAULT_DIGITS, int $period = self::DEFAULT_PERIOD): string {
+	public function createSecret(IUser $user, string $customSecret = null, int $algorithm = ITotp::DEFAULT_ALGORITHM, int $digits = ITotp::DEFAULT_DIGITS, int $period = ITotp::DEFAULT_PERIOD): string {
 		try {
 			// Delete existing one
 			$oldSecret = $this->secretMapper->getSecret($user);

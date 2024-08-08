@@ -120,9 +120,6 @@ class SettingsControllerTest extends TestCase {
 		$this->totp->expects($this->once())
 			->method('getDefaultDigits')
 			->willReturn(6);
-		$this->totp->expects($this->once())
-			->method('getDefaultPeriod')
-			->willReturn(30);
 
 		$issuer = rawurlencode($this->defaults->getName());
 		$qrUrl = "otpauth://totp/{$issuer}:user%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1&digits=6&period=30&image=";
