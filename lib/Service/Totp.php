@@ -55,12 +55,7 @@ class Totp implements ITotp {
 	private const DEFAULT_SECRET_LENGTH = 32; // 160 bit
 	private const MAX_SECRET_LENGTH = 128; // 640 bit
 
-	private const DEFAULT_ALGORITHM = ITotp::HASH_SHA1;
-
-	private const DEFAULT_DIGITS = 6; // Tokenlength
 	private const MAX_DIGITS = 8;
-
-	private const DEFAULT_PERIOD = 30; // Period in seconds
 
 	/** @var TotpSecretMapper */
 	private $secretMapper;

@@ -38,6 +38,11 @@ interface ITotp {
 	public const HASH_SHA256 = 2;
 	public const HASH_SHA512 = 3;
 
+	public const DEFAULT_ALGORITHM = ITotp::HASH_SHA1;
+	public const DEFAULT_DIGITS = 6; // Tokenlength
+	public const DEFAULT_PERIOD = 30; // Period in seconds
+
+
 	public static function getAlgorithmById(int $id): string;
 
 	public function hasSecret(IUser $user): bool;
