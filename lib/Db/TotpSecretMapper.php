@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
  *
  * Two-factor TOTP
  *
@@ -48,7 +49,7 @@ class TotpSecretMapper extends QBMapper {
 		/* @var $qb IQueryBuilder */
 		$qb = $this->db->getQueryBuilder();
 
-		$qb->select('id', 'user_id', 'secret', 'state', 'last_counter', 'token_length', 'hash_algorithm')
+		$qb->select('id', 'user_id', 'secret', 'state', 'last_counter', 'algorithm', 'digits', 'period')
 			->from($this->getTableName())
 			->from('twofactor_totp_secrets')
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user->getUID())));

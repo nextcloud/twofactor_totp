@@ -2,6 +2,7 @@
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,26 +20,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Axios from '@nextcloud/axios'
+import axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
 
 // Function to save the TOTP state
 export const saveState = async (data) => {
 	const url = generateUrl('/apps/twofactor_totp/settings/enable')
-	const resp = await Axios.post(url, data)
+	const resp = await axios.post(url, data)
 	return resp.data
 }
 
 // Function to get the TOTP state
 export const getState = async () => {
 	const url = generateUrl('/apps/twofactor_totp/settings/state')
-	const resp = await Axios.get(url)
+	const resp = await axios.get(url)
 	return resp.data
 }
 
 // Function to update TOTP settings
 export const updateSettings = async (settings) => {
 	const url = generateUrl('/apps/twofactor_totp/settings/update')
-	const resp = await Axios.post(url, settings)
+	const resp = await axios.post(url, settings)
+	return resp.data
+}
+
+// Function to get the defaults for secret (digits, algorithm and period)
+export const getDefaults = async () => {
+	const url = generateUrl('/apps/twofactor_totp/settings/defaults')
+	const resp = await axios.get(url)
 	return resp.data
 }

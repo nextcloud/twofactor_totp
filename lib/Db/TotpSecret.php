@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
  *
  * Two-factor TOTP
  *
@@ -34,10 +35,12 @@ use OCP\AppFramework\Db\Entity;
  * @method void setState(int $state)
  * @method int getLastCounter()
  * @method void setLastCounter(int $counter)
- * @method int getTokenLength()
- * @method void setTokenLength(int $length)
- * @method int getHashAlgorithm()
- * @method void setHashAlgorithm(int $algorithm)
+ * @method int getAlgorithm()
+ * @method void setAlgorithm(int $algorithm)
+ * @method int getDigits()
+ * @method void setDigits(int $length)
+ * @method int getPeriod()
+ * @method void setPeriod(int $algorithm)
  */
 class TotpSecret extends Entity {
 
@@ -54,17 +57,21 @@ class TotpSecret extends Entity {
 	protected $lastCounter;
 
 	/** @var int */
-	protected $tokenLength;
+	protected $algorithm;
 
 	/** @var int */
-	protected $hashAlgorithm;
+	protected $digits;
+
+	/** @var int */
+	protected $period;
 
 	public function __construct() {
 		$this->addType('userId', 'string');
 		$this->addType('secret', 'string');
 		$this->addType('state', 'int');
 		$this->addType('lastCounter', 'int');
-		$this->addType('tokenLength', 'int');
-		$this->addType('hashAlgorithm', 'int');
+		$this->addType('algorithm', 'int');
+		$this->addType('digits', 'int');
+		$this->addType('period', 'int');
 	}
 }

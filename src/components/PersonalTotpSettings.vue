@@ -2,6 +2,7 @@
   - @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -49,7 +50,7 @@
 			</div>
 
 			<!-- Advanced Settings Section -->
-			<div v-if="showAdvanced" class="advanced-settings">
+			<div v-if="showAdvanced && enabled" class="advanced-settings">
 				<p class="warning-message">
 					{{ t('twofactor_totp', 'Warning: Changing these settings may break TOTP functionality.') }}
 				</p>
@@ -57,35 +58,42 @@
 					{{ t('twofactor_totp', 'Changes here must match exactly in your TOTP app. Most TOTP apps do not allow editing these settings. If a setting cannot be changed in your TOTP app, leave it unchanged here.') }}
 				</p>
 
-				<!-- Token Length Select -->
-				<label for="token-length">{{
-					t('twofactor_totp', 'Digits (OTP token length)')
+				<!-- Algorithm Select -->
+				<label for="algorithm">{{
+					t('twofactor_totp', 'Algorithm')
 				}}</label>
-				<select id="token-length"
-					v-model="tokenLength"
+				<select id="algorithm"
+					v-model.number="algorithm"
 					:disabled="loading || !enabled"
 					@change="onSettingsChange">
-					<option v-for="length in tokenLengthOptions" :key="length" :value="length">
+					<option :value="1">SHA1</option>
+					<option :value="2">SHA256</option>
+					<option :value="3">SHA512</option>
+				</select>
+
+				<!-- Digits Select -->
+				<label for="digits">{{
+					t('twofactor_totp', 'Digits (OTP token length)')
+				}}</label>
+				<select id="digits"
+					v-model.number="digits"
+					:disabled="loading || !enabled"
+					@change="onSettingsChange">
+					<option v-for="length in digitsOptions" :key="length" :value="length">
 						{{ length }}
 					</option>
 				</select>
 
-				<!-- Hash Algorithm Select -->
-				<label for="hash-algorithm">{{
-					t('twofactor_totp', 'Hash algorithm')
+				<!-- Period Select -->
+				<label for="period">{{
+					t('twofactor_totp', 'Period (OTP validity in seconds)')
 				}}</label>
-				<select id="hash-algorithm"
-					v-model="hashAlgorithm"
+				<select id="period"
+					v-model.number="period"
 					:disabled="loading || !enabled"
 					@change="onSettingsChange">
-					<option value="1">
-						SHA1
-					</option>
-					<option value="2">
-						SHA256
-					</option>
-					<option value="3">
-						SHA512
+					<option v-for="seconds in periodOptions" :key="seconds" :value="seconds">
+						{{ seconds }}
 					</option>
 				</select>
 
@@ -102,7 +110,8 @@
 			:qr-url="qrUrl"
 			:loading="loadingConfirmation"
 			:confirmation.sync="confirmation"
-			@confirm="enableTOTP" />
+			@confirm="enableTOTP"
+			@updateQR="updateQR"/>
 	</div>
 </template>
 
@@ -112,7 +121,7 @@ import '@nextcloud/password-confirmation/dist/style.css'
 
 import Logger from '../logger.js'
 import SetupConfirmation from './SetupConfirmation.vue'
-import state from '../state.js'
+import STATE from '../state.js'
 
 export default {
 	name: 'PersonalTotpSettings',
@@ -123,21 +132,43 @@ export default {
 		return {
 			loading: false,
 			loadingConfirmation: false,
-			enabled: this.$store.state.totpState === state.STATE_ENABLED,
+			enabled: this.$store.state.totpState === STATE.STATE_ENABLED,
 			secret: undefined,
 			qrUrl: '',
 			confirmation: '',
-			tokenLength: null, // initially null to ensure it gets set when advanced settings are loaded
-			hashAlgorithm: null, // initially null to ensure it gets set when advanced settings are loaded
-			tokenLengthOptions: [4, 5, 6, 7, 8, 9, 10], // options for token length
+			algorithm: null, // initially null to ensure it gets set when advanced settings are loaded
+			digits: null, // initially null to ensure it gets set when advanced settings are loaded
+			period: null, // initially null to ensure it gets set when advanced settings are loaded
+			digitsOptions: [4, 5, 6, 7, 8, 9, 10], // options for digits
+			periodOptions: [15, 20, 25, 30, 35, 40, 45, 50, 55, 60], // options for period
 			settingsChanged: false, // track if settings have changed
 			showAdvanced: false, // whether to show advanced settings
+			initialSettings: {}
 		}
 	},
 	computed: {
 		state() {
 			return this.$store.state.totpState
 		},
+	},
+	watch: {
+		algorithm() {
+			this.checkIfSettingsChanged()
+		},
+		digits() {
+			this.checkIfSettingsChanged()
+		},
+		period() {
+			this.checkIfSettingsChanged()
+		},
+		enabled(newValue) {
+			if (!newValue) {
+				this.hideAdvancedSettings()
+			}
+		}
+	},
+	mounted() {
+		this.storeInitialSettings()
 	},
 
 	methods: {
@@ -149,9 +180,9 @@ export default {
 			}
 
 			if (this.enabled) {
-				return this.createTOTP()
+				this.createTOTP()
 			} else {
-				return this.disableTOTP()
+				this.disableTOTP()
 			}
 		},
 
@@ -168,7 +199,7 @@ export default {
 					this.qrUrl = qrUrl
 					// If the state could be changed, keep showing the loading
 					// spinner until the user has finished the registration
-					this.loading = this.$store.state.totpState === state.STATE_CREATED
+					this.loading = this.$store.state.totpState === STATE.STATE_CREATED
 				})
 				.catch((e) => {
 					OC.Notification.showTemporary(
@@ -192,7 +223,7 @@ export default {
 			return confirmPassword()
 				.then(() => this.$store.dispatch('confirm', this.confirmation))
 				.then(() => {
-					if (this.$store.state.totpState === state.STATE_ENABLED) {
+					if (this.$store.state.totpState === STATE.STATE_ENABLED) {
 						// Success
 						this.loading = false
 						this.enabled = true
@@ -218,7 +249,10 @@ export default {
 
 			return confirmPassword()
 				.then(() => this.$store.dispatch('disable'))
-				.then(() => (this.enabled = false))
+				.then(() => {
+					this.enabled = false
+					this.hideAdvancedSettings()
+				})
 				.catch(Logger.error.bind(this))
 				.then(() => (this.loading = false))
 		},
@@ -226,8 +260,10 @@ export default {
 		fetchSettings() {
 			this.$store.dispatch('getSettings')
 				.then(() => {
-					this.tokenLength = this.$store.state.tokenLength
-					this.hashAlgorithm = this.$store.state.hashAlgorithm
+					this.algorithm = this.$store.state.algorithm
+					this.digits = this.$store.state.digits
+					this.period = this.$store.state.period
+					this.storeInitialSettings()
 				})
 				.catch((e) => {
 					Logger.error('Could not fetch settings', e)
@@ -244,8 +280,9 @@ export default {
 				// Confirm password before updating settings
 				return confirmPassword()
 					.then(() => this.$store.dispatch('updateSettings', {
-						tokenLength: this.tokenLength,
-						hashAlgorithm: this.hashAlgorithm,
+						algorithm: this.algorithm,
+						digits: this.digits,
+						period: this.period,
 					}))
 					.then(() => {
 						this.loading = false
@@ -266,15 +303,40 @@ export default {
 
 		onSettingsChange() {
 			this.settingsChanged = true
+			event.target.blur()
+		},
+
+		checkIfSettingsChanged() {
+			this.settingsChanged =
+				this.algorithm !== this.initialSettings.algorithm ||
+				this.digits !== this.initialSettings.digits ||
+				this.period !== this.initialSettings.period
 		},
 
 		toggleAdvancedSettings() {
 			this.showAdvanced = !this.showAdvanced
-			if (this.showAdvanced && this.tokenLength === null && this.hashAlgorithm === null) {
+			if (this.showAdvanced && !this.initialSettings.algorithm) {
 				this.fetchSettings()
 			}
 		},
-	},
+
+		hideAdvancedSettings() {
+			this.showAdvanced = false
+		},
+
+		storeInitialSettings() {
+			this.initialSettings = {
+				algorithm: this.algorithm,
+				digits: this.digits,
+				period: this.period
+			}
+		},
+
+		updateQR({ secret, qrUrl }) {
+			this.secret = secret
+			this.qrUrl = qrUrl
+		}
+	}
 }
 </script>
 
