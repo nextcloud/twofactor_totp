@@ -129,7 +129,7 @@ class SettingsControllerTest extends TestCase {
 			->willReturn('SHA1');
 
 		$issuer = rawurlencode($this->defaults->getName());
-		$qrUrl = "otpauth://totp/{$issuer}:user%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1&digits=6&period=30&image=";
+		$qrUrl = "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1&digits=6&period=30&image=";
 
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
