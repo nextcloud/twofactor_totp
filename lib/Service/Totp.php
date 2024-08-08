@@ -106,7 +106,7 @@ class Totp implements ITotp {
 		return ($length >= ITotp::DEFAULT_DIGITS && $length <= self::MAX_DIGITS) ? $length : ITotp::DEFAULT_DIGITS;
 	}
 
-	public static function getAlgorithmById(int $id): string {
+	public function getAlgorithmById(int $id): string {
 		switch ($id) {
 			case ITotp::HASH_SHA1:
 				return \EasyTOTP\TOTPInterface::HASH_SHA1;
@@ -275,7 +275,7 @@ class Totp implements ITotp {
 		}
 
 		$secret = $this->crypto->decrypt($dbSecret->getSecret());
-		$algorithm = self::getAlgorithmById($this->getAlgorithmId($user));
+		$algorithm = $this->getAlgorithmById($this->getAlgorithmId($user));
 		$digits = $this->getDigits($user);
 		$period = $this->getPeriod($user);
 		$otp = Factory::getTOTP(Base32::decode($secret), $period, $digits, 0, $algorithm);

@@ -43,7 +43,7 @@ interface ITotp {
 	public const DEFAULT_PERIOD = 30; // Period in seconds
 
 
-	public static function getAlgorithmById(int $id): string;
+	public function getAlgorithmById(int $id): string;
 
 	public function hasSecret(IUser $user): bool;
 

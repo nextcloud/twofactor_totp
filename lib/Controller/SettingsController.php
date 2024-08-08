@@ -133,7 +133,7 @@ class SettingsController extends ALoginSetupController {
 				$secret = $secret ?? $this->totp->createSecret($user, null, $algorithm, $digits, $period);
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
-				$algorithmName = strtoupper($this->totp::getAlgorithmById($algorithm));
+				$algorithmName = strtoupper($this->totp->getAlgorithmById($algorithm));
 				$faviconUrl = $this->getFaviconUrl();
 				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer&algorithm=$algorithmName&digits=$digits&period=$period&image=$faviconUrl";
 				return new JSONResponse([

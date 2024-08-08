@@ -122,6 +122,12 @@ class SettingsControllerTest extends TestCase {
 			->method('getDefaultDigits')
 			->willReturn(6);
 
+		// Mock the getAlgorithmById method
+		$this->totp->expects($this->once())
+			->method('getAlgorithmById')
+			->with(1)  // Example value for algorithm
+			->willReturn('SHA1');
+
 		$issuer = rawurlencode($this->defaults->getName());
 		$qrUrl = "otpauth://totp/{$issuer}:user%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1&digits=6&period=30&image=";
 
