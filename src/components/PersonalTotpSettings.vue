@@ -66,9 +66,15 @@
 					v-model.number="algorithm"
 					:disabled="loading || !enabled"
 					@change="onSettingsChange">
-					<option :value="1">SHA1</option>
-					<option :value="2">SHA256</option>
-					<option :value="3">SHA512</option>
+					<option :value="1">
+						SHA1
+					</option>
+					<option :value="2">
+						SHA256
+					</option>
+					<option :value="3">
+						SHA512
+					</option>
 				</select>
 
 				<!-- Digits Select -->
@@ -111,7 +117,7 @@
 			:loading="loadingConfirmation"
 			:confirmation.sync="confirmation"
 			@confirm="enableTOTP"
-			@updateQR="updateQR"/>
+			@updateQR="updateQR" />
 	</div>
 </template>
 
@@ -143,7 +149,7 @@ export default {
 			periodOptions: [15, 20, 25, 30, 35, 40, 45, 50, 55, 60], // options for period
 			settingsChanged: false, // track if settings have changed
 			showAdvanced: false, // whether to show advanced settings
-			initialSettings: {}
+			initialSettings: {},
 		}
 	},
 	computed: {
@@ -165,7 +171,7 @@ export default {
 			if (!newValue) {
 				this.hideAdvancedSettings()
 			}
-		}
+		},
 	},
 	mounted() {
 		this.storeInitialSettings()
@@ -307,10 +313,10 @@ export default {
 		},
 
 		checkIfSettingsChanged() {
-			this.settingsChanged =
-				this.algorithm !== this.initialSettings.algorithm ||
-				this.digits !== this.initialSettings.digits ||
-				this.period !== this.initialSettings.period
+			this.settingsChanged
+				= this.algorithm !== this.initialSettings.algorithm
+				|| this.digits !== this.initialSettings.digits
+				|| this.period !== this.initialSettings.period
 		},
 
 		toggleAdvancedSettings() {
@@ -328,15 +334,15 @@ export default {
 			this.initialSettings = {
 				algorithm: this.algorithm,
 				digits: this.digits,
-				period: this.period
+				period: this.period,
 			}
 		},
 
 		updateQR({ secret, qrUrl }) {
 			this.secret = secret
 			this.qrUrl = qrUrl
-		}
-	}
+		},
+	},
 }
 </script>
 

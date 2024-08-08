@@ -42,33 +42,59 @@
 			<!-- Custom Secret Input -->
 			<div class="form-group">
 				<label for="custom-secret">{{ t('twofactor_totp', 'Custom Secret') }}</label>
-				<input id="custom-secret" v-model="customSecret" type="text" :disabled="loading" @input="validateCustomSecret" class="custom-secret-input">
+				<input id="custom-secret"
+					v-model="customSecret"
+					type="text"
+					:disabled="loading"
+					class="custom-secret-input"
+					@input="validateCustomSecret">
 			</div>
-			<p v-if="customSecretWarning" class="warning-message">{{ t('twofactor_totp', 'Invalid characters detected. Only A-Z and 2-7 are allowed.') }}</p>
+			<p v-if="customSecretWarning" class="warning-message">
+				{{ t('twofactor_totp', 'Invalid characters detected. Only A-Z and 2-7 are allowed.') }}
+			</p>
 
 			<!-- Algorithm Select -->
 			<div class="form-group">
 				<label for="algorithm">{{ t('twofactor_totp', 'Algorithm') }}</label>
-				<select id="algorithm" v-model.number="algorithm" :disabled="loading" @change="onSettingsChange">
-					<option :value="1">SHA1</option>
-					<option :value="2">SHA256</option>
-					<option :value="3">SHA512</option>
+				<select id="algorithm"
+					v-model.number="algorithm"
+					:disabled="loading"
+					@change="onSettingsChange">
+					<option :value="1">
+						SHA1
+					</option>
+					<option :value="2">
+						SHA256
+					</option>
+					<option :value="3">
+						SHA512
+					</option>
 				</select>
 			</div>
 
 			<!-- Digits Select -->
 			<div class="form-group">
 				<label for="digits">{{ t('twofactor_totp', 'Digits (OTP token length)') }}</label>
-				<select id="digits" v-model.number="digits" :disabled="loading" @change="onSettingsChange">
-					<option v-for="length in digitsOptions" :key="length" :value="length">{{ length }}</option>
+				<select id="digits"
+					v-model.number="digits"
+					:disabled="loading"
+					@change="onSettingsChange">
+					<option v-for="length in digitsOptions" :key="length" :value="length">
+						{{ length }}
+					</option>
 				</select>
 			</div>
 
 			<!-- Period Select -->
 			<div class="form-group">
 				<label for="period">{{ t('twofactor_totp', 'Period (OTP validity in seconds)') }}</label>
-				<select id="period" v-model.number="period" :disabled="loading" @change="onSettingsChange">
-					<option v-for="seconds in periodOptions" :key="seconds" :value="seconds">{{ seconds }}</option>
+				<select id="period"
+					v-model.number="period"
+					:disabled="loading"
+					@change="onSettingsChange">
+					<option v-for="seconds in periodOptions" :key="seconds" :value="seconds">
+						{{ seconds }}
+					</option>
 				</select>
 			</div>
 
@@ -81,8 +107,8 @@
 		<p>{{ t('twofactor_totp', 'For quick setup, scan this QR code with your TOTP app:') }}</p>
 		<QR :value="qrUrl" :options="{ width: 150 }" />
 		<p>{{ t('twofactor_totp', 'After you configured your app, enter a test code below to ensure everything works correctly:') }}</p>
-		<input
-			id="totp-confirmation"
+		<input id="totp-confirmation"
+			ref="confirmationInput"
 			v-model="confirmationCode"
 			type="tel"
 			minlength="4"
@@ -91,16 +117,12 @@
 			autocapitalize="off"
 			:disabled="loading"
 			:placeholder="t('twofactor_totp', 'Authentication code')"
-			@keydown="onConfirmKeyDown"
-			ref="confirmationInput"
-		/>
-		<input
-			id="totp-confirmation-submit"
+			@keydown="onConfirmKeyDown">
+		<input id="totp-confirmation-submit"
 			type="button"
 			:disabled="loading"
 			:value="t('twofactor_totp', 'Verify')"
-			@click="confirm"
-		/>
+			@click="confirm">
 	</div>
 </template>
 
@@ -143,7 +165,7 @@ export default {
 			settingsChanged: false,
 			showAdvanced: false,
 			customSecretWarning: false,
-			initialSettings: {}
+			initialSettings: {},
 		}
 	},
 	watch: {
@@ -165,7 +187,7 @@ export default {
 		},
 		period() {
 			this.checkIfSettingsChanged()
-		}
+		},
 	},
 	mounted() {
 		// Set focus to the confirmation input field when the component is mounted
@@ -182,7 +204,7 @@ export default {
 			this.$emit('confirm', {
 				algorithm: this.algorithm,
 				digits: this.digits,
-				period: this.period
+				period: this.period,
 			})
 		},
 		onConfirmKeyDown(e) {
@@ -257,21 +279,21 @@ export default {
 			this.checkIfSettingsChanged()
 		},
 		checkIfSettingsChanged() {
-			this.settingsChanged =
-				this.customSecret !== this.initialSettings.customSecret ||
-				this.algorithm !== this.initialSettings.algorithm ||
-				this.digits !== this.initialSettings.digits ||
-				this.period !== this.initialSettings.period
+			this.settingsChanged
+				= this.customSecret !== this.initialSettings.customSecret
+				|| this.algorithm !== this.initialSettings.algorithm
+				|| this.digits !== this.initialSettings.digits
+				|| this.period !== this.initialSettings.period
 		},
 		storeInitialSettings() {
 			this.initialSettings = {
 				customSecret: this.customSecret,
 				algorithm: this.algorithm,
 				digits: this.digits,
-				period: this.period
+				period: this.period,
 			}
-		}
-	}
+		},
+	},
 }
 </script>
 

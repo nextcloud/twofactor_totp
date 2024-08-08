@@ -46,7 +46,7 @@ describe('PersonalTotpSettings', () => {
 			confirm: jest.fn(),
 			disable: jest.fn(),
 			getSettings: jest.fn().mockResolvedValue({ algorithm: 1, digits: 6, period: 30 }),
-			updateSettings: jest.fn().mockResolvedValue()
+			updateSettings: jest.fn().mockResolvedValue(),
 		}
 		store = new Vuex.Store({
 			state: {

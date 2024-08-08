@@ -48,7 +48,7 @@ export const actions = {
 				({ state, secret, qrUrl }) => {
 					commit('setState', state)
 					return { qrUrl, secret }
-				}
+				},
 			)
 		})
 	},
@@ -60,9 +60,9 @@ export const actions = {
 		return saveState({ state: STATE.STATE_CREATED, secret, algorithm, digits, period }).then(
 			({ state, secret, qrUrl }) => {
 				commit('setState', state)
-				commit('setSettings', { secret: secret, algorithm, digits, period })
-				return { qrUrl, secret: secret }
-			}
+				commit('setSettings', { secret, algorithm, digits, period })
+				return { qrUrl, secret }
+			},
 		)
 	},
 
