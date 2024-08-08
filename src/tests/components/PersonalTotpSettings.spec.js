@@ -29,6 +29,13 @@ const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
+// Mock OC.Notification
+global.OC = {
+	Notification: {
+		showTemporary: jest.fn(),
+	},
+}
+
 describe('PersonalTotpSettings', () => {
 	let actions
 	let store
