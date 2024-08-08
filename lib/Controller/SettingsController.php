@@ -103,7 +103,9 @@ class SettingsController extends ALoginSetupController {
 		$this->logger->debug('Enable called', [
 			'state' => $state,
 			'code' => $code,
+			/* sensitive parameter
 			'secret' => $secret,
+			*/
 			'algorithm' => $algorithm,
 			'digits' => $digits,
 			'period' => $period
