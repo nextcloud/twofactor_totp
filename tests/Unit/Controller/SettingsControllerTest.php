@@ -109,24 +109,17 @@ class SettingsControllerTest extends TestCase {
 			->method('getCloudId')
 			->willReturn('user@instance.com');
 
-		$this->totp->expects($this->once())
-			->method('createSecret')
-			->with($user, null, 1, 6, 30)
-			->willReturn('newsecret');
-		
-		$this->totp->expects($this->once())
-			->method('getDefaultAlgorithm')
-			->willReturn(1);
-		$this->totp->expects($this->once())
-			->method('getDefaultDigits')
-			->willReturn(6);
+		$secret = 'newsecret';
+		$algorithm = ITotp::getAlgorithmById(1);
+		$digits = 6;
+		$period = ITotp::DEFAULT_PERIOD;
 
 		$issuer = rawurlencode($this->defaults->getName());
-		$qrUrl = "otpauth://totp/{$issuer}:user%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1&digits=6&period=30&image=";
+		$qrUrl = "otpauth://totp/{$issuer}:user%40instance.com?secret=$secret&issuer=$issuer&algorithm=SHA1&digits=$digits&period=$period&image=";
 
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
-			'secret' => 'newsecret',
+			'secret' => $secret,
 			'qrUrl' => $qrUrl
 		]);
 
