@@ -250,15 +250,19 @@ export default {
 			this.customSecret = this.initialSettings.customSecret
 			this.settingsChanged = false
 		},
+
 		recreateQRCode() {
+			// console.log('recreateQRCode called')
 			this.$store.dispatch('updateSettings', {
 				secret: this.customSecret,
 				algorithm: this.algorithm,
 				digits: this.digits,
 				period: this.period,
 			}).then(() => {
+				// console.log('updateSettings completed')
 				return this.$store.dispatch('recreateQrCode', { secret: this.customSecret })
 			}).then(({ secret, qrUrl }) => {
+				// console.log('recreateQrCode completed', { secret, qrUrl })
 				this.localSecret = secret
 				this.localQrUrl = qrUrl
 				this.settingsChanged = false
@@ -271,6 +275,7 @@ export default {
 				Logger.error('Could not recreate QR code', e)
 			})
 		},
+
 		validateCustomSecret() {
 			const base32Regex = /^[A-Z2-7]*$/
 			if (!base32Regex.test(this.customSecret)) {
