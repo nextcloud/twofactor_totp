@@ -52,61 +52,67 @@
 			<!-- Advanced Settings Section -->
 			<div v-if="showAdvanced && enabled" class="advanced-settings">
 				<p class="warning-message">
-					{{ t('twofactor_totp', 'Warning: Changing these settings may break TOTP functionality.') }}
+					{{ t('twofactor_totp', 'Warning: Not all TOTP apps support changing these settings or may not support their full range.') }}
 				</p>
 				<p class="instruction-message">
-					{{ t('twofactor_totp', 'Changes here must match exactly in your TOTP app. Most TOTP apps do not allow editing these settings. If a setting cannot be changed in your TOTP app, leave it unchanged here.') }}
+					{{ t('twofactor_totp', 'Changes made here must be reflected exactly in your TOTP app. Ensure that both settings match. Keep any setting in this form that cannot be edited or updated in your TOTP app unchanged here.') }}
 				</p>
 
 				<!-- Algorithm Select -->
-				<label for="algorithm">{{
-					t('twofactor_totp', 'Algorithm')
-				}}</label>
-				<select id="algorithm"
-					v-model.number="algorithm"
-					:disabled="loading || !enabled"
-					@change="onSettingsChange">
-					<option :value="1">
-						SHA1
-					</option>
-					<option :value="2">
-						SHA256
-					</option>
-					<option :value="3">
-						SHA512
-					</option>
-				</select>
+				<div class="form-group">
+					<label for="algorithm">{{
+						t('twofactor_totp', 'Algorithm')
+					}}</label>
+					<select id="algorithm"
+						v-model.number="algorithm"
+						:disabled="loading || !enabled"
+						@mouseleave="onMouseLeave">
+						<option :value="1">
+							SHA1
+						</option>
+						<option :value="2">
+							SHA256
+						</option>
+						<option :value="3">
+							SHA512
+						</option>
+					</select>
+				</div>
 
 				<!-- Digits Select -->
-				<label for="digits">{{
-					t('twofactor_totp', 'Digits (OTP token length)')
-				}}</label>
-				<select id="digits"
-					v-model.number="digits"
-					:disabled="loading || !enabled"
-					@change="onSettingsChange">
-					<option v-for="length in digitsOptions" :key="length" :value="length">
-						{{ length }}
-					</option>
-				</select>
+				<div class="form-group">
+					<label for="digits">{{
+						t('twofactor_totp', 'Digits (OTP token length)')
+					}}</label>
+					<select id="digits"
+						v-model.number="digits"
+						:disabled="loading || !enabled"
+						@mouseleave="onMouseLeave">
+						<option v-for="length in digitsOptions" :key="length" :value="length">
+							{{ length }}
+						</option>
+					</select>
+				</div>
 
 				<!-- Period Select -->
-				<label for="period">{{
-					t('twofactor_totp', 'Period (OTP validity in seconds)')
-				}}</label>
-				<select id="period"
-					v-model.number="period"
-					:disabled="loading || !enabled"
-					@change="onSettingsChange">
-					<option v-for="seconds in periodOptions" :key="seconds" :value="seconds">
-						{{ seconds }}
-					</option>
-				</select>
+				<div class="form-group">
+					<label for="period">{{
+						t('twofactor_totp', 'Period (OTP validity in seconds)')
+					}}</label>
+					<select id="period"
+						v-model.number="period"
+						:disabled="loading || !enabled"
+						@mouseleave="onMouseLeave">
+						<option v-for="seconds in periodOptions" :key="seconds" :value="seconds">
+							{{ seconds }}
+						</option>
+					</select>
+				</div>
 
 				<!-- Save Button -->
 				<button :disabled="!settingsChanged || loading"
 					@click="updateSettings">
-					{{ t('twofactor_totp', 'Save') }}
+					{{ t('twofactor_totp', 'Save changes') }}
 				</button>
 			</div>
 		</div>
@@ -307,8 +313,8 @@ export default {
 			}
 		},
 
-		onSettingsChange() {
-			this.settingsChanged = true
+		onMouseLeave() {
+			this.checkIfSettingsChanged()
 			event.target.blur()
 		},
 
@@ -378,12 +384,31 @@ export default {
 }
 
 .warning-message {
-	color: red;
+	color: var(--color-warning);
 	font-weight: bold;
 }
 
 .instruction-message {
-	margin-top: 10px;
+	color: var(--color-info);
 	margin-bottom: 10px;
+}
+
+.form-group {
+	display: flex;
+	align-items: center;
+	margin: 5px 0;
+
+	label {
+		margin-right: 10px;
+		white-space: nowrap;
+	}
+
+	input, select {
+		width: auto;
+	}
+
+	.custom-secret-input {
+		width: 100%;
+	}
 }
 </style>

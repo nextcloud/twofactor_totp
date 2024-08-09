@@ -23,7 +23,7 @@
 <template>
 	<div class="setup-confirmation">
 		<p class="setup-confirmation__secret">
-			{{ t('twofactor_totp', 'Your new TOTP secret is:') }} {{ secret }}
+			{{ t('twofactor_totp', 'Your new TOTP secret is:') }} {{ localSecret }}
 		</p>
 
 		<!-- Advanced Settings Button -->
@@ -36,12 +36,15 @@
 		<!-- Advanced Settings Section -->
 		<div v-if="showAdvanced" class="advanced-settings">
 			<p class="warning-message">
-				{{ t('twofactor_totp', 'Warning: Changing these settings may break TOTP functionality in some TOTP Apps.') }}
+				{{ t('twofactor_totp', 'Warning: Not all TOTP apps support changing these settings or may not support their full range.') }}
+			</p>
+			<p class="instruction-message">
+				{{ t('twofactor_totp', 'If your app does not support a setting, the QR code might not be accepted, a warning message may be displayed, or the OTP will be incorrect, preventing activation. Adjust settings until your TOTP app supports the configuration, or simply scan the pre-generated QR code with the default settings.') }}
 			</p>
 
 			<!-- Custom Secret Input -->
 			<div class="form-group">
-				<label for="custom-secret">{{ t('twofactor_totp', 'Custom Secret') }}</label>
+				<label for="custom-secret">{{ t('twofactor_totp', 'Secret') }}</label>
 				<input id="custom-secret"
 					v-model="customSecret"
 					type="text"
@@ -49,7 +52,7 @@
 					class="custom-secret-input"
 					@input="validateCustomSecret">
 			</div>
-			<p v-if="customSecretWarning" class="warning-message">
+			<p v-if="customSecretWarning" class="error-message">
 				{{ t('twofactor_totp', 'Invalid characters detected. Only A-Z and 2-7 are allowed.') }}
 			</p>
 
@@ -59,7 +62,7 @@
 				<select id="algorithm"
 					v-model.number="algorithm"
 					:disabled="loading"
-					@change="onSettingsChange">
+					@mouseleave="onMouseLeave">
 					<option :value="1">
 						SHA1
 					</option>
@@ -78,7 +81,7 @@
 				<select id="digits"
 					v-model.number="digits"
 					:disabled="loading"
-					@change="onSettingsChange">
+					@mouseleave="onMouseLeave">
 					<option v-for="length in digitsOptions" :key="length" :value="length">
 						{{ length }}
 					</option>
@@ -91,7 +94,7 @@
 				<select id="period"
 					v-model.number="period"
 					:disabled="loading"
-					@change="onSettingsChange">
+					@mouseleave="onMouseLeave">
 					<option v-for="seconds in periodOptions" :key="seconds" :value="seconds">
 						{{ seconds }}
 					</option>
@@ -155,11 +158,13 @@ export default {
 	},
 	data() {
 		return {
+			localQrUrl: this.qrUrl,
 			confirmationCode: this.confirmation,
+			localSecret: this.secret,
+			customSecret: this.secret,
 			algorithm: null,
 			digits: null,
 			period: null,
-			customSecret: this.secret,
 			digitsOptions: [4, 5, 6, 7, 8, 9, 10],
 			periodOptions: [15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
 			settingsChanged: false,
@@ -171,10 +176,6 @@ export default {
 	watch: {
 		confirmation(newVal) {
 			this.confirmationCode = newVal
-		},
-		qrUrl(newVal) {
-			// Monitor the qrUrl for changes and updates of the QR code
-			this.updateQRCode(newVal)
 		},
 		customSecret() {
 			this.checkIfSettingsChanged()
@@ -225,7 +226,7 @@ export default {
 					Logger.error('Could not fetch settings', e)
 				})
 		},
-		onSettingsChange() {
+		onMouseLeave() {
 			this.checkIfSettingsChanged()
 			event.target.blur()
 		},
@@ -237,6 +238,10 @@ export default {
 				this.showAdvanced = true
 				this.fetchSettings()
 			}
+			// Set focus to the confirmation input field when QRCode is recreated
+			this.$nextTick(() => {
+				this.$refs.confirmationInput.focus()
+			})
 		},
 		resetSettings() {
 			this.algorithm = this.initialSettings.algorithm
@@ -247,16 +252,15 @@ export default {
 		},
 		recreateQRCode() {
 			this.$store.dispatch('updateSettings', {
-				customSecret: this.customSecret,
+				secret: this.customSecret,
 				algorithm: this.algorithm,
 				digits: this.digits,
 				period: this.period,
 			}).then(() => {
-				// After updating the settings, call the action recreateQrCode
-				return this.$store.dispatch('recreateQrCode', { customSecret: this.customSecret })
+				return this.$store.dispatch('recreateQrCode', { secret: this.customSecret })
 			}).then(({ secret, qrUrl }) => {
-				this.secret = secret
-				this.qrUrl = qrUrl
+				this.localSecret = secret
+				this.localQrUrl = qrUrl
 				this.settingsChanged = false
 				this.$emit('updateQR', { secret, qrUrl })
 				// Set focus to the confirmation input field when QRCode is recreated
@@ -265,8 +269,6 @@ export default {
 				})
 			}).catch((e) => {
 				Logger.error('Could not recreate QR code', e)
-			}).catch((e) => {
-				Logger.error('Could not update settings', e)
 			})
 		},
 		validateCustomSecret() {
@@ -312,9 +314,18 @@ export default {
 	}
 
 	.warning-message {
-		margin-bottom: 10px;
-		color: red;
+		color: var(--color-warning);
 		font-weight: bold;
+	}
+
+	.instruction-message {
+		color: var(--color-info);
+		margin-bottom: 10px;
+	}
+
+	.error-message {
+		margin-bottom: 10px;
+		color: var(--color-error);
 	}
 
 	.form-group {
