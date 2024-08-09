@@ -22,7 +22,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import SetupConfirmation from '../../components/SetupConfirmation.vue'
-import QR from '@chenfengyuan/vue-qrcode'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
