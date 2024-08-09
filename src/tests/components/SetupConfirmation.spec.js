@@ -160,7 +160,7 @@ describe('SetupConfirmation', () => {
 		await wrapper.vm.recreateQRCode()
 
 		// Check if updateSettings was called
-		console.log('updateSettings calls:', actions.updateSettings.mock.calls)
+		// console.log('updateSettings calls:', actions.updateSettings.mock.calls)
 		if (actions.updateSettings.mock.calls.length !== 1) {
 			throw new Error('updateSettings should have been called once')
 		}
