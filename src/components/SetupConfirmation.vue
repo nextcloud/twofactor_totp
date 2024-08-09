@@ -262,7 +262,7 @@ export default {
 				this.localSecret = secret
 				this.localQrUrl = qrUrl
 				this.settingsChanged = false
-				this.$emit('updateQr', { secret, qrUrl })
+				this.$emit('update-qr', { secret, qrUrl })
 				// Set focus to the confirmation input field when QRCode is recreated
 				this.$nextTick(() => {
 					this.$refs.confirmationInput.focus()

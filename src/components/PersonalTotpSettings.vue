@@ -44,7 +44,7 @@
 			:loading="loadingConfirmation"
 			:confirmation.sync="confirmation"
 			@confirm="enableTOTP"
-			@updateQr="updateQr" />
+			@update-qr="updateQr" />
 	</div>
 </template>
 
