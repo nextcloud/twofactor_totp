@@ -131,9 +131,9 @@ describe('SetupConfirmation', () => {
 		}
 		const emittedEvent = wrapper.emitted().confirm[0]
 		if (
-			emittedEvent[0].algorithm !== wrapper.vm.algorithm ||
-			emittedEvent[0].digits !== wrapper.vm.digits ||
-			emittedEvent[0].period !== wrapper.vm.period
+			emittedEvent[0].algorithm !== wrapper.vm.algorithm
+			|| emittedEvent[0].digits !== wrapper.vm.digits
+			|| emittedEvent[0].period !== wrapper.vm.period
 		) {
 			throw new Error('Values in confirm event are incorrect')
 		}
@@ -148,23 +148,23 @@ describe('SetupConfirmation', () => {
 				qrUrl: 'testQrUrl',
 				loading: false,
 			},
-		});
+		})
 
 		wrapper.setData({
 			customSecret: 'customSecret',
 			algorithm: 2,
 			digits: 8,
 			period: 45,
-		});
+		})
 
-		await wrapper.vm.recreateQRCode();
+		await wrapper.vm.recreateQRCode()
 
 		// Check if updateSettings was called
-		console.log('updateSettings calls:', actions.updateSettings.mock.calls);
+		console.log('updateSettings calls:', actions.updateSettings.mock.calls)
 		if (actions.updateSettings.mock.calls.length !== 1) {
-			throw new Error('updateSettings should have been called once');
+			throw new Error('updateSettings should have been called once')
 		}
-/* TODO
+		/* TODO
 		// Check if recreateQrCode was called
 		console.log('recreateQrCode calls:', actions.recreateQrCode.mock.calls);
 		if (actions.recreateQrCode.mock.calls.length !== 1) {
