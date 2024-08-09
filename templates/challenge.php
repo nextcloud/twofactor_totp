@@ -7,7 +7,7 @@ style('twofactor_totp', 'style');
 <p><?php p($l->t('Get the authentication code from the two-factor authentication app on your device.')) ?></p>
 
 <form method="POST" class="totp-form">
-	<input type="tel" minlength="6" maxlength="10" name="challenge" required="required" autofocus autocomplete="off" autocapitalize="off" placeholder="<?php p($l->t('Authentication code')) ?>">
+	<input type="tel" minlength="4" maxlength="10" name="challenge" required="required" autofocus autocomplete="off" autocapitalize="off" placeholder="<?php p($l->t('Authentication code')) ?>">
 	<button class="primary two-factor-submit" type="submit">
 		<?php p($l->t('Submit')); ?>
 	</button>

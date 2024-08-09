@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
  *
  * Two-factor TOTP
  *
@@ -25,11 +26,14 @@ namespace OCA\TwoFactorTOTP\Controller;
 
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Service\ITotp;
+use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\Defaults;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\IUserSession;
+use Psr\Log\LoggerInterface;
 use RuntimeException;
 use function is_null;
 
@@ -44,11 +48,27 @@ class SettingsController extends ALoginSetupController {
 	/** @var Defaults */
 	private $defaults;
 
-	public function __construct(string $appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults) {
+	/** @var IURLGenerator */
+	private $urlGenerator;
+
+	/** @var LoggerInterface */
+	private $logger;
+
+	public function __construct(
+		string $appName,
+		IRequest $request,
+		IUserSession $userSession,
+		ITotp $totp,
+		Defaults $defaults,
+		IURLGenerator $urlGenerator,
+		LoggerInterface $logger
+	) {
 		parent::__construct($appName, $request);
 		$this->userSession = $userSession;
 		$this->totp = $totp;
 		$this->defaults = $defaults;
+		$this->urlGenerator = $urlGenerator;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -62,6 +82,9 @@ class SettingsController extends ALoginSetupController {
 		}
 		return new JSONResponse([
 			'state' => $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED,
+			'algorithm' => $this->totp->getAlgorithmId($user),
+			'digits' => $this->totp->getDigits($user),
+			'period' => $this->totp->getPeriod($user)
 		]);
 	}
 
@@ -71,12 +94,37 @@ class SettingsController extends ALoginSetupController {
 	 *
 	 * @param int $state
 	 * @param string|null $code for verification
+	 * @param string|null $secret
+	 * @param int $algorithm
+	 * @param int $digits
+	 * @param int $period
 	 */
-	public function enable(int $state, string $code = null): JSONResponse {
+	public function enable(int $state, string $code = null, string $secret = null, int $algorithm = null, int $digits = null, int $period = ITotp::DEFAULT_PERIOD) {
+		$this->logger->debug('Enable called', [
+			'state' => $state,
+			'code' => $code,
+			/* sensitive parameter
+			'secret' => $secret,
+			*/
+			'algorithm' => $algorithm,
+			'digits' => $digits,
+			'period' => $period
+		]);
+
+		// Use defaults as set by admin if null
+		$algorithm = $algorithm ?? $this->totp->getDefaultAlgorithm();
+		$digits = $digits ?? $this->totp->getDefaultDigits();
+
+		$this->logger->debug('Enable after default values', [
+			'algorithm' => $algorithm,
+			'digits' => $digits,
+		]);
+
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new \Exception('user not available');
 		}
+
 		switch ($state) {
 			case ITotp::STATE_DISABLED:
 				$this->totp->deleteSecret($user);
@@ -84,15 +132,16 @@ class SettingsController extends ALoginSetupController {
 					'state' => ITotp::STATE_DISABLED,
 				]);
 			case ITotp::STATE_CREATED:
-				$secret = $this->totp->createSecret($user);
-
+				$secret = $secret ?? $this->totp->createSecret($user, null, $algorithm, $digits, $period);
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
-				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer";
+				$algorithmName = strtoupper($this->totp->getAlgorithmById($algorithm));
+				$faviconUrl = $this->getFaviconUrl();
+				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer&algorithm=$algorithmName&digits=$digits&period=$period&image=$faviconUrl";
 				return new JSONResponse([
 					'state' => ITotp::STATE_CREATED,
 					'secret' => $secret,
-					'qrUrl' => $qrUrl,
+					'qrUrl' => $qrUrl
 				]);
 			case ITotp::STATE_ENABLED:
 				if ($code === null) {
@@ -105,6 +154,55 @@ class SettingsController extends ALoginSetupController {
 			default:
 				throw new InvalidArgumentException('Invalid TOTP state');
 		}
+	}
+
+	/**
+	 * Update TOTP settings after TOTP has been enabled.
+	 *
+	 * @NoAdminRequired
+	 * @PasswordConfirmationRequired
+	 *
+	 * @param string|null $secret
+	 * @param int $algorithm
+	 * @param int $digits
+	 * @param int $period
+	 * @return JSONResponse
+	 */
+	public function updateSettings(string $secret = null, int $algorithm, int $digits, int $period): JSONResponse {
+		$user = $this->userSession->getUser();
+		if (is_null($user)) {
+			throw new \Exception('user not available');
+		}
+
+		$this->totp->updateSettings($user, $secret, $algorithm, $digits, $period);
+		return new JSONResponse([
+			'secret' => $secret,
+			'algorithm' => $algorithm,
+			'digits' => $digits,
+			'period' => $period
+		]);
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function getDefaults(): DataResponse {
+		return new DataResponse([
+			'defaultAlgorithm' => $this->totp->getDefaultAlgorithm(),
+			'defaultDigits' => $this->totp->getDefaultDigits(),
+			'defaultPeriod' => ITotp::DEFAULT_PERIOD
+		]);
+	}
+
+	public function getSettings(): JSONResponse {
+		$user = $this->userSession->getUser();
+		if (is_null($user)) {
+			throw new \Exception('user not available');
+		}
+
+		$settings = $this->totp->getSettings($user);
+		return new JSONResponse($settings);
 	}
 
 	/**
@@ -130,5 +228,16 @@ class SettingsController extends ALoginSetupController {
 	private function getSecretIssuer(): string {
 		$productName = $this->defaults->getName();
 		return rawurlencode($productName);
+	}
+
+	/**
+	 * FaviconUrl for FreeOTP
+	 *
+	 * @return string
+	 */
+	private function getFaviconUrl(): string {
+		$baseUrl = $this->urlGenerator->getBaseUrl();
+		$subPath = $this->urlGenerator->linkToRoute('theming.Icon.getFavicon', ['app' => 'core']);
+		return $baseUrl . $subPath;
 	}
 }
