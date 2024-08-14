@@ -146,11 +146,11 @@ class Totp implements ITotp {
 	public function getPeriod(IUser $user): int {
 		try {
 			$secret = $this->secretMapper->getSecret($user);
-			$digits = (int)$secret->getPeriod();
-			$this->logger->debug("Period in seconds from secret: " . $digits);
-			return $digits;
+			$period = (int)$secret->getSeconds();
+			$this->logger->debug("Period in seconds from secret: " . $period);
+			return $period;
 		} catch (DoesNotExistException $ex) {
-			$this->logger->debug("Period in seconds not found, defaulting to " . ITotp::DEFAULT_DIGITS);
+			$this->logger->debug("Period in seconds not found, defaulting to " . ITotp::DEFAULT_PERIOD);
 			return ITotp::DEFAULT_PERIOD; // Default value
 		}
 	}
@@ -170,7 +170,7 @@ class Totp implements ITotp {
 			$dbSecret = $this->secretMapper->getSecret($user);
 			$dbSecret->setAlgorithm($algorithm);
 			$dbSecret->setDigits($digits);
-			$dbSecret->setPeriod($period);
+			$dbSecret->setSeconds($period);
 			if ($customSecret !== null) {
 				$dbSecret->setSecret($this->crypto->encrypt($customSecret));
 			}
@@ -224,10 +224,10 @@ class Totp implements ITotp {
 		$dbSecret->setState(ITotp::STATE_CREATED);
 		$dbSecret->setAlgorithm($algorithm);
 		$dbSecret->setDigits($digits);
-		$dbSecret->setPeriod($period);
+		$dbSecret->setSeconds($period);
 
 		$this->secretMapper->insert($dbSecret);
-		$this->logger->debug("Created new secret for user {$user->getUID()} with Token Length: $digits and Hash Algorithm: $algorithm");
+		$this->logger->debug("Created new secret for user {$user->getUID()} with Hash Algorithm: $algorithm Token Length: $digits and Period: $period");
 		return $secret;
 	}
 

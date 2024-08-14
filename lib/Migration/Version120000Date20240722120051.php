@@ -32,7 +32,7 @@ use OCP\DB\Types;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
-class Version12000Date20240722120051 extends SimpleMigrationStep {
+class Version120000Date20240722120051 extends SimpleMigrationStep {
 
 	/**
 	 * @param IOutput $output
@@ -58,7 +58,7 @@ class Version12000Date20240722120051 extends SimpleMigrationStep {
 			'notnull' => true,
 			'default' => 6,
 		]);
-		$table->addColumn('period', Types::INTEGER, [
+		$table->addColumn('seconds', Types::INTEGER, [
 			'notnull' => true,
 			'default' => 30,
 		]);

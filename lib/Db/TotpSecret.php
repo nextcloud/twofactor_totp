@@ -39,8 +39,8 @@ use OCP\AppFramework\Db\Entity;
  * @method void setAlgorithm(int $algorithm)
  * @method int getDigits()
  * @method void setDigits(int $length)
- * @method int getPeriod()
- * @method void setPeriod(int $algorithm)
+ * @method int getSeconds()
+ * @method void setSeconds(int $seconds)
  */
 class TotpSecret extends Entity {
 
@@ -63,7 +63,7 @@ class TotpSecret extends Entity {
 	protected $digits;
 
 	/** @var int */
-	protected $period;
+	protected $seconds;
 
 	public function __construct() {
 		$this->addType('userId', 'string');
@@ -72,6 +72,6 @@ class TotpSecret extends Entity {
 		$this->addType('lastCounter', 'int');
 		$this->addType('algorithm', 'int');
 		$this->addType('digits', 'int');
-		$this->addType('period', 'int');
+		$this->addType('seconds', 'int');
 	}
 }
