@@ -44,8 +44,7 @@
 
 			<!-- Custom Secret Input -->
 			<div :class="['form-group', { centered: isCentered }]">
-				<label
-					:class="{ centered: isCentered }"
+				<label :class="{ centered: isCentered }"
 					for="custom-secret"
 					@mouseleave="onMouseLeave">
 					{{ t('twofactor_totp', 'Secret') }}
@@ -65,8 +64,7 @@
 			<div class="form-row">
 				<!-- Algorithm Select -->
 				<div :class="['form-group', { centered: isCentered }]">
-					<label
-						:class="{ centered: isCentered }"
+					<label :class="{ centered: isCentered }"
 						for="algorithm"
 						@mouseleave="onMouseLeave">
 						{{ t('twofactor_totp', 'Algorithm') }}
@@ -89,8 +87,7 @@
 
 				<!-- Digits Select -->
 				<div :class="['form-group', { centered: isCentered }]">
-					<label
-						:class="{ centered: isCentered }"
+					<label :class="{ centered: isCentered }"
 						for="digits"
 						:title="t('twofactor_totp', 'OTP token length')"
 						@mouseleave="onMouseLeave">
@@ -109,8 +106,7 @@
 
 				<!-- Period Select -->
 				<div :class="['form-group', { centered: isCentered }]">
-					<label
-						:class="{ centered: isCentered }"
+					<label :class="{ centered: isCentered }"
 						for="period"
 						:title="t('twofactor_totp', 'OTP validity in seconds')"
 						@mouseleave="onMouseLeave">
@@ -149,8 +145,7 @@
 				:disabled="loading"
 				:placeholder="t('twofactor_totp', 'Code')"
 				@keydown="onConfirmKeyDown">
-			<button
-				id="totp-confirmation-submit"
+			<button id="totp-confirmation-submit"
 				:disabled="isSubmitDisabled"
 				@click="confirm">
 				{{ t('twofactor_totp', 'Verify') }}
@@ -207,6 +202,13 @@ export default {
 			initialSettings: {},
 		}
 	},
+	computed: {
+		isSubmitDisabled() {
+			const code = this.confirmationCode
+			const requiredLength = this.digits
+			return !code || code.length !== requiredLength || /\D/.test(code) || this.loading
+		},
+	},
 	watch: {
 		confirmation(newVal) {
 			this.confirmationCode = newVal
@@ -235,13 +237,6 @@ export default {
 
 		// Fetch settings when component is mounted
 		this.fetchSettings()
-	},
-	computed: {
-		isSubmitDisabled() {
-			const code = this.confirmationCode;
-			const requiredLength = this.digits;
-			return !code || code.length !== requiredLength || /\D/.test(code) || this.loading;
-		}
 	},
 	methods: {
 		confirm() {
