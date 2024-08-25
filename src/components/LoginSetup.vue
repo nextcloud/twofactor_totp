@@ -2,6 +2,7 @@
   - @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -20,75 +21,109 @@
   -->
 
 <template>
-	<div>
+	<div id="twofactor-totp-login-setup">
 		<div v-if="loading" class="loading" />
-		<SetupConfirmation v-else
-			:loading="confirmationLoading"
+		<SetupConfirmation v-if="secret"
+			:isCentered="true"
+			:loading="loadingConfirmation"
 			:secret="secret"
 			:qr-url="qrUrl"
 			:confirmation.sync="confirmation"
-			@confirm="confirm" />
+			@confirm="enableTOTP"
+			@update-qr="updateQr" />
 		<form ref="confirmForm" method="POST" />
 	</div>
 </template>
 
 <script>
+import Vue from 'vue'
+import Vuex from 'vuex'
+import store from '../store.js' // Store importieren
+
 import Logger from '../logger.js'
-import { saveState } from '../services/StateService.js'
 import SetupConfirmation from './SetupConfirmation.vue'
 import STATE from '../state.js'
+
+Vue.use(Vuex)
 
 export default {
 	name: 'LoginSetup',
 	components: {
 		SetupConfirmation,
 	},
+	store,
 	data() {
 		return {
-			loading: true,
-			confirmationLoading: false,
-			secret: '',
+			loading: false,
+			loadingConfirmation: false,
+			secret: undefined,
 			qrUrl: '',
 			confirmation: '',
 		}
 	},
 	mounted() {
-		this.load()
+		this.createTOTP()
 	},
 	methods: {
-		load() {
+
+		createTOTP() {
+			// Show loading spinner
 			this.loading = true
-			Logger.info('starting TOTP setup')
 
-			saveState({ state: STATE.STATE_CREATED }).then(
-				({ secret, qrUrl }) => {
-					Logger.info('TOTP secret received')
+			Logger.debug('starting TOTP setup')
 
+			return this.$store.dispatch('enable')
+				.then(({ secret, qrUrl }) => {
 					this.secret = secret
 					this.qrUrl = qrUrl
+					// If the state could be changed, keep showing the loading
+					// spinner until the user has finished the registration
+					this.loading
+						= this.$store.state.totpState === STATE.STATE_CREATED
+				})
+				.catch((e) => {
+					OC.Notification.showTemporary(
+						t('twofactor_totp', 'Could not enable TOTP'),
+					)
+					Logger.error('Could not enable TOTP', e)
 
+					// Restore on error
 					this.loading = false
-				},
-			)
+					this.enabled = false
+				})
+				.catch((e) => Logger.error(e))
 		},
-		confirm() {
+
+		enableTOTP() {
+			// Show loading spinner and disable input elements
 			this.loading = true
+			this.loadingConfirmation = true
 
-			saveState({
-				state: STATE.STATE_ENABLED,
-				code: this.confirmation,
-			}).then(({ state }) => {
-				if (state === STATE.STATE_ENABLED) {
-					Logger.info('TOTP secret confirmed')
+			Logger.debug('starting enable TOTP')
 
-					Logger.info('todo: submit')
-					this.$refs.confirmForm.submit()
-				} else {
-					Logger.warn('TOTP confirmation failed')
+			return this.$store.dispatch('confirm', this.confirmation)
+				.then(() => {
+					if (this.$store.state.totpState === STATE.STATE_ENABLED) {
+						// Success
+						this.loading = false
+						this.enabled = true
+						this.qrUrl = ''
+						this.secret = undefined
+						Logger.info('TOTP secret confirmed')
+						this.$refs.confirmForm.submit()
+					} else {
+						Logger.warn('TOTP confirmation failed')
+						this.loading = false
+					}
+					this.confirmation = ''
+					this.loadingConfirmation = false
+				})
+				.catch(Logger.error)
+		},
 
-					this.loading = false
-				}
-			})
+		updateQr({ secret, qrUrl }) {
+			this.secret = secret
+			this.qrUrl = qrUrl
 		},
 	},
 }

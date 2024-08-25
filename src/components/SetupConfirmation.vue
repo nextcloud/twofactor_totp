@@ -21,30 +21,35 @@
   -->
 
 <template>
-	<div class="setup-confirmation">
+	<div :class="['setup-confirmation', { centered: isCentered }]">
 		<p class="setup-confirmation__secret">
 			{{ t('twofactor_totp', 'Your new TOTP secret is:') }} {{ localSecret }}
 		</p>
 
 		<!-- Advanced Settings Button -->
-		<div class="advanced-settings-container">
+		<div :class="['advanced-settings-container', { centered: isCentered }]">
 			<button class="advanced-settings-btn" @click="toggleAdvancedSettings">
-				{{ showAdvanced ? t('twofactor_totp', 'Hide Advanced Settings') : t('twofactor_totp', 'Advanced Settings') }}
+				{{ showAdvanced ? t('twofactor_totp', 'Hide advanced settings') : t('twofactor_totp', 'Advanced settings') }}
 			</button>
 		</div>
 
 		<!-- Advanced Settings Section -->
-		<div v-if="showAdvanced" class="advanced-settings">
+		<div v-if="showAdvanced" :class="['advanced-settings', { centered: isCentered }]">
 			<p class="warning-message">
-				{{ t('twofactor_totp', 'Warning: Not all TOTP apps support changing these settings or may not support their full range.') }}
+				{{ t('twofactor_totp', 'Warning: Not all TOTP devices or smartphone apps support the full range of these advanced settings.') }}
 			</p>
 			<p class="instruction-message">
-				{{ t('twofactor_totp', 'If your app does not support a setting, the QR code might not be accepted, a warning message may be displayed, or the OTP will be incorrect, preventing activation. Adjust settings until your TOTP app supports the configuration, or simply scan the pre-generated QR code with the default settings.') }}
+				{{ t('twofactor_totp', 'If your app does not support a setting, the QR code might not be accepted, a warning message may be displayed, or the OTP will be incorrect, preventing activation. Adjust settings until your device/app supports the configuration, or simply scan the pre-generated QR code created with the default settings.') }}
 			</p>
 
 			<!-- Custom Secret Input -->
-			<div class="form-group">
-				<label for="custom-secret">{{ t('twofactor_totp', 'Secret') }}</label>
+			<div :class="['form-group', { centered: isCentered }]">
+				<label
+					:class="{ centered: isCentered }"
+					for="custom-secret"
+					@mouseleave="onMouseLeave">
+					{{ t('twofactor_totp', 'Secret') }}
+				</label>
 				<input id="custom-secret"
 					v-model="customSecret"
 					type="text"
@@ -56,76 +61,101 @@
 				{{ t('twofactor_totp', 'Invalid characters detected. Only A-Z and 2-7 are allowed.') }}
 			</p>
 
-			<!-- Algorithm Select -->
-			<div class="form-group">
-				<label for="algorithm">{{ t('twofactor_totp', 'Algorithm') }}</label>
-				<select id="algorithm"
-					v-model.number="algorithm"
-					:disabled="loading"
-					@mouseleave="onMouseLeave">
-					<option :value="1">
-						SHA1
-					</option>
-					<option :value="2">
-						SHA256
-					</option>
-					<option :value="3">
-						SHA512
-					</option>
-				</select>
-			</div>
+			<!-- Settings Row (Algorithm, Digits, Period) -->
+			<div class="form-row">
+				<!-- Algorithm Select -->
+				<div :class="['form-group', { centered: isCentered }]">
+					<label
+						:class="{ centered: isCentered }"
+						for="algorithm"
+						@mouseleave="onMouseLeave">
+						{{ t('twofactor_totp', 'Algorithm') }}
+					</label>
+					<select id="algorithm"
+						v-model.number="algorithm"
+						:disabled="loading"
+						@mouseleave="onMouseLeave">
+						<option :value="1">
+							SHA1
+						</option>
+						<option :value="2">
+							SHA256
+						</option>
+						<option :value="3">
+							SHA512
+						</option>
+					</select>
+				</div>
 
-			<!-- Digits Select -->
-			<div class="form-group">
-				<label for="digits">{{ t('twofactor_totp', 'Digits (OTP token length)') }}</label>
-				<select id="digits"
-					v-model.number="digits"
-					:disabled="loading"
-					@mouseleave="onMouseLeave">
-					<option v-for="length in digitsOptions" :key="length" :value="length">
-						{{ length }}
-					</option>
-				</select>
-			</div>
+				<!-- Digits Select -->
+				<div :class="['form-group', { centered: isCentered }]">
+					<label
+						:class="{ centered: isCentered }"
+						for="digits"
+						:title="t('twofactor_totp', 'OTP token length')"
+						@mouseleave="onMouseLeave">
+						{{ t('twofactor_totp', 'Digits') }}
+					</label>
+					<select id="digits"
+						v-model.number="digits"
+						:disabled="loading"
+						:title="t('twofactor_totp', 'OTP token length')"
+						@mouseleave="onMouseLeave">
+						<option v-for="length in digitsOptions" :key="length" :value="length">
+							{{ length }}
+						</option>
+					</select>
+				</div>
 
-			<!-- Period Select -->
-			<div class="form-group">
-				<label for="period">{{ t('twofactor_totp', 'Period (OTP validity in seconds)') }}</label>
-				<select id="period"
-					v-model.number="period"
-					:disabled="loading"
-					@mouseleave="onMouseLeave">
-					<option v-for="seconds in periodOptions" :key="seconds" :value="seconds">
-						{{ seconds }}
-					</option>
-				</select>
+				<!-- Period Select -->
+				<div :class="['form-group', { centered: isCentered }]">
+					<label
+						:class="{ centered: isCentered }"
+						for="period"
+						:title="t('twofactor_totp', 'OTP validity in seconds')"
+						@mouseleave="onMouseLeave">
+						{{ t('twofactor_totp', 'Period') }}
+					</label>
+					<select id="period"
+						v-model.number="period"
+						:disabled="loading"
+						:title="t('twofactor_totp', 'OTP validity in seconds')"
+						@mouseleave="onMouseLeave">
+						<option v-for="seconds in periodOptions" :key="seconds" :value="seconds">
+							{{ seconds }}
+						</option>
+					</select>
+				</div>
 			</div>
 
 			<!-- Recreate QR Code Button -->
 			<button :disabled="!settingsChanged || loading" @click="recreateQRCode">
-				{{ t('twofactor_totp', 'Recreate QR-Code with custom settings') }}
+				{{ t('twofactor_totp', 'Apply custom settings and recreate QR code') }}
 			</button>
 		</div>
 
 		<p>{{ t('twofactor_totp', 'For quick setup, scan this QR code with your TOTP app:') }}</p>
 		<QR :value="qrUrl" :options="{ width: 150 }" />
 		<p>{{ t('twofactor_totp', 'After you configured your app, enter a test code below to ensure everything works correctly:') }}</p>
-		<input id="totp-confirmation"
-			ref="confirmationInput"
-			v-model="confirmationCode"
-			type="tel"
-			minlength="4"
-			maxlength="10"
-			autocomplete="off"
-			autocapitalize="off"
-			:disabled="loading"
-			:placeholder="t('twofactor_totp', 'Authentication code')"
-			@keydown="onConfirmKeyDown">
-		<input id="totp-confirmation-submit"
-			type="button"
-			:disabled="loading"
-			:value="t('twofactor_totp', 'Verify')"
-			@click="confirm">
+		<div id="['totp-confirmation-container', { centered: isCentered }]">
+			<input id="totp-confirmation"
+				ref="confirmationInput"
+				v-model="confirmationCode"
+				type="tel"
+				minlength="4"
+				maxlength="10"
+				autocomplete="off"
+				autocapitalize="off"
+				:disabled="loading"
+				:placeholder="t('twofactor_totp', 'Code')"
+				@keydown="onConfirmKeyDown">
+			<button
+				id="totp-confirmation-submit"
+				:disabled="isSubmitDisabled"
+				@click="confirm">
+				{{ t('twofactor_totp', 'Verify') }}
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -139,6 +169,10 @@ export default {
 		QR,
 	},
 	props: {
+		isCentered: {
+			type: Boolean,
+			default: false,
+		},
 		loading: {
 			type: Boolean,
 			default: false,
@@ -198,6 +232,16 @@ export default {
 
 		// Store the initial settings
 		this.storeInitialSettings()
+
+		// Fetch settings when component is mounted
+		this.fetchSettings()
+	},
+	computed: {
+		isSubmitDisabled() {
+			const code = this.confirmationCode;
+			const requiredLength = this.digits;
+			return !code || code.length !== requiredLength || /\D/.test(code) || this.loading;
+		}
 	},
 	methods: {
 		confirm() {
@@ -209,6 +253,11 @@ export default {
 			})
 		},
 		onConfirmKeyDown(e) {
+			// Exit early if the submit button is disabled
+			if (this.isSubmitDisabled) {
+				return
+			}
+			// Check if the Enter key (key code 13) was pressed
 			if (e.which === 13) {
 				this.confirm()
 			}
@@ -236,7 +285,6 @@ export default {
 				this.resetSettings()
 			} else {
 				this.showAdvanced = true
-				this.fetchSettings()
 			}
 			// Set focus to the confirmation input field when QRCode is recreated
 			this.$nextTick(() => {
@@ -267,6 +315,8 @@ export default {
 				this.localQrUrl = qrUrl
 				this.settingsChanged = false
 				this.$emit('update-qr', { secret, qrUrl })
+				// Store the new settings as initialSettings
+				this.storeInitialSettings()
 				// Set focus to the confirmation input field when QRCode is recreated
 				this.$nextTick(() => {
 					this.$refs.confirmationInput.focus()
@@ -306,55 +356,120 @@ export default {
 
 <style lang="scss" scoped>
 .setup-confirmation {
+	/* Centered only if isCentered is true */
+	&.centered {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center; /* Centered short text as well */
+	}
+
 	&__secret {
 		word-break: break-all;
 	}
 
 	.advanced-settings-container {
-		margin-top: 10px;
+		&.centered {
+			width: 100%;
+			text-align: center; /* centers the button */
+			margin-top: 10px;
+		}
+	}
+
+	.advanced-settings-btn {
+		padding: 10px 20px;
+		cursor: pointer;
+		font-size: 1em;
 	}
 
 	.advanced-settings {
+		width: 100%;
 		margin-top: 20px;
-	}
-
-	.warning-message {
-		color: var(--color-warning);
-		font-weight: bold;
-	}
-
-	.instruction-message {
-		color: var(--color-info);
-		margin-bottom: 10px;
-	}
-
-	.error-message {
-		margin-bottom: 10px;
-		color: var(--color-error);
-	}
-
-	.form-group {
 		display: flex;
-		align-items: center;
+		flex-direction: column;
+		align-items: flex-start;
+		&.centered {
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+		.warning-message {
+			color: var(--color-warning);
+			font-weight: bold;
+		}
+		.instruction-message {
+			color: var(--color-info);
+			margin-bottom: 10px;
+		}
+		.error-message {
+			color: var(--color-error);
+			margin-bottom: 10px;
+		}
+		.form-group {
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			margin: 5px 0;
+			width: 100%;
+			justify-content: center;
+			text-align: center;
+			label {
+				margin-right: 10px;
+				white-space: nowrap;
+				flex: 0 1 auto; /* Flexible label */
+				text-align: left;
+				cursor: default; /* Ensure default cursor for labels */
+			}
+			.custom-secret-input {
+				flex-grow: 1;
+				width: 100%;
+			}
+			select {
+				width: auto;
+				padding: 8px;
+				border: 1px solid #ccc;
+				box-sizing: border-box;
+				cursor: pointer; /* Shows pointer cursor for select fields */
+			}
+		}
+		.form-row {
+			display: flex;
+			.form-group {
+				margin-right: 10px; // Add spacing between elements
+				&:last-child {
+					margin-right: 0; // Remove right margin from last item
+				}
+			}
+		}
+	}
+
+	/* Authentication Code and Verify Button side by side */
+	#totp-confirmation-container {
 		margin: 5px 0;
 
-		label {
-			margin-right: 10px;
-			white-space: nowrap;
-		}
-
-		input, select {
+		input#totp-confirmation {
 			width: auto;
+			max-width: 100px;
+			padding: 8px;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+			margin-right: 10px; /* Distance to Verify-Button */
 		}
 
-		.custom-secret-input {
-			width: 100%;
+		button#totp-confirmation-submit {
+			padding: 8px 20px;
+			cursor: pointer;
+			font-size: 1em;
 		}
-	}
 
-	button {
-		margin-top: 10px;
-		display: block;
+		button#totp-confirmation-submit:disabled {
+			background-color: #ccc;
+			cursor: not-allowed;
+		}
+
+		&.centered {
+			justify-content: center;
+		}
 	}
 }
 </style>
