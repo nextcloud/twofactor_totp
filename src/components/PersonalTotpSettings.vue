@@ -38,6 +38,13 @@
 			}}</label>
 		</div>
 
+		<!-- Cancel Button -->
+		<button v-if="secret"
+			class="cancel-button"
+			@click="resetSetup">
+			{{ t('twofactor_totp', 'Cancel') }}
+		</button>
+
 		<SetupConfirmation v-if="secret"
 			:secret="secret"
 			:qr-url="qrUrl"
@@ -95,7 +102,7 @@ export default {
 			// Show loading spinner
 			this.loading = true
 
-			Logger.debug('starting setup')
+			Logger.debug('starting TOTP setup')
 
 			return confirmPassword()
 				.then(() => this.$store.dispatch('enable'))
@@ -125,7 +132,7 @@ export default {
 			this.loading = true
 			this.loadingConfirmation = true
 
-			Logger.debug('starting enable')
+			Logger.debug('starting enable TOTP')
 
 			return confirmPassword()
 				.then(() => this.$store.dispatch('confirm', this.confirmation))
@@ -164,6 +171,14 @@ export default {
 				.then(() => (this.loading = false))
 		},
 
+		resetSetup() {
+			this.secret = undefined
+			this.qrUrl = ''
+			this.confirmation = ''
+			this.loading = false
+			this.enabled = false
+		},
+
 		updateQr({ secret, qrUrl }) {
 			this.secret = secret
 			this.qrUrl = qrUrl
@@ -178,5 +193,9 @@ export default {
 	vertical-align: sub;
 	margin-left: -2px;
 	margin-right: 4px;
+}
+
+.cancel-button {
+	margin-left: 10px;
 }
 </style>
