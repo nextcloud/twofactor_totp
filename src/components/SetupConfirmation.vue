@@ -57,7 +57,7 @@
 					@input="validateCustomSecret">
 			</div>
 			<p v-if="customSecretWarning" class="error-message">
-				{{ t('twofactor_totp', 'Invalid characters detected. Only A-Z and 2-7 are allowed.') }}
+				{{ customSecretWarning }}
 			</p>
 
 			<!-- Settings Row (Algorithm, Digits, Period) -->
@@ -125,7 +125,7 @@
 			</div>
 
 			<!-- Recreate QR Code Button -->
-			<button :disabled="!settingsChanged || loading" @click="recreateQRCode">
+			<button :disabled="!settingsChanged || loading || customSecretWarning" @click="recreateQRCode">
 				{{ t('twofactor_totp', 'Apply custom settings and recreate QR code') }}
 			</button>
 		</div>
@@ -320,14 +320,27 @@ export default {
 				Logger.error('Could not recreate QR code', e)
 			})
 		},
-
 		validateCustomSecret() {
 			const base32Regex = /^[A-Z2-7]*$/
-			if (!base32Regex.test(this.customSecret)) {
-				this.customSecretWarning = true
-			} else {
-				this.customSecretWarning = false
+			const minLength = 26
+			const maxLength = 128
+			let warningMessages = []
+			if (this.customSecret.length < minLength) {
+				warningMessages.push(this.t('twofactor_totp', 'The secret must have at least 26 characters.'))
 			}
+			if (this.customSecret.length > maxLength) {
+				warningMessages.push(this.t('twofactor_totp', 'The secret must not exceed 128 characters.'))
+			}
+			if (!base32Regex.test(this.customSecret)) {
+				warningMessages.push(this.t('twofactor_totp', 'Only A-Z and 2-7 are allowed.'))
+			}
+			// Set the warning message based on the validation
+			if (warningMessages.length > 0) {
+				this.customSecretWarning = warningMessages.join(' ');
+			} else {
+				this.customSecretWarning = false;
+			}
+			// Check if the settings have changed
 			this.checkIfSettingsChanged()
 		},
 		checkIfSettingsChanged() {
