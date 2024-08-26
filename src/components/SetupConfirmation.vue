@@ -4,7 +4,7 @@
   - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   - @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
   -
-  - @license GNU AGPL version 3 or any later version
+  - @license AGPL-3.0-or-later
   -
   - This program is free software: you can redistribute it and/or modify
   - it under the terms of the GNU Affero General Public License as
@@ -21,20 +21,20 @@
   -->
 
 <template>
-	<div :class="['setup-confirmation', { centered: isCentered }]">
+	<div :class="['setup-confirmation', { centered: center }]">
 		<p class="setup-confirmation__secret">
 			{{ t('twofactor_totp', 'Your new TOTP secret is:') }} {{ localSecret }}
 		</p>
 
 		<!-- Advanced Settings Button -->
-		<div :class="['advanced-settings-container', { centered: isCentered }]">
+		<div :class="['advanced-settings-container', { centered: center }]">
 			<button class="advanced-settings-btn" @click="toggleAdvancedSettings">
 				{{ showAdvanced ? t('twofactor_totp', 'Hide advanced settings') : t('twofactor_totp', 'Advanced settings') }}
 			</button>
 		</div>
 
 		<!-- Advanced Settings Section -->
-		<div v-if="showAdvanced" :class="['advanced-settings', { centered: isCentered }]">
+		<div v-if="showAdvanced" :class="['advanced-settings', { centered: center }]">
 			<p class="warning-message">
 				{{ t('twofactor_totp', 'Warning: Not all TOTP devices or smartphone apps support the full range of these advanced settings.') }}
 			</p>
@@ -43,8 +43,8 @@
 			</p>
 
 			<!-- Custom Secret Input -->
-			<div :class="['form-group', { centered: isCentered }]">
-				<label :class="{ centered: isCentered }"
+			<div :class="['form-group', { centered: center }]">
+				<label :class="{ centered: center }"
 					for="custom-secret"
 					@mouseleave="onMouseLeave">
 					{{ t('twofactor_totp', 'Secret') }}
@@ -63,8 +63,8 @@
 			<!-- Settings Row (Algorithm, Digits, Period) -->
 			<div class="form-row">
 				<!-- Algorithm Select -->
-				<div :class="['form-group', { centered: isCentered }]">
-					<label :class="{ centered: isCentered }"
+				<div :class="['form-group', { centered: center }]">
+					<label :class="{ centered: center }"
 						for="algorithm"
 						@mouseleave="onMouseLeave">
 						{{ t('twofactor_totp', 'Algorithm') }}
@@ -86,8 +86,8 @@
 				</div>
 
 				<!-- Digits Select -->
-				<div :class="['form-group', { centered: isCentered }]">
-					<label :class="{ centered: isCentered }"
+				<div :class="['form-group', { centered: center }]">
+					<label :class="{ centered: center }"
 						for="digits"
 						:title="t('twofactor_totp', 'OTP token length')"
 						@mouseleave="onMouseLeave">
@@ -105,8 +105,8 @@
 				</div>
 
 				<!-- Period Select -->
-				<div :class="['form-group', { centered: isCentered }]">
-					<label :class="{ centered: isCentered }"
+				<div :class="['form-group', { centered: center }]">
+					<label :class="{ centered: center }"
 						for="period"
 						:title="t('twofactor_totp', 'OTP validity in seconds')"
 						@mouseleave="onMouseLeave">
@@ -133,7 +133,7 @@
 		<p>{{ t('twofactor_totp', 'For quick setup, scan this QR code with your TOTP app:') }}</p>
 		<QR :value="qrUrl" :options="{ width: 150 }" />
 		<p>{{ t('twofactor_totp', 'After you configured your app, enter a test code below to ensure everything works correctly:') }}</p>
-		<div id="['totp-confirmation-container', { centered: isCentered }]">
+		<div id="['totp-confirmation-container', { centered: center }]">
 			<input id="totp-confirmation"
 				ref="confirmationInput"
 				v-model="confirmationCode"
@@ -164,7 +164,7 @@ export default {
 		QR,
 	},
 	props: {
-		isCentered: {
+		center: {
 			type: Boolean,
 			default: false,
 		},
@@ -324,7 +324,7 @@ export default {
 			const base32Regex = /^[A-Z2-7]*$/
 			const minLength = 26
 			const maxLength = 128
-			let warningMessages = []
+			const warningMessages = []
 			if (this.customSecret.length < minLength) {
 				warningMessages.push(this.t('twofactor_totp', 'The secret must have at least 26 characters.'))
 			}
@@ -336,9 +336,9 @@ export default {
 			}
 			// Set the warning message based on the validation
 			if (warningMessages.length > 0) {
-				this.customSecretWarning = warningMessages.join(' ');
+				this.customSecretWarning = warningMessages.join(' ')
 			} else {
-				this.customSecretWarning = false;
+				this.customSecretWarning = false
 			}
 			// Check if the settings have changed
 			this.checkIfSettingsChanged()
@@ -364,7 +364,7 @@ export default {
 
 <style lang="scss" scoped>
 .setup-confirmation {
-	/* Centered only if isCentered is true */
+	/* Centered only if center is true */
 	&.centered {
 		display: flex;
 		flex-direction: column;

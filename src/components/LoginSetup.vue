@@ -4,7 +4,7 @@
   - @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
   - @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
   -
-  - @license GNU AGPL version 3 or any later version
+  - @license AGPL-3.0-or-later
   -
   - This program is free software: you can redistribute it and/or modify
   - it under the terms of the GNU Affero General Public License as
@@ -24,7 +24,7 @@
 	<div id="twofactor-totp-login-setup">
 		<div v-if="loading" class="loading" />
 		<SetupConfirmation v-if="secret"
-			:isCentered="true"
+			:center="true"
 			:loading="loadingConfirmation"
 			:secret="secret"
 			:qr-url="qrUrl"
@@ -36,9 +36,10 @@
 </template>
 
 <script>
+
 import Vue from 'vue'
 import Vuex from 'vuex'
-import store from '../store.js' // Store importieren
+import store from '../store.js' // import store
 
 import Logger from '../logger.js'
 import SetupConfirmation from './SetupConfirmation.vue'

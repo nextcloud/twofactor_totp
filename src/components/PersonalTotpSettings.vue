@@ -4,7 +4,7 @@
   - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
   - @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
   -
-  - @license GNU AGPL version 3 or any later version
+  - @license AGPL-3.0-or-later
   -
   - This program is free software: you can redistribute it and/or modify
   - it under the terms of the GNU Affero General Public License as
@@ -46,6 +46,7 @@
 		</button>
 
 		<SetupConfirmation v-if="secret"
+			:center="false"
 			:secret="secret"
 			:qr-url="qrUrl"
 			:loading="loadingConfirmation"
