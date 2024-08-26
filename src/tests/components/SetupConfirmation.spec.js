@@ -188,7 +188,6 @@ describe('SetupConfirmation', () => {
 */
 	})
 
-
 	it('validates custom secret', () => {
 		const wrapper = shallowMount(SetupConfirmation, {
 			store,
@@ -201,7 +200,7 @@ describe('SetupConfirmation', () => {
 		})
 		wrapper.setData({ customSecret: 'INVALID!' })
 		wrapper.vm.validateCustomSecret()
-		if (wrapper.vm.customSecretWarning == false) {
+		if (wrapper.vm.customSecretWarning === false) {
 			throw new Error('customSecretWarning should not be false')
 		}
 	})
