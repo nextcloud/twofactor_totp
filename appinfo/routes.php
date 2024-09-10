@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
  *
  * Two-factor TOTP
  *
@@ -31,6 +32,16 @@ return [
 			'name' => 'settings#enable',
 			'url' => '/settings/enable',
 			'verb' => 'POST'
+		],
+		[
+			'name' => 'settings#updateSettings',
+			'url' => '/settings/update',
+			'verb' => 'POST'
+		],
+		[
+			'name' => 'settings#getDefaults',
+			'url' => '/settings/defaults',
+			'verb' => 'GET'
 		],
 	]
 ];

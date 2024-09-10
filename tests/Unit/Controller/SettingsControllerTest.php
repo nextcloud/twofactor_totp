@@ -3,6 +3,7 @@
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Copyright (c) 2016 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
  *
  * Two-factor TOTP
  *
@@ -25,19 +26,22 @@ namespace OCA\TwoFactorTOTP\Unit\Controller;
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
 use OCA\TwoFactorTOTP\Service\ITotp;
-use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\IUserSession;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class SettingsControllerTest extends TestCase {
 	private $request;
 	private $userSession;
 	private $totp;
 	private $defaults;
+	private $urlGenerator;
+	private $logger;
 
 	/** @var SettingsController */
 	private $controller;
@@ -47,10 +51,20 @@ class SettingsControllerTest extends TestCase {
 
 		$this->request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
-		$this->totp = $this->createMock(Totp::class);
-		$this->defaults = new Defaults();
+		$this->totp = $this->createMock(ITotp::class);
+		$this->defaults = $this->createMock(Defaults::class);
+		$this->urlGenerator = $this->createMock(IURLGenerator::class);
+		$this->logger = $this->createMock(LoggerInterface::class);
 
-		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);
+		$this->controller = new SettingsController(
+			'twofactor_totp',
+			$this->request,
+			$this->userSession,
+			$this->totp,
+			$this->defaults,
+			$this->urlGenerator,
+			$this->logger
+		);
 	}
 
 	public function testDisabledState() {
@@ -63,8 +77,24 @@ class SettingsControllerTest extends TestCase {
 			->with($user)
 			->willReturn(false);
 
+		$this->totp->expects($this->once())
+			->method('getAlgorithmId')
+			->with($user)
+			->willReturn(0);
+		$this->totp->expects($this->once())
+			->method('getDigits')
+			->with($user)
+			->willReturn(0);
+		$this->totp->expects($this->once())
+			->method('getPeriod')
+			->with($user)
+			->willReturn(0);
+
 		$expected = new JSONResponse([
-			'state' => false,
+			'state' => ITotp::STATE_DISABLED,
+			'algorithm' => 0,
+			'digits' => 0,
+			'period' => 0
 		]);
 
 		$this->assertEquals($expected, $this->controller->state());
@@ -78,18 +108,36 @@ class SettingsControllerTest extends TestCase {
 		$user->expects($this->once())
 			->method('getCloudId')
 			->willReturn('user@instance.com');
+
 		$this->totp->expects($this->once())
 			->method('createSecret')
-			->with($user)
+			->with($user, null, 1, 6, 30)
 			->willReturn('newsecret');
+		
+		// Mock the default algorithm and digits
+		$this->totp->expects($this->once())
+			->method('getDefaultAlgorithm')
+			->willReturn(1);
+		$this->totp->expects($this->once())
+			->method('getDefaultDigits')
+			->willReturn(6);
+
+		// Mock the getAlgorithmById method
+		$this->totp->expects($this->once())
+			->method('getAlgorithmById')
+			->with(1)  // Example value for algorithm
+			->willReturn('SHA1');
+
 		$issuer = rawurlencode($this->defaults->getName());
+		$qrUrl = "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1&digits=6&period=30&image=";
+
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
 			'secret' => 'newsecret',
-			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer",
+			'qrUrl' => $qrUrl
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(true));
+		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_CREATED));
 	}
 
 	public function testEnableSecret() {
@@ -115,7 +163,8 @@ class SettingsControllerTest extends TestCase {
 			->method('getUser')
 			->willReturn($user);
 		$this->totp->expects($this->once())
-			->method('deleteSecret');
+			->method('deleteSecret')
+			->with($user);
 
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_DISABLED,

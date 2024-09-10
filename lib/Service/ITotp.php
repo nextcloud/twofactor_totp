@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 [ernolf] Raphael Gradenwitz <raphael.gradenwitz@googlemail.com>
  *
  * Two-factor TOTP
  *
@@ -33,7 +34,32 @@ interface ITotp {
 	public const STATE_CREATED = 1;
 	public const STATE_ENABLED = 2;
 
+	public const HASH_SHA1 = 1;
+	public const HASH_SHA256 = 2;
+	public const HASH_SHA512 = 3;
+
+	public const DEFAULT_ALGORITHM = ITotp::HASH_SHA1;
+	public const DEFAULT_DIGITS = 6; // Tokenlength
+	public const DEFAULT_PERIOD = 30; // Period in seconds
+
+
+	public function getAlgorithmById(int $id): string;
+
 	public function hasSecret(IUser $user): bool;
+
+	/**
+	 * Get the default hash algorithm
+	 *
+	 * @return int the default algorithm
+	 */
+	public function getDefaultAlgorithm(): int;
+
+	/**
+	 * Get the default token length in digits
+	 *
+	 * @return int the default digits
+	 */
+	public function getDefaultDigits(): int;
 
 	/**
 	 * Create a new secret
@@ -42,10 +68,14 @@ interface ITotp {
 	 * the user should once confirm that the OTP app was set up successfully.
 	 *
 	 * @param IUser $user
+	 * @param string $customSecret
+	 * @param int $algorithm
+	 * @param int $digits
+	 * @param int $period
 	 * @return string the newly created secret
 	 * @throws TotpSecretAlreadySet
 	 */
-	public function createSecret(IUser $user): string;
+	public function createSecret(IUser $user, string $customSecret = null, int $algorithm = self::DEFAULT_ALGORITHM, int $digits = self::DEFAULT_DIGITS, int $period = self::DEFAULT_PERIOD): string;
 
 	/**
 	 * Enable OTP for the given user. The secret has to be generated
@@ -62,4 +92,14 @@ interface ITotp {
 	public function deleteSecret(IUser $user, bool $byAdmin = false): void;
 
 	public function validateSecret(IUser $user, string $key): bool;
+
+	public function getAlgorithmId(IUser $user): int;
+
+	public function getDigits(IUser $user): int;
+
+	public function getPeriod(IUser $user): int;
+
+	public function updateSettings(IUser $user, string $customSecret = null, int $algorithm, int $digits, int $period): void;
+
+	public function getSettings(IUser $user): array;
 }
