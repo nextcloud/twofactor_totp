@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorTOTP\Activity;
 
-use InvalidArgumentException;
+use OCP\Activity\Exceptions\UnknownActivityException;
 use OCP\Activity\IEvent;
 use OCP\Activity\IProvider;
 use OCP\IURLGenerator;
@@ -43,9 +43,9 @@ class Provider implements IProvider {
 		$this->l10n = $l10n;
 	}
 
-	public function parse($language, IEvent $event, IEvent $previousEvent = null): IEvent {
+	public function parse($language, IEvent $event, ?IEvent $previousEvent = null): IEvent {
 		if ($event->getApp() !== 'twofactor_totp') {
-			throw new InvalidArgumentException();
+			throw new UnknownActivityException();
 		}
 
 		$l = $this->l10n->get('twofactor_totp', $language);
@@ -61,6 +61,8 @@ class Provider implements IProvider {
 			case 'totp_disabled_by_admin':
 				$event->setSubject($l->t('TOTP two-factor authentication disabled by an admin'));
 				break;
+			default:
+				throw new UnknownActivityException();
 		}
 		return $event;
 	}
