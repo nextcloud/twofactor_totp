@@ -1,4 +1,39 @@
+<!--
+  - SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 # Authors
 
-* Christoph Wurst: <christoph@winzerhof-wurst.at>
-
+- Adam Monsen <haircut@gmail.com>
+- Aiden Madaffri <Aiden.Madaffri@gmail.com>
+- Alexander Paetzelt <36155797+alex-nitrokey@users.noreply.github.com>
+- Andy Scherzinger <info@andy-scherzinger.de>
+- Anna Larch <anna@nextcloud.com>
+- Arthur Schiwon <blizzz@arthur-schiwon.de>
+- beerisgood <beerisgood@users.noreply.github.com>
+- Christoph Wurst <christoph@winzerhof-wurst.at>
+- Daniel Kesselberg <mail@danielkesselberg.de>
+- dflvunoooooo <32816598+dflvunoooooo@users.noreply.github.com>
+- Fabian Rodriguez <317514+MagicFab@users.noreply.github.com>
+- j-ed <juergen@eisfair.org>
+- Jan-Christoph Borchardt <hey@jancborchardt.net>
+- Jim Newsome <sporksmith@gmail.com>
+- Joas Schilling <coding@schilljs.com>
+- John Molakvoæ <skjnldsv@protonmail.com>
+- Loki3000 <github@labcms.ru>
+- Maadix <20930277+MaadixNet@users.noreply.github.com>
+- Michael J. Keen <mikek1024@gmail.com>
+- Morris Jobke <hey@morrisjobke.de>
+- My1 <My1@users.noreply.github.com>
+- Pablo Hinojosa <pablohn6@gmail.com>
+- Richard Steinmetz <richard@steinmetz.cloud>
+- Roeland Jago Douma <roeland@famdouma.nl>
+- Ronak Patel <ronak.patel@enrysisland.com>
+- Sascha Wiswedel <wiswedel@users.noreply.github.com>
+- sebastian-berlin-wmse <36327337+sebastian-berlin-wmse@users.noreply.github.com>
+- supremesyntax <supremesyntax@users.noreply.github.com>
+- Thomas Müller <thomas.mueller@tmit.eu>
+- Vincent Petry <vincent@nextcloud.com>
+- Wilfred Dijksman <wilfreddijksman@users.noreply.github.com>
+- Xaver Maierhofer <xaver.maierhofer@xwissen.info>
+- Étienne <etienne@maiste.fr>
