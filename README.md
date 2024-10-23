@@ -1,3 +1,7 @@
+<!--
+  - SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 # Two Factor Totp
 ![Downloads](https://img.shields.io/github/downloads/nextcloud/twofactor_totp/total.svg)
 [![Build Status](https://travis-ci.org/nextcloud/twofactor_totp.svg?branch=master)](https://travis-ci.org/nextcloud/twofactor_totp)

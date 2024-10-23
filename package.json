@@ -3,10 +3,11 @@
   "description": "Nextcloud TwoFactor TOTP",
   "version": "13.0.0-dev.0",
   "author": "Christoph Wurst <christoph@winzerhof-wurst.at>",
-  "license": "agpl",
+  "license": "AGPL-3.0-only",
   "private": true,
   "scripts": {
     "build": "webpack --node-env production --progress",
+    "postbuild": "build-js/npm-post-build.sh",
     "dev": "webpack --node-env development --progress",
     "watch": "webpack --node-env development --progress --watch",
     "lint": "eslint --ext .js,.vue src",
