@@ -6,7 +6,7 @@
     "Authenticate with a TOTP app" : "Autenticar coa aplicación TOTP",
     "Two-Factor TOTP Provider" : "Provedor TOTP de dous factores",
     "TOTP two-factor provider" : "Provedor de autenticación de dous factores TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un provedor de autenticación de dous factores para TOTP (RFC 6238) ",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un provedor de segundo factor de autenticación para TOTP (RFC 6238) ",
     "Enable TOTP" : "Activar TOTP",
     "Could not enable TOTP" : "Non foi posíbel activar TOTP ",
     "Could not verify your key. Please try again" : "Non foi posíbel verificar a súa chave. Ténteo de novo",
