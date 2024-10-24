@@ -3,6 +3,7 @@
   - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 # Two Factor Totp
+[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/twofactor_totp)](https://api.reuse.software/info/github.com/nextcloud/twofactor_totp)
 ![Downloads](https://img.shields.io/github/downloads/nextcloud/twofactor_totp/total.svg)
 [![Build Status](https://travis-ci.org/nextcloud/twofactor_totp.svg?branch=master)](https://travis-ci.org/nextcloud/twofactor_totp)
 
