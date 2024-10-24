@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "لقد قمت بتفعيل خاصية التحقق ثنائي العوامل من الهوية في حسابك  باستخدام TOTP \"كلمة سر لمرة واحدة ولمهلة زمنية محددة\" ",
     "You disabled TOTP two-factor authentication for your account" : "لقد قمت بتعطيل خاصية التحقق ثنائي العوامل من الهوية في حسابك باستخدام TOTP \"كلمة سر لمرة واحدة ولمهلة زمنية محددة\" ",
-    "TOTP two-factor authentication disabled by an admin" : "خاصية التحقق ثنائي العوامل من الهويّة two-factor authentication باستخدام TOTP \"كلمة سرٍ لمرةٍ واحدةٍ و لمهلة زمنية محدّدة\" ، تمّ إيقافها من قِبل المُشرِف",
+    "TOTP two-factor authentication disabled by an admin" : "خاصية التحقق ثنائي العوامل من الهويّة two-factor authentication باستخدام TOTP \"كلمة سرٍ لمرةٍ واحدةٍ و لمهلة زمنية محدّدة\" ، تمّ إيقافها من قِبل المدير",
     "TOTP (Authenticator app)" : "TOTP (تطبيق التحقّق من الهويّة)",
     "Authenticate with a TOTP app" : "المصادقة عبر تطبيق TOTP",
     "Two-Factor TOTP Provider" : "مٌوفّر التحقّق المُثنى باستخدام TOTP",
