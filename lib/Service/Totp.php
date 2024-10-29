@@ -65,14 +65,14 @@ class Totp implements ITotp {
 	public function hasSecret(IUser $user): bool {
 		try {
 			$secret = $this->secretMapper->getSecret($user);
-			return ITotp::STATE_ENABLED === (int)$secret->getState();
+			return (int)$secret->getState() === ITotp::STATE_ENABLED;
 		} catch (DoesNotExistException $ex) {
 			return false;
 		}
 	}
 
 	private function generateSecret(): string {
-		return $this->random->generate(32, ISecureRandom::CHAR_UPPER.'234567');
+		return $this->random->generate(32, ISecureRandom::CHAR_UPPER . '234567');
 	}
 
 	/**

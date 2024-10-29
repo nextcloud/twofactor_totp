@@ -47,7 +47,7 @@ class CleanUp extends Command {
 	public function __construct(
 		IDBConnection $db,
 		IUserManager $userManager,
-		TotpSecretMapper $totpSecretMapper
+		TotpSecretMapper $totpSecretMapper,
 	) {
 		parent::__construct();
 
