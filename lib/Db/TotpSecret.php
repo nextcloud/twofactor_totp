@@ -52,7 +52,7 @@ class TotpSecret extends Entity {
 	public function __construct() {
 		$this->addType('userId', 'string');
 		$this->addType('secret', 'string');
-		$this->addType('state', 'int');
-		$this->addType('lastCounter', 'int');
+		$this->addType('state', 'integer');
+		$this->addType('lastCounter', 'integer');
 	}
 }
