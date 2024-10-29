@@ -72,7 +72,7 @@ class SettingsController extends ALoginSetupController {
 	 * @param int $state
 	 * @param string|null $code for verification
 	 */
-	public function enable(int $state, string $code = null): JSONResponse {
+	public function enable(int $state, ?string $code = null): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new \Exception('user not available');
@@ -96,7 +96,7 @@ class SettingsController extends ALoginSetupController {
 				]);
 			case ITotp::STATE_ENABLED:
 				if ($code === null) {
-					throw new InvalidArgumentException("code is missing");
+					throw new InvalidArgumentException('code is missing');
 				}
 				$success = $this->totp->enable($user, $code);
 				return new JSONResponse([
@@ -116,7 +116,7 @@ class SettingsController extends ALoginSetupController {
 		$productName = $this->defaults->getName();
 		$user = $this->userSession->getUser();
 		if ($user === null) {
-			throw new RuntimeException("No user in this context");
+			throw new RuntimeException('No user in this context');
 		}
 		$userName = $user->getCloudId();
 		return rawurlencode("$productName:$userName");
