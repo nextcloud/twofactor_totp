@@ -1,9 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: christoph
- * Date: 31.07.18
- * Time: 06:33
+
+/*
+ * SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 namespace OCA\TwoFactorTOTP\Test\Listener;
