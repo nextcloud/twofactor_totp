@@ -1,8 +1,23 @@
 {
   "name": "twofactor_email",
-  "description": "Nextcloud TwoFactor TOTP",
+  "description": "Nextcloud TwoFactor Email",
   "version": "3.0.0-dev",
-  "author": "Christoph Wurst <christoph@winzerhof-wurst.at>",
+  "author":
+    {
+      "name": "Olav Seyfarth (current maintainer)",
+      "email": "olav@seyfarth.de"
+    },
+  "contributors":
+    [
+      {
+        "name": "Christoph Wurst (original author of twofactor_totp)",
+        "email": "christoph@winzerhof-wurst.at"
+      },
+      {
+        "name": "Nico Kluge (dev to clone from twofactor_totp)",
+        "email": "nico.kluge@klugecoded.com"
+      }
+    ],
   "license": "agpl",
   "private": true,
   "scripts": {
