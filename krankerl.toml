@@ -1,6 +1,6 @@
 [package]
 before_cmds = [
 	"composer install --no-dev -o",
-	"npm ci",
-	"npm run build",
+	"NODE_OPTIONS='--disable-warning=ExperimentalWarning' npm ci",
+	"NODE_OPTIONS='--disable-warning=ExperimentalWarning' npm run build",
 ]
