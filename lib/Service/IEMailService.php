@@ -27,7 +27,6 @@ namespace OCA\TwoFactorEMail\Service;
 use OCA\TwoFactorEMail\Db\TwoFactorEMail;
 use OCA\TwoFactorEMail\Exception\NoTwoFactorEMailFoundException;
 use OCA\TwoFactorEMail\Exception\TwoFactorEMailAlreadySet;
-use OCA\TwoFactorEMail\Exception\UserEMailAddressNotSet;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IUser;
 
@@ -39,16 +38,17 @@ interface IEMailService {
 	public function isEnabled(IUser $user): bool;
 
 	/**
-	 * Create a new two-factor email
+	 * Create a new two-factor email.
 	 *
 	 * Note: the newly generated two-factor email is disabled by default, because
 	 * the user should once confirm that the email confirmation was set up successfully.
 	 *
 	 * @param IUser $user
-	 * @return string the newly created email
+	 * @param string|null $email
+	 * @return TwoFactorEMail the newly created email
 	 * @throws TwoFactorEMailAlreadySet
 	 */
-	public function createTwoFactorEMail(IUser $user, string $email = ""): TwoFactorEMail;
+	public function createTwoFactorEMail(IUser $user, string|null $email = null): TwoFactorEMail;
 
 	/**
 	 * Enable email confirmation for the given user. The two-factor email has to be generated

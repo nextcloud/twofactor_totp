@@ -39,38 +39,14 @@ use OCP\Mail\IMailer;
 use Psr\Log\LoggerInterface;
 
 class EMailService implements IEMailService {
-
-	/** @var TwoFactorEMailMapper */
-	private $twoFactorEMailMapper;
-
-	/** @var IEventDispatcher */
-	private $eventDispatcher;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var IL10N */
-	private $l10n;
-
-	/** @var IMailer */
-	private $mailer;
-
-	/** @var Defaults */
-	private $defaults;
-
-	public function __construct(TwoFactorEMailMapper $twoFactorEMailMapper,
-								IEventDispatcher     $eventDispatcher,
-								LoggerInterface      $logger,
-								IL10N                $l10n,
-								IMailer              $mailer,
-								Defaults             $defaults
+	public function __construct(
+        private TwoFactorEMailMapper $twoFactorEMailMapper,
+        private IEventDispatcher     $eventDispatcher,
+        private LoggerInterface      $logger,
+        private IL10N                $l10n,
+        private IMailer              $mailer,
+        private Defaults             $defaults
 	) {
-		$this->twoFactorEMailMapper = $twoFactorEMailMapper;
-		$this->eventDispatcher = $eventDispatcher;
-		$this->logger = $logger;
-		$this->l10n = $l10n;
-		$this->mailer = $mailer;
-		$this->defaults = $defaults;
 	}
 
 	public function isEnabled(IUser $user): bool {
@@ -82,10 +58,7 @@ class EMailService implements IEMailService {
 		}
 	}
 
-	/**
-	 * @param IUser $user
-	 */
-	public function createTwoFactorEMail(IUser $user, string $email = null): TwoFactorEMail {
+	public function createTwoFactorEMail(IUser $user, string|null $email = null): TwoFactorEMail {
 		try {
 			// Delete existing one
 			$dbTwoFactorEmail = $this->twoFactorEMailMapper->getTwoFactorEMail($user);
