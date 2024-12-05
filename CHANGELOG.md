@@ -1,7 +1,18 @@
 # Changelog
 Notable changes in [changelog format](https://keepachangelog.com/en/1.0.0/), project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## 3.0.0 (2024-03-##)
+## 3.0.2-dev (2024-12-05)
+
+### Added
+
+- Support for Nextcloud 29-31 (tested against 30.0.3)
+- Support for PHP 8.4
+
+### Removed
+
+- Support for Nextcloud <=28
+
+## 3.0.0-dev (2024-04-21)
 
 ### Changed
 - Complete rewrite, based on twofactor_totp 11.0.0-dev
