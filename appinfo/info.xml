@@ -7,8 +7,8 @@
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
 	<id>twofactor_totp</id>
 	<name>Two-Factor TOTP Provider</name>
-	<summary>TOTP two-factor provider</summary>
-	<description>A Two-Factor-Auth Provider for TOTP (RFC 6238)</description>
+	<summary>Two-Factor TOTP provider</summary>
+	<description>A two-factor authentication provider for TOTP (RFC 6238)</description>
 	<version>13.0.0-dev.0</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
