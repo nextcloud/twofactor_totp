@@ -44,7 +44,7 @@ class Provider implements IProvider {
 				$event->setSubject($l->t('You disabled TOTP two-factor authentication for your account'));
 				break;
 			case 'totp_disabled_by_admin':
-				$event->setSubject($l->t('TOTP two-factor authentication disabled by an admin'));
+				$event->setSubject($l->t('TOTP two-factor authentication disabled by the administration'));
 				break;
 			default:
 				throw new UnknownActivityException();
