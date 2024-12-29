@@ -1,12 +1,9 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Otit TOTP-tunnistautumisen käyttöön tililläsi",
     "You disabled TOTP two-factor authentication for your account" : "Poistit TOTP-tunnistautumisen käytöstä tililläsi",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP-kaksivaiheinen tunnistautuminen on poistettu käytöstä ylläpidon toimesta",
     "TOTP (Authenticator app)" : "TOTP (Authenticator-sovellus)",
     "Authenticate with a TOTP app" : "Tunnistaudu TOTP-sovelluksella",
     "Two-Factor TOTP Provider" : "Kaksivaiheinen TOTP-tarjoaja",
-    "TOTP two-factor provider" : "TOTP-kaksivaiheisuuden tarjoaja",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Kaksivaiheisen tunnistautumisen tarjoaja TOTP:ille (RFC 6238)",
     "Enable TOTP" : "Käytä TOTP:tä",
     "Could not enable TOTP" : "TOTP:ia ei voitu ottaa käyttöön",
     "Could not verify your key. Please try again" : "Koodin tarkastus epäonnistui. Yritä uudelleen.",
@@ -16,6 +13,9 @@
     "Authentication code" : "Tunnistautumiskoodi",
     "Verify" : "Vahvista",
     "Get the authentication code from the two-factor authentication app on your device." : "Hanki tunnistautumiskoodi laitteesi 2-vaiheisen tunnistautumisen sovelluksesta.",
-    "Submit" : "Lähetä"
+    "Submit" : "Lähetä",
+    "TOTP two-factor authentication disabled by an admin" : "TOTP-kaksivaiheinen tunnistautuminen on poistettu käytöstä ylläpidon toimesta",
+    "TOTP two-factor provider" : "TOTP-kaksivaiheisuuden tarjoaja",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Kaksivaiheisen tunnistautumisen tarjoaja TOTP:ille (RFC 6238)"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
