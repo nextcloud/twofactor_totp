@@ -3,12 +3,9 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Hesabınız için tek kullanımlık parola ile iki adımlı doğrulamayı kullanıma aldınız",
     "You disabled TOTP two-factor authentication for your account" : "Hesabınız için tek kullanımlık parola ile iki adımlı doğrulamayı kullanımdan kaldırdınız",
-    "TOTP two-factor authentication disabled by an admin" : "Tek kullanımlık parola ile iki adımlı doğrulama yönetici tarafından kullanımdan kaldırılmış",
     "TOTP (Authenticator app)" : "Tek kullanımlık parola (kimlik doğrulama uygulaması)",
     "Authenticate with a TOTP app" : "Tek kullanımlık parola uygulamasıyla kimlik doğrulama",
     "Two-Factor TOTP Provider" : "İki adımlı doğrulama tek kullanımlık parola hizmeti sağlayıcısı",
-    "TOTP two-factor provider" : "Tek kullanımlık parola iki adımlı doğrulama hizmeti sağlayıcısı",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Tek kullanımlık parola için iki adımlı doğrulama hizmeti sağlayıcısı (RFC 6238)",
     "Enable TOTP" : "Tek kullanımlık parola kullanılsın",
     "Could not enable TOTP" : "Tek kullanımlık parola kullanıma alınamadı",
     "Could not verify your key. Please try again" : "Anahtarınız doğrulanamadı. Lütfen yeniden deneyin",
@@ -18,6 +15,9 @@ OC.L10N.register(
     "Authentication code" : "Kimlik doğrulama kodu",
     "Verify" : "Doğrula",
     "Get the authentication code from the two-factor authentication app on your device." : "Aygıtınızda yüklü iki adımlı doğrulama uygulamasından kodu alın.",
-    "Submit" : "Gönder"
+    "Submit" : "Gönder",
+    "TOTP two-factor authentication disabled by an admin" : "Tek kullanımlık parola ile iki adımlı doğrulama yönetici tarafından kullanımdan kaldırılmış",
+    "TOTP two-factor provider" : "Tek kullanımlık parola iki adımlı doğrulama hizmeti sağlayıcısı",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Tek kullanımlık parola için iki adımlı doğrulama hizmeti sağlayıcısı (RFC 6238)"
 },
 "nplurals=2; plural=(n > 1);");

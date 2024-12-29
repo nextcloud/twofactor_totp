@@ -3,12 +3,9 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "As ativadu s'autenticatzione a duos fatores TOTP pro su contu tuo",
     "You disabled TOTP two-factor authentication for your account" : "As disativadu s'autenticatzione a duos fatores TOTP pro su contu tuo",
-    "TOTP two-factor authentication disabled by an admin" : "Autenticatzione a duos fatores TOTP disativada dae s'amministratzione",
     "TOTP (Authenticator app)" : "TOTP (Aplicatzione autenticatzione)",
     "Authenticate with a TOTP app" : "Autentica·ti cun un'aplicatzione TOTP",
     "Two-Factor TOTP Provider" : "Frunidore TOTP a duos fatores",
-    "TOTP two-factor provider" : "Frunidore a duos fatores pro TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Unu frunidore de autenticatzione a duos fatores pro TOTP (RFC 6238)",
     "Enable TOTP" : "Ativa TOTP",
     "Could not enable TOTP" : "No at fatu a ativare TOTP",
     "Could not verify your key. Please try again" : "No at fatu a verificare sa crae tua. Torra a proare",
@@ -18,6 +15,9 @@ OC.L10N.register(
     "Authentication code" : "Còdighe de autenticatzione",
     "Verify" : "Verìfica",
     "Get the authentication code from the two-factor authentication app on your device." : "Otene su còdighe de autenticatzione dae s'aplicatzione de autenticatzione a duos fatores in su dispositivu tuo.",
-    "Submit" : "Imbia"
+    "Submit" : "Imbia",
+    "TOTP two-factor authentication disabled by an admin" : "Autenticatzione a duos fatores TOTP disativada dae s'amministratzione",
+    "TOTP two-factor provider" : "Frunidore a duos fatores pro TOTP",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Unu frunidore de autenticatzione a duos fatores pro TOTP (RFC 6238)"
 },
 "nplurals=2; plural=(n != 1);");
