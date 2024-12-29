@@ -3,12 +3,9 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "ھېساباتىڭىز ئۈچۈن TOTP ئىككى ئامىللىق دەلىللەشنى قوزغىتىڭ",
     "You disabled TOTP two-factor authentication for your account" : "ھېساباتىڭىز ئۈچۈن TOTP ئىككى ئامىللىق دەلىللەشنى چەكلىدىڭىز",
-    "TOTP two-factor authentication disabled by an admin" : "باشقۇرغۇچى تەرىپىدىن TOTP ئىككى ئامىللىق دەلىللەش چەكلەنگەن",
     "TOTP (Authenticator app)" : "TOTP (دەلىللەش دېتالى)",
     "Authenticate with a TOTP app" : "TOTP دېتالى ئارقىلىق دەلىللەڭ",
     "Two-Factor TOTP Provider" : "ئىككى ئامىللىق TOTP تەمىنلىگۈچى",
-    "TOTP two-factor provider" : "TOTP ئىككى ئامىل تەمىنلىگۈچى",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP ئۈچۈن ئىككى ئامىللىق ئاپتور تەمىنلىگۈچى (RFC 6238)",
     "Enable TOTP" : "TOTP نى قوزغىتىڭ",
     "Could not enable TOTP" : "TOTP نى قوزغىتالمىدى",
     "Could not verify your key. Please try again" : "ئاچقۇچىڭىزنى دەلىللىيەلمىدى. قايتا سىناڭ",
@@ -18,6 +15,9 @@ OC.L10N.register(
     "Authentication code" : "دەلىللەش كودى",
     "Verify" : "دەلىللەڭ",
     "Get the authentication code from the two-factor authentication app on your device." : "ئۈسكۈنىڭىزدىكى ئىككى ئامىللىق دەلىللەش دېتالىدىن دەلىللەش كودىغا ئېرىشىڭ.",
-    "Submit" : "يوللاڭ"
+    "Submit" : "يوللاڭ",
+    "TOTP two-factor authentication disabled by an admin" : "باشقۇرغۇچى تەرىپىدىن TOTP ئىككى ئامىللىق دەلىللەش چەكلەنگەن",
+    "TOTP two-factor provider" : "TOTP ئىككى ئامىل تەمىنلىگۈچى",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP ئۈچۈن ئىككى ئامىللىق ئاپتور تەمىنلىگۈچى (RFC 6238)"
 },
 "nplurals=2; plural=(n != 1);");

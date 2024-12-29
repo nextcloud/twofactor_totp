@@ -3,12 +3,9 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Du hast TOTP Zwei-Faktor-Authentifizierung für dein Konto aktiviert",
     "You disabled TOTP two-factor authentication for your account" : "Du hast TOTP Zwei-Faktor-Authentifizierung für dein Konto deaktiviert",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP Zwei-Faktor-Authentifizierung wurde von einem Administrator deaktiviert",
     "TOTP (Authenticator app)" : "TOTP (App zur Authentifizierung)",
     "Authenticate with a TOTP app" : "Mit einer TOTP-App authentifizieren",
     "Two-Factor TOTP Provider" : "Zwei-Faktor TOTP-Anbieter",
-    "TOTP two-factor provider" : "TOTP-Zwei-Faktor-Anbieter",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Ein Zwei-Faktor-Anbieter für TOTP (RFC 6238)",
     "Enable TOTP" : "TOTP aktivieren",
     "Could not enable TOTP" : "TOTP konnte nicht aktiviert werden",
     "Could not verify your key. Please try again" : "Dein Schlüssel konnte nicht überprüft werden. Bitte erneut versuchen.",
@@ -18,6 +15,9 @@ OC.L10N.register(
     "Authentication code" : "Authentifizierungscode",
     "Verify" : "Überprüfen",
     "Get the authentication code from the two-factor authentication app on your device." : "Erhalte den Authentifizierungscode von der Zweifaktorauthentifizierung-App auf deinem Gerät.",
-    "Submit" : "Übermitteln"
+    "Submit" : "Übermitteln",
+    "TOTP two-factor authentication disabled by an admin" : "TOTP Zwei-Faktor-Authentifizierung wurde von einem Administrator deaktiviert",
+    "TOTP two-factor provider" : "TOTP-Zwei-Faktor-Anbieter",
+    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Ein Zwei-Faktor-Anbieter für TOTP (RFC 6238)"
 },
 "nplurals=2; plural=(n != 1);");
