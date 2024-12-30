@@ -1,9 +1,12 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "لقد قمت بتفعيل خاصية التحقق ثنائي العوامل من الهوية في حسابك  باستخدام TOTP \"كلمة سر لمرة واحدة ولمهلة زمنية محددة\" ",
     "You disabled TOTP two-factor authentication for your account" : "لقد قمت بتعطيل خاصية التحقق ثنائي العوامل من الهوية في حسابك باستخدام TOTP \"كلمة سر لمرة واحدة ولمهلة زمنية محددة\" ",
+    "TOTP two-factor authentication disabled by the administration" : "المصادقة الثنائية من النوع TOTP معطلة من الإدارة",
     "TOTP (Authenticator app)" : "TOTP (تطبيق التحقّق من الهويّة)",
     "Authenticate with a TOTP app" : "المصادقة عبر تطبيق TOTP",
     "Two-Factor TOTP Provider" : "مٌوفّر التحقّق المُثنى باستخدام TOTP",
+    "Two-factor TOTP provider" : "مزود خدمة المصادقة الثنائية من النوع TOTP",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "مزود خدمة المصادقة الثنائية من النوع TOTPـ (RFC 6238)",
     "Enable TOTP" : "تفعيل TOTP",
     "Could not enable TOTP" : "لم يُمكن تمكين TOTP",
     "Could not verify your key. Please try again" : "تعذّر التحقّق من مفتاحك. يُرجى إعادة المحاولة",

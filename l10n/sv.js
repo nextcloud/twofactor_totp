@@ -3,9 +3,12 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Du aktiverade TOTP tvåstegsverifiering för ditt konto",
     "You disabled TOTP two-factor authentication for your account" : "Du avaktiverade TOTP tvåstegsverifiering för ditt konto",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP två-faktor autentisering inaktiverad av administratören",
     "TOTP (Authenticator app)" : "TOTP (Autentiseringsapplikation)",
     "Authenticate with a TOTP app" : "Autentisera med en TOTP-app",
     "Two-Factor TOTP Provider" : "Tvåfaktor TOTP-leverantör",
+    "Two-factor TOTP provider" : "Två-faktor TOTP-leverantör",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "En leverantör av två-faktorsautentisering för TOTP (RFC 6238)",
     "Enable TOTP" : "Aktivera TOTP",
     "Could not enable TOTP" : "Kunde inte aktivera TOTP",
     "Could not verify your key. Please try again" : "Kunde ej verifiera din nyckel. Vänligen försök igen",

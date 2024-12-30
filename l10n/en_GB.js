@@ -3,9 +3,12 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "You enabled TOTP two-factor authentication for your account",
     "You disabled TOTP two-factor authentication for your account" : "You disabled TOTP two-factor authentication for your account",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP two-factor authentication disabled by the administration",
     "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
     "Authenticate with a TOTP app" : "Authenticate with a TOTP app",
     "Two-Factor TOTP Provider" : "Two-Factor TOTP Provider",
+    "Two-factor TOTP provider" : "Two-factor TOTP provider",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "A two-factor authentication provider for TOTP (RFC 6238)",
     "Enable TOTP" : "Enable TOTP",
     "Could not enable TOTP" : "Could not enable TOTP",
     "Could not verify your key. Please try again" : "Could not verify your key. Please try again",

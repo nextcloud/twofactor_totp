@@ -1,9 +1,12 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Chuir tú ar chumas TOTP fíordheimhniú dhá-fhachtóir do do chuntas",
     "You disabled TOTP two-factor authentication for your account" : "Dhíchumasaigh tú fíordheimhniú TOTP dhá-fhachtóir do do chuntas",
+    "TOTP two-factor authentication disabled by the administration" : "Fíordheimhniú dhá-fhachtóir TOTP díchumasaithe ag an riarachán",
     "TOTP (Authenticator app)" : "TOTP (aip Authenticator)",
     "Authenticate with a TOTP app" : "Fíordheimhnigh le haip TOTP",
     "Two-Factor TOTP Provider" : "Soláthraí TOTP Dhá-Fhachtóir",
+    "Two-factor TOTP provider" : "Soláthraí TOTP dhá fhachtóir",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Soláthraí fíordheimhnithe dhá fhachtóir le haghaidh TOTP (RFC 6238)",
     "Enable TOTP" : "Cumasaigh TOTP",
     "Could not enable TOTP" : "Níorbh fhéidir TOTP a chumasú",
     "Could not verify your key. Please try again" : "Níorbh fhéidir d'eochair a fhíorú. Arís, le do thoil",
