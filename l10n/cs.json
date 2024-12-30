@@ -1,9 +1,12 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Pro svůj účet jste povolil(a) dvoufázové ověření pomocí TOTP",
     "You disabled TOTP two-factor authentication for your account" : "Pro váš účet jste zakázali dvoufázové ověřování pomocí TOTP",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP dvoufázové přihlašování vypnuto správci",
     "TOTP (Authenticator app)" : "TOTP (aplikace pro ověřování se)",
     "Authenticate with a TOTP app" : "Přihlaste se pomocí TOTP aplikace",
     "Two-Factor TOTP Provider" : "Poskytovatel TOTP kódů pro dvoufázové ověření",
+    "Two-factor TOTP provider" : "Poskytovatel TOTP kódů pro dvoufázové ověření",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Poskytovatel dvouúřovňového ověřování pro TOTP (dle normy RFC 6238)",
     "Enable TOTP" : "Zapnout TOTP",
     "Could not enable TOTP" : "TOTP se nepodařilo zapnout",
     "Could not verify your key. Please try again" : "Ověření vašeho klíče se nezdařilo. Zkuste to znovu.",
