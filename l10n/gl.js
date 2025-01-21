@@ -3,9 +3,12 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Vde. activou a autenticación TOTP de dous factores para a súa conta",
     "You disabled TOTP two-factor authentication for your account" : "Vde. desactivou a autenticación TOTP de dous factores para a súa conta",
+    "TOTP two-factor authentication disabled by the administration" : "A autenticación TOTP de dous factores foi desactivada pola administración.",
     "TOTP (Authenticator app)" : "TOTP (aplicación de autenticación)",
     "Authenticate with a TOTP app" : "Autenticar coa aplicación TOTP",
     "Two-Factor TOTP Provider" : "Provedor TOTP de dous factores",
+    "Two-factor TOTP provider" : "Provedor TOTP de dous factores",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Un provedor de segundo factor de autenticación para TOTP (RFC 6238) ",
     "Enable TOTP" : "Activar TOTP",
     "Could not enable TOTP" : "Non foi posíbel activar TOTP ",
     "Could not verify your key. Please try again" : "Non foi posíbel verificar a súa chave. Ténteo de novo",
