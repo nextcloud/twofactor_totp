@@ -3,9 +3,12 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Укључили сте TOTP двофакторску проверу идентитета за Ваш налог",
     "You disabled TOTP two-factor authentication for your account" : "Искључили сте TOTP двофакторску проверу идентитета за Ваш налог",
+    "TOTP two-factor authentication disabled by the administration" : "Администратор је искључио TOTP двофакторску проверу идентитета",
     "TOTP (Authenticator app)" : "TOTP (апликација за проверу идентитета)",
     "Authenticate with a TOTP app" : "Идентификујте се са TOTP апликацијом",
     "Two-Factor TOTP Provider" : "Провајдер двофакторске TOTP",
+    "Two-factor TOTP provider" : "Пружалац услуге двофакторске TOTP",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Пружалац двофакторске провере идентитета за TOTP (RFC 6238)",
     "Enable TOTP" : "Укључи TOTP",
     "Could not enable TOTP" : "Не могу да укључим TOTP",
     "Could not verify your key. Please try again" : "Не могу да верификујем Ваш кључ. Пробајте поново",
