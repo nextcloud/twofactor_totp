@@ -20,15 +20,10 @@ use OCP\EventDispatcher\IEventListener;
  */
 class StateChangeRegistryUpdater implements IEventListener {
 
-	/** @var IRegistry */
-	private $registry;
-
-	/** @var TotpProvider */
-	private $provider;
-
-	public function __construct(IRegistry $registry, TotpProvider $provider) {
-		$this->registry = $registry;
-		$this->provider = $provider;
+	public function __construct(
+		private IRegistry $registry,
+		private TotpProvider $provider,
+	) {
 	}
 
 	public function handle(Event $event): void {

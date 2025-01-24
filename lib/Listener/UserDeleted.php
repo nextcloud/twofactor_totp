@@ -21,15 +21,10 @@ use Psr\Log\LoggerInterface;
  */
 class UserDeleted implements IEventListener {
 
-	/** @var TotpSecretMapper */
-	private $totpSecretMapper;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	public function __construct(TotpSecretMapper $totpSecretMapper, LoggerInterface $logger) {
-		$this->totpSecretMapper = $totpSecretMapper;
-		$this->logger = $logger;
+	public function __construct(
+		private TotpSecretMapper $totpSecretMapper,
+		private LoggerInterface $logger,
+	) {
 	}
 
 	public function handle(Event $event): void {
