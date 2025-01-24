@@ -25,26 +25,12 @@ use OCP\Security\ISecureRandom;
 
 class Totp implements ITotp {
 
-	/** @var TotpSecretMapper */
-	private $secretMapper;
-
-	/** @var ICrypto */
-	private $crypto;
-
-	/** @var IEventDispatcher */
-	private $eventDispatcher;
-
-	/** @var ISecureRandom */
-	private $random;
-
-	public function __construct(TotpSecretMapper $secretMapper,
-		ICrypto $crypto,
-		IEventDispatcher $eventDispatcher,
-		ISecureRandom $random) {
-		$this->secretMapper = $secretMapper;
-		$this->crypto = $crypto;
-		$this->eventDispatcher = $eventDispatcher;
-		$this->random = $random;
+	public function __construct(
+		private TotpSecretMapper $secretMapper,
+		private ICrypto $crypto,
+		private IEventDispatcher $eventDispatcher,
+		private ISecureRandom $random,
+	) {
 	}
 
 	public function hasSecret(IUser $user): bool {

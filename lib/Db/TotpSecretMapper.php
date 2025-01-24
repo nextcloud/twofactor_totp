@@ -39,7 +39,7 @@ class TotpSecretMapper extends QBMapper {
 			->from('twofactor_totp_secrets')
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user->getUID())));
 		/** @var Statement $result */
-		$result = $qb->execute();
+		$result = $qb->executeQuery();
 
 		$row = $result->fetch();
 		$result->closeCursor();

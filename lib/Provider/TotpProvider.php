@@ -28,31 +28,13 @@ use OCP\Template;
 
 class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
 
-	/** @var ITotp */
-	private $totp;
-
-	/** @var IL10N */
-	private $l10n;
-
-	/** @var IAppContainer */
-	private $container;
-
-	/** @var IInitialState */
-	private $initialState;
-
-	/** @var IURLGenerator */
-	private $urlGenerator;
-
-	public function __construct(ITotp $totp,
-		IL10N $l10n,
-		IAppContainer $container,
-		IInitialState $initialStateService,
-		IURLGenerator $urlGenerator) {
-		$this->totp = $totp;
-		$this->l10n = $l10n;
-		$this->container = $container;
-		$this->initialState = $initialStateService;
-		$this->urlGenerator = $urlGenerator;
+	public function __construct(
+		private ITotp $totp,
+		private IL10N $l10n,
+		private IAppContainer $container,
+		private IInitialState $initialStateService,
+		private IURLGenerator $urlGenerator,
+	) {
 	}
 
 	/**

@@ -21,23 +21,18 @@ use Psr\Log\LoggerInterface;
  */
 class UserDeleted implements IEventListener {
 
-	/** @var TotpSecretMapper */
-	private $totpSecretMapper;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	public function __construct(TotpSecretMapper $totpSecretMapper, LoggerInterface $logger) {
-		$this->totpSecretMapper = $totpSecretMapper;
-		$this->logger = $logger;
+	public function __construct(
+		private TotpSecretMapper $totpSecretMapper,
+		private LoggerInterface $logger,
+	) {
 	}
 
 	public function handle(Event $event): void {
 		if ($event instanceof UserDeletedEvent) {
 			try {
-				$this->totpSecretMapper->deleteSecretByUserId($event->getUser()->getUID());
+				$this->totpSecretMapper->deleteSecretByUserId($event->getUser()?->getUID());
 			} catch (Exception $e) {
-				$this->logger->warning($e->getMessage(), ['uid' => $event->getUser()->getUID()]);
+				$this->logger->warning($e->getMessage(), ['uid' => $event->getUser()?->getUID()]);
 			}
 		}
 	}
