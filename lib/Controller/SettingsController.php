@@ -36,7 +36,7 @@ class SettingsController extends ALoginSetupController {
 	 * @return JSONResponse
 	 */
 	public function state(): JSONResponse {
-		$user = $this->userSession?->getUser();
+		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new \Exception('user not available');
 		}
@@ -53,7 +53,7 @@ class SettingsController extends ALoginSetupController {
 	 * @param string|null $code for verification
 	 */
 	public function enable(int $state, ?string $code = null): JSONResponse {
-		$user = $this->userSession?->getUser();
+		$user = $this->userSession->getUser();
 		if (is_null($user)) {
 			throw new \Exception('user not available');
 		}
@@ -94,7 +94,7 @@ class SettingsController extends ALoginSetupController {
 	 */
 	private function getSecretName(): string {
 		$productName = $this->defaults->getName();
-		$user = $this->userSession?->getUser();
+		$user = $this->userSession->getUser();
 		if ($user === null) {
 			throw new RuntimeException('No user in this context');
 		}

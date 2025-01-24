@@ -30,9 +30,9 @@ class UserDeleted implements IEventListener {
 	public function handle(Event $event): void {
 		if ($event instanceof UserDeletedEvent) {
 			try {
-				$this->totpSecretMapper->deleteSecretByUserId($event->getUser()?->getUID());
+				$this->totpSecretMapper->deleteSecretByUserId($event->getUser()->getUID());
 			} catch (Exception $e) {
-				$this->logger->warning($e->getMessage(), ['uid' => $event->getUser()?->getUID()]);
+				$this->logger->warning($e->getMessage(), ['uid' => $event->getUser()->getUID()]);
 			}
 		}
 	}
