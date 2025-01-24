@@ -32,7 +32,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 		private ITotp $totp,
 		private IL10N $l10n,
 		private IAppContainer $container,
-		private IInitialState $initialStateService,
+		private IInitialState $initialState,
 		private IURLGenerator $urlGenerator,
 	) {
 	}
