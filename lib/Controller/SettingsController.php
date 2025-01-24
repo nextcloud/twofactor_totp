@@ -21,20 +21,14 @@ use function is_null;
 
 class SettingsController extends ALoginSetupController {
 
-	/** @var ITotp */
-	private $totp;
-
-	/** @var IUserSession */
-	private $userSession;
-
-	/** @var Defaults */
-	private $defaults;
-
-	public function __construct(string $appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults) {
+	public function __construct(
+		string $appName,
+		IRequest $request,
+		private IUserSession $userSession,
+		private ITotp $totp,
+		private Defaults $defaults,
+	) {
 		parent::__construct($appName, $request);
-		$this->userSession = $userSession;
-		$this->totp = $totp;
-		$this->defaults = $defaults;
 	}
 
 	/**
@@ -42,7 +36,7 @@ class SettingsController extends ALoginSetupController {
 	 * @return JSONResponse
 	 */
 	public function state(): JSONResponse {
-		$user = $this->userSession->getUser();
+		$user = $this->userSession?->getUser();
 		if (is_null($user)) {
 			throw new \Exception('user not available');
 		}
@@ -59,7 +53,7 @@ class SettingsController extends ALoginSetupController {
 	 * @param string|null $code for verification
 	 */
 	public function enable(int $state, ?string $code = null): JSONResponse {
-		$user = $this->userSession->getUser();
+		$user = $this->userSession?->getUser();
 		if (is_null($user)) {
 			throw new \Exception('user not available');
 		}
@@ -100,7 +94,7 @@ class SettingsController extends ALoginSetupController {
 	 */
 	private function getSecretName(): string {
 		$productName = $this->defaults->getName();
-		$user = $this->userSession->getUser();
+		$user = $this->userSession?->getUser();
 		if ($user === null) {
 			throw new RuntimeException('No user in this context');
 		}

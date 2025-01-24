@@ -20,11 +20,9 @@ use OCP\EventDispatcher\IEventListener;
  */
 class StateChangeActivity implements IEventListener {
 
-	/** @var ActivityManager */
-	private $activityManager;
-
-	public function __construct(ActivityManager $activityManager) {
-		$this->activityManager = $activityManager;
+	public function __construct(
+		private ActivityManager $activityManager,
+	) {
 	}
 
 	public function handle(Event $event): void {
