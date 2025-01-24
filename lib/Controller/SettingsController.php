@@ -21,20 +21,14 @@ use function is_null;
 
 class SettingsController extends ALoginSetupController {
 
-	/** @var ITotp */
-	private $totp;
-
-	/** @var IUserSession */
-	private $userSession;
-
-	/** @var Defaults */
-	private $defaults;
-
-	public function __construct(string $appName, IRequest $request, IUserSession $userSession, ITotp $totp, Defaults $defaults) {
+	public function __construct(
+		string $appName,
+		IRequest $request,
+		private IUserSession $userSession,
+		private ITotp $totp,
+		private Defaults $defaults,
+	) {
 		parent::__construct($appName, $request);
-		$this->userSession = $userSession;
-		$this->totp = $totp;
-		$this->defaults = $defaults;
 	}
 
 	/**

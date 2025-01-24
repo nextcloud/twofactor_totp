@@ -19,25 +19,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CleanUp extends Command {
-	/** @var IDBConnection */
-	private $db;
-
-	/** @var IUserManager */
-	private $userManager;
-
-	/** @var TotpSecretMapper */
-	private $totpSecretMapper;
 
 	public function __construct(
-		IDBConnection $db,
-		IUserManager $userManager,
-		TotpSecretMapper $totpSecretMapper,
+		private IDBConnection $db,
+		private IUserManager $userManager,
+		private TotpSecretMapper $totpSecretMapper,
 	) {
 		parent::__construct();
-
-		$this->db = $db;
-		$this->userManager = $userManager;
-		$this->totpSecretMapper = $totpSecretMapper;
 	}
 
 	protected function configure(): void {

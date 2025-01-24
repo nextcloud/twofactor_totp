@@ -16,11 +16,9 @@ use OCP\Template;
 
 class AtLoginProvider implements ILoginSetupProvider {
 
-	/** @var IURLGenerator */
-	private $urlGenerator;
-
-	public function __construct(IURLGenerator $urlGenerator) {
-		$this->urlGenerator = $urlGenerator;
+	public function __construct(
+		private IURLGenerator $urlGenerator,
+	) {
 	}
 
 	public function getBody(): Template {
