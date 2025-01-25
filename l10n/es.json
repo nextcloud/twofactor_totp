@@ -1,9 +1,12 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Ha habilitado la autenticación de dos factores TOTP para su cuenta",
     "You disabled TOTP two-factor authentication for your account" : "Ha deshabilitado la autenticación de dos factores TOTP para su cuenta",
+    "TOTP two-factor authentication disabled by the administration" : "La autenticación de dos factores TOTP ha sido desactivada por la administración",
     "TOTP (Authenticator app)" : "TOTP (App de autenticación)",
     "Authenticate with a TOTP app" : "Autenticar con la app TOTP",
     "Two-Factor TOTP Provider" : "Proveedor de autenticación de dos factores TOTP",
+    "Two-factor TOTP provider" : "Proveedor de segundo factor TOTP",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Un proveedor de autenticación en dos pasos para TOTP (RFC 6238)",
     "Enable TOTP" : "Habilitar TOTP",
     "Could not enable TOTP" : "No se ha podido activar TOTP",
     "Could not verify your key. Please try again" : "No se ha podido verificar su clave. Por favor, inténtelo de nuevo",
