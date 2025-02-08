@@ -1,9 +1,12 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Zapli ste TOTP dvojfaktorové overenie pre váš účet",
     "You disabled TOTP two-factor authentication for your account" : "Vypli ste TOTP dvojfaktorové overenie pre váš účet",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP dvojfázové prihlasovanie bolo vypnuté administrátorom",
     "TOTP (Authenticator app)" : "TOTP (Authenticator aplikácia)",
     "Authenticate with a TOTP app" : "Overujete sa pomocou TOTP aplikácie",
     "Two-Factor TOTP Provider" : "Poskytovateľ dvojzložkovej služby TOTP",
+    "Two-factor TOTP provider" : "Poskytovateľ dvojfázového overenia TOTP",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Poskytovateľ dvojfaktorového overenia TOTP (RFC 6238)",
     "Enable TOTP" : "Povoliť TOTP",
     "Could not enable TOTP" : "Nepodarilo sa zapnúť TOTP",
     "Could not verify your key. Please try again" : "Nie je možné overiť váš kľúč. Skúste to znovu",
