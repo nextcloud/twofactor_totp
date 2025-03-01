@@ -1,6 +1,7 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Hai abilitato l'autenticazione TOTP a due fattori per il tuo account",
     "You disabled TOTP two-factor authentication for your account" : "Hai disabilitato l'autenticazione TOTP a due fattori per il tuo account",
+    "TOTP two-factor authentication disabled by the administration" : "Autenticazione a due fattori TOTP disabilitata dall'amministratore",
     "TOTP (Authenticator app)" : "TOTP (Applicazione autenticazione)",
     "Authenticate with a TOTP app" : "Autenticati con un'applicazione TOTP",
     "Two-Factor TOTP Provider" : "Fornitore TOTP a due fattori",
