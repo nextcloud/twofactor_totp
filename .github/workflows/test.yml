@@ -165,7 +165,7 @@ jobs:
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          tunnelIdentifier: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
+          tunnelName: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
           region: eu
 
       - name: Run tests
