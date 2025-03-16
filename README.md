@@ -24,7 +24,7 @@ Any offers to help are welcome, whether it's development knowledge, refactoring 
 
 ## State of the app
 
-This version 3 ("v3") of the [twofactor_email](https://github.com/nursoda/twofactor_email/) app version 2 ("v2") is meant to someday replace v2. v3 is based on [twofactor_totp](https://github.com/nextcloud/twofactor_totp/). My idea was to only modify what's necessary and to cherrypick all changes that reflect the Nextcloud framwork changes. It turned out, that this may not have been my best idea. But the code is there, and usable.
+This version 3 ("v3") of the currently official [twofactor_email](https://github.com/nursoda/twofactor_email/) app version 2 ("v2") (available in the [Nextcloud App Store](https://apps.nextcloud.com/apps/twofactor_email)) is meant to someday replace v2. v3 is based on [twofactor_totp](https://github.com/nextcloud/twofactor_totp/). My idea was to only modify what's necessary and to cherrypick all changes that reflect the Nextcloud framwork changes. It turned out, that this may not have been my best idea. But the code is there, and usable.
 
 Until the code of this app is not able to replace the currently working v2 without disturbances for users, I won't release it. Currently, the migration from v2 to v3 gives me headaches. Mind that the state machine changed, and will change further: I intend to simplify it (code not yet committed here since I cannot find why the app no longer registers itself as twofactor provider.
 
