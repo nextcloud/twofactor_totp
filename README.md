@@ -12,7 +12,7 @@ Admins may enforce 2FA for certain or all users. If enforced, users are prompted
 
 Mind that, once you enable 2FA, you can no longer use your passwort in applications that don't support the web based 2FA login flow. For them, you need to create and use [app passwords](https://docs.nextcloud.com/server/stable/user_manual/en/session_management.html#managing-devices).
 
-## Any development help welcome
+## Building yourself and call for help
 
 To build the app, check out the repo and follow these steps:
 
@@ -20,4 +20,12 @@ To build the app, check out the repo and follow these steps:
 * `npm ci`
 * `npm run build` or `npm run dev` [more info](https://docs.nextcloud.com/server/latest/developer_manual/digging_deeper/npm.html)
 
-Any pull requests or offers to help are welcome, please contact [the dev team](https://github.com/datenschutz-individuell/twofactor_email/wiki/Developer-notes).
+Any offers to help are welcome, whether it's development knowledge, refactoring to fully adhere SOLID principles, better test coverage or implemeting new features, but also good documentation, examples, security audits, etc. Please contact [the dev team](https://github.com/datenschutz-individuell/twofactor_email/wiki/Developer-notes).
+
+## State of the app
+
+This version 3 ("v3") of the [twofactor_email](https://github.com/nursoda/twofactor_email/) app version 2 ("v2") is meant to someday replace v2. v3 is based on [twofactor_totp](https://github.com/nextcloud/twofactor_totp/). My idea was to only modify what's necessary and to cherrypick all changes that reflect the Nextcloud framwork changes. It turned out, that this may not have been my best idea. But the code is there, and usable.
+
+Until the code of this app is not able to replace the currently working v2 without disturbances for users, I won't release it. Currently, the migration from v2 to v3 gives me headaches. Mind that the state machine changed, and will change further: I intend to simplify it (code not yet committed here since I cannot find why the app no longer registers itself as twofactor provider.
+
+So if you have deeper Nextcloud framework knowledge and ideas for features, I suggest you rather create PRs here in v3 than in v2. If you know how to replace vue2 and the dependencies it pulls, please preferrably help Nextcloud to get rid of vue2 altogether. If you know how to switch to vue3 for this v3 app only, please create a PR.  Mi biggest concern is to be able to build this app without any security warnings for all officially supported Nextcloud versions.
