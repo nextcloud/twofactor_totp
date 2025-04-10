@@ -161,12 +161,12 @@ jobs:
         run: php -S 0.0.0.0:8080 &
 
       - name: Connect to sauce
-        uses: saucelabs/sauce-connect-action@55139e517d661df9be6c05509aeb6bae38fa7a50 # v2.3.7
+        uses: saucelabs/sauce-connect-action@fc54c8b087f2b4b6d4ccc42a2d4bbc64795dfde2 #v3.0.0
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
           region: eu-central-1
-          tunnelIdentifier: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
+          tunnelName: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
 
       - name: Run tests
         working-directory: nextcloud/apps/twofactor_totp
