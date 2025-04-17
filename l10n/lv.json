@@ -5,7 +5,7 @@
     "Authenticate with a TOTP app" : "Autentificēties ar TOTP lietotni",
     "Could not verify your key. Please try again" : "Nevarēja verificēt tavu atslēgu. Mēģini vēlreiz.",
     "Enable TOTP" : "Iespējot TOTP",
-    "Authentication code" : "Autentifikācijas kods",
+    "Authentication code" : "Autentificēšanās kods",
     "Verify" : "Verificēt",
     "Get the authentication code from the two-factor authentication app on your device." : "Autentificēšanas kods ir iegūstams divpakāpju autentificēšanas lietotnē Tavā ierīcē.",
     "Submit" : "Iesniegt"
