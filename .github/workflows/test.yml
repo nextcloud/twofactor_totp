@@ -163,7 +163,7 @@ jobs:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
           region: eu
-          tunnelIdentifier: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
+          tunnelName: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
 
       - name: Run tests
         working-directory: nextcloud/apps/twofactor_totp
