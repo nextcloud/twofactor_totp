@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Sie haben TOTP als Zwei-Faktor-Authentifizierung für Ihr Konto aktiviert",
     "You disabled TOTP two-factor authentication for your account" : "Sie haben TOTP als Zwei-Faktor-Authentifizierung für Ihr Konto deaktiviert",
-    "TOTP two-factor authentication disabled by the administration" : "TOTP-Zwei-Faktor-Authentifizierung von der Administration deaktiviert",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP Zwei-Faktor-Authentifizierung von der Administration deaktiviert",
     "TOTP (Authenticator app)" : "TOTP (Authenticator-App)",
     "Authenticate with a TOTP app" : "Mit einer TOTP-App authentifizieren",
     "Two-Factor TOTP Provider" : "Zwei-Faktor TOTP-Anbieter",
@@ -17,7 +17,7 @@ OC.L10N.register(
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Nachdem Sie die App konfiguriert haben, geben Sie unten einen Testcode ein, um sicherzustellen, dass alles funktioniert:",
     "Authentication code" : "Authentifizierungscode",
     "Verify" : "Überprüfen",
-    "Get the authentication code from the two-factor authentication app on your device." : "Erhalten Sie den Authentifizierungscode von der Zweifaktorauthentifizierungs-App auf Ihrem Gerät ",
+    "Get the authentication code from the two-factor authentication app on your device." : "Erhalten Sie den Authentifizierungscode von der Zwei-Faktor-Authentifizierungs-App auf Ihrem Gerät ",
     "Submit" : "Übermitteln",
     "TOTP two-factor authentication disabled by an admin" : "TOTP als Zwei-Faktor-Authentifizierung wurde von der Administration deaktiviert",
     "TOTP two-factor provider" : "TOTP-Zwei-Faktor-Anbieter",
