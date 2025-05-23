@@ -27,10 +27,11 @@
 		</p>
 		<input id="totp-confirmation"
 			v-model="confirmationCode"
-			type="tel"
+			type="text"
 			minlength="6"
 			maxlength="10"
-			autocomplete="off"
+			autocomplete="one-time-code"
+			inputmode="numeric"
 			autocapitalize="off"
 			:disabled="loading"
 			:placeholder="t('twofactor_totp', 'Authentication code')"
