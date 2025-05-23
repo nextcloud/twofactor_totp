@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e29676302b45e2098becc64814965e5",
+    "content-hash": "bb4ee618c8edf6557b27356b4a984fba",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -240,16 +240,16 @@
         },
         {
             "name": "christophwurst/nextcloud_testing",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
-                "reference": "6677a6d09f7fc9c8e5258a69aa684da4e9f43515"
+                "reference": "dcd62d7ea496891f88e6aa9709b15b1d8a774216"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/6677a6d09f7fc9c8e5258a69aa684da4e9f43515",
-                "reference": "6677a6d09f7fc9c8e5258a69aa684da4e9f43515",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/dcd62d7ea496891f88e6aa9709b15b1d8a774216",
+                "reference": "dcd62d7ea496891f88e6aa9709b15b1d8a774216",
                 "shasum": ""
             },
             "require": {
@@ -276,9 +276,9 @@
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
             "support": {
                 "issues": "https://github.com/ChristophWurst/nextcloud_testing/issues",
-                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v1.0.0"
+                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v1.0.1"
             },
-            "time": "2023-10-30T07:42:56+00:00"
+            "time": "2025-05-23T11:40:46+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -2214,8 +2214,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -2356,8 +2356,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -2531,11 +2531,11 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.0"
     },
