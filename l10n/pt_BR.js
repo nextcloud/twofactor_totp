@@ -13,7 +13,7 @@ OC.L10N.register(
     "Could not verify your key. Please try again" : "Não foi possível verificar sua chave. Tente novamente.",
     "Enable TOTP" : "Ativar TOTP",
     "Your new TOTP secret is:" : "A nova senha TOTP is:",
-    "For quick setup, scan this QR code with your TOTP app:" : "Para uma configuração rápida, digitalize este código QR com o seu aplicativo TOTP:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Para uma configuração rápida, escaneie este código QR com o seu aplicativo TOTP:",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Após configurar seu aplicativo, insira um código de teste abaixo para garantir que tudo funcione corretamente:",
     "Authentication code" : "Código de autenticação",
     "Verify" : "Verificar",
