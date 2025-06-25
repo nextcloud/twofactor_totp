@@ -1,9 +1,12 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Je hebt TOTP twee-factor authenticatie voor je account ingeschakeld",
     "You disabled TOTP two-factor authentication for your account" : "Je hebt TOTP twee-factor authenticatie voor je account uitgeschakeld",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP tweefactorauthenticatie uitgeschakeld door de beheerder",
     "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
     "Authenticate with a TOTP app" : "Authenticeren met een TOTP app",
     "Two-Factor TOTP Provider" : "Twee-Factor TOTP Provider",
+    "Two-factor TOTP provider" : "TOPTP tweefactorprovider",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Een tweefactorauthenticatieprovider voor TOTP (RFC 6238)",
     "Could not enable TOTP" : "Kon TOTP niet inschakelen",
     "Could not verify your key. Please try again" : "Kon je sleutel niet verifiëren. Probeer het opnieuw",
     "Enable TOTP" : "Inschakelen TOTP",
