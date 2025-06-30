@@ -1,5 +1,5 @@
 { "translations": {
-    "You enabled TOTP two-factor authentication for your account" : "Hesabınız için tek kullanımlık parola ile iki adımlı doğrulamayı etkinleştirdiniz",
+    "You enabled TOTP two-factor authentication for your account" : "Hesabınız için tek kullanımlık parola ile iki adımlı doğrulamayı açtınız",
     "You disabled TOTP two-factor authentication for your account" : "Hesabınız için tek kullanımlık parola ile iki adımlı doğrulamayı kullanımdan kaldırdınız",
     "TOTP two-factor authentication disabled by the administration" : "Tek kullanımlık parola ile iki adımlı doğrulama yönetim tarafından kapatılmış",
     "TOTP (Authenticator app)" : "Tek kullanımlık parola (kimlik doğrulama uygulaması)",
@@ -7,7 +7,7 @@
     "Two-Factor TOTP Provider" : "İki adımlı doğrulama tek kullanımlık parola hizmeti sağlayıcısı",
     "Two-factor TOTP provider" : "İki adımlı doğrulama tek kullanımlık parola hizmeti sağlayıcısı",
     "A two-factor authentication provider for TOTP (RFC 6238)" : "Tek kullanımlık parola için iki adımlı doğrulama hizmeti sağlayıcısı (RFC 6238)",
-    "Could not enable TOTP" : "Tek kullanımlık parola etkinleştirilemedi",
+    "Could not enable TOTP" : "Tek kullanımlık parola açılamadı",
     "Could not verify your key. Please try again" : "Anahtarınız doğrulanamadı. Lütfen yeniden deneyin",
     "Enable TOTP" : "Tek kullanımlık parola kullanılsın",
     "Your new TOTP secret is:" : "Yeni tek kullanımlık parolanız:",
@@ -17,7 +17,7 @@
     "Verify" : "Doğrula",
     "Get the authentication code from the two-factor authentication app on your device." : "Aygıtınızda yüklü iki adımlı doğrulama uygulamasından kodu alın.",
     "Submit" : "Gönder",
-    "TOTP two-factor authentication disabled by an admin" : "Tek kullanımlık parola ile iki adımlı doğrulama yönetici tarafından devre dışı bırakılmış",
+    "TOTP two-factor authentication disabled by an admin" : "Tek kullanımlık parola ile iki adımlı doğrulama yönetici tarafından kapatılmış",
     "TOTP two-factor provider" : "Tek kullanımlık parola iki adımlı doğrulama hizmeti sağlayıcısı",
     "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Tek kullanımlık parola için iki adımlı doğrulama hizmeti sağlayıcısı (RFC 6238)"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
