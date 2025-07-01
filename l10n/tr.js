@@ -13,7 +13,7 @@ OC.L10N.register(
     "Could not verify your key. Please try again" : "Anahtarınız doğrulanamadı. Lütfen yeniden deneyin",
     "Enable TOTP" : "Tek kullanımlık parola kullanılsın",
     "Your new TOTP secret is:" : "Yeni tek kullanımlık parolanız:",
-    "For quick setup, scan this QR code with your TOTP app:" : "Hızlı kurulum için tek kullanımlık parola uygulamanızla şu QR kodunu tarayın:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Hızlı kurulum için tek kullanımlık parola uygulamanızla şu kare kodunu tarayın:",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Uygulamanızı yapılandırdıktan sonra aşağı bir deneme kodu yazarak herşeyin düzgün çalıştığından emin olun:",
     "Authentication code" : "Kimlik doğrulama kodu",
     "Verify" : "Doğrula",
