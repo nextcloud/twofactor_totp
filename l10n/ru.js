@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Вы включили двухфакторную аутентификацию с использованием TOTP",
     "You disabled TOTP two-factor authentication for your account" : "Вы отключили двухфакторную аутентификацию TOTP",
+    "TOTP two-factor authentication disabled by the administration" : "Двухфакторная TOTP аутентификация была отключена администратором",
     "TOTP (Authenticator app)" : "TOTP (Приложение аутентификации)",
     "Authenticate with a TOTP app" : "Аутентифицируйтесь с помощью TOTP приложения",
     "Two-Factor TOTP Provider" : "Второй фактор — коды TOTP",
