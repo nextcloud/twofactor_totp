@@ -77,7 +77,6 @@ export default {
 		createTwoFactorEMail() {
 			// Show loading spinner
 			this.loading = true
-			this.errorHint = ''
 
 			Logger.debug('starting setup')
 
@@ -94,7 +93,9 @@ export default {
 					}
 				})
 				.catch((e) => {
-					this.errorHint = t('twofactor_email', 'Unable to activate email authentication. It\'s possible that the server is experiencing difficulties with mail delivery.')
+					OC.Notification.showTemporary(
+						t('twofactor_email', 'Unable to activate email authentication. It\'s possible that the server is experiencing difficulties with mail delivery.'),
+					)
 					Logger.error('Could not enable e-mail', e)
 
 					// Restore on error
@@ -108,7 +109,6 @@ export default {
 			// Show loading spinner and disable input elements
 			this.loading = true
 			this.loadingConfirmation = true
-			this.errorHint = ''
 
 			Logger.debug('starting enable')
 
@@ -120,9 +120,10 @@ export default {
 						this.loading = false
 						this.enabled = true
 						this.email = ''
-						this.errorHint = ''
 					} else {
-						this.errorHint = t('twofactor_email', 'Could not verify your code. Please try again.')
+						OC.Notification.showTemporary(
+							t('twofactor_email', 'Could not verify your code. Please try again.'),
+						)
 					}
 
 					this.confirmation = ''
@@ -134,7 +135,6 @@ export default {
 		disableTwoFactorEMail() {
 			// Show loading spinner
 			this.loading = true
-			this.errorHint = ''
 
 			Logger.debug('starting disable')
 
