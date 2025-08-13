@@ -12,8 +12,9 @@
 	<version>3.0.2-dev</version>
 	<licence>agpl</licence>
 	<author mail="twofactor-email@datenschutz-individuell.de">Olav Seyfarth (datenschutz-individuell) [see CONTRIBUTORS.md for more]</author>
-	<category>security</category>
 	<namespace>TwoFactorEMail</namespace>
+	<category>security</category>
+
 	<website>https://github.com/datenschutz-individuell/twofactor_email</website>
 	<bugs>https://github.com/datenschutz-individuell/twofactor_email/issues</bugs>
 	<documentation>
@@ -21,7 +22,7 @@
 		<admin>https://github.com/datenschutz-individuell/twofactor_email/wiki/Admin-manual</admin>
 		<developer>https://github.com/datenschutz-individuell/twofactor_email/wiki/Developer-notes</developer>
 	</documentation>
-	<repository>https://github.com/datenschutz-individuell/twofactor_email.git</repository>
+	<repository type="git">https://github.com/datenschutz-individuell/twofactor_email.git</repository>
 	<screenshot small-thumbnail="https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/select-auth_thumb.png">https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/challenge.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-before.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-after.png</screenshot>
