@@ -11,7 +11,7 @@
 	<description>A Two-Factor-Auth Provider for e-mail</description>
 	<version>3.0.2-dev</version>
 	<licence>agpl</licence>
-	<author mail="olav@seyfarth.de">Olav Seyfarth (datenschutz-individuell) [see CONTRIBUTORS.md for more]</author>
+	<author mail="twofactor-email@datenschutz-individuell.de">Olav Seyfarth (datenschutz-individuell) [see CONTRIBUTORS.md for more]</author>
 	<category>security</category>
 	<namespace>TwoFactorEMail</namespace>
 	<website>https://github.com/datenschutz-individuell/twofactor_email</website>

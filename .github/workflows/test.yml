@@ -39,14 +39,14 @@ jobs:
       - name: Checkout app
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          path: nextcloud/apps/twofactor_totp
+          path: nextcloud/apps/twofactor_email
 
       - name: Install dependencies
-        working-directory: nextcloud/apps/twofactor_totp
+        working-directory: nextcloud/apps/twofactor_email
         run: composer install
 
       - name: Run tests
-        working-directory: nextcloud/apps/twofactor_totp
+        working-directory: nextcloud/apps/twofactor_email
         run: composer run test:unit
 
       - name: Report coverage
@@ -54,7 +54,7 @@ jobs:
         if: ${{ always() }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./nextcloud/apps/twofactor_totp/tests/clover.xml
+          file: ./nextcloud/apps/twofactor_email/tests/clover.xml
           flags: unittests
           fail_ci_if_error: true
 
@@ -117,13 +117,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          path: nextcloud/apps/twofactor_totp
+          path: nextcloud/apps/twofactor_email
 
       - name: Read package.json node and npm engines version
         uses: skjnldsv/read-package-engines-version-actions@06d6baf7d8f41934ab630e97d9e6c0bc9c9ac5e4 # v3
         id: versions
         with:
-          path: nextcloud/apps/twofactor_totp
+          path: nextcloud/apps/twofactor_email
           fallbackNode: '^12'
           fallbackNpm: '^6'
 
@@ -141,20 +141,20 @@ jobs:
       - name: Checkout app
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          path: nextcloud/apps/twofactor_totp
+          path: nextcloud/apps/twofactor_email
 
       - name: Install dependencies
-        working-directory: nextcloud/apps/twofactor_totp
+        working-directory: nextcloud/apps/twofactor_email
         run: |
           composer install
           npm ci
 
       - name: Build the app
-        working-directory: nextcloud/apps/twofactor_totp
+        working-directory: nextcloud/apps/twofactor_email
         run: npm run build
 
       - name: Install the app
-        run: php -f nextcloud/occ app:enable twofactor_totp
+        run: php -f nextcloud/occ app:enable twofactor_email
 
       - name: Start Nextcloud web server
         working-directory: nextcloud
@@ -168,7 +168,7 @@ jobs:
           tunnelIdentifier: "${{ github.run_id }}-${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-${{ matrix.browser }}"
 
       - name: Run tests
-        working-directory: nextcloud/apps/twofactor_totp
+        working-directory: nextcloud/apps/twofactor_email
         run: composer run test:acceptance
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}

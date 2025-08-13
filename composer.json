@@ -5,6 +5,11 @@
 			"OCA\\TwoFactorEMail\\": "lib/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"OCA\\TwoFactorEMail\\": "tests/"
+		}
+	},
 	"require": {
 		"php": ">=8.0 <8.5"
 	},
