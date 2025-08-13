@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorEMail\Activity;
 
-use InvalidArgumentException;
 use OCA\TwoFactorEMail\AppInfo\Application;
 use OCP\Activity\Exceptions\UnknownActivityException;
 use OCP\Activity\IEvent;

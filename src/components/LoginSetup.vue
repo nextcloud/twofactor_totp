@@ -59,14 +59,14 @@ export default {
 					this.loading = false
 				},
 			)
-			.catch((e) => {
-				this.errorHint = t('twofactor_email', 'Unable to activate email authentication. It\'s possible that the server is experiencing difficulties with mail delivery.')
-				Logger.error('Could not enable e-mail', e)
+				.catch((e) => {
+					this.errorHint = t('twofactor_email', 'Unable to activate email authentication. It\'s possible that the server is experiencing difficulties with mail delivery.')
+					Logger.error('Could not enable e-mail', e)
 
-				// Restore on error
-				this.loading = false
-			})
-			.catch((e) => Logger.error(e))
+					// Restore on error
+					this.loading = false
+				})
+				.catch((e) => Logger.error(e))
 
 		},
 		confirm() {
