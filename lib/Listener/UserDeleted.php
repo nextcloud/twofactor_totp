@@ -2,27 +2,9 @@
 
 declare(strict_types=1);
 
-/**
- * @copyright Copyright (c) 2022 Daniel Kesselberg <mail@danielkesselberg.de>
- *
- * @author Nico Kluge <nico.kluge@klugecoded.com>
- * @author Daniel Kesselberg <mail@danielkesselberg.de>
- *
- * @license GNU AGPL version 3 or any later version
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
+/*
+ * SPDX-FileCopyrightText: 2022 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
 namespace OCA\TwoFactorEMail\Listener;
@@ -39,15 +21,10 @@ use Psr\Log\LoggerInterface;
  */
 class UserDeleted implements IEventListener {
 
-	/** @var TwoFactorEMailMapper */
-	private $twoFactorEMailMapper;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	public function __construct(TwoFactorEMailMapper $twoFactorEMailMapper, LoggerInterface $logger) {
-		$this->twoFactorEMailMapper = $twoFactorEMailMapper;
-		$this->logger = $logger;
+	public function __construct(
+		private TwoFactorEMailMapper $twoFactorEMailMapper,
+		private LoggerInterface $logger,
+	) {
 	}
 
 	public function handle(Event $event): void {

@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
+<!--
+  - SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-only
+-->
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
 	<id>twofactor_email</id>
@@ -22,7 +26,7 @@
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-before.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-after.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="29" max-version="31" />
+		<nextcloud min-version="30" max-version="31" />
 	</dependencies>
 	<two-factor-providers>
 		<provider>OCA\TwoFactorEMail\Provider\EMailProvider</provider>

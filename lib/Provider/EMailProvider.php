@@ -2,24 +2,9 @@
 
 declare(strict_types=1);
 
-/**
- * @author Nico Kluge <nico.kluge@klugecoded.com>
- * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- *
- * Two-factor TOTP
- *
- * This code is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License, version 3,
- * as published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License, version 3,
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- *
+/*
+ * SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 namespace OCA\TwoFactorEMail\Provider;
@@ -44,36 +29,14 @@ use OCP\Template;
 
 class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
 
-	/** @var IEMailService */
-	private $emailService;
-
-	/** @var IL10N */
-	private $l10n;
-
-	/** @var IAppContainer */
-	private $container;
-
-	/** @var IInitialState */
-	private $initialState;
-
-	/** @var IURLGenerator */
-	private $urlGenerator;
-
-	/** @var ISecureRandom */
-	private $secureRandom;
-
-	public function __construct(IEMailService $emailService,
-								IL10N         $l10n,
-								IAppContainer $container,
-								IInitialState $initialStateService,
-								IURLGenerator $urlGenerator,
-								ISecureRandom $secureRandom	) {
-		$this->emailService = $emailService;
-		$this->l10n = $l10n;
-		$this->container = $container;
-		$this->initialState = $initialStateService;
-		$this->urlGenerator = $urlGenerator;
-		$this->secureRandom = $secureRandom;
+	public function __construct(
+		private IEMailService $emailService,
+		private IL10N $l10n,
+		private IAppContainer $container,
+		private IInitialState $initialState,
+		private IURLGenerator $urlGenerator,
+		private ISecureRandom $secureRandom,
+	) {
 	}
 
 	/**

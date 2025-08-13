@@ -1,4 +1,10 @@
 <?php
+
+/*
+ * SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
 style('twofactor_email', 'style');
 ?>
 
@@ -7,7 +13,7 @@ style('twofactor_email', 'style');
 <p><?php p($l->t('Get the authentication code from your email inbox.')) ?></p>
 
 <form method="POST" class="twofactor-email-form">
-	<input type="tel" minlength="6" maxlength="10" name="challenge" required="required" autofocus autocomplete="off" autocapitalize="off" placeholder="<?php p($l->t('Authentication code')) ?>">
+	<input type="text" minlength="6" maxlength="10" name="challenge" required="required" autofocus autocomplete="one-time-code" inputmode="numeric" autocapitalize="off" placeholder="<?php p($l->t('Authentication code')) ?>">
 	<button class="primary two-factor-submit" type="submit">
 		<?php p($l->t('Submit')); ?>
 	</button>
