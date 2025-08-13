@@ -12,6 +12,7 @@ namespace OCA\TwoFactorEMail\Test\Unit\Provider;
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\TwoFactorEMail\Provider\AtLoginProvider;
 use OCA\TwoFactorEMail\Provider\EMailProvider;
+use OCA\TwoFactorEMail\Service\IEMailProviderState;
 use OCA\TwoFactorEMail\Service\IEMailService;
 use OCA\TwoFactorEMail\Settings\Personal;
 use OCP\AppFramework\IAppContainer;
@@ -23,6 +24,9 @@ use OCP\Security\ISecureRandom;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class EMailProviderTest extends TestCase {
+
+	/** @var IEMailProviderState|MockObject */
+	private $providerState;
 
 	/** @var IEMailService|MockObject */
 	private $emailService;
@@ -45,6 +49,7 @@ class EMailProviderTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->providerState = $this->createMock(IEMailProviderState::class);
 		$this->emailService = $this->createMock(IEMailService::class);
 		$this->l10n = $this->createMock(IL10N::class);
 		$this->container = $this->createMock(IAppContainer::class);
@@ -53,6 +58,7 @@ class EMailProviderTest extends TestCase {
 		$this->secureRandom = $this->createMock(ISecureRandom::class);
 
 		$this->provider = new EMailProvider(
+			$this->providerState,
 			$this->emailService,
 			$this->l10n,
 			$this->container,
@@ -115,7 +121,7 @@ class EMailProviderTest extends TestCase {
 		$expected = new Personal();
 
 		$user = $this->createMock(IUser::class);
-		$this->emailService->expects($this->once())
+		$this->providerState->expects($this->once())
 			->method('isEnabled')
 			->with($user)
 			->willReturn(true);

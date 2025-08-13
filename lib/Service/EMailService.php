@@ -29,17 +29,8 @@ class EMailService implements IEMailService {
         private LoggerInterface      $logger,
         private IL10N                $l10n,
         private IMailer              $mailer,
-        private Defaults             $defaults
+        private Defaults             $defaults,
 	) {
-	}
-
-	public function isEnabled(IUser $user): bool {
-		try {
-			$dbTwoFactorEmail = $this->twoFactorEMailMapper->getTwoFactorEMail($user);
-			return (int)$dbTwoFactorEmail->getState() === IEMailService::STATE_ENABLED;
-		} catch (DoesNotExistException $ex) {
-			return false;
-		}
 	}
 
 	public function createTwoFactorEMail(IUser $user, string|null $email = null): TwoFactorEMail {

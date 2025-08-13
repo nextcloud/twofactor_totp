@@ -20,8 +20,6 @@ interface IEMailService {
 	public const STATE_CREATED = 1;
 	public const STATE_ENABLED = 2;
 
-	public function isEnabled(IUser $user): bool;
-
 	/**
 	 * Create a new two-factor email.
 	 *

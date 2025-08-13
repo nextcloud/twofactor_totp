@@ -9,8 +9,8 @@ namespace OCA\TwoFactorEMail\Test\Unit\Controller;
 
 use InvalidArgumentException;
 use OCA\TwoFactorEMail\Controller\SettingsController;
+use OCA\TwoFactorEMail\Service\IEMailProviderState;
 use OCA\TwoFactorEMail\Service\IEMailService;
-use OCA\TwoFactorEMail\Service\EMailService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use OCP\IUser;
@@ -22,6 +22,7 @@ class SettingsControllerTest extends TestCase {
 	private $request;
 	private $userSession;
 	private $emailService;
+	private $providerState;
 	private $secureRandom;
 	/** @var SettingsController */
 	private $controller;
@@ -31,10 +32,11 @@ class SettingsControllerTest extends TestCase {
 
 		$this->request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
-		$this->emailService = $this->createMock(EMailService::class);
+		$this->emailService = $this->createMock(IEMailService::class);
+		$this->providerState = $this->createMock(IEMailProviderState::class);
 		$this->secureRandom = $this->createMock(ISecureRandom::class);
 
-		$this->controller = new SettingsController('twofactor_email', $this->request, $this->userSession, $this->emailService, $this->secureRandom);
+		$this->controller = new SettingsController('twofactor_email', $this->request, $this->userSession, $this->emailService, $this->providerState, $this->secureRandom);
 	}
 
 	public function testDisabledState() {
@@ -42,7 +44,7 @@ class SettingsControllerTest extends TestCase {
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
-		$this->emailService->expects($this->once())
+		$this->providerState->expects($this->once())
 			->method('isEnabled')
 			->with($user)
 			->willReturn(false);

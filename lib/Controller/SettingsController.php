@@ -11,6 +11,7 @@ namespace OCA\TwoFactorEMail\Controller;
 
 use Exception;
 use InvalidArgumentException;
+use OCA\TwoFactorEMail\Service\IEMailProviderState;
 use OCA\TwoFactorEMail\Service\IEMailService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
@@ -26,6 +27,7 @@ class SettingsController extends ALoginSetupController {
 		IRequest $request,
 		private IUserSession $userSession,
 		private IEMailService $emailService,
+		private IEMailProviderState $providerState,
 		private ISecureRandom $secureRandom,
 	) {
 		parent::__construct($appName, $request);
@@ -41,7 +43,7 @@ class SettingsController extends ALoginSetupController {
 			throw new \Exception('user not available');
 		}
 		return new JSONResponse([
-			'state' => $this->emailService->isEnabled($user) ? IEMailService::STATE_ENABLED : IEMailService::STATE_DISABLED,
+			'state' => $this->providerState->isEnabled($user) ? IEMailService::STATE_ENABLED : IEMailService::STATE_DISABLED,
 		]);
 	}
 

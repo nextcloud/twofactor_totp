@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Provider;
 
 use OCA\TwoFactorEMail\AppInfo\Application;
+use OCA\TwoFactorEMail\Service\IEMailProviderState;
 use OCA\TwoFactorEMail\Service\IEMailService;
 use OCA\TwoFactorEMail\Settings\Personal;
 use OCP\AppFramework\IAppContainer;
@@ -30,6 +31,7 @@ use OCP\Template;
 class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
 
 	public function __construct(
+		private IEMailProviderState $providerState,
 		private IEMailService $emailService,
 		private IL10N $l10n,
 		private IAppContainer $container,
@@ -81,10 +83,13 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	}
 
 	/**
-	 * Decides whether 2FA is enabled for the given user
+	 * Decides whether 2FA is enabled for the given user.
+	 * The Nextcloud stores two-factor provider states for every user in the oc_twofactor_providers table.
+	 * If no entry for an installed provider exists for a user then this method will be called.
+	 * The result will then be written to that table by Nextcloud.
 	 */
 	public function isTwoFactorAuthEnabledForUser(IUser $user): bool {
-		return $this->emailService->isEnabled($user);
+		return $this->providerState->isEnabled($user);
 	}
 
 	public function getLightIcon(): String {
@@ -96,7 +101,7 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	}
 
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
-		$this->initialState->provideInitialState('state', $this->emailService->isEnabled($user) ? IEMailService::STATE_ENABLED : IEMailService::STATE_DISABLED);
+		$this->initialState->provideInitialState('state', $this->providerState->isEnabled($user) ? IEMailService::STATE_ENABLED : IEMailService::STATE_DISABLED);
 		return new Personal();
 	}
 

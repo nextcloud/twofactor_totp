@@ -15,6 +15,8 @@ use OCA\TwoFactorEMail\Listener\EmailDeleted;
 use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorEMail\Listener\UserDeleted;
+use OCA\TwoFactorEMail\Service\EMailProviderState;
+use OCA\TwoFactorEMail\Service\IEMailProviderState;
 use OCA\TwoFactorEMail\Service\IEMailService;
 use OCA\TwoFactorEMail\Service\EMailService;
 use OCP\Accounts\UserUpdatedEvent;
@@ -35,6 +37,7 @@ class Application extends App implements IBootstrap {
 		include_once __DIR__ . '/../../vendor/autoload.php';
 
 		$context->registerServiceAlias(IEMailService::class, EMailService::class);
+		$context->registerServiceAlias(IEMailProviderState::class, EMailProviderState::class);
 
 		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
 		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
