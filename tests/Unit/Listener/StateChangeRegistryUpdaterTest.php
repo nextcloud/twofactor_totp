@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-namespace OCA\TwoFactorEMail\Test\Listener;
+namespace OCA\TwoFactorEMail\Test\Unit\Listener;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\TwoFactorEMail\Event\StateChanged;

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-namespace OCA\TwoFactorEMail\Unit\Activity;
+namespace OCA\TwoFactorEMail\Test\Unit\Activity;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use InvalidArgumentException;

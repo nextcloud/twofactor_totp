@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-namespace OCA\TwoFactorEMail\Unit\Controller;
+namespace OCA\TwoFactorEMail\Test\Unit\Controller;
 
 use InvalidArgumentException;
 use OCA\TwoFactorEMail\Controller\SettingsController;

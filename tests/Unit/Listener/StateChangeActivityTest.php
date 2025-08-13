@@ -7,7 +7,7 @@ declare(strict_types=1);
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-namespace OCA\TwoFactorEMail\Unit\Listener;
+namespace OCA\TwoFactorEMail\Test\Unit\Listener;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\TwoFactorEMail\Event\DisabledByAdmin;

@@ -7,7 +7,7 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"OCA\\TwoFactorEMail\\": "tests/"
+			"OCA\\TwoFactorEMail\\Test\\": "tests/"
 		}
 	},
 	"require": {

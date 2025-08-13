@@ -7,7 +7,7 @@ declare(strict_types=1);
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-namespace OCA\TwoFactorEMail\Tests\Acceptance;
+namespace OCA\TwoFactorEMail\Test\Acceptance;
 
 use ChristophWurst\Nextcloud\Testing\Selenium;
 use ChristophWurst\Nextcloud\Testing\TestCase;
