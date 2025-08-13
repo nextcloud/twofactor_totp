@@ -27,6 +27,7 @@ class EMailProviderState implements IEMailProviderState
 
 	private function isNoOtherProviderActive(array $activeProviders): bool
 	{
+		unset($activeProviders['backup_codes']); // backup codes are not a primary second factor
 		return !array_reduce($activeProviders, fn($a, $b) => $a || $b, false);
 	}
 
