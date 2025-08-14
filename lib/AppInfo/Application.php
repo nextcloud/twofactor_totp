@@ -15,10 +15,14 @@ use OCA\TwoFactorEMail\Listener\EmailDeleted;
 use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorEMail\Listener\UserDeleted;
+use OCA\TwoFactorEMail\Service\ConstantApplicationSettings;
 use OCA\TwoFactorEMail\Service\EMailProviderState;
+use OCA\TwoFactorEMail\Service\IApplicationSettings;
+use OCA\TwoFactorEMail\Service\ICodeStorage;
 use OCA\TwoFactorEMail\Service\IEMailProviderState;
 use OCA\TwoFactorEMail\Service\IEMailService;
 use OCA\TwoFactorEMail\Service\EMailService;
+use OCA\TwoFactorEMail\Service\PreferencesCodeStorage;
 use OCP\Accounts\UserUpdatedEvent;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
@@ -36,6 +40,8 @@ class Application extends App implements IBootstrap {
 	public function register(IRegistrationContext $context): void {
 		include_once __DIR__ . '/../../vendor/autoload.php';
 
+		$context->registerServiceAlias(IApplicationSettings::class, ConstantApplicationSettings::class);
+		$context->registerServiceAlias(ICodeStorage::class, PreferencesCodeStorage::class);
 		$context->registerServiceAlias(IEMailService::class, EMailService::class);
 		$context->registerServiceAlias(IEMailProviderState::class, EMailProviderState::class);
 
