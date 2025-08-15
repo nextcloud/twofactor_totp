@@ -20,11 +20,13 @@ use OCP\IURLGenerator;
 use OCP\IUser;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Container\ContainerInterface;
 
 class EMailProviderTest extends TestCase {
 	private IL10N&MockObject $l10n;
 	private IInitialState&MockObject $initialState;
 	private IURLGenerator&MockObject $urlGenerator;
+	private ContainerInterface&MockObject $container;
 	private IChallengeService&MockObject $challengeService;
 	private IStateManager&MockObject $stateManager;
 
@@ -39,6 +41,7 @@ class EMailProviderTest extends TestCase {
 		$this->l10n = $this->createMock(IL10N::class);
 		$this->initialState = $this->createMock(IInitialState::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
+		$this->container = $this->createMock(ContainerInterface::class);
 		$this->challengeService = $this->createMock(IChallengeService::class);
 		$this->stateManager = $this->createMock(IStateManager::class);
 
@@ -46,25 +49,18 @@ class EMailProviderTest extends TestCase {
 			$this->l10n,
 			$this->initialState,
 			$this->urlGenerator,
+			$this->container,
 			$this->challengeService,
 			$this->stateManager,
 		);
 	}
 
 	public function testGetId(): void {
-		$expectedId = 'email';
-
-		$id = $this->provider->getId();
-
-		self::assertEquals($expectedId, $id);
+		self::assertEquals('email', $this->provider->getId());
 	}
 
 	public function testGetDisplayName(): void {
-		$expected = 'E-mail';
-
-		$displayName = $this->provider->getDisplayName();
-
-		self::assertEquals($expected, $displayName);
+		self::assertEquals('E-mail', $this->provider->getDisplayName());
 	}
 
 	public function testGetDescription(): void {
@@ -100,20 +96,46 @@ class EMailProviderTest extends TestCase {
 		self::assertEquals('/path/to/app-dark.svg', $icon);
 	}
 
-	public function testGetPersonalSettings(): void {
+	public function testGetPersonalSettingsDisabledWithoutEMail(): void {
 		$expected = new Personal();
 
 		$user = $this->createMock(IUser::class);
+		$user->expects(self::once())
+			->method('getEMailAddress')
+			->willReturn(null);
+		$this->stateManager->expects($this->once())
+			->method('isEnabled')
+			->with($user)
+			->willReturn(false);
+		$this->initialState->expects($this->exactly(2))
+			->method('provideInitialState')
+			->with($this->logicalOr(
+				$this->equalTo('enabled'),
+				$this->equalTo('hasEmail'),
+			), false);
+
+		$actual = $this->provider->getPersonalSettings($user);
+
+		self::assertEquals($expected, $actual);
+	}
+
+	public function testGetPersonalSettingsEnabledWithEMail(): void {
+		$expected = new Personal();
+
+		$user = $this->createMock(IUser::class);
+		$user->expects(self::once())
+			->method('getEMailAddress')
+			->willReturn('user@localhost');
 		$this->stateManager->expects($this->once())
 			->method('isEnabled')
 			->with($user)
 			->willReturn(true);
-		$this->initialState->expects($this->once())
+		$this->initialState->expects($this->exactly(2))
 			->method('provideInitialState')
-			->with(
-				'state',
-				true
-			);
+			->with($this->logicalOr(
+				$this->equalTo('enabled'),
+				$this->equalTo('hasEmail'),
+			), true);
 
 		$actual = $this->provider->getPersonalSettings($user);
 

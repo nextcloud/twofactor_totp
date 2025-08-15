@@ -7,110 +7,90 @@
 
 namespace OCA\TwoFactorEMail\Test\Unit\Controller;
 
-use InvalidArgumentException;
+use OCA\TwoFactorEMail\AppInfo\Application;
 use OCA\TwoFactorEMail\Controller\SettingsController;
-use OCA\TwoFactorEMail\Service\IChallengeService;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use OCP\IUser;
 use OCP\IUserSession;
-use OCP\Security\ISecureRandom;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class SettingsControllerTest extends TestCase {
-	private $request;
-	private $userSession;
-	private $emailService;
-	private $stateManager;
-	private $secureRandom;
-	/** @var SettingsController */
-	private $controller;
+	private IRequest&MockObject $request;
+	private IUserSession&MockObject $userSession;
+	private IStateManager&MockObject $stateManager;
+
+	private SettingsController $controller;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
-		$this->emailService = $this->createMock(IChallengeService::class);
 		$this->stateManager = $this->createMock(IStateManager::class);
-		$this->secureRandom = $this->createMock(ISecureRandom::class);
 
-		$this->controller = new SettingsController('twofactor_email', $this->request, $this->userSession, $this->emailService, $this->stateManager, $this->providerState, $this->secureRandom);
+		$this->controller = new SettingsController(
+			Application::APP_ID,
+			$this->request,
+			$this->userSession,
+			$this->stateManager,
+		);
 	}
 
-	public function testDisabledState() {
+	public function testDisable() {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
 		$this->stateManager->expects($this->once())
-			->method('isEnabled')
-			->with($user)
-			->willReturn(false);
+			->method('disable')
+			->with($user);
 
 		$expected = new JSONResponse([
-			'state' => false,
+			'enabled' => false,
 		]);
 
-		$this->assertEquals($expected, $this->controller->state());
+		$this->assertEquals($expected, $this->controller->setState(false));
 	}
 
-	public function testCreateTwoFactorEMail() {
+	public function testEnableWithoutEmail() {
 		$user = $this->createMock(IUser::class);
+		$user->expects($this->once())
+			->method('getEMailAddress')
+			->willReturn(null);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
-		$this->emailService->expects($this->once())
-			->method('setAndSendAuthCode')
-			->willReturn("user@instance.com");
+		$this->stateManager->expects($this->never())
+			->method('enable')
+			->with($user);
+
 		$expected = new JSONResponse([
-			'state' => IChallengeService::STATE_CREATED,
-			'email' => 'user@instance.com'
+			'enabled' => false,
+			'error' => 'no-email',
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(IChallengeService::STATE_CREATED));
+		$this->assertEquals($expected, $this->controller->setState(true));
 	}
 
-	public function testEnableTwoFactorEMail() {
+	public function testEnableWithEmail() {
 		$user = $this->createMock(IUser::class);
+		$user->expects($this->once())
+			->method('getEMailAddress')
+			->willReturn('user@localhost');
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
 		$this->stateManager->expects($this->once())
 			->method('enable')
-			->with($user, '123456')
-			->willReturn(true);
+			->with($user);
 
 		$expected = new JSONResponse([
-			'state' => IChallengeService::STATE_ENABLED,
+			'enabled' => true,
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(IChallengeService::STATE_ENABLED, '123456'));
-	}
-
-	public function testDisableTwoFactorEMail() {
-		$user = $this->createMock(IUser::class);
-		$this->userSession->expects($this->once())
-			->method('getUser')
-			->willReturn($user);
-		$this->stateManager->expects($this->once())
-			->method('disable');
-
-		$expected = new JSONResponse([
-			'state' => IChallengeService::STATE_DISABLED,
-		]);
-
-		$this->assertEquals($expected, $this->controller->enable(IChallengeService::STATE_DISABLED));
-	}
-
-	public function testEnableInvalidState() {
-		$user = $this->createMock(IUser::class);
-		$this->userSession->expects($this->once())
-			->method('getUser')
-			->willReturn($user);
-
-		$this->expectException(InvalidArgumentException::class);
-		$this->controller->enable(17);
+		$this->assertEquals($expected, $this->controller->setState(true));
 	}
 }

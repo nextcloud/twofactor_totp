@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Provider;
 
 use OCA\TwoFactorEMail\AppInfo\Application;
-use OCA\TwoFactorEMail\Service\ChallengeService;
+use OCA\TwoFactorEMail\Service\IChallengeService;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Settings\Personal;
 use OCP\AppFramework\Services\IInitialState;
@@ -35,7 +35,7 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 		private IInitialState      $initialState,
 		private IURLGenerator      $urlGenerator,
 		private ContainerInterface $container,
-		private ChallengeService   $challengeService,
+		private IChallengeService   $challengeService,
 		private IStateManager      $stateManager,
 	) {
 	}

@@ -44,7 +44,7 @@ class StateChangeActivity implements IEventListener {
 				->setType('security')
 				->setAuthor($user->getUID())
 				->setAffectedUser($user->getUID())
-				->setSubject($notification->name);
+				->setSubject($notification->value);
 			$this->activityManager->publish($activity);
 		}
 	}

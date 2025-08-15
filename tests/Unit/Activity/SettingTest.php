@@ -10,12 +10,12 @@ namespace OCA\TwoFactorEMail\Test\Unit\Activity;
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\TwoFactorEMail\Activity\Setting;
 use OCP\IL10N;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class SettingTest extends TestCase {
-	private $l10n;
+	private IL10N&MockObject $l10n;
 
-	/** @var Setting */
-	private $setting;
+	private Setting $setting;
 
 	protected function setUp(): void {
 		parent::setUp();

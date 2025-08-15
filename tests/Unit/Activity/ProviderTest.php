@@ -9,29 +9,27 @@ namespace OCA\TwoFactorEMail\Test\Unit\Activity;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use InvalidArgumentException;
+use OCA\TwoFactorEMail\Activity\Notification;
 use OCA\TwoFactorEMail\Activity\Provider;
 use OCP\Activity\IEvent;
 use OCP\IL10N;
-use OCP\ILogger;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ProviderTest extends TestCase {
-	private $l10n;
-	private $urlGenerator;
-	private $logger;
+	private IFactory&MockObject $l10n;
+	private IURLGenerator&MockObject $urlGenerator;
 
-	/** @var Provider */
-	private $provider;
+	private Provider $provider;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->l10n = $this->createMock(IFactory::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
-		$this->logger = $this->createMock(ILogger::class);
 
-		$this->provider = new Provider($this->l10n, $this->urlGenerator, $this->logger);
+		$this->provider = new Provider($this->l10n, $this->urlGenerator);
 	}
 
 	public function testParseUnrelated() {
@@ -45,18 +43,20 @@ class ProviderTest extends TestCase {
 		$this->provider->parse($lang, $event);
 	}
 
-	public function subjectData() {
+	public static function subjectData(): array
+	{
 		return [
-			['twofactor_email_enabled_subject'],
-			['twofactor_email_disabled_subject'],
-			['twofactor_email_disabled_by_admin'],
+			[Notification::ENABLED_BY_USER],
+			[Notification::DISABLED_BY_USER],
+			[Notification::ENABLED_BY_ADMIN],
+			[Notification::DISABLED_BY_ADMIN],
 		];
 	}
 
 	/**
 	 * @dataProvider subjectData
 	 */
-	public function testParse($subject) {
+	public function testParse(Notification $subject) {
 		$lang = 'ru';
 		$event = $this->createMock(IEvent::class);
 		$l = $this->createMock(IL10N::class);
@@ -81,7 +81,7 @@ class ProviderTest extends TestCase {
 			->with('absolute/path/to/image');
 		$event->expects($this->once())
 			->method('getSubject')
-			->willReturn($subject);
+			->willReturn($subject->value);
 		$event->expects($this->once())
 			->method('setSubject');
 

@@ -18,17 +18,13 @@ class StateChangedTest extends TestCase {
 		$user = $this->createMock(IUser::class);
 		$event = new StateChanged($user, true);
 
-		$enabled = $event->isEnabled();
-
-		$this->assertTrue($enabled);
+		$this->assertTrue($event->isEnabled());
 	}
 
 	public function testDisabled() {
 		$user = $this->createMock(IUser::class);
 		$event = new StateChanged($user, false);
 
-		$enabled = $event->isEnabled();
-
-		$this->assertFalse($enabled);
+		$this->assertFalse($event->isEnabled());
 	}
 }
