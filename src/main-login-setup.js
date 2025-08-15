@@ -4,7 +4,8 @@
  */
 
 import Vue from 'vue'
-import Logger from './logger.js'
+import store from './store.js'
+
 import LoginSetup from './components/LoginSetup.vue'
 
 Vue.mixin({
@@ -13,7 +14,7 @@ Vue.mixin({
 	},
 })
 
-Logger.debug('rendering login setup view')
 const View = Vue.extend(LoginSetup)
-new View().$mount('#twofactor-email-login-setup')
-Logger.debug('login setup view rendered')
+new View({
+	store,
+}).$mount('#twofactor-email-login-setup')

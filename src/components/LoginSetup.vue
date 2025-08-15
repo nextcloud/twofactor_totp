@@ -27,11 +27,11 @@ export default {
 	},
 
 	mounted() {
-		this.enable()
+		this.load()
 	},
 
 	methods: {
-		enable() {
+		load() {
 			if (this.loading) {
 				// Ignore event
 				Logger.debug('still loading -> ignoring event')
@@ -41,7 +41,9 @@ export default {
 
 			this.$store.dispatch('enable')
 				.then(enabled => {
+					Logger.debug('enable two-factor e-mail request returned')
 					if (enabled) {
+						Logger.debug('two-factor e-mail successfully enabled')
 						this.$refs.confirmForm.submit()
 					}
 					this.loading = false
