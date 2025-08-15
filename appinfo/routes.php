@@ -10,14 +10,9 @@ declare(strict_types=1);
 return [
 	'routes' => [
 		[
-			'name' => 'settings#state',
+			'name' => 'Settings#setState',
 			'url' => '/settings/state',
-			'verb' => 'GET'
-		],
-		[
-			'name' => 'settings#enable',
-			'url' => '/settings/enable',
-			'verb' => 'POST'
+			'verb' => 'POST',
 		],
 	]
 ];

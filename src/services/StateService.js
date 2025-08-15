@@ -6,13 +6,6 @@
 import Axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
 
-export const saveState = async (data) => {
-	const url = generateUrl('/apps/twofactor_email/settings/state')
-
-	const resp = await Axios.post(url, data)
-	return resp.data
-}
-
 /**
  * @param {boolean} enabled Enable or disable?
  * @return {Promise}
