@@ -14,8 +14,8 @@ Notable changes in [changelog format](https://keepachangelog.com/en/1.0.0/), pro
 
 ### Changed
 
-- twofactor_email versions 3.0.0-dev - 3.0.2-dev used their own database table. These versions were never published. If you used it anyway, you might want to manually delete that database table:
-  `drop table oc_twofactor_email;`
+- twofactor_email versions 3.0.0-dev - 3.0.2-dev used their own database table.
+  This table is dropped. When updating from these dev versions, pending codes are lost.
 
 ### Removed
 

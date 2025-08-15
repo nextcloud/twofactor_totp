@@ -13,6 +13,7 @@ use Closure;
 use NCU\Config\IUserConfig;
 use OCA\TwoFactorEMail\AppInfo\Application;
 use OCA\TwoFactorEMail\Service\ICodeStorage;
+use OCP\DB\ISchemaWrapper;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
@@ -22,6 +23,18 @@ class Version030000Date20250814100800 extends SimpleMigrationStep {
 		private ICodeStorage $codeStorage,
 	)
 	{
+	}
+
+	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ISchemaWrapper
+	{
+		/** @var ISchemaWrapper $schema */
+		$schema = $schemaClosure();
+
+		if ($schema->hasTable('twofactor_email')) {
+			$schema->dropTable('twofactor_email');
+		}
+
+		return $schema;
 	}
 
 	public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void
