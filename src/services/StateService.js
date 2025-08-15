@@ -5,6 +5,7 @@
 
 import Axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
+import Logger from '../logger.js'
 
 /**
  * @param {boolean} enabled Enable or disable?
@@ -16,6 +17,7 @@ export function persist(enabled) {
 		state: enabled,
 	}
 
+	Logger.debug('sending two-factor e-mail state change request', data)
 	return Axios.post(url, data)
 		.then(resp => resp.data)
 }

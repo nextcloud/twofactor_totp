@@ -32,13 +32,6 @@ export default {
 
 	methods: {
 		load() {
-			if (this.loading) {
-				// Ignore event
-				Logger.debug('still loading -> ignoring event')
-				return
-			}
-			this.loading = true
-
 			this.$store.dispatch('enable')
 				.then(enabled => {
 					Logger.debug('enable two-factor e-mail request returned')
