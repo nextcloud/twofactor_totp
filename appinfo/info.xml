@@ -9,7 +9,7 @@
 	<name>Two-Factor e-mail Provider</name>
 	<summary>E-mail two-factor provider</summary>
 	<description>A Two-Factor-Auth Provider for e-mail</description>
-	<version>3.0.2-dev</version>
+	<version>3.0.3-beta.1</version>
 	<licence>agpl</licence>
 	<author mail="twofactor-email@datenschutz-individuell.de">Olav Seyfarth (datenschutz-individuell) [see CONTRIBUTORS.md for more]</author>
 	<namespace>TwoFactorEMail</namespace>
