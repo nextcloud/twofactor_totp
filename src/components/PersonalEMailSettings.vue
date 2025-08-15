@@ -13,10 +13,11 @@
 			{{ t('twofactor_email', 'Use two-factor authentication via e-mail') }}
 		</NcCheckboxRadioSwitch>
 		<div v-else>
-			<span class="notice"> {{ t('twofactor_email', 'You need to set your email address first.') }} </span>
+			<span class="notice"> {{ t('twofactor_email', 'You need to set your e-mail address first.') }} </span>
 		</div>
 		<div v-if="error">
-			<span class="error"> {{ error }} </span>
+			<span v-if="error === 'no-email'" class="error"> {{ t('twofactor_email', 'Apparently your configured e-mail address just vanished.') }} </span>
+			<span v-else class="error"> {{ t('twofactor_email', 'Something went wrong') }} </span>
 		</div>
 	</div>
 </template>
@@ -40,7 +41,7 @@ export default {
 		return {
 			enabled: this.$store.state.enabled,
 			hasEmail: this.$store.state.hasEmail,
-			error: this.$store.state.error,
+			error: null,
 			loading: false,
 		}
 	},
@@ -64,8 +65,9 @@ export default {
 					}
 
 					action
-						.then(enabled => {
+						.then(({ enabled, error }) => {
 							this.enabled = enabled
+							this.error = error
 						})
 						.catch(console.error.bind(this))
 						.then(() => {

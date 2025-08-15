@@ -5,7 +5,8 @@
 
 <template>
 	<div v-if="error">
-		<span class="error"> {{ error }} </span>
+		<span v-if="error === 'no-email'" class="error"> {{ t('twofactor_email', 'Cannot enable two-factor authentication via e-mail as your e-mail address is not configured.') }} </span>
+		<span v-else class="error"> {{ t('twofactor_email', 'Something went wrong') }} </span>
 	</div>
 	<div v-else>
 		<div v-if="loading" class="loading" />
@@ -33,11 +34,13 @@ export default {
 	methods: {
 		load() {
 			this.$store.dispatch('enable')
-				.then(enabled => {
+				.then(({ enabled, error }) => {
 					Logger.debug('enable two-factor e-mail request returned')
 					if (enabled) {
 						Logger.debug('two-factor e-mail successfully enabled')
 						this.$refs.confirmForm.submit()
+					} else {
+						this.error = error
 					}
 					this.loading = false
 				})

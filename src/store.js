@@ -14,9 +14,6 @@ export const mutations = {
 	setEnabled(state, enabled) {
 		state.enabled = enabled
 	},
-	setError(state, error) {
-		state.error = error
-	},
 }
 
 export const actions = {
@@ -24,8 +21,7 @@ export const actions = {
 		return persist(true)
 			.then(({ enabled, error }) => {
 				commit('setEnabled', enabled)
-				commit('setError', error)
-				return enabled
+				return { enabled, error }
 			})
 	},
 
@@ -33,7 +29,7 @@ export const actions = {
 		return persist(false)
 			.then(({ enabled }) => {
 				commit('setEnabled', enabled)
-				return enabled
+				return { enabled }
 			})
 	},
 }
@@ -43,7 +39,6 @@ export default new Vuex.Store({
 	state: {
 		enabled: false,
 		hasEmail: false,
-		error: null,
 	},
 	mutations,
 	actions,
