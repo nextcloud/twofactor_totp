@@ -11,6 +11,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 webpackConfig.entry = {
 	'main-settings': path.join(__dirname, 'src', 'main-settings.js'),
+	'main-login-setup': path.join(__dirname, 'src', 'main-login-setup.js'),
 }
 
 // Generate reuse license files if not in development mode

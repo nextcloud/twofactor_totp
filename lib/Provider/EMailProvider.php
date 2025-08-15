@@ -14,8 +14,10 @@ use OCA\TwoFactorEMail\Service\ChallengeService;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Settings\Personal;
 use OCP\AppFramework\Services\IInitialState;
+use OCP\Authentication\TwoFactorAuth\IActivatableAtLogin;
 use OCP\Authentication\TwoFactorAuth\IActivatableByAdmin;
 use OCP\Authentication\TwoFactorAuth\IDeactivatableByAdmin;
+use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
@@ -24,15 +26,17 @@ use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
+use Psr\Container\ContainerInterface;
 
-class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableByAdmin {
+class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableByAdmin, IActivatableAtLogin {
 
 	public function __construct(
-		private IL10N            $l10n,
-		private IInitialState    $initialState,
-		private IURLGenerator    $urlGenerator,
-		private ChallengeService $challengeService,
-		private IStateManager    $stateManager,
+		private IL10N              $l10n,
+		private IInitialState      $initialState,
+		private IURLGenerator      $urlGenerator,
+		private ContainerInterface $container,
+		private ChallengeService   $challengeService,
+		private IStateManager      $stateManager,
 	) {
 	}
 
@@ -93,5 +97,10 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	public function enableFor(IUser $user): void
 	{
 		$this->stateManager->enable($user, true);
+	}
+
+	public function getLoginSetup(IUser $user): ILoginSetupProvider
+	{
+		return $this->container->get(AtLoginProvider::class);
 	}
 }
