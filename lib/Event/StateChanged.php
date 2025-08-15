@@ -17,6 +17,7 @@ class StateChanged extends Event {
 	public function __construct(
 		private IUser $user,
 		private bool $enabled,
+		private bool $byAdmin = false,
 	) {
 		parent::__construct();
 	}
@@ -27,5 +28,9 @@ class StateChanged extends Event {
 
 	public function isEnabled(): bool {
 		return $this->enabled;
+	}
+
+	public function byAdmin(): bool {
+		return $this->byAdmin;
 	}
 }

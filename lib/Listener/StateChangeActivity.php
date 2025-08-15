@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorEMail\Listener;
 
+use OCA\TwoFactorEMail\Activity\Notification;
 use OCA\TwoFactorEMail\AppInfo\Application;
-use OCA\TwoFactorEMail\Event\DisabledByAdmin;
 use OCA\TwoFactorEMail\Event\StateChanged;
 use OCP\Activity\IManager as ActivityManager;
 use OCP\EventDispatcher\Event;
@@ -28,10 +28,14 @@ class StateChangeActivity implements IEventListener {
 
 	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
-			if ($event instanceof DisabledByAdmin) {
-				$subject = 'twofactor_email_disabled_by_admin';
+			if ($event->byAdmin()) {
+				$notification = $event->isEnabled()
+					? Notification::ENABLED_BY_ADMIN
+					: Notification::DISABLED_BY_ADMIN;
 			} else {
-				$subject = $event->isEnabled() ? 'twofactor_email_enabled_subject' : 'twofactor_email_disabled_subject';
+				$notification = $event->isEnabled()
+					? Notification::ENABLED_BY_USER
+					: Notification::DISABLED_BY_USER;
 			}
 			$user = $event->getUser();
 
@@ -40,7 +44,7 @@ class StateChangeActivity implements IEventListener {
 				->setType('security')
 				->setAuthor($user->getUID())
 				->setAffectedUser($user->getUID())
-				->setSubject($subject);
+				->setSubject($notification->name);
 			$this->activityManager->publish($activity);
 		}
 	}

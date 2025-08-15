@@ -10,61 +10,44 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Test\Unit\Provider;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorEMail\Provider\AtLoginProvider;
 use OCA\TwoFactorEMail\Provider\EMailProvider;
-use OCA\TwoFactorEMail\Service\IEMailProviderState;
-use OCA\TwoFactorEMail\Service\IEMailService;
+use OCA\TwoFactorEMail\Service\IChallengeService;
+use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Settings\Personal;
-use OCP\AppFramework\IAppContainer;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
-use OCP\Security\ISecureRandom;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class EMailProviderTest extends TestCase {
+	private IL10N&MockObject $l10n;
+	private IInitialState&MockObject $initialState;
+	private IURLGenerator&MockObject $urlGenerator;
+	private IChallengeService&MockObject $challengeService;
+	private IStateManager&MockObject $stateManager;
 
-	/** @var IEMailProviderState|MockObject */
-	private $providerState;
+	private EMailProvider $provider;
 
-	/** @var IEMailService|MockObject */
-	private $emailService;
-
-	/** @var IL10N|MockObject */
-	private $l10n;
-
-	/** @var IAppContainer|MockObject */
-	private $container;
-
-	/** @var IInitialStateService|MockObject */
-	private $initialState;
-
-	/** @var IURLGenerator|MockObject */
-	private $urlGenerator;
-
-	/** @var EMailProvider */
-	private $provider;
-
+	/**
+	 * @throws Exception
+	 */
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->providerState = $this->createMock(IEMailProviderState::class);
-		$this->emailService = $this->createMock(IEMailService::class);
 		$this->l10n = $this->createMock(IL10N::class);
-		$this->container = $this->createMock(IAppContainer::class);
 		$this->initialState = $this->createMock(IInitialState::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
-		$this->secureRandom = $this->createMock(ISecureRandom::class);
+		$this->challengeService = $this->createMock(IChallengeService::class);
+		$this->stateManager = $this->createMock(IStateManager::class);
 
 		$this->provider = new EMailProvider(
-			$this->providerState,
-			$this->emailService,
 			$this->l10n,
-			$this->container,
 			$this->initialState,
 			$this->urlGenerator,
-			$this->secureRandom
+			$this->challengeService,
+			$this->stateManager,
 		);
 	}
 
@@ -121,7 +104,7 @@ class EMailProviderTest extends TestCase {
 		$expected = new Personal();
 
 		$user = $this->createMock(IUser::class);
-		$this->providerState->expects($this->once())
+		$this->stateManager->expects($this->once())
 			->method('isEnabled')
 			->with($user)
 			->willReturn(true);
@@ -139,24 +122,10 @@ class EMailProviderTest extends TestCase {
 
 	public function testDeactivate(): void {
 		$user = $this->createMock(IUser::class);
-		$this->emailService->expects($this->once())
-			->method('deleteTwoFactorEMail')
+		$this->stateManager->expects($this->once())
+			->method('disable')
 			->with($user);
 
 		$this->provider->disableFor($user);
-	}
-
-	public function testGetSetupProvider(): void {
-		/** @var IUser|MockObject $user */
-		$user = $this->createMock(IUser::class);
-		$provider = $this->createMock(AtLoginProvider::class);
-		$this->container->expects($this->once())
-			->method('query')
-			->with(AtLoginProvider::class)
-			->willReturn($provider);
-
-		$result = $this->provider->getLoginSetup($user);
-
-		self::assertSame($provider, $result);
 	}
 }

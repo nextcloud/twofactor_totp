@@ -19,7 +19,6 @@ describe('PersonalEMailSettings', () => {
 	beforeEach(() => {
 		actions = {
 			enable: () => {},
-			confirm: () => {},
 			disable: () => {},
 		}
 		store = new Vuex.Store({

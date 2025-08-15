@@ -11,6 +11,8 @@ namespace OCA\TwoFactorEMail\Service;
 
 use OCP\IUser;
 
-interface IEMailProviderState {
-	public function isEnabled(IUser $user): bool;
+interface IChallengeService {
+	public function sendChallenge(IUser $user): void;
+
+	public function verifyChallenge(IUser $user, string $submittedCode): bool;
 }

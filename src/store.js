@@ -6,49 +6,45 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { saveState } from './services/StateService.js'
-import state from './state.js'
+import { persist } from './services/StateService.js'
 
 Vue.use(Vuex)
 
 export const mutations = {
-	setState(state, emailState) {
-		state.emailState = emailState
+	setEnabled(state, enabled) {
+		state.enabled = enabled
+	},
+	setError(state, error) {
+		state.error = error
 	},
 }
 
 export const actions = {
 	enable({ commit }) {
-		return saveState({ state: state.STATE_CREATED }).then(
-			({ state, email }) => {
-				commit('setState', state)
-				return { email }
-			},
-		)
-	},
-
-	confirm({ commit }, code) {
-		return saveState({
-			state: state.STATE_ENABLED,
-			code,
-		}).then(({ state }) => commit('setState', state))
+		return persist(true)
+			.then(({ enabled, error }) => {
+				commit('setEnabled', enabled)
+				commit('setError', error)
+				return enabled
+			})
 	},
 
 	disable({ commit }) {
-		return saveState({ state: state.STATE_DISABLED }).then(({ state }) =>
-			commit('setState', state),
-		)
+		return persist(false)
+			.then(({ enabled }) => {
+				commit('setEnabled', enabled)
+				return enabled
+			})
 	},
 }
-
-export const getters = {}
 
 export default new Vuex.Store({
 	strict: process.env.NODE_ENV !== 'production',
 	state: {
-		emailState: undefined,
+		enabled: false,
+		hasEmail: false,
+		error: null,
 	},
-	getters,
 	mutations,
 	actions,
 })

@@ -9,26 +9,27 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorEMail\AppInfo;
 
-use OCA\TwoFactorEMail\Event\DisabledByAdmin;
 use OCA\TwoFactorEMail\Event\StateChanged;
 use OCA\TwoFactorEMail\Listener\EmailDeleted;
 use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
-use OCA\TwoFactorEMail\Listener\UserDeleted;
+use OCA\TwoFactorEMail\Service\ChallengeService;
 use OCA\TwoFactorEMail\Service\ConstantApplicationSettings;
-use OCA\TwoFactorEMail\Service\EMailProviderState;
 use OCA\TwoFactorEMail\Service\IApplicationSettings;
+use OCA\TwoFactorEMail\Service\ICodeGenerator;
 use OCA\TwoFactorEMail\Service\ICodeStorage;
-use OCA\TwoFactorEMail\Service\IEMailProviderState;
-use OCA\TwoFactorEMail\Service\IEMailService;
-use OCA\TwoFactorEMail\Service\EMailService;
+use OCA\TwoFactorEMail\Service\IChallengeService;
+use OCA\TwoFactorEMail\Service\IEMailSender;
+use OCA\TwoFactorEMail\Service\IStateManager;
+use OCA\TwoFactorEMail\Service\NumericalCodeGenerator;
 use OCA\TwoFactorEMail\Service\PreferencesCodeStorage;
+use OCA\TwoFactorEMail\Service\EMailSender;
+use OCA\TwoFactorEMail\Service\StateManager;
 use OCP\Accounts\UserUpdatedEvent;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\User\Events\UserDeletedEvent;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'twofactor_email';
@@ -41,14 +42,14 @@ class Application extends App implements IBootstrap {
 		include_once __DIR__ . '/../../vendor/autoload.php';
 
 		$context->registerServiceAlias(IApplicationSettings::class, ConstantApplicationSettings::class);
+		$context->registerServiceAlias(IChallengeService::class, ChallengeService::class);
+		$context->registerServiceAlias(ICodeGenerator::class, NumericalCodeGenerator::class);
 		$context->registerServiceAlias(ICodeStorage::class, PreferencesCodeStorage::class);
-		$context->registerServiceAlias(IEMailService::class, EMailService::class);
-		$context->registerServiceAlias(IEMailProviderState::class, EMailProviderState::class);
+		$context->registerServiceAlias(IEMailSender::class, EMailSender::class);
+		$context->registerServiceAlias(IStateManager::class, StateManager::class);
 
 		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
 		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
-		$context->registerEventListener(DisabledByAdmin::class, StateChangeActivity::class);
-		$context->registerEventListener(UserDeletedEvent::class, UserDeleted::class);
 		$context->registerEventListener(UserUpdatedEvent::class, EmailDeleted::class);
 	}
 

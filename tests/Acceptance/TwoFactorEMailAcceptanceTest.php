@@ -17,12 +17,7 @@ use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 use OC;
-use OCA\TwoFactorEMail\Db\TwoFactorEMail;
-use OCA\TwoFactorEMail\Db\TwoFactorEMailMapper;
-use OCA\TwoFactorEMail\Provider\EMailProvider;
-use OCA\TwoFactorEMail\Service\IEMailService;
-use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\Authentication\TwoFactorAuth\IRegistry;
+use OCA\TwoFactorEMail\Service\IStateManager;
 use OCP\IUser;
 
 /**
@@ -35,14 +30,11 @@ class TwoFactorEMailAcceptanceTest extends TestCase {
 	/** @var IUser */
 	private $user;
 
-	/** @var TwoFactorEMailMapper */
-	private $twoFactorEMailMapper;
-
 	public function setUp(): void {
 		parent::setUp();
 
 		$this->user = $this->createTestUser();
-		$this->twoFactorEMailMapper = new TwoFactorEMailMapper(OC::$server->getDatabaseConnection());
+		$this->user->setSystemEMailAddress('test@localhost');
 	}
 
 	public function testEnableTwoFactorEmail(): void {
@@ -61,74 +53,31 @@ class TwoFactorEMailAcceptanceTest extends TestCase {
 		// Wait for state being loaded from the server
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
-				return count($driver->findElements(WebDriverBy::id('email-enabled'))) > 0;
+				return count($driver->findElements(WebDriverBy::id('twofactor-email-settings'))) > 0;
 			} catch (ElementNotInteractableException $ex) {
 				return false;
 			}
 		});
-		$this->webDriver->executeScript('arguments[0].click(); console.log(arguments[0]);', [
-			$this->webDriver->findElement(WebDriverBy::id('email-enabled')),
-		]);
-		$this->webDriver->wait(15, 200)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('twofactor-email-settings'), 'We have sent an email containing your authentication code to:'));
-		$this->assertHasEMail(IEMailService::STATE_CREATED);
-
-		// Enter a wrong code
-		$this->webDriver->findElement(WebDriverBy::id('email-confirmation'))->sendKeys('000000');
-		$this->webDriver->findElement(WebDriverBy::id('email-confirmation-submit'))->click();
-
-		// Wait for the notification
-		// TODO: this was replaced with toastify https://github.com/nextcloud/server/pull/15124
-		// $this->webDriver->wait(15, 200)->until(WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('notification'), 'Could not verify your key. Please try again'));
-
-		// Enter a correct code
-		$this->webDriver->findElement(WebDriverBy::id('email-confirmation'))->sendKeys($this->getValidCode());
-		$this->webDriver->findElement(WebDriverBy::id('email-confirmation-submit'))->click();
+		$this->webDriver->findElement(WebDriverBy::id('twofactor-email-settings'))->click();
 
 		// Try to locate checked checkbox
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
-				return $driver->findElement(WebDriverBy::id('email-enabled'))->getAttribute('checked') === 'true';
+				return $driver->findElement(WebDriverBy::id('twofactor-email-settings'))->getAttribute('checked') === 'true';
 			} catch (ElementNotInteractableException $ex) {
 				return false;
 			}
 		});
-		$this->assertHasEMail(IEMailService::STATE_ENABLED);
-	}
 
-	private function assertHasEMail($state): void {
-		try {
-			$dbTwoFactorEMail = $this->twoFactorEMailMapper->getTwoFactorEMail($this->user);
-			if ($state !== (int)$dbTwoFactorEMail->getState()) {
-				self::fail('TwoFactorEMail has has wrong state');
-			}
-		} catch (DoesNotExistException $ex) {
-			self::fail('User does not have a TwoFactorEMail');
-		}
-	}
-
-	private function getValidCode(): string {
-		try {
-			$dbTwoFactorEMail = $this->twoFactorEMailMapper->getTwoFactorEMail($this->user);
-		} catch (DoesNotExistException $e) {
-			self::fail('User does not have a TwoFactorEMail');
-		}
-		return $dbTwoFactorEMail->getAuthCode();
-	}
-
-	private function createTwoFactorEMail(): void {
-		$dbTwoFactorEMail = new TwoFactorEMail();
-		$dbTwoFactorEMail->setUserId($this->user->getUID());
-		$this->twoFactorEMailMapper->insert($dbTwoFactorEMail);
-
-		/** @var IRegistry $registry */
-		$registry = OC::$server->query(IRegistry::class);
-		/** @var EMailProvider $provider */
-		$provider = OC::$server->query(EMailProvider::class);
-		$registry->enableProviderFor($provider, $this->user);
+		/** @var IStateManager $providerState */
+		$providerState = OC::$server->query(IStateManager::class);
+		self::assertTrue($providerState->isEnabled($this->user));
 	}
 
 	public function testLoginShouldFailWithWrongOTP(): void {
-		$this->createTwoFactorEMail();
+		/** @var IStateManager $stateManager */
+		$stateManager = OC::$server->query(IStateManager::class);
+		$stateManager->enable($this->user);
 
 		$this->webDriver->get('http://localhost:8080/index.php/login');
 		self::assertStringContainsString('Nextcloud', $this->webDriver->getTitle());

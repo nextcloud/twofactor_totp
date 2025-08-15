@@ -12,5 +12,6 @@ namespace OCA\TwoFactorEMail\Service;
 interface ICodeStorage {
 	public function readCode(string $userId): ?string;
 	public function writeCode(string $userId, string $code, ?int $createdAt = null): void;
+	public function deleteCode(string $userId): void;
 	public function deleteExpired(): void;
 }

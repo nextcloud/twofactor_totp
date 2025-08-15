@@ -9,14 +9,10 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorEMail\Listener;
 
-use OCA\TwoFactorEMail\Db\TwoFactorEMailMapper;
-use OCA\TwoFactorEMail\Provider\EMailProvider;
-use OCP\Authentication\TwoFactorAuth\IRegistry;
-use OCP\DB\Exception as DbException;
+use OCA\TwoFactorEMail\Service\IStateManager;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\Accounts\UserUpdatedEvent;
-use Psr\Log\LoggerInterface;
 
 /**
  * @template-implements IEventListener<UserUpdatedEvent>
@@ -24,14 +20,13 @@ use Psr\Log\LoggerInterface;
 class EmailDeleted implements IEventListener {
 
 	public function __construct(
-		private EMailProvider $provider,
-		private IRegistry $registry,
+		private IStateManager $service,
 	) {
 	}
 
 	public function handle(Event $event): void {
 		if ($event instanceof UserUpdatedEvent && empty($event->getUser()->getEMailAddress())) {
-			$this->registry->disableProviderFor($this->provider, $event->getUser());
+			$this->service->disable($event->getUser());
         }
 	}
 }

@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Test\Unit\Listener;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorEMail\Event\DisabledByAdmin;
 use OCA\TwoFactorEMail\Event\StateChanged;
 use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCP\Activity\IEvent;
@@ -57,42 +56,6 @@ class StateChangeActivityTest extends TestCase {
 		$activityEvent->expects($this->once())
 			->method('setAffectedUser')
 			->with($uid)
-			->willReturnSelf();
-		$this->activityManager->expects($this->once())
-			->method('publish')
-			->with($activityEvent);
-
-		$this->listener->handle($event);
-	}
-
-	public function testHandleDisabledByAdminEvent() {
-		$uid = 'user234';
-		$user = $this->createMock(IUser::class);
-		$user->method('getUID')->willReturn($uid);
-		$event = new DisabledByAdmin($user);
-		$activityEvent = $this->createMock(IEvent::class);
-		$this->activityManager->expects($this->once())
-			->method('generateEvent')
-			->willReturn($activityEvent);
-		$activityEvent->expects($this->once())
-			->method('setApp')
-			->with('twofactor_email')
-			->willReturnSelf();
-		$activityEvent->expects($this->once())
-			->method('setType')
-			->with('security')
-			->willReturnSelf();
-		$activityEvent->expects($this->once())
-			->method('setAuthor')
-			->with($uid)
-			->willReturnSelf();
-		$activityEvent->expects($this->once())
-			->method('setAffectedUser')
-			->with($uid)
-			->willReturnSelf();
-		$activityEvent->expects($this->once())
-			->method('setSubject')
-			->with('twofactor_email_disabled_by_admin')
 			->willReturnSelf();
 		$this->activityManager->expects($this->once())
 			->method('publish')
