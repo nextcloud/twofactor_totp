@@ -23,6 +23,8 @@
 
 <script>
 import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
+
+import { confirmPassword } from '@nextcloud/password-confirmation'
 import '@nextcloud/password-confirmation/dist/style.css'
 
 import Logger from '../logger.js'
@@ -52,20 +54,23 @@ export default {
 			}
 			this.loading = true
 
-			let action
-			if (this.enabled) {
-				action = this.$store.dispatch('enable')
-			} else {
-				action = this.$store.dispatch('disable')
-			}
-
-			action
-				.then(enabled => {
-					this.enabled = enabled
-				})
-				.catch(console.error.bind(this))
+			confirmPassword()
 				.then(() => {
-					this.loading = false
+					let action
+					if (this.enabled) {
+						action = this.$store.dispatch('enable')
+					} else {
+						action = this.$store.dispatch('disable')
+					}
+
+					action
+						.then(enabled => {
+							this.enabled = enabled
+						})
+						.catch(console.error.bind(this))
+						.then(() => {
+							this.loading = false
+						})
 				})
 		},
 	},
