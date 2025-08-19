@@ -9,7 +9,7 @@
 	<name>Two-Factor e-mail Provider</name>
 	<summary>E-mail two-factor provider</summary>
 	<description>A Two-Factor-Auth Provider for e-mail</description>
-	<version>3.0.3-beta.1</version>
+	<version>3.0.3-beta.2</version>
 	<licence>agpl</licence>
 	<author mail="twofactor-email@datenschutz-individuell.de">Olav Seyfarth (datenschutz-individuell) [see CONTRIBUTORS.md for more]</author>
 	<namespace>TwoFactorEMail</namespace>
@@ -27,7 +27,7 @@
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-before.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-after.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="31" max-version="31" />
+		<nextcloud min-version="31" max-version="32" />
 	</dependencies>
 	<two-factor-providers>
 		<provider>OCA\TwoFactorEMail\Provider\EMailProvider</provider>
