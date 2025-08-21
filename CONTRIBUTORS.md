@@ -8,8 +8,9 @@
 ### Current Maintainer
 
 * [Olav Seyfarth](mailto:Olav Seyfarth <olav@seyfarth.de>) ([nursoda](https://github.com/nursoda))
+* [Niklas Seyfarth](mailto:Niklas Seyfarth <niklas@seyfarth.de>) ([seyfahni](https://github.com/seyfahni))
 
-### Current Authors
+### Previous Authors
 
 * [Nico Kluge](mailto:Nico Kluge <nico.kluge@klugecoded.com>) ([KlugeNico](https://github.com/KlugeNico))
   New author of twofactor_email ≥3.0.0. Cloned and adjusted twofactor_totp project

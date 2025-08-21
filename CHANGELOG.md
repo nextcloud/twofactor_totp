@@ -5,13 +5,23 @@
 # Changelog
 Notable changes in [changelog format](https://keepachangelog.com/en/1.0.0/), project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## 3.0.3-beta.3 (2025-08-21)
+
+### Fixed
+
+- Support for Nextcloud 32
+
+### Removed
+
+- Support for Nextcloud <=31
+
 ## 3.0.3-beta.2 (2025-08-19)
 
 ### Added
 
 - If twofactor_email version 2.x was installed before, user settings are now migrated
 - Support for enabling the provider for users via OCC command
-- Support for Nextcloud 32
+- Support for Nextcloud 32 (but broken)
 
 ### Changed
 
