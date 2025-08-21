@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Migration;
 
 use Closure;
-use NCU\Config\IUserConfig;
+use OCP\Config\IUserConfig;
 use OCA\TwoFactorEMail\AppInfo\Application;
 use OCA\TwoFactorEMail\Service\ICodeStorage;
 use OCP\DB\ISchemaWrapper;

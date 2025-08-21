@@ -2,8 +2,8 @@
 
 namespace OCA\TwoFactorEMail\Service;
 
-use NCU\Config\IUserConfig;
-use NCU\Config\ValueType;
+use OCP\Config\IUserConfig;
+use OCP\Config\ValueType;
 use OCA\TwoFactorEMail\AppInfo\Application;
 
 class PreferencesCodeStorage implements ICodeStorage

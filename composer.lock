@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce953d5fbf283272cd997b231d1c4ab7",
+    "content-hash": "5a85a3e39546d981525b97968aa4184d",
     "packages": [],
     "packages-dev": [
         {
@@ -168,16 +168,16 @@
         },
         {
             "name": "nextcloud/ocp",
-            "version": "v31.0.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextcloud-deps/ocp.git",
-                "reference": "abd32429d794ede1d92b7b0a88a1070371c907b5"
+                "reference": "d3466ca056c5a1face854398881431d44ab38879"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextcloud-deps/ocp/zipball/abd32429d794ede1d92b7b0a88a1070371c907b5",
-                "reference": "abd32429d794ede1d92b7b0a88a1070371c907b5",
+                "url": "https://api.github.com/repos/nextcloud-deps/ocp/zipball/d3466ca056c5a1face854398881431d44ab38879",
+                "reference": "d3466ca056c5a1face854398881431d44ab38879",
                 "shasum": ""
             },
             "require": {
@@ -187,10 +187,11 @@
                 "psr/event-dispatcher": "^1.0",
                 "psr/log": "^3.0.2"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-stable31": "31.0.0-dev"
+                    "dev-master": "32.0.0-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -210,9 +211,9 @@
             "description": "Composer package containing Nextcloud's public OCP API and the unstable NCU API",
             "support": {
                 "issues": "https://github.com/nextcloud-deps/ocp/issues",
-                "source": "https://github.com/nextcloud-deps/ocp/tree/v31.0.8"
+                "source": "https://github.com/nextcloud-deps/ocp/tree/master"
             },
-            "time": "2025-07-31T00:57:37+00:00"
+            "time": "2025-08-21T00:49:25+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -779,16 +780,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.52",
+            "version": "10.5.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "5be558244941fba07788b6bb42dc5fc84429580c"
+                "reference": "32768472ebfb6969e6c7399f1c7b09009723f653"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5be558244941fba07788b6bb42dc5fc84429580c",
-                "reference": "5be558244941fba07788b6bb42dc5fc84429580c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/32768472ebfb6969e6c7399f1c7b09009723f653",
+                "reference": "32768472ebfb6969e6c7399f1c7b09009723f653",
                 "shasum": ""
             },
             "require": {
@@ -860,7 +861,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.52"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.53"
             },
             "funding": [
                 {
@@ -884,7 +885,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-16T05:17:33+00:00"
+            "time": "2025-08-20T14:40:06+00:00"
         },
         {
             "name": "psalm/phar",
@@ -1128,12 +1129,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "45efa5832686533f38dc0445a8b185f6d0649c2f"
+                "reference": "afc1b5ea0233d87f958f1a73da7468f387da9022"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/45efa5832686533f38dc0445a8b185f6d0649c2f",
-                "reference": "45efa5832686533f38dc0445a8b185f6d0649c2f",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/afc1b5ea0233d87f958f1a73da7468f387da9022",
+                "reference": "afc1b5ea0233d87f958f1a73da7468f387da9022",
                 "shasum": ""
             },
             "conflict": {
@@ -1477,7 +1478,7 @@
                 "jbartels/wec-map": "<3.0.3",
                 "jcbrand/converse.js": "<3.3.3",
                 "joelbutcher/socialstream": "<5.6|>=6,<6.2",
-                "johnbillion/wp-crontrol": "<1.16.2",
+                "johnbillion/wp-crontrol": "<1.16.2|>=1.17,<1.19.2",
                 "joomla/application": "<1.0.13",
                 "joomla/archive": "<1.1.12|>=2,<2.0.1",
                 "joomla/database": ">=1,<2.2|>=3,<3.4",
@@ -1586,6 +1587,7 @@
                 "mongodb/mongodb": ">=1,<1.9.2",
                 "monolog/monolog": ">=1.8,<1.12",
                 "moodle/moodle": "<4.3.12|>=4.4,<4.4.8|>=4.5.0.0-beta,<4.5.4",
+                "moonshine/moonshine": "<=3.12.5",
                 "mos/cimage": "<0.7.19",
                 "movim/moxl": ">=0.8,<=0.10",
                 "movingbytes/social-network": "<=1.2.1",
@@ -1941,7 +1943,7 @@
                 "uasoft-indonesia/badaso": "<=2.9.7",
                 "unisharp/laravel-filemanager": "<2.9.1",
                 "universal-omega/dynamic-page-list3": "<3.6.4",
-                "unopim/unopim": "<0.1.5",
+                "unopim/unopim": "<=0.2",
                 "userfrosting/userfrosting": ">=0.3.1,<4.6.3",
                 "usmanhalalit/pixie": "<1.0.3|>=2,<2.0.2",
                 "uvdesk/community-skeleton": "<=1.1.1",
@@ -2083,7 +2085,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-15T23:05:36+00:00"
+            "time": "2025-08-21T15:06:11+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -3213,6 +3215,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "nextcloud/ocp": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
