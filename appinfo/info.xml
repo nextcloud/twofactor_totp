@@ -42,7 +42,7 @@ Mind that, once a user enabled any 2FA provider, they can no longer use their
 password in applications that don't support the web based 2FA login flow. For
 such applications, the user needs to create and use app passwords (to be found
 at the bottom of Personal Settings/Security).]]></description>
-	<version>3.0.3-beta.3</version>
+	<version>3.0.3-beta.4</version>
 	<licence>agpl</licence>
 	<author mail="twofactor-email@datenschutz-individuell.de">Olav Seyfarth (datenschutz-individuell) [see CONTRIBUTORS.md for more]</author>
 	<namespace>TwoFactorEMail</namespace>
