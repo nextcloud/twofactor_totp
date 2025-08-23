@@ -4,6 +4,7 @@
  */
 
 import Vue from 'vue'
+import { loadState } from '@nextcloud/initial-state'
 import store from './store.js'
 
 import LoginSetup from './components/LoginSetup.vue'
@@ -12,6 +13,10 @@ Vue.mixin({
 	methods: {
 		t,
 	},
+})
+
+store.replaceState({
+	email: loadState('twofactor_email', 'email'),
 })
 
 const View = Vue.extend(LoginSetup)

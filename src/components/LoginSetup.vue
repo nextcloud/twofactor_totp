@@ -10,7 +10,11 @@
 	</div>
 	<div v-else>
 		<div v-if="loading" class="loading" />
-		<form ref="confirmForm" method="POST" />
+		<p>Successfully enabled</p>
+		<p>Codes will be sent to your primary e-mail address:<br><b>{{ email }}</b></p>
+		<form ref="confirmForm" method="POST">
+			<button>Proceed with login</button>
+		</form>
 	</div>
 </template>
 
@@ -23,6 +27,7 @@ export default {
 	data() {
 		return {
 			error: this.$store.state.error,
+			email: this.$store.state.email,
 			loading: true,
 		}
 	},
@@ -38,7 +43,6 @@ export default {
 					Logger.debug('enable two-factor e-mail request returned')
 					if (enabled) {
 						Logger.debug('two-factor e-mail successfully enabled')
-						this.$refs.confirmForm.submit()
 					} else {
 						this.error = error
 					}
@@ -46,6 +50,9 @@ export default {
 				})
 				.catch(console.error.bind(this))
 		},
+		continue() {
+			this.$refs.confirmForm.submit()
+		}
 	},
 }
 </script>

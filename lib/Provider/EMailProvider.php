@@ -35,7 +35,7 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 		private IInitialState      $initialState,
 		private IURLGenerator      $urlGenerator,
 		private ContainerInterface $container,
-		private IChallengeService   $challengeService,
+		private IChallengeService  $challengeService,
 		private IStateManager      $stateManager,
 	) {
 	}
@@ -101,6 +101,7 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 
 	public function getLoginSetup(IUser $user): ILoginSetupProvider
 	{
+		$this->initialState->provideInitialState('email', $user->getEMailAddress());
 		return $this->container->get(AtLoginProvider::class);
 	}
 }

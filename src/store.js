@@ -39,6 +39,8 @@ export default new Vuex.Store({
 	state: {
 		enabled: false,
 		hasEmail: false,
+		email: 'ERROR [no email set]',
+		error: false,
 	},
 	mutations,
 	actions,
