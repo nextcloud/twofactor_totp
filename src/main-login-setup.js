@@ -16,7 +16,7 @@ Vue.mixin({
 })
 
 store.replaceState({
-	email: loadState('twofactor_email', 'email'),
+	maskedEmail: loadState('twofactor_email', 'maskedEmail'),
 })
 
 const View = Vue.extend(LoginSetup)

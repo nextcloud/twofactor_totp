@@ -11,9 +11,9 @@
 	<div v-else>
 		<div v-if="loading" class="loading" />
 		<p>Successfully enabled</p>
-		<p>Codes will be sent to your primary e-mail address:<br><b>{{ email }}</b></p>
+		<p>Codes will be sent to your primary e-mail address:<br><b>{{ maskedEmail }}</b></p>
 		<form ref="confirmForm" method="POST">
-			<button>Proceed with login</button>
+			<button>Proceed</button>
 		</form>
 	</div>
 </template>
@@ -27,7 +27,7 @@ export default {
 	data() {
 		return {
 			error: this.$store.state.error,
-			email: this.$store.state.email,
+			maskedEmail: this.$store.state.maskedEmail,
 			loading: true,
 		}
 	},

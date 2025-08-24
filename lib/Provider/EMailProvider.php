@@ -11,6 +11,7 @@ namespace OCA\TwoFactorEMail\Provider;
 
 use OCA\TwoFactorEMail\AppInfo\Application;
 use OCA\TwoFactorEMail\Service\IChallengeService;
+use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Settings\Personal;
 use OCP\AppFramework\Services\IInitialState;
@@ -31,12 +32,13 @@ use Psr\Container\ContainerInterface;
 class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableByAdmin, IActivatableAtLogin {
 
 	public function __construct(
-		private IL10N              $l10n,
-		private IInitialState      $initialState,
-		private IURLGenerator      $urlGenerator,
-		private ContainerInterface $container,
-		private IChallengeService  $challengeService,
-		private IStateManager      $stateManager,
+		private IL10N               $l10n,
+		private IInitialState       $initialState,
+		private IURLGenerator       $urlGenerator,
+		private ContainerInterface  $container,
+		private IChallengeService   $challengeService,
+		private IStateManager       $stateManager,
+		private IEMailAddressMasker $emailAddressMasker,
 	) {
 	}
 
@@ -101,7 +103,8 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 
 	public function getLoginSetup(IUser $user): ILoginSetupProvider
 	{
-		$this->initialState->provideInitialState('email', $user->getEMailAddress());
+		$maskedEmail = $this->emailAddressMasker->maskForUI($user->getEMailAddress());
+		$this->initialState->provideInitialState('maskedEmail', $maskedEmail);
 		return $this->container->get(AtLoginProvider::class);
 	}
 }

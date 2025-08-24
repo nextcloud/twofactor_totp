@@ -15,10 +15,12 @@ use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorEMail\Service\ChallengeService;
 use OCA\TwoFactorEMail\Service\ConstantApplicationSettings;
+use OCA\TwoFactorEMail\Service\EMailAddressMasker;
 use OCA\TwoFactorEMail\Service\IApplicationSettings;
 use OCA\TwoFactorEMail\Service\ICodeGenerator;
 use OCA\TwoFactorEMail\Service\ICodeStorage;
 use OCA\TwoFactorEMail\Service\IChallengeService;
+use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
 use OCA\TwoFactorEMail\Service\IEMailSender;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Service\NumericalCodeGenerator;
@@ -45,6 +47,7 @@ class Application extends App implements IBootstrap {
 		$context->registerServiceAlias(IChallengeService::class, ChallengeService::class);
 		$context->registerServiceAlias(ICodeGenerator::class, NumericalCodeGenerator::class);
 		$context->registerServiceAlias(ICodeStorage::class, PreferencesCodeStorage::class);
+		$context->registerServiceAlias(IEMailAddressMasker::class, EMailAddressMasker::class);
 		$context->registerServiceAlias(IEMailSender::class, EMailSender::class);
 		$context->registerServiceAlias(IStateManager::class, StateManager::class);
 
