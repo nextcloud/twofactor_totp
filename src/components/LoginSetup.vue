@@ -11,9 +11,9 @@
 	<div v-else>
 		<div v-if="loading" class="loading" />
 		<p>Successfully enabled</p>
-		<p>Codes will be sent to your primary e-mail address:<br><b>{{ maskedEmail }}</b></p>
+		<p>Codes will be sent to your primary e-mail address:<br><b>{{ t('twofactor_email', maskedEmail) }}</b></p>
 		<form ref="confirmForm" method="POST">
-			<button>Proceed</button>
+			<button>{{ t('twofactor_email', 'Proceed') }}</button>
 		</form>
 	</div>
 </template>
