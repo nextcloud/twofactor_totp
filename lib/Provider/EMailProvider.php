@@ -23,22 +23,24 @@ use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
+use OCP\Template\ITemplate;
+use OCP\Template\ITemplateManager;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
-use OCP\Template;
 use Psr\Container\ContainerInterface;
 
 class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableByAdmin, IActivatableAtLogin {
 
 	public function __construct(
+		private IEMailAddressMasker $emailAddressMasker,
+		private ITemplateManager    $templateManager,
 		private IL10N               $l10n,
-		private IInitialState       $initialState,
+		private IInitialState       $initialStateService,
 		private IURLGenerator       $urlGenerator,
 		private ContainerInterface  $container,
 		private IChallengeService   $challengeService,
 		private IStateManager       $stateManager,
-		private IEMailAddressMasker $emailAddressMasker,
 	) {
 	}
 
@@ -58,10 +60,10 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	 * Get the template for rending the 2FA provider view.
 	 * This function is called from nextcloud when the user activated the e-mail 2FA and is now logging in.
 	 */
-	public function getTemplate(IUser $user): Template {
+	public function getTemplate(IUser $user): ITemplate {
 		$this->challengeService->sendChallenge($user);
 		// Return the template for the challenge view (challenge.php file in the templates folder of the app)
-		return new Template(Application::APP_ID, 'challenge');
+		return $this->templateManager->getTemplate(Application::APP_ID, 'challenge');
 	}
 
 	public function verifyChallenge(IUser $user, string $challenge): bool {
@@ -87,9 +89,11 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	}
 
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
-		$this->initialState->provideInitialState('enabled', $this->stateManager->isEnabled($user));
-		$this->initialState->provideInitialState('hasEmail', !empty($user->getEMailAddress()));
-		return new Personal();
+		$this->initialStateService->provideInitialState('enabled', $this->stateManager->isEnabled($user));
+		$this->initialStateService->provideInitialState('hasEmail', !empty($user->getEMailAddress()));
+		return new Personal(
+			$this->templateManager,
+		);
 	}
 
 	public function disableFor(IUser $user): void {
@@ -104,7 +108,7 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	public function getLoginSetup(IUser $user): ILoginSetupProvider
 	{
 		$maskedEmail = $this->emailAddressMasker->maskForUI($user->getEMailAddress());
-		$this->initialState->provideInitialState('maskedEmail', $maskedEmail);
+		$this->initialStateService->provideInitialState('maskedEmail', $maskedEmail);
 		return $this->container->get(AtLoginProvider::class);
 	}
 }

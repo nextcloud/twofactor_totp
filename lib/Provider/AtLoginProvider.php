@@ -12,17 +12,19 @@ namespace OCA\TwoFactorEMail\Provider;
 use OCA\TwoFactorEMail\AppInfo\Application;
 use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
 use OCP\IURLGenerator;
-use OCP\Template;
+use OCP\Template\ITemplate;
+use OCP\Template\ITemplateManager;
 
 class AtLoginProvider implements ILoginSetupProvider {
 
 	public function __construct(
-		private IURLGenerator $urlGenerator,
+		private IURLGenerator    $urlGenerator,
+		private ITemplateManager $templateManager,
 	) {
 	}
 
-	public function getBody(): Template {
-		$template = new Template(Application::APP_ID, 'loginsetup');
+	public function getBody(): ITemplate {
+		$template = $this->templateManager->getTemplate(Application::APP_ID, 'loginsetup');
 		$template->assign('urlGenerator', $this->urlGenerator);
 		return $template;
 	}
