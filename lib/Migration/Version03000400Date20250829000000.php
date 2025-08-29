@@ -18,7 +18,7 @@ use OCP\DB\ISchemaWrapper;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
-class Version030000Date20250814100800 extends SimpleMigrationStep {
+class Version03000400Date20250829000000 extends SimpleMigrationStep {
 	private const APP_ID = 'twofactor_email';
 	private const V2_KEY_CODE = 'authentication_code';
 	private const V3_KEY_CODE = 'code';
