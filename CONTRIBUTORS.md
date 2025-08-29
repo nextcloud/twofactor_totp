@@ -33,6 +33,12 @@
 * [Barbara Seyfarth](mailto:Barbara Seyfarth <barbara@seyfarth.de>) ([firlefunke](https://github.com/firlefunke))
 * [Anna Larch](mailto:Anna Larch <anna@nextcloud.com>) ([miaulalala](https://github.com/miaulalala))
 
+### AI usage to enhance code
+
+* Contributors may use AI to refactor or verify code snippets. This led to more robust code!
+* All code proposed by an AI is thoroughly manually verified and adjusted by the maintainers.
+* Major AI contributions are commented in the source code near the AI enhanced code parts.
+* Many thanks to both DuckDuckGo and OpenAI. It is fun using duck.ai with GPT-5 mini.
 ____
 
 *Please [tell me](mailto:Olav Seyfarth <olav@seyfarth.de>?subject=[twofactor_email] CONTRIBUTORS.md) if I forgot to include you or somebody or if I shall correct or delete contact details.*
