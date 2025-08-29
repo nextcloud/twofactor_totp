@@ -12,6 +12,7 @@ namespace OCA\TwoFactorEMail\Migration;
 // IUserConfig cannot be used since it's only available in NC ≥32 but migration also happens before that
 use Closure;
 use OCP\IConfig;
+use OCP\IUser;
 use OCP\IUserManager;
 use OCP\DB\ISchemaWrapper;
 use OCP\Migration\IOutput;
@@ -54,7 +55,9 @@ class Version030000Date20250814100800 extends SimpleMigrationStep {
 		// Get a list of all current user IDs as array for bulk operation
 		$uids = [];
 		try {
-			$this->userManager->callForAllUsers(function($uid) use (&$uids) { $uids[] = (string)$uid; });
+			$this->userManager->callForAllUsers(function(IUser $user) use (&$uids) {
+				$uids[] = $user->getUID();
+			});
 		} catch (\Throwable $e) {
 			$output->warning('Failed to enumerate users: ' . $e->getMessage());
 		}
