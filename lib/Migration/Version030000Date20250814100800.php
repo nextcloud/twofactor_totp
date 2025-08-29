@@ -62,17 +62,24 @@ class Version030000Date20250814100800 extends SimpleMigrationStep {
 		foreach ($legacyCodes as $userId => $code) {
 			if (!is_string($code)) { $code = (string)$code; }
 			if (!preg_match(self::CODE_REGEX, $code)) {
-				$skippedInvalid++; $output->debug("Skipping invalid code for user {$userId}");
+				$skippedInvalid++;
+				$output->info("Skipping invalid code for user {$userId}");
 				continue;
 			}
 
 			try {
-				$this->config->setValueString($userId, self::APP_ID, self::V3_KEY_CODE, $code);
-				$this->config->setValueInt($userId, self::APP_ID, self::V3_KEY_CREATED_AT, $now);
-				$migrated++;
+				$code_written = false;
+				$time_written = false;
+				$code_written = $this->config->setValueString($userId, self::APP_ID, self::V3_KEY_CODE, $code);
+				$time_written = $this->config->setValueInt($userId, self::APP_ID, self::V3_KEY_CREATED_AT, $now);
+				if ($code_written && $time_written) {
+					$migrated++;
+					$output->info("Migrated code for user {$userId}. Added current time as 'created at' since v2 did not have an expiry mechanism.");
+					$output->debug("Code: {$code}, created at {$now}");
+				}
 			} catch (\Throwable $e) {
 				$failed++;
-				$output->debug("Failed to migrate code for user {$userId}: " . $e->getMessage());
+				$output->info("Failed to migrate code for user {$userId}: " . $e->getMessage());
 			}
 		}
 
@@ -82,7 +89,7 @@ class Version030000Date20250814100800 extends SimpleMigrationStep {
 			$output->warning('Failed to delete legacy app config: ' . $e->getMessage());
 		}
 
-		$output->info("Migrated {$migrated} authentication codes.");
+		$output->warning("Migrated {$migrated} authentication codes.");
 		if ($skippedInvalid > 0) {
 			$output->warning("Skipped {$skippedInvalid} invalid legacy entries.");
 		}
