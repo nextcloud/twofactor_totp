@@ -5,11 +5,15 @@
 # Changelog
 Notable changes in [changelog format](https://keepachangelog.com/en/1.0.0/), project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## 3.0.3-beta.5 (2025-08-26)
+## 3.0.3-beta.6 (2025-08-29)
+
+### Added
+
+- Support for Nextcloud 32
 
 ### Fixed
 
-- Support for Nextcloud 32
+- Migration errors when updating from v2 to v3
 
 ### Removed
 
