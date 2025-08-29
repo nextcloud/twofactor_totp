@@ -91,6 +91,7 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
 		$this->initialStateService->provideInitialState('enabled', $this->stateManager->isEnabled($user));
 		$this->initialStateService->provideInitialState('hasEmail', !empty($user->getEMailAddress()));
+		$this->initialStateService->provideInitialState('email', $user->getEMailAddress());
 		return new Personal(
 			$this->templateManager,
 		);

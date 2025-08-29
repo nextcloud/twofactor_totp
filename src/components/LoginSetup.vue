@@ -3,15 +3,20 @@
   - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
+<!-- Sync strings with PersonalEmailSettings.vue -->
 <template>
 	<div v-if="error">
-		<span v-if="error === 'no-email'" class="error"> {{ t('twofactor_email', 'Cannot enable two-factor authentication via e-mail as your e-mail address is not configured.') }} </span>
-		<span v-else class="error"> {{ t('twofactor_email', 'Something went wrong') }} </span>
+		<span v-if="error === 'no-email'" class="error">
+			{{ t('twofactor_email', 'You cannot enable two-factor authentication via e-mail. You need to set a primary e-mail address (in your personal settings) first.') }}
+		</span>
+		<span v-else class="error">
+			{{ t('twofactor_email', 'Unhandled error') }}
+		</span>
 	</div>
 	<div v-else>
 		<div v-if="loading" class="loading" />
 		<p>Successfully enabled</p>
-		<p>Codes will be sent to your primary e-mail address:<br><b>{{ t('twofactor_email', maskedEmail) }}</b></p>
+		<p>{{ t('twofactor_email', 'Codes will be sent to your primary e-mail address') }}:<br><b>{{ maskedEmail }}</b></p>
 		<form ref="confirmForm" method="POST">
 			<button>{{ t('twofactor_email', 'Proceed') }}</button>
 		</form>

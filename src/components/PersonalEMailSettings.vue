@@ -3,21 +3,30 @@
   - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
+<!-- Sync strings with LoginSetup.vue -->
 <template>
 	<div id="twofactor-email-settings">
-		<NcCheckboxRadioSwitch v-if="hasEmail"
-			type="switch"
-			:checked.sync="enabled"
-			:loading="loading"
-			@update:checked="toggleEnabled">
-			{{ t('twofactor_email', 'Use two-factor authentication via e-mail') }}
-		</NcCheckboxRadioSwitch>
+		<div v-if="hasEmail">
+			<p>
+				<NcCheckboxRadioSwitch type="switch"
+					:checked.sync="enabled"
+					:loading="loading"
+					@update:checked="toggleEnabled">
+					{{ t('twofactor_email', 'Use two-factor authentication via e-mail') }}
+				</NcCheckboxRadioSwitch>
+			</p>
+			<p v-if="enabled">
+				{{ t('twofactor_email', 'Codes will be sent to your primary e-mail address') }} <b>{{ email }}.</b>
+			</p>
+		</div>
 		<div v-else>
-			<span class="notice"> {{ t('twofactor_email', 'You need to set your e-mail address first.') }} </span>
+			<span class="notice">
+				{{ t('twofactor_email', 'You cannot enable two-factor authentication via e-mail. You need to set a primary e-mail address (in your personal settings) first.') }}
+			</span>
 		</div>
 		<div v-if="error">
-			<span v-if="error === 'no-email'" class="error"> {{ t('twofactor_email', 'Apparently your configured e-mail address just vanished.') }} </span>
-			<span v-else class="error"> {{ t('twofactor_email', 'Something went wrong') }} </span>
+			<span v-if="error === 'no-email'" class="error"> {{ t('twofactor_email', 'Apparently your previously configured e-mail address just vanished.') }} </span>
+			<span v-else class="error"> {{ t('twofactor_email', 'Unhandled error') }} </span>
 		</div>
 	</div>
 </template>
@@ -41,6 +50,7 @@ export default {
 		return {
 			enabled: this.$store.state.enabled,
 			hasEmail: this.$store.state.hasEmail,
+			email: this.$store.state.email,
 			error: null,
 			loading: false,
 		}

@@ -40,6 +40,7 @@ export default new Vuex.Store({
 		enabled: false,
 		hasEmail: false,
 		maskedEmail: 'ERROR [no email set]',
+		email: '',
 		error: false,
 	},
 	mutations,

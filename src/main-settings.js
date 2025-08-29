@@ -18,6 +18,7 @@ Vue.mixin({
 store.replaceState({
 	enabled: loadState('twofactor_email', 'enabled'),
 	hasEmail: loadState('twofactor_email', 'hasEmail'),
+	email: loadState('twofactor_email', 'email'),
 })
 
 const View = Vue.extend(PersonalEMailSettings)
