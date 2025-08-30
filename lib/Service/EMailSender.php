@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Service;
 
 use Exception;
+use OCA\TwoFactorEMail\Exception\EMailNotSetException;
 use OCA\TwoFactorEMail\Exception\EMailTransportFailedException;
-use OCA\TwoFactorEMail\Exception\UnknownEMailException;
 use OCP\Defaults;
 use OCP\IL10N;
 use OCP\IUser;
@@ -30,7 +30,7 @@ class EMailSender implements IEMailSender {
 	public function sendChallengeEMail(IUser $user, string $code): void {
 		$email = $user->getEMailAddress();
 		if (empty($email)) {
-			throw new UnknownEMailException($user);
+			throw new EMailNotSetException($user);
 		}
 
 		$this->logger->debug("sending email message to $email, code: $code");
