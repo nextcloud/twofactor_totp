@@ -16,6 +16,6 @@
 	margin: 0 0 5px 0;
 }
 
-.two-factor-email-icon {
+.twofactor-email-icon {
 	filter: var(--background-invert-if-bright);
 }

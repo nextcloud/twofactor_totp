@@ -39,8 +39,8 @@ export default new Vuex.Store({
 	state: {
 		enabled: false,
 		hasEmail: false,
-		maskedEmail: 'ERROR [no email set]',
-		email: '',
+		maskedEmail: 'UNEXPECTED ERROR: no e-mail address set',
+		email: 'UNEXPECTED ERROR: no e-mail address set',
 		error: false,
 	},
 	mutations,

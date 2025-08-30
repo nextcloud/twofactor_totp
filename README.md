@@ -1,4 +1,4 @@
-# Two-Factor Email Provider for Nextcloud
+# Two-Factor E-Mail Provider for Nextcloud
 
 [Nextcloud](https://nextcloud.com/) supports web logins with a second factor
 ([two factor authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication#Factors),
@@ -6,7 +6,7 @@
 installed. 2FA kicks in after the primary authentication stage (typically
 username and password) were successful. This provider challenges the user to
 enter a randomly generated authentication code (aka one-time password, OTP,
-currently 6 digits). It sends that code to the user's primary email address and
+currently 6 digits). It sends that code to the user's primary e-mail address and
 expects the user to enter it on an additional 2nd step web login page.
 
 ### Installation, activation and usage
@@ -17,9 +17,9 @@ enabled by a Nextcloud server admin. Additionally, the Nextcloud must have a
 working e-mail server configured.
 
 The user may set up any of the installed providers or even multiple. This
-provider uses email to send the code and thus can only be enabled if an email
+provider uses e-mail to send the code and thus can only be enabled if an e-mail
 address is set in 'Personal info'. Mind that a user may not be able to log in
-if that email address is invalid (or email server setup of the Nextcloud is
+if that e-mail address is invalid (or e-mail server setup of the Nextcloud is
 not working properly).
 
 Admins with console access may enable and disable this provider for specified

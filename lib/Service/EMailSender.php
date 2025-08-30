@@ -40,7 +40,7 @@ class EMailSender implements IEMailSender {
 		$template->setSubject($this->l10n->t('Login attempt for %s', [$user_at_cloud]));
 		$template->addHeader();
 		$template->addHeading($this->l10n->t('Your two-factor authentication code is: %s', [$code]));
-		$template->addBodyText($this->l10n->t('If you tried to login, please enter that code on %s. If you did not, somebody else did and knows your your email address or username – and your password!', [$this->defaults->getName()]));
+		$template->addBodyText($this->l10n->t('If you tried to login, please enter that code on %s. If you did not, somebody else did and knows your your e-mail address or username – and your password!', [$this->defaults->getName()]));
 		$template->addFooter();
 
 		$message = $this->mailer->createMessage();
