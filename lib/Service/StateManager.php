@@ -14,7 +14,7 @@ use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IUser;
 
-class StateManager implements IStateManager {
+final class StateManager implements IStateManager {
 	public function __construct(
 		private IEventDispatcher $eventDispatcher,
 		private IRegistry $registry,

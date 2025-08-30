@@ -12,7 +12,7 @@ namespace OCA\TwoFactorEMail\Event;
 use OCP\EventDispatcher\Event;
 use OCP\IUser;
 
-class StateChanged extends Event {
+final class StateChanged extends Event {
 
 	public function __construct(
 		private IUser $user,

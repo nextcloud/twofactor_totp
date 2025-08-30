@@ -18,7 +18,7 @@ use OCP\IUser;
 use OCP\Mail\IMailer;
 use Psr\Log\LoggerInterface;
 
-class EMailSender implements IEMailSender {
+final class EMailSender implements IEMailSender {
 	public function __construct(
 		private LoggerInterface $logger,
 		private IL10N $l10n,
@@ -29,7 +29,7 @@ class EMailSender implements IEMailSender {
 
 	public function sendChallengeEMail(IUser $user, string $code): void {
 		$email = $user->getEMailAddress();
-		if (empty($email)) {
+		if ($email === null) {
 			throw new EMailNotSetException($user);
 		}
 

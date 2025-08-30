@@ -18,7 +18,7 @@ use OCP\EventDispatcher\IEventListener;
 /**
  * @template-implements IEventListener<StateChanged>
  */
-class StateChangeRegistryUpdater implements IEventListener {
+final class StateChangeRegistryUpdater implements IEventListener {
 
 	public function __construct(
 		private IRegistry $registry,

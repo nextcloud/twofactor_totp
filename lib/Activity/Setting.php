@@ -13,7 +13,7 @@ use OCA\TwoFactorEMail\AppInfo\Application;
 use OCP\Activity\ISetting;
 use OCP\IL10N;
 
-class Setting implements ISetting {
+final class Setting implements ISetting {
 
 	public function __construct(
 		private IL10N $l10n,

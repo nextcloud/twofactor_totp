@@ -12,7 +12,7 @@ namespace OCA\TwoFactorEMail\Exception;
 use OCP\IUser;
 use Throwable;
 
-class EMailNotSetException extends SendEMailException {
+final class EMailNotSetException extends SendEMailException {
 	public function __construct(
 		public readonly IUser $user,
 		?Throwable $previous = null,

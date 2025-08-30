@@ -9,5 +9,5 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorEMail\Exception;
 
-class EMailTransportFailedException extends SendEMailException {
+final class EMailTransportFailedException extends SendEMailException {
 }

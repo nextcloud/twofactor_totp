@@ -16,16 +16,16 @@ use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorEMail\Service\ChallengeService;
 use OCA\TwoFactorEMail\Service\ConstantApplicationSettings;
 use OCA\TwoFactorEMail\Service\EMailAddressMasker;
+use OCA\TwoFactorEMail\Service\EMailSender;
 use OCA\TwoFactorEMail\Service\IApplicationSettings;
+use OCA\TwoFactorEMail\Service\IChallengeService;
 use OCA\TwoFactorEMail\Service\ICodeGenerator;
 use OCA\TwoFactorEMail\Service\ICodeStorage;
-use OCA\TwoFactorEMail\Service\IChallengeService;
 use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
 use OCA\TwoFactorEMail\Service\IEMailSender;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Service\NumericalCodeGenerator;
 use OCA\TwoFactorEMail\Service\PreferencesCodeStorage;
-use OCA\TwoFactorEMail\Service\EMailSender;
 use OCA\TwoFactorEMail\Service\StateManager;
 use OCP\Accounts\UserUpdatedEvent;
 use OCP\AppFramework\App;
@@ -33,7 +33,7 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
-class Application extends App implements IBootstrap {
+final class Application extends App implements IBootstrap {
 	public const APP_ID = 'twofactor_email';
 
 	public function __construct() {

@@ -2,21 +2,10 @@
 
 declare(strict_types=1);
 
-
-
-
-
-
 namespace OCA\TwoFactorEMail\Service;
 
-
-
-class EMailAddressMasker implements IEMailAddressMasker {
-	public function __construct() {
-	}
-
-	public function maskForUI(string $emailAddress): string
-	{
+final class EMailAddressMasker implements IEMailAddressMasker {
+	public function maskForUI(string $emailAddress): string {
 		if (!preg_match('/^([^@\s]+)@([^@\s]+)$/', $emailAddress, $m)) {
 			return $emailAddress;
 		}

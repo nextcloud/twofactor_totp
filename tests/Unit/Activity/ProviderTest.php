@@ -43,8 +43,7 @@ class ProviderTest extends TestCase {
 		$this->provider->parse($lang, $event);
 	}
 
-	public static function subjectData(): array
-	{
+	public static function subjectData(): array {
 		return [
 			[Notification::ENABLED_BY_USER],
 			[Notification::DISABLED_BY_USER],
