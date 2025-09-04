@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version: [ "8.1" ]
-        nextcloud-version: [ 'master' ]
+        nextcloud-version: [ 'stable32' ]
         db: ['sqlite']
 
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
@@ -68,7 +68,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version: [ "8.1" ]
-        nextcloud-version: [ 'master' ]
+        nextcloud-version: [ 'stable32' ]
         browser: [ 'firefox' ]
         db: [ 'mysql' ]
 
