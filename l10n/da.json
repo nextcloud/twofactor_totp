@@ -1,9 +1,12 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Du har aktiveret to-faktor godkendelse til din konto",
     "You disabled TOTP two-factor authentication for your account" : "Du har deaktiveret to-fakto godkendelse til din konto.",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP to-faktor godkendelse deaktiveret af administrationen",
     "TOTP (Authenticator app)" : "TOTP (Gokendelses app)",
     "Authenticate with a TOTP app" : "Godkend med en TOTP App",
     "Two-Factor TOTP Provider" : "To-faktor TOTP-udbyder",
+    "Two-factor TOTP provider" : "To-faktor TOTP leverandør",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "En to-faktor godkendelses leverandør til TOTP (RFC 6238)",
     "Could not enable TOTP" : "Kunne ikke aktivere TOTP",
     "Could not verify your key. Please try again" : "Kunne ikke bekræfte din nøgle. Prøv venligst igen",
     "Enable TOTP" : "Aktiver TOTP",
