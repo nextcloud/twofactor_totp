@@ -10,14 +10,14 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Listener;
 
 use OCA\TwoFactorEMail\Service\IStateManager;
+use OCP\Accounts\UserUpdatedEvent;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
-use OCP\Accounts\UserUpdatedEvent;
 
 /**
  * @template-implements IEventListener<UserUpdatedEvent>
  */
-class EmailDeleted implements IEventListener {
+final class EmailDeleted implements IEventListener {
 
 	public function __construct(
 		private IStateManager $service,
@@ -25,8 +25,8 @@ class EmailDeleted implements IEventListener {
 	}
 
 	public function handle(Event $event): void {
-		if ($event instanceof UserUpdatedEvent && empty($event->getUser()->getEMailAddress())) {
+		if ($event instanceof UserUpdatedEvent && $event->getUser()->getEMailAddress() === null) {
 			$this->service->disable($event->getUser());
-        }
+		}
 	}
 }

@@ -19,7 +19,7 @@ use OCP\EventDispatcher\IEventListener;
 /**
  * @template-implements IEventListener<StateChanged>
  */
-class StateChangeActivity implements IEventListener {
+final class StateChangeActivity implements IEventListener {
 
 	public function __construct(
 		private ActivityManager $activityManager,

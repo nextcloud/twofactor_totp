@@ -17,13 +17,13 @@ use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\IRequest;
 use OCP\IUserSession;
 
-class SettingsController extends ALoginSetupController {
+final class SettingsController extends ALoginSetupController {
 
 	public function __construct(
-		string                      $appName,
-		IRequest                    $request,
-		private IUserSession        $userSession,
-		private IStateManager       $stateManager,
+		string $appName,
+		IRequest $request,
+		private IUserSession $userSession,
+		private IStateManager $stateManager,
 	) {
 		parent::__construct($appName, $request);
 	}
@@ -32,8 +32,13 @@ class SettingsController extends ALoginSetupController {
 	#[PasswordConfirmationRequired]
 	public function setState(bool $state): JSONResponse {
 		$user = $this->userSession->getUser();
+		if ($user === null) {
+			return new JSONResponse([
+				'error' => 'no-user',
+			]);
+		}
 		if ($state) {
-			if (empty($user->getEMailAddress())) {
+			if ($user->getEMailAddress() === null) {
 				return new JSONResponse([
 					'error' => 'no-email',
 					'enabled' => false,

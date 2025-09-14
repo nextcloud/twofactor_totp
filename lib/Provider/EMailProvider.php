@@ -23,24 +23,24 @@ use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
-use OCP\Template\ITemplate;
-use OCP\Template\ITemplateManager;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
+use OCP\Template\ITemplate;
+use OCP\Template\ITemplateManager;
 use Psr\Container\ContainerInterface;
 
 class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableByAdmin, IActivatableAtLogin {
 
 	public function __construct(
 		private IEMailAddressMasker $emailAddressMasker,
-		private ITemplateManager    $templateManager,
-		private IL10N               $l10n,
-		private IInitialState       $initialStateService,
-		private IURLGenerator       $urlGenerator,
-		private ContainerInterface  $container,
-		private IChallengeService   $challengeService,
-		private IStateManager       $stateManager,
+		private ITemplateManager $templateManager,
+		private IL10N $l10n,
+		private IInitialState $initialStateService,
+		private IURLGenerator $urlGenerator,
+		private ContainerInterface $container,
+		private IChallengeService $challengeService,
+		private IStateManager $stateManager,
 	) {
 	}
 
@@ -89,9 +89,10 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	}
 
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
+		$email = $user->getEMailAddress() ?? '';
 		$this->initialStateService->provideInitialState('enabled', $this->stateManager->isEnabled($user));
-		$this->initialStateService->provideInitialState('hasEmail', !empty($user->getEMailAddress()));
-		$this->initialStateService->provideInitialState('email', $user->getEMailAddress());
+		$this->initialStateService->provideInitialState('hasEmail', $email !== '');
+		$this->initialStateService->provideInitialState('email', $email);
 		return new Personal(
 			$this->templateManager,
 		);
@@ -101,14 +102,12 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 		$this->stateManager->disable($user, true);
 	}
 
-	public function enableFor(IUser $user): void
-	{
+	public function enableFor(IUser $user): void {
 		$this->stateManager->enable($user, true);
 	}
 
-	public function getLoginSetup(IUser $user): ILoginSetupProvider
-	{
-		$maskedEmail = $this->emailAddressMasker->maskForUI($user->getEMailAddress());
+	public function getLoginSetup(IUser $user): ILoginSetupProvider {
+		$maskedEmail = $this->emailAddressMasker->maskForUI($user->getEMailAddress() ?? '');
 		$this->initialStateService->provideInitialState('maskedEmail', $maskedEmail);
 		return $this->container->get(AtLoginProvider::class);
 	}

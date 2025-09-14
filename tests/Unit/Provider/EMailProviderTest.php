@@ -12,17 +12,21 @@ namespace OCA\TwoFactorEMail\Test\Unit\Provider;
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\TwoFactorEMail\Provider\EMailProvider;
 use OCA\TwoFactorEMail\Service\IChallengeService;
+use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Settings\Personal;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
+use OCP\Template\ITemplateManager;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Container\ContainerInterface;
 
 class EMailProviderTest extends TestCase {
+	private IEMailAddressMasker&MockObject $masker;
+	private ITemplateManager&MockObject $templateManager;
 	private IL10N&MockObject $l10n;
 	private IInitialState&MockObject $initialState;
 	private IURLGenerator&MockObject $urlGenerator;
@@ -38,6 +42,8 @@ class EMailProviderTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->masker = $this->createMock(IEMailAddressMasker::class);
+		$this->templateManager = $this->createMock(ITemplateManager::class);
 		$this->l10n = $this->createMock(IL10N::class);
 		$this->initialState = $this->createMock(IInitialState::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
@@ -46,6 +52,8 @@ class EMailProviderTest extends TestCase {
 		$this->stateManager = $this->createMock(IStateManager::class);
 
 		$this->provider = new EMailProvider(
+			$this->masker,
+			$this->templateManager,
 			$this->l10n,
 			$this->initialState,
 			$this->urlGenerator,
@@ -97,7 +105,7 @@ class EMailProviderTest extends TestCase {
 	}
 
 	public function testGetPersonalSettingsDisabledWithoutEMail(): void {
-		$expected = new Personal();
+		$expected = new Personal($this->templateManager);
 
 		$user = $this->createMock(IUser::class);
 		$user->expects(self::once())
@@ -107,11 +115,12 @@ class EMailProviderTest extends TestCase {
 			->method('isEnabled')
 			->with($user)
 			->willReturn(false);
-		$this->initialState->expects($this->exactly(2))
+		$this->initialState->expects($this->exactly(3))
 			->method('provideInitialState')
 			->with($this->logicalOr(
 				$this->equalTo('enabled'),
 				$this->equalTo('hasEmail'),
+				$this->equalTo('email'),
 			), false);
 
 		$actual = $this->provider->getPersonalSettings($user);
@@ -120,7 +129,7 @@ class EMailProviderTest extends TestCase {
 	}
 
 	public function testGetPersonalSettingsEnabledWithEMail(): void {
-		$expected = new Personal();
+		$expected = new Personal($this->templateManager);
 
 		$user = $this->createMock(IUser::class);
 		$user->expects(self::once())
@@ -130,11 +139,12 @@ class EMailProviderTest extends TestCase {
 			->method('isEnabled')
 			->with($user)
 			->willReturn(true);
-		$this->initialState->expects($this->exactly(2))
+		$this->initialState->expects($this->exactly(3))
 			->method('provideInitialState')
 			->with($this->logicalOr(
 				$this->equalTo('enabled'),
 				$this->equalTo('hasEmail'),
+				$this->equalTo('email'),
 			), true);
 
 		$actual = $this->provider->getPersonalSettings($user);

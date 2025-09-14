@@ -15,10 +15,10 @@ use OCP\IURLGenerator;
 use OCP\Template\ITemplate;
 use OCP\Template\ITemplateManager;
 
-class AtLoginProvider implements ILoginSetupProvider {
+final class AtLoginProvider implements ILoginSetupProvider {
 
 	public function __construct(
-		private IURLGenerator    $urlGenerator,
+		private IURLGenerator $urlGenerator,
 		private ITemplateManager $templateManager,
 	) {
 	}

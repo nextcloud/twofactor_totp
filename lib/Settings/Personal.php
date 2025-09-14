@@ -14,7 +14,7 @@ use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Template\ITemplate;
 use OCP\Template\ITemplateManager;
 
-class Personal implements IPersonalProviderSettings {
+final class Personal implements IPersonalProviderSettings {
 
 	public function __construct(
 		private ITemplateManager $templateManager,

@@ -11,14 +11,14 @@ namespace OCA\TwoFactorEMail\Migration;
 
 // IUserConfig cannot be used since it's only available in NC ≥32 but migration also happens before that
 use Closure;
+use OCP\DB\ISchemaWrapper;
 use OCP\IConfig;
 use OCP\IUser;
 use OCP\IUserManager;
-use OCP\DB\ISchemaWrapper;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
-class Version03000400Date20250829000000 extends SimpleMigrationStep {
+final class Version03000400Date20250829000000 extends SimpleMigrationStep {
 	private const APP_ID = 'twofactor_email';
 	private const V2_KEY_CODE = 'authentication_code';
 	private const V3_KEY_CODE = 'code';
@@ -28,10 +28,10 @@ class Version03000400Date20250829000000 extends SimpleMigrationStep {
 	public function __construct(
 		private IConfig $config,
 		private IUserManager $userManager,
-	) {}
+	) {
+	}
 
-	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ISchemaWrapper
-	{
+	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ISchemaWrapper {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
@@ -43,8 +43,7 @@ class Version03000400Date20250829000000 extends SimpleMigrationStep {
 		return $schema;
 	}
 
-	public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void
-	{
+	public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void {
 		$now = time();
 		$migrated = 0;
 		$skippedInvalid = 0;
@@ -55,7 +54,7 @@ class Version03000400Date20250829000000 extends SimpleMigrationStep {
 		// Get a list of all current user IDs as array for bulk operation
 		$uids = [];
 		try {
-			$this->userManager->callForAllUsers(function(IUser $user) use (&$uids) {
+			$this->userManager->callForAllUsers(function (IUser $user) use (&$uids) {
 				$uids[] = $user->getUID();
 			});
 		} catch (\Throwable $e) {
@@ -92,7 +91,9 @@ class Version03000400Date20250829000000 extends SimpleMigrationStep {
 		// Migrate to new scheme (see V3 constants above)
 		foreach ($legacyCodes as $userId => $code) {
 			$uid = (string)$userId;
-			if (!is_string($code)) { $code = (string)$code; }
+			if (!is_string($code)) {
+				$code = (string)$code;
+			}
 
 			// V2 only used 6-digit codes, only migrate if the value is as such
 			if (!preg_match(self::CODE_REGEX, $code)) {
