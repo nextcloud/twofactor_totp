@@ -1,5 +1,6 @@
 { "translations": {
     "Enable TOTP" : "Enable TOTP",
-    "Verify" : "Verify"
+    "Verify" : "Verify",
+    "Submit" : "Submit"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
