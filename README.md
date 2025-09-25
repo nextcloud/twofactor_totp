@@ -71,11 +71,10 @@ are free to contribute code that implements is. Make sure it doesn't break
 existing functionality though.
 
 If you have deeper Nextcloud framework knowledge and ideas for features, I
-suggest you rather create PRs here in v3 than in v2. If you know how to replace
-vue2 and the dependencies it pulls, please preferably help Nextcloud to get rid
-of vue2 altogether. If you know how to switch to vue3 for this v3 app only,
-please create a PR. My biggest concern is to be able to build this app without
-ANY security warnings for all officially supported Nextcloud versions.
+suggest you rather create PRs here in v3 than in v2. If you know how to switch
+this v3 app to vue3 using nextcloud-vue v9+, please contact me or create a PR.
+My biggest concern is to build this app without ANY security warnings for all
+officially supported Nextcloud versions.
 
 I try to review PRs timely. I will also make sure that there's a v2 release
 for all officially supported Nextcloud versions until this app is released.
