@@ -10,8 +10,8 @@ const webpackConfig = require('@nextcloud/webpack-vue-config')
 const isDev = process.env.NODE_ENV === 'development'
 
 webpackConfig.entry = {
-	'main-settings': path.join(__dirname, 'src', 'main-settings.js'),
-	'main-login-setup': path.join(__dirname, 'src', 'main-login-setup.js'),
+	personal_settings: path.join(__dirname, 'src', 'PersonalSettings.js'),
+	login_setup: path.join(__dirname, 'src', 'LoginSetup.js'),
 }
 
 // Generate reuse license files if not in development mode

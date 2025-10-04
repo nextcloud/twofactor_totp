@@ -10,13 +10,14 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Exception;
 
 use OCP\IUser;
+use Exception;
 use Throwable;
 
-final class EMailNotSetException extends SendEMailException {
+final class EMailNotSet extends Exception {
 	public function __construct(
 		public readonly IUser $user,
 		?Throwable $previous = null,
 	) {
-		parent::__construct("Failed to send e-mail to user '{$user->getUID()}': no e-mail set", previous: $previous);
+		parent::__construct("Failed to send e-mail to user '{$user->getUID()}': No e-mail set", previous: $previous);
 	}
 }

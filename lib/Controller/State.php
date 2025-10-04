@@ -17,7 +17,7 @@ use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\IRequest;
 use OCP\IUserSession;
 
-final class SettingsController extends ALoginSetupController {
+final class State extends ALoginSetupController {
 
 	public function __construct(
 		string $appName,

@@ -63,7 +63,7 @@ at the bottom of Personal Settings/Security).]]></description>
 		<nextcloud min-version="32" max-version="32" />
 	</dependencies>
 	<two-factor-providers>
-		<provider>OCA\TwoFactorEMail\Provider\EMailProvider</provider>
+		<provider>OCA\TwoFactorEMail\Provider\TwoFactorEMail</provider>
 	</two-factor-providers>
 	<commands>
 		<command>OCA\TwoFactorEMail\Command\CleanUp</command>

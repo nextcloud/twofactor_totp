@@ -27,8 +27,7 @@ class TwoFactorEMailAcceptanceTest extends TestCase {
 	use TestUser;
 	use Selenium;
 
-	/** @var IUser */
-	private $user;
+	private IUser $user;
 
 	public function setUp(): void {
 		parent::setUp();
@@ -54,7 +53,7 @@ class TwoFactorEMailAcceptanceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return count($driver->findElements(WebDriverBy::id('twofactor-email-settings'))) > 0;
-			} catch (ElementNotInteractableException $ex) {
+			} catch (ElementNotInteractableException) {
 				return false;
 			}
 		});
@@ -64,7 +63,7 @@ class TwoFactorEMailAcceptanceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return $driver->findElement(WebDriverBy::id('twofactor-email-settings'))->getAttribute('checked') === 'true';
-			} catch (ElementNotInteractableException $ex) {
+			} catch (ElementNotInteractableException) {
 				return false;
 			}
 		});
@@ -90,7 +89,7 @@ class TwoFactorEMailAcceptanceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return $driver->findElements(WebDriverBy::className('email-form'));
-			} catch (ElementNotInteractableException $ex) {
+			} catch (ElementNotInteractableException) {
 				return false;
 			}
 		});

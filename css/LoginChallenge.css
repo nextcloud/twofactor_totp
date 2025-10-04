@@ -3,19 +3,15 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-.twofactor-email-form {
+.twofactor_email-challenge-form {
 	margin: 16px auto 1px !important;
 }
 
-.twofactor-email-form > input {
+.twofactor_email-challenge-form > input {
 	padding: 10px;
 	margin: 0 0 5px 0;
 }
 
-.twofactor-email-form > input[type='tel'] {
-	margin: 0 0 5px 0;
-}
-
-.twofactor-email-icon {
+.twofactor_email-challenge-icon {
 	filter: var(--background-invert-if-bright);
 }

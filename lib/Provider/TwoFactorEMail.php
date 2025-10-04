@@ -10,10 +10,10 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Provider;
 
 use OCA\TwoFactorEMail\AppInfo\Application;
-use OCA\TwoFactorEMail\Service\IChallengeService;
+use OCA\TwoFactorEMail\Service\ILoginChallenge;
 use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
 use OCA\TwoFactorEMail\Service\IStateManager;
-use OCA\TwoFactorEMail\Settings\Personal;
+use OCA\TwoFactorEMail\Settings\PersonalSettings;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\Authentication\TwoFactorAuth\IActivatableAtLogin;
 use OCP\Authentication\TwoFactorAuth\IActivatableByAdmin;
@@ -30,7 +30,7 @@ use OCP\Template\ITemplate;
 use OCP\Template\ITemplateManager;
 use Psr\Container\ContainerInterface;
 
-class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableByAdmin, IActivatableAtLogin {
+class TwoFactorEMail implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableByAdmin, IActivatableAtLogin {
 
 	public function __construct(
 		private IEMailAddressMasker $emailAddressMasker,
@@ -39,7 +39,7 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 		private IInitialState $initialStateService,
 		private IURLGenerator $urlGenerator,
 		private ContainerInterface $container,
-		private IChallengeService $challengeService,
+		private ILoginChallenge $challengeService,
 		private IStateManager $stateManager,
 	) {
 	}
@@ -62,8 +62,8 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	 */
 	public function getTemplate(IUser $user): ITemplate {
 		$this->challengeService->sendChallenge($user);
-		// Return the template for the challenge view (challenge.php file in the templates folder of the app)
-		return $this->templateManager->getTemplate(Application::APP_ID, 'challenge');
+		// Return the template for the challenge view (LoginChallenge.php file in the templates folder of the app)
+		return $this->templateManager->getTemplate(Application::APP_ID, 'LoginChallenge');
 	}
 
 	public function verifyChallenge(IUser $user, string $challenge): bool {
@@ -93,7 +93,7 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 		$this->initialStateService->provideInitialState('enabled', $this->stateManager->isEnabled($user));
 		$this->initialStateService->provideInitialState('hasEmail', $email !== '');
 		$this->initialStateService->provideInitialState('email', $email);
-		return new Personal(
+		return new PersonalSettings(
 			$this->templateManager,
 		);
 	}
@@ -109,6 +109,6 @@ class EMailProvider implements IProvider, IProvidesIcons, IProvidesPersonalSetti
 	public function getLoginSetup(IUser $user): ILoginSetupProvider {
 		$maskedEmail = $this->emailAddressMasker->maskForUI($user->getEMailAddress() ?? '');
 		$this->initialStateService->provideInitialState('maskedEmail', $maskedEmail);
-		return $this->container->get(AtLoginProvider::class);
+		return $this->container->get(LoginSetup::class);
 	}
 }

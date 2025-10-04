@@ -5,7 +5,7 @@
 
 import Axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
-import Logger from '../logger.js'
+import Logger from '../Logger.js'
 
 /**
  * @param {boolean} enabled Enable or disable?

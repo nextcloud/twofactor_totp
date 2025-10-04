@@ -8,7 +8,7 @@
 namespace OCA\TwoFactorEMail\Test\Unit\Controller;
 
 use OCA\TwoFactorEMail\AppInfo\Application;
-use OCA\TwoFactorEMail\Controller\SettingsController;
+use OCA\TwoFactorEMail\Controller\State;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -17,12 +17,12 @@ use OCP\IUserSession;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class SettingsControllerTest extends TestCase {
+class StateTest extends TestCase {
 	private IRequest&MockObject $request;
 	private IUserSession&MockObject $userSession;
 	private IStateManager&MockObject $stateManager;
 
-	private SettingsController $controller;
+	private State $controller;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -31,7 +31,7 @@ class SettingsControllerTest extends TestCase {
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->stateManager = $this->createMock(IStateManager::class);
 
-		$this->controller = new SettingsController(
+		$this->controller = new State(
 			Application::APP_ID,
 			$this->request,
 			$this->userSession,

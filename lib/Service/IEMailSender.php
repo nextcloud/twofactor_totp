@@ -9,14 +9,16 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorEMail\Service;
 
-use OCA\TwoFactorEMail\Exception\SendEMailException;
+use OCA\TwoFactorEMail\Exception\EMailNotSet;
+use OCA\TwoFactorEMail\Exception\SendEMailFailed;
 use OCP\IUser;
 
 interface IEMailSender {
 	/**
 	 * @param IUser $user
 	 * @param string $code
-	 * @throws SendEMailException
+	 * @throws EMailNotSet
+	 * @throws SendEMailFailed
 	 */
 	public function sendChallengeEMail(IUser $user, string $code): void;
 }

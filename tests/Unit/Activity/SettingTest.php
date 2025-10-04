@@ -26,8 +26,8 @@ class SettingTest extends TestCase {
 	}
 
 	public function testAll() {
-		$this->assertEquals(false, $this->setting->canChangeMail());
-		$this->assertEquals(false, $this->setting->canChangeStream());
+		$this->assertFalse($this->setting->canChangeMail());
+		$this->assertFalse($this->setting->canChangeStream());
 		$this->assertEquals('twofactor_email', $this->setting->getIdentifier());
 		$this->l10n->expects($this->once())
 			->method('t')
@@ -35,7 +35,7 @@ class SettingTest extends TestCase {
 			->willReturn('E-Mail');
 		$this->assertEquals('E-Mail', $this->setting->getName());
 		$this->assertEquals(10, $this->setting->getPriority());
-		$this->assertEquals(true, $this->setting->isDefaultEnabledMail());
-		$this->assertEquals(true, $this->setting->isDefaultEnabledStream());
+		$this->assertTrue($this->setting->isDefaultEnabledMail());
+		$this->assertTrue($this->setting->isDefaultEnabledStream());
 	}
 }

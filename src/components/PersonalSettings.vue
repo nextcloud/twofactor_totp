@@ -5,7 +5,7 @@
 
 <!-- Sync strings with LoginSetup.vue -->
 <template>
-	<div id="twofactor-email-settings">
+	<div id="twofactor_email-personal_settings">
 		<div v-if="hasEmail">
 			<p>
 				<NcCheckboxRadioSwitch type="switch"
@@ -33,14 +33,12 @@
 
 <script>
 import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
-
 import { confirmPassword } from '@nextcloud/password-confirmation'
 import '@nextcloud/password-confirmation/dist/style.css'
-
-import Logger from '../logger.js'
+import Logger from '../Logger.js'
 
 export default {
-	name: 'PersonalEMailSettings',
+	name: 'PersonalSettings',
 
 	components: {
 		NcCheckboxRadioSwitch,

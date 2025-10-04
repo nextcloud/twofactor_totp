@@ -5,7 +5,7 @@
 
 import Vue from 'vue'
 import { loadState } from '@nextcloud/initial-state'
-import store from './store.js'
+import store from './Store.js'
 
 import LoginSetup from './components/LoginSetup.vue'
 
@@ -22,4 +22,4 @@ store.replaceState({
 const View = Vue.extend(LoginSetup)
 new View({
 	store,
-}).$mount('#twofactor-email-login-setup')
+}).$mount('#twofactor_email-atlogin_setup')

@@ -11,5 +11,5 @@ namespace OCA\TwoFactorEMail\Exception;
 
 use Exception;
 
-class SendEMailException extends Exception {
+final class SendEMailFailed extends Exception {
 }

@@ -15,14 +15,13 @@ use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCP\Activity\IEvent;
 use OCP\Activity\IManager;
 use OCP\IUser;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class StateChangeActivityTest extends TestCase {
 
-	/** @var StateChangeActivity */
-	private $listener;
+	private StateChangeActivity $listener;
 
-	/** @var IManager */
-	private $activityManager;
+	private IManager|MockObject $activityManager;
 
 	protected function setUp(): void {
 		parent::setUp();

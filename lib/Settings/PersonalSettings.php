@@ -14,13 +14,13 @@ use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Template\ITemplate;
 use OCP\Template\ITemplateManager;
 
-final class Personal implements IPersonalProviderSettings {
+final class PersonalSettings implements IPersonalProviderSettings {
 
 	public function __construct(
 		private ITemplateManager $templateManager,
 	) {
 	}
 	public function getBody(): ITemplate {
-		return $this->templateManager->getTemplate(Application::APP_ID, 'personal');
+		return $this->templateManager->getTemplate(Application::APP_ID, 'PersonalSettings');
 	}
 }

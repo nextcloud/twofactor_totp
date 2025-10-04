@@ -2,6 +2,6 @@
 
 namespace OCA\TwoFactorEMail\Service;
 
-interface IApplicationSettings {
+interface IAppSettings {
 	public function getCodeValidSeconds(): int;
 }

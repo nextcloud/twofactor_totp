@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Service;
 
 use Exception;
-use OCA\TwoFactorEMail\Exception\EMailNotSetException;
-use OCA\TwoFactorEMail\Exception\EMailTransportFailedException;
+use OCA\TwoFactorEMail\Exception\EMailNotSet;
+use OCA\TwoFactorEMail\Exception\SendEMailFailed;
 use OCP\Defaults;
 use OCP\IL10N;
 use OCP\IUser;
@@ -30,7 +30,7 @@ final class EMailSender implements IEMailSender {
 	public function sendChallengeEMail(IUser $user, string $code): void {
 		$email = $user->getEMailAddress();
 		if ($email === null) {
-			throw new EMailNotSetException($user);
+			throw new EMailNotSet($user);
 		}
 
 		$this->logger->debug("sending email message to $email, code: $code");
@@ -51,7 +51,7 @@ final class EMailSender implements IEMailSender {
 			$this->mailer->send($message);
 		} catch (Exception $e) {
 			$this->logger->error("failed sending email message to $email, code: $code");
-			throw new EMailTransportFailedException(previous: $e);
+			throw new SendEMailFailed(previous: $e);
 		}
 	}
 }

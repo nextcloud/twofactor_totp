@@ -17,6 +17,7 @@ use OCP\IUser;
 use OCP\IUserManager;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
+use Throwable;
 
 final class Version03000400Date20250829000000 extends SimpleMigrationStep {
 	private const APP_ID = 'twofactor_email';
@@ -57,7 +58,7 @@ final class Version03000400Date20250829000000 extends SimpleMigrationStep {
 			$this->userManager->callForAllUsers(function (IUser $user) use (&$uids) {
 				$uids[] = $user->getUID();
 			});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$output->warning('Failed to enumerate users: ' . $e->getMessage());
 		}
 
@@ -70,7 +71,7 @@ final class Version03000400Date20250829000000 extends SimpleMigrationStep {
 		// Only get twofactor_email v2 authentication codes for all user IDs, we don't need its other keys
 		try {
 			$legacyCodes = $this->config->getUserValueForUsers(self::APP_ID, self::V2_KEY_CODE, $uids) ?? [];
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			// This might be an issue with a VERY LARGE number of users and LITTLE free memory
 			$output->warning('Failed to read legacy codes in bulk: ' . $e->getMessage());
 		}
@@ -84,7 +85,7 @@ final class Version03000400Date20250829000000 extends SimpleMigrationStep {
 		// Delete all settings of twofactor_email v2; we need to do this first if we want to purge ALL key/values
 		try {
 			$this->config->deleteAppFromAllUsers(self::APP_ID);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$output->warning('Failed to delete legacy app settings: ' . $e->getMessage());
 		}
 
@@ -98,7 +99,7 @@ final class Version03000400Date20250829000000 extends SimpleMigrationStep {
 			// V2 only used 6-digit codes, only migrate if the value is as such
 			if (!preg_match(self::CODE_REGEX, $code)) {
 				$skippedInvalid++;
-				$output->debug("Skipping invalid code for user {$uid}");
+				$output->debug("Skipping invalid code for user $uid");
 				continue;
 			}
 
@@ -108,19 +109,19 @@ final class Version03000400Date20250829000000 extends SimpleMigrationStep {
 				$this->config->setUserValue($uid, self::APP_ID, self::V3_KEY_CREATED_AT, (string)$now);
 
 				$migrated++;
-				$output->debug("Migrated code {$code} for user {$uid}. Added current time {$now} as 'created at' since v2 did not have an expiry mechanism.");
-			} catch (\Throwable $e) {
+				$output->debug("Migrated code $code for user $uid. Added current time $now as 'created at' since v2 did not have an expiry mechanism.");
+			} catch (Throwable $e) {
 				$failed++;
-				$output->warning("Failed to migrate code for user {$uid}: " . $e->getMessage());
+				$output->warning("Failed to migrate code for user $uid: " . $e->getMessage());
 			}
 		}
 
-		$output->info("Migrated {$migrated} authentication codes.");
+		$output->info("Migrated $migrated authentication codes.");
 		if ($skippedInvalid > 0) {
-			$output->info("Skipped {$skippedInvalid} invalid legacy entries.");
+			$output->info("Skipped $skippedInvalid invalid legacy entries.");
 		}
 		if ($failed > 0) {
-			$output->info("Failed to write {$failed} entries to new config.");
+			$output->info("Failed to write $failed entries to new config.");
 		}
 	}
 }

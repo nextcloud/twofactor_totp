@@ -13,19 +13,19 @@ use OCA\TwoFactorEMail\Event\StateChanged;
 use OCA\TwoFactorEMail\Listener\EmailDeleted;
 use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
-use OCA\TwoFactorEMail\Service\ChallengeService;
-use OCA\TwoFactorEMail\Service\ConstantApplicationSettings;
+use OCA\TwoFactorEMail\Service\CodeStorage;
+use OCA\TwoFactorEMail\Service\ConstantAppSettings;
 use OCA\TwoFactorEMail\Service\EMailAddressMasker;
 use OCA\TwoFactorEMail\Service\EMailSender;
-use OCA\TwoFactorEMail\Service\IApplicationSettings;
-use OCA\TwoFactorEMail\Service\IChallengeService;
+use OCA\TwoFactorEMail\Service\IAppSettings;
 use OCA\TwoFactorEMail\Service\ICodeGenerator;
 use OCA\TwoFactorEMail\Service\ICodeStorage;
+use OCA\TwoFactorEMail\Service\ILoginChallenge;
 use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
 use OCA\TwoFactorEMail\Service\IEMailSender;
 use OCA\TwoFactorEMail\Service\IStateManager;
+use OCA\TwoFactorEMail\Service\LoginChallenge;
 use OCA\TwoFactorEMail\Service\NumericalCodeGenerator;
-use OCA\TwoFactorEMail\Service\PreferencesCodeStorage;
 use OCA\TwoFactorEMail\Service\StateManager;
 use OCP\Accounts\UserUpdatedEvent;
 use OCP\AppFramework\App;
@@ -43,10 +43,10 @@ final class Application extends App implements IBootstrap {
 	public function register(IRegistrationContext $context): void {
 		include_once __DIR__ . '/../../vendor/autoload.php';
 
-		$context->registerServiceAlias(IApplicationSettings::class, ConstantApplicationSettings::class);
-		$context->registerServiceAlias(IChallengeService::class, ChallengeService::class);
+		$context->registerServiceAlias(IAppSettings::class, ConstantAppSettings::class);
+		$context->registerServiceAlias(ILoginChallenge::class, LoginChallenge::class);
 		$context->registerServiceAlias(ICodeGenerator::class, NumericalCodeGenerator::class);
-		$context->registerServiceAlias(ICodeStorage::class, PreferencesCodeStorage::class);
+		$context->registerServiceAlias(ICodeStorage::class, CodeStorage::class);
 		$context->registerServiceAlias(IEMailAddressMasker::class, EMailAddressMasker::class);
 		$context->registerServiceAlias(IEMailSender::class, EMailSender::class);
 		$context->registerServiceAlias(IStateManager::class, StateManager::class);

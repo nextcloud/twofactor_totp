@@ -3,7 +3,7 @@
   - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<!-- Sync strings with PersonalEmailSettings.vue -->
+<!-- Sync strings with PersonalSettings.vue -->
 <template>
 	<div v-if="error">
 		<span v-if="error === 'no-email'" class="error">
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Logger from '../logger.js'
+import Logger from '../Logger.js'
 
 export default {
 	name: 'LoginSetup',

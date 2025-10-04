@@ -6,13 +6,13 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import PersonalEMailSettings from '../../components/PersonalEMailSettings.vue'
+import PersonalSettings from '../../components/PersonalSettings.vue'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
-describe('PersonalEMailSettings', () => {
+describe('PersonalSettings', () => {
 	let actions
 	let store
 
@@ -28,7 +28,7 @@ describe('PersonalEMailSettings', () => {
 	})
 
 	it('does not load on start', () => {
-		const settings = shallowMount(PersonalEMailSettings, {
+		const settings = shallowMount(PersonalSettings, {
 			store,
 			localVue,
 		})

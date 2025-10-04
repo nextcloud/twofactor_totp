@@ -10,27 +10,24 @@ namespace OCA\TwoFactorEMail\Test\Unit\Listener;
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\TwoFactorEMail\Event\StateChanged;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
-use OCA\TwoFactorEMail\Provider\EMailProvider;
+use OCA\TwoFactorEMail\Provider\TwoFactorEMail;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\Event;
 use OCP\IUser;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class StateChangeRegistryUpdaterTest extends TestCase {
 
-	/** @var StateChangeRegistryUpdater */
-	private $listener;
+	private StateChangeRegistryUpdater $listener;
 
-	/** @var IRegistry */
-	private $registry;
-
-	/** @var EMailProvider */
-	private $provider;
+	private IRegistry|MockObject $registry;
+	private TwoFactorEMail|MockObject $provider;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->registry = $this->createMock(IRegistry::class);
-		$this->provider = $this->createMock(EMailProvider::class);
+		$this->provider = $this->createMock(TwoFactorEMail::class);
 
 		$this->listener = new StateChangeRegistryUpdater($this->registry, $this->provider);
 	}

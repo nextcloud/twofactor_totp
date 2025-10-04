@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Listener;
 
 use OCA\TwoFactorEMail\Event\StateChanged;
-use OCA\TwoFactorEMail\Provider\EMailProvider;
+use OCA\TwoFactorEMail\Provider\TwoFactorEMail;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
@@ -22,7 +22,7 @@ final class StateChangeRegistryUpdater implements IEventListener {
 
 	public function __construct(
 		private IRegistry $registry,
-		private EMailProvider $provider,
+		private TwoFactorEMail $provider,
 	) {
 	}
 

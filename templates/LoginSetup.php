@@ -7,8 +7,8 @@ declare(strict_types=1);
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-script('twofactor_email', 'twofactor_email-main-login-setup');
+script('twofactor_email', 'twofactor_email-login_setup');
 
 ?>
 
-<div id="twofactor-email-login-setup"></div>
+<div id="twofactor_email-login_setup"></div>

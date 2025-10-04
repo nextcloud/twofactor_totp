@@ -15,7 +15,7 @@ use OCP\IURLGenerator;
 use OCP\Template\ITemplate;
 use OCP\Template\ITemplateManager;
 
-final class AtLoginProvider implements ILoginSetupProvider {
+final class LoginSetup implements ILoginSetupProvider {
 
 	public function __construct(
 		private IURLGenerator $urlGenerator,
@@ -24,7 +24,7 @@ final class AtLoginProvider implements ILoginSetupProvider {
 	}
 
 	public function getBody(): ITemplate {
-		$template = $this->templateManager->getTemplate(Application::APP_ID, 'loginsetup');
+		$template = $this->templateManager->getTemplate(Application::APP_ID, 'LoginSetup');
 		$template->assign('urlGenerator', $this->urlGenerator);
 		return $template;
 	}

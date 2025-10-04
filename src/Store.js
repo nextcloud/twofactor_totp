@@ -6,7 +6,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { persist } from './services/StateService.js'
+import { persist } from './services/StateManager.js'
 
 Vue.use(Vuex)
 

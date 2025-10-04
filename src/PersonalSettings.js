@@ -5,9 +5,9 @@
 
 import Vue from 'vue'
 import { loadState } from '@nextcloud/initial-state'
-import store from './store.js'
+import store from './Store.js'
 
-import PersonalEMailSettings from './components/PersonalEMailSettings.vue'
+import PersonalSettings from './components/PersonalSettings.vue'
 
 Vue.mixin({
 	methods: {
@@ -21,7 +21,7 @@ store.replaceState({
 	email: loadState('twofactor_email', 'email'),
 })
 
-const View = Vue.extend(PersonalEMailSettings)
+const View = Vue.extend(PersonalSettings)
 new View({
 	store,
-}).$mount('#twofactor-email-settings')
+}).$mount('#twofactor_email-personal_settings')

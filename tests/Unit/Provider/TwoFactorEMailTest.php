@@ -10,11 +10,11 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Test\Unit\Provider;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorEMail\Provider\EMailProvider;
-use OCA\TwoFactorEMail\Service\IChallengeService;
+use OCA\TwoFactorEMail\Provider\TwoFactorEMail;
 use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
+use OCA\TwoFactorEMail\Service\ILoginChallenge;
 use OCA\TwoFactorEMail\Service\IStateManager;
-use OCA\TwoFactorEMail\Settings\Personal;
+use OCA\TwoFactorEMail\Settings\PersonalSettings;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -24,17 +24,17 @@ use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Container\ContainerInterface;
 
-class EMailProviderTest extends TestCase {
+class TwoFactorEMailTest extends TestCase {
 	private IEMailAddressMasker&MockObject $masker;
 	private ITemplateManager&MockObject $templateManager;
 	private IL10N&MockObject $l10n;
 	private IInitialState&MockObject $initialState;
 	private IURLGenerator&MockObject $urlGenerator;
 	private ContainerInterface&MockObject $container;
-	private IChallengeService&MockObject $challengeService;
+	private ILoginChallenge&MockObject $challengeService;
 	private IStateManager&MockObject $stateManager;
 
-	private EMailProvider $provider;
+	private TwoFactorEMail $provider;
 
 	/**
 	 * @throws Exception
@@ -48,10 +48,10 @@ class EMailProviderTest extends TestCase {
 		$this->initialState = $this->createMock(IInitialState::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 		$this->container = $this->createMock(ContainerInterface::class);
-		$this->challengeService = $this->createMock(IChallengeService::class);
+		$this->challengeService = $this->createMock(ILoginChallenge::class);
 		$this->stateManager = $this->createMock(IStateManager::class);
 
-		$this->provider = new EMailProvider(
+		$this->provider = new TwoFactorEMail(
 			$this->masker,
 			$this->templateManager,
 			$this->l10n,
@@ -72,14 +72,11 @@ class EMailProviderTest extends TestCase {
 	}
 
 	public function testGetDescription(): void {
-		$description = 'Authenticate by e-mail';
 		$this->l10n->expects($this->once())
 			->method('t')
 			->willReturnArgument(0);
 
-		$descr = $this->provider->getDescription();
-
-		self::assertEquals($description, $descr);
+		self::assertEquals('Authenticate by e-mail', $this->provider->getDescription());
 	}
 
 	public function testGetLightIcon(): void {
@@ -105,7 +102,7 @@ class EMailProviderTest extends TestCase {
 	}
 
 	public function testGetPersonalSettingsDisabledWithoutEMail(): void {
-		$expected = new Personal($this->templateManager);
+		$expected = new PersonalSettings($this->templateManager);
 
 		$user = $this->createMock(IUser::class);
 		$user->expects(self::once())
@@ -129,7 +126,7 @@ class EMailProviderTest extends TestCase {
 	}
 
 	public function testGetPersonalSettingsEnabledWithEMail(): void {
-		$expected = new Personal($this->templateManager);
+		$expected = new PersonalSettings($this->templateManager);
 
 		$user = $this->createMock(IUser::class);
 		$user->expects(self::once())

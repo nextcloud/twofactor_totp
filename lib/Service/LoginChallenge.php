@@ -11,7 +11,7 @@ namespace OCA\TwoFactorEMail\Service;
 
 use OCP\IUser;
 
-final class ChallengeService implements IChallengeService {
+final class LoginChallenge implements ILoginChallenge {
 	public function __construct(
 		private ICodeGenerator $codeGenerator,
 		private ICodeStorage $codeStorage,
