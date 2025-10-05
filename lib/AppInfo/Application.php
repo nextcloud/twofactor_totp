@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\AppInfo;
 
 use OCA\TwoFactorEMail\Event\StateChanged;
-use OCA\TwoFactorEMail\Listener\EmailDeleted;
+use OCA\TwoFactorEMail\Listener\EMailDeleted;
 use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorEMail\Service\CodeStorage;
@@ -53,7 +53,7 @@ final class Application extends App implements IBootstrap {
 
 		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
 		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
-		$context->registerEventListener(UserUpdatedEvent::class, EmailDeleted::class);
+		$context->registerEventListener(UserUpdatedEvent::class, EMailDeleted::class);
 	}
 
 	public function boot(IBootContext $context): void {

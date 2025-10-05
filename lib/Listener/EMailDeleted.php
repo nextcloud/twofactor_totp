@@ -17,7 +17,7 @@ use OCP\EventDispatcher\IEventListener;
 /**
  * @template-implements IEventListener<UserUpdatedEvent>
  */
-final class EmailDeleted implements IEventListener {
+final class EMailDeleted implements IEventListener {
 
 	public function __construct(
 		private IStateManager $service,
