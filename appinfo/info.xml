@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-  - SPDX-FileCopyrightText: 2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>
+  - SPDX-FileCopyrightText: 2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/main/CONTRIBUTORS.md>
   - SPDX-License-Identifier: AGPL-3.0-only
 -->
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
@@ -56,9 +56,9 @@ at the bottom of Personal Settings/Security).]]></description>
 	<website>https://github.com/datenschutz-individuell/twofactor_email</website>
 	<bugs>https://github.com/datenschutz-individuell/twofactor_email/issues</bugs>
 	<repository type="git">https://github.com/datenschutz-individuell/twofactor_email.git</repository>
-	<screenshot small-thumbnail="https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/select-auth_thumb.png">https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/challenge.png</screenshot>
-	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-before.png</screenshot>
-	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/settings-after.png</screenshot>
+	<screenshot small-thumbnail="https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/main/screenshots/select-auth_thumb.png">https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/master/screenshots/challenge.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/main/screenshots/settings-before.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/main/screenshots/settings-after.png</screenshot>
 	<dependencies>
 		<nextcloud min-version="32" max-version="32" />
 	</dependencies>
