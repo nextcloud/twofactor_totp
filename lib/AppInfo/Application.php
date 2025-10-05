@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 /*
- * SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 namespace OCA\TwoFactorEMail\AppInfo;
 
 use OCA\TwoFactorEMail\Event\StateChanged;
-use OCA\TwoFactorEMail\Listener\EmailDeleted;
+use OCA\TwoFactorEMail\Listener\EMailDeleted;
 use OCA\TwoFactorEMail\Listener\StateChangeActivity;
 use OCA\TwoFactorEMail\Listener\StateChangeRegistryUpdater;
 use OCA\TwoFactorEMail\Service\CodeStorage;
@@ -20,9 +20,9 @@ use OCA\TwoFactorEMail\Service\EMailSender;
 use OCA\TwoFactorEMail\Service\IAppSettings;
 use OCA\TwoFactorEMail\Service\ICodeGenerator;
 use OCA\TwoFactorEMail\Service\ICodeStorage;
-use OCA\TwoFactorEMail\Service\ILoginChallenge;
 use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
 use OCA\TwoFactorEMail\Service\IEMailSender;
+use OCA\TwoFactorEMail\Service\ILoginChallenge;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Service\LoginChallenge;
 use OCA\TwoFactorEMail\Service\NumericalCodeGenerator;
@@ -53,7 +53,7 @@ final class Application extends App implements IBootstrap {
 
 		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
 		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
-		$context->registerEventListener(UserUpdatedEvent::class, EmailDeleted::class);
+		$context->registerEventListener(UserUpdatedEvent::class, EMailDeleted::class);
 	}
 
 	public function boot(IBootContext $context): void {

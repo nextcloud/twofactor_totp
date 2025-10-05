@@ -3,7 +3,7 @@
 /**
  * Partly inspired by https://github.com/FormidableLabs/webpack-stats-plugin
  *
- * SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>
  * SPDX-License-Identifier: MIT
  */
 

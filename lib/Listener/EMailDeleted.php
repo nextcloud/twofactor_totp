@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * SPDX-FileCopyrightText: 2017 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
@@ -17,7 +17,7 @@ use OCP\EventDispatcher\IEventListener;
 /**
  * @template-implements IEventListener<UserUpdatedEvent>
  */
-final class EmailDeleted implements IEventListener {
+final class EMailDeleted implements IEventListener {
 
 	public function __construct(
 		private IStateManager $service,

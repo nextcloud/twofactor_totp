@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 /*
- * SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 namespace OCA\TwoFactorEMail\Provider;
 
 use OCA\TwoFactorEMail\AppInfo\Application;
-use OCA\TwoFactorEMail\Service\ILoginChallenge;
 use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
+use OCA\TwoFactorEMail\Service\ILoginChallenge;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCA\TwoFactorEMail\Settings\PersonalSettings;
 use OCP\AppFramework\Services\IInitialState;

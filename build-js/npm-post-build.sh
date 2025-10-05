@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
+# SPDX-FileCopyrightText: 2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 set -e
@@ -13,7 +13,7 @@ if [ -d "js" ]; then
 			# Remove existing link
 			[ -e "$f.map.license" ] || [ -L "$f.map.license" ] && rm "$f.map.license"
 			# Create a new link
-			ln -s "$(basename "$f.license")" "$f.map.license" 
+			ln -s "$(basename "$f.license")" "$f.map.license"
 		fi
 	done
 	echo "Copying licenses for sourcemaps done"
