@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorEMail\Exception;
 
-use OCP\IUser;
 use Exception;
+use OCP\IUser;
 use Throwable;
 
 final class EMailNotSet extends Exception {
