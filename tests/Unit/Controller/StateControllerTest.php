@@ -8,7 +8,7 @@
 namespace OCA\TwoFactorEMail\Test\Unit\Controller;
 
 use OCA\TwoFactorEMail\AppInfo\Application;
-use OCA\TwoFactorEMail\Controller\State;
+use OCA\TwoFactorEMail\Controller\StateController;
 use OCA\TwoFactorEMail\Service\IStateManager;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -17,12 +17,12 @@ use OCP\IUserSession;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class StateTest extends TestCase {
+class StateControllerTest extends TestCase {
 	private IRequest&MockObject $request;
 	private IUserSession&MockObject $userSession;
 	private IStateManager&MockObject $stateManager;
 
-	private State $controller;
+	private StateController $controller;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -31,7 +31,7 @@ class StateTest extends TestCase {
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->stateManager = $this->createMock(IStateManager::class);
 
-		$this->controller = new State(
+		$this->controller = new StateController(
 			Application::APP_ID,
 			$this->request,
 			$this->userSession,
@@ -52,7 +52,7 @@ class StateTest extends TestCase {
 			'enabled' => false,
 		]);
 
-		$this->assertEquals($expected, $this->controller->setState(false));
+		$this->assertEquals($expected, $this->controller->update(false));
 	}
 
 	public function testEnableWithoutEmail() {
@@ -72,7 +72,7 @@ class StateTest extends TestCase {
 			'error' => 'no-email',
 		]);
 
-		$this->assertEquals($expected, $this->controller->setState(true));
+		$this->assertEquals($expected, $this->controller->update(true));
 	}
 
 	public function testEnableWithEmail() {
@@ -91,6 +91,6 @@ class StateTest extends TestCase {
 			'enabled' => true,
 		]);
 
-		$this->assertEquals($expected, $this->controller->setState(true));
+		$this->assertEquals($expected, $this->controller->update(true));
 	}
 }

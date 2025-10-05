@@ -25,8 +25,15 @@
 			</span>
 		</div>
 		<div v-if="error">
-			<span v-if="error === 'no-email'" class="error"> {{ t('twofactor_email', 'Apparently your previously configured e-mail address just vanished.') }} </span>
-			<span v-else class="error"> {{ t('twofactor_email', 'Unhandled error') }} </span>
+			<span v-if="error === 'no-email'" class="error">
+				{{ t('twofactor_email', 'Apparently your previously configured e-mail address just vanished.') }}
+			</span>
+			<span v-else-if="error === 'save-failed'" class="error">
+				{{ t('twofactor_email', 'Could not enable/disable two-factor authentication via e-mail.') }}
+			</span>
+			<span v-else class="error">
+				{{ t('twofactor_email', 'Unhandled error!') }}
+			</span>
 		</div>
 	</div>
 </template>
@@ -74,7 +81,9 @@ export default {
 
 					action
 						.then(({ enabled, error }) => {
-							this.enabled = enabled
+							if (enabled !== null) {
+								this.enabled = enabled
+							}
 							this.error = error
 						})
 						.catch(console.error.bind(this))

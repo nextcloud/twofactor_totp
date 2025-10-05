@@ -12,7 +12,9 @@ Vue.use(Vuex)
 
 export const mutations = {
 	setEnabled(state, enabled) {
-		state.enabled = enabled
+		if (enabled !== null) {
+			state.enabled = enabled
+		}
 	},
 }
 

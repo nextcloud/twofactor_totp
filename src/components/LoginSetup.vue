@@ -9,8 +9,11 @@
 		<span v-if="error === 'no-email'" class="error">
 			{{ t('twofactor_email', 'You cannot enable two-factor authentication via e-mail. You need to set a primary e-mail address (in your personal settings) first.') }}
 		</span>
+		<span v-else-if="error === 'save-failed'" class="error">
+			{{ t('twofactor_email', 'Could not enable/disable two-factor authentication via e-mail.') }}
+		</span>
 		<span v-else class="error">
-			{{ t('twofactor_email', 'Unhandled error') }}
+			{{ t('twofactor_email', 'Unhandled error!') }}
 		</span>
 	</div>
 	<div v-else>

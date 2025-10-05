@@ -7,11 +7,16 @@ declare(strict_types=1);
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+/*
+ * Nextcloud USES the class 'StateController(.php)' as the 'name' refers to 'State' here.
+ * 'update' is a method thereof.
+ */
+
 return [
 	'routes' => [
 		[
-			'name' => 'Settings#setState',
-			'url' => '/settings/state',
+			'name' => 'State#update',
+			'url' => '/personal_settings/state',
 			'verb' => 'POST',
 		],
 	]

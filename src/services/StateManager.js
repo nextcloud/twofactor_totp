@@ -12,12 +12,20 @@ import Logger from '../Logger.js'
  * @return {Promise}
  */
 export function persist(enabled) {
-	const url = generateUrl('/apps/twofactor_email/settings/state')
+	const url = generateUrl('/apps/twofactor_email/personal_settings/state')
 	const data = {
 		state: enabled,
 	}
 
 	Logger.debug('sending two-factor e-mail state change request', data)
 	return Axios.post(url, data)
-		.then(resp => resp.data)
+		.then(resp => {
+			if (resp.status !== 200) {
+				return { error: 'save-failed' }
+			} else {
+				return resp.data
+			}
+		}).catch(_ => {
+			return { error: 'save-failed' }
+		})
 }
