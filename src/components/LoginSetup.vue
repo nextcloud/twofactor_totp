@@ -60,7 +60,7 @@ export default {
 		},
 		continue() {
 			this.$refs.confirmForm.submit()
-		}
+		},
 	},
 }
 </script>
