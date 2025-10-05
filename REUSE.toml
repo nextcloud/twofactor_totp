@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
+# SPDX-FileCopyrightText: 2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>
 # SPDX-License-Identifier: AGPL-3.0-or-later
 version = 1
 SPDX-PackageName = "twofactor_email"
@@ -6,33 +6,39 @@ SPDX-PackageSupplier = "Two-Factor e-mail Support <twofactor-email@datenschutz-i
 SPDX-PackageDownloadLocation = "https://github.com/datenschutz-individuell/twofactor_email"
 
 [[annotations]]
+path = ["README.md", "CONTRIBUTORS.md"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
 path = ["composer.json", "composer.lock"]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2016 Nextcloud GmbH and Nextcloud contributors"
+SPDX-FileCopyrightText = "2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
 path = ["package-lock.json", "package.json"]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2018 Nextcloud GmbH and Nextcloud contributors"
+SPDX-FileCopyrightText = "2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
 path = ["psalm.xml", "vendor-bin/cs-fixer/composer.json", "vendor-bin/cs-fixer/composer.lock"]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2020 Nextcloud GmbH and Nextcloud contributors"
+SPDX-FileCopyrightText = "2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
 path = [".github/CODEOWNERS", ".github/renovate.json"]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2023 Nextcloud GmbH and Nextcloud contributors"
+SPDX-FileCopyrightText = "2025 Olav and Niklas Seyfarth, Contributors <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
 path = ["l10n/**.js", "l10n/**.json", "l10n/**.php"]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2016 Nextcloud translators"
+SPDX-FileCopyrightText = "2025 Translators <https://github.com/datenschutz-individuell/twofactor_email/blob/master/CONTRIBUTORS.md>"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
