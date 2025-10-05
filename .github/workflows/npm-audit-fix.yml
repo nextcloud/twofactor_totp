@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branches: ['main', 'master', 'stable31', 'stable30', 'stable29']
+        branches: ['master']
 
     name: npm-audit-fix-${{ matrix.branches }}
 
@@ -71,11 +71,10 @@ jobs:
           token: ${{ secrets.COMMAND_BOT_PAT }}
           commit-message: 'fix(deps): Fix npm audit'
           committer: GitHub <noreply@github.com>
-          author: nextcloud-command <nextcloud-command@users.noreply.github.com>
+          author: datenschutz-individuell Bot <github-bot@datenschutz-individuell.de>
           signoff: true
           branch: automated/noid/${{ matrix.branches }}-fix-npm-audit
           title: '[${{ matrix.branches }}] Fix npm audit'
           body: ${{ steps.npm-audit.outputs.markdown }}
           labels: |
             dependencies
-            3. to review
