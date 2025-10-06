@@ -35,7 +35,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 		$this->listener = new StateChangeRegistryUpdater($this->registry, $this->provider);
 	}
 
-	public function testIgnoresGenericEvent() {
+	public function testIgnoresGenericEvent(): void {
 		$event = new Event();
 		$this->registry->expects($this->never())
 			->method('enableProviderFor');
@@ -45,7 +45,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 		$this->listener->handle($event);
 	}
 
-	public function testProviderEnabledEvent() {
+	public function testProviderEnabledEvent(): void {
 		$user = $this->createMock(IUser::class);
 		$event = new StateChanged($user, true);
 		$this->registry->expects($this->once())
@@ -55,7 +55,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 		$this->listener->handle($event);
 	}
 
-	public function testProviderDisabledEvent() {
+	public function testProviderDisabledEvent(): void {
 		$user = $this->createMock(IUser::class);
 		$event = new StateChanged($user, false);
 		$this->registry->expects($this->once())

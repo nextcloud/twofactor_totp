@@ -33,7 +33,7 @@ class StateChangeActivityTest extends TestCase {
 		$this->listener = new StateChangeActivity($this->activityManager);
 	}
 
-	public function testHandleStateEvent() {
+	public function testHandleStateEvent(): void {
 		$uid = 'user234';
 		$user = $this->createMock(IUser::class);
 		$user->method('getUID')->willReturn($uid);
@@ -65,7 +65,7 @@ class StateChangeActivityTest extends TestCase {
 		$this->listener->handle($event);
 	}
 
-	public function testHandleDisabledByAdminEvent() {
+	public function testHandleDisabledByAdminEvent(): void {
 		$uid = 'user234';
 		$user = $this->createMock(IUser::class);
 		$user->method('getUID')->willReturn($uid);

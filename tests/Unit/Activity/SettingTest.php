@@ -25,7 +25,7 @@ class SettingTest extends TestCase {
 		$this->setting = new Setting($this->l10n);
 	}
 
-	public function testAll() {
+	public function testAll(): void {
 		$this->assertEquals(false, $this->setting->canChangeMail());
 		$this->assertEquals(false, $this->setting->canChangeStream());
 		$this->assertEquals('twofactor_totp', $this->setting->getIdentifier());
