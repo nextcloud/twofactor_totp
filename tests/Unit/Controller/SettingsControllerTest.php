@@ -19,7 +19,6 @@ use OCP\IUserSession;
 use PHPUnit\Framework\TestCase;
 
 class SettingsControllerTest extends TestCase {
-	private $request;
 	private $userSession;
 	private $totp;
 	private $defaults;
@@ -30,12 +29,12 @@ class SettingsControllerTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->request = $this->createMock(IRequest::class);
+		$request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->totp = $this->createMock(Totp::class);
 		$this->defaults = new Defaults();
 
-		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);
+		$this->controller = new SettingsController('twofactor_totp', $request, $this->userSession, $this->totp, $this->defaults);
 	}
 
 	public function testDisabledState() {
