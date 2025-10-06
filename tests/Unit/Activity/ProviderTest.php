@@ -19,7 +19,6 @@ use OCP\L10N\IFactory;
 class ProviderTest extends TestCase {
 	private $l10n;
 	private $urlGenerator;
-	private $logger;
 
 	/** @var Provider */
 	private $provider;
@@ -29,9 +28,9 @@ class ProviderTest extends TestCase {
 
 		$this->l10n = $this->createMock(IFactory::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
-		$this->logger = $this->createMock(ILogger::class);
+		$logger = $this->createMock(ILogger::class);
 
-		$this->provider = new Provider($this->l10n, $this->urlGenerator, $this->logger);
+		$this->provider = new Provider($this->l10n, $this->urlGenerator, $logger);
 	}
 
 	public function testParseUnrelated() {
