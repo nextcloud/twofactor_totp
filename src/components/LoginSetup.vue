@@ -5,68 +5,45 @@
 
 <!-- Sync strings with PersonalSettings.vue -->
 <template>
-	<div v-if="error">
-		<span v-if="error === 'no-email'" class="error">
+	<div id="twofactor_email-login_setup">
+		<span v-if="store.error === 'no-email'" class="error">
 			{{ t('twofactor_email', 'You cannot enable two-factor authentication via e-mail. You need to set a primary e-mail address (in your personal settings) first.') }}
 		</span>
-		<span v-else-if="error === 'save-failed'" class="error">
+		<span v-else-if="store.error === 'save-failed'" class="error">
 			{{ t('twofactor_email', 'Could not enable/disable two-factor authentication via e-mail.') }}
 		</span>
-		<span v-else class="error">
+		<span v-else-if="store.error" class="error">
 			{{ t('twofactor_email', 'Unhandled error!') }}
 		</span>
-	</div>
-	<div v-else>
-		<div v-if="loading" class="loading" />
-		<p>Successfully enabled</p>
-		<p>{{ t('twofactor_email', 'Codes will be sent to your primary e-mail address') }}:<br><b>{{ maskedEmail }}</b></p>
-		<form ref="confirmForm" method="POST">
-			<button>{{ t('twofactor_email', 'Proceed') }}</button>
-		</form>
+		<div v-else-if="loading" class="loading" style="min-height: 50px" />
+		<div v-else>
+			<p>Successfully enabled</p>
+			<p>{{ t('twofactor_email', 'Codes will be sent to your primary e-mail address:') }} <b>{{ store.maskedEmail }}</b></p>
+			<form method="POST">
+				<button>{{ t('twofactor_email', 'Proceed') }}</button>
+			</form>
+		</div>
 	</div>
 </template>
 
-<script>
-import Logger from '../Logger.js'
+<script setup>
+import { ref, onMounted } from "vue";
+import { t } from '@nextcloud/l10n'
 
-export default {
-	name: 'LoginSetup',
+import { usePersonalSettingsStore } from "../Store.js"
 
-	data() {
-		return {
-			error: this.$store.state.error,
-			maskedEmail: this.$store.state.maskedEmail,
-			loading: true,
-		}
-	},
+const store = usePersonalSettingsStore()
+store.loadInitialState('maskedEmail')
 
-	mounted() {
-		this.load()
-	},
+const loading = ref(true)
 
-	methods: {
-		load() {
-			this.$store.dispatch('enable')
-				.then(({ enabled, error }) => {
-					Logger.debug('enable two-factor e-mail request returned')
-					if (enabled) {
-						Logger.debug('two-factor e-mail successfully enabled')
-					} else {
-						this.error = error
-					}
-					this.loading = false
-				})
-				.catch(console.error.bind(this))
-		},
-		continue() {
-			this.$refs.confirmForm.submit()
-		},
-	},
-}
+onMounted(async () => {
+	try {
+		await store.enable()
+	} catch (error) {
+		console.error(error)
+	} finally {
+		loading.value = false
+	}
+})
 </script>
-
-<style scoped>
-.loading {
-	min-height: 50px;
-}
-</style>

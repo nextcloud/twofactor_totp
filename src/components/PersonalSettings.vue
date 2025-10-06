@@ -6,17 +6,17 @@
 <!-- Sync strings with LoginSetup.vue -->
 <template>
 	<div id="twofactor_email-personal_settings">
-		<div v-if="hasEmail">
+		<div v-if="store.hasEmail">
 			<p>
-				<NcCheckboxRadioSwitch type="switch"
-					:checked.sync="enabled"
-					:loading="loading"
-					@update:checked="toggleEnabled">
+				<NcCheckboxRadioSwitch v-model="store.enabled"
+						type="switch"
+						:loading="loading"
+						@update:model-value="onUpdate">
 					{{ t('twofactor_email', 'Use two-factor authentication via e-mail') }}
 				</NcCheckboxRadioSwitch>
 			</p>
-			<p v-if="enabled">
-				{{ t('twofactor_email', 'Codes will be sent to your primary e-mail address') }} <b>{{ email }}.</b>
+			<p v-if="store.enabled">
+				{{ t('twofactor_email', 'Codes will be sent to your primary e-mail address:') }} <b>{{ store.email }}</b>
 			</p>
 		</div>
 		<div v-else>
@@ -24,75 +24,49 @@
 				{{ t('twofactor_email', 'You cannot enable two-factor authentication via e-mail. You need to set a primary e-mail address (in your personal settings) first.') }}
 			</span>
 		</div>
-		<div v-if="error">
-			<span v-if="error === 'no-email'" class="error">
-				{{ t('twofactor_email', 'Apparently your previously configured e-mail address just vanished.') }}
-			</span>
-			<span v-else-if="error === 'save-failed'" class="error">
-				{{ t('twofactor_email', 'Could not enable/disable two-factor authentication via e-mail.') }}
-			</span>
-			<span v-else class="error">
-				{{ t('twofactor_email', 'Unhandled error!') }}
-			</span>
-		</div>
+		<span v-if="store.error === 'no-email'" class="error">
+			{{ t('twofactor_email', 'Apparently your previously configured e-mail address just vanished.') }}
+		</span>
+		<span v-else-if="store.error === 'save-failed'" class="error">
+			{{ t('twofactor_email', 'Could not enable/disable two-factor authentication via e-mail.') }}
+		</span>
+		<span v-else-if="store.error" class="error">
+			{{ t('twofactor_email', 'Unhandled error!') }}
+		</span>
 	</div>
 </template>
 
-<script>
-import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
+<script setup>
+import { ref } from "vue";
+import NcCheckboxRadioSwitch from '@nextcloud/vue/components/NcCheckboxRadioSwitch'
+import { t } from '@nextcloud/l10n'
 import { confirmPassword } from '@nextcloud/password-confirmation'
-import '@nextcloud/password-confirmation/dist/style.css'
+import '@nextcloud/password-confirmation/style.css'
+
 import Logger from '../Logger.js'
+import { usePersonalSettingsStore } from "../Store.js"
 
-export default {
-	name: 'PersonalSettings',
+const store = usePersonalSettingsStore()
+store.loadInitialState('enabled', 'hasEmail', 'email')
 
-	components: {
-		NcCheckboxRadioSwitch,
-	},
+const loading = ref(false)
 
-	data() {
-		return {
-			enabled: this.$store.state.enabled,
-			hasEmail: this.$store.state.hasEmail,
-			email: this.$store.state.email,
-			error: null,
-			loading: false,
-		}
-	},
+async function onUpdate() {
+	if (loading.value) {
+		// Ignore event
+		Logger.debug('still loading -> ignoring event')
+		return
+	}
+	loading.value = true
 
-	methods: {
-		toggleEnabled() {
-			if (this.loading) {
-				// Ignore event
-				Logger.debug('still loading -> ignoring event')
-				return
-			}
-			this.loading = true
-
-			confirmPassword()
-				.then(() => {
-					let action
-					if (this.enabled) {
-						action = this.$store.dispatch('enable')
-					} else {
-						action = this.$store.dispatch('disable')
-					}
-
-					action
-						.then(({ enabled, error }) => {
-							if (enabled !== null) {
-								this.enabled = enabled
-							}
-							this.error = error
-						})
-						.catch(console.error.bind(this))
-						.then(() => {
-							this.loading = false
-						})
-				})
-		},
-	},
+	try {
+		await confirmPassword()
+		await store.save()
+	} catch (error) {
+		console.error(error)
+	} finally {
+		loading.value = false
+	}
 }
 </script>
 
@@ -100,7 +74,6 @@ export default {
 .loading {
 	display: inline-block;
 	vertical-align: middle;
-	margin-left: -2px;
-	margin-right: 1px;
+	margin-inline: -2px 1px;
 }
 </style>
