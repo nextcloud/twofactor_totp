@@ -37,7 +37,7 @@ class SettingsControllerTest extends TestCase {
 		$this->controller = new SettingsController('twofactor_totp', $request, $this->userSession, $this->totp, $this->defaults);
 	}
 
-	public function testDisabledState() {
+	public function testDisabledState(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
@@ -54,7 +54,7 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->state());
 	}
 
-	public function testCreateSecret() {
+	public function testCreateSecret(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->exactly(2))
 			->method('getUser')
@@ -76,7 +76,7 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->enable(true));
 	}
 
-	public function testEnableSecret() {
+	public function testEnableSecret(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
@@ -93,7 +93,7 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_ENABLED, '123456'));
 	}
 
-	public function testDisableSecret() {
+	public function testDisableSecret(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
@@ -108,7 +108,7 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_DISABLED));
 	}
 
-	public function testEnableInvalidState() {
+	public function testEnableInvalidState(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')

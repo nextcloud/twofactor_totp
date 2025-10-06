@@ -14,7 +14,7 @@ use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCP\IUser;
 
 class StateChangedTest extends TestCase {
-	public function testEnabled() {
+	public function testEnabled(): void {
 		$user = $this->createMock(IUser::class);
 		$event = new StateChanged($user, true);
 
@@ -23,7 +23,7 @@ class StateChangedTest extends TestCase {
 		$this->assertTrue($enabled);
 	}
 
-	public function testDisabled() {
+	public function testDisabled(): void {
 		$user = $this->createMock(IUser::class);
 		$event = new StateChanged($user, false);
 

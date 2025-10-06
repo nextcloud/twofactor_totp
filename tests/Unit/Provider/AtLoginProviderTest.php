@@ -26,7 +26,7 @@ class AtLoginProviderTest extends TestCase {
 	}
 
 
-	public function testGetBody() {
+	public function testGetBody(): void {
 		// Not really anything to test, let's see if it does :boom:, though
 		$this->provider->getBody();
 
