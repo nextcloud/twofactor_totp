@@ -7,7 +7,9 @@ declare(strict_types=1);
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-style('twofactor_email', 'LoginChallenge');
+use OCP\Util;
+
+Util::addStyle('twofactor_email', 'twofactor_email-login_challenge');
 ?>
 
 <img class="two-factor-icon twofactor_email-challenge-icon" src="<?php print_unescaped(image_path('twofactor_email', 'app.svg')); ?>" alt="Icon depicting a letter and a user">

@@ -5,7 +5,17 @@
 
 module.exports = {
 	extends: [
-		'@nextcloud',
-		'plugin:chai-friendly/recommended'
+		'@nextcloud/eslint-config/vue3',
+		'prettier',
 	],
+	rules: {
+		'jsdoc/require-jsdoc': [
+			'error' | 'warn',
+			{
+				publicOnly: {
+					ancestorsOnly: true,
+				},
+			},
+		],
+	}
 }

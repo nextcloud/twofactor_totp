@@ -3,48 +3,46 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createPinia, defineStore } from 'pinia'
+import { loadState } from '@nextcloud/initial-state'
 
 import { persist } from './services/StateManager.js'
 
-Vue.use(Vuex)
+export const pinia = createPinia()
 
-export const mutations = {
-	setEnabled(state, enabled) {
-		if (enabled !== null) {
-			state.enabled = enabled
-		}
-	},
-}
-
-export const actions = {
-	enable({ commit }) {
-		return persist(true)
-			.then(({ enabled, error }) => {
-				commit('setEnabled', enabled)
-				return { enabled, error }
-			})
-	},
-
-	disable({ commit }) {
-		return persist(false)
-			.then(({ enabled }) => {
-				commit('setEnabled', enabled)
-				return { enabled }
-			})
-	},
-}
-
-export default new Vuex.Store({
-	strict: process.env.NODE_ENV !== 'production',
-	state: {
+export const usePersonalSettingsStore = defineStore('personalSettings', {
+	state: () => ({
 		enabled: false,
 		hasEmail: false,
 		maskedEmail: 'UNEXPECTED ERROR: no e-mail address set',
 		email: 'UNEXPECTED ERROR: no e-mail address set',
 		error: false,
+	}),
+	actions: {
+		/**
+		 * Loads the initial state from Nextcloud into the Store.
+		 * Only tries to fetch the given keys.
+		 * All initial state keys must be the same as in the store.
+		 *
+		 * @param {string} keys keys to load from initial state
+		 */
+		loadInitialState(...keys) {
+			const initialState = {}
+			for (const key of keys) {
+				initialState[key] = loadState('twofactor_email', key)
+			}
+			this.$patch(initialState)
+		},
+		async save() {
+			const result = await persist(this.enabled)
+			this.$patch({
+				enabled: result.enabled ?? this.enabled,
+				error: result.error,
+			})
+		},
+		async enable() {
+			this.enabled = true
+			await this.save()
+		},
 	},
-	mutations,
-	actions,
 })
