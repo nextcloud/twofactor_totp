@@ -16,6 +16,7 @@
 /node_modules
 /package*
 /.psalm.xml
+/rector.php
 /screenshots
 /src
 /tests
