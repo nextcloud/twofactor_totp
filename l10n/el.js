@@ -3,9 +3,12 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Ενεργοποιήσατε την ΤΟΤΡ πιστοποίηση δύο-παραγόντων για το λογαριασμό σας",
     "You disabled TOTP two-factor authentication for your account" : "Απενεργοποιήσατε την ΤΟΤΡ πιστοποίηση δύο-παραγόντων για το λογαριασμό σας",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP πιστοποίηση δύο παραγόντων απενεργοποιήθηκε από τη διαχείριση",
     "TOTP (Authenticator app)" : "TOTP (Εφαρμογή πιστοποίησης)",
     "Authenticate with a TOTP app" : "Πιστοποίηση με μια TOTP εφαρμογή",
-    "Two-Factor TOTP Provider" : "Πάροχος ΤΟΤΡ δύο-Παραγόντων",
+    "Two-Factor TOTP Provider" : "Πάροχος TOTP δύο παραγόντων",
+    "Two-factor TOTP provider" : "Πάροχος TOTP δύο παραγόντων",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Ένας πάροχος πιστοποίησης δύο παραγόντων για TOTP (RFC 6238)",
     "Could not enable TOTP" : "Αδυναμία ενεργοποίησης TOTP",
     "Could not verify your key. Please try again" : "Αδυναμία επαλήθευσης κλειδιού. Παρακαλούμε προσπαθήστε ξανά",
     "Enable TOTP" : "Ενεργοποίηση TOTP",
