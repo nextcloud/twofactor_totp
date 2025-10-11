@@ -13,9 +13,6 @@ OC.L10N.register(
     "Authentication code" : "קוד אימות",
     "Verify" : "אימות",
     "Get the authentication code from the two-factor authentication app on your device." : "קבלת קוד אימות מיישום אימות דו-מרכיבי בהתקן שלך.",
-    "Submit" : "הגשה",
-    "TOTP two-factor authentication disabled by an admin" : "אימות דו־שלבי בתצורת TOTP הושבת על ידי ההנהלה",
-    "TOTP two-factor provider" : "ספק אימות דו־שלבי TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "ספק אימות דו־שלבי עבור TOTP‏ (RFC 6238)"
+    "Submit" : "הגשה"
 },
 "nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;");

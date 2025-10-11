@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Msimbo wa uthibitishaji",
     "Verify" : "Thibitisha",
     "Get the authentication code from the two-factor authentication app on your device." : "Pata msimbo wa uthibitishaji kutoka kwa programu ya uthibitishaji wa vipengele viwili kwenye kifaa chako.",
-    "Submit" : "Wasilisha",
-    "TOTP two-factor authentication disabled by an admin" : "Uthibitishaji wa TOTP wa vipengele viwili umezimwa na msimamizi",
-    "TOTP two-factor provider" : "Mtoa huduma wa vipengele viwili vya TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Mtoaji wa Uthibitishaji wa Mambo Mbili kwa TOTP (RFC 6238)"
+    "Submit" : "Wasilisha"
 },
 "nplurals=2; plural=(n != 1);");

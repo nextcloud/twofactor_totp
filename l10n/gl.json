@@ -16,9 +16,6 @@
     "Authentication code" : "Código de autenticación",
     "Verify" : "Verificar",
     "Get the authentication code from the two-factor authentication app on your device." : "Obteña o código de autenticación da aplicación de autenticación de dous factores no seu dispositivo.",
-    "Submit" : "Enviar",
-    "TOTP two-factor authentication disabled by an admin" : "A autenticación TOTP de dous factores foi desactivada por un administrador.",
-    "TOTP two-factor provider" : "Provedor de autenticación de dous factores TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un provedor de segundo factor de autenticación para TOTP (RFC 6238) "
+    "Submit" : "Enviar"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

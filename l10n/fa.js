@@ -15,9 +15,6 @@ OC.L10N.register(
     "Authentication code" : "کد هویت",
     "Verify" : "تأیید کنید",
     "Get the authentication code from the two-factor authentication app on your device." : "کد احراز هویت را از برنامه احراز هویت دو مرحله ای در دستگاه خود دریافت کنید.",
-    "Submit" : "ارسال",
-    "TOTP two-factor authentication disabled by an admin" : "احراز هویت دو مرحله‌ای TOTP توسط یک مدیر غیرفعال شد",
-    "TOTP two-factor provider" : "ارائه دهنده دو عامل TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "ارائه‌دهنده تأییدیه دو عاملی برای TOTP (RFC 6238)"
+    "Submit" : "ارسال"
 },
 "nplurals=2; plural=(n > 1);");

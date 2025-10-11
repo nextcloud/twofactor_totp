@@ -15,9 +15,6 @@ OC.L10N.register(
     "Authentication code" : "Šifra za autentifikaciju",
     "Verify" : "Provjeri",
     "Get the authentication code from the two-factor authentication app on your device." : "Nabavite šifru za autentifikaciju iz aplikacije za dvofaktorsku autentifikaciju na uređaju.",
-    "Submit" : "Šalji",
-    "TOTP two-factor authentication disabled by an admin" : "Administrator je onemogućio TOTP dvofaktorsku autentifikaciju",
-    "TOTP two-factor provider" : "Davatelj usluge dvofaktorskog TOTP-a",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Davatelj usluge dvofaktorske autentifikacije za TOTP (RFC 6238)"
+    "Submit" : "Šalji"
 },
 "nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;");

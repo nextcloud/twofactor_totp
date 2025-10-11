@@ -15,9 +15,6 @@ OC.L10N.register(
     "Authentication code" : "Удостоверителен код",
     "Verify" : "Потвърждаване",
     "Get the authentication code from the two-factor authentication app on your device." : "Въведете кода от приложението за двустепенно удостоверяване.",
-    "Submit" : "Изпращане",
-    "TOTP two-factor authentication disabled by an admin" : "Двустепенното TOTP удостоверяване е изключено от администратора",
-    "TOTP two-factor provider" : "Доставчик на двустепенно TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Доставчик на двустепенно удостоверяване за TOTP (RFC 6238) "
+    "Submit" : "Изпращане"
 },
 "nplurals=2; plural=(n != 1);");

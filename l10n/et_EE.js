@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Autentimiskood",
     "Verify" : "Kontrolli",
     "Get the authentication code from the two-factor authentication app on your device." : "Vaata autentimiskoodi TOTP-põhist kaheastmelist autentimist kasutavast rakendusest oma nutiseadmes või arvutis.",
-    "Submit" : "Saada",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP-põhise kaheastmelise autentimise võimalus on peakasutaja poolt välja lülitatud",
-    "TOTP two-factor provider" : "TOTP-põhise kaheastmelise autentimise teenusepakkuja",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP-põhise kaheastmelise autentimise teenusepakkuja (RFC 6238)"
+    "Submit" : "Saada"
 },
 "nplurals=2; plural=(n != 1);");

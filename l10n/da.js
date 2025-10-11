@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Autorisationskode",
     "Verify" : "Bekræft",
     "Get the authentication code from the two-factor authentication app on your device." : "Få godkendelses koden fra two-factor godkendelses app på din enhed. ",
-    "Submit" : "Indsend",
-    "TOTP two-factor authentication disabled by an admin" : "To-faktor-godkendelse deaktiveret af en administrator",
-    "TOTP two-factor provider" : "TOTP to-faktor udbyder",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "En to-faktor-godkendelsesudbyder til TOTP (RFC 6238)"
+    "Submit" : "Indsend"
 },
 "nplurals=2; plural=(n != 1);");
