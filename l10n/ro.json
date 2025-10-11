@@ -13,9 +13,6 @@
     "Authentication code" : "Cod autentificare",
     "Verify" : "Verifică",
     "Get the authentication code from the two-factor authentication app on your device." : "Obțineți codul de autentificare din aplicația de autentificare two-factor de pe dispozitiv.",
-    "Submit" : "Trimite",
-    "TOTP two-factor authentication disabled by an admin" : "TOTO autentificarea în doi pași a fost dezacticată de admin",
-    "TOTP two-factor provider" : "Furnizorul de autentificare în doi pași TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Un furnizor de autentificare în doi pași TOTP (RFC6238)"
+    "Submit" : "Trimite"
 },"pluralForm" :"nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));"
 }

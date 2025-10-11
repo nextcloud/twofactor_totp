@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "인증 코드",
     "Verify" : "인증",
     "Get the authentication code from the two-factor authentication app on your device." : "내 장치에 있는 2단계 인증 앱에서 인증 코드를 확인하십시오.",
-    "Submit" : "제출",
-    "TOTP two-factor authentication disabled by an admin" : "관리자가 TOTP 2단계 인증을 비활성화함",
-    "TOTP two-factor provider" : "TOTP 2단계 인증 공급자",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP 2단계 인증 공급자(RFC 6238)"
+    "Submit" : "제출"
 },
 "nplurals=1; plural=0;");

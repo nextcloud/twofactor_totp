@@ -16,9 +16,6 @@
     "Authentication code" : "Hitelesítőkód",
     "Verify" : "Ellenőrzés",
     "Get the authentication code from the two-factor authentication app on your device." : "Szerezze meg a hitelesítőkódot az eszközén lévő kétlépcsős hitelesítési alkalmazásából.",
-    "Submit" : "Küldés",
-    "TOTP two-factor authentication disabled by an admin" : "A TOTP kétlépcsős hitelesítést egy rendszergazda letiltotta",
-    "TOTP two-factor provider" : "TOTP kétlépcsős szolgáltató",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Kétlépcsős hitelesítésszolgáltató TOTP-hez (RFC6238)"
+    "Submit" : "Küldés"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

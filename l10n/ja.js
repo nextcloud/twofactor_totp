@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "認証コード",
     "Verify" : "検証",
     "Get the authentication code from the two-factor authentication app on your device." : "デバイスの二要素認証アプリで認証コードを取得してください。",
-    "Submit" : "送信",
-    "TOTP two-factor authentication disabled by an admin" : "管理者によってTOTP二要素認証は無効にされています",
-    "TOTP two-factor provider" : "TOTP 二要素認証プロバイダー",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP（RFC 6238）の二要素認証プロバイダー"
+    "Submit" : "送信"
 },
 "nplurals=1; plural=0;");

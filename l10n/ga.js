@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Cód fíordheimhnithe",
     "Verify" : "Fíoraigh",
     "Get the authentication code from the two-factor authentication app on your device." : "Faigh an cód fíordheimhnithe ón aip fíordheimhnithe dhá-fhachtóir ar do ghléas.",
-    "Submit" : "Cuir isteach",
-    "TOTP two-factor authentication disabled by an admin" : "Díchumasaíodh fíordheimhniú dhá-fhachtóir TOTP ag riarthóir",
-    "TOTP two-factor provider" : "TOTP soláthraí dhá-fhachtóir",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Soláthraí Dhá-Fachtóir-Údar do TOTP (RFC 6238)"
+    "Submit" : "Cuir isteach"
 },
 "nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);");

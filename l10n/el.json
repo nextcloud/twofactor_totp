@@ -16,9 +16,6 @@
     "Authentication code" : "Κώδικας πιστοποίησης",
     "Verify" : "Επαλήθευση",
     "Get the authentication code from the two-factor authentication app on your device." : "Παραλάβετε τον κωδικό πιστοποίησης από την εφαρμογή δύο-παραγόντων στην συσκευή σας.",
-    "Submit" : "Υποβολή",
-    "TOTP two-factor authentication disabled by an admin" : "Η πιστοποίηση δύο-παραγόντων ΤΟΤΡ απενεργοποιήθηκε από τον διαχειριστή",
-    "TOTP two-factor provider" : "TOTP δύο-παραγόντων πάροχος",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Πάροχος Αυθεντικοποίησης-Δύο-Παραγόντων για TOTP (RFC 6238)"
+    "Submit" : "Υποβολή"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
