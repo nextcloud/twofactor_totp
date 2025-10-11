@@ -16,9 +16,6 @@
     "Authentication code" : "驗證碼",
     "Verify" : "核對",
     "Get the authentication code from the two-factor authentication app on your device." : "從您裝置上的兩階段驗證應用程式取得驗證碼。",
-    "Submit" : "送出",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP 兩階段驗證功能已被系統管理員停用",
-    "TOTP two-factor provider" : "TOTP 兩階段驗證提供者",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP 兩階段驗證裝置提供者 (RFC 6238)"
+    "Submit" : "送出"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

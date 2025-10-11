@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Kimlik doğrulama kodu",
     "Verify" : "Doğrula",
     "Get the authentication code from the two-factor authentication app on your device." : "Aygıtınızda yüklü iki adımlı doğrulama uygulamasından kodu alın.",
-    "Submit" : "Gönder",
-    "TOTP two-factor authentication disabled by an admin" : "Tek kullanımlık parola ile iki adımlı doğrulama yönetici tarafından kapatılmış",
-    "TOTP two-factor provider" : "Tek kullanımlık parola iki adımlı doğrulama hizmeti sağlayıcısı",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Tek kullanımlık parola için iki adımlı doğrulama hizmeti sağlayıcısı (RFC 6238)"
+    "Submit" : "Gönder"
 },
 "nplurals=2; plural=(n > 1);");

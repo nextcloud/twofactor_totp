@@ -16,9 +16,6 @@
     "Authentication code" : "Autentiseringskod",
     "Verify" : "Verifiera",
     "Get the authentication code from the two-factor authentication app on your device." : "Skriv in autentiseringskoden från tvåfaktorsautentiseringsappen på din enhet.",
-    "Submit" : "Skicka",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP två-faktor autentisering inaktiverad av en admin",
-    "TOTP two-factor provider" : "TOTP-leverantör av tvåfaktorsautentisering",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "En leverantör av tvåfaktorsautentisering för TOTP (RFC 6238)"
+    "Submit" : "Skicka"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

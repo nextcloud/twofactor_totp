@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Код авторизації",
     "Verify" : "Перевірити",
     "Get the authentication code from the two-factor authentication app on your device." : "Зазначте одноразовий код доступу, який було зґенеровано у застосунку двофакторної авторизації на вашому пристрої.",
-    "Submit" : "Продовжити",
-    "TOTP two-factor authentication disabled by an admin" : "Двофактору авторизацію за допомогою одноразового коду вимкнено адміністратором",
-    "TOTP two-factor provider" : "Постачальник послуг двофакторної авторизації TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Постачальник послуг двофакторної авторизації TOTP (RFC 6238)"
+    "Submit" : "Продовжити"
 },
 "nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);");

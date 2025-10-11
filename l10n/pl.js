@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Kod uwierzytelnienia",
     "Verify" : "Weryfikuj",
     "Get the authentication code from the two-factor authentication app on your device." : "Pobierz kod uwierzytelnienia z aplikacji uwierzytelniania dwuskładnikowego na swoim urządzeniu.",
-    "Submit" : "Wyślij",
-    "TOTP two-factor authentication disabled by an admin" : "Uwierzytelnienie dwuskładnikowe TOTP wyłączone przez administratora",
-    "TOTP two-factor provider" : "Dostawca TOTP dla uwierzytelniania dwuskładnikowego",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Dostawca autoryzacji dwuskładnikowej dla TOTP (RFC 6238)"
+    "Submit" : "Wyślij"
 },
 "nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);");

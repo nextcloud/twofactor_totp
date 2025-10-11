@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Ověřovací kód",
     "Verify" : "Ověřit",
     "Get the authentication code from the two-factor authentication app on your device." : "Získat ověřovací kód z aplikace na vašem přístroji.",
-    "Submit" : "Odeslat",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP dvoufázové přihlašování vypnuto správcem",
-    "TOTP two-factor provider" : "Poskytovatel dvoufázového TOTP",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Poskytovatel dvouúřovňového ověřování pro TOTP (dle normy RFC 6238)"
+    "Submit" : "Odeslat"
 },
 "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;");

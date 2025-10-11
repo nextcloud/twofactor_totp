@@ -9,8 +9,6 @@ OC.L10N.register(
     "Enable TOTP" : "Activar l'autenticación TOTP",
     "Authentication code" : "Códigu d'autenticación",
     "Verify" : "Verificar",
-    "Submit" : "Unviar",
-    "TOTP two-factor authentication disabled by an admin" : "L'alministración desactivó l'autenticación en dos pasos TOTP",
-    "TOTP two-factor provider" : "Fornidor de l'autenticación en dos pasos TOTP"
+    "Submit" : "Unviar"
 },
 "nplurals=2; plural=(n != 1);");
