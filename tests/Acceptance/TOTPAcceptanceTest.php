@@ -65,7 +65,7 @@ class TOTPAcceptanceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return count($driver->findElements(WebDriverBy::id('totp-enabled'))) > 0;
-			} catch (ElementNotInteractableException $ex) {
+			} catch (ElementNotInteractableException) {
 				return false;
 			}
 		});
@@ -91,7 +91,7 @@ class TOTPAcceptanceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return $driver->findElement(WebDriverBy::id('totp-enabled'))->getAttribute('checked') === 'true';
-			} catch (ElementNotInteractableException $ex) {
+			} catch (ElementNotInteractableException) {
 				return false;
 			}
 		});
@@ -104,7 +104,7 @@ class TOTPAcceptanceTest extends TestCase {
 			if ($state !== (int)$secret->getState()) {
 				self::fail('TOTP secret has wrong state');
 			}
-		} catch (DoesNotExistException $ex) {
+		} catch (DoesNotExistException) {
 			self::fail('User does not have a totp secret');
 		}
 	}
@@ -146,7 +146,7 @@ class TOTPAcceptanceTest extends TestCase {
 		$this->webDriver->wait(20, 200)->until(function (WebDriver $driver) {
 			try {
 				return $driver->findElements(WebDriverBy::className('totp-form'));
-			} catch (ElementNotInteractableException $ex) {
+			} catch (ElementNotInteractableException) {
 				return false;
 			}
 		});

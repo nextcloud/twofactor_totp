@@ -31,19 +31,12 @@ class Provider implements IProvider {
 		$l = $this->l10n->get('twofactor_totp', $language);
 
 		$event->setIcon($this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'actions/password.svg')));
-		switch ($event->getSubject()) {
-			case 'totp_enabled_subject':
-				$event->setSubject($l->t('You enabled TOTP two-factor authentication for your account'));
-				break;
-			case 'totp_disabled_subject':
-				$event->setSubject($l->t('You disabled TOTP two-factor authentication for your account'));
-				break;
-			case 'totp_disabled_by_admin':
-				$event->setSubject($l->t('TOTP two-factor authentication disabled by the administration'));
-				break;
-			default:
-				throw new UnknownActivityException();
-		}
+		$event->setSubject(match ($event->getSubject()) {
+			'totp_enabled_subject' => $l->t('You enabled TOTP two-factor authentication for your account'),
+			'totp_disabled_subject' => $l->t('You disabled TOTP two-factor authentication for your account'),
+			'totp_disabled_by_admin' => $l->t('TOTP two-factor authentication disabled by the administration'),
+			default => throw new UnknownActivityException(),
+		});
 		return $event;
 	}
 }

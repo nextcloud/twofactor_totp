@@ -37,7 +37,7 @@ class Totp implements ITotp {
 		try {
 			$secret = $this->secretMapper->getSecret($user);
 			return (int)$secret->getState() === ITotp::STATE_ENABLED;
-		} catch (DoesNotExistException $ex) {
+		} catch (DoesNotExistException) {
 			return false;
 		}
 	}
@@ -54,7 +54,7 @@ class Totp implements ITotp {
 			// Delete existing one
 			$oldSecret = $this->secretMapper->getSecret($user);
 			$this->secretMapper->delete($oldSecret);
-		} catch (DoesNotExistException $ex) {
+		} catch (DoesNotExistException) {
 			// Ignore
 		}
 
@@ -88,7 +88,7 @@ class Totp implements ITotp {
 			// TODO: execute DELETE sql in mapper instead
 			$dbSecret = $this->secretMapper->getSecret($user);
 			$this->secretMapper->delete($dbSecret);
-		} catch (DoesNotExistException $ex) {
+		} catch (DoesNotExistException) {
 			// Ignore
 		}
 
@@ -102,7 +102,7 @@ class Totp implements ITotp {
 	public function validateSecret(IUser $user, string $key): bool {
 		try {
 			$dbSecret = $this->secretMapper->getSecret($user);
-		} catch (DoesNotExistException $ex) {
+		} catch (DoesNotExistException) {
 			throw new NoTotpSecretFoundException();
 		}
 
