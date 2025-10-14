@@ -22,7 +22,7 @@ return RectorConfig::configure()
 		phpunitCodeQuality: true,
 	)
 	->withPhpSets(
-		php81: true,
+		php82: true,
 	)
 	->withRules([
 		AddTestsVoidReturnTypeWhereNoReturnRector::class,
