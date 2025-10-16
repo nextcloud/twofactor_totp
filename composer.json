@@ -45,7 +45,7 @@
 	"extra": {
 		"bamarni-bin": {
 			"bin-links": true,
-			"forward-command": true
+			"forward-command": false
 		}
 	}
 }
