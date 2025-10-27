@@ -27,7 +27,7 @@ Tested with the following hardware devices:
 
 ### Nextcloud 25 and newer
 
-The app is [shipped](https://docs.nextcloud.com/server/latest/developer_manual/app_publishing_maintenance/release_process.html#shipped-apps) and comes with the installation of Nextcloud Server. No additional steps are necessary.
+The app is [shipped](https://docs.nextcloud.com/server/latest/developer_manual/app_publishing_maintenance/release_process.html#shipped-apps) and comes with the installation of Nextcloud Server. No additional steps are necessary, besides activating it.
 
 ### Nextcloud 24 and older
 
