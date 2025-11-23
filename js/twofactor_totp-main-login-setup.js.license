@@ -18,9 +18,6 @@ This file is generated from multiple sources. Included packages:
 - @chenfengyuan/vue-qrcode
 	- version: 1.0.2
 	- license: MIT
-- @nextcloud/browser-storage
-	- version: 0.4.0
-	- license: GPL-3.0-or-later
 - semver
 	- version: 7.7.2
 	- license: ISC
