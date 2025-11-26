@@ -15,7 +15,6 @@ SPDX-FileCopyrightText: John Molakvoæ (skjnldsv) <skjnldsv@protonmail.com>
 SPDX-FileCopyrightText: GitHub Inc.
 SPDX-FileCopyrightText: Feross Aboukhadijeh
 SPDX-FileCopyrightText: Dr.-Ing. Mario Heiderich, Cure53 <mario@cure53.de> (https://cure53.de/)
-SPDX-FileCopyrightText: Denis Pushkarev
 SPDX-FileCopyrightText: Christoph Wurst <christoph@winzerhof-wurst.at>
 SPDX-FileCopyrightText: Christoph Wurst
 SPDX-FileCopyrightText: Chen Fengyuan
@@ -33,15 +32,9 @@ This file is generated from multiple sources. Included packages:
 - semver
 	- version: 7.7.2
 	- license: ISC
-- @nextcloud/router
-	- version: 3.0.1
-	- license: GPL-3.0-or-later
 - @nextcloud/password-confirmation
 	- version: 5.1.1
 	- license: MIT
-- @nextcloud/router
-	- version: 2.2.1
-	- license: GPL-3.0-or-later
 - @nextcloud/vue
 	- version: 8.19.0
 	- license: AGPL-3.0-or-later
@@ -50,9 +43,6 @@ This file is generated from multiple sources. Included packages:
 	- license: MIT
 - buffer
 	- version: 6.0.3
-	- license: MIT
-- core-js
-	- version: 3.37.0
 	- license: MIT
 - css-loader
 	- version: 7.1.2
