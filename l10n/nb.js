@@ -15,9 +15,6 @@ OC.L10N.register(
     "Authentication code" : "Autentiseringskode",
     "Verify" : "Verifiser",
     "Get the authentication code from the two-factor authentication app on your device." : "Få autentiseringskoden fra to-trinns-appen på din enhet. ",
-    "Submit" : "Send inn",
-    "TOTP two-factor authentication disabled by an admin" : "To-trinn autentisering er deaktivert av administrator",
-    "TOTP two-factor provider" : "To-trinn tilbyder",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "En to-trinn tilbyder (RFC 6238)"
+    "Submit" : "Send inn"
 },
 "nplurals=2; plural=(n != 1);");

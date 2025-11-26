@@ -3,9 +3,12 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Włączono uwierzytelnienie dwuskładnikowe TOTP na Twoim koncie",
     "You disabled TOTP two-factor authentication for your account" : "Wyłączono uwierzytelnienie dwuskładnikowe TOTP na Twoim koncie",
+    "TOTP two-factor authentication disabled by the administration" : "Uwierzytelnianie dwuskładnikowe TOTP wyłączone przez administratora",
     "TOTP (Authenticator app)" : "TOTP (aplikacja uwierzytelniająca)",
     "Authenticate with a TOTP app" : "Uwierzytelnij przy pomocy aplikacji TOTP",
     "Two-Factor TOTP Provider" : "Dostawca uwierzytelnienia dwuskładnikowego TOTP",
+    "Two-factor TOTP provider" : "Dostawca uwierzytelniania dwuskładnikowego TOTP",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Dostawca uwierzytelniania dwuskładnikowego dla TOTP (RFC 6238)",
     "Could not enable TOTP" : "Nie można włączyć TOTP",
     "Could not verify your key. Please try again" : "Nie można zweryfikować Twojego klucza. Proszę spróbować ponownie",
     "Enable TOTP" : "Włącz TOTP",
@@ -15,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Kod uwierzytelnienia",
     "Verify" : "Weryfikuj",
     "Get the authentication code from the two-factor authentication app on your device." : "Pobierz kod uwierzytelnienia z aplikacji uwierzytelniania dwuskładnikowego na swoim urządzeniu.",
-    "Submit" : "Wyślij",
-    "TOTP two-factor authentication disabled by an admin" : "Uwierzytelnienie dwuskładnikowe TOTP wyłączone przez administratora",
-    "TOTP two-factor provider" : "Dostawca TOTP dla uwierzytelniania dwuskładnikowego",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Dostawca autoryzacji dwuskładnikowej dla TOTP (RFC 6238)"
+    "Submit" : "Wyślij"
 },
 "nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);");

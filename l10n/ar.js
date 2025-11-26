@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "رمز المصادقة",
     "Verify" : "تحقّق",
     "Get the authentication code from the two-factor authentication app on your device." : "احصل على رمز التحقّق من تطبيق التحقق ثنائي العوامل على جهازك.",
-    "Submit" : "إرسال ",
-    "TOTP two-factor authentication disabled by an admin" : "خاصية التحقق ثنائي العوامل من الهويّة two-factor authentication باستخدام TOTP \"كلمة سرٍ لمرةٍ واحدةٍ و لمهلة زمنية محدّدة\" ، تمّ إيقافها من قِبل المدير",
-    "TOTP two-factor provider" : "مُوفّر خدمة التحقّق المٌثنّى من الهويّة two-factor authentication باستخدام تقنية TOTP \"كلمة سرٍ لمرةٍ واحدةٍ و لمهلة زمنية محدّدة\" ",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "مزود التحقق ثنائي العوامل للهويّة بواسطة TOTP (بحسب المعيار RFC 6238)"
+    "Submit" : "إرسال "
 },
 "nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;");

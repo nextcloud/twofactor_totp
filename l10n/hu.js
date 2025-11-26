@@ -3,9 +3,12 @@ OC.L10N.register(
     {
     "You enabled TOTP two-factor authentication for your account" : "Engedélyezte a TOTP kétlépcsős hitelesítést a fiókjához",
     "You disabled TOTP two-factor authentication for your account" : "Letiltotta a TOTP kétlépcsős hitelesítést a fiókjához",
+    "TOTP two-factor authentication disabled by the administration" : "A TOTP kétlépcsős hitelesítést a rendszergazda letiltotta",
     "TOTP (Authenticator app)" : "TOTP (Hitelesítő alkalmazás)",
     "Authenticate with a TOTP app" : "Hitelesítés egy TOTP alkalmazással",
     "Two-Factor TOTP Provider" : "Kétlépcsős TOTP szolgáltató",
+    "Two-factor TOTP provider" : "Kétlépcsős TOTP szolgáltató",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Egy kétlépcsős hitelesítésszolgáltató TOTP-hez (RFC 6238)",
     "Could not enable TOTP" : "Nem sikerült engedélyezni a TOTP-t",
     "Could not verify your key. Please try again" : "A kulcs nem ellenőrizhető. Próbálja meg újra.",
     "Enable TOTP" : "Időalapú egyszer használatos jelszó (TOTP) engedélyezése",
@@ -15,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "Hitelesítőkód",
     "Verify" : "Ellenőrzés",
     "Get the authentication code from the two-factor authentication app on your device." : "Szerezze meg a hitelesítőkódot az eszközén lévő kétlépcsős hitelesítési alkalmazásából.",
-    "Submit" : "Küldés",
-    "TOTP two-factor authentication disabled by an admin" : "A TOTP kétlépcsős hitelesítést egy rendszergazda letiltotta",
-    "TOTP two-factor provider" : "TOTP kétlépcsős szolgáltató",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Kétlépcsős hitelesítésszolgáltató TOTP-hez (RFC6238)"
+    "Submit" : "Küldés"
 },
 "nplurals=2; plural=(n != 1);");

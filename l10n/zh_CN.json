@@ -13,9 +13,6 @@
     "Authentication code" : "验证码",
     "Verify" : "验证",
     "Get the authentication code from the two-factor authentication app on your device." : "从您设备上的两步验证应用获取验证码",
-    "Submit" : "提交",
-    "TOTP two-factor authentication disabled by an admin" : "管理员已禁用了 TOTP 两步验证",
-    "TOTP two-factor provider" : "TOTP 两步验证",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "一个 TOTP（RFC 6238）两步验证提供者"
+    "Submit" : "提交"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

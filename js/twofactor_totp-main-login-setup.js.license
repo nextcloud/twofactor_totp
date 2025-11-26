@@ -6,10 +6,8 @@ SPDX-License-Identifier: AGPL-3.0-only
 SPDX-FileCopyrightText: Tobias Koppers @sokra
 SPDX-FileCopyrightText: T. Jameson Little <t.jameson.little@gmail.com>
 SPDX-FileCopyrightText: Roman Shtylman <shtylman@gmail.com>
-SPDX-FileCopyrightText: Matt Zabriskie
 SPDX-FileCopyrightText: GitHub Inc.
 SPDX-FileCopyrightText: Feross Aboukhadijeh
-SPDX-FileCopyrightText: Denis Pushkarev
 SPDX-FileCopyrightText: Christoph Wurst <christoph@winzerhof-wurst.at>
 SPDX-FileCopyrightText: Christoph Wurst
 SPDX-FileCopyrightText: Chen Fengyuan
@@ -19,35 +17,17 @@ This file is generated from multiple sources. Included packages:
 - @chenfengyuan/vue-qrcode
 	- version: 1.0.2
 	- license: MIT
-- @nextcloud/auth
-	- version: 2.4.0
-	- license: GPL-3.0-or-later
 - @nextcloud/browser-storage
 	- version: 0.4.0
 	- license: GPL-3.0-or-later
 - semver
-	- version: 7.6.2
+	- version: 7.7.2
 	- license: ISC
-- @nextcloud/event-bus
-	- version: 3.3.1
-	- license: GPL-3.0-or-later
-- @nextcloud/logger
-	- version: 2.7.0
-	- license: GPL-3.0-or-later
-- @nextcloud/router
-	- version: 2.2.1
-	- license: GPL-3.0-or-later
-- axios
-	- version: 1.7.4
-	- license: MIT
 - base64-js
 	- version: 1.5.1
 	- license: MIT
 - buffer
 	- version: 6.0.3
-	- license: MIT
-- core-js
-	- version: 3.37.0
 	- license: MIT
 - css-loader
 	- version: 7.1.2
@@ -65,5 +45,5 @@ This file is generated from multiple sources. Included packages:
 	- version: 5.95.0
 	- license: MIT
 - twofactor_totp
-	- version: 14.0.0-dev.0
+	- version: 15.0.0-dev.0
 	- license: AGPL-3.0-only

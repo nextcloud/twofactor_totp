@@ -19,7 +19,6 @@ use OCP\L10N\IFactory;
 class ProviderTest extends TestCase {
 	private $l10n;
 	private $urlGenerator;
-	private $logger;
 
 	/** @var Provider */
 	private $provider;
@@ -29,12 +28,12 @@ class ProviderTest extends TestCase {
 
 		$this->l10n = $this->createMock(IFactory::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
-		$this->logger = $this->createMock(ILogger::class);
+		$logger = $this->createMock(ILogger::class);
 
-		$this->provider = new Provider($this->l10n, $this->urlGenerator, $this->logger);
+		$this->provider = new Provider($this->l10n, $this->urlGenerator, $logger);
 	}
 
-	public function testParseUnrelated() {
+	public function testParseUnrelated(): void {
 		$lang = 'ru';
 		$event = $this->createMock(IEvent::class);
 		$event->expects($this->once())
@@ -45,18 +44,16 @@ class ProviderTest extends TestCase {
 		$this->provider->parse($lang, $event);
 	}
 
-	public function subjectData() {
-		return [
-			['totp_enabled_subject'],
-			['totp_disabled_subject'],
-			['totp_disabled_by_admin'],
-		];
+	public function subjectData(): \Iterator {
+		yield ['totp_enabled_subject'];
+		yield ['totp_disabled_subject'];
+		yield ['totp_disabled_by_admin'];
 	}
 
 	/**
 	 * @dataProvider subjectData
 	 */
-	public function testParse($subject) {
+	public function testParse($subject): void {
 		$lang = 'ru';
 		$event = $this->createMock(IEvent::class);
 		$l = $this->createMock(IL10N::class);

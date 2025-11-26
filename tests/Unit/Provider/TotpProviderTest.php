@@ -64,7 +64,7 @@ class TotpProviderTest extends TestCase {
 
 		$id = $this->provider->getId();
 
-		self::assertEquals($expectedId, $id);
+		$this->assertEquals($expectedId, $id);
 	}
 
 	public function testGetDisplayName(): void {
@@ -72,7 +72,7 @@ class TotpProviderTest extends TestCase {
 
 		$displayName = $this->provider->getDisplayName();
 
-		self::assertEquals($expected, $displayName);
+		$this->assertEquals($expected, $displayName);
 	}
 
 	public function testGetDescription(): void {
@@ -83,29 +83,29 @@ class TotpProviderTest extends TestCase {
 
 		$descr = $this->provider->getDescription();
 
-		self::assertEquals($description, $descr);
+		$this->assertEquals($description, $descr);
 	}
 
 	public function testGetLightIcon(): void {
-		$this->urlGenerator->expects(self::once())
+		$this->urlGenerator->expects($this->once())
 			->method('imagePath')
 			->with('twofactor_totp', 'app.svg')
 			->willReturn('/path/to/app.svg');
 
 		$icon = $this->provider->getLightIcon();
 
-		self::assertEquals('/path/to/app.svg', $icon);
+		$this->assertEquals('/path/to/app.svg', $icon);
 	}
 
 	public function testGetDarkIcon(): void {
-		$this->urlGenerator->expects(self::once())
+		$this->urlGenerator->expects($this->once())
 			->method('imagePath')
 			->with('twofactor_totp', 'app-dark.svg')
 			->willReturn('/path/to/app-dark.svg');
 
 		$icon = $this->provider->getDarkIcon();
 
-		self::assertEquals('/path/to/app-dark.svg', $icon);
+		$this->assertEquals('/path/to/app-dark.svg', $icon);
 	}
 
 	public function testGetPersonalSettings(): void {
@@ -125,7 +125,7 @@ class TotpProviderTest extends TestCase {
 
 		$actual = $this->provider->getPersonalSettings($user);
 
-		self::assertEquals($expected, $actual);
+		$this->assertEquals($expected, $actual);
 	}
 
 	public function testDeactivate(): void {
@@ -148,6 +148,6 @@ class TotpProviderTest extends TestCase {
 
 		$result = $this->provider->getLoginSetup($user);
 
-		self::assertSame($provider, $result);
+		$this->assertSame($provider, $result);
 	}
 }

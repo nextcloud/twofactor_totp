@@ -19,7 +19,6 @@ use OCP\IUserSession;
 use PHPUnit\Framework\TestCase;
 
 class SettingsControllerTest extends TestCase {
-	private $request;
 	private $userSession;
 	private $totp;
 	private $defaults;
@@ -30,15 +29,15 @@ class SettingsControllerTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->request = $this->createMock(IRequest::class);
+		$request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->totp = $this->createMock(Totp::class);
 		$this->defaults = new Defaults();
 
-		$this->controller = new SettingsController('twofactor_totp', $this->request, $this->userSession, $this->totp, $this->defaults);
+		$this->controller = new SettingsController('twofactor_totp', $request, $this->userSession, $this->totp, $this->defaults);
 	}
 
-	public function testDisabledState() {
+	public function testDisabledState(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
@@ -55,7 +54,7 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->state());
 	}
 
-	public function testCreateSecret() {
+	public function testCreateSecret(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->exactly(2))
 			->method('getUser')
@@ -77,7 +76,7 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->enable(true));
 	}
 
-	public function testEnableSecret() {
+	public function testEnableSecret(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
@@ -94,7 +93,7 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_ENABLED, '123456'));
 	}
 
-	public function testDisableSecret() {
+	public function testDisableSecret(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
@@ -109,7 +108,7 @@ class SettingsControllerTest extends TestCase {
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_DISABLED));
 	}
 
-	public function testEnableInvalidState() {
+	public function testEnableInvalidState(): void {
 		$user = $this->createMock(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')

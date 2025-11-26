@@ -15,9 +15,6 @@ OC.L10N.register(
     "Authentication code" : "Authentication code",
     "Verify" : "Verify",
     "Get the authentication code from the two-factor authentication app on your device." : "Get the authentication code from the two-factor authentication app on your device.",
-    "Submit" : "Submit",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP two-factor authentication disabled by an admin",
-    "TOTP two-factor provider" : "TOTP two-factor provider",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "A Two-Factor-Auth Provider for TOTP (RFC 6238)"
+    "Submit" : "Submit"
 },
 "nplurals=2; plural=(n!=1);");

@@ -15,9 +15,6 @@ OC.L10N.register(
     "Authentication code" : "Autentifikazio kodea",
     "Verify" : "Egiaztatu",
     "Get the authentication code from the two-factor authentication app on your device." : "Zure gailuko bi faktoreko autentifikazio aplikaziotik autentifikazio kodea lortu.",
-    "Submit" : "Bidali",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP bi faktoreko autentifikazioa kudeatzaileak desaktibatu egin du",
-    "TOTP two-factor provider" : "TOTP bi faktoreko zerbitzua",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP eskaintzeko zerbitzua (RFC 6238)"
+    "Submit" : "Bidali"
 },
 "nplurals=2; plural=(n != 1);");

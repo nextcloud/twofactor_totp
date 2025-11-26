@@ -13,9 +13,6 @@
     "Authentication code" : "Auðkenningarkóði",
     "Verify" : "Sannprófa",
     "Get the authentication code from the two-factor authentication app on your device." : "Náðu í auðkenningarkóða frá tveggja-þrepa auðkenningarforriti á tækinu þínu.",
-    "Submit" : "Senda inn",
-    "TOTP two-factor authentication disabled by an admin" : "TOTP tveggja-þátta auðkenning er gerð óvirk af kerfisstjóra",
-    "TOTP two-factor provider" : "Veituaðili tveggja-þrepa TOTP-vottunar",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Veituaðili tveggja-þrepa vottunar fyrir TOTP (RFC 6238)"
+    "Submit" : "Senda inn"
 },"pluralForm" :"nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);"
 }

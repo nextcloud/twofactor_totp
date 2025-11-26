@@ -1,9 +1,12 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Ενεργοποιήσατε την ΤΟΤΡ πιστοποίηση δύο-παραγόντων για το λογαριασμό σας",
     "You disabled TOTP two-factor authentication for your account" : "Απενεργοποιήσατε την ΤΟΤΡ πιστοποίηση δύο-παραγόντων για το λογαριασμό σας",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP πιστοποίηση δύο παραγόντων απενεργοποιήθηκε από τη διαχείριση",
     "TOTP (Authenticator app)" : "TOTP (Εφαρμογή πιστοποίησης)",
     "Authenticate with a TOTP app" : "Πιστοποίηση με μια TOTP εφαρμογή",
-    "Two-Factor TOTP Provider" : "Πάροχος ΤΟΤΡ δύο-Παραγόντων",
+    "Two-Factor TOTP Provider" : "Πάροχος TOTP δύο παραγόντων",
+    "Two-factor TOTP provider" : "Πάροχος TOTP δύο παραγόντων",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Ένας πάροχος πιστοποίησης δύο παραγόντων για TOTP (RFC 6238)",
     "Could not enable TOTP" : "Αδυναμία ενεργοποίησης TOTP",
     "Could not verify your key. Please try again" : "Αδυναμία επαλήθευσης κλειδιού. Παρακαλούμε προσπαθήστε ξανά",
     "Enable TOTP" : "Ενεργοποίηση TOTP",
@@ -13,9 +16,6 @@
     "Authentication code" : "Κώδικας πιστοποίησης",
     "Verify" : "Επαλήθευση",
     "Get the authentication code from the two-factor authentication app on your device." : "Παραλάβετε τον κωδικό πιστοποίησης από την εφαρμογή δύο-παραγόντων στην συσκευή σας.",
-    "Submit" : "Υποβολή",
-    "TOTP two-factor authentication disabled by an admin" : "Η πιστοποίηση δύο-παραγόντων ΤΟΤΡ απενεργοποιήθηκε από τον διαχειριστή",
-    "TOTP two-factor provider" : "TOTP δύο-παραγόντων πάροχος",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "Πάροχος Αυθεντικοποίησης-Δύο-Παραγόντων για TOTP (RFC 6238)"
+    "Submit" : "Υποβολή"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

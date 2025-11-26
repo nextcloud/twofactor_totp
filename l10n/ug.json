@@ -13,9 +13,6 @@
     "Authentication code" : "دەلىللەش كودى",
     "Verify" : "دەلىللەڭ",
     "Get the authentication code from the two-factor authentication app on your device." : "ئۈسكۈنىڭىزدىكى ئىككى ئامىللىق دەلىللەش دېتالىدىن دەلىللەش كودىغا ئېرىشىڭ.",
-    "Submit" : "يوللاڭ",
-    "TOTP two-factor authentication disabled by an admin" : "باشقۇرغۇچى تەرىپىدىن TOTP ئىككى ئامىللىق دەلىللەش چەكلەنگەن",
-    "TOTP two-factor provider" : "TOTP ئىككى ئامىل تەمىنلىگۈچى",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP ئۈچۈن ئىككى ئامىللىق ئاپتور تەمىنلىگۈچى (RFC 6238)"
+    "Submit" : "يوللاڭ"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -18,9 +18,6 @@ OC.L10N.register(
     "Authentication code" : "驗證碼",
     "Verify" : "核對",
     "Get the authentication code from the two-factor authentication app on your device." : "從你裝置上的雙重認證應用程式取得驗證碼。",
-    "Submit" : "遞交",
-    "TOTP two-factor authentication disabled by an admin" : "系統管理員已停用 TOTP 雙重認證功能",
-    "TOTP two-factor provider" : "TOTP 雙重認證供應商",
-    "A Two-Factor-Auth Provider for TOTP (RFC 6238)" : "TOTP 雙重認證裝置供應商（RFC 6238）"
+    "Submit" : "遞交"
 },
 "nplurals=1; plural=0;");

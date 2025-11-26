@@ -1,0 +1,23 @@
+OC.L10N.register(
+    "twofactor_totp",
+    {
+    "You enabled TOTP two-factor authentication for your account" : "Umewezesha uthibitishaji wa vipengele viwili vya TOTP kwa akaunti yako",
+    "You disabled TOTP two-factor authentication for your account" : "Umezima uthibitishaji wa vipengele viwili vya TOTP kwa akaunti yako",
+    "TOTP two-factor authentication disabled by the administration" : "Uthibitishaji wa vipengele viwili wa TOTP umezimwa na wasimamizi",
+    "TOTP (Authenticator app)" : "TOTP (Programu ya Kithibitishaji)",
+    "Authenticate with a TOTP app" : "Thibitisha kwa programu ya TOTP",
+    "Two-Factor TOTP Provider" : "Mtoa huduma wa vipengele viwili wa TOTP",
+    "Two-factor TOTP provider" : "Mtoa huduma wa vipengele viwili wa TOTP",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Mtoa huduma wa uthibitishaji wa vipengele viwili kwa TOTP (RFC 6238)",
+    "Could not enable TOTP" : "Haikuweza kuwezesha TOTP",
+    "Could not verify your key. Please try again" : "Haikuweza kuthibitisha ufunguo wako. Tafadhali jaribu tena",
+    "Enable TOTP" : "Washa TOTP",
+    "Your new TOTP secret is:" : "Siri yako mpya ya TOTP ni:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Kwa usanidi wa haraka, changanua msimbo huu wa QR ukitumia programu yako ya TOTP:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Baada ya kusanidi programu yako, weka msimbo wa jaribio hapa chini ili kuhakikisha kuwa kila kitu kinafanya kazi ipasavyo:",
+    "Authentication code" : "Msimbo wa uthibitishaji",
+    "Verify" : "Thibitisha",
+    "Get the authentication code from the two-factor authentication app on your device." : "Pata msimbo wa uthibitishaji kutoka kwa programu ya uthibitishaji wa vipengele viwili kwenye kifaa chako.",
+    "Submit" : "Wasilisha"
+},
+"nplurals=2; plural=(n != 1);");
