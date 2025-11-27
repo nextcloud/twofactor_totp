@@ -19,6 +19,11 @@ global.expect = require('chai').expect
 // https://github.com/vuejs/vue-cli/issues/2128#issuecomment-453109575
 window.Date = Date
 
+// https://github.com/jsdom/jsdom/issues/3363
+if (typeof global.structuredClone !== 'function') {
+	global.structuredClone = (obj) => JSON.parse(JSON.stringify(obj))
+}
+
 global.OC = {
 	getCurrentUser: () => {
 		return { uid: false }
