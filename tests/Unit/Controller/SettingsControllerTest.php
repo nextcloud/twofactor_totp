@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 namespace OCA\TwoFactorTOTP\Unit\Controller;
 
 use InvalidArgumentException;
@@ -18,7 +19,7 @@ use OCP\IUser;
 use OCP\IUserSession;
 use PHPUnit\Framework\TestCase;
 
-class SettingsControllerTest extends TestCase {
+final class SettingsControllerTest extends TestCase {
 	private $userSession;
 	private $totp;
 	private $defaults;
@@ -27,8 +28,6 @@ class SettingsControllerTest extends TestCase {
 	private $controller;
 
 	protected function setUp(): void {
-		parent::setUp();
-
 		$request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->totp = $this->createMock(Totp::class);
@@ -73,7 +72,7 @@ class SettingsControllerTest extends TestCase {
 			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer",
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(true));
+		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_CREATED));
 	}
 
 	public function testEnableSecret(): void {
