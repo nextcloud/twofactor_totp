@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",
-    "@nextcloud/auth": "^2.5.2",
+    "@nextcloud/auth": "^2.5.3",
     "@nextcloud/axios": "^2.5.2",
     "@nextcloud/initial-state": "^3.0.0",
     "@nextcloud/logger": "^3.0.2",
@@ -78,7 +78,7 @@
       ".*\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|avif)$": "jest-transform-stub"
     },
     "transformIgnorePatterns": [
-      "/node_modules/.*/.+\\.js$"
+      "/node_modules/(?!(?:@nextcloud/vue|@nextcloud/auth|@nextcloud/browser-storage|@nextcloud/password-confirmation)/)"
     ]
   }
 }
