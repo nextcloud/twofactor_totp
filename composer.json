@@ -35,7 +35,7 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "8.0"
+			"php": "8.2"
 		},
 		"sort-packages": true,
 		"allow-plugins": {
