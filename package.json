@@ -23,7 +23,7 @@
     "@nextcloud/axios": "^2.5.2",
     "@nextcloud/initial-state": "^3.0.0",
     "@nextcloud/logger": "^3.0.2",
-    "@nextcloud/password-confirmation": "^5.1.1",
+    "@nextcloud/password-confirmation": "^6",
     "@nextcloud/router": "^3.1.0",
     "vue": "^2.7.16",
     "vuex": "^3.6.2"
@@ -68,17 +68,23 @@
       "js",
       "vue"
     ],
+    "moduleNameMapper": {
+      "^@nextcloud/password-confirmation$": "<rootDir>/node_modules/@nextcloud/password-confirmation/dist/index.mjs",
+      "^@nextcloud/vue/components/NcDialog$": "<rootDir>/node_modules/@nextcloud/vue/dist/components/NcDialog/index.mjs",
+      "^@nextcloud/vue/components/NcPasswordField$": "<rootDir>/node_modules/@nextcloud/vue/dist/components/NcPasswordField/index.mjs",
+      "^@nextcloud/vue/functions/dialog$": "<rootDir>/node_modules/@nextcloud/vue/dist/functions/dialog/index.mjs"
+    },
     "setupFilesAfterEnv": [
       "./src/tests/jest.setup.js"
     ],
     "testEnvironment": "jest-environment-jsdom",
     "transform": {
-      ".*\\.(js)$": "babel-jest",
+      ".*\\.(m?js)$": "babel-jest",
       ".*\\.(vue)$": "@vue/vue2-jest",
       ".*\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|avif)$": "jest-transform-stub"
     },
     "transformIgnorePatterns": [
-      "/node_modules/(?!(?:@nextcloud/vue|@nextcloud/auth|@nextcloud/browser-storage|@nextcloud/password-confirmation)/)"
+      "/node_modules/(?!(?:@nextcloud/vue|@nextcloud/auth|@nextcloud/browser-storage|@nextcloud/initial-state|@nextcloud/password-confirmation|@vueuse/core|@vueuse/shared|debounce)/)"
     ]
   }
 }
