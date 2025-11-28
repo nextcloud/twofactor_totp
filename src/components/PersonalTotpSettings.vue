@@ -32,7 +32,7 @@
 
 <script>
 import { confirmPassword } from '@nextcloud/password-confirmation'
-import '@nextcloud/password-confirmation/dist/style.css'
+import '@nextcloud/password-confirmation/style.css'
 
 import Logger from '../logger.js'
 import SetupConfirmation from './SetupConfirmation.vue'
