@@ -80,7 +80,7 @@ jobs:
 
     services:
       mysql-service:
-        image: mariadb:10.11
+        image: mariadb:12.1
         env:
           MYSQL_ROOT_PASSWORD: my-secret-pw
           MYSQL_DATABASE: nextcloud
