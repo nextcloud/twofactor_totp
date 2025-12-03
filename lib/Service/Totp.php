@@ -84,11 +84,23 @@ class Totp implements ITotp {
 		return $secret;
 	}
 
+	public function getSecret(IUser $user): TotpSecret {
+		try {
+			return $this->secretMapper->getSecret($user);
+		} catch (DoesNotExistException $e) {
+			throw new NoTotpSecretFoundException(
+				$e->getMessage(),
+				$e->getCode(),
+				$e,
+			);
+		}
+	}
+
 	public function enable(IUser $user, $key): bool {
-		if (!$this->validateSecret($user, $key)) {
+		$dbSecret = $this->secretMapper->getSecret($user);
+		if (!$this->validateSecret($dbSecret, $key)) {
 			return false;
 		}
-		$dbSecret = $this->secretMapper->getSecret($user);
 		$dbSecret->setState(ITotp::STATE_ENABLED);
 		$this->secretMapper->update($dbSecret);
 
@@ -124,15 +136,15 @@ class Totp implements ITotp {
 		$otp = Factory::getTOTP(Base32::decode($secret), 30, 6);
 
 		$counter = null;
-		$lastCounter = $dbSecret->getLastCounter();
+		$lastCounter = $secret->getLastCounter();
 		if ($lastCounter !== -1) {
 			$counter = $lastCounter;
 		}
 
 		$result = $otp->verify($key, 3, $counter);
 		if ($result instanceof TOTPValidResultInterface) {
-			$dbSecret->setLastCounter($result->getCounter());
-			$this->secretMapper->update($dbSecret);
+			$secret->setLastCounter($result->getCounter());
+			$this->secretMapper->update($secret);
 
 			return true;
 		}
