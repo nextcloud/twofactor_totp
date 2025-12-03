@@ -11,6 +11,7 @@ namespace OCA\TwoFactorTOTP\Controller;
 
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Service\ITotp;
+use OCP\AppFramework\Http\Attribute\BruteForceProtection;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\Defaults;
@@ -58,6 +59,7 @@ class SettingsController extends ALoginSetupController {
 	 * @param int $state
 	 * @param string|null $code for verification
 	 */
+	#[BruteForceProtection('totp_enable')]
 	public function enable(int $state, ?string $code = null): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
@@ -85,9 +87,13 @@ class SettingsController extends ALoginSetupController {
 					throw new InvalidArgumentException('code is missing');
 				}
 				$success = $this->totp->enable($user, $code);
-				return new JSONResponse([
+				$response = new JSONResponse([
 					'state' => $success ? ITotp::STATE_ENABLED : ITotp::STATE_CREATED,
 				]);
+				if (!$success) {
+					$response->throttle();
+				}
+				return $response;
 			default:
 				throw new InvalidArgumentException('Invalid TOTP state');
 		}
