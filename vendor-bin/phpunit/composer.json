@@ -1,6 +1,6 @@
 {
     "require-dev": {
-        "christophwurst/nextcloud_testing": "^1.0.1",
+        "christophwurst/nextcloud_testing": "^1.0.4",
         "phpunit/phpunit": "9.6.29"
     }
 }
