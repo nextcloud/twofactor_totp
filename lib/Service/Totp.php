@@ -125,15 +125,9 @@ class Totp implements ITotp {
 		}
 	}
 
-	public function validateSecret(IUser $user, string $key): bool {
-		try {
-			$dbSecret = $this->secretMapper->getSecret($user);
-		} catch (DoesNotExistException $ex) {
-			throw new NoTotpSecretFoundException();
-		}
-
-		$secret = $this->crypto->decrypt($dbSecret->getSecret());
-		$otp = Factory::getTOTP(Base32::decode($secret), 30, 6);
+	public function validateSecret(TotpSecret $secret, string $key): bool {
+		$decryptedSecret = $this->crypto->decrypt($secret->getSecret());
+		$otp = Factory::getTOTP(Base32::decode($decryptedSecret), 30, 6);
 
 		$counter = null;
 		$lastCounter = $secret->getLastCounter();
