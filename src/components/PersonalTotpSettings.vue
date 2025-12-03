@@ -130,7 +130,13 @@ export default {
 					this.confirmation = ''
 					this.loadingConfirmation = false
 				})
-				.catch(Logger.error)
+				.catch((error) => {
+					OC.Notification.showTemporary(
+						t('twofactor_totp', 'Could not confirm TOTP'),
+					)
+					Logger.error('Could not confirm TOTP', { error })
+				})
+				.catch(Logger.error.bind(this))
 		},
 
 		disableTOTP() {
