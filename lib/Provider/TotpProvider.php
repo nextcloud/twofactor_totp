@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorTOTP\Provider;
 
 use OCA\TwoFactorTOTP\AppInfo\Application;
+use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
 use OCP\AppFramework\IAppContainer;
@@ -70,7 +71,12 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	 */
 	public function verifyChallenge(IUser $user, string $challenge): bool {
 		$challenge = preg_replace('/[^0-9]/', '', $challenge);
-		return $this->totp->validateSecret($user, $challenge);
+		try {
+			$secret = $this->totp->getSecret($user);
+		} catch (NoTotpSecretFoundException $e) {
+			return false;
+		}
+		return $this->totp->validateSecret($secret, $challenge);
 	}
 
 	/**
