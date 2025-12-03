@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace OCA\TwoFactorTOTP\Test\Unit\Provider;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
+use OCA\TwoFactorTOTP\Db\TotpSecret;
+use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCA\TwoFactorTOTP\Provider\AtLoginProvider;
 use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCA\TwoFactorTOTP\Service\ITotp;
@@ -126,6 +128,35 @@ class TotpProviderTest extends TestCase {
 		$actual = $this->provider->getPersonalSettings($user);
 
 		self::assertEquals($expected, $actual);
+	}
+
+	public function testVerifyChallengeSecretNotFound(): void {
+		$user = $this->createMock(IUser::class);
+		$this->totp->expects($this->once())
+			->method('getSecret')
+			->with($user)
+			->willThrowException(new NoTotpSecretFoundException());
+
+		$result = $this->provider->verifyChallenge($user, '123456');
+
+		$this->assertFalse($result);
+	}
+
+	public function testVerifyChallengeStripNonDigits(): void {
+		$user = $this->createMock(IUser::class);
+		$secret = new TotpSecret();
+		$this->totp->expects(self::once())
+			->method('getSecret')
+			->with($user)
+			->willReturn($secret);
+		$this->totp->expects(self::once())
+			->method('validateSecret')
+			->with($secret, '123456')
+			->willReturn(true);
+
+		$result = $this->provider->verifyChallenge($user, '  123456  a	');
+
+		$this->assertTrue($result);
 	}
 
 	public function testDeactivate(): void {
