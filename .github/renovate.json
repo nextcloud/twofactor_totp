@@ -36,6 +36,23 @@
 		"npm",
 		"php"
 	],
+	"ignorePaths": [
+		".github/workflows/appstore-build-publish.yml",
+		".github/workflows/block-merge-freeze.yml",
+		".github/workflows/command-compile.yml",
+		".github/workflows/fixup.yml",
+		".github/workflows/lint-eslint.yml",
+		".github/workflows/lint-info-xml.yml",
+		".github/workflows/lint-php.yml",
+		".github/workflows/lint-php-cs.yml",
+		".github/workflows/lint-stylelint.yml",
+		".github/workflows/node.yml",
+		".github/workflows/node-test.yml",
+		".github/workflows/npm-audit-fix.yml",
+		".github/workflows/pr-feedback.yml",
+		".github/workflows/psalm.yml",
+		".github/workflows/reuse.yml"
+	],
 	"packageRules": [
 		{
 			"description": "Request JavaScript reviews",
