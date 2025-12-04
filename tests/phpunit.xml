@@ -5,17 +5,12 @@
 -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 bootstrap="bootstrap.php"
-		 verbose="true"
-		 convertDeprecationsToExceptions="true"
-		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-  <coverage>
+		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd">
+  <source>
     <include>
       <directory suffix=".php">../lib</directory>
     </include>
-    <report>
-      <clover outputFile="./clover.xml"/>
-    </report>
-  </coverage>
+  </source>
   <testsuite name="TOTP 2FA Provider">
     <directory suffix="Test.php">.</directory>
   </testsuite>
