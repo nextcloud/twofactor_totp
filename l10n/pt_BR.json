@@ -9,6 +9,7 @@
     "A two-factor authentication provider for TOTP (RFC 6238)" : "Um provedor de autenticação de dois fatores para TOTP (RFC 6238)",
     "Could not enable TOTP" : "Não foi  possível ativar o TOTP",
     "Could not verify your key. Please try again" : "Não foi possível verificar sua chave. Tente novamente.",
+    "Could not confirm TOTP" : "Não foi possível confirmar o TOTP",
     "Enable TOTP" : "Ativar TOTP",
     "Your new TOTP secret is:" : "A nova senha TOTP is:",
     "For quick setup, scan this QR code with your TOTP app:" : "Para uma configuração rápida, escaneie este código QR com o seu aplicativo TOTP:",
