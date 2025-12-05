@@ -15,3 +15,10 @@ vendor/
 
 tests/clover.xml
 tests/.phpunit.result.cache
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
