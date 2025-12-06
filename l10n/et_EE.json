@@ -9,6 +9,7 @@
     "A two-factor authentication provider for TOTP (RFC 6238)" : "TOTP-põhise kaheastmelise autentimise teenusepakkuja (RFC 6238)",
     "Could not enable TOTP" : "TOTP sisselülitamine ei õnnestunud",
     "Could not verify your key. Please try again" : "Sinu võtme verifitseerimine ei õnnestunud. Palun proovi uuesti.",
+    "Could not confirm TOTP" : "TOTP kinnitamine ei õnnestunud",
     "Enable TOTP" : "Lülita TOTP sisse",
     "Your new TOTP secret is:" : "Sinu uus TOTP saladus on:",
     "For quick setup, scan this QR code with your TOTP app:" : "Kiireks seadistamiseks skaneeri seda QR-koodi oma TOTP-põhist kaheastmelist autentimist toetava rakendusega",
