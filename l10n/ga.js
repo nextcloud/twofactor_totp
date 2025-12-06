@@ -11,6 +11,7 @@ OC.L10N.register(
     "A two-factor authentication provider for TOTP (RFC 6238)" : "Soláthraí fíordheimhnithe dhá fhachtóir le haghaidh TOTP (RFC 6238)",
     "Could not enable TOTP" : "Níorbh fhéidir TOTP a chumasú",
     "Could not verify your key. Please try again" : "Níorbh fhéidir d'eochair a fhíorú. Arís, le do thoil",
+    "Could not confirm TOTP" : "Níorbh fhéidir TOTP a dheimhniú",
     "Enable TOTP" : "Cumasaigh TOTP",
     "Your new TOTP secret is:" : "Is é do rún TOTP nua:",
     "For quick setup, scan this QR code with your TOTP app:" : "Chun socrú tapa a dhéanamh, scanadh an cód QR seo le do aip TOTP:",
