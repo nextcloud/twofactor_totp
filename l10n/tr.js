@@ -11,6 +11,7 @@ OC.L10N.register(
     "A two-factor authentication provider for TOTP (RFC 6238)" : "Tek kullanımlık parola için iki adımlı doğrulama hizmeti sağlayıcısı (RFC 6238)",
     "Could not enable TOTP" : "Tek kullanımlık parola açılamadı",
     "Could not verify your key. Please try again" : "Anahtarınız doğrulanamadı. Lütfen yeniden deneyin",
+    "Could not confirm TOTP" : "Tek kullanımlık parola doğrulanamadı",
     "Enable TOTP" : "Tek kullanımlık parola kullanılsın",
     "Your new TOTP secret is:" : "Yeni tek kullanımlık parolanız:",
     "For quick setup, scan this QR code with your TOTP app:" : "Hızlı kurulum için tek kullanımlık parola uygulamanızla şu kare kodunu tarayın:",
