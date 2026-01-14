@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "TOTP (Authenticator app)" : "TOTP (Aplikasi autentikasi)",
     "Authenticate with a TOTP app" : "Autentikasi dengan aplikasi TOTP",
-    "Verify" : "Verifikasi"
+    "Verify" : "Verifikasi",
+    "Submit" : "Kirim"
 },
 "nplurals=1; plural=0;");
