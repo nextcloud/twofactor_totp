@@ -12,7 +12,7 @@
     "Could not confirm TOTP" : "Не вдалося підтвердити одноразовий код (TOTP)",
     "Enable TOTP" : "Увімкнути авторизацію за допомогою одноразового коду",
     "Your new TOTP secret is:" : "Ваш новий одноразовий код:",
-    "For quick setup, scan this QR code with your TOTP app:" : "Для швидкого налаштування відскануйте цей QR-код у вашому застосунку з авторизації за допомогою одноразового паролю:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Для швидкого налаштування відскануйте цей QR-код у вашому застосунку з авторизації за допомогою одноразового пароля:",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Після налаштування вашого застосунку введіть цей тестовий код для здійснення перевірки коректності роботи авторизації:",
     "Authentication code" : "Код авторизації",
     "Verify" : "Перевірити",
