@@ -42,7 +42,7 @@ Mind that, once a user enabled any 2FA provider, they can no longer use their
 password in applications that don't support the web based 2FA login flow. For
 such applications, the user needs to create and use app passwords (to be found
 at the bottom of Personal Settings/Security).]]></description>
-	<version>3.0.4-beta.3</version>
+	<version>3.1.0-beta.1</version>
 	<licence>agpl</licence>
 	<author mail="twofactor-email@datenschutz-individuell.de">Olav Seyfarth (datenschutz-individuell) [see CONTRIBUTORS.md for more]</author>
 	<namespace>TwoFactorEMail</namespace>
@@ -60,7 +60,8 @@ at the bottom of Personal Settings/Security).]]></description>
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/main/screenshots/settings-before.png</screenshot>
 	<screenshot>https://raw.githubusercontent.com/datenschutz-individuell/twofactor_email/main/screenshots/settings-after.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="32" max-version="32" />
+		<php min-version="8.2" max-version="8.5" />
+		<nextcloud min-version="32" max-version="33" />
 	</dependencies>
 	<two-factor-providers>
 		<provider>OCA\TwoFactorEMail\Provider\TwoFactorEMail</provider>
