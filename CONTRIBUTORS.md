@@ -22,7 +22,7 @@
 * [Roeland Jago Douma](mailto:Roeland Jago Douma <roeland@famdouma.nl>) ([rullzer](https://github.com/rullzer))
   Original author of twofactor_email ≤3.0.0
 
-### Code, Automation, Reviews, Tests and Documentation
+### Code, Automation, Reviews, Tests, Documentation, Discussion/Input
 
 * [Florian Doersch](mailto:Florian Doersch <sf-team@siedler25.org>) ([Flow86](https://github.com/Flow86))
 * Stanislav Zapolsky ([stszap](https://github.com/stszap))
@@ -32,6 +32,8 @@
 * [Niklas Seyfarth](mailto:Niklas Seyfarth  <niklas@seyfarth.de>) ([seyfahni](https://github.com/seyfahni))
 * [Barbara Seyfarth](mailto:Barbara Seyfarth <barbara@seyfarth.de>) ([firlefunke](https://github.com/firlefunke))
 * [Anna Larch](mailto:Anna Larch <anna@nextcloud.com>) ([miaulalala](https://github.com/miaulalala))
+* [Felix Pütsch](mailto:Felix Pütsch <felix@puetsch.net>) ([puetsch](https://github.com/puetschs))
+* ElonSmokes ([ElonSmokes](https://github.com/ElonSmokes))
 
 ### AI usage to enhance code
 

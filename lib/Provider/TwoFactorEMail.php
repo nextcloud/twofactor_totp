@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorEMail\Provider;
 
 use OCA\TwoFactorEMail\AppInfo\Application;
+use OCA\TwoFactorEMail\Service\IAppSettings;
 use OCA\TwoFactorEMail\Service\IEMailAddressMasker;
 use OCA\TwoFactorEMail\Service\ILoginChallenge;
 use OCA\TwoFactorEMail\Service\IStateManager;
@@ -26,6 +27,7 @@ use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
+use OCP\Security\RateLimiting\ILimiter;
 use OCP\Template\ITemplate;
 use OCP\Template\ITemplateManager;
 use Psr\Container\ContainerInterface;
@@ -39,8 +41,10 @@ class TwoFactorEMail implements IProvider, IProvidesIcons, IProvidesPersonalSett
 		private IInitialState $initialStateService,
 		private IURLGenerator $urlGenerator,
 		private ContainerInterface $container,
+		private ILimiter $limiter,
 		private ILoginChallenge $challengeService,
 		private IStateManager $stateManager,
+		private IAppSettings $settings,
 	) {
 	}
 
@@ -61,7 +65,19 @@ class TwoFactorEMail implements IProvider, IProvidesIcons, IProvidesPersonalSett
 	 * This function is called from nextcloud when the user activated the e-mail 2FA and is now logging in.
 	 */
 	public function getTemplate(IUser $user): ITemplate {
-		$this->challengeService->sendChallenge($user);
+		try {
+			// skip sending further emails once rate limit is reached
+			// see https://docs.nextcloud.com/server/latest/developer_manual/digging_deeper/security.html#rate-limiting
+			$this->limiter->registerUserRequest(
+				'twofactor_email_send',
+				$this->settings->getSendRateLimitAttempts(),
+				$this->settings->getSendRateLimitPeriodSeconds(),
+				$user,
+			);
+			$this->challengeService->sendChallenge($user);
+		} catch (IRateLimitExceededException $exception) {
+            // ignore, because we just don't want to send a new code
+        }
 		// Return the template for the challenge view (LoginChallenge.php file in the templates folder of the app)
 		return $this->templateManager->getTemplate(Application::APP_ID, 'LoginChallenge');
 	}
