@@ -1,10 +1,24 @@
 OC.L10N.register(
     "twofactor_totp",
     {
-    "TOTP (Authenticator app)" : "TOTP (Aplikasi autentikasi)",
+    "You enabled TOTP two-factor authentication for your account" : "Anda mengaktifkan autentikasi dua faktor TOTP untuk akun Anda",
+    "You disabled TOTP two-factor authentication for your account" : "Anda menonaktifkan autentikasi dua faktor TOTP untuk akun Anda",
+    "TOTP two-factor authentication disabled by the administration" : "Autentikasi dua faktor TOTP dinonaktifkan oleh administrasi",
+    "TOTP (Authenticator app)" : "TOTP (aplikasi autentikator)",
     "Authenticate with a TOTP app" : "Autentikasi dengan aplikasi TOTP",
+    "Two-Factor TOTP Provider" : "Penyedia TOTP Dua Faktor",
+    "Two-factor TOTP provider" : "Penyedia TOTP dua faktor",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Penyedia autentikasi dua faktor untuk TOTP (RFC 6238)",
+    "Could not enable TOTP" : "Tidak dapat mengaktifkan TOTP",
+    "Could not verify your key. Please try again" : "Tidak dapat memverifikasi kunci Anda. Silakan coba lagi",
+    "Could not confirm TOTP" : "Tidak dapat mengonfirmasi TOTP",
+    "Enable TOTP" : "Aktifkan TOTP",
+    "Your new TOTP secret is:" : "Rahasia TOTP baru Anda adalah:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Untuk penyiapan cepat, pindai kode QR ini dengan aplikasi TOTP Anda:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Setelah Anda mengonfigurasi aplikasi Anda, masukkan kode uji di bawah ini untuk memastikan semuanya berfungsi dengan benar:",
     "Authentication code" : "Kode autentikasi",
     "Verify" : "Verifikasi",
+    "Get the authentication code from the two-factor authentication app on your device." : "Ambil kode autentikasi dari aplikasi autentikasi dua faktor di perangkat Anda.",
     "Submit" : "Kirim"
 },
 "nplurals=1; plural=0;");
