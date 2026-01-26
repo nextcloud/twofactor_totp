@@ -5,9 +5,12 @@
 # Changelog
 Notable changes in [changelog format](https://keepachangelog.com/en/1.0.0/), project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## UNRELEASED
+## 3.0.5-beta.1 (2026-01-26)
 
+### Added
 
+- Support for Nextcloud 33
+- Support for PHP 8.5
 
 ## 3.0.4-beta.1 (2025-08-29)
 

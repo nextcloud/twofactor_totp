@@ -1,7 +1,7 @@
 {
   "name": "twofactor_email",
   "description": "Nextcloud TwoFactor Email",
-  "version": "3.1.0-beta.1",
+  "version": "3.0.5-beta.1",
   "type": "module",
   "author": {
     "name": "Christoph Wurst",
