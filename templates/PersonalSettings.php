@@ -10,6 +10,7 @@ declare(strict_types=1);
 use OCP\Util;
 
 Util::addScript('twofactor_email', 'twofactor_email-personal_settings');
+Util::addStyle('twofactor_email', 'twofactor_email-personal_settings');
 ?>
 
 <div id="twofactor_email-personal_settings"></div>
