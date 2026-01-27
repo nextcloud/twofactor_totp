@@ -28,6 +28,13 @@ final class LoginChallenge implements ILoginChallenge {
 	public function verifyChallenge(IUser $user, string $submittedCode): bool {
 		$submittedCode = trim($submittedCode);
 		$code = $this->codeStorage->readCode($user->getUID());
-		return $submittedCode === $code;
+		$isValid = $submittedCode === $code;
+		if ($isValid) {
+			$this->codeStorage->deleteCode($user->getUID());
+			return true;
+		} else {
+			// don't delete, could be a typo
+			return false;
+		}
 	}
 }
