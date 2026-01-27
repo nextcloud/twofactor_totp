@@ -28,9 +28,11 @@ use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Security\RateLimiting\ILimiter;
+use OCP\Security\RateLimiting\IRateLimitExceededException;
 use OCP\Template\ITemplate;
 use OCP\Template\ITemplateManager;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 class TwoFactorEMail implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableByAdmin, IActivatableAtLogin {
 
@@ -38,6 +40,7 @@ class TwoFactorEMail implements IProvider, IProvidesIcons, IProvidesPersonalSett
 		private IEMailAddressMasker $emailAddressMasker,
 		private ITemplateManager $templateManager,
 		private IL10N $l10n,
+		private LoggerInterface $logger,
 		private IInitialState $initialStateService,
 		private IURLGenerator $urlGenerator,
 		private ContainerInterface $container,
@@ -62,7 +65,9 @@ class TwoFactorEMail implements IProvider, IProvidesIcons, IProvidesPersonalSett
 
 	/**
 	 * Get the template for rending the 2FA provider view.
-	 * This function is called from nextcloud when the user activated the e-mail 2FA and is now logging in.
+	 * This function is called from nextcloud when the user activated the e-mail 2FA.
+	 * It sends a new challenge code by e-mail and asks the user to enter it via the Template.
+	 * If a user reloads that web page, a new code is generated and re-sent. Thus throttled.
 	 */
 	public function getTemplate(IUser $user): ITemplate {
 		try {
@@ -75,8 +80,9 @@ class TwoFactorEMail implements IProvider, IProvidesIcons, IProvidesPersonalSett
 				$user,
 			);
 			$this->challengeService->sendChallenge($user);
-		} catch (IRateLimitExceededException $exception) {
+		} catch (IRateLimitExceededException $e) {
             // ignore, because we just don't want to send a new code
+			$this->logger->warning("E-mail not sent since the user '".$user->getUID()."' already sent too many in a row", ['exception' => $e]);
         }
 		// Return the template for the challenge view (LoginChallenge.php file in the templates folder of the app)
 		return $this->templateManager->getTemplate(Application::APP_ID, 'LoginChallenge');
