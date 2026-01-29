@@ -24,8 +24,20 @@ This file is generated from multiple sources. Included packages:
 - semver
 	- version: 7.7.2
 	- license: ISC
+- @vue/reactivity
+	- version: 3.5.27
+	- license: MIT
+- @vue/runtime-core
+	- version: 3.5.27
+	- license: MIT
+- @vue/runtime-dom
+	- version: 3.5.27
+	- license: MIT
+- @vue/shared
+	- version: 3.5.27
+	- license: MIT
 - vue
-	- version: 3.5.25
+	- version: 3.5.27
 	- license: MIT
 - @nextcloud/password-confirmation
 	- version: 6.0.2
