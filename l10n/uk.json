@@ -5,7 +5,7 @@
     "TOTP (Authenticator app)" : "Застосунок двофакторної авторизації",
     "Authenticate with a TOTP app" : "Отримати одноразовий код у застосунку авторизації на вашому пристрої",
     "Two-Factor TOTP Provider" : "Постачальник послуг двофакторної авторизації TOTP",
-    "Two-factor TOTP provider" : "Постачальник другого фактору TOTP",
+    "Two-factor TOTP provider" : "Постачальник другого фактора TOTP",
     "A two-factor authentication provider for TOTP (RFC 6238)" : "Постачальник двофакторної авторизації для TOTP (RFC 6238)",
     "Could not enable TOTP" : "Не вдалося увімкнути авторизацію за допомогою одноразового коду",
     "Could not verify your key. Please try again" : "Не вдалося перевірити ваш код. Спробуйте ще раз",
