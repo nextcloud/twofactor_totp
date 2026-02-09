@@ -1,21 +1,22 @@
 { "translations": {
     "You enabled TOTP two-factor authentication for your account" : "Je hebt TOTP twee-factor authenticatie voor je account ingeschakeld",
     "You disabled TOTP two-factor authentication for your account" : "Je hebt TOTP twee-factor authenticatie voor je account uitgeschakeld",
-    "TOTP two-factor authentication disabled by the administration" : "TOTP tweefactorauthenticatie uitgeschakeld door de beheerder",
+    "TOTP two-factor authentication disabled by the administration" : "TOTP twee-factor authenticatie uitgeschakeld door de beheerder",
     "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
     "Authenticate with a TOTP app" : "Authenticeren met een TOTP app",
     "Two-Factor TOTP Provider" : "Twee-Factor TOTP Provider",
-    "Two-factor TOTP provider" : "TOPTP tweefactorprovider",
-    "A two-factor authentication provider for TOTP (RFC 6238)" : "Een tweefactorauthenticatieprovider voor TOTP (RFC 6238)",
+    "Two-factor TOTP provider" : "Twee-factor TOTP-provider",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Een aanbieder van twee-factor authenticatie voor TOTP (RFC 6238)",
     "Could not enable TOTP" : "Kon TOTP niet inschakelen",
     "Could not verify your key. Please try again" : "Kon je sleutel niet verifiëren. Probeer het opnieuw",
+    "Could not confirm TOTP" : "TOTP kon niet worden bevestigd",
     "Enable TOTP" : "Inschakelen TOTP",
     "Your new TOTP secret is:" : "Je nieuwe TOTP geheim is:",
-    "For quick setup, scan this QR code with your TOTP app:" : "Voor een snelle instelling scan je deze QR code met je TOTP app:",
+    "For quick setup, scan this QR code with your TOTP app:" : "Als snelle procedure, scan deze QR-code met uw TOTP-app.",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Na het instellen van je app moet je een testcode invoeren om er zeker van te zijn dat alles goed werkt:",
     "Authentication code" : "Authenticatie code",
     "Verify" : "Verifiëren",
-    "Get the authentication code from the two-factor authentication app on your device." : "Krijg de authenticatiecode op je 'tweede factor' authenticatie app op je toestel.",
+    "Get the authentication code from the two-factor authentication app on your device." : "Haal de verificatiecode op uit de app voor twee-factor authenticatie op je apparaat.",
     "Submit" : "Versturen"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
