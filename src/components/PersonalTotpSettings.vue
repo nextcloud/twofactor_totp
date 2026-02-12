@@ -159,7 +159,6 @@ export default {
 .totp-loading {
 	display: inline-block;
 	vertical-align: sub;
-	margin-left: -2px;
-	margin-right: 4px;
+	margin-inline: -2px 4px;
 }
 </style>
