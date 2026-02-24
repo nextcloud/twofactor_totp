@@ -13,6 +13,7 @@
     "Enable TOTP" : "TOTP эрх олгох",
     "Your new TOTP secret is:" : "Таны шинэ TOTP нууц:",
     "For quick setup, scan this QR code with your TOTP app:" : "Хурдан тохируулахын тулд энэ QR кодыг TOTP апп-аараа уншуулна уу:",
+    "After you configured your app, enter a test code below to ensure everything works correctly:" : "Аппаа тохируулсны дараа бүх зүйл зөв ажиллаж байгаа эсэхийг шалгахын тулд доор туршилтын код оруулна уу:",
     "Authentication code" : "баталгаажуулсан код",
     "Verify" : "Шалнгах",
     "Get the authentication code from the two-factor authentication app on your device." : "Таны төхөөрөмж дээрх хоёр хүчин зүйл нь таних апп-аас баталгаажуулах кодыг аваарай.",
