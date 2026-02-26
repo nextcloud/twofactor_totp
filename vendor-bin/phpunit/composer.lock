@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac0dbb17ac31d1c094c07a4c3ec26c3c",
+    "content-hash": "dcdf49e8dec8b25c25d697d294058ebb",
     "packages": [],
     "packages-dev": [
         {
             "name": "christophwurst/nextcloud_testing",
-            "version": "v1.0.4",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
-                "reference": "4959d073dd44cb23a014ab6da6f39639316b4fc4"
+                "reference": "152df875b0533e720fc20a77a33fecbd9d408588"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/4959d073dd44cb23a014ab6da6f39639316b4fc4",
-                "reference": "4959d073dd44cb23a014ab6da6f39639316b4fc4",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/152df875b0533e720fc20a77a33fecbd9d408588",
+                "reference": "152df875b0533e720fc20a77a33fecbd9d408588",
                 "shasum": ""
             },
             "require": {
@@ -45,9 +45,9 @@
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
             "support": {
                 "issues": "https://github.com/ChristophWurst/nextcloud_testing/issues",
-                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v1.0.4"
+                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v1.1.1"
             },
-            "time": "2025-11-27T08:00:34+00:00"
+            "time": "2026-02-17T08:39:26+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1821,16 +1821,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v7.3.4",
+            "version": "v7.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "f24f8f316367b30810810d4eb30c543d7003ff3b"
+                "reference": "608476f4604102976d687c483ac63a79ba18cc97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/f24f8f316367b30810810d4eb30c543d7003ff3b",
-                "reference": "f24f8f316367b30810810d4eb30c543d7003ff3b",
+                "url": "https://api.github.com/repos/symfony/process/zipball/608476f4604102976d687c483ac63a79ba18cc97",
+                "reference": "608476f4604102976d687c483ac63a79ba18cc97",
                 "shasum": ""
             },
             "require": {
@@ -1862,7 +1862,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v7.3.4"
+                "source": "https://github.com/symfony/process/tree/v7.4.5"
             },
             "funding": [
                 {
@@ -1882,7 +1882,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-11T10:12:26+00:00"
+            "time": "2026-01-26T15:07:59+00:00"
         },
         {
             "name": "theseer/tokenizer",
