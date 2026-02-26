@@ -16,6 +16,7 @@ use OCP\IDBConnection;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
+/** @psalm-api */
 class Version140000Date202503027114917 extends SimpleMigrationStep {
 	private bool $hasVerfiedColumn = false;
 

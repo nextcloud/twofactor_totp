@@ -22,6 +22,7 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\User\Events\UserDeletedEvent;
 
+/** @psalm-api */
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'twofactor_totp';
 

@@ -23,6 +23,7 @@ use OCP\IUser;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 
+/** @psalm-api */
 class Totp implements ITotp {
 
 	public function __construct(

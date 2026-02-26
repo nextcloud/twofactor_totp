@@ -16,6 +16,7 @@ use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 
 /**
+ * @psalm-api
  * @template-implements IEventListener<StateChanged>
  */
 class StateChangeActivity implements IEventListener {
