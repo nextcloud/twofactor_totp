@@ -22,6 +22,7 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
+use Override;
 
 class Totp implements ITotp {
 
@@ -33,6 +34,7 @@ class Totp implements ITotp {
 	) {
 	}
 
+	#[Override]
 	public function hasSecret(IUser $user): bool {
 		try {
 			$secret = $this->secretMapper->getSecret($user);
@@ -49,6 +51,7 @@ class Totp implements ITotp {
 	/**
 	 * @param IUser $user
 	 */
+	#[Override]
 	public function createSecret(IUser $user): string {
 		try {
 			// Delete existing one
@@ -70,6 +73,7 @@ class Totp implements ITotp {
 		return $secret;
 	}
 
+	#[Override]
 	public function getSecret(IUser $user): TotpSecret {
 		try {
 			return $this->secretMapper->getSecret($user);
@@ -82,6 +86,7 @@ class Totp implements ITotp {
 		}
 	}
 
+	#[Override]
 	public function enable(IUser $user, $key): bool {
 		$dbSecret = $this->secretMapper->getSecret($user);
 		if (!$this->validateSecret($dbSecret, $key)) {
@@ -95,6 +100,7 @@ class Totp implements ITotp {
 		return true;
 	}
 
+	#[Override]
 	public function deleteSecret(IUser $user, bool $byAdmin = false): void {
 		try {
 			// TODO: execute DELETE sql in mapper instead
@@ -111,6 +117,7 @@ class Totp implements ITotp {
 		}
 	}
 
+	#[Override]
 	public function validateSecret(TotpSecret $secret, string $key): bool {
 		$decryptedSecret = $this->crypto->decrypt($secret->getSecret());
 		$otp = Factory::getTOTP(Base32::decode($decryptedSecret), 30, 6);

@@ -14,6 +14,7 @@ use OCP\DB\Exception;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\User\Events\UserDeletedEvent;
+use Override;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -27,6 +28,7 @@ class UserDeleted implements IEventListener {
 	) {
 	}
 
+	#[Override]
 	public function handle(Event $event): void {
 		if ($event instanceof UserDeletedEvent) {
 			try {

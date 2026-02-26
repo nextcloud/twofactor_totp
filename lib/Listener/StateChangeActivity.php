@@ -14,6 +14,7 @@ use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCP\Activity\IManager as ActivityManager;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
+use Override;
 
 /**
  * @template-implements IEventListener<StateChanged>
@@ -25,6 +26,7 @@ class StateChangeActivity implements IEventListener {
 	) {
 	}
 
+	#[Override]
 	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
 			if ($event instanceof DisabledByAdmin) {

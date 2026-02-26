@@ -11,8 +11,10 @@ namespace OCA\TwoFactorTOTP\Settings;
 
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Template;
+use Override;
 
 class Personal implements IPersonalProviderSettings {
+	#[Override]
 	public function getBody(): Template {
 		return new Template('twofactor_totp', 'personal');
 	}

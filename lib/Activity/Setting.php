@@ -11,6 +11,7 @@ namespace OCA\TwoFactorTOTP\Activity;
 
 use OCP\Activity\ISetting;
 use OCP\IL10N;
+use Override;
 
 class Setting implements ISetting {
 
@@ -19,30 +20,37 @@ class Setting implements ISetting {
 	) {
 	}
 
+	#[Override]
 	public function canChangeMail(): bool {
 		return false;
 	}
 
+	#[Override]
 	public function canChangeStream(): bool {
 		return false;
 	}
 
+	#[Override]
 	public function getIdentifier(): string {
 		return 'twofactor_totp';
 	}
 
+	#[Override]
 	public function getName(): string {
 		return $this->l10n->t('TOTP (Authenticator app)');
 	}
 
+	#[Override]
 	public function getPriority(): int {
 		return 10;
 	}
 
+	#[Override]
 	public function isDefaultEnabledMail(): bool {
 		return true;
 	}
 
+	#[Override]
 	public function isDefaultEnabledStream(): bool {
 		return true;
 	}
