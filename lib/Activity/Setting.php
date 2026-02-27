@@ -12,6 +12,7 @@ namespace OCA\TwoFactorTOTP\Activity;
 use OCP\Activity\ISetting;
 use OCP\IL10N;
 
+/** @psalm-api */
 class Setting implements ISetting {
 
 	public function __construct(

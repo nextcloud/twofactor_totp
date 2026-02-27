@@ -27,6 +27,7 @@ use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
 
+/** @psalm-api */
 class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
 
 	public function __construct(

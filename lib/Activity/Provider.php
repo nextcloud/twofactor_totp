@@ -15,6 +15,7 @@ use OCP\Activity\IProvider;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory as L10nFactory;
 
+/** @psalm-api */
 class Provider implements IProvider {
 
 	public function __construct(

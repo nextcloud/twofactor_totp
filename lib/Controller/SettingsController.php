@@ -20,6 +20,7 @@ use OCP\IUserSession;
 use RuntimeException;
 use function is_null;
 
+/** @psalm-api */
 class SettingsController extends ALoginSetupController {
 
 	public function __construct(

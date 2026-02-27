@@ -14,6 +14,7 @@ use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
 use OCP\IURLGenerator;
 use OCP\Template;
 
+/** @psalm-api */
 class AtLoginProvider implements ILoginSetupProvider {
 
 	public function __construct(

@@ -12,6 +12,7 @@ namespace OCA\TwoFactorTOTP\Db;
 use OCP\AppFramework\Db\Entity;
 
 /**
+ * @psalm-api
  * @method string getUserId()
  * @method void setUserId(string $userId)
  * @method string getSecret()

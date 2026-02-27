@@ -17,6 +17,7 @@ use OCP\IDBConnection;
 use OCP\IUser;
 
 /**
+ * @psalm-api
  * @template-extends QBMapper<TotpSecret>
  */
 class TotpSecretMapper extends QBMapper {
