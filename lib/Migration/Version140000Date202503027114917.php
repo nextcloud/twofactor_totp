@@ -15,6 +15,7 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
+use Override;
 
 /** @psalm-api */
 class Version140000Date202503027114917 extends SimpleMigrationStep {
@@ -32,6 +33,7 @@ class Version140000Date202503027114917 extends SimpleMigrationStep {
 	 * @param array $options
 	 * @return null|ISchemaWrapper
 	 */
+	#[Override]
 	public function changeSchema(IOutput $output, \Closure $schemaClosure, array $options) {
 		$schema = $schemaClosure();
 		$table = $schema->getTable('twofactor_totp_secrets');
@@ -47,6 +49,7 @@ class Version140000Date202503027114917 extends SimpleMigrationStep {
 	 * @psalm-param Closure():ISchemaWrapper $schemaClosure
 	 * @param array $options
 	 */
+	#[Override]
 	public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options) {
 		if ($this->hasVerfiedColumn) {
 			// There is a 'verified' column which comes from owncloud

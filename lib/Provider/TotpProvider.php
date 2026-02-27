@@ -26,6 +26,7 @@ use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
+use Override;
 
 /** @psalm-api */
 class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
@@ -42,6 +43,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/**
 	 * Get unique identifier of this 2FA provider
 	 */
+	#[Override]
 	public function getId(): string {
 		return 'totp';
 	}
@@ -49,6 +51,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/**
 	 * Get the display name for selecting the 2FA provider
 	 */
+	#[Override]
 	public function getDisplayName(): string {
 		return 'TOTP (Authenticator app)';
 	}
@@ -56,6 +59,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/**
 	 * Get the description for selecting the 2FA provider
 	 */
+	#[Override]
 	public function getDescription(): string {
 		return $this->l10n->t('Authenticate with a TOTP app');
 	}
@@ -63,6 +67,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/**
 	 * Get the template for rending the 2FA provider view
 	 */
+	#[Override]
 	public function getTemplate(IUser $user): Template {
 		return new Template('twofactor_totp', 'challenge');
 	}
@@ -70,6 +75,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/**
 	 * Verify the given challenge
 	 */
+	#[Override]
 	public function verifyChallenge(IUser $user, string $challenge): bool {
 		$challenge = preg_replace('/[^0-9]/', '', $challenge);
 		try {
@@ -83,18 +89,22 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	/**
 	 * Decides whether 2FA is enabled for the given user
 	 */
+	#[Override]
 	public function isTwoFactorAuthEnabledForUser(IUser $user): bool {
 		return $this->totp->hasSecret($user);
 	}
 
+	#[Override]
 	public function getLightIcon(): String {
 		return $this->urlGenerator->imagePath(Application::APP_ID, 'app.svg');
 	}
 
+	#[Override]
 	public function getDarkIcon(): String {
 		return $this->urlGenerator->imagePath(Application::APP_ID, 'app-dark.svg');
 	}
 
+	#[Override]
 	public function getPersonalSettings(IUser $user): IPersonalProviderSettings {
 		$this->initialState->provideInitialState('state', $this->totp->hasSecret($user) ? ITotp::STATE_ENABLED : ITotp::STATE_DISABLED);
 		return new Personal();
@@ -105,10 +115,12 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	 *
 	 * @param IUser $user the user to deactivate this provider for
 	 */
+	#[Override]
 	public function disableFor(IUser $user) {
 		$this->totp->deleteSecret($user, true);
 	}
 
+	#[Override]
 	public function getLoginSetup(IUser $user): ILoginSetupProvider {
 		return $this->container->query(AtLoginProvider::class);
 	}

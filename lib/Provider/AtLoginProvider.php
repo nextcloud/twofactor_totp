@@ -13,6 +13,7 @@ use OCA\TwoFactorTOTP\AppInfo\Application;
 use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
 use OCP\IURLGenerator;
 use OCP\Template;
+use Override;
 
 /** @psalm-api */
 class AtLoginProvider implements ILoginSetupProvider {
@@ -22,6 +23,7 @@ class AtLoginProvider implements ILoginSetupProvider {
 	) {
 	}
 
+	#[Override]
 	public function getBody(): Template {
 		$template = new Template(Application::APP_ID, 'loginsetup');
 		$template->assign('urlGenerator', $this->urlGenerator);

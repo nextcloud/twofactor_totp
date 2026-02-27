@@ -14,6 +14,7 @@ use OCP\Activity\IEvent;
 use OCP\Activity\IProvider;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory as L10nFactory;
+use Override;
 
 /** @psalm-api */
 class Provider implements IProvider {
@@ -24,6 +25,7 @@ class Provider implements IProvider {
 	) {
 	}
 
+	#[Override]
 	public function parse($language, IEvent $event, ?IEvent $previousEvent = null): IEvent {
 		if ($event->getApp() !== 'twofactor_totp') {
 			throw new UnknownActivityException();

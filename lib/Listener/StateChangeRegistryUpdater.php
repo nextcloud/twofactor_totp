@@ -14,6 +14,7 @@ use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
+use Override;
 
 /**
  * @psalm-api
@@ -27,6 +28,7 @@ class StateChangeRegistryUpdater implements IEventListener {
 	) {
 	}
 
+	#[Override]
 	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
 			if ($event->isEnabled()) {
