@@ -18,12 +18,6 @@
         <directory name="vendor" />
     </extraFiles>
 	<issueHandlers>
-		<UndefinedClass>
-			<errorLevel type="suppress">
-				<referencedClass name="OC" />
-				<referencedClass name="Doctrine\DBAL\Types\Type"/>
-			</errorLevel>
-		</UndefinedClass>
 		<UndefinedDocblockClass>
 			<errorLevel type="suppress">
 				<referencedClass name="Doctrine\DBAL\Driver\Statement" />
