@@ -37,7 +37,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 4.0.0
 	- license: MIT
 - webpack
-	- version: 5.95.0
+	- version: 5.105.3
 	- license: MIT
 - twofactor_totp
 	- version: 16.0.0-dev.0
