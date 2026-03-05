@@ -57,7 +57,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-transform-stub": "^2.0.0",
     "totp-generator": "^2.0.1",
-    "vue-loader": "^15.11.1"
+    "vue-loader": "^17.4.2"
   },
   "prettier": {
     "singleQuote": true,
