@@ -11,6 +11,7 @@ OC.L10N.register(
     "A two-factor authentication provider for TOTP (RFC 6238)" : "TOTP（RFC 6238）の二要素認証プロバイダー",
     "Could not enable TOTP" : "TOTP を有効にできません",
     "Could not verify your key. Please try again" : "鍵を検証できませんでした。やり直してください。",
+    "Could not confirm TOTP" : "TOTPを確認できませんでした",
     "Enable TOTP" : "TOTP有効化",
     "Your new TOTP secret is:" : "新しいTOTP秘密鍵は次のとおりです：",
     "For quick setup, scan this QR code with your TOTP app:" : "クイックセットアップでは、このQRコードをTOTPアプリでスキャンしてください：",
