@@ -56,7 +56,7 @@ class ProviderTest extends TestCase {
 	public function testParse($subject): void {
 		$lang = 'ru';
 		$event = $this->createMock(IEvent::class);
-		$l = $this->createMock(IL10N::class);
+		$l = $this->createStub(IL10N::class);
 
 		$event->expects($this->once())
 			->method('getApp')

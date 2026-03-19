@@ -46,7 +46,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 	}
 
 	public function testProviderEnabledEvent(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$event = new StateChanged($user, true);
 		$this->registry->expects($this->once())
 			->method('enableProviderFor')
@@ -56,7 +56,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 	}
 
 	public function testProviderDisabledEvent(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$event = new StateChanged($user, false);
 		$this->registry->expects($this->once())
 			->method('disableProviderFor')
