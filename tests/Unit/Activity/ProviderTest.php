@@ -44,7 +44,7 @@ class ProviderTest extends TestCase {
 		$this->provider->parse($lang, $event);
 	}
 
-	public function subjectData(): \Iterator {
+	public static function subjectData(): \Iterator {
 		yield ['totp_enabled_subject'];
 		yield ['totp_disabled_subject'];
 		yield ['totp_disabled_by_admin'];
