@@ -15,6 +15,7 @@ use OCP\IL10N;
 use OCP\ILogger;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class ProviderTest extends TestCase {
 	private $l10n;
@@ -44,19 +45,17 @@ class ProviderTest extends TestCase {
 		$this->provider->parse($lang, $event);
 	}
 
-	public function subjectData(): \Iterator {
+	public static function subjectData(): \Iterator {
 		yield ['totp_enabled_subject'];
 		yield ['totp_disabled_subject'];
 		yield ['totp_disabled_by_admin'];
 	}
 
-	/**
-	 * @dataProvider subjectData
-	 */
+	#[DataProvider('subjectData')]
 	public function testParse($subject): void {
 		$lang = 'ru';
 		$event = $this->createMock(IEvent::class);
-		$l = $this->createMock(IL10N::class);
+		$l = $this->createStub(IL10N::class);
 
 		$event->expects($this->once())
 			->method('getApp')
