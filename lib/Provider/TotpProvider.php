@@ -32,11 +32,11 @@ use Override;
 class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
 
 	public function __construct(
-		private ITotp $totp,
-		private IL10N $l10n,
-		private IAppContainer $container,
-		private IInitialState $initialState,
-		private IURLGenerator $urlGenerator,
+		private readonly ITotp $totp,
+		private readonly IL10N $l10n,
+		private readonly IAppContainer $container,
+		private readonly IInitialState $initialState,
+		private readonly IURLGenerator $urlGenerator,
 	) {
 	}
 
@@ -80,7 +80,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 		$challenge = preg_replace('/[^0-9]/', '', $challenge);
 		try {
 			$secret = $this->totp->getSecret($user);
-		} catch (NoTotpSecretFoundException $e) {
+		} catch (NoTotpSecretFoundException) {
 			return false;
 		}
 		return $this->totp->validateSecret($secret, $challenge);

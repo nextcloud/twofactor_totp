@@ -23,7 +23,7 @@ use Override;
 class StateChangeActivity implements IEventListener {
 
 	public function __construct(
-		private ActivityManager $activityManager,
+		private readonly ActivityManager $activityManager,
 	) {
 	}
 

@@ -19,7 +19,7 @@ use Override;
 class AtLoginProvider implements ILoginSetupProvider {
 
 	public function __construct(
-		private IURLGenerator $urlGenerator,
+		private readonly IURLGenerator $urlGenerator,
 	) {
 	}
 

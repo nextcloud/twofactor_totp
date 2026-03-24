@@ -23,8 +23,8 @@ use Override;
 class StateChangeRegistryUpdater implements IEventListener {
 
 	public function __construct(
-		private IRegistry $registry,
-		private TotpProvider $provider,
+		private readonly IRegistry $registry,
+		private readonly TotpProvider $provider,
 	) {
 	}
 

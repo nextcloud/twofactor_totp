@@ -26,9 +26,9 @@ class SettingsController extends ALoginSetupController {
 	public function __construct(
 		string $appName,
 		IRequest $request,
-		private IUserSession $userSession,
-		private ITotp $totp,
-		private Defaults $defaults,
+		private readonly IUserSession $userSession,
+		private readonly ITotp $totp,
+		private readonly Defaults $defaults,
 	) {
 		parent::__construct($appName, $request);
 	}

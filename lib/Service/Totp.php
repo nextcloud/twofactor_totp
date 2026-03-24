@@ -28,10 +28,10 @@ use Override;
 class Totp implements ITotp {
 
 	public function __construct(
-		private TotpSecretMapper $secretMapper,
-		private ICrypto $crypto,
-		private IEventDispatcher $eventDispatcher,
-		private ISecureRandom $random,
+		private readonly TotpSecretMapper $secretMapper,
+		private readonly ICrypto $crypto,
+		private readonly IEventDispatcher $eventDispatcher,
+		private readonly ISecureRandom $random,
 	) {
 	}
 

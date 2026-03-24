@@ -17,7 +17,7 @@ use Override;
 class Setting implements ISetting {
 
 	public function __construct(
-		private IL10N $l10n,
+		private readonly IL10N $l10n,
 	) {
 	}
 

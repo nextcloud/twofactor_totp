@@ -113,7 +113,7 @@ class TotpProviderTest extends TestCase {
 	public function testGetPersonalSettings(): void {
 		$expected = new Personal();
 
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$this->totp->expects($this->once())
 			->method('hasSecret')
 			->with($user)
@@ -131,7 +131,7 @@ class TotpProviderTest extends TestCase {
 	}
 
 	public function testVerifyChallengeSecretNotFound(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$this->totp->expects($this->once())
 			->method('getSecret')
 			->with($user)
@@ -143,7 +143,7 @@ class TotpProviderTest extends TestCase {
 	}
 
 	public function testVerifyChallengeStripNonDigits(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$secret = new TotpSecret();
 		$this->totp->expects(self::once())
 			->method('getSecret')
@@ -160,7 +160,7 @@ class TotpProviderTest extends TestCase {
 	}
 
 	public function testDeactivate(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$this->totp->expects($this->once())
 			->method('deleteSecret')
 			->with($user);
@@ -170,8 +170,8 @@ class TotpProviderTest extends TestCase {
 
 	public function testGetSetupProvider(): void {
 		/** @var IUser|MockObject $user */
-		$user = $this->createMock(IUser::class);
-		$provider = $this->createMock(AtLoginProvider::class);
+		$user = $this->createStub(IUser::class);
+		$provider = $this->createStub(AtLoginProvider::class);
 		$this->container->expects($this->once())
 			->method('query')
 			->with(AtLoginProvider::class)
