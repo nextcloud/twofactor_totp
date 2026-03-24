@@ -15,7 +15,7 @@ use OCP\IUser;
 
 class StateChangedTest extends TestCase {
 	public function testEnabled(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$event = new StateChanged($user, true);
 
 		$enabled = $event->isEnabled();
@@ -24,7 +24,7 @@ class StateChangedTest extends TestCase {
 	}
 
 	public function testDisabled(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$event = new StateChanged($user, false);
 
 		$enabled = $event->isEnabled();

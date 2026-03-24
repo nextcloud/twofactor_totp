@@ -23,7 +23,7 @@ return RectorConfig::configure()
 		phpunitCodeQuality: true,
 	)
 	->withSets([
-		PHPUnitSetList::PHPUNIT_100,
+		PHPUnitSetList::PHPUNIT_110,
 	])
 	->withPhpSets(
 		php82: true,

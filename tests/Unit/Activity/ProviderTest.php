@@ -44,7 +44,7 @@ class ProviderTest extends TestCase {
 		$this->provider->parse($lang, $event);
 	}
 
-	public function subjectData(): \Iterator {
+	public static function subjectData(): \Iterator {
 		yield ['totp_enabled_subject'];
 		yield ['totp_disabled_subject'];
 		yield ['totp_disabled_by_admin'];
@@ -56,7 +56,7 @@ class ProviderTest extends TestCase {
 	public function testParse($subject): void {
 		$lang = 'ru';
 		$event = $this->createMock(IEvent::class);
-		$l = $this->createMock(IL10N::class);
+		$l = $this->createStub(IL10N::class);
 
 		$event->expects($this->once())
 			->method('getApp')
