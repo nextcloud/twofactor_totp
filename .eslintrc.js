@@ -6,10 +6,11 @@
 module.exports = {
 	extends: [
 		'@nextcloud',
+		'plugin:vue/vue3-recommended',
 		'plugin:chai-friendly/recommended'
 	],
 	rules: {
-		// v-model:arg is valid Vue 2.7+ syntax (replaces .sync); silence the Vue 2 lint rule
+		// v-model:arg is valid Vue 3 syntax; the Vue 2 rule from @nextcloud must be disabled
 		'vue/no-v-model-argument': 'off',
 	},
 }

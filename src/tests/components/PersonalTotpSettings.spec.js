@@ -3,21 +3,25 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { shallowMount, createLocalVue } from '@vue/test-utils'
-import { createPinia, setActivePinia, PiniaVuePlugin } from 'pinia'
+import { shallowMount } from '@vue/test-utils'
+import { createPinia, setActivePinia } from 'pinia'
 
 import PersonalTotpSettings from '../../components/PersonalTotpSettings.vue'
 
-const localVue = createLocalVue()
-localVue.use(PiniaVuePlugin)
-
 describe('PersonalTotpSettings', () => {
+	let pinia
+
 	beforeEach(() => {
-		setActivePinia(createPinia())
+		pinia = createPinia()
+		setActivePinia(pinia)
 	})
 
 	it('does not load on start', () => {
-		const settings = shallowMount(PersonalTotpSettings, { localVue })
+		const settings = shallowMount(PersonalTotpSettings, {
+			global: {
+				plugins: [pinia],
+			},
+		})
 
 		expect(settings.vm.loading).to.be.false
 	})
