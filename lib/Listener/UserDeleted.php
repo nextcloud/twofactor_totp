@@ -24,8 +24,8 @@ use Psr\Log\LoggerInterface;
 class UserDeleted implements IEventListener {
 
 	public function __construct(
-		private TotpSecretMapper $totpSecretMapper,
-		private LoggerInterface $logger,
+		private readonly TotpSecretMapper $totpSecretMapper,
+		private readonly LoggerInterface $logger,
 	) {
 	}
 

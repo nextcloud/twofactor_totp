@@ -20,8 +20,8 @@ use Override;
 class Provider implements IProvider {
 
 	public function __construct(
-		private L10nFactory $l10n,
-		private IURLGenerator $urlGenerator,
+		private readonly L10nFactory $l10n,
+		private readonly IURLGenerator $urlGenerator,
 	) {
 	}
 

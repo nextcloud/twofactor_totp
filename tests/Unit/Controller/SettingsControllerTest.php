@@ -37,7 +37,7 @@ final class SettingsControllerTest extends TestCase {
 	}
 
 	public function testDisabledState(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
@@ -65,7 +65,7 @@ final class SettingsControllerTest extends TestCase {
 			->method('createSecret')
 			->with($user)
 			->willReturn('newsecret');
-		$issuer = rawurlencode($this->defaults->getName());
+		$issuer = rawurlencode((string)$this->defaults->getName());
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
 			'secret' => 'newsecret',
@@ -76,7 +76,7 @@ final class SettingsControllerTest extends TestCase {
 	}
 
 	public function testEnableSecret(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
@@ -93,7 +93,7 @@ final class SettingsControllerTest extends TestCase {
 	}
 
 	public function testDisableSecret(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);
@@ -108,7 +108,7 @@ final class SettingsControllerTest extends TestCase {
 	}
 
 	public function testEnableInvalidState(): void {
-		$user = $this->createMock(IUser::class);
+		$user = $this->createStub(IUser::class);
 		$this->userSession->expects($this->once())
 			->method('getUser')
 			->willReturn($user);

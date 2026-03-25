@@ -22,9 +22,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CleanUp extends Command {
 
 	public function __construct(
-		private IDBConnection $db,
-		private IUserManager $userManager,
-		private TotpSecretMapper $totpSecretMapper,
+		private readonly IDBConnection $db,
+		private readonly IUserManager $userManager,
+		private readonly TotpSecretMapper $totpSecretMapper,
 	) {
 		parent::__construct();
 	}

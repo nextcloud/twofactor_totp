@@ -22,7 +22,7 @@ class Version140000Date202503027114917 extends SimpleMigrationStep {
 	private bool $hasVerfiedColumn = false;
 
 	public function __construct(
-		private IDBConnection $db,
+		private readonly IDBConnection $db,
 	) {
 	}
 
