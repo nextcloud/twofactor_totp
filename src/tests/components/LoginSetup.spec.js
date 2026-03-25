@@ -4,14 +4,13 @@
  */
 
 import { shallowMount, flushPromises } from '@vue/test-utils'
+import { saveState } from '../../services/StateService.js'
 import LoginSetup from '../../components/LoginSetup.vue'
 import STATE from '../../state.js'
 
 jest.mock('../../services/StateService.js', () => ({
 	saveState: jest.fn(),
 }))
-
-import { saveState } from '../../services/StateService.js'
 
 describe('LoginSetup', () => {
 	beforeEach(() => {

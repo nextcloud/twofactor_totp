@@ -4,14 +4,13 @@
  */
 
 import { createPinia, setActivePinia } from 'pinia'
+import { saveState } from '../services/StateService.js'
 import { useTotpStore } from '../store.js'
 import STATE from '../state.js'
 
 jest.mock('../services/StateService.js', () => ({
 	saveState: jest.fn(),
 }))
-
-import { saveState } from '../services/StateService.js'
 
 describe('totp store', () => {
 	beforeEach(() => {

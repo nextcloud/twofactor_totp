@@ -70,6 +70,7 @@ export default {
 			default: '',
 		},
 	},
+	emits: ['update:confirmation', 'confirm'],
 	data() {
 		return {
 			confirmationCode: this.confirmation,

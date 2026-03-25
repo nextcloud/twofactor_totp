@@ -22,10 +22,10 @@
 		</div>
 
 		<SetupConfirmation v-if="secret"
+			v-model:confirmation="confirmation"
 			:secret="secret"
 			:qr-url="qrUrl"
 			:loading="loadingConfirmation"
-			v-model:confirmation="confirmation"
 			@confirm="enableTOTP" />
 	</div>
 </template>
