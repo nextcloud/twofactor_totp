@@ -7,10 +7,10 @@
 	<div>
 		<div v-if="loading" class="loading" />
 		<SetupConfirmation v-else
+			v-model:confirmation="confirmation"
 			:loading="confirmationLoading"
 			:secret="secret"
 			:qr-url="qrUrl"
-			v-model:confirmation="confirmation"
 			@confirm="confirm" />
 		<form ref="confirmForm" method="POST" />
 	</div>
