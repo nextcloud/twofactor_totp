@@ -10,7 +10,8 @@
 			:loading="confirmationLoading"
 			:secret="secret"
 			:qr-url="qrUrl"
-			:confirmation.sync="confirmation"
+			:confirmation="confirmation"
+			@update:confirmation="confirmation = $event"
 			@confirm="confirm" />
 		<form ref="confirmForm" method="POST" />
 	</div>
