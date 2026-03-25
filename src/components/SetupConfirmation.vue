@@ -86,7 +86,7 @@ export default {
 			this.$emit('confirm')
 		},
 		onConfirmKeyDown(e) {
-			if (e.which === 13) {
+			if (e.key === 'Enter') {
 				this.confirm()
 			}
 		},
