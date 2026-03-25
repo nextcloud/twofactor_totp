@@ -38,17 +38,21 @@ import '@nextcloud/password-confirmation/style.css'
 import Logger from '../logger.js'
 import SetupConfirmation from './SetupConfirmation.vue'
 import state from '../state.js'
+import { useTotpStore } from '../store.js'
 
 export default {
 	name: 'PersonalTotpSettings',
 	components: {
 		SetupConfirmation,
 	},
+	setup() {
+		return { totpStore: useTotpStore() }
+	},
 	data() {
 		return {
 			loading: false,
 			loadingConfirmation: false,
-			enabled: this.$store.state.totpState === state.STATE_ENABLED,
+			enabled: this.totpStore.totpState === state.STATE_ENABLED,
 			secret: undefined,
 			qrUrl: '',
 			confirmation: '',
@@ -56,7 +60,7 @@ export default {
 	},
 	computed: {
 		state() {
-			return this.$store.state.totpState
+			return this.totpStore.totpState
 		},
 	},
 	methods: {
@@ -81,14 +85,14 @@ export default {
 			Logger.debug('starting setup')
 
 			return confirmPassword()
-				.then(() => this.$store.dispatch('enable'))
+				.then(() => this.totpStore.enable())
 				.then(({ secret, qrUrl }) => {
 					this.secret = secret
 					this.qrUrl = qrUrl
-					// If the stat could be changed, keep showing the loading
+					// If the state could be changed, keep showing the loading
 					// spinner until the user has finished the registration
 					this.loading
-						= this.$store.state.totpState === state.STATE_CREATED
+						= this.totpStore.totpState === state.STATE_CREATED
 				})
 				.catch((e) => {
 					OC.Notification.showTemporary(
@@ -111,9 +115,9 @@ export default {
 			Logger.debug('starting enable')
 
 			return confirmPassword()
-				.then(() => this.$store.dispatch('confirm', this.confirmation))
+				.then(() => this.totpStore.confirm(this.confirmation))
 				.then(() => {
-					if (this.$store.state.totpState === state.STATE_ENABLED) {
+					if (this.totpStore.totpState === state.STATE_ENABLED) {
 						// Success
 						this.loading = false
 						this.enabled = true
@@ -147,7 +151,7 @@ export default {
 			Logger.debug('starting disable')
 
 			return confirmPassword()
-				.then(() => this.$store.dispatch('disable'))
+				.then(() => this.totpStore.disable())
 				.then(() => (this.enabled = false))
 				.catch(Logger.error.bind(this))
 				.then(() => (this.loading = false))
