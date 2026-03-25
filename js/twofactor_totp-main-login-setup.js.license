@@ -1,23 +1,32 @@
 SPDX-License-Identifier: MIT
 SPDX-License-Identifier: ISC
 SPDX-License-Identifier: BSD-3-Clause
-SPDX-License-Identifier: AGPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-or-later
+SPDX-FileCopyrightText: encode-utf8 developers
+SPDX-FileCopyrightText: dijkstrajs developers
 SPDX-FileCopyrightText: Tobias Koppers @sokra
 SPDX-FileCopyrightText: T. Jameson Little <t.jameson.little@gmail.com>
+SPDX-FileCopyrightText: Ryan Day <soldair@gmail.com>
 SPDX-FileCopyrightText: Roman Shtylman <shtylman@gmail.com>
+SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
 SPDX-FileCopyrightText: GitHub Inc.
 SPDX-FileCopyrightText: Feross Aboukhadijeh
-SPDX-FileCopyrightText: Christoph Wurst <christoph@winzerhof-wurst.at>
-SPDX-FileCopyrightText: Chen Fengyuan
+SPDX-FileCopyrightText: Evan You
 
 
 This file is generated from multiple sources. Included packages:
-- @chenfengyuan/vue-qrcode
-	- version: 1.0.2
+- @vue/reactivity
+	- version: 3.5.31
 	- license: MIT
-- semver
-	- version: 7.7.2
-	- license: ISC
+- @vue/runtime-core
+	- version: 3.5.31
+	- license: MIT
+- @vue/runtime-dom
+	- version: 3.5.31
+	- license: MIT
+- @vue/shared
+	- version: 3.5.31
+	- license: MIT
 - base64-js
 	- version: 1.5.1
 	- license: MIT
@@ -27,18 +36,36 @@ This file is generated from multiple sources. Included packages:
 - css-loader
 	- version: 7.1.2
 	- license: MIT
+- dijkstrajs
+	- version: 1.0.1
+	- license: MIT
+- encode-utf8
+	- version: 1.0.3
+	- license: MIT
 - ieee754
 	- version: 1.2.1
 	- license: BSD-3-Clause
 - process
 	- version: 0.11.10
 	- license: MIT
+- qrcode
+	- version: 1.5.0
+	- license: MIT
+- semver
+	- version: 7.7.4
+	- license: ISC
 - style-loader
 	- version: 4.0.0
+	- license: MIT
+- vue-loader
+	- version: 17.4.2
+	- license: MIT
+- vue
+	- version: 3.5.31
 	- license: MIT
 - webpack
 	- version: 5.105.4
 	- license: MIT
-- twofactor_totp
-	- version: 16.0.0-dev.0
-	- license: AGPL-3.0-only
+- nextcloud
+	- version: 1.0.0
+	- license: AGPL-3.0-or-later
