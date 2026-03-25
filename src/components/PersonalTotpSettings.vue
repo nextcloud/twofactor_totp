@@ -25,7 +25,8 @@
 			:secret="secret"
 			:qr-url="qrUrl"
 			:loading="loadingConfirmation"
-			:confirmation.sync="confirmation"
+			:confirmation="confirmation"
+			@update:confirmation="confirmation = $event"
 			@confirm="enableTOTP" />
 	</div>
 </template>
