@@ -79,3 +79,57 @@ test('enable TOTP and disable it again', async ({ page }) => {
     // Assert that TOTP was successfully disabled
     await expect(page.locator('#totp-enabled')).not.toBeChecked()
 })
+
+test('shows error when an incorrect verification code is entered', async ({ page }) => {
+    // Go to personal settings and trigger TOTP setup
+    await page.getByRole('button', { name: 'Settings menu' }).click()
+    await page.getByRole('link', { name: 'Personal settings' }).click()
+    await page.getByLabel('Personal').getByRole('link', { name: 'Security' }).click()
+    await page.getByText('Enable TOTP').click()
+
+    // Enter a wrong code
+    await page.getByRole('textbox', { name: 'Authentication code' }).fill('000000')
+    await page.getByRole('button', { name: 'Verify' }).click()
+
+    // Setup form should still be visible and checkbox unchecked
+    await expect(page.locator('#twofactor-totp-settings')).toContainText('Your new TOTP secret is:')
+    await expect(page.locator('#totp-enabled')).not.toBeChecked()
+})
+
+test('submits verification code with Enter key', async ({ page }) => {
+    // Go to personal settings and trigger TOTP setup
+    await page.getByRole('button', { name: 'Settings menu' }).click()
+    await page.getByRole('link', { name: 'Personal settings' }).click()
+    await page.getByLabel('Personal').getByRole('link', { name: 'Security' }).click()
+    await page.getByText('Enable TOTP').click()
+
+    // Enter a valid code and submit with Enter instead of clicking Verify
+    const key = await extractTotpKey(page)
+    const { otp } = await TOTP.generate(key)
+    await page.getByRole('textbox', { name: 'Authentication code' }).fill(otp)
+    await page.getByRole('textbox', { name: 'Authentication code' }).press('Enter')
+
+    // Assert that TOTP was successfully enabled
+    await expect(page.locator('#totp-enabled')).toBeChecked()
+})
+
+test('can re-enable TOTP after disabling it', async ({ page }) => {
+    await enableTotp(page)
+
+    // Disable TOTP
+    await page.getByText('Enable TOTP').click()
+    await expect(page.locator('#totp-enabled')).not.toBeChecked()
+
+    // Re-enable TOTP — click the checkbox again to trigger a new setup
+    await page.getByText('Enable TOTP').click()
+    await expect(page.locator('#twofactor-totp-settings')).toContainText('Your new TOTP secret is:')
+
+    // Complete the new setup
+    const key = await extractTotpKey(page)
+    const { otp } = await TOTP.generate(key)
+    await page.getByRole('textbox', { name: 'Authentication code' }).fill(otp)
+    await page.getByRole('button', { name: 'Verify' }).click()
+
+    // Assert that TOTP is enabled again
+    await expect(page.locator('#totp-enabled')).toBeChecked()
+})
