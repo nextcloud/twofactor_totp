@@ -10,7 +10,7 @@
 			:loading="confirmationLoading"
 			:secret="secret"
 			:qr-url="qrUrl"
-			:confirmation.sync="confirmation"
+			v-model:confirmation="confirmation"
 			@confirm="confirm" />
 		<form ref="confirmForm" method="POST" />
 	</div>

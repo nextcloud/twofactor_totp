@@ -3,26 +3,22 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import Vue from 'vue'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import { loadState } from '@nextcloud/initial-state'
 import Logger from './logger.js'
-import store from './store.js'
+import { useTotpStore } from './store.js'
 
 import PersonalTotpSettings from './components/PersonalTotpSettings.vue'
 
-Vue.mixin({
-	methods: {
-		t,
-	},
-})
+const pinia = createPinia()
+const app = createApp(PersonalTotpSettings)
+app.mixin({ methods: { t } })
+app.use(pinia)
 
-store.replaceState({
-	totpState: loadState('twofactor_totp', 'state'),
-})
+const store = useTotpStore(pinia)
+store.totpState = loadState('twofactor_totp', 'state')
 
-const View = Vue.extend(PersonalTotpSettings)
-new View({
-	store,
-}).$mount('#twofactor-totp-settings')
+app.mount('#twofactor-totp-settings')
 
 Logger.debug('personal settings loaded and rendered')
