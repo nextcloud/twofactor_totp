@@ -4,7 +4,7 @@
 -->
 
 <template>
-	<div id="twofactor-totp-settings">
+	<div>
 		<template v-if="loading">
 			<span class="icon-loading-small totp-loading" />
 			<span> {{ t('twofactor_totp', 'Enable TOTP') }} </span>

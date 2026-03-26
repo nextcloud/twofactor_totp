@@ -52,6 +52,7 @@ export default {
 	components: {
 		QR,
 	},
+	emits: ['update:confirmation', 'confirm'],
 	props: {
 		loading: {
 			type: Boolean,

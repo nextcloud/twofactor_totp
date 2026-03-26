@@ -4,8 +4,11 @@ SPDX-License-Identifier: BSD-3-Clause
 SPDX-License-Identifier: AGPL-3.0-or-later
 SPDX-License-Identifier: AGPL-3.0-only
 SPDX-FileCopyrightText: escape-html developers
+SPDX-FileCopyrightText: encode-utf8 developers
+SPDX-FileCopyrightText: dijkstrajs developers
 SPDX-FileCopyrightText: Tobias Koppers @sokra
 SPDX-FileCopyrightText: T. Jameson Little <t.jameson.little@gmail.com>
+SPDX-FileCopyrightText: Ryan Day <soldair@gmail.com>
 SPDX-FileCopyrightText: Roman Shtylman <shtylman@gmail.com>
 SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
 SPDX-FileCopyrightText: Guillaume Chau
@@ -14,27 +17,14 @@ SPDX-FileCopyrightText: Feross Aboukhadijeh
 SPDX-FileCopyrightText: Evan You
 SPDX-FileCopyrightText: Eduardo San Martin Morote
 SPDX-FileCopyrightText: Christoph Wurst <christoph@winzerhof-wurst.at>
-SPDX-FileCopyrightText: Chen Fengyuan
 
 
 This file is generated from multiple sources. Included packages:
-- @chenfengyuan/vue-qrcode
-	- version: 1.0.2
-	- license: MIT
-- semver
-	- version: 7.7.2
-	- license: ISC
-- vue
-	- version: 3.5.25
-	- license: MIT
 - @nextcloud/password-confirmation
 	- version: 6.0.2
 	- license: MIT
 - vue-router
 	- version: 4.6.3
-	- license: MIT
-- vue
-	- version: 3.5.25
 	- license: MIT
 - @nextcloud/vue
 	- version: 9.3.0
@@ -43,16 +33,16 @@ This file is generated from multiple sources. Included packages:
 	- version: 6.6.4
 	- license: MIT
 - @vue/reactivity
-	- version: 3.5.25
+	- version: 3.5.31
 	- license: MIT
 - @vue/runtime-core
-	- version: 3.5.25
+	- version: 3.5.31
 	- license: MIT
 - @vue/runtime-dom
-	- version: 3.5.25
+	- version: 3.5.31
 	- license: MIT
 - @vue/shared
-	- version: 3.5.25
+	- version: 3.5.31
 	- license: MIT
 - base64-js
 	- version: 1.5.1
@@ -63,6 +53,12 @@ This file is generated from multiple sources. Included packages:
 - css-loader
 	- version: 7.1.2
 	- license: MIT
+- dijkstrajs
+	- version: 1.0.1
+	- license: MIT
+- encode-utf8
+	- version: 1.0.3
+	- license: MIT
 - escape-html
 	- version: 1.0.3
 	- license: MIT
@@ -72,8 +68,20 @@ This file is generated from multiple sources. Included packages:
 - process
 	- version: 0.11.10
 	- license: MIT
+- qrcode
+	- version: 1.5.0
+	- license: MIT
+- semver
+	- version: 7.7.4
+	- license: ISC
 - style-loader
 	- version: 4.0.0
+	- license: MIT
+- vue-loader
+	- version: 17.4.2
+	- license: MIT
+- vue
+	- version: 3.5.31
 	- license: MIT
 - webpack
 	- version: 5.105.4
