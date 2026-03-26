@@ -4,35 +4,20 @@
  */
 
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
+import { createPinia, setActivePinia, PiniaVuePlugin } from 'pinia'
 
 import PersonalTotpSettings from '../../components/PersonalTotpSettings.vue'
 
 const localVue = createLocalVue()
-
-localVue.use(Vuex)
+localVue.use(PiniaVuePlugin)
 
 describe('PersonalTotpSettings', () => {
-	let actions
-	let store
-
 	beforeEach(() => {
-		actions = {
-			enable: () => {},
-			confirm: () => {},
-			disable: () => {},
-		}
-		store = new Vuex.Store({
-			state: {},
-			actions,
-		})
+		setActivePinia(createPinia())
 	})
 
 	it('does not load on start', () => {
-		const settings = shallowMount(PersonalTotpSettings, {
-			store,
-			localVue,
-		})
+		const settings = shallowMount(PersonalTotpSettings, { localVue })
 
 		expect(settings.vm.loading).to.be.false
 	})

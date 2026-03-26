@@ -3,52 +3,30 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { defineStore } from 'pinia'
 
 import { saveState } from './services/StateService.js'
-import state from './state.js'
+import STATE from './state.js'
 
-Vue.use(Vuex)
-
-export const mutations = {
-	setState(state, totpState) {
-		state.totpState = totpState
-	},
-}
-
-export const actions = {
-	enable({ commit }) {
-		return saveState({ state: state.STATE_CREATED }).then(
-			({ state, secret, qrUrl }) => {
-				commit('setState', state)
-				return { qrUrl, secret }
-			},
-		)
-	},
-
-	confirm({ commit }, code) {
-		return saveState({
-			state: state.STATE_ENABLED,
-			code,
-		}).then(({ state }) => commit('setState', state))
-	},
-
-	disable({ commit }) {
-		return saveState({ state: state.STATE_DISABLED }).then(({ state }) =>
-			commit('setState', state),
-		)
-	},
-}
-
-export const getters = {}
-
-export default new Vuex.Store({
-	strict: process.env.NODE_ENV !== 'production',
-	state: {
+export const useTotpStore = defineStore('totp', {
+	state: () => ({
 		totpState: undefined,
+	}),
+	actions: {
+		async enable() {
+			const { state, secret, qrUrl } = await saveState({ state: STATE.STATE_CREATED })
+			this.totpState = state
+			return { secret, qrUrl }
+		},
+
+		async confirm(code) {
+			const { state } = await saveState({ state: STATE.STATE_ENABLED, code })
+			this.totpState = state
+		},
+
+		async disable() {
+			const { state } = await saveState({ state: STATE.STATE_DISABLED })
+			this.totpState = state
+		},
 	},
-	getters,
-	mutations,
-	actions,
 })
