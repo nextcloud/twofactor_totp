@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efdaf1ea03c3b3cd2af83c69fa5a93c7",
+    "content-hash": "200a8154ad3e70e34f2bc8f98a731841",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -357,20 +357,20 @@
         },
         {
             "name": "psalm/phar",
-            "version": "5.26.1",
+            "version": "7.0.0-beta19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/phar.git",
-                "reference": "8a38e7ad04499a0ccd2c506fd1da6fc01fff4547"
+                "reference": "8f65c84236950ddb2aa1f9e44d8d4a3a073e685a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/phar/zipball/8a38e7ad04499a0ccd2c506fd1da6fc01fff4547",
-                "reference": "8a38e7ad04499a0ccd2c506fd1da6fc01fff4547",
+                "url": "https://api.github.com/repos/psalm/phar/zipball/8f65c84236950ddb2aa1f9e44d8d4a3a073e685a",
+                "reference": "8f65c84236950ddb2aa1f9e44d8d4a3a073e685a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^8.2"
             },
             "conflict": {
                 "vimeo/psalm": "*"
@@ -386,9 +386,9 @@
             "description": "Composer-based Psalm Phar",
             "support": {
                 "issues": "https://github.com/psalm/phar/issues",
-                "source": "https://github.com/psalm/phar/tree/5.26.1"
+                "source": "https://github.com/psalm/phar/tree/7.0.0-beta19"
             },
-            "time": "2024-09-09T16:22:43+00:00"
+            "time": "2026-04-15T20:55:22+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -461,7 +461,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "psalm/phar": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},
