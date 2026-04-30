@@ -1,26 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.7.7@e028ba46ba0d7f9a78bc3201c251e137383e145f">
-<file src="lib/Command/CleanUp.php">
+<files psalm-version="7.0.0-beta19@7e751c06a756fa64dc4c759c09fe4a173afcb433">
+  <file src="lib/Activity/Provider.php">
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+    </MissingPureAnnotation>
+  </file>
+  <file src="lib/Activity/Setting.php">
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[canChangeMail]]></code>
+      <code><![CDATA[canChangeStream]]></code>
+      <code><![CDATA[getIdentifier]]></code>
+      <code><![CDATA[getPriority]]></code>
+      <code><![CDATA[isDefaultEnabledMail]]></code>
+      <code><![CDATA[isDefaultEnabledStream]]></code>
+    </MissingPureAnnotation>
+  </file>
+  <file src="lib/AppInfo/Application.php">
+    <MissingPureAnnotation>
+      <code><![CDATA[boot]]></code>
+    </MissingPureAnnotation>
+  </file>
+  <file src="lib/Command/CleanUp.php">
+    <MissingImmutableAnnotation>
+      <code><![CDATA[CleanUp]]></code>
+    </MissingImmutableAnnotation>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$input]]></code>
+      <code><![CDATA[$output]]></code>
+    </PossiblyUnusedParam>
     <UndefinedClass>
       <code><![CDATA[Command]]></code>
     </UndefinedClass>
+    <UnusedMethod>
+      <code><![CDATA[findUserIds]]></code>
+    </UnusedMethod>
+    <UnusedProperty>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$totpSecretMapper]]></code>
+      <code><![CDATA[$userManager]]></code>
+    </UnusedProperty>
+  </file>
+  <file src="lib/Listener/StateChangeActivity.php">
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+    </MissingPureAnnotation>
+  </file>
+  <file src="lib/Listener/StateChangeRegistryUpdater.php">
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+    </MissingPureAnnotation>
+  </file>
+  <file src="lib/Listener/UserDeleted.php">
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+    </MissingPureAnnotation>
+  </file>
+  <file src="lib/Migration/Version140000Date202503027114917.php">
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+    </MissingPureAnnotation>
   </file>
   <file src="lib/Provider/AtLoginProvider.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[getBody]]></code>
+    </MissingPureAnnotation>
   </file>
   <file src="lib/Provider/TotpProvider.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[getDisplayName]]></code>
+      <code><![CDATA[getId]]></code>
+      <code><![CDATA[getTemplate]]></code>
+    </MissingPureAnnotation>
+    <PossiblyNullArgument>
+      <code><![CDATA[$challenge]]></code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="lib/Service/ITotp.php">
+    <MissingAbstractPureAnnotation>
+      <code><![CDATA[createSecret]]></code>
+      <code><![CDATA[deleteSecret]]></code>
+      <code><![CDATA[enable]]></code>
+      <code><![CDATA[getSecret]]></code>
+      <code><![CDATA[hasSecret]]></code>
+      <code><![CDATA[validateSecret]]></code>
+    </MissingAbstractPureAnnotation>
+    <MissingInterfaceImmutableAnnotation>
+      <code><![CDATA[ITotp]]></code>
+    </MissingInterfaceImmutableAnnotation>
+  </file>
+  <file src="lib/Service/Totp.php">
+    <MissingPureAnnotation>
+      <code><![CDATA[__construct]]></code>
+    </MissingPureAnnotation>
   </file>
   <file src="lib/Settings/Personal.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
+    <MissingPureAnnotation>
+      <code><![CDATA[getBody]]></code>
+    </MissingPureAnnotation>
   </file>
 </files>
