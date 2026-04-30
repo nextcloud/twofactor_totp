@@ -76,8 +76,12 @@
       ".*\\.(vue)$": "@vue/vue2-jest",
       ".*\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|avif)$": "jest-transform-stub"
     },
+    "moduleNameMapper": {
+      "^@nextcloud/axios$": "<rootDir>/node_modules/@nextcloud/axios/dist/index.js",
+      "^@nextcloud/password-confirmation$": "<rootDir>/src/tests/__mocks__/password-confirmation.js"
+    },
     "transformIgnorePatterns": [
-      "/node_modules/.*/.+\\.js$"
+      "/node_modules/(?!(?:@nextcloud/axios|@nextcloud/auth|@nextcloud/browser-storage)/).+\\.js$"
     ]
   }
 }
