@@ -13,7 +13,6 @@ use OCA\TwoFactorTOTP\AppInfo\Application;
 use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
-use OCP\AppFramework\IAppContainer;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\Authentication\TwoFactorAuth\IActivatableAtLogin;
 use OCP\Authentication\TwoFactorAuth\IDeactivatableByAdmin;
@@ -27,6 +26,7 @@ use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
 use Override;
+use Psr\Container\ContainerInterface;
 
 /** @psalm-api */
 class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
@@ -34,7 +34,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	public function __construct(
 		private readonly ITotp $totp,
 		private readonly IL10N $l10n,
-		private readonly IAppContainer $container,
+		private readonly ContainerInterface $container,
 		private readonly IInitialState $initialState,
 		private readonly IURLGenerator $urlGenerator,
 	) {
@@ -122,6 +122,6 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 
 	#[Override]
 	public function getLoginSetup(IUser $user): ILoginSetupProvider {
-		return $this->container->query(AtLoginProvider::class);
+		return $this->container->get(AtLoginProvider::class);
 	}
 }
