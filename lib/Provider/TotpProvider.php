@@ -70,7 +70,7 @@ class TotpProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettin
 	 * Verify the given challenge
 	 */
 	public function verifyChallenge(IUser $user, string $challenge): bool {
-		$challenge = preg_replace('/[^0-9]/', '', $challenge);
+		$challenge = preg_replace('/[^0-9]/', '', $challenge) ?? '';
 		try {
 			$secret = $this->totp->getSecret($user);
 		} catch (NoTotpSecretFoundException $e) {
