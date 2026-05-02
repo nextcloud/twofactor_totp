@@ -1,13 +1,22 @@
 { "translations": {
+    "You enabled TOTP two-factor authentication for your account" : "Jūs įjungėte TOTP dviejų veiksnių autentifikavimą savo paskyroje",
+    "You disabled TOTP two-factor authentication for your account" : "Jūs išjungėte TOTP dviejų veiksnių autentifikavimą savo paskyroje",
+    "TOTP two-factor authentication disabled by the administration" : "Administratorius išjungė TOTP dviejų veiksnių autentifikavimą",
     "TOTP (Authenticator app)" : "TOTP (Tapatybės nustatymo programėlė)",
+    "Authenticate with a TOTP app" : "Prisijunkite naudodami TOTP programėlę",
+    "Two-Factor TOTP Provider" : "Dviejų veiksnių TOTP paslaugų teikėjas",
+    "Two-factor TOTP provider" : "Dviejų veiksnių TOTP paslaugų teikėjas",
+    "A two-factor authentication provider for TOTP (RFC 6238)" : "Dviejų veiksnių autentifikavimo paslaugos teikėjas, palaikantis TOTP (RFC 6238)",
     "Could not enable TOTP" : "Nepavyko įjungti TOTP",
+    "Could not verify your key. Please try again" : "Nepavyko patvirtinti jūsų rakto. Prašome bandyti dar kartą",
+    "Could not confirm TOTP" : "Nepavyko patvirtinti TOTP",
     "Enable TOTP" : "Įjungti TOTP",
     "Your new TOTP secret is:" : "Jūsų nauja TOTP paslaptis yra:",
     "For quick setup, scan this QR code with your TOTP app:" : "Greitai sąrankai, nuskenuokite šį QR kodą naudodami savo TOTP programėlę:",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Sukonfigūravę savo programėlę, žemiau įveskite bandomąjį kodą, kad būtų užtikrinta, jog viskas veikia tinkamai:",
     "Authentication code" : "Tapatybės nustatymo kodas",
     "Verify" : "Patikrinti",
-    "Get the authentication code from the two-factor authentication app on your device." : "Gaukite tapatybės nustatymo kodą iš dviejų faktorių tapatybės nustatymo programėlės savo įrenginyje.",
+    "Get the authentication code from the two-factor authentication app on your device." : "Gaukite autentifikavimo kodą iš dviejų veiksnių autentifikavimo programėlės savo įrenginyje.",
     "Submit" : "Pateikti"
 },"pluralForm" :"nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);"
 }
