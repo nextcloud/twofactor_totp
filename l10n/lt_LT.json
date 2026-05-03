@@ -3,7 +3,7 @@
     "You disabled TOTP two-factor authentication for your account" : "Jūs išjungėte TOTP dviejų veiksnių autentifikavimą savo paskyroje",
     "TOTP two-factor authentication disabled by the administration" : "Administratorius išjungė TOTP dviejų veiksnių autentifikavimą",
     "TOTP (Authenticator app)" : "TOTP (Tapatybės nustatymo programėlė)",
-    "Authenticate with a TOTP app" : "Prisijunkite naudodami TOTP programėlę",
+    "Authenticate with a TOTP app" : "Autentifikuokitės naudodami TOTP programėlę",
     "Two-Factor TOTP Provider" : "Dviejų veiksnių TOTP paslaugų teikėjas",
     "Two-factor TOTP provider" : "Dviejų veiksnių TOTP paslaugų teikėjas",
     "A two-factor authentication provider for TOTP (RFC 6238)" : "Dviejų veiksnių autentifikavimo paslaugos teikėjas, palaikantis TOTP (RFC 6238)",
