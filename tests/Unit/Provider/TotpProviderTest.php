@@ -16,12 +16,12 @@ use OCA\TwoFactorTOTP\Provider\AtLoginProvider;
 use OCA\TwoFactorTOTP\Provider\TotpProvider;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCA\TwoFactorTOTP\Settings\Personal;
-use OCP\AppFramework\IAppContainer;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Container\ContainerInterface;
 
 class TotpProviderTest extends TestCase {
 
@@ -31,7 +31,7 @@ class TotpProviderTest extends TestCase {
 	/** @var IL10N|MockObject */
 	private $l10n;
 
-	/** @var IAppContainer|MockObject */
+	/** @var ContainerInterface|MockObject */
 	private $container;
 
 	/** @var IInitialStateService|MockObject */
@@ -48,7 +48,7 @@ class TotpProviderTest extends TestCase {
 
 		$this->totp = $this->createMock(ITotp::class);
 		$this->l10n = $this->createMock(IL10N::class);
-		$this->container = $this->createMock(IAppContainer::class);
+		$this->container = $this->createMock(ContainerInterface::class);
 		$this->initialState = $this->createMock(IInitialState::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 
@@ -173,7 +173,7 @@ class TotpProviderTest extends TestCase {
 		$user = $this->createStub(IUser::class);
 		$provider = $this->createStub(AtLoginProvider::class);
 		$this->container->expects($this->once())
-			->method('query')
+			->method('get')
 			->with(AtLoginProvider::class)
 			->willReturn($provider);
 
