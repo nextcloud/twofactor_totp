@@ -87,5 +87,5 @@ This file is generated from multiple sources. Included packages:
 	- version: 5.105.4
 	- license: MIT
 - twofactor_totp
-	- version: 16.0.0-dev.0
+	- version: 17.0.0-dev.0
 	- license: AGPL-3.0-only
