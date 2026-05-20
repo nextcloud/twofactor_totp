@@ -53,10 +53,16 @@ class Version140000Date202503027114917 extends SimpleMigrationStep {
 	public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options) {
 		if ($this->hasVerfiedColumn) {
 			// There is a 'verified' column which comes from owncloud
-			// If verified is set to 0 then the twofactor auth was not properly enabled and we should remove those entries
+			// If verified is set to 0 and the secret is not actively enabled (state=2/STATE_ENABLED),
+			// the twofactor auth was not properly set up and we should remove those entries.
+			// We must not delete state=2 rows: when the state column was added (2019), all existing rows
+			// received state=2 as a default regardless of verified. Rows inserted by Nextcloud also never
+			// have verified set (it stays at the DB default of 0), so verified=0 alone does not indicate
+			// an incomplete setup for Nextcloud-native secrets.
 			$qb = $this->db->getQueryBuilder();
 			$qb->delete('twofactor_totp_secrets')
 				->where($qb->expr()->eq('verified', $qb->createNamedParameter(0, IQueryBuilder::PARAM_INT)))
+				->andWhere($qb->expr()->neq('state', $qb->createNamedParameter(2, IQueryBuilder::PARAM_INT))) // 2 = ITotp::STATE_ENABLED
 				->executeStatement();
 		}
 	}
