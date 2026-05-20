@@ -7,6 +7,7 @@
 /.gitignore
 /.nextcloudignore
 /.tx
+/AGENTS.md
 /build
 /CONTRIBUTING.md
 /composer.*
