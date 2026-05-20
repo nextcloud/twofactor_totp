@@ -7,7 +7,9 @@
 /.gitignore
 /.nextcloudignore
 /.tx
+/AGENTS.md
 /build
+/CLAUDE.md
 /CONTRIBUTING.md
 /composer.*
 /krankerl.toml
