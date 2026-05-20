@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "\U0001F64B Question"
+    url: https://help.nextcloud.com/tags/c/support/7/twofactor-totp-app
+    about: Do you have a question about the app? Please ask at the Nextcloud help forum.

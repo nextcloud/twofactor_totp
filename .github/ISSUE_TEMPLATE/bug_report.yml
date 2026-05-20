@@ -1,0 +1,140 @@
+name: "\U0001F41B Bug report"
+description: Have you encountered a bug?
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill in as much information as possible to help us reproduce and fix the bug.
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Describe the exact steps that lead to the bug.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected behaviour
+      description: Tell us what should happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behaviour
+    attributes:
+      label: Actual behaviour
+      description: Tell us what happens instead.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: "## Server configuration"
+
+  - type: input
+    id: server-os
+    attributes:
+      label: Operating system
+      placeholder: e.g. Ubuntu 24.04
+
+  - type: input
+    id: web-server
+    attributes:
+      label: Web server
+      placeholder: e.g. Apache, nginx
+
+  - type: input
+    id: database
+    attributes:
+      label: Database
+      placeholder: e.g. MySQL 8.0, PostgreSQL 16
+
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: e.g. 8.3
+
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: See the admin page.
+      placeholder: e.g. 7.0.0
+
+  - type: dropdown
+    id: install-type
+    attributes:
+      label: Updated from an older version or fresh install?
+      options:
+        - Fresh install
+        - Updated from an older version
+
+  - type: textarea
+    id: activated-apps
+    attributes:
+      label: List of activated apps
+      description: |
+        If you have access to your command line, run from within your Nextcloud installation folder:
+        ```
+        sudo -u www-data php occ app:list
+        ```
+      render: shell
+
+  - type: textarea
+    id: nextcloud-config
+    attributes:
+      label: Nextcloud configuration
+      description: |
+        If you have access to your command line, run from within your Nextcloud installation folder:
+        ```
+        sudo -u www-data php occ config:list system
+        ```
+        You can also paste `config/config.php` directly. Remove all sensitive content such as passwords (e.g. `passwordsalt`, `secret`, SMTP password).
+      render: shell
+
+  - type: markdown
+    attributes:
+      value: "## Client configuration"
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: e.g. Firefox 126, Chrome 125
+
+  - type: input
+    id: client-os
+    attributes:
+      label: Operating system
+      placeholder: e.g. Windows 11, macOS 14, Ubuntu 24.04
+
+  - type: markdown
+    attributes:
+      value: "## Logs"
+
+  - type: textarea
+    id: webserver-log
+    attributes:
+      label: Web server error log
+    render: shell
+
+  - type: textarea
+    id: nextcloud-log
+    attributes:
+      label: Nextcloud log (data/nextcloud.log)
+    render: shell
+
+  - type: textarea
+    id: browser-log
+    attributes:
+      label: Browser log
+      description: This could include the JavaScript console log and the network log.
+    render: shell
