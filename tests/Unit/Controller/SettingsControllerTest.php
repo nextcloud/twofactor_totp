@@ -10,8 +10,8 @@ namespace OCA\TwoFactorTOTP\Unit\Controller;
 
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Controller\SettingsController;
+use OCA\TwoFactorTOTP\Db\TotpSecret;
 use OCA\TwoFactorTOTP\Service\ITotp;
-use OCA\TwoFactorTOTP\Service\Totp;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
@@ -30,7 +30,7 @@ final class SettingsControllerTest extends TestCase {
 	protected function setUp(): void {
 		$request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
-		$this->totp = $this->createMock(Totp::class);
+		$this->totp = $this->createMock(ITotp::class);
 		$this->defaults = new Defaults();
 
 		$this->controller = new SettingsController('twofactor_totp', $request, $this->userSession, $this->totp, $this->defaults);
@@ -65,11 +65,45 @@ final class SettingsControllerTest extends TestCase {
 			->method('createSecret')
 			->with($user)
 			->willReturn('newsecret');
+		$dbSecret = new TotpSecret();
+		$dbSecret->setAlgorithm(ITotp::ALGORITHM_SHA1);
+		$this->totp->expects($this->once())
+			->method('getSecret')
+			->with($user)
+			->willReturn($dbSecret);
 		$issuer = rawurlencode((string)$this->defaults->getName());
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
 			'secret' => 'newsecret',
-			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer",
+			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1",
+		]);
+
+		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_CREATED));
+	}
+
+	public function testCreateSecretWithNonDefaultAlgorithm(): void {
+		$user = $this->createMock(IUser::class);
+		$this->userSession->expects($this->exactly(2))
+			->method('getUser')
+			->willReturn($user);
+		$user->expects($this->once())
+			->method('getCloudId')
+			->willReturn('user@instance.com');
+		$this->totp->expects($this->once())
+			->method('createSecret')
+			->with($user)
+			->willReturn('newsecret');
+		$dbSecret = new TotpSecret();
+		$dbSecret->setAlgorithm(ITotp::ALGORITHM_SHA256);
+		$this->totp->expects($this->once())
+			->method('getSecret')
+			->with($user)
+			->willReturn($dbSecret);
+		$issuer = rawurlencode((string)$this->defaults->getName());
+		$expected = new JSONResponse([
+			'state' => ITotp::STATE_CREATED,
+			'secret' => 'newsecret',
+			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA256",
 		]);
 
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_CREATED));
