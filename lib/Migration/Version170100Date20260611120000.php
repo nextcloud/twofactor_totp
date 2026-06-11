@@ -18,7 +18,7 @@ use OCP\Migration\SimpleMigrationStep;
 use Override;
 
 /** @psalm-api */
-class Version170000Date20260611120000 extends SimpleMigrationStep {
+class Version170100Date20260611120000 extends SimpleMigrationStep {
 
 	#[Override]
 	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ?ISchemaWrapper {
