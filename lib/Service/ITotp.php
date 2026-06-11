@@ -20,6 +20,18 @@ interface ITotp {
 	public const STATE_CREATED = 1;
 	public const STATE_ENABLED = 2;
 
+	public const ALGORITHM_SHA1 = 'sha1';
+	public const ALGORITHM_SHA256 = 'sha256';
+	public const ALGORITHM_SHA512 = 'sha512';
+	public const DEFAULT_ALGORITHM = self::ALGORITHM_SHA1;
+
+	/** Minimum secret length in Base32 characters (130 bits) */
+	public const MIN_SECRET_LENGTH = 26;
+	/** Default secret length in Base32 characters (160 bits, per RFC 4226 recommendation) */
+	public const DEFAULT_SECRET_LENGTH = 32;
+	/** Maximum secret length in Base32 characters */
+	public const MAX_SECRET_LENGTH = 128;
+
 	public function hasSecret(IUser $user): bool;
 
 	/**
