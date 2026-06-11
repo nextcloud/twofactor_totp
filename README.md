@@ -52,7 +52,7 @@ The default algorithm is SHA1 as required by [RFC 6238](https://datatracker.ietf
 | `sha512` | SHA512 |
 
 ```sh
-occ config:app:set twofactor_totp algorithm --value=sha256
+occ config:app:set twofactor_totp --type=string algorithm --value=sha256
 ```
 
 ### Secret length
@@ -66,7 +66,7 @@ The generated TOTP secret defaults to 32 Base32 characters (160 bits), which mee
 | Maximum | 128 | 640 |
 
 ```sh
-occ config:app:set twofactor_totp secret_length --value=64
+occ config:app:set twofactor_totp --type=integer secret_length --value=64
 ```
 
 ## Login with external apps
