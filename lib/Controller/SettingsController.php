@@ -16,6 +16,7 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\Defaults;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\IUserSession;
 use RuntimeException;
 use function is_null;
@@ -29,6 +30,7 @@ class SettingsController extends ALoginSetupController {
 		private readonly IUserSession $userSession,
 		private readonly ITotp $totp,
 		private readonly Defaults $defaults,
+		private readonly IURLGenerator $urlGenerator,
 	) {
 		parent::__construct($appName, $request);
 	}
@@ -71,7 +73,10 @@ class SettingsController extends ALoginSetupController {
 
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
-				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer";
+				$image = $this->urlGenerator->getAbsoluteURL(
+					$this->urlGenerator->linkToRoute('theming.Icon.getFavicon', ['app' => 'core'])
+				);
+				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer&image=" . rawurlencode($image);
 				return new JSONResponse([
 					'state' => ITotp::STATE_CREATED,
 					'secret' => $secret,
