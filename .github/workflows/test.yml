@@ -54,7 +54,7 @@ jobs:
         run: composer run test:unit
 
       - name: Report coverage
-        uses: codecov/codecov-action@0da7aa657d958d32c117fc47e1f977e7524753c7 # v5.3.0
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
         if: ${{ always() }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
