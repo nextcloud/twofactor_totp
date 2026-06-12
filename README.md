@@ -37,6 +37,38 @@ The app is available through the [app store](https://apps.nextcloud.com/apps/two
 ![](screenshots/enter_challenge.png)
 ![](screenshots/settings.png)
 
+## Admin configuration
+
+Administrators can harden TOTP settings via `occ`. Changes only affect newly enrolled secrets; existing enrollments continue to work with the algorithm they were created with.
+
+### Hash algorithm
+
+The default algorithm is SHA1 as required by [RFC 6238](https://datatracker.ietf.org/doc/html/rfc6238). Stricter environments may prefer SHA256 or SHA512, provided all users' authenticator apps support the chosen algorithm.
+
+| Value | Algorithm |
+|-------|-----------|
+| `sha1` | SHA1 (default) |
+| `sha256` | SHA256 |
+| `sha512` | SHA512 |
+
+```sh
+occ config:app:set twofactor_totp --type=string algorithm --value=sha256
+```
+
+### Secret length
+
+The generated TOTP secret defaults to 32 Base32 characters (160 bits), which meets the recommendation in [RFC 4226](https://datatracker.ietf.org/doc/html/rfc4226#section-4). Administrators can increase this for higher entropy requirements.
+
+| | Characters | Bits |
+|-|------------|------|
+| Minimum | 26 | 130 |
+| Default | 32 | 160 |
+| Maximum | 128 | 640 |
+
+```sh
+occ config:app:set twofactor_totp --type=integer secret_length --value=64
+```
+
 ## Login with external apps
 Once you enable OTP with Two Factor Totp, your applications (for example your Android app or your GNOME app) will need to login using device passwords. To manage it, [know more here](https://docs.nextcloud.com/server/stable/user_manual/en/session_management.html#managing-devices)
 
