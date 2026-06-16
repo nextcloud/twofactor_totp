@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ "8.2" ]
+        php-version: [ "8.3" ]
         nextcloud-version: [ 'master' ]
         db: ['sqlite']
 
