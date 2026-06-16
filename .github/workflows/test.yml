@@ -58,7 +58,7 @@ jobs:
         if: ${{ always() }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./nextcloud/apps/twofactor_totp/tests/clover.xml
+          files: ./nextcloud/apps/twofactor_totp/tests/clover.xml
           flags: unittests
           fail_ci_if_error: true
 
