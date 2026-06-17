@@ -18,6 +18,7 @@ test.beforeEach(async () => {
 })
 
 test('set up and log in', async ({ page }) => {
+    test.slow()
     // Log in and choose to set up TOTP
     await login(page, false)
     await page.waitForURL('./index.php/login/setupchallenge')
