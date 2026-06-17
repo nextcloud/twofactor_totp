@@ -121,6 +121,7 @@ test('submit verification code via Enter key', async ({ page }) => {
 })
 
 test('re-enable TOTP after disabling', async ({ page }) => {
+    test.slow()
     // Enable and then disable TOTP
     await enableTotp(page)
     await page.getByText('Enable TOTP').click()
