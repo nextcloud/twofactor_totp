@@ -13,7 +13,7 @@
       <directory suffix=".php">../lib</directory>
     </include>
     <report>
-      <clover outputFile="./clover.xml"/>
+      <clover outputFile="clover.xml"/>
     </report>
   </coverage>
   <testsuite name="TOTP 2FA Provider">
