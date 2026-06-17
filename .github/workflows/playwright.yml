@@ -46,7 +46,7 @@ jobs:
         uses: icewind1991/nextcloud-version-matrix@58becf3b4bb6dc6cef677b15e2fd8e7d48c0908f # v1.3.1
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, self-hosted]
     name: Playwright E2E tests
     needs:
       - node-version
@@ -103,9 +103,24 @@ jobs:
           sudo stunnel3 -p stunnel.pem -d 443 -r 8080
       - name: Test https access
         run: curl --insecure -Li https://localhost
+      - name: Get Playwright version
+        id: playwright-version
+        working-directory: nextcloud/apps/twofactor_totp
+        run: echo "version=$(npm ls @playwright/test --json | jq -r '.dependencies["@playwright/test"].version')" >> $GITHUB_OUTPUT
+      - name: Cache Playwright browsers
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ steps.playwright-version.outputs.version }}
       - name: Install Playwright browsers
         working-directory: nextcloud/apps/twofactor_totp
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
+      - name: Install Playwright browser system deps
+        working-directory: nextcloud/apps/twofactor_totp
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
       - name: Run Playwright tests
         working-directory: nextcloud/apps/twofactor_totp
         run: DEBUG=pw:api npx playwright test
