@@ -18,6 +18,7 @@ use OCA\TwoFactorTOTP\Event\DisabledByAdmin;
 use OCA\TwoFactorTOTP\Event\StateChanged;
 use OCA\TwoFactorTOTP\Exception\NoTotpSecretFoundException;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Services\IAppConfig;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IUser;
 use OCP\Security\ICrypto;
@@ -32,7 +33,26 @@ class Totp implements ITotp {
 		private readonly ICrypto $crypto,
 		private readonly IEventDispatcher $eventDispatcher,
 		private readonly ISecureRandom $random,
+		private readonly IAppConfig $appConfig,
 	) {
+	}
+
+	private function getSecretLength(): int {
+		$length = $this->appConfig->getAppValueInt('secret_length', ITotp::DEFAULT_SECRET_LENGTH);
+		if ($length >= ITotp::MIN_SECRET_LENGTH && $length <= ITotp::MAX_SECRET_LENGTH) {
+			return $length;
+		}
+		return ITotp::DEFAULT_SECRET_LENGTH;
+	}
+
+	private function getDefaultAlgorithm(): string {
+		$algorithm = $this->appConfig->getAppValueString('algorithm', ITotp::DEFAULT_ALGORITHM);
+		$valid = [
+			ITotp::ALGORITHM_SHA1,
+			ITotp::ALGORITHM_SHA256,
+			ITotp::ALGORITHM_SHA512,
+		];
+		return in_array($algorithm, $valid, true) ? $algorithm : ITotp::DEFAULT_ALGORITHM;
 	}
 
 	#[Override]
@@ -46,7 +66,7 @@ class Totp implements ITotp {
 	}
 
 	private function generateSecret(): string {
-		return $this->random->generate(32, ISecureRandom::CHAR_UPPER . '234567');
+		return $this->random->generate($this->getSecretLength(), ISecureRandom::CHAR_UPPER . '234567');
 	}
 
 	/**
@@ -69,6 +89,7 @@ class Totp implements ITotp {
 		$dbSecret->setUserId($user->getUID());
 		$dbSecret->setSecret($this->crypto->encrypt($secret));
 		$dbSecret->setState(ITotp::STATE_CREATED);
+		$dbSecret->setAlgorithm($this->getDefaultAlgorithm());
 
 		$this->secretMapper->insert($dbSecret);
 		return $secret;
@@ -121,7 +142,8 @@ class Totp implements ITotp {
 	#[Override]
 	public function validateSecret(TotpSecret $secret, string $key): bool {
 		$decryptedSecret = $this->crypto->decrypt($secret->getSecret());
-		$otp = Factory::getTOTP(Base32::decode($decryptedSecret), 30, 6);
+		$algorithm = $secret->getAlgorithm() ?: ITotp::DEFAULT_ALGORITHM;
+		$otp = Factory::getTOTP(Base32::decode($decryptedSecret), 30, 6, 0, $algorithm);
 
 		$counter = null;
 		$lastCounter = $secret->getLastCounter();

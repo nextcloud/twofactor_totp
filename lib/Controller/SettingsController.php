@@ -68,10 +68,12 @@ class SettingsController extends ALoginSetupController {
 				]);
 			case ITotp::STATE_CREATED:
 				$secret = $this->totp->createSecret($user);
+				$dbSecret = $this->totp->getSecret($user);
 
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
-				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer";
+				$algorithm = strtoupper($dbSecret->getAlgorithm());
+				$qrUrl = "otpauth://totp/$secretName?secret=$secret&issuer=$issuer&algorithm=$algorithm";
 				return new JSONResponse([
 					'state' => ITotp::STATE_CREATED,
 					'secret' => $secret,
