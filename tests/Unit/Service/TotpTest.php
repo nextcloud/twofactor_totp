@@ -22,11 +22,10 @@ use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 use PHPUnit\Framework\TestCase;
 
-class TotpTest extends TestCase {
+final class TotpTest extends TestCase {
 
 	private TotpSecretMapper $secretMapper;
 	private ICrypto $crypto;
-	private IEventDispatcher $eventDispatcher;
 	private ISecureRandom $random;
 	private IAppConfig $appConfig;
 	private Totp $totp;
@@ -34,14 +33,13 @@ class TotpTest extends TestCase {
 	protected function setUp(): void {
 		$this->secretMapper = $this->createMock(TotpSecretMapper::class);
 		$this->crypto = $this->createMock(ICrypto::class);
-		$this->eventDispatcher = $this->createMock(IEventDispatcher::class);
 		$this->random = $this->createMock(ISecureRandom::class);
 		$this->appConfig = $this->createMock(IAppConfig::class);
 
 		$this->totp = new Totp(
 			$this->secretMapper,
 			$this->crypto,
-			$this->eventDispatcher,
+			$this->createStub(IEventDispatcher::class),
 			$this->random,
 			$this->appConfig,
 		);

@@ -39,7 +39,7 @@ class TotpSecretMapper extends QBMapper {
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user->getUID())));
 		$result = $qb->executeQuery();
 
-		$row = $result->fetch();
+		$row = $result->fetchAssociative();
 		$result->closeCursor();
 		if ($row === false) {
 			throw new DoesNotExistException('Secret does not exist');

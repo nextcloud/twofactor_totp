@@ -30,13 +30,12 @@ final class SettingsControllerTest extends TestCase {
 	private $controller;
 
 	protected function setUp(): void {
-		$request = $this->createMock(IRequest::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->totp = $this->createMock(ITotp::class);
 		$this->defaults = new Defaults();
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 
-		$this->controller = new SettingsController('twofactor_totp', $request, $this->userSession, $this->totp, $this->defaults, $this->urlGenerator);
+		$this->controller = new SettingsController('twofactor_totp', $this->createStub(IRequest::class), $this->userSession, $this->totp, $this->defaults, $this->urlGenerator);
 	}
 
 	public function testDisabledState(): void {
