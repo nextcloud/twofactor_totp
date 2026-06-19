@@ -15,6 +15,7 @@ use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Defaults;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\IUserSession;
 use PHPUnit\Framework\TestCase;
@@ -23,6 +24,7 @@ final class SettingsControllerTest extends TestCase {
 	private $userSession;
 	private $totp;
 	private $defaults;
+	private $urlGenerator;
 
 	/** @var SettingsController */
 	private $controller;
@@ -32,8 +34,9 @@ final class SettingsControllerTest extends TestCase {
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->totp = $this->createMock(ITotp::class);
 		$this->defaults = new Defaults();
+		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 
-		$this->controller = new SettingsController('twofactor_totp', $request, $this->userSession, $this->totp, $this->defaults);
+		$this->controller = new SettingsController('twofactor_totp', $request, $this->userSession, $this->totp, $this->defaults, $this->urlGenerator);
 	}
 
 	public function testDisabledState(): void {
@@ -71,11 +74,21 @@ final class SettingsControllerTest extends TestCase {
 			->method('getSecret')
 			->with($user)
 			->willReturn($dbSecret);
+		$this->urlGenerator->expects($this->once())
+			->method('linkToRoute')
+			->with('theming.Icon.getFavicon', ['app' => 'core'])
+			->willReturn('/path/to/favicon');
+		$this->urlGenerator->expects($this->once())
+			->method('getAbsoluteURL')
+			->with('/path/to/favicon')
+			->willReturn('https://cloud.example.com/path/to/favicon');
+
 		$issuer = rawurlencode((string)$this->defaults->getName());
+		$image = rawurlencode('https://cloud.example.com/path/to/favicon');
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
 			'secret' => 'newsecret',
-			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1",
+			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA1&image=$image",
 		]);
 
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_CREATED));
@@ -99,11 +112,21 @@ final class SettingsControllerTest extends TestCase {
 			->method('getSecret')
 			->with($user)
 			->willReturn($dbSecret);
+		$this->urlGenerator->expects($this->once())
+			->method('linkToRoute')
+			->with('theming.Icon.getFavicon', ['app' => 'core'])
+			->willReturn('/path/to/favicon');
+		$this->urlGenerator->expects($this->once())
+			->method('getAbsoluteURL')
+			->with('/path/to/favicon')
+			->willReturn('https://cloud.example.com/path/to/favicon');
+
 		$issuer = rawurlencode((string)$this->defaults->getName());
+		$image = rawurlencode('https://cloud.example.com/path/to/favicon');
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_CREATED,
 			'secret' => 'newsecret',
-			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA256",
+			'qrUrl' => "otpauth://totp/$issuer%3Auser%40instance.com?secret=newsecret&issuer=$issuer&algorithm=SHA256&image=$image",
 		]);
 
 		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_CREATED));
