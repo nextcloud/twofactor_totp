@@ -1,0 +1,50 @@
+name: "\U0001F41B Bug report"
+description: Have you encountered a bug?
+body:
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Describe the exact steps that lead to the bug.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected behaviour
+      description: Tell us what should happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behaviour
+    attributes:
+      label: Actual behaviour
+      description: Tell us what happens instead.
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: See the admin page.
+      placeholder: e.g. 7.0.0
+
+  - type: input
+    id: nextcloud-version
+    attributes:
+      label: Nextcloud version
+      description: See the admin settings.
+      placeholder: e.g. 30.0.0
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional info
+      description: Any additional information related to the issue (e.g. browser console errors, logs, server configuration).
