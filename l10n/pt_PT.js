@@ -2,6 +2,8 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "Authenticate with a TOTP app" : "Autenticação com uma app TOTP",
+    "Two-Factor TOTP Provider" : "Provedor TOTP de dois fatores",
+    "Could not confirm TOTP" : "Não foi possível confirmar o TOTP",
     "Enable TOTP" : "Ativar TOTP",
     "Authentication code" : "Código de autenticação",
     "Verify" : "Verificar",
