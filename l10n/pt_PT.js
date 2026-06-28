@@ -1,6 +1,7 @@
 OC.L10N.register(
     "twofactor_totp",
     {
+    "TOTP two-factor authentication disabled by the administration" : "Autenticação de dois fatores TOTP desativada pela administração",
     "Authenticate with a TOTP app" : "Autenticação com uma app TOTP",
     "Two-Factor TOTP Provider" : "Provedor TOTP de dois fatores",
     "Could not confirm TOTP" : "Não foi possível confirmar o TOTP",
