@@ -71,12 +71,12 @@
     ],
     "testEnvironment": "jest-environment-jsdom",
     "transform": {
-      ".*\\.(js)$": "babel-jest",
+      ".*\\.(m?js)$": "babel-jest",
       ".*\\.(vue)$": "@vue/vue2-jest",
       ".*\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|avif)$": "jest-transform-stub"
     },
     "transformIgnorePatterns": [
-      "/node_modules/.*/.+\\.js$"
+      "/node_modules/(?!(?:@nextcloud/vue|@nextcloud/auth|@nextcloud/browser-storage|@nextcloud/dialogs|@nextcloud/initial-state|@nextcloud/password-confirmation|@nextcloud/router|@vueuse/core|@vueuse/shared)/)"
     ]
   }
 }
