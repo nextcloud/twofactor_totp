@@ -22,7 +22,6 @@ class Version170100Date20260611120000 extends SimpleMigrationStep {
 
 	#[Override]
 	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ?ISchemaWrapper {
-		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 		$table = $schema->getTable('twofactor_totp_secrets');
 
