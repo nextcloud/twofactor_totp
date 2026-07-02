@@ -1,8 +1,56 @@
 /*!
+ * SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/*!
+ * SPDX-FileCopyrightText: 2020 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: MIT
+ */
+
+/*!
+ * SPDX-FileCopyrightText: 2022 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/*!
+ * SPDX-FileCopyrightText: 2022 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: MIT
+ */
+
+/*!
+ * SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/*!
+ * SPDX-FileCopyrightText: 2025 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/*!
+ * SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+/*!
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2025 Nextcloud GmbH and Nextcloud contributors
+ */
+
+/*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
+ */
+
+/*!
+ * Toastify js 1.12.0
+ * https://github.com/apvarun/toastify-js
+ * @license MIT licensed
+ *
+ * Copyright (C) 2018 Varun A P
  */
 
 /*!
@@ -36,16 +84,16 @@
  */
 
 /*!
-* focus-trap 7.5.2
+* focus-trap 7.6.6
 * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
 */
 
 /*!
-* tabbable 6.2.0
+* tabbable 6.3.0
 * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
 */
 
-/*! @license DOMPurify 3.1.7 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.1.7/LICENSE */
+/*! @license DOMPurify 3.3.0 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.3.0/LICENSE */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
