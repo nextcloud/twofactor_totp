@@ -25,7 +25,7 @@
     "@nextcloud/axios": "^2.5.2",
     "@nextcloud/initial-state": "^3.0.0",
     "@nextcloud/logger": "^3.0.3",
-    "@nextcloud/password-confirmation": "^6",
+    "@nextcloud/password-confirmation": "^6.1.0",
     "@nextcloud/router": "^3.1.0",
     "pinia": "^2.3.1",
     "vue": "^3.5.39"
@@ -75,6 +75,7 @@
     "moduleNameMapper": {
       "^@vue/test-utils$": "<rootDir>/node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js",
       "^vue-demi$": "<rootDir>/node_modules/pinia/node_modules/vue-demi/lib/v3/index.cjs",
+      "^@nextcloud/axios$": "<rootDir>/node_modules/@nextcloud/axios/dist/index.js",
       "^@nextcloud/password-confirmation$": "<rootDir>/node_modules/@nextcloud/password-confirmation/dist/index.mjs",
       "^@nextcloud/vue/components/NcDialog$": "<rootDir>/node_modules/@nextcloud/vue/dist/components/NcDialog/index.mjs",
       "^@nextcloud/vue/components/NcPasswordField$": "<rootDir>/node_modules/@nextcloud/vue/dist/components/NcPasswordField/index.mjs",
@@ -90,7 +91,7 @@
       ".*\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|avif)$": "jest-transform-stub"
     },
     "transformIgnorePatterns": [
-      "/node_modules/(?!(?:@nextcloud/vue|@nextcloud/auth|@nextcloud/browser-storage|@nextcloud/initial-state|@nextcloud/password-confirmation|@vueuse/core|@vueuse/shared|debounce)/)"
+      "/node_modules/(?!(?:@nextcloud/vue|@nextcloud/auth|@nextcloud/axios|@nextcloud/browser-storage|@nextcloud/initial-state|@nextcloud/password-confirmation|@vueuse/core|@vueuse/shared|debounce|perfect-debounce)/)"
     ]
   }
 }
