@@ -11,6 +11,11 @@
       <directory suffix=".php">../lib</directory>
     </include>
   </source>
+  <coverage>
+    <report>
+      <clover outputFile="clover.xml"/>
+    </report>
+  </coverage>
   <testsuite name="TOTP 2FA Provider">
     <directory suffix="Test.php">.</directory>
   </testsuite>
