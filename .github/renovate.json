@@ -16,7 +16,7 @@
 	"rangeStrategy": "bump",
 	"rebaseWhen": "conflicted",
 	"ignoreUnstable": false,
-	"baseBranchPatterns": ["master", "stable26", "stable25"],
+	"baseBranchPatterns": ["master", "stable34", "stable33", "stable32"],
 	"enabledManagers": ["composer", "github-actions", "npm"],
 	"ignoreDeps": ["node", "npm", "php"],
 	"ignorePaths": [
@@ -63,9 +63,10 @@
 			"reviewers": []
 		},
 		{
-			"description": "Disable regular bumps for stable branches",
+			"description": "Only allow patch-level bumps for stable branches",
 			"enabled": false,
-			"matchBaseBranches": "/^stable(.)+/"
+			"matchBaseBranches": "/^stable(.)+/",
+			"matchUpdateTypes": ["major", "minor"]
 		},
 		{
 			"description": "Update dev dependencies monthly",
