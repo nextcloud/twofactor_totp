@@ -27,7 +27,7 @@
     "@nextcloud/logger": "^3.0.3",
     "@nextcloud/password-confirmation": "^6.1.0",
     "@nextcloud/router": "^3.1.0",
-    "pinia": "^2.3.1",
+    "pinia": "^3.0.4",
     "vue": "^3.5.39"
   },
   "browserslist": [
