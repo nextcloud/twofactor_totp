@@ -20,7 +20,6 @@
 	"enabledManagers": ["composer", "github-actions", "npm"],
 	"ignoreDeps": ["node", "npm", "php"],
 	"ignorePaths": [
-		".github/workflows/appstore-build-publish.yml",
 		".github/workflows/block-merge-freeze.yml",
 		".github/workflows/command-compile.yml",
 		".github/workflows/fixup.yml",
