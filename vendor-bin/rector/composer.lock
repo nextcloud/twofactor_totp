@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d223b4f220e6538c3b017551651841e9",
+    "content-hash": "481b5d621623c496c55a4dfbaf2f5c12",
     "packages": [],
     "packages-dev": [
         {
@@ -493,16 +493,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "2.4.6",
+            "version": "2.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "9b9e5c76618e4d359f65b54ca2eabcad3d1761ee"
+                "reference": "ba22f8c087848278fed6b4910d4cf1108096d8d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/9b9e5c76618e4d359f65b54ca2eabcad3d1761ee",
-                "reference": "9b9e5c76618e4d359f65b54ca2eabcad3d1761ee",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/ba22f8c087848278fed6b4910d4cf1108096d8d3",
+                "reference": "ba22f8c087848278fed6b4910d4cf1108096d8d3",
                 "shasum": ""
             },
             "require": {
@@ -541,7 +541,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.4.6"
+                "source": "https://github.com/rectorphp/rector/tree/2.5.7"
             },
             "funding": [
                 {
@@ -549,7 +549,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-17T11:56:28+00:00"
+            "time": "2026-07-13T15:24:18+00:00"
         },
         {
             "name": "webmozart/assert",
