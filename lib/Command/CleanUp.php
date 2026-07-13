@@ -68,7 +68,7 @@ class CleanUp extends Command {
 
 		$result = $qb->executeQuery();
 
-		while ($row = $result->fetch()) {
+		while ($row = $result->fetchAssociative()) {
 			$userIds[] = $row['user_id'];
 		}
 

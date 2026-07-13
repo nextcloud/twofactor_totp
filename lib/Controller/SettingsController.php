@@ -12,6 +12,8 @@ namespace OCA\TwoFactorTOTP\Controller;
 use InvalidArgumentException;
 use OCA\TwoFactorTOTP\Service\ITotp;
 use OCP\AppFramework\Http\Attribute\BruteForceProtection;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\PasswordConfirmationRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\Defaults;
@@ -35,10 +37,7 @@ class SettingsController extends ALoginSetupController {
 		parent::__construct($appName, $request);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @return JSONResponse
-	 */
+	#[NoAdminRequired]
 	public function state(): JSONResponse {
 		$user = $this->userSession->getUser();
 		if (is_null($user)) {
@@ -49,13 +48,8 @@ class SettingsController extends ALoginSetupController {
 		]);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @PasswordConfirmationRequired
-	 *
-	 * @param int $state
-	 * @param string|null $code for verification
-	 */
+	#[NoAdminRequired]
+	#[PasswordConfirmationRequired]
 	#[BruteForceProtection('totp_enable')]
 	public function enable(int $state, ?string $code = null): JSONResponse {
 		$user = $this->userSession->getUser();
@@ -74,7 +68,7 @@ class SettingsController extends ALoginSetupController {
 
 				$secretName = $this->getSecretName();
 				$issuer = $this->getSecretIssuer();
-				$algorithm = strtoupper($dbSecret->getAlgorithm());
+				$algorithm = strtoupper((string)$dbSecret->getAlgorithm());
 				$image = $this->urlGenerator->getAbsoluteURL(
 					$this->urlGenerator->linkToRoute('theming.Icon.getFavicon', ['app' => 'core'])
 				);
