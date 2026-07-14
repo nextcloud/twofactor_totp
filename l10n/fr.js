@@ -11,6 +11,7 @@ OC.L10N.register(
     "A two-factor authentication provider for TOTP (RFC 6238)" : "Un fournisseur d'authentification à deux facteurs pour TOTP (RFC 6238)",
     "Could not enable TOTP" : "Impossible d'activer les mots de passe à usage unique (TOTP)",
     "Could not verify your key. Please try again" : "Impossible de vérifier votre clé. Merci de réeessayer",
+    "Could not confirm TOTP" : "Impossible de confirmer le code TOTP.",
     "Enable TOTP" : "Activer les mots de passe à usage unique (TOTP)",
     "Your new TOTP secret is:" : "Votre nouveau secret TOTP est :",
     "For quick setup, scan this QR code with your TOTP app:" : "Pour un paramétrage facile, scannez ce QR code avec votre application TOTP.",
