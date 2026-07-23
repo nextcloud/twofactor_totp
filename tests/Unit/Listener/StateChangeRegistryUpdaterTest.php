@@ -30,7 +30,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 		parent::setUp();
 
 		$this->registry = $this->createMock(IRegistry::class);
-		$this->provider = $this->createMock(TotpProvider::class);
+		$this->provider = $this->createStub(TotpProvider::class);
 
 		$this->listener = new StateChangeRegistryUpdater($this->registry, $this->provider);
 	}

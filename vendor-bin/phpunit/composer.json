@@ -1,11 +1,11 @@
 {
     "config": {
         "platform": {
-            "php": "8.2"
+            "php": "8.3"
 	}
     },
     "require-dev": {
-        "christophwurst/nextcloud_testing": "^2",
-        "phpunit/phpunit": "^11"
+        "christophwurst/nextcloud_testing": "^3.0",
+        "phpunit/phpunit": "^12"
     }
 }
