@@ -4,10 +4,11 @@
  */
 
 import { config } from '@vue/test-utils'
+import { expect } from 'chai'
 
 config.global.mocks.t = (app, str) => str
 
-global.expect = require('chai').expect
+global.expect = expect
 window.Date = Date
 
 // https://github.com/jsdom/jsdom/issues/3363
