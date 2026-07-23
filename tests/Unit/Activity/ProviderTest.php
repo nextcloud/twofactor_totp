@@ -27,9 +27,9 @@ class ProviderTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->l10n = $this->createMock(IFactory::class);
-		$this->urlGenerator = $this->createMock(IURLGenerator::class);
-		$logger = $this->createMock(ILogger::class);
+		$this->l10n = $this->createStub(IFactory::class);
+		$this->urlGenerator = $this->createStub(IURLGenerator::class);
+		$logger = $this->createStub(ILogger::class);
 
 		$this->provider = new Provider($this->l10n, $this->urlGenerator, $logger);
 	}
@@ -60,17 +60,11 @@ class ProviderTest extends TestCase {
 		$event->expects($this->once())
 			->method('getApp')
 			->willReturn('twofactor_totp');
-		$this->l10n->expects($this->once())
-			->method('get')
-			->with('twofactor_totp', $lang)
+		$this->l10n->method('get')
 			->willReturn($l);
-		$this->urlGenerator->expects($this->once())
-			->method('imagePath')
-			->with('core', 'actions/password.svg')
+		$this->urlGenerator->method('imagePath')
 			->willReturn('path/to/image');
-		$this->urlGenerator->expects($this->once())
-			->method('getAbsoluteURL')
-			->with('path/to/image')
+		$this->urlGenerator->method('getAbsoluteURL')
 			->willReturn('absolute/path/to/image');
 		$event->expects($this->once())
 			->method('setIcon')

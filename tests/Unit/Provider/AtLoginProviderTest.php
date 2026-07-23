@@ -19,7 +19,7 @@ class AtLoginProviderTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$urlGenerator = $this->createMock(IURLGenerator::class);
+		$urlGenerator = $this->createStub(IURLGenerator::class);
 
 		$this->provider = new AtLoginProvider(
 			$urlGenerator

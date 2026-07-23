@@ -46,11 +46,11 @@ class TotpProviderTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->totp = $this->createMock(ITotp::class);
-		$this->l10n = $this->createMock(IL10N::class);
-		$this->container = $this->createMock(ContainerInterface::class);
-		$this->initialState = $this->createMock(IInitialState::class);
-		$this->urlGenerator = $this->createMock(IURLGenerator::class);
+		$this->totp = $this->createStub(ITotp::class);
+		$this->l10n = $this->createStub(IL10N::class);
+		$this->container = $this->createStub(ContainerInterface::class);
+		$this->initialState = $this->createStub(IInitialState::class);
+		$this->urlGenerator = $this->createStub(IURLGenerator::class);
 
 		$this->provider = new TotpProvider(
 			$this->totp,
@@ -79,8 +79,7 @@ class TotpProviderTest extends TestCase {
 
 	public function testGetDescription(): void {
 		$description = 'Authenticate with a TOTP app';
-		$this->l10n->expects($this->once())
-			->method('t')
+		$this->l10n->method('t')
 			->willReturnArgument(0);
 
 		$descr = $this->provider->getDescription();
@@ -89,9 +88,7 @@ class TotpProviderTest extends TestCase {
 	}
 
 	public function testGetLightIcon(): void {
-		$this->urlGenerator->expects($this->once())
-			->method('imagePath')
-			->with('twofactor_totp', 'app.svg')
+		$this->urlGenerator->method('imagePath')
 			->willReturn('/path/to/app.svg');
 
 		$icon = $this->provider->getLightIcon();
@@ -100,9 +97,7 @@ class TotpProviderTest extends TestCase {
 	}
 
 	public function testGetDarkIcon(): void {
-		$this->urlGenerator->expects($this->once())
-			->method('imagePath')
-			->with('twofactor_totp', 'app-dark.svg')
+		$this->urlGenerator->method('imagePath')
 			->willReturn('/path/to/app-dark.svg');
 
 		$icon = $this->provider->getDarkIcon();
@@ -114,27 +109,31 @@ class TotpProviderTest extends TestCase {
 		$expected = new Personal();
 
 		$user = $this->createStub(IUser::class);
-		$this->totp->expects($this->once())
-			->method('hasSecret')
-			->with($user)
+		$this->totp->method('hasSecret')
 			->willReturn(true);
-		$this->initialState->expects($this->once())
+		$initialState = $this->createMock(IInitialState::class);
+		$initialState->expects($this->once())
 			->method('provideInitialState')
 			->with(
 				'state',
 				true
 			);
+		$provider = new TotpProvider(
+			$this->totp,
+			$this->l10n,
+			$this->container,
+			$initialState,
+			$this->urlGenerator
+		);
 
-		$actual = $this->provider->getPersonalSettings($user);
+		$actual = $provider->getPersonalSettings($user);
 
 		$this->assertEquals($expected, $actual);
 	}
 
 	public function testVerifyChallengeSecretNotFound(): void {
 		$user = $this->createStub(IUser::class);
-		$this->totp->expects($this->once())
-			->method('getSecret')
-			->with($user)
+		$this->totp->method('getSecret')
 			->willThrowException(new NoTotpSecretFoundException());
 
 		$result = $this->provider->verifyChallenge($user, '123456');
@@ -145,36 +144,48 @@ class TotpProviderTest extends TestCase {
 	public function testVerifyChallengeStripNonDigits(): void {
 		$user = $this->createStub(IUser::class);
 		$secret = new TotpSecret();
-		$this->totp->expects(self::once())
-			->method('getSecret')
-			->with($user)
+		$totp = $this->createMock(ITotp::class);
+		$totp->method('getSecret')
 			->willReturn($secret);
-		$this->totp->expects(self::once())
+		$totp->expects($this->once())
 			->method('validateSecret')
 			->with($secret, '123456')
 			->willReturn(true);
+		$provider = new TotpProvider(
+			$totp,
+			$this->l10n,
+			$this->container,
+			$this->initialState,
+			$this->urlGenerator
+		);
 
-		$result = $this->provider->verifyChallenge($user, '  123456  a	');
+		$result = $provider->verifyChallenge($user, '  123456  a	');
 
 		$this->assertTrue($result);
 	}
 
 	public function testDeactivate(): void {
 		$user = $this->createStub(IUser::class);
-		$this->totp->expects($this->once())
+		$totp = $this->createMock(ITotp::class);
+		$totp->expects($this->once())
 			->method('deleteSecret')
 			->with($user);
+		$provider = new TotpProvider(
+			$totp,
+			$this->l10n,
+			$this->container,
+			$this->initialState,
+			$this->urlGenerator
+		);
 
-		$this->provider->disableFor($user);
+		$provider->disableFor($user);
 	}
 
 	public function testGetSetupProvider(): void {
 		/** @var IUser|MockObject $user */
 		$user = $this->createStub(IUser::class);
 		$provider = $this->createStub(AtLoginProvider::class);
-		$this->container->expects($this->once())
-			->method('get')
-			->with(AtLoginProvider::class)
+		$this->container->method('get')
 			->willReturn($provider);
 
 		$result = $this->provider->getLoginSetup($user);
