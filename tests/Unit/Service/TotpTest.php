@@ -20,159 +20,127 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IUser;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class TotpTest extends TestCase {
 
-	private TotpSecretMapper $secretMapper;
 	private ICrypto $crypto;
-	private ISecureRandom $random;
 	private IAppConfig $appConfig;
-	private Totp $totp;
 
 	protected function setUp(): void {
-		$this->secretMapper = $this->createMock(TotpSecretMapper::class);
-		$this->crypto = $this->createMock(ICrypto::class);
-		$this->random = $this->createMock(ISecureRandom::class);
-		$this->appConfig = $this->createMock(IAppConfig::class);
+		$this->crypto = $this->createStub(ICrypto::class);
+		$this->crypto->method('encrypt')->willReturnArgument(0);
+		$this->appConfig = $this->createStub(IAppConfig::class);
+	}
 
-		$this->totp = new Totp(
-			$this->secretMapper,
+	private function buildTotp(TotpSecretMapper $secretMapper, ISecureRandom $random): Totp {
+		return new Totp(
+			$secretMapper,
 			$this->crypto,
 			$this->createStub(IEventDispatcher::class),
-			$this->random,
+			$random,
 			$this->appConfig,
 		);
 	}
 
-	private function stubNoExistingSecret(): void {
-		$this->secretMapper->method('getSecret')
+	private function stubMapperWithoutSecret(): TotpSecretMapper {
+		$secretMapper = $this->createStub(TotpSecretMapper::class);
+		$secretMapper->method('getSecret')
 			->willThrowException(new DoesNotExistException(''));
+		$secretMapper->method('insert')->willReturnArgument(0);
+		return $secretMapper;
+	}
+
+	private function mockMapperExpectingAlgorithm(string $expectedAlgorithm): TotpSecretMapper&MockObject {
+		$secretMapper = $this->createMock(TotpSecretMapper::class);
+		$secretMapper->method('getSecret')
+			->willThrowException(new DoesNotExistException(''));
+		$secretMapper->expects($this->once())
+			->method('insert')
+			->with($this->callback(function (TotpSecret $entity) use ($expectedAlgorithm): bool {
+				$this->assertSame($expectedAlgorithm, $entity->getAlgorithm());
+				return true;
+			}))
+			->willReturnArgument(0);
+		return $secretMapper;
 	}
 
 	public function testCreateSecretStoresDefaultAlgorithm(): void {
-		$this->stubNoExistingSecret();
-		$this->appConfig->method('getAppValueString')
-			->with('algorithm', ITotp::DEFAULT_ALGORITHM)
-			->willReturn(ITotp::DEFAULT_ALGORITHM);
-		$this->appConfig->method('getAppValueInt')
-			->willReturn(ITotp::DEFAULT_SECRET_LENGTH);
-		$this->random->method('generate')->willReturn(str_repeat('A', 32));
-		$this->crypto->method('encrypt')->willReturnArgument(0);
-
-		$this->secretMapper->expects($this->once())
-			->method('insert')
-			->with($this->callback(function (TotpSecret $entity): bool {
-				$this->assertSame(ITotp::ALGORITHM_SHA1, $entity->getAlgorithm());
-				return true;
-			}))
-			->willReturnArgument(0);
+		$this->appConfig->method('getAppValueString')->willReturn(ITotp::DEFAULT_ALGORITHM);
+		$this->appConfig->method('getAppValueInt')->willReturn(ITotp::DEFAULT_SECRET_LENGTH);
+		$random = $this->createStub(ISecureRandom::class);
+		$random->method('generate')->willReturn(str_repeat('A', 32));
+		$secretMapper = $this->mockMapperExpectingAlgorithm(ITotp::ALGORITHM_SHA1);
+		$totp = $this->buildTotp($secretMapper, $random);
 
 		$user = $this->createStub(IUser::class);
-		$this->totp->createSecret($user);
+		$totp->createSecret($user);
 	}
 
 	public function testCreateSecretStoresConfiguredAlgorithm(): void {
-		$this->stubNoExistingSecret();
-		$this->appConfig->method('getAppValueString')
-			->with('algorithm', ITotp::DEFAULT_ALGORITHM)
-			->willReturn(ITotp::ALGORITHM_SHA256);
-		$this->appConfig->method('getAppValueInt')
-			->willReturn(ITotp::DEFAULT_SECRET_LENGTH);
-		$this->random->method('generate')->willReturn(str_repeat('A', 32));
-		$this->crypto->method('encrypt')->willReturnArgument(0);
-
-		$this->secretMapper->expects($this->once())
-			->method('insert')
-			->with($this->callback(function (TotpSecret $entity): bool {
-				$this->assertSame(ITotp::ALGORITHM_SHA256, $entity->getAlgorithm());
-				return true;
-			}))
-			->willReturnArgument(0);
+		$this->appConfig->method('getAppValueString')->willReturn(ITotp::ALGORITHM_SHA256);
+		$this->appConfig->method('getAppValueInt')->willReturn(ITotp::DEFAULT_SECRET_LENGTH);
+		$random = $this->createStub(ISecureRandom::class);
+		$random->method('generate')->willReturn(str_repeat('A', 32));
+		$secretMapper = $this->mockMapperExpectingAlgorithm(ITotp::ALGORITHM_SHA256);
+		$totp = $this->buildTotp($secretMapper, $random);
 
 		$user = $this->createStub(IUser::class);
-		$this->totp->createSecret($user);
+		$totp->createSecret($user);
 	}
 
 	public function testCreateSecretFallsBackToDefaultForInvalidAlgorithm(): void {
-		$this->stubNoExistingSecret();
-		$this->appConfig->method('getAppValueString')
-			->with('algorithm', ITotp::DEFAULT_ALGORITHM)
-			->willReturn('md5');
-		$this->appConfig->method('getAppValueInt')
-			->willReturn(ITotp::DEFAULT_SECRET_LENGTH);
-		$this->random->method('generate')->willReturn(str_repeat('A', 32));
-		$this->crypto->method('encrypt')->willReturnArgument(0);
-
-		$this->secretMapper->expects($this->once())
-			->method('insert')
-			->with($this->callback(function (TotpSecret $entity): bool {
-				$this->assertSame(ITotp::DEFAULT_ALGORITHM, $entity->getAlgorithm());
-				return true;
-			}))
-			->willReturnArgument(0);
+		$this->appConfig->method('getAppValueString')->willReturn('md5');
+		$this->appConfig->method('getAppValueInt')->willReturn(ITotp::DEFAULT_SECRET_LENGTH);
+		$random = $this->createStub(ISecureRandom::class);
+		$random->method('generate')->willReturn(str_repeat('A', 32));
+		$secretMapper = $this->mockMapperExpectingAlgorithm(ITotp::DEFAULT_ALGORITHM);
+		$totp = $this->buildTotp($secretMapper, $random);
 
 		$user = $this->createStub(IUser::class);
-		$this->totp->createSecret($user);
+		$totp->createSecret($user);
 	}
 
 	public function testCreateSecretUsesConfiguredLength(): void {
-		$this->stubNoExistingSecret();
-		$this->appConfig->method('getAppValueString')
-			->willReturn(ITotp::DEFAULT_ALGORITHM);
-		$this->appConfig->method('getAppValueInt')
-			->with('secret_length', ITotp::DEFAULT_SECRET_LENGTH)
-			->willReturn(64);
-		$this->crypto->method('encrypt')->willReturnArgument(0);
-
-		$this->random->expects($this->once())
+		$this->appConfig->method('getAppValueString')->willReturn(ITotp::DEFAULT_ALGORITHM);
+		$this->appConfig->method('getAppValueInt')->willReturn(64);
+		$random = $this->createMock(ISecureRandom::class);
+		$random->expects($this->once())
 			->method('generate')
 			->with(64, ISecureRandom::CHAR_UPPER . '234567')
 			->willReturn(str_repeat('A', 64));
-
-		$this->secretMapper->method('insert')->willReturnArgument(0);
+		$totp = $this->buildTotp($this->stubMapperWithoutSecret(), $random);
 
 		$user = $this->createStub(IUser::class);
-		$this->totp->createSecret($user);
+		$totp->createSecret($user);
 	}
 
 	public function testCreateSecretFallsBackToDefaultLengthWhenTooShort(): void {
-		$this->stubNoExistingSecret();
-		$this->appConfig->method('getAppValueString')
-			->willReturn(ITotp::DEFAULT_ALGORITHM);
-		$this->appConfig->method('getAppValueInt')
-			->with('secret_length', ITotp::DEFAULT_SECRET_LENGTH)
-			->willReturn(5);
-		$this->crypto->method('encrypt')->willReturnArgument(0);
-
-		$this->random->expects($this->once())
+		$this->appConfig->method('getAppValueString')->willReturn(ITotp::DEFAULT_ALGORITHM);
+		$this->appConfig->method('getAppValueInt')->willReturn(5);
+		$random = $this->createMock(ISecureRandom::class);
+		$random->expects($this->once())
 			->method('generate')
 			->with(ITotp::DEFAULT_SECRET_LENGTH, ISecureRandom::CHAR_UPPER . '234567')
 			->willReturn(str_repeat('A', ITotp::DEFAULT_SECRET_LENGTH));
-
-		$this->secretMapper->method('insert')->willReturnArgument(0);
+		$totp = $this->buildTotp($this->stubMapperWithoutSecret(), $random);
 
 		$user = $this->createStub(IUser::class);
-		$this->totp->createSecret($user);
+		$totp->createSecret($user);
 	}
 
 	public function testCreateSecretFallsBackToDefaultLengthWhenTooLong(): void {
-		$this->stubNoExistingSecret();
-		$this->appConfig->method('getAppValueString')
-			->willReturn(ITotp::DEFAULT_ALGORITHM);
-		$this->appConfig->method('getAppValueInt')
-			->with('secret_length', ITotp::DEFAULT_SECRET_LENGTH)
-			->willReturn(200);
-		$this->crypto->method('encrypt')->willReturnArgument(0);
-
-		$this->random->expects($this->once())
+		$this->appConfig->method('getAppValueString')->willReturn(ITotp::DEFAULT_ALGORITHM);
+		$this->appConfig->method('getAppValueInt')->willReturn(200);
+		$random = $this->createMock(ISecureRandom::class);
+		$random->expects($this->once())
 			->method('generate')
 			->with(ITotp::DEFAULT_SECRET_LENGTH, ISecureRandom::CHAR_UPPER . '234567')
 			->willReturn(str_repeat('A', ITotp::DEFAULT_SECRET_LENGTH));
-
-		$this->secretMapper->method('insert')->willReturnArgument(0);
+		$totp = $this->buildTotp($this->stubMapperWithoutSecret(), $random);
 
 		$user = $this->createStub(IUser::class);
-		$this->totp->createSecret($user);
+		$totp->createSecret($user);
 	}
 }

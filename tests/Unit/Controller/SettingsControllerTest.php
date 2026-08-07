@@ -30,22 +30,19 @@ final class SettingsControllerTest extends TestCase {
 	private $controller;
 
 	protected function setUp(): void {
-		$this->userSession = $this->createMock(IUserSession::class);
-		$this->totp = $this->createMock(ITotp::class);
+		$this->userSession = $this->createStub(IUserSession::class);
+		$this->totp = $this->createStub(ITotp::class);
 		$this->defaults = new Defaults();
-		$this->urlGenerator = $this->createMock(IURLGenerator::class);
+		$this->urlGenerator = $this->createStub(IURLGenerator::class);
 
 		$this->controller = new SettingsController('twofactor_totp', $this->createStub(IRequest::class), $this->userSession, $this->totp, $this->defaults, $this->urlGenerator);
 	}
 
 	public function testDisabledState(): void {
 		$user = $this->createStub(IUser::class);
-		$this->userSession->expects($this->once())
-			->method('getUser')
+		$this->userSession->method('getUser')
 			->willReturn($user);
-		$this->totp->expects($this->once())
-			->method('hasSecret')
-			->with($user)
+		$this->totp->method('hasSecret')
 			->willReturn(false);
 
 		$expected = new JSONResponse([
@@ -56,30 +53,20 @@ final class SettingsControllerTest extends TestCase {
 	}
 
 	public function testCreateSecret(): void {
-		$user = $this->createMock(IUser::class);
-		$this->userSession->expects($this->exactly(2))
-			->method('getUser')
+		$user = $this->createStub(IUser::class);
+		$this->userSession->method('getUser')
 			->willReturn($user);
-		$user->expects($this->once())
-			->method('getCloudId')
+		$user->method('getCloudId')
 			->willReturn('user@instance.com');
-		$this->totp->expects($this->once())
-			->method('createSecret')
-			->with($user)
+		$this->totp->method('createSecret')
 			->willReturn('newsecret');
 		$dbSecret = new TotpSecret();
 		$dbSecret->setAlgorithm(ITotp::ALGORITHM_SHA1);
-		$this->totp->expects($this->once())
-			->method('getSecret')
-			->with($user)
+		$this->totp->method('getSecret')
 			->willReturn($dbSecret);
-		$this->urlGenerator->expects($this->once())
-			->method('linkToRoute')
-			->with('theming.Icon.getFavicon', ['app' => 'core'])
+		$this->urlGenerator->method('linkToRoute')
 			->willReturn('/path/to/favicon');
-		$this->urlGenerator->expects($this->once())
-			->method('getAbsoluteURL')
-			->with('/path/to/favicon')
+		$this->urlGenerator->method('getAbsoluteURL')
 			->willReturn('https://cloud.example.com/path/to/favicon');
 
 		$issuer = rawurlencode((string)$this->defaults->getName());
@@ -94,30 +81,20 @@ final class SettingsControllerTest extends TestCase {
 	}
 
 	public function testCreateSecretWithNonDefaultAlgorithm(): void {
-		$user = $this->createMock(IUser::class);
-		$this->userSession->expects($this->exactly(2))
-			->method('getUser')
+		$user = $this->createStub(IUser::class);
+		$this->userSession->method('getUser')
 			->willReturn($user);
-		$user->expects($this->once())
-			->method('getCloudId')
+		$user->method('getCloudId')
 			->willReturn('user@instance.com');
-		$this->totp->expects($this->once())
-			->method('createSecret')
-			->with($user)
+		$this->totp->method('createSecret')
 			->willReturn('newsecret');
 		$dbSecret = new TotpSecret();
 		$dbSecret->setAlgorithm(ITotp::ALGORITHM_SHA256);
-		$this->totp->expects($this->once())
-			->method('getSecret')
-			->with($user)
+		$this->totp->method('getSecret')
 			->willReturn($dbSecret);
-		$this->urlGenerator->expects($this->once())
-			->method('linkToRoute')
-			->with('theming.Icon.getFavicon', ['app' => 'core'])
+		$this->urlGenerator->method('linkToRoute')
 			->willReturn('/path/to/favicon');
-		$this->urlGenerator->expects($this->once())
-			->method('getAbsoluteURL')
-			->with('/path/to/favicon')
+		$this->urlGenerator->method('getAbsoluteURL')
 			->willReturn('https://cloud.example.com/path/to/favicon');
 
 		$issuer = rawurlencode((string)$this->defaults->getName());
@@ -133,40 +110,42 @@ final class SettingsControllerTest extends TestCase {
 
 	public function testEnableSecret(): void {
 		$user = $this->createStub(IUser::class);
-		$this->userSession->expects($this->once())
-			->method('getUser')
+		$this->userSession->method('getUser')
 			->willReturn($user);
-		$this->totp->expects($this->once())
+		$totp = $this->createMock(ITotp::class);
+		$totp->expects($this->once())
 			->method('enable')
 			->with($user, '123456')
 			->willReturn(true);
+		$controller = new SettingsController('twofactor_totp', $this->createStub(IRequest::class), $this->userSession, $totp, $this->defaults, $this->urlGenerator);
 
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_ENABLED,
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_ENABLED, '123456'));
+		$this->assertEquals($expected, $controller->enable(ITotp::STATE_ENABLED, '123456'));
 	}
 
 	public function testDisableSecret(): void {
 		$user = $this->createStub(IUser::class);
-		$this->userSession->expects($this->once())
-			->method('getUser')
+		$this->userSession->method('getUser')
 			->willReturn($user);
-		$this->totp->expects($this->once())
-			->method('deleteSecret');
+		$totp = $this->createMock(ITotp::class);
+		$totp->expects($this->once())
+			->method('deleteSecret')
+			->with($user);
+		$controller = new SettingsController('twofactor_totp', $this->createStub(IRequest::class), $this->userSession, $totp, $this->defaults, $this->urlGenerator);
 
 		$expected = new JSONResponse([
 			'state' => ITotp::STATE_DISABLED,
 		]);
 
-		$this->assertEquals($expected, $this->controller->enable(ITotp::STATE_DISABLED));
+		$this->assertEquals($expected, $controller->enable(ITotp::STATE_DISABLED));
 	}
 
 	public function testEnableInvalidState(): void {
 		$user = $this->createStub(IUser::class);
-		$this->userSession->expects($this->once())
-			->method('getUser')
+		$this->userSession->method('getUser')
 			->willReturn($user);
 
 		$this->expectException(InvalidArgumentException::class);

@@ -25,7 +25,7 @@ return RectorConfig::configure()
 	)
 	->withSets([
 		NextcloudSets::NEXTCLOUD_35,
-		PHPUnitSetList::PHPUNIT_110,
+		PHPUnitSetList::PHPUNIT_120,
 	])
 	->withPhpSets(
 		php82: true,
