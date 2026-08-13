@@ -2,7 +2,7 @@ OC.L10N.register(
     "twofactor_totp",
     {
     "You enabled TOTP two-factor authentication for your account" : "Hesabınız için tek kullanımlık parola ile iki adımlı doğrulamayı açtınız",
-    "You disabled TOTP two-factor authentication for your account" : "Hesabınız için tek kullanımlık parola ile iki adımlı doğrulamayı kullanımdan kaldırdınız",
+    "You disabled TOTP two-factor authentication for your account" : "Hesabınız için tek kullanımlık parola ile iki adımlı doğrulamayı kapattınız",
     "TOTP two-factor authentication disabled by the administration" : "Tek kullanımlık parola ile iki adımlı doğrulama yönetim tarafından kapatılmış",
     "TOTP (Authenticator app)" : "Tek kullanımlık parola (kimlik doğrulama uygulaması)",
     "Authenticate with a TOTP app" : "Tek kullanımlık parola uygulamasıyla kimlik doğrulama",
