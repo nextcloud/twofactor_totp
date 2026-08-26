@@ -65,7 +65,7 @@ jobs:
           php -f nextcloud/occ config:system:set overwritehost --value=localhost
           php -f nextcloud/occ config:system:set overwrite.cli.url --value=https://localhost
       - name: Check out the app
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
           path: nextcloud/apps/twofactor_totp
