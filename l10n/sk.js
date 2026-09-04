@@ -11,6 +11,7 @@ OC.L10N.register(
     "A two-factor authentication provider for TOTP (RFC 6238)" : "Poskytovateľ dvojfaktorového overenia TOTP (RFC 6238)",
     "Could not enable TOTP" : "Nepodarilo sa zapnúť TOTP",
     "Could not verify your key. Please try again" : "Nie je možné overiť váš kľúč. Skúste to znovu",
+    "Could not confirm TOTP" : "Nepodarilo sa potvrdiť TOTP",
     "Enable TOTP" : "Povoliť TOTP",
     "Your new TOTP secret is:" : "Váš nový TOTP kľúč je:",
     "For quick setup, scan this QR code with your TOTP app:" : "Pre rýchle nastavenie, naskenujte tento QR kód pomocou svojej aplikácie TOTP:",
