@@ -1,0 +1,2 @@
+(()=>{"use strict";const e=document.querySelector('.totp-form input[name="challenge"]');e&&function(e){e.addEventListener("input",()=>{const t=e.value.replace(/\D/g,"");t!==e.value&&(e.value=t)})}(e)})();
+//# sourceMappingURL=twofactor_totp-main-challenge.js.map?v=85242c9a4e4d172c7b4f
