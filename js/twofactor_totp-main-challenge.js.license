@@ -1,0 +1,8 @@
+SPDX-License-Identifier: AGPL-3.0-only
+SPDX-FileCopyrightText: Christoph Wurst <christoph@winzerhof-wurst.at>
+
+
+This file is generated from multiple sources. Included packages:
+- twofactor_totp
+	- version: 18.0.0-dev.0
+	- license: AGPL-3.0-only
