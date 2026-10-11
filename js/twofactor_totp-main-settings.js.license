@@ -1,7 +1,6 @@
 SPDX-License-Identifier: MIT
 SPDX-License-Identifier: ISC
 SPDX-License-Identifier: GPL-3.0-or-later
-SPDX-License-Identifier: BSD-3-Clause
 SPDX-License-Identifier: AGPL-3.0-or-later
 SPDX-License-Identifier: AGPL-3.0-only
 SPDX-License-Identifier: (MPL-2.0 OR Apache-2.0)
@@ -9,12 +8,10 @@ SPDX-FileCopyrightText: escape-html developers
 SPDX-FileCopyrightText: debounce developers
 SPDX-FileCopyrightText: Varun A P
 SPDX-FileCopyrightText: Tobias Koppers @sokra
-SPDX-FileCopyrightText: T. Jameson Little <t.jameson.little@gmail.com>
 SPDX-FileCopyrightText: Roman Shtylman <shtylman@gmail.com>
 SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
 SPDX-FileCopyrightText: Matt Zabriskie
 SPDX-FileCopyrightText: GitHub Inc.
-SPDX-FileCopyrightText: Feross Aboukhadijeh
 SPDX-FileCopyrightText: Evan You
 SPDX-FileCopyrightText: Dr.-Ing. Mario Heiderich, Cure53 <mario@cure53.de> (https://cure53.de/)
 SPDX-FileCopyrightText: Denis Pushkarev
@@ -76,7 +73,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 3.1.0
 	- license: GPL-3.0-or-later
 - @nextcloud/vue
-	- version: 8.39.0
+	- version: 8.41.0
 	- license: AGPL-3.0-or-later
 - @vueuse/core
 	- version: 11.3.0
@@ -85,13 +82,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 11.3.0
 	- license: MIT
 - axios
-	- version: 1.18.1
-	- license: MIT
-- base64-js
-	- version: 1.5.1
-	- license: MIT
-- buffer
-	- version: 6.0.3
+	- version: 1.20.0
 	- license: MIT
 - core-js
 	- version: 3.37.0
@@ -103,7 +94,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 2.2.0
 	- license: MIT
 - dompurify
-	- version: 3.4.11
+	- version: 3.4.16
 	- license: (MPL-2.0 OR Apache-2.0)
 - escape-html
 	- version: 1.0.3
@@ -111,9 +102,6 @@ This file is generated from multiple sources. Included packages:
 - focus-trap
 	- version: 7.8.0
 	- license: MIT
-- ieee754
-	- version: 1.2.1
-	- license: BSD-3-Clause
 - process
 	- version: 0.11.10
 	- license: MIT
@@ -121,7 +109,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 4.0.0
 	- license: MIT
 - tabbable
-	- version: 6.4.0
+	- version: 6.5.0
 	- license: MIT
 - toastify-js
 	- version: 1.12.0
