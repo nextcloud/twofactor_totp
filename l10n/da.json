@@ -10,7 +10,7 @@
     "Could not enable TOTP" : "Kunne ikke aktivere TOTP",
     "Could not verify your key. Please try again" : "Din nøgle kunne ikke bekræftes. Prøv igen",
     "Could not confirm TOTP" : "TOTP kunne ikke bekræftes",
-    "Enable TOTP" : "Aktiver TOTP",
+    "Enable TOTP" : "Aktivér TOTP",
     "Your new TOTP secret is:" : "Din nye TOTP-hemmelighed er:",
     "For quick setup, scan this QR code with your TOTP app:" : "For hurtig opsætning skal du scanne denne QR-kode med din TOTP-app:",
     "After you configured your app, enter a test code below to ensure everything works correctly:" : "Når du har konfigureret din app, skal du indtaste en testkode nedenfor for at sikre, at alt fungerer korrekt:",
