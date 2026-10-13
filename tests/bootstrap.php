@@ -1,11 +1,18 @@
 <?php
 
-/*
- * SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
- * SPDX-License-Identifier: AGPL-3.0-only
+declare(strict_types=1);
+
+/**
+ * SPDX-FileCopyrightText: 2020 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-require_once __DIR__ . '/../../../lib/base.php';
-require_once __DIR__ . '/../../../tests/bootstrap.php';
+use OCP\App\IAppManager;
+use OCP\Server;
 
-\OC_App::loadApp('twofactor_totp');
+define('PHPUNIT_RUN', 1);
+
+require_once __DIR__ . '/../../../lib/base.php';
+require_once __DIR__ . '/../../../tests/autoload.php';
+
+Server::get(IAppManager::class)->loadApp('twofactor_totp');
