@@ -10,7 +10,7 @@ acad44f3e99b665897766ce90374dd03 block-merge-freeze.yml
 99024d814801405672676fd03f57c2ce lint-stylelint.yml
 e65c909a335f55dae1f950fcc8f28ce9 node-test.yml
 03759c9dc0fa748cb927b9f9cadf2925 node.yml
-f1909c78987565cb19a471c60dc53950 npm-audit-fix.yml
+db73bd92859c4fb9d0489c0378a73d9e npm-audit-fix.yml
 cc0602ed005f19639c69c0b975c9c84f playwright.yml
 2639f2b96989a4fcbb441ca8f1fecb2f pr-feedback.yml
 fa1cab1471a6a7a7a0622744f8d6ab12 psalm.yml
