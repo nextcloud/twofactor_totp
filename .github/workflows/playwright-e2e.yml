@@ -12,6 +12,36 @@ env:
   CI: true
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest-low
+    permissions:
+      contents: read
+      pull-requests: read
+
+    outputs:
+      src: ${{ steps.changes.outputs.src }}
+
+    steps:
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        id: changes
+        continue-on-error: true
+        with:
+          filters: |
+            src:
+              - '.github/workflows/playwright-e2e.yml'
+              - 'appinfo/**'
+              - 'composer.json'
+              - 'composer.lock'
+              - 'css/**'
+              - 'img/**'
+              - 'lib/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'playwright.config.js'
+              - 'src/**'
+              - 'templates/**'
+              - 'webpack.config.js'
+
   node-version:
     runs-on: ubuntu-latest-low
     outputs:
@@ -49,8 +79,10 @@ jobs:
     runs-on: [ubuntu-latest, self-hosted]
     name: Playwright E2E tests
     needs:
+      - changes
       - node-version
       - matrix
+    if: needs.changes.outputs.src != 'false'
     steps:
       - name: Set up Nextcloud env
         uses: ChristophWurst/setup-nextcloud@14cf58de73855aa30212721e8177ca45626e4477 # v0.4.2
@@ -133,3 +165,17 @@ jobs:
       - name: Print server logs
         if: always()
         run: cat nextcloud/data/nextcloud.log*
+
+  summary:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest-low
+    needs: [changes, test]
+
+    if: always()
+
+    name: playwright-summary
+
+    steps:
+      - name: Summary status
+        run: if ${{ needs.changes.outputs.src != 'false' && needs.test.result != 'success' }}; then exit 1; fi
