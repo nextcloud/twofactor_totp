@@ -9,6 +9,14 @@ module.exports = {
 		'plugin:vue/vue3-recommended',
 		'plugin:chai-friendly/recommended'
 	],
+	overrides: [
+		{
+			files: ['src/tests/**/*.js'],
+			globals: {
+				vi: 'readonly',
+			},
+		},
+	],
 	rules: {
 		// v-model:arg is valid Vue 3 syntax; the Vue 2 rule from @nextcloud must be disabled
 		'vue/no-v-model-argument': 'off',

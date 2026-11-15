@@ -8,14 +8,14 @@ import { saveState } from '../services/StateService.js'
 import { useTotpStore } from '../store.js'
 import STATE from '../state.js'
 
-jest.mock('../services/StateService.js', () => ({
-	saveState: jest.fn(),
+vi.mock('../services/StateService.js', () => ({
+	saveState: vi.fn(),
 }))
 
 describe('totp store', () => {
 	beforeEach(() => {
 		setActivePinia(createPinia())
-		jest.resetAllMocks()
+		vi.resetAllMocks()
 	})
 
 	describe('initial state', () => {

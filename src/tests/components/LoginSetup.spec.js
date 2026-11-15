@@ -8,13 +8,13 @@ import { saveState } from '../../services/StateService.js'
 import LoginSetup from '../../components/LoginSetup.vue'
 import STATE from '../../state.js'
 
-jest.mock('../../services/StateService.js', () => ({
-	saveState: jest.fn(),
+vi.mock('../../services/StateService.js', () => ({
+	saveState: vi.fn(),
 }))
 
 describe('LoginSetup', () => {
 	beforeEach(() => {
-		jest.resetAllMocks()
+		vi.resetAllMocks()
 	})
 
 	it('shows a loading spinner on mount while the secret is being fetched', () => {
@@ -54,8 +54,8 @@ describe('LoginSetup', () => {
 		const wrapper = shallowMount(LoginSetup)
 		await flushPromises()
 
-		const submitMock = jest.fn()
-		jest.spyOn(wrapper.vm.$refs.confirmForm, 'submit').mockImplementation(submitMock)
+		const submitMock = vi.fn()
+		vi.spyOn(wrapper.vm.$refs.confirmForm, 'submit').mockImplementation(submitMock)
 
 		wrapper.vm.confirmation = '123456'
 		wrapper.vm.confirm()
@@ -72,8 +72,8 @@ describe('LoginSetup', () => {
 		const wrapper = shallowMount(LoginSetup)
 		await flushPromises()
 
-		const submitMock = jest.fn()
-		jest.spyOn(wrapper.vm.$refs.confirmForm, 'submit').mockImplementation(submitMock)
+		const submitMock = vi.fn()
+		vi.spyOn(wrapper.vm.$refs.confirmForm, 'submit').mockImplementation(submitMock)
 
 		wrapper.vm.confirmation = '000000'
 		wrapper.vm.confirm()
