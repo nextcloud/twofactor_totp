@@ -6,7 +6,13 @@
 import Axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
 
-export const saveState = async (data) => {
+/**
+ * Persist the TOTP state change on the server.
+ *
+ * @param {object} data request payload, e.g. the new state and confirmation code
+ * @return {Promise<object>} the updated state returned by the server
+ */
+export async function saveState(data) {
 	const url = generateUrl('/apps/twofactor_totp/settings/enable')
 
 	const resp = await Axios.post(url, data)

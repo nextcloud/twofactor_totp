@@ -3,13 +3,12 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 import { loadState } from '@nextcloud/initial-state'
+import { createPinia } from 'pinia'
+import { createApp } from 'vue'
+import PersonalTotpSettings from './components/PersonalTotpSettings.vue'
 import Logger from './logger.js'
 import { useTotpStore } from './store.js'
-
-import PersonalTotpSettings from './components/PersonalTotpSettings.vue'
 
 const pinia = createPinia()
 const app = createApp(PersonalTotpSettings)

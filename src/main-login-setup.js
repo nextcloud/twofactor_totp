@@ -4,8 +4,8 @@
  */
 
 import { createApp } from 'vue'
-import Logger from './logger.js'
 import LoginSetup from './components/LoginSetup.vue'
+import Logger from './logger.js'
 
 Logger.debug('rendering login setup view')
 const app = createApp(LoginSetup)

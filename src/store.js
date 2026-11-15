@@ -4,7 +4,6 @@
  */
 
 import { defineStore } from 'pinia'
-
 import { saveState } from './services/StateService.js'
 import STATE from './state.js'
 
