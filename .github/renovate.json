@@ -16,7 +16,7 @@
 	"rangeStrategy": "bump",
 	"rebaseWhen": "conflicted",
 	"ignoreUnstable": false,
-	"baseBranchPatterns": ["master", "stable34", "stable33", "stable32"],
+	"baseBranchPatterns": ["master", "stable35", "stable34", "stable33"],
 	"enabledManagers": ["composer", "github-actions", "npm"],
 	"ignoreDeps": ["node", "npm", "php"],
 	"ignorePaths": [
