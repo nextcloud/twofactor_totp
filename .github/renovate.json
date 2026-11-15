@@ -74,12 +74,11 @@
 			"extends": ["schedule:monthly"]
 		},
 		{
-			"groupName": "Jest family",
+			"groupName": "Vitest family",
 			"matchPackageNames": [
-				"jest",
-				"jest-environment-jsdom",
-				"babel-jest",
-				"@vue/vue2-jest"
+				"vitest",
+				"@vitejs/plugin-vue",
+				"jsdom"
 			],
 			"automerge": true
 		}
