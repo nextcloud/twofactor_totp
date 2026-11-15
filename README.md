@@ -7,8 +7,6 @@
 ![Downloads](https://img.shields.io/github/downloads/nextcloud/twofactor_totp/total.svg)
 [![Build Status](https://travis-ci.org/nextcloud/twofactor_totp.svg?branch=master)](https://travis-ci.org/nextcloud/twofactor_totp)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/nextcloud-totp.svg)](https://saucelabs.com/u/nextcloud-totp)
-
 Tested with the following apps:
 * [Aegis](https://github.com/beemdevelopment/Aegis) (open source) Available via [F-Droid](https://f-droid.org/en/packages/com.beemdevelopment.aegis/) and [Google Play](https://play.google.com/store/apps/details?id=com.beemdevelopment.aegis). It features a built-in QR-code reader.
 * [FreeOTPPlus](https://github.com/helloworld1/FreeOTPPlus/) (open source) Available via [F-droid](https://f-droid.org/packages/org.liberty.android.freeotpplus/) and [Google Play](https://play.google.com/store/apps/details?id=org.liberty.android.freeotpplus).
