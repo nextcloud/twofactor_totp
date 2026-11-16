@@ -1,14 +1,14 @@
 SPDX-License-Identifier: MIT
 SPDX-License-Identifier: ISC
-SPDX-License-Identifier: AGPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-or-later
 SPDX-FileCopyrightText: encode-utf8 developers
 SPDX-FileCopyrightText: dijkstrajs developers
 SPDX-FileCopyrightText: Tobias Koppers @sokra
 SPDX-FileCopyrightText: Ryan Day <soldair@gmail.com>
 SPDX-FileCopyrightText: Roman Shtylman <shtylman@gmail.com>
+SPDX-FileCopyrightText: Nextcloud GmbH and Nextcloud contributors
 SPDX-FileCopyrightText: GitHub Inc.
 SPDX-FileCopyrightText: Evan You
-SPDX-FileCopyrightText: Christoph Wurst <christoph@winzerhof-wurst.at>
 
 
 This file is generated from multiple sources. Included packages:
@@ -40,7 +40,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 1.5.0
 	- license: MIT
 - semver
-	- version: 7.7.4
+	- version: 7.8.6
 	- license: ISC
 - style-loader
 	- version: 4.0.0
@@ -54,6 +54,6 @@ This file is generated from multiple sources. Included packages:
 - webpack
 	- version: 5.105.4
 	- license: MIT
-- twofactor_totp
-	- version: 18.0.0-dev.0
-	- license: AGPL-3.0-only
+- nextcloud
+	- version: 1.0.0
+	- license: AGPL-3.0-or-later
