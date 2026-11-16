@@ -12,7 +12,7 @@
 			{{
 				t(
 					'twofactor_totp',
-					'For quick setup, scan this QR code with your TOTP app:'
+					'For quick setup, scan this QR code with your TOTP app:',
 				)
 			}}
 		</p>
@@ -21,11 +21,12 @@
 			{{
 				t(
 					'twofactor_totp',
-					'After you configured your app, enter a test code below to ensure everything works correctly:'
+					'After you configured your app, enter a test code below to ensure everything works correctly:',
 				)
 			}}
 		</p>
-		<input id="totp-confirmation"
+		<input
+			id="totp-confirmation"
 			v-model="confirmationCode"
 			type="text"
 			minlength="6"
@@ -36,7 +37,8 @@
 			:disabled="loading"
 			:placeholder="t('twofactor_totp', 'Authentication code')"
 			@keydown="onConfirmKeyDown">
-		<input id="totp-confirmation-submit"
+		<input
+			id="totp-confirmation-submit"
 			type="button"
 			:disabled="loading"
 			:value="t('twofactor_totp', 'Verify')"
@@ -52,40 +54,49 @@ export default {
 	components: {
 		QR,
 	},
-	emits: ['update:confirmation', 'confirm'],
+
 	props: {
 		loading: {
 			type: Boolean,
 			default: false,
 		},
+
 		secret: {
 			type: String,
 			required: true,
 		},
+
 		qrUrl: {
 			type: String,
 			required: true,
 		},
+
 		confirmation: {
 			type: String,
 			default: '',
 		},
 	},
+
+	emits: ['update:confirmation', 'confirm'],
+
 	data() {
 		return {
 			confirmationCode: this.confirmation,
 		}
 	},
+
 	watch: {
 		confirmation(newVal) {
 			this.confirmationCode = newVal
 		},
 	},
+
 	methods: {
 		confirm() {
 			this.$emit('update:confirmation', this.confirmationCode)
 			this.$emit('confirm')
 		},
+
 		onConfirmKeyDown(e) {
 			if (e.key === 'Enter') {
 				this.confirm()

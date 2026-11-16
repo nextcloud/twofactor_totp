@@ -5,7 +5,6 @@
 
 import { shallowMount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
-
 import PersonalTotpSettings from '../../components/PersonalTotpSettings.vue'
 
 describe('PersonalTotpSettings', () => {
