@@ -105,7 +105,7 @@ npm run test:e2e                     # Playwright end-to-end tests
 Do NOT commit changes unless explicitly asked to do so.
 
 After completing code changes:
-1. Verify your work is complete and tests pass
+1. Verify your work is complete and tests pass. Validate every change to runtime behavior on a live Nextcloud instance where you can, and give the contributor concrete steps to test it there themselves — your testing supports theirs, it does not replace it.
 2. Never push directly to `master` — always create a feature branch with a descriptive name (e.g. `fix/secret-cleanup`, `feat/backup-codes`).
 3. Worktree branches must use descriptive feature-branch names, not generated names like `agent-xxxx`.
 4. Make sure there is no trailing whitespace
@@ -114,6 +114,8 @@ After completing code changes:
 7. Suggest a commit message using Conventional Commits format
 
 ### Commit Message Format
+
+The message body explains **why** the change was made — the problem it solves and the decisions the diff does not show — not how; the diff already shows that. Don't restate the changed lines as a bullet list.
 
 All commits must include two trailers at the end:
 1. Agent/model attribution: `Assisted-by: <AgentName>:<model-id>`
@@ -127,12 +129,23 @@ Example:
 ```
 fix(totp): handle null return from preg_replace
 
-- add explicit null check before string operations
-- prevents type error on edge-case input
+preg_replace returns null on a regex error, and the following string
+operations then threw a type error on edge-case input. Treat null as
+an invalid code instead.
 
-Assisted-by: Claude:claude-sonnet-4-6
+Assisted-by: Claude:claude-sonnet-5-5
 Signed-off-by: Name <email>
 ```
+
+### Issues, PR descriptions and comments
+
+Issues, PR descriptions and comments may be drafted with AI and posted on the contributor's behalf when they ask for it. Write them for human readers (see the [AI Contribution Policy](https://github.com/nextcloud/.github/blob/master/AI_POLICY.md)):
+
+- Lead with what changed and why it matters, in plain and concise sentences. Don't restate the diff file by file, add filler, or paste raw tool output.
+- Keep the repository's PR or issue template intact and fill in every section, including the AI disclosure checkbox. For a bug report, also state whether the bug was validated and reproduced on a live Nextcloud instance.
+- End AI-drafted issues and comments with a footer such as `Assisted by <AgentName>:<model-id>`.
+- Put information meant only for agents (plans, prompts, tool logs) into a collapsed `<details>` block.
+- Tell the contributor what you posted.
 
 ### Styling
 
