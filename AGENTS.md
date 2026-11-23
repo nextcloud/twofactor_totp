@@ -69,6 +69,15 @@ Two independent webpack bundles, each mounted into a Nextcloud template.
    */
   ```
 
+### Code comments
+
+The diff shows *what* changed and *how*; a comment exists only to capture *why* — intent the code and names can't convey on their own.
+
+- **Default to none.** Most changes need zero comments; express intent through clear names and small functions.
+- **Comment the *why*, never the *how*.** Legitimate reasons: a non-obvious workaround (link the issue/ticket), a subtle business rule, a deliberate deviation from the expected. Never narrate what the next lines do.
+- **No multi-line explanatory blocks, AI-style walkthroughs, or section banners.**
+- **Remove a stale comment** only when you're already editing that code for the task at hand — no drive-by cleanups.
+
 ## Testing
 
 ### Unit Tests
@@ -112,6 +121,15 @@ After completing code changes:
 5. Leave changes in working directory or staged (do not commit)
 6. Provide a summary of what was changed and why
 7. Suggest a commit message using Conventional Commits format
+
+### GitHub comments and reviews
+
+Agents may post GitHub text directly (PR and issue comments, review comments, PR descriptions), as long as it is written **for humans**: plain, concise, and skimmable.
+
+- A human must review the text before it is posted.
+- Disclose the AI assistance in every posted body, e.g. with an `Assisted by <harness>:<model-id>` footer.
+- Fill out the repo's PR/issue template completely when opening a PR or issue.
+- Additional info meant only for agents can go into a description or comment, but must be wrapped in a collapsed `<details>` block so human readers can skip it or dive in.
 
 ### Commit Message Format
 
