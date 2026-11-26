@@ -46,7 +46,7 @@
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/stylelint-config": "^3.2.2",
     "@nextcloud/webpack-vue-config": "^7.1.0",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.65.1",
     "@vitejs/plugin-vue": "^6.0.11",
     "@vue/test-utils": "^2.4.11",
     "eslint-plugin-chai-friendly": "^1.2.1",
