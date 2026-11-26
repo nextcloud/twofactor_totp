@@ -6,10 +6,11 @@
 <template>
 	<div>
 		<div v-if="loading" class="loading" />
-		<SetupConfirmation v-else
+		<SetupConfirmation
+			v-else
 			:loading="confirmationLoading"
 			:secret="secret"
-			:qr-url="qrUrl"
+			:qrUrl="qrUrl"
 			:confirmation="confirmation"
 			@update:confirmation="confirmation = $event"
 			@confirm="confirm" />
@@ -18,9 +19,9 @@
 </template>
 
 <script>
+import SetupConfirmation from './SetupConfirmation.vue'
 import Logger from '../logger.js'
 import { saveState } from '../services/StateService.js'
-import SetupConfirmation from './SetupConfirmation.vue'
 import STATE from '../state.js'
 
 export default {
@@ -28,6 +29,7 @@ export default {
 	components: {
 		SetupConfirmation,
 	},
+
 	data() {
 		return {
 			loading: true,
@@ -37,25 +39,26 @@ export default {
 			confirmation: '',
 		}
 	},
+
 	mounted() {
 		this.load()
 	},
+
 	methods: {
 		load() {
 			this.loading = true
 			Logger.info('starting TOTP setup')
 
-			saveState({ state: STATE.STATE_CREATED }).then(
-				({ secret, qrUrl }) => {
-					Logger.info('TOTP secret received')
+			saveState({ state: STATE.STATE_CREATED }).then(({ secret, qrUrl }) => {
+				Logger.info('TOTP secret received')
 
-					this.secret = secret
-					this.qrUrl = qrUrl
+				this.secret = secret
+				this.qrUrl = qrUrl
 
-					this.loading = false
-				},
-			)
+				this.loading = false
+			})
 		},
+
 		confirm() {
 			this.loading = true
 

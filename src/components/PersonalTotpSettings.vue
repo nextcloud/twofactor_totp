@@ -10,7 +10,8 @@
 			<span> {{ t('twofactor_totp', 'Enable TOTP') }} </span>
 		</template>
 		<div v-else>
-			<input id="totp-enabled"
+			<input
+				id="totp-enabled"
 				v-model="enabled"
 				type="checkbox"
 				class="checkbox"
@@ -21,9 +22,10 @@
 			}}</label>
 		</div>
 
-		<SetupConfirmation v-if="secret"
+		<SetupConfirmation
+			v-if="secret"
 			:secret="secret"
-			:qr-url="qrUrl"
+			:qrUrl="qrUrl"
 			:loading="loadingConfirmation"
 			:confirmation="confirmation"
 			@update:confirmation="confirmation = $event"
@@ -33,21 +35,23 @@
 
 <script>
 import { confirmPassword } from '@nextcloud/password-confirmation'
-import '@nextcloud/password-confirmation/style.css'
-
-import Logger from '../logger.js'
 import SetupConfirmation from './SetupConfirmation.vue'
+import Logger from '../logger.js'
 import state from '../state.js'
 import { useTotpStore } from '../store.js'
+
+import '@nextcloud/password-confirmation/style.css'
 
 export default {
 	name: 'PersonalTotpSettings',
 	components: {
 		SetupConfirmation,
 	},
+
 	setup() {
 		return { totpStore: useTotpStore() }
 	},
+
 	data() {
 		return {
 			loading: false,
@@ -58,11 +62,13 @@ export default {
 			confirmation: '',
 		}
 	},
+
 	computed: {
 		state() {
 			return this.totpStore.totpState
 		},
 	},
+
 	methods: {
 		toggleEnabled() {
 			if (this.loading) {
@@ -95,9 +101,7 @@ export default {
 						= this.totpStore.totpState === state.STATE_CREATED
 				})
 				.catch((e) => {
-					OC.Notification.showTemporary(
-						t('twofactor_totp', 'Could not enable TOTP'),
-					)
+					OC.Notification.showTemporary(t('twofactor_totp', 'Could not enable TOTP'))
 					Logger.error('Could not enable TOTP', e)
 
 					// Restore on error
@@ -124,21 +128,17 @@ export default {
 						this.qrUrl = ''
 						this.secret = undefined
 					} else {
-						OC.Notification.showTemporary(
-							t(
-								'twofactor_totp',
-								'Could not verify your key. Please try again',
-							),
-						)
+						OC.Notification.showTemporary(t(
+							'twofactor_totp',
+							'Could not verify your key. Please try again',
+						))
 					}
 
 					this.confirmation = ''
 					this.loadingConfirmation = false
 				})
 				.catch((error) => {
-					OC.Notification.showTemporary(
-						t('twofactor_totp', 'Could not confirm TOTP'),
-					)
+					OC.Notification.showTemporary(t('twofactor_totp', 'Could not confirm TOTP'))
 					Logger.error('Could not confirm TOTP', { error })
 				})
 				.catch(Logger.error.bind(this))

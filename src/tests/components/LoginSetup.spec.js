@@ -3,9 +3,9 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { shallowMount, flushPromises } from '@vue/test-utils'
-import { saveState } from '../../services/StateService.js'
+import { flushPromises, shallowMount } from '@vue/test-utils'
 import LoginSetup from '../../components/LoginSetup.vue'
+import { saveState } from '../../services/StateService.js'
 import STATE from '../../state.js'
 
 vi.mock('../../services/StateService.js', () => ({
