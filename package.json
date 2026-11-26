@@ -52,7 +52,7 @@
     "eslint-plugin-chai-friendly": "^1.2.1",
     "jsdom": "^31.0.1",
     "totp-generator": "^2.0.1",
-    "vitest": "^5.1.0",
+    "vitest": "^5.1.2",
     "vue-loader": "^17.4.2"
   },
   "prettier": {
