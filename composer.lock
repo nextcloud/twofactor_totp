@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8942b7fe7e33b894b29173304db66c0",
+    "content-hash": "81d845f59ea7db2ee51a09a32615959a",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -357,16 +357,16 @@
         },
         {
             "name": "psalm/phar",
-            "version": "7.0.0-beta19",
+            "version": "7.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/phar.git",
-                "reference": "8f65c84236950ddb2aa1f9e44d8d4a3a073e685a"
+                "reference": "79136c6aae2c220c6851c68aefd06fb1e96f26ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/phar/zipball/8f65c84236950ddb2aa1f9e44d8d4a3a073e685a",
-                "reference": "8f65c84236950ddb2aa1f9e44d8d4a3a073e685a",
+                "url": "https://api.github.com/repos/psalm/phar/zipball/79136c6aae2c220c6851c68aefd06fb1e96f26ff",
+                "reference": "79136c6aae2c220c6851c68aefd06fb1e96f26ff",
                 "shasum": ""
             },
             "require": {
@@ -386,9 +386,10 @@
             "description": "Composer-based Psalm Phar",
             "support": {
                 "issues": "https://github.com/psalm/phar/issues",
-                "source": "https://github.com/psalm/phar/tree/7.0.0-beta19"
+                "source": "https://github.com/psalm/phar/tree/7.21.1"
             },
-            "time": "2026-04-15T20:55:22+00:00"
+            "time": "2026-11-26T00:48:50+00:00",
+            "published-time": "2026-11-26T00:48:59+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -461,9 +462,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "psalm/phar": 10
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},
@@ -471,5 +470,5 @@
     "platform-overrides": {
         "php": "8.3"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
