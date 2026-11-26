@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efc3fd79334f37b5daf3e61580aca03b",
+    "content-hash": "e6cf4bb4710d0f622a97fabe51473e10",
     "packages": [],
     "packages-dev": [
         {
@@ -125,11 +125,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.2",
+            "version": "2.3.7",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
-                "reference": "e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/90c91c2498849ab8cc4e873864bbf1cb2bf6ea12",
+                "reference": "90c91c2498849ab8cc4e873864bbf1cb2bf6ea12",
                 "shasum": ""
             },
             "require": {
@@ -185,7 +185,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-05T09:00:01+00:00"
+            "time": "2026-11-19T10:31:11+00:00",
+            "published-time": "2026-11-19T10:31:27+00:00"
         },
         {
             "name": "psr/clock",
@@ -501,30 +502,27 @@
         },
         {
             "name": "rector/rector",
-            "version": "2.5.7",
+            "version": "2.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "ba22f8c087848278fed6b4910d4cf1108096d8d3"
+                "reference": "8a06053cae42915224f9357566162ccb1076001a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/ba22f8c087848278fed6b4910d4cf1108096d8d3",
-                "reference": "ba22f8c087848278fed6b4910d4cf1108096d8d3",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/8a06053cae42915224f9357566162ccb1076001a",
+                "reference": "8a06053cae42915224f9357566162ccb1076001a",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.2.2"
+                "phpstan/phpstan": "^2.3.5"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
                 "rector/rector-downgrade-php": "*",
                 "rector/rector-phpunit": "*",
                 "rector/rector-symfony": "*"
-            },
-            "suggest": {
-                "ext-dom": "To manipulate phpunit.xml via the custom-rule command"
             },
             "bin": [
                 "bin/rector"
@@ -549,7 +547,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.5.7"
+                "source": "https://github.com/rectorphp/rector/tree/2.9.2"
             },
             "funding": [
                 {
@@ -557,7 +555,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-13T15:24:18+00:00"
+            "time": "2026-11-24T23:34:02+00:00",
+            "published-time": "2026-11-24T23:34:08+00:00"
         },
         {
             "name": "webmozart/assert",
