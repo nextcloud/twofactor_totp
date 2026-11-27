@@ -1,34 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.7.7@e028ba46ba0d7f9a78bc3201c251e137383e145f">
+<files psalm-version="7.21.1@9c65a301d0f131bc3c3b481551aad870b86dd967">
+  <file src="lib/Activity/Provider.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function parse($language, IEvent $event, ?IEvent $previousEvent = null): IEvent {]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[Provider]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/Activity/Setting.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function canChangeMail(): bool {]]></code>
+      <code><![CDATA[public function canChangeStream(): bool {]]></code>
+      <code><![CDATA[public function getIdentifier(): string {]]></code>
+      <code><![CDATA[public function getName(): string {]]></code>
+      <code><![CDATA[public function getPriority(): int {]]></code>
+      <code><![CDATA[public function isDefaultEnabledMail(): bool {]]></code>
+      <code><![CDATA[public function isDefaultEnabledStream(): bool {]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[Setting]]></code>
+    </UnusedClass>
+  </file>
   <file src="lib/AppInfo/Application.php">
-    <InvalidArgument>
-      <code>StateChangeActivity::class</code>
-      <code>StateChangeActivity::class</code>
-      <code>StateChangeRegistryUpdater::class</code>
-      <code>UserDeleted::class</code>
-    </InvalidArgument>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function boot(IBootContext $context): void {]]></code>
+      <code><![CDATA[public function register(IRegistrationContext $context): void {]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="lib/Command/CleanUp.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$input]]></code>
+      <code><![CDATA[$output]]></code>
+    </PossiblyUnusedParam>
     <UndefinedClass>
       <code><![CDATA[Command]]></code>
     </UndefinedClass>
+    <UnusedClass>
+      <code><![CDATA[CleanUp]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/Controller/SettingsController.php">
+    <UnusedClass>
+      <code><![CDATA[SettingsController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/Db/TotpSecret.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$lastCounter]]></code>
+      <code><![CDATA[$secret]]></code>
+      <code><![CDATA[$state]]></code>
+      <code><![CDATA[$userId]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="lib/Db/TotpSecretMapper.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="lib/Exception/TotpSecretAlreadySet.php">
+    <UnusedClass>
+      <code><![CDATA[TotpSecretAlreadySet]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/Listener/StateChangeActivity.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function handle(Event $event): void {]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="lib/Listener/StateChangeRegistryUpdater.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function handle(Event $event): void {]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="lib/Listener/UserDeleted.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function handle(Event $event): void {]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="lib/Migration/Version010501Date20181018124436.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[Version010501Date20181018124436]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/Migration/Version020102Date20190304124405.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[Version020102Date20190304124405]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/Migration/Version030000Date20190305114917.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[Version030000Date20190305114917]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/Migration/Version140000Date202503027114917.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function changeSchema(IOutput $output, \Closure $schemaClosure, array $options) {]]></code>
+      <code><![CDATA[public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options) {]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[Version140000Date202503027114917]]></code>
+    </UnusedClass>
   </file>
   <file src="lib/Provider/AtLoginProvider.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getBody(): Template {]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="lib/Provider/TotpProvider.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function disableFor(IUser $user) {]]></code>
+      <code><![CDATA[public function getDarkIcon(): String {]]></code>
+      <code><![CDATA[public function getDescription(): string {]]></code>
+      <code><![CDATA[public function getDisplayName(): string {]]></code>
+      <code><![CDATA[public function getId(): string {]]></code>
+      <code><![CDATA[public function getLightIcon(): String {]]></code>
+      <code><![CDATA[public function getLoginSetup(IUser $user): ILoginSetupProvider {]]></code>
+      <code><![CDATA[public function getPersonalSettings(IUser $user): IPersonalProviderSettings {]]></code>
+      <code><![CDATA[public function getTemplate(IUser $user): Template {]]></code>
+      <code><![CDATA[public function isTwoFactorAuthEnabledForUser(IUser $user): bool {]]></code>
+      <code><![CDATA[public function verifyChallenge(IUser $user, string $challenge): bool {]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="lib/Service/ITotp.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[createSecret]]></code>
+      <code><![CDATA[enable]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="lib/Service/Totp.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function createSecret(IUser $user): string {]]></code>
+      <code><![CDATA[public function deleteSecret(IUser $user, bool $byAdmin = false): void {]]></code>
+      <code><![CDATA[public function enable(IUser $user, $key): bool {]]></code>
+      <code><![CDATA[public function getSecret(IUser $user): TotpSecret {]]></code>
+      <code><![CDATA[public function hasSecret(IUser $user): bool {]]></code>
+      <code><![CDATA[public function validateSecret(TotpSecret $secret, string $key): bool {]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <UnusedMethod>
+      <code><![CDATA[generateSecret]]></code>
+    </UnusedMethod>
+    <UnusedProperty>
+      <code><![CDATA[$random]]></code>
+    </UnusedProperty>
   </file>
   <file src="lib/Settings/Personal.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getBody(): Template {]]></code>
+    </MissingOverrideAttribute>
   </file>
 </files>
