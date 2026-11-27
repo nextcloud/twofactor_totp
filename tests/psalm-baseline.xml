@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.7.7@e028ba46ba0d7f9a78bc3201c251e137383e145f">
-<file src="lib/Command/CleanUp.php">
+<files psalm-version="7.21.1@9c65a301d0f131bc3c3b481551aad870b86dd967">
+  <file src="lib/Command/CleanUp.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$input]]></code>
+      <code><![CDATA[$output]]></code>
+    </PossiblyUnusedParam>
     <UndefinedClass>
       <code><![CDATA[Command]]></code>
     </UndefinedClass>
+    <UnusedMethod>
+      <code><![CDATA[findUserIds]]></code>
+    </UnusedMethod>
+    <UnusedProperty>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$totpSecretMapper]]></code>
+      <code><![CDATA[$userManager]]></code>
+    </UnusedProperty>
   </file>
   <file src="lib/Provider/AtLoginProvider.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
   </file>
   <file src="lib/Provider/TotpProvider.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
   </file>
   <file src="lib/Settings/Personal.php">
     <MissingDependency>
-      <code>Template</code>
-      <code>Template</code>
+      <code><![CDATA[Template]]></code>
+      <code><![CDATA[Template]]></code>
     </MissingDependency>
   </file>
 </files>

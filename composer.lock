@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efdaf1ea03c3b3cd2af83c69fa5a93c7",
+    "content-hash": "736c00eeb816479c189fc84e169a0a6c",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -357,20 +357,20 @@
         },
         {
             "name": "psalm/phar",
-            "version": "5.26.1",
+            "version": "7.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/phar.git",
-                "reference": "8a38e7ad04499a0ccd2c506fd1da6fc01fff4547"
+                "reference": "79136c6aae2c220c6851c68aefd06fb1e96f26ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/phar/zipball/8a38e7ad04499a0ccd2c506fd1da6fc01fff4547",
-                "reference": "8a38e7ad04499a0ccd2c506fd1da6fc01fff4547",
+                "url": "https://api.github.com/repos/psalm/phar/zipball/79136c6aae2c220c6851c68aefd06fb1e96f26ff",
+                "reference": "79136c6aae2c220c6851c68aefd06fb1e96f26ff",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^8.2"
             },
             "conflict": {
                 "vimeo/psalm": "*"
@@ -386,9 +386,10 @@
             "description": "Composer-based Psalm Phar",
             "support": {
                 "issues": "https://github.com/psalm/phar/issues",
-                "source": "https://github.com/psalm/phar/tree/5.26.1"
+                "source": "https://github.com/psalm/phar/tree/7.21.1"
             },
-            "time": "2024-09-09T16:22:43+00:00"
+            "time": "2026-11-26T00:48:50+00:00",
+            "published-time": "2026-11-26T00:48:59+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -469,5 +470,5 @@
     "platform-overrides": {
         "php": "8.2"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
