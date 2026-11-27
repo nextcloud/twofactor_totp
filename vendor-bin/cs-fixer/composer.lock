@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6bf6def5a96440ac9ccd0884c3af7cb",
+    "content-hash": "9e1e3187f2572fb2b0d2f0c1a7a29380",
     "packages": [],
     "packages-dev": [
         {
@@ -100,16 +100,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.95.15",
+            "version": "v3.95.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "64a33558b1b581470c8c8489048efaf9ceeb8415"
+                "reference": "c95a290fc4486d4a68fb75f88d7b166f4141686a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/64a33558b1b581470c8c8489048efaf9ceeb8415",
-                "reference": "64a33558b1b581470c8c8489048efaf9ceeb8415",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/c95a290fc4486d4a68fb75f88d7b166f4141686a",
+                "reference": "c95a290fc4486d4a68fb75f88d7b166f4141686a",
                 "shasum": ""
             },
             "require": {
@@ -146,9 +146,16 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.95.15"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.95.32"
             },
-            "time": "2026-07-15T09:52:14+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/keradus",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-11-17T18:09:48+00:00",
+            "published-time": "2026-11-17T18:09:58+00:00"
         }
     ],
     "aliases": [],
@@ -158,5 +165,5 @@
     "prefer-lowest": false,
     "platform": {},
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
